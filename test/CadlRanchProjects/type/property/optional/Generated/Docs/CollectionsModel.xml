@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllAsync(RequestContext)">
+    <member name="GetAllAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetAllAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = await client.GetAllAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetAll(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetAll.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = client.GetAll();
+]]></code>
+</example>
+    </member>
+    <member name="GetAllAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -30,7 +50,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetAll(RequestContext)">
+    <member name="GetAll(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
@@ -59,7 +79,27 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefaultAsync(RequestContext)">
+    <member name="GetDefaultAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDefaultAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = await client.GetDefaultAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetDefault(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDefault.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = client.GetDefault();
+]]></code>
+</example>
+    </member>
+    <member name="GetDefaultAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDefaultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -88,7 +128,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefault(RequestContext)">
+    <member name="GetDefault(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDefault with required parameters and parse the result.
 <code><![CDATA[
@@ -117,7 +157,51 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAllAsync(RequestContent,RequestContext)">
+    <member name="PutAllAsync(global::_Type.Property.Optional.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAllAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+)
+{
+    Property = 
+{
+        new StringProperty(
+)
+{
+            Property = "<Property>",
+        }
+    },
+};
+var result = await client.PutAllAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAll(global::_Type.Property.Optional.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAll with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+)
+{
+    Property = 
+{
+        new StringProperty(
+)
+{
+            Property = "<Property>",
+        }
+    },
+};
+var result = client.PutAll(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
@@ -161,7 +245,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAll(RequestContent,RequestContext)">
+    <member name="PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAll.
 <code><![CDATA[
@@ -205,7 +289,51 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefaultAsync(RequestContent,RequestContext)">
+    <member name="PutDefaultAsync(global::_Type.Property.Optional.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutDefaultAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+)
+{
+    Property = 
+{
+        new StringProperty(
+)
+{
+            Property = "<Property>",
+        }
+    },
+};
+var result = await client.PutDefaultAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutDefault(global::_Type.Property.Optional.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutDefault with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+)
+{
+    Property = 
+{
+        new StringProperty(
+)
+{
+            Property = "<Property>",
+        }
+    },
+};
+var result = client.PutDefault(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutDefaultAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
@@ -249,7 +377,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefault(RequestContent,RequestContext)">
+    <member name="PutDefault(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDefault.
 <code><![CDATA[

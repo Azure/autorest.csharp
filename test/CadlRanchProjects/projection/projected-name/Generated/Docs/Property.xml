@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="JsonAsync(RequestContent,RequestContext)">
+    <member name="JsonAsync(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call JsonAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonProjectedNameModel = new JsonProjectedNameModel(
+true);
+var result = await client.JsonAsync(jsonProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Json(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Json with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonProjectedNameModel = new JsonProjectedNameModel(
+true);
+var result = client.Json(jsonProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call JsonAsync with required request content.
 <code><![CDATA[
@@ -28,7 +52,7 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Json(RequestContent,RequestContext)">
+    <member name="Json(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Json with required request content.
 <code><![CDATA[
@@ -55,7 +79,31 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="ClientAsync(RequestContent,RequestContext)">
+    <member name="ClientAsync(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ClientAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var clientProjectedNameModel = new ClientProjectedNameModel(
+true);
+var result = await client.ClientAsync(clientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Client(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Client with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var clientProjectedNameModel = new ClientProjectedNameModel(
+true);
+var result = client.Client(clientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="ClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ClientAsync with required request content.
 <code><![CDATA[
@@ -82,7 +130,7 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Client(RequestContent,RequestContext)">
+    <member name="Client(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Client with required request content.
 <code><![CDATA[
@@ -109,7 +157,31 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="LanguageAsync(RequestContent,RequestContext)">
+    <member name="LanguageAsync(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call LanguageAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var languageProjectedNameModel = new LanguageProjectedNameModel(
+true);
+var result = await client.LanguageAsync(languageProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Language(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Language with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var languageProjectedNameModel = new LanguageProjectedNameModel(
+true);
+var result = client.Language(languageProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="LanguageAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call LanguageAsync with required request content.
 <code><![CDATA[
@@ -136,7 +208,7 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Language(RequestContent,RequestContext)">
+    <member name="Language(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Language with required request content.
 <code><![CDATA[
@@ -163,7 +235,31 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClientAsync(RequestContent,RequestContext)">
+    <member name="JsonAndClientAsync(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call JsonAndClientAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(
+true);
+var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClient(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call JsonAndClient with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(
+true);
+var result = client.JsonAndClient(jsonAndClientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call JsonAndClientAsync with required request content.
 <code><![CDATA[
@@ -190,7 +286,7 @@ Schema for <c>JsonAndClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClient(RequestContent,RequestContext)">
+    <member name="JsonAndClient(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call JsonAndClient with required request content.
 <code><![CDATA[

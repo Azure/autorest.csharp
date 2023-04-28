@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SmokeTestAsync(Int32,String,RequestConditions,RequestContext)">
+    <member name="SmokeTestAsync(int,string,global::Azure.RequestConditions,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call SmokeTestAsync with required parameters.
+<code><![CDATA[
+var client = new TraitsClient();
+
+var result = await client.SmokeTestAsync(1234, "<foo>", null);
+]]></code>
+</example>
+    </member>
+    <member name="SmokeTest(int,string,global::Azure.RequestConditions,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call SmokeTest with required parameters.
+<code><![CDATA[
+var client = new TraitsClient();
+
+var result = client.SmokeTest(1234, "<foo>", null);
+]]></code>
+</example>
+    </member>
+    <member name="SmokeTestAsync(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SmokeTestAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +48,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="SmokeTest(Int32,String,RequestConditions,RequestContext)">
+    <member name="SmokeTest(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SmokeTest with required parameters and parse the result.
 <code><![CDATA[

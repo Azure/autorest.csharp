@@ -61,7 +61,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='DeleteAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='DeleteAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Delete");
@@ -83,7 +83,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Delete(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Delete(int,global::Azure.RequestContext)']/*" />
         public virtual Response Delete(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Delete");
@@ -103,6 +103,7 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(int,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> ReadAsync(int petId, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -113,6 +114,7 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(int,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Pet> Read(int petId, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -125,7 +127,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
@@ -147,7 +149,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(int,global::Azure.RequestContext)']/*" />
         public virtual Response Read(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
@@ -167,6 +169,7 @@ namespace PetStore
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='CreateAsync(global::PetStore.Models.Pet,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
@@ -179,6 +182,7 @@ namespace PetStore
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Create(global::PetStore.Models.Pet,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
@@ -193,7 +197,7 @@ namespace PetStore
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='CreateAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='CreateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -217,7 +221,7 @@ namespace PetStore
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Create(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Create(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Create(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -238,6 +242,7 @@ namespace PetStore
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(global::PetStore.Models.PetKind,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetPetByKindAsync(PetKind kind, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -247,6 +252,7 @@ namespace PetStore
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(global::PetStore.Models.PetKind,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Pet> GetPetByKind(PetKind kind, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -260,7 +266,7 @@ namespace PetStore
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetPetByKindAsync(string kind, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(kind, nameof(kind));
@@ -285,7 +291,7 @@ namespace PetStore
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(String,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(string,global::Azure.RequestContext)']/*" />
         public virtual Response GetPetByKind(string kind, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(kind, nameof(kind));
@@ -306,6 +312,7 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -315,6 +322,7 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -326,7 +334,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetFirstPetAsync(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
@@ -347,7 +355,7 @@ namespace PetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,global::Azure.RequestContext)']/*" />
         public virtual Response GetFirstPet(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");

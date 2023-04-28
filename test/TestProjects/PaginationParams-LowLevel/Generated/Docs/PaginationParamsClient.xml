@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetPaginationParamsAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetPaginationParamsAsync(int?,int?,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetPaginationParamsAsync and parse the result.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="GetPaginationParams(Int32,Int32,Int32,RequestContext)">
+    <member name="GetPaginationParams(int?,int?,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetPaginationParams and parse the result.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get2sAsync(Int32,Int32,Int64,RequestContext)">
+    <member name="Get2sAsync(int?,int?,long?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get2sAsync and parse the result.
 <code><![CDATA[
@@ -127,7 +127,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get2s(Int32,Int32,Int64,RequestContext)">
+    <member name="Get2s(int?,int?,long?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get2s and parse the result.
 <code><![CDATA[
@@ -169,7 +169,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get3sAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="Get3sAsync(int?,int?,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get3sAsync and parse the result.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get3s(Int32,Int32,Int32,RequestContext)">
+    <member name="Get3s(int?,int?,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get3s and parse the result.
 <code><![CDATA[
@@ -253,7 +253,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get4sAsync(Int32,Int32,Single,RequestContext)">
+    <member name="Get4sAsync(int?,int?,float?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get4sAsync and parse the result.
 <code><![CDATA[
@@ -271,7 +271,7 @@ This sample shows how to call Get4sAsync with all parameters, and how to parse t
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var data in client.Get4sAsync(1234, 1234, 1234))
+await foreach (var data in client.Get4sAsync(1234, 1234, 3.14))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -295,7 +295,7 @@ Schema for <c>PageSizeIntegerModelListResultValue</c>:
 
 </remarks>
     </member>
-    <member name="Get4s(Int32,Int32,Single,RequestContext)">
+    <member name="Get4s(int?,int?,float?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get4s and parse the result.
 <code><![CDATA[
@@ -313,7 +313,7 @@ This sample shows how to call Get4s with all parameters, and how to parse the re
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var data in client.Get4s(1234, 1234, 1234))
+foreach (var data in client.Get4s(1234, 1234, 3.14))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());

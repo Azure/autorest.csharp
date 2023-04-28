@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetByteAsync(RequestContext)">
+    <member name="GetByteAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetByteAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+
+var result = await client.GetByteAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetByte(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetByte.
+<code><![CDATA[
+var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+
+var result = client.GetByte();
+]]></code>
+</example>
+    </member>
+    <member name="GetByteAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByteAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +46,7 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetByte(RequestContext)">
+    <member name="GetByte(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByte with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +71,31 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.BytesProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+
+var body = new BytesProperty(
+BinaryData.FromString("<your binary data content>"));
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::_Type.Property.ValueTypes.Models.BytesProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+
+var body = new BytesProperty(
+BinaryData.FromString("<your binary data content>"));
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -78,7 +122,7 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

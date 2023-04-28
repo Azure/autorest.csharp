@@ -52,6 +52,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(global::_Type.Model.Inheritance.Models.Siamese,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> PostValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -64,6 +65,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(global::_Type.Model.Inheritance.Models.Siamese,global::System.Threading.CancellationToken)']/*" />
         public virtual Response PostValid(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -78,7 +80,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PostValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -102,7 +104,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PostValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -122,6 +124,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -130,6 +133,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -140,7 +144,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
@@ -160,7 +164,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
@@ -180,6 +184,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(global::_Type.Model.Inheritance.Models.Siamese,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> PutValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -192,6 +197,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(global::_Type.Model.Inheritance.Models.Siamese,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Siamese> PutValid(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -206,7 +212,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -230,7 +236,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -250,6 +256,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -258,6 +265,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Fish> GetModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -268,7 +276,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
@@ -288,7 +296,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(global::Azure.RequestContext)']/*" />
         public virtual Response GetModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
@@ -308,6 +316,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(global::_Type.Model.Inheritance.Models.Fish,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> PutModelAsync(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -320,6 +329,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(global::_Type.Model.Inheritance.Models.Fish,global::System.Threading.CancellationToken)']/*" />
         public virtual Response PutModel(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -334,7 +344,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -358,7 +368,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -378,6 +388,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetRecursiveModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -386,6 +397,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Fish> GetRecursiveModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -396,7 +408,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
@@ -416,7 +428,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(global::Azure.RequestContext)']/*" />
         public virtual Response GetRecursiveModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
@@ -436,6 +448,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(global::_Type.Model.Inheritance.Models.Fish,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -448,6 +461,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(global::_Type.Model.Inheritance.Models.Fish,global::System.Threading.CancellationToken)']/*" />
         public virtual Response PutRecursiveModel(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -462,7 +476,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -486,7 +500,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutRecursiveModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -506,6 +520,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -514,6 +529,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Fish> GetMissingDiscriminator(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -524,7 +540,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
@@ -544,7 +560,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(global::Azure.RequestContext)']/*" />
         public virtual Response GetMissingDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
@@ -562,6 +578,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -570,6 +587,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<Fish> GetWrongDiscriminator(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -580,7 +598,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
@@ -600,7 +618,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(global::Azure.RequestContext)']/*" />
         public virtual Response GetWrongDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");

@@ -60,6 +60,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -73,6 +74,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTrip(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -88,7 +90,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -113,7 +115,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTrip(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTrip(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputToRoundTrip(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -136,6 +138,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -149,6 +152,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -164,7 +168,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripPrimitiveAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -189,7 +193,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputToRoundTripPrimitive(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -212,6 +216,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(global::ModelsInCadl.Models.RoundTripOptionalModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -225,6 +230,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(global::ModelsInCadl.Models.RoundTripOptionalModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -240,7 +246,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripOptionalAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -265,7 +271,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputToRoundTripOptional(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -288,6 +294,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -302,6 +309,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(global::ModelsInCadl.Models.InputModel,global::System.Threading.CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -318,7 +326,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         [Obsolete("deprecated for test")]
         public virtual async Task<Response> InputToRoundTripReadOnlyAsync(RequestContent content, RequestContext context = null)
         {
@@ -344,7 +352,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         [Obsolete("deprecated for test")]
         public virtual Response InputToRoundTripReadOnly(RequestContent content, RequestContext context = null)
         {
@@ -368,6 +376,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(global::ModelsInCadl.Models.RoundTripModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -381,6 +390,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutput(global::ModelsInCadl.Models.RoundTripModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -396,7 +406,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> RoundTripToOutputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -421,7 +431,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutput(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response RoundTripToOutput(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -444,6 +454,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursiveAsync(global::ModelsInCadl.Models.InputRecursiveModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -457,6 +468,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursive(global::ModelsInCadl.Models.InputRecursiveModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -472,7 +484,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursiveAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputRecursiveAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -497,7 +509,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursive(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursive(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputRecursive(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -520,6 +532,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(global::ModelsInCadl.Models.RoundTripRecursiveModel,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -533,6 +546,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursive(global::ModelsInCadl.Models.RoundTripRecursiveModel,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -548,7 +562,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> RoundTripRecursiveAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -573,7 +587,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursive(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursive(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response RoundTripRecursive(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -594,6 +608,7 @@ namespace ModelsInCadl
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReferenceAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<ErrorModel>> SelfReferenceAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -603,6 +618,7 @@ namespace ModelsInCadl
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReference(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<ErrorModel> SelfReference(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -614,7 +630,7 @@ namespace ModelsInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReferenceAsync(RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReferenceAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SelfReferenceAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReference");
@@ -635,7 +651,7 @@ namespace ModelsInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReference(RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReference(global::Azure.RequestContext)']/*" />
         public virtual Response SelfReference(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReference");
@@ -656,6 +672,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOnNoUse to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(global::ModelsInCadl.Models.RoundTripOnNoUse,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -669,6 +686,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOnNoUse to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(global::ModelsInCadl.Models.RoundTripOnNoUse,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -684,7 +702,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> RoundTripToOutputWithNoUseBaseAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -709,7 +727,7 @@ namespace ModelsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response RoundTripToOutputWithNoUseBase(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

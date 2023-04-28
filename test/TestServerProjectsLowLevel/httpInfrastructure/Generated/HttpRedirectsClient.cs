@@ -61,7 +61,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head300Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head300Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head300Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head300(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head300(global::Azure.RequestContext)']/*" />
         public virtual Response Head300(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get300Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -124,7 +124,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get300(global::Azure.RequestContext)']/*" />
         public virtual Response Get300(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -145,7 +145,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head301Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head301Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head301Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -166,7 +166,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head301(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head301(global::Azure.RequestContext)']/*" />
         public virtual Response Head301(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -187,7 +187,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get301Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get301Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get301Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -208,7 +208,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get301(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get301(global::Azure.RequestContext)']/*" />
         public virtual Response Get301(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -230,7 +230,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -252,7 +252,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put301(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -273,7 +273,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head302Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head302Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head302Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -294,7 +294,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head302(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head302(global::Azure.RequestContext)']/*" />
         public virtual Response Head302(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -315,7 +315,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get302Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get302Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get302Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -336,7 +336,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get302(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get302(global::Azure.RequestContext)']/*" />
         public virtual Response Get302(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -358,7 +358,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -380,7 +380,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Patch302(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -402,7 +402,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -424,7 +424,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post303(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -445,7 +445,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head307Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head307Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -466,7 +466,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head307(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Head307(global::Azure.RequestContext)']/*" />
         public virtual Response Head307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -487,7 +487,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get307Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get307Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -508,7 +508,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get307(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Get307(global::Azure.RequestContext)']/*" />
         public virtual Response Get307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -529,7 +529,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Options307Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Options307Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Options307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -550,7 +550,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Options307(RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Options307(global::Azure.RequestContext)']/*" />
         public virtual Response Options307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -572,7 +572,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -594,7 +594,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -616,7 +616,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -638,7 +638,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Patch307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -660,7 +660,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -682,7 +682,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -704,7 +704,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
@@ -726,7 +726,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Delete307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");

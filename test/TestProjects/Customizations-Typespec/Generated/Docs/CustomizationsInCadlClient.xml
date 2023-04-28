@@ -1,7 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="RoundTripAsync(RequestContent,RequestContext)">
+    <member name="RoundTripAsync(global::CustomizationsInCadl.Models.RootModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call RoundTripAsync with required parameters.
+<code><![CDATA[
+var client = new CustomizationsInCadlClient();
+
+var input = new RootModel(
+)
+{
+    PropertyModelToRename = new RenamedModel(
+1234),
+    PropertyModelToChangeNamespace = new ModelToChangeNamespace(
+1234),
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+1234, 1234, 3.14, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
+{
+        "<null>"
+    }, new Dictionary<string, string>
+{
+        ["key"] = "<null>",
+    }, new IList[] 
+{
+        new String[] 
+{
+            "<null>"
+        }
+    }, new IDictionary[] 
+{
+        new Dictionary<string, string>
+{
+            ["key"] = "<null>",
+        }
+    }),
+    PropertyEnumToRename = RenamedEnum.One,
+    PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+    PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+};
+var result = await client.RoundTripAsync(input);
+]]></code>
+</example>
+    </member>
+    <member name="RoundTrip(global::CustomizationsInCadl.Models.RootModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call RoundTrip with required parameters.
+<code><![CDATA[
+var client = new CustomizationsInCadlClient();
+
+var input = new RootModel(
+)
+{
+    PropertyModelToRename = new RenamedModel(
+1234),
+    PropertyModelToChangeNamespace = new ModelToChangeNamespace(
+1234),
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+1234, 1234, 3.14, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
+{
+        "<null>"
+    }, new Dictionary<string, string>
+{
+        ["key"] = "<null>",
+    }, new IList[] 
+{
+        new String[] 
+{
+            "<null>"
+        }
+    }, new IDictionary[] 
+{
+        new Dictionary<string, string>
+{
+            ["key"] = "<null>",
+        }
+    }),
+    PropertyEnumToRename = RenamedEnum.One,
+    PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+    PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+};
+var result = client.RoundTrip(input);
+]]></code>
+</example>
+    </member>
+    <member name="RoundTripAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripAsync and parse the result.
 <code><![CDATA[
@@ -153,7 +235,7 @@ Schema for <c>RootModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTrip(RequestContent,RequestContext)">
+    <member name="RoundTrip(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTrip and parse the result.
 <code><![CDATA[

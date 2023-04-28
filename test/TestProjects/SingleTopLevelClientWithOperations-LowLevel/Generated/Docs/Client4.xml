@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="PatchAsync(String,RequestContext)">
+    <member name="PatchAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PatchAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Patch(String,RequestContext)">
+    <member name="Patch(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch with required parameters and parse the result.
 <code><![CDATA[

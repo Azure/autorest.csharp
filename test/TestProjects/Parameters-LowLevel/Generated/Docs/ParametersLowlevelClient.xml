@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="NoRequestBodyResponseBodyAsync(Int32,Int32,Int32,String,RequestContext)">
+    <member name="NoRequestBodyResponseBodyAsync(int,int?,int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="NoRequestBodyResponseBody(Int32,Int32,Int32,String,RequestContext)">
+    <member name="NoRequestBodyResponseBody(int,int?,int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="RequestBodyResponseBodyAsync(RequestContent,RequestContext)">
+    <member name="RequestBodyResponseBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
 <code><![CDATA[
@@ -103,7 +103,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="RequestBodyResponseBody(RequestContent,RequestContext)">
+    <member name="RequestBodyResponseBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RequestBodyResponseBody and parse the result.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="DeleteNoRequestBodyResponseBodyAsync(String,RequestContext)">
+    <member name="DeleteNoRequestBodyResponseBodyAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -171,7 +171,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="DeleteNoRequestBodyResponseBody(String,RequestContext)">
+    <member name="DeleteNoRequestBodyResponseBody(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
 <code><![CDATA[
@@ -185,7 +185,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="NoRequestBodyNoResponseBodyAsync(RequestContext)">
+    <member name="NoRequestBodyNoResponseBodyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyNoResponseBodyAsync.
 <code><![CDATA[
@@ -197,7 +197,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="NoRequestBodyNoResponseBody(RequestContext)">
+    <member name="NoRequestBodyNoResponseBody(global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyNoResponseBody.
 <code><![CDATA[
@@ -209,7 +209,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)">
+    <member name="RequestBodyNoResponseBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RequestBodyNoResponseBodyAsync with required request content.
 <code><![CDATA[
@@ -223,7 +223,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="RequestBodyNoResponseBody(RequestContent,RequestContext)">
+    <member name="RequestBodyNoResponseBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RequestBodyNoResponseBody with required request content.
 <code><![CDATA[
@@ -237,7 +237,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersAsync(Int32,Int32,String,RequestContext)">
+    <member name="OptionalPathParametersAsync(int,int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersAsync with required parameters.
 <code><![CDATA[
@@ -257,7 +257,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParameters(Int32,Int32,String,RequestContext)">
+    <member name="OptionalPathParameters(int,int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathParameters with required parameters.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersWithMixedSequenceAsync(Int32,String,Int32,RequestContext)">
+    <member name="OptionalPathParametersWithMixedSequenceAsync(int,string,int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with required parameters.
 <code><![CDATA[
@@ -297,7 +297,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersWithMixedSequence(Int32,String,Int32,RequestContext)">
+    <member name="OptionalPathParametersWithMixedSequence(int,string,int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersWithMixedSequence with required parameters.
 <code><![CDATA[
@@ -317,7 +317,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathBodyParametersWithMixedSequenceAsync(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)">
+    <member name="OptionalPathBodyParametersWithMixedSequenceAsync(string,int,global::Azure.Core.RequestContent,int,int?,int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync with required parameters.
 <code><![CDATA[
@@ -357,7 +357,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="OptionalPathBodyParametersWithMixedSequence(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)">
+    <member name="OptionalPathBodyParametersWithMixedSequence(string,int,global::Azure.Core.RequestContent,int,int?,int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequence with required parameters.
 <code><![CDATA[

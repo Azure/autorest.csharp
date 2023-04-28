@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetCollectionsStringAsync(RequestContext)">
+    <member name="GetCollectionsStringAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsStringAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsStringClient(<1.0.0>);
+
+var result = await client.GetCollectionsStringAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetCollectionsString(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsString.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsStringClient(<1.0.0>);
+
+var result = client.GetCollectionsString();
+]]></code>
+</example>
+    </member>
+    <member name="GetCollectionsStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsStringAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +46,7 @@ Schema for <c>CollectionsStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetCollectionsString(RequestContext)">
+    <member name="GetCollectionsString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsString with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +71,37 @@ Schema for <c>CollectionsStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.CollectionsStringProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsStringClient(<1.0.0>);
+
+var body = new CollectionsStringProperty(
+new String[] 
+{
+    "<null>"
+});
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::_Type.Property.ValueTypes.Models.CollectionsStringProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsStringClient(<1.0.0>);
+
+var body = new CollectionsStringProperty(
+new String[] 
+{
+    "<null>"
+});
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -80,7 +130,7 @@ Schema for <c>CollectionsStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

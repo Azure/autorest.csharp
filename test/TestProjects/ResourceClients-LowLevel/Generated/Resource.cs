@@ -60,7 +60,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItemAsync(RequestContext)']/*" />
+        /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItemAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
@@ -81,7 +81,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItem(RequestContext)']/*" />
+        /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItem(global::Azure.RequestContext)']/*" />
         public virtual Response GetItem(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");

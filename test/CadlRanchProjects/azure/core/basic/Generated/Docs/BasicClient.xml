@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateOrUpdateAsync(Int32,RequestContent,RequestContext)">
+    <member name="CreateOrUpdateAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdateAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -84,7 +84,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrUpdate(Int32,RequestContent,RequestContext)">
+    <member name="CreateOrUpdate(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdate with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -167,7 +167,45 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrReplaceAsync(Int32,RequestContent,RequestContext)">
+    <member name="CreateOrReplaceAsync(int,global::_Specs_.Azure.Core.Basic.Models.User,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplaceAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var resource = new User(
+"<name>")
+{
+    Orders = 
+{
+        new UserOrder(
+1234, "<detail>")
+    },
+};
+var result = await client.CreateOrReplaceAsync(1234, resource);
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplace(int,global::_Specs_.Azure.Core.Basic.Models.User,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplace with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var resource = new User(
+"<name>")
+{
+    Orders = 
+{
+        new UserOrder(
+1234, "<detail>")
+    },
+};
+var result = client.CreateOrReplace(1234, resource);
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplaceAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateOrReplaceAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -250,7 +288,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrReplace(Int32,RequestContent,RequestContext)">
+    <member name="CreateOrReplace(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateOrReplace with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -333,7 +371,27 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="GetUserAsync(Int32,RequestContext)">
+    <member name="GetUserAsync(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUserAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = await client.GetUserAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="GetUser(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUser with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetUser(1234);
+]]></code>
+</example>
+    </member>
+    <member name="GetUserAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUserAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -374,7 +432,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="GetUser(Int32,RequestContext)">
+    <member name="GetUser(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUser with required parameters and parse the result.
 <code><![CDATA[
@@ -415,7 +473,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="DeleteAsync(Int32,RequestContext)">
+    <member name="DeleteAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
@@ -429,7 +487,7 @@ Console.WriteLine(response.Status);
 Deletes a User
 </remarks>
     </member>
-    <member name="Delete(Int32,RequestContext)">
+    <member name="Delete(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete with required parameters.
 <code><![CDATA[
@@ -443,7 +501,27 @@ Console.WriteLine(response.Status);
 Deletes a User
 </remarks>
     </member>
-    <member name="ExportAsync(Int32,String,RequestContext)">
+    <member name="ExportAsync(int,string,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ExportAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = await client.ExportAsync(1234, "<format>");
+]]></code>
+</example>
+    </member>
+    <member name="Export(int,string,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Export with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.Export(1234, "<format>");
+]]></code>
+</example>
+    </member>
+    <member name="ExportAsync(int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ExportAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -484,7 +562,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="Export(Int32,String,RequestContext)">
+    <member name="Export(int,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Export with required parameters and parse the result.
 <code><![CDATA[
@@ -525,7 +603,25 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)">
+    <member name="GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUsersAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"});]]></code>
+</example>
+    </member>
+    <member name="GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUsers with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"});]]></code>
+</example>
+    </member>
+    <member name="GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUsersAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -561,7 +657,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)">
+    <member name="GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUsers with required parameters and parse the result.
 <code><![CDATA[
@@ -597,7 +693,25 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetWithPageAsync(RequestContext)">
+    <member name="GetWithPageAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetWithPageAsync.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetWithPageAsync();]]></code>
+</example>
+    </member>
+    <member name="GetWithPage(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetWithPage.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetWithPage();]]></code>
+</example>
+    </member>
+    <member name="GetWithPageAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithPageAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -631,7 +745,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetWithPage(RequestContext)">
+    <member name="GetWithPage(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithPage with required parameters and parse the result.
 <code><![CDATA[
@@ -665,7 +779,25 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetWithCustomPageModelAsync(RequestContext)">
+    <member name="GetWithCustomPageModelAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetWithCustomPageModelAsync.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetWithCustomPageModelAsync();]]></code>
+</example>
+    </member>
+    <member name="GetWithCustomPageModel(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetWithCustomPageModel.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetWithCustomPageModel();]]></code>
+</example>
+    </member>
+    <member name="GetWithCustomPageModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithCustomPageModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -699,7 +831,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetWithCustomPageModel(RequestContext)">
+    <member name="GetWithCustomPageModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithCustomPageModel with required parameters and parse the result.
 <code><![CDATA[

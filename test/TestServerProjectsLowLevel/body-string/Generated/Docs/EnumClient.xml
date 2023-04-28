@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNotExpandableAsync(RequestContext)">
+    <member name="GetNotExpandableAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNotExpandableAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNotExpandable(RequestContext)">
+    <member name="GetNotExpandable(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNotExpandable and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutNotExpandableAsync(RequestContent,RequestContext)">
+    <member name="PutNotExpandableAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutNotExpandableAsync with required request content.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutNotExpandable(RequestContent,RequestContext)">
+    <member name="PutNotExpandable(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutNotExpandable with required request content.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetReferencedAsync(RequestContext)">
+    <member name="GetReferencedAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetReferencedAsync and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetReferenced(RequestContext)">
+    <member name="GetReferenced(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetReferenced and parse the result.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutReferencedAsync(RequestContent,RequestContext)">
+    <member name="PutReferencedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutReferencedAsync with required request content.
 <code><![CDATA[
@@ -99,7 +99,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutReferenced(RequestContent,RequestContext)">
+    <member name="PutReferenced(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutReferenced with required request content.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetReferencedConstantAsync(RequestContext)">
+    <member name="GetReferencedConstantAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetReferencedConstantAsync and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Schema for <c>RefColorConstant</c>:
 
 </remarks>
     </member>
-    <member name="GetReferencedConstant(RequestContext)">
+    <member name="GetReferencedConstant(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetReferencedConstant and parse the result.
 <code><![CDATA[
@@ -169,7 +169,7 @@ Schema for <c>RefColorConstant</c>:
 
 </remarks>
     </member>
-    <member name="PutReferencedConstantAsync(RequestContent,RequestContext)">
+    <member name="PutReferencedConstantAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutReferencedConstantAsync with required request content.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Schema for <c>RefColorConstant</c>:
 
 </remarks>
     </member>
-    <member name="PutReferencedConstant(RequestContent,RequestContext)">
+    <member name="PutReferencedConstant(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutReferencedConstant with required request content.
 <code><![CDATA[

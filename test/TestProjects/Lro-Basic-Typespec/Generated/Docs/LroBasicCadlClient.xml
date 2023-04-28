@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateProjectAsync(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProjectAsync(global::Azure.WaitUntil,global::LroBasicCadl.Models.Project,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateProjectAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var resource = new Project(
+)
+{
+    Description = "<Description>",
+    Name = "<Name>",
+};
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="CreateProject(global::Azure.WaitUntil,global::LroBasicCadl.Models.Project,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateProject with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var resource = new Project(
+)
+{
+    Description = "<Description>",
+    Name = "<Name>",
+};
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="CreateProjectAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateProjectAsync with required parameters.
 <code><![CDATA[
@@ -44,7 +78,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProject(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateProject with required parameters.
 <code><![CDATA[
@@ -87,7 +121,41 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProjectAsync(global::Azure.WaitUntil,string,global::LroBasicCadl.Models.Project,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call UpdateProjectAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var resource = new Project(
+)
+{
+    Description = "<Description>",
+    Name = "<Name>",
+};
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="UpdateProject(global::Azure.WaitUntil,string,global::LroBasicCadl.Models.Project,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call UpdateProject with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var resource = new Project(
+)
+{
+    Description = "<Description>",
+    Name = "<Name>",
+};
+var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="UpdateProjectAsync(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -146,7 +214,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProject(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProject(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateProject with required parameters and parse the result.
 <code><![CDATA[
@@ -205,7 +273,33 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="CreateThingAsync(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateThingAsync(global::Azure.WaitUntil,global::LroBasicCadl.Models.Thing,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateThingAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var thing = new Thing(
+"<name>");
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="CreateThing(global::Azure.WaitUntil,global::LroBasicCadl.Models.Thing,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call CreateThing with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var thing = new Thing(
+"<name>");
+var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
+]]></code>
+</example>
+    </member>
+    <member name="CreateThingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateThingAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -244,7 +338,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateThing(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateThing(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateThing with required parameters and request content and parse the result.
 <code><![CDATA[

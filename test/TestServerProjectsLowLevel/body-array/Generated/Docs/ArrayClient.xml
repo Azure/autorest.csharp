@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNullAsync(RequestContext)">
+    <member name="GetNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNull(RequestContext)">
+    <member name="GetNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetInvalidAsync(RequestContext)">
+    <member name="GetInvalidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetInvalidAsync and parse the result.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetInvalid(RequestContext)">
+    <member name="GetInvalid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetInvalid and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetEmptyAsync(RequestContext)">
+    <member name="GetEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmptyAsync and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetEmpty(RequestContext)">
+    <member name="GetEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmpty and parse the result.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutEmptyAsync(RequestContent,RequestContext)">
+    <member name="PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutEmptyAsync with required request content.
 <code><![CDATA[
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutEmpty(RequestContent,RequestContext)">
+    <member name="PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutEmpty with required request content.
 <code><![CDATA[
@@ -117,7 +117,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanTfftAsync(RequestContext)">
+    <member name="GetBooleanTfftAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanTfftAsync and parse the result.
 <code><![CDATA[
@@ -131,7 +131,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanTfft(RequestContext)">
+    <member name="GetBooleanTfft(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanTfft and parse the result.
 <code><![CDATA[
@@ -145,7 +145,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutBooleanTfftAsync(RequestContent,RequestContext)">
+    <member name="PutBooleanTfftAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutBooleanTfftAsync with required request content.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutBooleanTfft(RequestContent,RequestContext)">
+    <member name="PutBooleanTfft(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutBooleanTfft with required request content.
 <code><![CDATA[
@@ -177,7 +177,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanInvalidNullAsync(RequestContext)">
+    <member name="GetBooleanInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -191,7 +191,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanInvalidNull(RequestContext)">
+    <member name="GetBooleanInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanInvalidNull and parse the result.
 <code><![CDATA[
@@ -205,7 +205,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanInvalidStringAsync(RequestContext)">
+    <member name="GetBooleanInvalidStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanInvalidStringAsync and parse the result.
 <code><![CDATA[
@@ -219,7 +219,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanInvalidString(RequestContext)">
+    <member name="GetBooleanInvalidString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanInvalidString and parse the result.
 <code><![CDATA[
@@ -233,7 +233,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetIntegerValidAsync(RequestContext)">
+    <member name="GetIntegerValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntegerValidAsync and parse the result.
 <code><![CDATA[
@@ -247,7 +247,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetIntegerValid(RequestContext)">
+    <member name="GetIntegerValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntegerValid and parse the result.
 <code><![CDATA[
@@ -261,7 +261,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutIntegerValidAsync(RequestContent,RequestContext)">
+    <member name="PutIntegerValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutIntegerValidAsync with required request content.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutIntegerValid(RequestContent,RequestContext)">
+    <member name="PutIntegerValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutIntegerValid with required request content.
 <code><![CDATA[
@@ -293,7 +293,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntInvalidNullAsync(RequestContext)">
+    <member name="GetIntInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -307,7 +307,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetIntInvalidNull(RequestContext)">
+    <member name="GetIntInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntInvalidNull and parse the result.
 <code><![CDATA[
@@ -321,7 +321,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetIntInvalidStringAsync(RequestContext)">
+    <member name="GetIntInvalidStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntInvalidStringAsync and parse the result.
 <code><![CDATA[
@@ -335,7 +335,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetIntInvalidString(RequestContext)">
+    <member name="GetIntInvalidString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetIntInvalidString and parse the result.
 <code><![CDATA[
@@ -349,7 +349,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetLongValidAsync(RequestContext)">
+    <member name="GetLongValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongValidAsync and parse the result.
 <code><![CDATA[
@@ -363,7 +363,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetLongValid(RequestContext)">
+    <member name="GetLongValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongValid and parse the result.
 <code><![CDATA[
@@ -377,7 +377,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutLongValidAsync(RequestContent,RequestContext)">
+    <member name="PutLongValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutLongValidAsync with required request content.
 <code><![CDATA[
@@ -393,7 +393,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutLongValid(RequestContent,RequestContext)">
+    <member name="PutLongValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutLongValid with required request content.
 <code><![CDATA[
@@ -409,7 +409,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLongInvalidNullAsync(RequestContext)">
+    <member name="GetLongInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -423,7 +423,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetLongInvalidNull(RequestContext)">
+    <member name="GetLongInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongInvalidNull and parse the result.
 <code><![CDATA[
@@ -437,7 +437,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetLongInvalidStringAsync(RequestContext)">
+    <member name="GetLongInvalidStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongInvalidStringAsync and parse the result.
 <code><![CDATA[
@@ -451,7 +451,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetLongInvalidString(RequestContext)">
+    <member name="GetLongInvalidString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetLongInvalidString and parse the result.
 <code><![CDATA[
@@ -465,7 +465,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatValidAsync(RequestContext)">
+    <member name="GetFloatValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatValidAsync and parse the result.
 <code><![CDATA[
@@ -479,7 +479,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatValid(RequestContext)">
+    <member name="GetFloatValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatValid and parse the result.
 <code><![CDATA[
@@ -493,7 +493,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutFloatValidAsync(RequestContent,RequestContext)">
+    <member name="PutFloatValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutFloatValidAsync with required request content.
 <code><![CDATA[
@@ -509,7 +509,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutFloatValid(RequestContent,RequestContext)">
+    <member name="PutFloatValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutFloatValid with required request content.
 <code><![CDATA[
@@ -525,7 +525,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatInvalidNullAsync(RequestContext)">
+    <member name="GetFloatInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -539,7 +539,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatInvalidNull(RequestContext)">
+    <member name="GetFloatInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatInvalidNull and parse the result.
 <code><![CDATA[
@@ -553,7 +553,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatInvalidStringAsync(RequestContext)">
+    <member name="GetFloatInvalidStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatInvalidStringAsync and parse the result.
 <code><![CDATA[
@@ -567,7 +567,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetFloatInvalidString(RequestContext)">
+    <member name="GetFloatInvalidString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetFloatInvalidString and parse the result.
 <code><![CDATA[
@@ -581,7 +581,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleValidAsync(RequestContext)">
+    <member name="GetDoubleValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleValidAsync and parse the result.
 <code><![CDATA[
@@ -595,7 +595,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleValid(RequestContext)">
+    <member name="GetDoubleValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleValid and parse the result.
 <code><![CDATA[
@@ -609,7 +609,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDoubleValidAsync(RequestContent,RequestContext)">
+    <member name="PutDoubleValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDoubleValidAsync with required request content.
 <code><![CDATA[
@@ -625,7 +625,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDoubleValid(RequestContent,RequestContext)">
+    <member name="PutDoubleValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDoubleValid with required request content.
 <code><![CDATA[
@@ -641,7 +641,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleInvalidNullAsync(RequestContext)">
+    <member name="GetDoubleInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -655,7 +655,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleInvalidNull(RequestContext)">
+    <member name="GetDoubleInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleInvalidNull and parse the result.
 <code><![CDATA[
@@ -669,7 +669,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleInvalidStringAsync(RequestContext)">
+    <member name="GetDoubleInvalidStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleInvalidStringAsync and parse the result.
 <code><![CDATA[
@@ -683,7 +683,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDoubleInvalidString(RequestContext)">
+    <member name="GetDoubleInvalidString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDoubleInvalidString and parse the result.
 <code><![CDATA[
@@ -697,7 +697,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringValidAsync(RequestContext)">
+    <member name="GetStringValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringValidAsync and parse the result.
 <code><![CDATA[
@@ -711,7 +711,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringValid(RequestContext)">
+    <member name="GetStringValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringValid and parse the result.
 <code><![CDATA[
@@ -725,7 +725,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutStringValidAsync(RequestContent,RequestContext)">
+    <member name="PutStringValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutStringValidAsync with required request content.
 <code><![CDATA[
@@ -741,7 +741,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutStringValid(RequestContent,RequestContext)">
+    <member name="PutStringValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutStringValid with required request content.
 <code><![CDATA[
@@ -757,7 +757,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetEnumValidAsync(RequestContext)">
+    <member name="GetEnumValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEnumValidAsync and parse the result.
 <code><![CDATA[
@@ -771,7 +771,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetEnumValid(RequestContext)">
+    <member name="GetEnumValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEnumValid and parse the result.
 <code><![CDATA[
@@ -785,7 +785,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutEnumValidAsync(RequestContent,RequestContext)">
+    <member name="PutEnumValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutEnumValidAsync with required request content.
 <code><![CDATA[
@@ -801,7 +801,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutEnumValid(RequestContent,RequestContext)">
+    <member name="PutEnumValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutEnumValid with required request content.
 <code><![CDATA[
@@ -817,7 +817,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetStringEnumValidAsync(RequestContext)">
+    <member name="GetStringEnumValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringEnumValidAsync and parse the result.
 <code><![CDATA[
@@ -831,7 +831,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringEnumValid(RequestContext)">
+    <member name="GetStringEnumValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringEnumValid and parse the result.
 <code><![CDATA[
@@ -845,7 +845,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutStringEnumValidAsync(RequestContent,RequestContext)">
+    <member name="PutStringEnumValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutStringEnumValidAsync with required request content.
 <code><![CDATA[
@@ -861,7 +861,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutStringEnumValid(RequestContent,RequestContext)">
+    <member name="PutStringEnumValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutStringEnumValid with required request content.
 <code><![CDATA[
@@ -877,7 +877,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetStringWithNullAsync(RequestContext)">
+    <member name="GetStringWithNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringWithNullAsync and parse the result.
 <code><![CDATA[
@@ -891,7 +891,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringWithNull(RequestContext)">
+    <member name="GetStringWithNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringWithNull and parse the result.
 <code><![CDATA[
@@ -905,7 +905,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringWithInvalidAsync(RequestContext)">
+    <member name="GetStringWithInvalidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringWithInvalidAsync and parse the result.
 <code><![CDATA[
@@ -919,7 +919,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetStringWithInvalid(RequestContext)">
+    <member name="GetStringWithInvalid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetStringWithInvalid and parse the result.
 <code><![CDATA[
@@ -933,7 +933,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUuidValidAsync(RequestContext)">
+    <member name="GetUuidValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUuidValidAsync and parse the result.
 <code><![CDATA[
@@ -947,7 +947,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUuidValid(RequestContext)">
+    <member name="GetUuidValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUuidValid and parse the result.
 <code><![CDATA[
@@ -961,7 +961,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutUuidValidAsync(RequestContent,RequestContext)">
+    <member name="PutUuidValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutUuidValidAsync with required request content.
 <code><![CDATA[
@@ -977,7 +977,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutUuidValid(RequestContent,RequestContext)">
+    <member name="PutUuidValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutUuidValid with required request content.
 <code><![CDATA[
@@ -993,7 +993,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetUuidInvalidCharsAsync(RequestContext)">
+    <member name="GetUuidInvalidCharsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUuidInvalidCharsAsync and parse the result.
 <code><![CDATA[
@@ -1007,7 +1007,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUuidInvalidChars(RequestContext)">
+    <member name="GetUuidInvalidChars(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUuidInvalidChars and parse the result.
 <code><![CDATA[
@@ -1021,7 +1021,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateValidAsync(RequestContext)">
+    <member name="GetDateValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateValidAsync and parse the result.
 <code><![CDATA[
@@ -1035,7 +1035,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateValid(RequestContext)">
+    <member name="GetDateValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateValid and parse the result.
 <code><![CDATA[
@@ -1049,7 +1049,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDateValidAsync(RequestContent,RequestContext)">
+    <member name="PutDateValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateValidAsync with required request content.
 <code><![CDATA[
@@ -1065,7 +1065,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDateValid(RequestContent,RequestContext)">
+    <member name="PutDateValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateValid with required request content.
 <code><![CDATA[
@@ -1081,7 +1081,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDateInvalidNullAsync(RequestContext)">
+    <member name="GetDateInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -1095,7 +1095,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateInvalidNull(RequestContext)">
+    <member name="GetDateInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateInvalidNull and parse the result.
 <code><![CDATA[
@@ -1109,7 +1109,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateInvalidCharsAsync(RequestContext)">
+    <member name="GetDateInvalidCharsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateInvalidCharsAsync and parse the result.
 <code><![CDATA[
@@ -1123,7 +1123,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateInvalidChars(RequestContext)">
+    <member name="GetDateInvalidChars(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateInvalidChars and parse the result.
 <code><![CDATA[
@@ -1137,7 +1137,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeValidAsync(RequestContext)">
+    <member name="GetDateTimeValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeValidAsync and parse the result.
 <code><![CDATA[
@@ -1151,7 +1151,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeValid(RequestContext)">
+    <member name="GetDateTimeValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeValid and parse the result.
 <code><![CDATA[
@@ -1165,7 +1165,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDateTimeValidAsync(RequestContent,RequestContext)">
+    <member name="PutDateTimeValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateTimeValidAsync with required request content.
 <code><![CDATA[
@@ -1181,7 +1181,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDateTimeValid(RequestContent,RequestContext)">
+    <member name="PutDateTimeValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateTimeValid with required request content.
 <code><![CDATA[
@@ -1197,7 +1197,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeInvalidNullAsync(RequestContext)">
+    <member name="GetDateTimeInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -1211,7 +1211,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeInvalidNull(RequestContext)">
+    <member name="GetDateTimeInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeInvalidNull and parse the result.
 <code><![CDATA[
@@ -1225,7 +1225,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeInvalidCharsAsync(RequestContext)">
+    <member name="GetDateTimeInvalidCharsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeInvalidCharsAsync and parse the result.
 <code><![CDATA[
@@ -1239,7 +1239,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeInvalidChars(RequestContext)">
+    <member name="GetDateTimeInvalidChars(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeInvalidChars and parse the result.
 <code><![CDATA[
@@ -1253,7 +1253,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeRfc1123ValidAsync(RequestContext)">
+    <member name="GetDateTimeRfc1123ValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeRfc1123ValidAsync and parse the result.
 <code><![CDATA[
@@ -1267,7 +1267,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDateTimeRfc1123Valid(RequestContext)">
+    <member name="GetDateTimeRfc1123Valid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDateTimeRfc1123Valid and parse the result.
 <code><![CDATA[
@@ -1281,7 +1281,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDateTimeRfc1123ValidAsync(RequestContent,RequestContext)">
+    <member name="PutDateTimeRfc1123ValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateTimeRfc1123ValidAsync with required request content.
 <code><![CDATA[
@@ -1297,7 +1297,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDateTimeRfc1123Valid(RequestContent,RequestContext)">
+    <member name="PutDateTimeRfc1123Valid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDateTimeRfc1123Valid with required request content.
 <code><![CDATA[
@@ -1313,7 +1313,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDurationValidAsync(RequestContext)">
+    <member name="GetDurationValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDurationValidAsync and parse the result.
 <code><![CDATA[
@@ -1327,7 +1327,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDurationValid(RequestContext)">
+    <member name="GetDurationValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDurationValid and parse the result.
 <code><![CDATA[
@@ -1341,7 +1341,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDurationValidAsync(RequestContent,RequestContext)">
+    <member name="PutDurationValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDurationValidAsync with required request content.
 <code><![CDATA[
@@ -1357,7 +1357,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDurationValid(RequestContent,RequestContext)">
+    <member name="PutDurationValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDurationValid with required request content.
 <code><![CDATA[
@@ -1373,7 +1373,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetByteValidAsync(RequestContext)">
+    <member name="GetByteValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByteValidAsync and parse the result.
 <code><![CDATA[
@@ -1387,7 +1387,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetByteValid(RequestContext)">
+    <member name="GetByteValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByteValid and parse the result.
 <code><![CDATA[
@@ -1401,7 +1401,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutByteValidAsync(RequestContent,RequestContext)">
+    <member name="PutByteValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutByteValidAsync with required request content.
 <code><![CDATA[
@@ -1417,7 +1417,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutByteValid(RequestContent,RequestContext)">
+    <member name="PutByteValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutByteValid with required request content.
 <code><![CDATA[
@@ -1433,7 +1433,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetByteInvalidNullAsync(RequestContext)">
+    <member name="GetByteInvalidNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByteInvalidNullAsync and parse the result.
 <code><![CDATA[
@@ -1447,7 +1447,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetByteInvalidNull(RequestContext)">
+    <member name="GetByteInvalidNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetByteInvalidNull and parse the result.
 <code><![CDATA[
@@ -1461,7 +1461,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64UrlAsync(RequestContext)">
+    <member name="GetBase64UrlAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBase64UrlAsync and parse the result.
 <code><![CDATA[
@@ -1475,7 +1475,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64Url(RequestContext)">
+    <member name="GetBase64Url(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBase64Url and parse the result.
 <code><![CDATA[
@@ -1489,7 +1489,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetComplexNullAsync(RequestContext)">
+    <member name="GetComplexNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexNullAsync and parse the result.
 <code><![CDATA[
@@ -1517,7 +1517,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexNull(RequestContext)">
+    <member name="GetComplexNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexNull and parse the result.
 <code><![CDATA[
@@ -1545,7 +1545,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexEmptyAsync(RequestContext)">
+    <member name="GetComplexEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexEmptyAsync and parse the result.
 <code><![CDATA[
@@ -1573,7 +1573,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexEmpty(RequestContext)">
+    <member name="GetComplexEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexEmpty and parse the result.
 <code><![CDATA[
@@ -1601,7 +1601,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexItemNullAsync(RequestContext)">
+    <member name="GetComplexItemNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexItemNullAsync and parse the result.
 <code><![CDATA[
@@ -1629,7 +1629,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexItemNull(RequestContext)">
+    <member name="GetComplexItemNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexItemNull and parse the result.
 <code><![CDATA[
@@ -1657,7 +1657,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexItemEmptyAsync(RequestContext)">
+    <member name="GetComplexItemEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexItemEmptyAsync and parse the result.
 <code><![CDATA[
@@ -1685,7 +1685,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexItemEmpty(RequestContext)">
+    <member name="GetComplexItemEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexItemEmpty and parse the result.
 <code><![CDATA[
@@ -1713,7 +1713,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexValidAsync(RequestContext)">
+    <member name="GetComplexValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexValidAsync and parse the result.
 <code><![CDATA[
@@ -1741,7 +1741,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetComplexValid(RequestContext)">
+    <member name="GetComplexValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetComplexValid and parse the result.
 <code><![CDATA[
@@ -1769,7 +1769,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PutComplexValidAsync(RequestContent,RequestContext)">
+    <member name="PutComplexValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutComplexValidAsync with required request content.
 <code><![CDATA[
@@ -1801,7 +1801,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PutComplexValid(RequestContent,RequestContext)">
+    <member name="PutComplexValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutComplexValid with required request content.
 <code><![CDATA[
@@ -1833,7 +1833,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="GetArrayNullAsync(RequestContext)">
+    <member name="GetArrayNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayNullAsync and parse the result.
 <code><![CDATA[
@@ -1847,7 +1847,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayNull(RequestContext)">
+    <member name="GetArrayNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayNull and parse the result.
 <code><![CDATA[
@@ -1861,7 +1861,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayEmptyAsync(RequestContext)">
+    <member name="GetArrayEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayEmptyAsync and parse the result.
 <code><![CDATA[
@@ -1875,7 +1875,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayEmpty(RequestContext)">
+    <member name="GetArrayEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayEmpty and parse the result.
 <code><![CDATA[
@@ -1889,7 +1889,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayItemNullAsync(RequestContext)">
+    <member name="GetArrayItemNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayItemNullAsync and parse the result.
 <code><![CDATA[
@@ -1903,7 +1903,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayItemNull(RequestContext)">
+    <member name="GetArrayItemNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayItemNull and parse the result.
 <code><![CDATA[
@@ -1917,7 +1917,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayItemEmptyAsync(RequestContext)">
+    <member name="GetArrayItemEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayItemEmptyAsync and parse the result.
 <code><![CDATA[
@@ -1931,7 +1931,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayItemEmpty(RequestContext)">
+    <member name="GetArrayItemEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayItemEmpty and parse the result.
 <code><![CDATA[
@@ -1945,7 +1945,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayValidAsync(RequestContext)">
+    <member name="GetArrayValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayValidAsync and parse the result.
 <code><![CDATA[
@@ -1959,7 +1959,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetArrayValid(RequestContext)">
+    <member name="GetArrayValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetArrayValid and parse the result.
 <code><![CDATA[
@@ -1973,7 +1973,7 @@ Console.WriteLine(result[0][0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutArrayValidAsync(RequestContent,RequestContext)">
+    <member name="PutArrayValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutArrayValidAsync with required request content.
 <code><![CDATA[
@@ -1991,7 +1991,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutArrayValid(RequestContent,RequestContext)">
+    <member name="PutArrayValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutArrayValid with required request content.
 <code><![CDATA[
@@ -2009,7 +2009,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryNullAsync(RequestContext)">
+    <member name="GetDictionaryNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryNullAsync and parse the result.
 <code><![CDATA[
@@ -2023,7 +2023,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryNull(RequestContext)">
+    <member name="GetDictionaryNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryNull and parse the result.
 <code><![CDATA[
@@ -2037,7 +2037,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryEmptyAsync(RequestContext)">
+    <member name="GetDictionaryEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryEmptyAsync and parse the result.
 <code><![CDATA[
@@ -2051,7 +2051,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryEmpty(RequestContext)">
+    <member name="GetDictionaryEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryEmpty and parse the result.
 <code><![CDATA[
@@ -2065,7 +2065,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryItemNullAsync(RequestContext)">
+    <member name="GetDictionaryItemNullAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryItemNullAsync and parse the result.
 <code><![CDATA[
@@ -2079,7 +2079,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryItemNull(RequestContext)">
+    <member name="GetDictionaryItemNull(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryItemNull and parse the result.
 <code><![CDATA[
@@ -2093,7 +2093,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryItemEmptyAsync(RequestContext)">
+    <member name="GetDictionaryItemEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryItemEmptyAsync and parse the result.
 <code><![CDATA[
@@ -2107,7 +2107,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryItemEmpty(RequestContext)">
+    <member name="GetDictionaryItemEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryItemEmpty and parse the result.
 <code><![CDATA[
@@ -2121,7 +2121,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryValidAsync(RequestContext)">
+    <member name="GetDictionaryValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryValidAsync and parse the result.
 <code><![CDATA[
@@ -2135,7 +2135,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryValid(RequestContext)">
+    <member name="GetDictionaryValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryValid and parse the result.
 <code><![CDATA[
@@ -2149,7 +2149,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutDictionaryValidAsync(RequestContent,RequestContext)">
+    <member name="PutDictionaryValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDictionaryValidAsync with required request content.
 <code><![CDATA[
@@ -2167,7 +2167,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutDictionaryValid(RequestContent,RequestContext)">
+    <member name="PutDictionaryValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDictionaryValid with required request content.
 <code><![CDATA[

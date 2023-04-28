@@ -13,6 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -248,15 +249,27 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeGetClientCodes(builder);
             builder.AppendLine();
 
-            // get input parameters
+            // get input parameters -- only body parameter is not initialized inline in the invocation, therefore we take out all the body parameters.
+            var typeProviderTypedParameters = convenienceMethod.Signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body);
+            foreach (var parameter in typeProviderTypedParameters)
+            {
+                ComposeBodyParameter(allParameters, parameter, builder);
+            }
 
             if (convenienceMethod.IsLongRunning)
             {
-                // handle LRO
+                if (convenienceMethod.IsPageable)
+                {
+                    // do nothing, this never happen right now
+                }
+                else
+                {
+                    ComposeHandleLongRunningResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+                }
             }
             else if (convenienceMethod.IsPageable)
             {
-                // handle pageable
+                ComposeHandlePageableResponseCode(convenienceMethod, methodName, async, allParameters, builder);
             }
             else
             {
@@ -319,6 +332,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeHandleLongRunningResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            /* GENERATED CODE PATTERN
+             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
+             */
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
+        }
+
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
             if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
@@ -370,6 +391,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeHandlePageableResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            var methodSignature = convenienceMethod.Signature;
+            builder.Append($"var result = client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)});");
+        }
+
         private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
         {
             foreach (var property in responseModelType.Properties)
@@ -417,7 +444,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // TODO -- need refactor to use CodeWriter and then reduce with Roslyn maybe?
             var methodSignature = convenienceMethod.Signature;
-            builder.AppendLine($"{methodSignature.ReturnType!.ToString().Trim()} result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)})"); // TODO -- handle parameters
+            builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
@@ -664,6 +691,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     var valueType = parameterType.Arguments[1];
                     return $"new Dictionary<string, {valueType.Name}>{{ \"<test>\" = {MockParameterTypeValue(parameterName, valueType)} }}";
                 }
+
+                if (type == typeof(BinaryData))
+                {
+                    return $"BinaryData.FromString(\"<your binary data content>\")";
+                }
             }
 
             return "null"; // some unknown found
@@ -674,6 +706,14 @@ namespace AutoRest.CSharp.Generation.Writers
             // var data = {value_expression};
             builder.Append("var data = ");
             builder.Append(ComposeRequestContent(composeAll, requestBodyType, null, 0, new HashSet<InputModelType>()));
+            builder.AppendLine(";");
+        }
+
+        private void ComposeBodyParameter(bool composeAll, Parameter bodyParameter, StringBuilder builder)
+        {
+            // var <parameterName> = {value_expression};
+            builder.Append($"var {bodyParameter.Name} = ");
+            builder.Append(ComposeCSharpType(composeAll, bodyParameter.Type, null, 0, false, new HashSet<ObjectType>()));
             builder.AppendLine(";");
         }
 
@@ -713,6 +753,17 @@ namespace AutoRest.CSharp.Generation.Writers
             _ => "new {}"
         };
 
+        private string ComposeCSharpType(bool allProperties, CSharpType type, string? propertyDescription, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
+        {
+            _ when TypeFactory.IsIEnumerableOfT(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), indent, includeCollectionInitialization, visitedModels), // IEnumerable<T> is guaranteed to have one and only one generic parameter
+            _ when TypeFactory.IsReadWriteList(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), indent, includeCollectionInitialization, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            _ when TypeFactory.IsReadWriteDictionary(type) => ComposeDictionaryCSharpType(allProperties, type.Arguments[0], type.Arguments[1], indent, includeCollectionInitialization, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
+            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription ?? "null", type),
+            { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(allProperties, objectType, indent, visitedModels),
+            { IsFrameworkType: false, Implementation: EnumType enumType } => $"{enumType.Type.Name}.{enumType.Values.First().Declaration.Name}",
+            _ => "null",
+        };
+
         private string ComposeArrayRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
         {
             /* GENERATED CODE PATTERN
@@ -724,13 +775,38 @@ namespace AutoRest.CSharp.Generation.Writers
              */
 
             var elementExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (elementExpr == "")
+            if (elementExpr == string.Empty)
             {
                 return "new[] {}";
             }
 
             var builder = new StringBuilder();
             using (Scope("new[] ", indent, builder))
+            {
+                builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
+            }
+            return builder.ToString();
+        }
+
+        private string ComposeArrayCSharpType(bool allProperties, CSharpType elementType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new <TypeName>[] {
+             *     {element_expression}
+             * }
+             * or
+             * Array.Empty<TypeName>()
+             */
+
+            var elementExpr = ComposeCSharpType(allProperties, elementType, null, indent + 4, includeCollectionInitialization, visitedModels);
+            if (elementExpr == string.Empty)
+            {
+                return includeCollectionInitialization ? $"Array.Empty<{elementType.Name}>()" : "{}";
+            }
+
+            var builder = new StringBuilder();
+            builder.AppendLine(includeCollectionInitialization ? $"new {elementType.Name}[] " : "");
+            using (Scope("", indent, builder))
             {
                 builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
             }
@@ -747,7 +823,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * new {}
              */
             var valueExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (valueExpr == "")
+            if (valueExpr == string.Empty)
             {
                 return "new {}";
             }
@@ -760,12 +836,40 @@ namespace AutoRest.CSharp.Generation.Writers
             return builder.ToString();
         }
 
+        private string ComposeDictionaryCSharpType(bool allProperties, CSharpType keyType, CSharpType valueType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new Dictionary<{keyType}, {valueType}>{
+             *     [key] = {value_expression},
+             * }
+             * or
+             * new Dictionary<{keyType}, {valueType}>()
+             */
+            var valueExpr = ComposeCSharpType(allProperties, valueType, null, indent + 4, includeCollectionInitialization, visitedModels);
+            if (valueExpr == string.Empty)
+            {
+                return includeCollectionInitialization ? $"new Dictionary<{EscapeStringTypeName(keyType)}, {EscapeStringTypeName(valueType)}>()" : "{}";
+            }
+
+            var builder = new StringBuilder();
+            builder.AppendLine(includeCollectionInitialization ? $"new Dictionary<{EscapeStringTypeName(keyType)}, {EscapeStringTypeName(valueType)}>" : "");
+            using (Scope("", indent, builder))
+            {
+                builder.Append(' ', indent + 4).AppendLine($"[\"key\"] = {valueExpr},");
+            }
+            return builder.ToString();
+
+            string EscapeStringTypeName(CSharpType type) => type switch
+            {
+                { IsFrameworkType: true } when type.FrameworkType == typeof(string) => "string",
+                _ => type.Name,
+            };
+        }
+
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
         {
             if (visitedModels.Contains(model))
-            {
-                return "";
-            }
+                return string.Empty;
 
             /* GENERATED CODE PATTERN
                      * new {
@@ -836,6 +940,71 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             return builder.ToString();
         }
+
+        private string ComposeObjectType(bool allProperties, ObjectType model, int indent, HashSet<ObjectType> visitedModels)
+        {
+            if (visitedModels.Contains(model))
+                return string.Empty;
+
+            visitedModels.Add(model);
+
+            /* GENERATED CODE PATTERN
+                     * new <ModelName>(parameterInCtor1, parameterInCtor2) {
+                     *     propNotInCtor1 = {value_expression},
+                     *     propNotInCtor2 = {value_expression},
+                     *     ...
+                     * }
+                     */
+            // TODO -- rewrite this logic to use CodeWriterExtensions.WriteInitialization when we migrate to use CodeWriter. The WriteInitialization method will make the logic here a lot simpler
+            var builder = new StringBuilder();
+            var concreteModel = GetConcreteChildModel(model);
+            var ctor = model.InitializationConstructor;
+            // write the ctor
+            var parameterExpressions = new List<string>();
+            foreach (var parameter in ctor.Signature.Parameters)
+            {
+                var parameterExpr = ComposeCSharpType(allProperties, parameter.Type, parameter.Name, indent, true, visitedModels);
+                parameterExpressions.Add(parameterExpr);
+            }
+            builder.Append($"new {model.Type.Name}(").AppendLine();
+            builder.Append(string.Join(", ", parameterExpressions));
+            builder.Append(")");
+
+            // find other properties
+            if (allProperties)
+            {
+                // get all properties on this model, and then only keep those do not have an initializer on the ctor, which means they are not covered by the signature of the ctor
+                var propertiesToWrite = model.EnumerateHierarchy().SelectMany(model => model.Properties).Distinct()
+                    .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p));
+
+                var propertyExpressions = new List<string>();
+                foreach (var property in propertiesToWrite)
+                {
+                    var propertyExpr = ComposeCSharpType(allProperties, property.Declaration.Type, property.Declaration.Name, indent + 4, false, visitedModels);
+                    if (propertyExpr != string.Empty)
+                    {
+                        propertyExpressions.Add($"{property.Declaration.Name} = {propertyExpr},");
+                    }
+                }
+
+                if (propertyExpressions.Any())
+                {
+                    builder.AppendLine();
+                    using (Scope("", indent, builder))
+                    {
+                        foreach (var propertyExpr in propertyExpressions)
+                        {
+                            builder.Append(' ', indent + 4).AppendLine(propertyExpr);
+                        }
+                    }
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private static bool IsPropertyAssignable(ObjectTypeProperty property)
+            => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
 
         private void ComposeGetClientCodes(StringBuilder builder)
         {
@@ -930,6 +1099,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static InputModelType GetConcreteChildModel(InputModelType model)
             => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
+
+        private static ObjectType GetConcreteChildModel(ObjectType model)
+        {
+            if (!model.Declaration.IsAbstract || model.Discriminator is not { } discriminator || !discriminator.Implementations.Any())
+                return model;
+
+            var nonAbstractType = discriminator.Implementations.Select(impl => impl.Type).First(type => type.TryCast<ObjectType>(out var objectType) && !objectType.Declaration.IsAbstract);
+            return (ObjectType)nonAbstractType.Implementation; // we selected this type by asserting it is ObjectType therefore this will never fail
+        }
 
         private CodeScope Scope(string content, int indent, StringBuilder builder, bool encloseWithNewLine = false)
         {

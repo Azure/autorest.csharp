@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDurationAsync(RequestContext)">
+    <member name="GetDurationAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDurationAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var result = await client.GetDurationAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetDuration(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDuration.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var result = client.GetDuration();
+]]></code>
+</example>
+    </member>
+    <member name="GetDurationAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDurationAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +46,7 @@ Schema for <c>DurationProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDuration(RequestContext)">
+    <member name="GetDuration(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDuration with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +71,31 @@ Schema for <c>DurationProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.DurationProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var body = new DurationProperty(
+new TimeSpan(1, 2, 3));
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::_Type.Property.ValueTypes.Models.DurationProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var body = new DurationProperty(
+new TimeSpan(1, 2, 3));
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -78,7 +122,7 @@ Schema for <c>DurationProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

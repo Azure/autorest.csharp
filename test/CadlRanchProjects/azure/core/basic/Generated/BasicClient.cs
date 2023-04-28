@@ -57,7 +57,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -83,7 +83,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response CreateOrUpdate(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -108,6 +108,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
         /// <remarks> Creates or replaces a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,global::_Specs_.Azure.Core.Basic.Models.User,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<User>> CreateOrReplaceAsync(int id, User resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -123,6 +124,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
         /// <remarks> Creates or replaces a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,global::_Specs_.Azure.Core.Basic.Models.User,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<User> CreateOrReplace(int id, User resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -139,7 +141,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateOrReplaceAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -165,7 +167,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response CreateOrReplace(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -188,6 +190,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<User>> GetUserAsync(int id, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -199,6 +202,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<User> GetUser(int id, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -211,7 +215,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -233,7 +237,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,global::Azure.RequestContext)']/*" />
         public virtual Response GetUser(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -255,7 +259,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -277,7 +281,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(int,global::Azure.RequestContext)']/*" />
         public virtual Response Delete(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -300,6 +304,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<User>> ExportAsync(int id, string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -315,6 +320,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports a User. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<User> Export(int id, string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -331,7 +337,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -357,7 +363,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,global::Azure.RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -386,6 +392,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Lists all Users. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetUsersAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -404,6 +411,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Lists all Users. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)']/*" />
         public virtual Pageable<User> GetUsers(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -423,7 +431,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -442,7 +450,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetUsers(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -452,6 +460,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithPageAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -462,6 +471,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(global::System.Threading.CancellationToken)']/*" />
         public virtual Pageable<User> GetWithPage(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -474,7 +484,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -486,7 +496,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -496,6 +506,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with custom page model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithCustomPageModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -506,6 +517,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with custom page model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(global::System.Threading.CancellationToken)']/*" />
         public virtual Pageable<User> GetWithCustomPageModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -518,7 +530,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithCustomPageModelAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
@@ -530,7 +542,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithCustomPageModel(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);

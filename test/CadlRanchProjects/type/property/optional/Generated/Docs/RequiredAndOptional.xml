@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllAsync(RequestContext)">
+    <member name="GetAllAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetAllAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var result = await client.GetAllAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetAll(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetAll.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var result = client.GetAll();
+]]></code>
+</example>
+    </member>
+    <member name="GetAllAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +48,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetAll(RequestContext)">
+    <member name="GetAll(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +75,27 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetRequiredOnlyAsync(RequestContext)">
+    <member name="GetRequiredOnlyAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetRequiredOnlyAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var result = await client.GetRequiredOnlyAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnly(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetRequiredOnly.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var result = client.GetRequiredOnly();
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnlyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequiredOnlyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -82,7 +122,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetRequiredOnly(RequestContext)">
+    <member name="GetRequiredOnly(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequiredOnly with required parameters and parse the result.
 <code><![CDATA[
@@ -109,7 +149,37 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAllAsync(RequestContent,RequestContext)">
+    <member name="PutAllAsync(global::_Type.Property.Optional.Models.RequiredAndOptionalProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAllAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var body = new RequiredAndOptionalProperty(
+1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = await client.PutAllAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAll(global::_Type.Property.Optional.Models.RequiredAndOptionalProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAll with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var body = new RequiredAndOptionalProperty(
+1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = client.PutAll(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAllAsync with required request content.
 <code><![CDATA[
@@ -149,7 +219,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAll(RequestContent,RequestContext)">
+    <member name="PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAll with required request content.
 <code><![CDATA[
@@ -189,7 +259,37 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutRequiredOnlyAsync(RequestContent,RequestContext)">
+    <member name="PutRequiredOnlyAsync(global::_Type.Property.Optional.Models.RequiredAndOptionalProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutRequiredOnlyAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var body = new RequiredAndOptionalProperty(
+1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = await client.PutRequiredOnlyAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnly(global::_Type.Property.Optional.Models.RequiredAndOptionalProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutRequiredOnly with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+
+var body = new RequiredAndOptionalProperty(
+1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = client.PutRequiredOnly(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOnlyAsync with required request content.
 <code><![CDATA[
@@ -229,7 +329,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutRequiredOnly(RequestContent,RequestContext)">
+    <member name="PutRequiredOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOnly with required request content.
 <code><![CDATA[

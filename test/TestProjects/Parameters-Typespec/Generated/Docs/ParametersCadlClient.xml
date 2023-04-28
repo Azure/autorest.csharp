@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(Int32,Int32,RequestContext)">
+    <member name="OperationAsync(int,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call OperationAsync with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = await client.OperationAsync(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="Operation(int,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Operation with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = client.Operation(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="OperationAsync(int,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OperationAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +46,7 @@ Schema for <c>Result</c>:
 
 </remarks>
     </member>
-    <member name="Operation(Int32,Int32,RequestContext)">
+    <member name="Operation(int,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Operation with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +71,27 @@ Schema for <c>Result</c>:
 
 </remarks>
     </member>
-    <member name="Operation2Async(Int32,Int32,RequestContext)">
+    <member name="Operation2Async(int,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Operation2Async with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = await client.Operation2Async(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="Operation2(int,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Operation2 with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = client.Operation2(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="Operation2Async(int,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Operation2Async with required parameters and parse the result.
 <code><![CDATA[
@@ -76,7 +116,7 @@ Schema for <c>Result</c>:
 
 </remarks>
     </member>
-    <member name="Operation2(Int32,Int32,RequestContext)">
+    <member name="Operation2(int,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Operation2 with required parameters and parse the result.
 <code><![CDATA[

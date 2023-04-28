@@ -90,7 +90,7 @@ namespace Authentication.Union
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidKeyAsync(RequestContext)']/*" />
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidKeyAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ValidKeyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("UnionClient.ValidKey");
@@ -111,7 +111,7 @@ namespace Authentication.Union
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidKey(RequestContext)']/*" />
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidKey(global::Azure.RequestContext)']/*" />
         public virtual Response ValidKey(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("UnionClient.ValidKey");
@@ -132,7 +132,7 @@ namespace Authentication.Union
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidTokenAsync(RequestContext)']/*" />
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidTokenAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ValidTokenAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("UnionClient.ValidToken");
@@ -153,7 +153,7 @@ namespace Authentication.Union
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidToken(RequestContext)']/*" />
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ValidToken(global::Azure.RequestContext)']/*" />
         public virtual Response ValidToken(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("UnionClient.ValidToken");

@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBatchDetectionResultAsync(String,RequestContext)">
+    <member name="GetBatchDetectionResultAsync(string,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetBatchDetectionResultAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ApiVersionInCadlClient(endpoint, credential);
+
+var result = await client.GetBatchDetectionResultAsync("<resultId>");
+]]></code>
+</example>
+    </member>
+    <member name="GetBatchDetectionResult(string,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetBatchDetectionResult with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ApiVersionInCadlClient(endpoint, credential);
+
+var result = client.GetBatchDetectionResult("<resultId>");
+]]></code>
+</example>
+    </member>
+    <member name="GetBatchDetectionResultAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -31,7 +55,7 @@ Schema for <c>DetectionResult</c>:
 
 </remarks>
     </member>
-    <member name="GetBatchDetectionResult(String,RequestContext)">
+    <member name="GetBatchDetectionResult(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters and parse the result.
 <code><![CDATA[

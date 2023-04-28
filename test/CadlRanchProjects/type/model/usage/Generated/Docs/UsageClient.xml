@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="InputAsync(RequestContent,RequestContext)">
+    <member name="InputAsync(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call InputAsync with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var input = new InputRecord(
+"<requiredProp>");
+var result = await client.InputAsync(input);
+]]></code>
+</example>
+    </member>
+    <member name="Input(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Input with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var input = new InputRecord(
+"<requiredProp>");
+var result = client.Input(input);
+]]></code>
+</example>
+    </member>
+    <member name="InputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputAsync with required request content.
 <code><![CDATA[
@@ -28,7 +52,7 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Input(RequestContent,RequestContext)">
+    <member name="Input(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Input with required request content.
 <code><![CDATA[
@@ -55,7 +79,27 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="OutputAsync(RequestContext)">
+    <member name="OutputAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call OutputAsync.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = await client.OutputAsync();
+]]></code>
+</example>
+    </member>
+    <member name="Output(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Output.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = client.Output();
+]]></code>
+</example>
+    </member>
+    <member name="OutputAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call OutputAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -80,7 +124,7 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Output(RequestContext)">
+    <member name="Output(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Output with required parameters and parse the result.
 <code><![CDATA[
@@ -105,7 +149,31 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutputAsync(RequestContent,RequestContext)">
+    <member name="InputAndOutputAsync(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call InputAndOutputAsync with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputOutputRecord(
+"<requiredProp>");
+var result = await client.InputAndOutputAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="InputAndOutput(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call InputAndOutput with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputOutputRecord(
+"<requiredProp>");
+var result = client.InputAndOutput(body);
+]]></code>
+</example>
+    </member>
+    <member name="InputAndOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputAndOutputAsync with required request content and parse the result.
 <code><![CDATA[
@@ -142,7 +210,7 @@ Schema for <c>InputOutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutput(RequestContent,RequestContext)">
+    <member name="InputAndOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputAndOutput with required request content and parse the result.
 <code><![CDATA[

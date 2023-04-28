@@ -49,6 +49,7 @@ namespace _Type.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAllAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAll(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetAll(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -69,7 +71,7 @@ namespace _Type.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAllAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetAll");
@@ -90,7 +92,7 @@ namespace _Type.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAll(global::Azure.RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetAll");
@@ -109,6 +111,7 @@ namespace _Type.Property.Optional
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefaultAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -118,6 +121,7 @@ namespace _Type.Property.Optional
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefault(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetDefault(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -129,7 +133,7 @@ namespace _Type.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefaultAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetDefault");
@@ -150,7 +154,7 @@ namespace _Type.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefault(global::Azure.RequestContext)']/*" />
         public virtual Response GetDefault(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetDefault");
@@ -171,6 +175,7 @@ namespace _Type.Property.Optional
         /// <param name="body"> The DatetimeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -184,6 +189,7 @@ namespace _Type.Property.Optional
         /// <param name="body"> The DatetimeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)']/*" />
         public virtual Response PutAll(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -199,7 +205,7 @@ namespace _Type.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -224,7 +230,7 @@ namespace _Type.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -247,6 +253,7 @@ namespace _Type.Property.Optional
         /// <param name="body"> The DatetimeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -260,6 +267,7 @@ namespace _Type.Property.Optional
         /// <param name="body"> The DatetimeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)']/*" />
         public virtual Response PutDefault(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -275,7 +283,7 @@ namespace _Type.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -300,7 +308,7 @@ namespace _Type.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

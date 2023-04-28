@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="UpdateConvenienceAsync(RequestContext)">
+    <member name="UpdateConvenienceAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call UpdateConvenienceAsync.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.UpdateConvenienceAsync();
+]]></code>
+</example>
+    </member>
+    <member name="UpdateConvenience(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call UpdateConvenience.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.UpdateConvenience();
+]]></code>
+</example>
+    </member>
+    <member name="UpdateConvenienceAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateConvenienceAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +46,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="UpdateConvenience(RequestContext)">
+    <member name="UpdateConvenience(global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateConvenience with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +71,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequiredAsync(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = await client.ConvenienceOptionalBeforeRequiredAsync(required, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = client.ConvenienceOptionalBeforeRequired(required, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -89,7 +133,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[
@@ -127,7 +171,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolAsync(RequestContext)">
+    <member name="ProtocolValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolValueAsync.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ProtocolValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolValue.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ProtocolValue();
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolAsync and parse the result.
 <code><![CDATA[
@@ -152,7 +216,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="Protocol(RequestContext)">
+    <member name="Protocol(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Protocol and parse the result.
 <code><![CDATA[
@@ -177,7 +241,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithOptionalAsync(RequestContext)">
+    <member name="ConvenienceWithOptionalValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceWithOptionalValueAsync.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceWithOptionalValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceWithOptionalValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceWithOptionalValue.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceWithOptionalValue();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceWithOptionalAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceWithOptionalAsync and parse the result.
 <code><![CDATA[
@@ -202,7 +286,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithOptional(RequestContext)">
+    <member name="ConvenienceWithOptional(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceWithOptional and parse the result.
 <code><![CDATA[
@@ -227,7 +311,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithRequiredAsync(RequestContext)">
+    <member name="ConvenienceWithRequiredAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceWithRequiredAsync.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceWithRequiredAsync();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceWithRequired(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceWithRequired.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceWithRequired();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceWithRequiredAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -252,7 +356,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithRequired(RequestContext)">
+    <member name="ConvenienceWithRequired(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -277,7 +381,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceShouldNotGenerateAsync(RequestContext)">
+    <member name="ConvenienceShouldNotGenerateAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceShouldNotGenerateAsync.
 <code><![CDATA[
@@ -288,7 +392,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ConvenienceShouldNotGenerate(RequestContext)">
+    <member name="ConvenienceShouldNotGenerate(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceShouldNotGenerate.
 <code><![CDATA[
@@ -299,7 +403,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolShouldNotGenerateConvenienceAsync(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenienceAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenienceAsync.
 <code><![CDATA[
@@ -310,7 +414,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolShouldNotGenerateConvenience(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenience(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenience.
 <code><![CDATA[
@@ -321,7 +425,27 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolOptionalQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolOptionalQueryValueAsync(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalQueryValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ProtocolOptionalQueryValueAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalQueryValue(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalQueryValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ProtocolOptionalQueryValue(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalQueryAsync(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
 <code><![CDATA[
@@ -355,7 +479,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalQuery(Int32,RequestContext)">
+    <member name="ProtocolOptionalQuery(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalQuery and parse the result.
 <code><![CDATA[
@@ -389,7 +513,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolRequiredQueryValueAsync(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolRequiredQueryValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ProtocolRequiredQueryValueAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolRequiredQueryValue(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolRequiredQueryValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ProtocolRequiredQueryValue(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolRequiredQueryAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredQueryAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -414,7 +558,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQuery(Int32,RequestContext)">
+    <member name="ProtocolRequiredQuery(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredQuery with required parameters and parse the result.
 <code><![CDATA[
@@ -439,7 +583,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
+    <member name="ProtocolOptionalModelValueAsync(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalModelValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = await client.ProtocolOptionalModelValueAsync(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalModelValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalModelValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = client.ProtocolOptionalModelValue(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalModelAsync with required request content.
 <code><![CDATA[
@@ -466,7 +634,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
+    <member name="ProtocolOptionalModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalModel with required request content.
 <code><![CDATA[
@@ -493,7 +661,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredModelAsync(RequestContent,RequestContext)">
+    <member name="ProtocolRequiredModelAsync(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolRequiredModelAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = await client.ProtocolRequiredModelAsync(required);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolRequiredModel(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolRequiredModel with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = client.ProtocolRequiredModel(required);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolRequiredModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredModelAsync with required request content.
 <code><![CDATA[
@@ -520,7 +712,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredModel(RequestContent,RequestContext)">
+    <member name="ProtocolRequiredModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredModel with required request content.
 <code><![CDATA[
@@ -547,7 +739,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptionalValueAsync(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithOptionalValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceOptionalQueryWithOptionalValueAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalQueryWithOptionalValue(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithOptionalValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceOptionalQueryWithOptionalValue(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalQueryWithOptionalAsync(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
 <code><![CDATA[
@@ -581,7 +793,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptional(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
 <code><![CDATA[
@@ -615,7 +827,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptionalValueAsync(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithOptionalValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceRequiredQueryWithOptionalValueAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredQueryWithOptionalValue(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithOptionalValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceRequiredQueryWithOptionalValue(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredQueryWithOptionalAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -640,7 +872,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptional(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptional with required parameters and parse the result.
 <code><![CDATA[
@@ -665,7 +897,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceOptionalQueryWithRequiredAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalQueryWithRequired(int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithRequired with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceOptionalQueryWithRequired(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -690,7 +942,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequired(int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -715,7 +967,27 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequiredAsync(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredQueryWithRequired(int,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithRequired with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceRequiredQueryWithRequired(1234);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredQueryWithRequiredAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -740,7 +1012,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequired(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -765,7 +1037,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithOptionalValueAsync(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithOptionalValueAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = await client.ConvenienceOptionalModelWithOptionalValueAsync(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalModelWithOptionalValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithOptionalValue with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = client.ConvenienceOptionalModelWithOptionalValue(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required request content.
 <code><![CDATA[
@@ -792,7 +1088,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalModelWithOptional with required request content.
 <code><![CDATA[
@@ -819,7 +1115,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceRequiredModelWithOptionalAsync(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = await client.ConvenienceRequiredModelWithOptionalAsync(required);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredModelWithOptional(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithOptional with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = client.ConvenienceRequiredModelWithOptional(required);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceRequiredModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with required request content.
 <code><![CDATA[
@@ -846,7 +1166,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)">
+    <member name="ConvenienceRequiredModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredModelWithOptional with required request content.
 <code><![CDATA[
@@ -873,7 +1193,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithRequiredAsync(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalModelWithRequired(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithRequired with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var optional = new Model(
+"<id>");
+var result = client.ConvenienceOptionalModelWithRequired(optional);
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceOptionalModelWithRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -900,7 +1244,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalModelWithRequired with required parameters and request content.
 <code><![CDATA[
@@ -927,7 +1271,31 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequiredAsync(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = await client.ProtocolOptionalBeforeRequiredAsync(required, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequired with required parameters.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var required = new Model(
+"<id>");
+var result = client.ProtocolOptionalBeforeRequired(required, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="ProtocolOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -965,7 +1333,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[

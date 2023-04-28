@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetCollectionsModelAsync(RequestContext)">
+    <member name="GetCollectionsModelAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsModelAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = await client.GetCollectionsModelAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetCollectionsModel(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsModel.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+
+var result = client.GetCollectionsModel();
+]]></code>
+</example>
+    </member>
+    <member name="GetCollectionsModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -30,7 +50,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetCollectionsModel(RequestContext)">
+    <member name="GetCollectionsModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsModel with required parameters and parse the result.
 <code><![CDATA[
@@ -59,7 +79,39 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+new InnerModel[] 
+{
+    new InnerModel(
+"<property>")
+});
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::_Type.Property.ValueTypes.Models.CollectionsModelProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+
+var body = new CollectionsModelProperty(
+new InnerModel[] 
+{
+    new InnerModel(
+"<property>")
+});
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -94,7 +146,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

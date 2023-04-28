@@ -52,6 +52,7 @@ namespace _Type.Model.Usage
         /// <param name="input"> The InputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response> InputAsync(InputRecord input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -64,6 +65,7 @@ namespace _Type.Model.Usage
         /// <param name="input"> The InputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)']/*" />
         public virtual Response Input(InputRecord input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -78,7 +80,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -102,7 +104,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Input(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -122,6 +124,7 @@ namespace _Type.Model.Usage
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<OutputRecord>> OutputAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -130,6 +133,7 @@ namespace _Type.Model.Usage
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(global::System.Threading.CancellationToken)']/*" />
         public virtual Response<OutputRecord> Output(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -140,7 +144,7 @@ namespace _Type.Model.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> OutputAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
@@ -160,7 +164,7 @@ namespace _Type.Model.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(global::Azure.RequestContext)']/*" />
         public virtual Response Output(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
@@ -180,6 +184,7 @@ namespace _Type.Model.Usage
         /// <param name="body"> The InputOutputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)']/*" />
         public virtual async Task<Response<InputOutputRecord>> InputAndOutputAsync(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -192,6 +197,7 @@ namespace _Type.Model.Usage
         /// <param name="body"> The InputOutputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)']/*" />
         public virtual Response<InputOutputRecord> InputAndOutput(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -206,7 +212,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputAndOutputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -230,7 +236,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputAndOutput(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

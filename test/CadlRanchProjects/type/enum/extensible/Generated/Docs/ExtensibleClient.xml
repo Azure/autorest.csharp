@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetKnownValueAsync(RequestContext)">
+    <member name="GetKnownValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetKnownValueAsync.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = await client.GetKnownValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetKnownValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetKnownValue.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = client.GetKnownValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetKnownValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetKnownValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +34,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetKnownValue(RequestContext)">
+    <member name="GetKnownValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetKnownValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +47,27 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValueAsync(RequestContext)">
+    <member name="GetUnknownValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUnknownValueAsync.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = await client.GetUnknownValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetUnknownValue.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = client.GetUnknownValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -40,7 +80,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValue(RequestContext)">
+    <member name="GetUnknownValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
@@ -53,7 +93,29 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutKnownValueAsync(RequestContent,RequestContext)">
+    <member name="PutKnownValueAsync(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutKnownValueAsync with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = await client.PutKnownValueAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutKnownValue(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutKnownValue with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = client.PutKnownValue(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutKnownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutKnownValueAsync with required request content.
 <code><![CDATA[
@@ -66,7 +128,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutKnownValue(RequestContent,RequestContext)">
+    <member name="PutKnownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutKnownValue with required request content.
 <code><![CDATA[
@@ -79,7 +141,29 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutUnknownValueAsync(RequestContent,RequestContext)">
+    <member name="PutUnknownValueAsync(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutUnknownValueAsync with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = await client.PutUnknownValueAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValue(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutUnknownValue with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = client.PutUnknownValue(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutUnknownValueAsync with required request content.
 <code><![CDATA[
@@ -92,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutUnknownValue(RequestContent,RequestContext)">
+    <member name="PutUnknownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutUnknownValue with required request content.
 <code><![CDATA[

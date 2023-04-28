@@ -61,7 +61,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyErrorAsync(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyErrorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyError(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyError(global::Azure.RequestContext)']/*" />
         public virtual Response GetEmptyError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelErrorAsync(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelErrorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -124,7 +124,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelError(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelError(global::Azure.RequestContext)']/*" />
         public virtual Response GetNoModelError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -145,7 +145,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmptyAsync(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmptyAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -166,7 +166,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmpty(RequestContext)']/*" />
+        /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmpty(global::Azure.RequestContext)']/*" />
         public virtual Response GetNoModelEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");

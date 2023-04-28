@@ -9,7 +9,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.TopActionAsync("<action>")
+var result = await client.TopActionAsync("<action>");
 ]]></code>
 </example>
     </member>
@@ -21,7 +21,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.TopAction("<action>")
+var result = client.TopAction("<action>");
 ]]></code>
 </example>
     </member>
@@ -433,7 +433,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.AnonymousBodyAsync(thing)
+var thing = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.AnonymousBodyAsync(thing);
 ]]></code>
 </example>
     </member>
@@ -445,7 +447,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.AnonymousBody(thing)
+var thing = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.AnonymousBody(thing);
 ]]></code>
 </example>
     </member>
@@ -669,7 +673,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Friend> result = await client.FriendlyModelAsync(notFriend)
+var notFriend = new Friend(
+"<name>");
+var result = await client.FriendlyModelAsync(notFriend);
 ]]></code>
 </example>
     </member>
@@ -681,7 +687,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Friend> result = client.FriendlyModel(notFriend)
+var notFriend = new Friend(
+"<name>");
+var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>
     </member>
@@ -943,7 +951,47 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.HelloAgainAsync("<p2>", "<p1>", action)
+var action = new RoundTripModel(
+"<requiredString>", 1234, new StringFixedEnum[] 
+{
+    StringFixedEnum.One
+}, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One,
+}, new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromString("<your binary data content>"),
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = 
+{
+        IntExtensibleEnum.One
+    },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = 
+{
+        FloatExtensibleEnum.One
+    },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = 
+{
+        FloatFixedEnum.One
+    },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = 
+{
+        IntFixedEnum.One
+    },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+    OptionalRecordUnknown = 
+{
+        ["key"] = BinaryData.FromString("<your binary data content>"),
+    },
+};
+var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
 ]]></code>
 </example>
     </member>
@@ -955,7 +1003,47 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.HelloAgain("<p2>", "<p1>", action)
+var action = new RoundTripModel(
+"<requiredString>", 1234, new StringFixedEnum[] 
+{
+    StringFixedEnum.One
+}, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One,
+}, new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromString("<your binary data content>"),
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = 
+{
+        IntExtensibleEnum.One
+    },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = 
+{
+        FloatExtensibleEnum.One
+    },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = 
+{
+        FloatFixedEnum.One
+    },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = 
+{
+        IntFixedEnum.One
+    },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+    OptionalRecordUnknown = 
+{
+        ["key"] = BinaryData.FromString("<your binary data content>"),
+    },
+};
+var result = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code>
 </example>
     </member>
@@ -1671,7 +1759,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.HelloDemo2Async()
+var result = await client.HelloDemo2Async();
 ]]></code>
 </example>
     </member>
@@ -1683,7 +1771,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.HelloDemo2()
+var result = client.HelloDemo2();
 ]]></code>
 </example>
     </member>
@@ -1789,7 +1877,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.CreateLiteralAsync(body)
+var body = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.CreateLiteralAsync(body);
 ]]></code>
 </example>
     </member>
@@ -1801,7 +1891,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.CreateLiteral(body)
+var body = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.CreateLiteral(body);
 ]]></code>
 </example>
     </member>
@@ -2025,7 +2117,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.HelloLiteralAsync()
+var result = await client.HelloLiteralAsync();
 ]]></code>
 </example>
     </member>
@@ -2037,7 +2129,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.HelloLiteral()
+var result = client.HelloLiteral();
 ]]></code>
 </example>
     </member>
@@ -2173,7 +2265,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = await client.InternalProtocolAsync(body)
+var body = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.InternalProtocolAsync(body);
 ]]></code>
 </example>
     </member>
@@ -2185,7 +2279,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response<global::TypeSpecFirstTest.Models.Thing> result = client.InternalProtocol(body)
+var body = new Thing(
+"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.InternalProtocol(body);
 ]]></code>
 </example>
     </member>
@@ -2409,7 +2505,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response result = await client.StillConvenientAsync()
+var result = await client.StillConvenientAsync();
 ]]></code>
 </example>
     </member>
@@ -2421,7 +2517,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-global::Azure.Response result = client.StillConvenient()
+var result = client.StillConvenient();
 ]]></code>
 </example>
     </member>
