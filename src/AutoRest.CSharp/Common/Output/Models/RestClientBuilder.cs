@@ -295,11 +295,11 @@ namespace AutoRest.CSharp.Output.Models
                                 .Where(rp => rp.InputParameter is not null)
                                 .ToDictionary(rp => rp.InputParameter!.NameInRequest, rp => CreateReference(rp.InputParameter, rp.OutputParameter, fields, typeFactory));
 
-                            foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
+                            foreach (var (_, inputParameter, outputParameter, _) in allParameters)
                             {
-                                if (inputParameter is { VirtualParameter: { } virtualParameter })
+                                if (inputParameter is { FlattenedBodyProperty: { } property })
                                 {
-                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)]));
+                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyBySerializedName(property.SerializedName ?? property.Name, true), outputParameter));
                                 }
                             }
 

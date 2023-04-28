@@ -346,7 +346,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var (operation, createMessageMethods, _) in restClient.Methods)
+                foreach (var (operation, createMessageMethods, _, _) in restClient.Methods)
                 {
                     if (createMessageMethods.Count != 2 || operation.Paging is not { } paging)
                     {
@@ -379,7 +379,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var (inputOperation, createMessageMethods, _) in restClient.Methods)
+                foreach (var (inputOperation, createMessageMethods, _, _) in restClient.Methods)
                 {
                     var restClientMethod = createMessageMethods[0];
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)

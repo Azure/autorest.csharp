@@ -31,9 +31,10 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var name = operationParameter.Name.ToVariableName();
             var description = CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()));
             var requestLocation = operationParameter.Location;
+            var isConstant = operationParameter.Kind == InputOperationParameterKind.Constant;
             var isRequired = operationParameter.IsRequired;
 
-            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, operationParameter.Kind, isRequired, out Constant? defaultValue, out FormattableString? initializer);
+            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, isConstant, isRequired, out Constant? defaultValue, out FormattableString? initializer);
 
             var validation = isRequired && initializer == null
                 ? GetValidation(type, requestLocation, operationParameter.SkipUrlEncoding)
@@ -53,13 +54,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
-        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, InputOperationParameterKind parameterKind, bool isRequired, out Constant? defaultValue, out FormattableString? initializer)
+        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, bool isConstant, bool isRequired, out Constant? defaultValue, out FormattableString? initializer)
         {
             defaultValue = inputDefaultValue != null ? BuilderHelpers.ParseConstant(inputDefaultValue.Value, typeFactory.CreateType(inputDefaultValue.Type)) : null;
 
             initializer = null;
 
-            if (defaultValue != null && parameterKind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && !isConstant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {
                 initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);

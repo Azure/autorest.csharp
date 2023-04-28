@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var propertyVariable in propertyVariables)
                 {
                     var property = propertyVariable.Key;
-                    initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
+                    initializers.Add(new PropertyInitializer(property.PropertyName, property.ValueType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
                 }
 
                 var objectType = (ObjectType)serialization.Type.Implementation;

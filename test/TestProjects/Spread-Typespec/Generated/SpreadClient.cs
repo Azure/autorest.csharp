@@ -563,12 +563,12 @@ namespace Spread
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
-            if (Optional.IsDefined(color))
+            if (color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(color);
             }
-            if (Optional.IsDefined(age))
+            if (age != null)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(age.Value);
@@ -580,7 +580,7 @@ namespace Spread
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (elements != null && Optional.IsCollectionDefined(elements))
+            if (elements != null)
             {
                 writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();
@@ -618,12 +618,12 @@ namespace Spread
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(name);
-            if (Optional.IsDefined(color))
+            if (color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(color);
             }
-            if (Optional.IsDefined(age))
+            if (age != null)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(age.Value);
@@ -635,7 +635,7 @@ namespace Spread
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (elements != null && Optional.IsCollectionDefined(elements))
+            if (elements != null)
             {
                 writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();

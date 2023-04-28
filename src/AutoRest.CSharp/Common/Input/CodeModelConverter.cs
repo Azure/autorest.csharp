@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Common.Input
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
+            GroupedBy: input.GroupedBy is {} groupedBy ? _parametersCache[groupedBy]() : null,
             Kind: GetOperationParameterKind(input),
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
+            FlattenedBodyProperty: input is VirtualParameter { Schema: not ConstantSchema, TargetProperty: {} property } ? CreateProperty(property) : null
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(

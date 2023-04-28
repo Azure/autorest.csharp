@@ -581,37 +581,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return string.Empty;
         }
 
-        public static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, PropertySerialization property)
-        {
-            if (property.IsRequired)
-            {
-                return default;
-            }
-
-            var method = TypeFactory.IsCollectionType(property.PropertyType)
-                ? nameof(Optional.IsCollectionDefined)
-                : nameof(Optional.IsDefined);
-            var propertyName = property.PropertyName;
-            return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");
-
-        }
-
-        public static CodeWriter.CodeWriterScope? WritePropertyNullCheckIf(this CodeWriter writer, PropertySerialization property)
-        {
-            if (property.ValueType == null)
-            {
-                return null;
-            }
-
-            if (!property.ValueType.IsNullable)
-            {
-                return null;
-            }
-
-            var propertyName = property.PropertyName;
-            return writer.Scope($"if ({propertyName} != null)");
-        }
-
         public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
         {
             writer.WriteXmlDocumentationSummary(signature.FormattableDescription);

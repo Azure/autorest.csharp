@@ -1,30 +1,25 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, bool optionalViaNullability)
-            : base(propertyName, serializedName, propertyType, valueType, isRequired, shouldSkipSerialization, shouldSkipDeserialization)
+        public JsonPropertySerialization(string parameterName, ValueExpression value, string serializedName, CSharpType valueType, CSharpType? serializedType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+            : base(parameterName, value, serializedName, valueType, serializedType, isRequired, shouldSkipSerialization, shouldSkipDeserialization)
         {
-            ParameterName = parameterName;
-            OptionalViaNullability = optionalViaNullability;
             ValueSerialization = valueSerialization;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
-            : base(serializedName, serializedName, typeof(object), null, false, false)
+            : base(string.Empty, new MemberReference(null, serializedName), serializedName, typeof(object), null, false, false)
         {
-            ParameterName = string.Empty;
             PropertySerializations = propertySerializations;
         }
 
-        public string ParameterName { get;  }
-        public bool OptionalViaNullability { get; }
         public JsonSerialization? ValueSerialization { get; }
         /// <summary>
         /// This is not null when the property is flattened in generated client SDK `x-ms-client-flatten: true`

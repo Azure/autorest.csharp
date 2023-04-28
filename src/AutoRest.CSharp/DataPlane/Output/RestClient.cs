@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public IReadOnlyList<LegacyMethods> Methods { get; }
-        public IReadOnlyList<(RestClientMethod Method, InputOperation Operation)> RequestMethods { get; }
+        public IReadOnlyList<(RestClientMethod Method, Method RequestMethod)> LegacyMethods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }
@@ -54,10 +55,10 @@ namespace AutoRest.CSharp.Output.Models
                 .ToList();
 
             Methods = methods.OrderBy(m => m.Order).Select(m => m.Methods).ToList();
-            RequestMethods = methods
-                .SelectMany(m => m.Methods.CreateMessageMethods.Select((method, i) => (method, i, m.Methods.Operation)))
+            LegacyMethods = methods
+                .SelectMany(m => m.Methods.CreateMessageMethods.Select((method, i) => (method, i, m.Methods.RequestMethod)))
                 .OrderBy(arg => arg.i)
-                .Select(arg => (arg.method, arg.Operation))
+                .Select(arg => (arg.method, arg.RequestMethod))
                 .ToList();
 
             _requestMethods = Methods.ToDictionary(m => m.Operation, m => m.CreateMessageMethods[0]);

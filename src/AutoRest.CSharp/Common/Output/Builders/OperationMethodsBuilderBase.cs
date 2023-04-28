@@ -57,6 +57,8 @@ namespace AutoRest.CSharp.Output.Models
         protected IReadOnlyList<Parameter> CreateMessageMethodParameters { get; }
         protected IReadOnlyList<Parameter> ProtocolMethodParameters { get; }
         protected IReadOnlyList<Parameter> ConvenienceMethodParameters { get; }
+        protected IReadOnlyDictionary<Parameter, ValueExpression> ArgumentsMap { get; }
+        protected IReadOnlyDictionary<Parameter, MethodBodyStatement> ConversionsMap { get; }
 
         protected OperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
         {
@@ -79,6 +81,8 @@ namespace AutoRest.CSharp.Output.Models
             _clientName = clientName;
             _typeFactory = typeFactory;
             _requestParts = clientMethodParameters.RequestParts;
+            ArgumentsMap = clientMethodParameters.Arguments;
+            ConversionsMap = clientMethodParameters.Conversions;
             _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
             _protocolAccessibility = operation.GenerateProtocolMethod ? GetAccessibility(operation.Accessibility) : MethodSignatureModifiers.Internal;
@@ -112,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[]{ BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) }
                 : Array.Empty<Method>();
 
-            return new LegacyMethods(Operation, createRequestMethods, convenienceMethods);
+            return new LegacyMethods(Operation, createRequestMethods, convenienceMethods, BuildCreateRequestMethod(createRequestMethods[0].ResponseClassifierType));
         }
 
         protected virtual IEnumerable<RestClientMethod> BuildCreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
@@ -335,13 +339,14 @@ namespace AutoRest.CSharp.Output.Models
                         });
 
                     case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
-                        return AddFlattenedBody(request);
+                        return AddFlattenedBody(request, outputParameter);
 
                     default:
+                        var serialization = SerializationBuilder.Build(Operation.RequestBodyMediaType, inputParameter.Type, outputParameter.Type);
                         return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
                         {
                             AddHeaders(request, true).AsStatement(),
-                            SerializeContentIntoRequest(request, inputParameter.Type, outputParameter)
+                            SerializeContentIntoRequest(request, serialization, outputParameter)
                         });
                 }
             }
@@ -366,26 +371,33 @@ namespace AutoRest.CSharp.Output.Models
             throw new NotImplementedException();
         }
 
-        private MethodBodyStatement AddFlattenedBody(RequestExpression request)
+        private MethodBodyStatement AddFlattenedBody(RequestExpression request, Parameter parameter)
         {
-            throw new NotImplementedException();
+            var content = ArgumentsMap[parameter];
+            var conversion = ConversionsMap[parameter];
+
+            return new[]
+            {
+                AddHeaders(request, true).AsStatement(),
+                conversion,
+                Assign(request.Content, content)
+            };
         }
 
-        private MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, InputType inputType, Parameter parameter)
+        private MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)
         {
-            var serialization = SerializationBuilder.Build(Operation.RequestBodyMediaType, inputType, parameter.Type);
             return serialization switch
             {
                 JsonSerialization jsonSerialization => new[]
                 {
                     Var("content", Utf8JsonRequestContentExpression.New(), out var content),
-                    JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, parameter),
+                    JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, expression),
                     Assign(request.Content, content)
                 },
                 XmlElementSerialization xmlSerialization => new[]
                 {
                     Var("content", XmlWriterContentExpression.New(), out var content),
-                    XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, parameter),
+                    XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, expression),
                     Assign(request.Content, content)
                 },
                 _ => throw new NotImplementedException()
@@ -521,40 +533,6 @@ namespace AutoRest.CSharp.Output.Models
         protected MethodBodyStatement WrapInDiagnosticScopeLegacy(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type), statements);
 
-        protected static IEnumerable<MethodBodyStatement> CreateSpreadConversion(Utf8JsonWriterExpression utf8JsonWriter, IReadOnlyList<MethodParametersBuilder.JsonSpreadParameterSerialization> serializations)
-        {
-            yield return utf8JsonWriter.WriteStartObject();
-            foreach (var (parameter, serializedName, valueSerialization, isRequired) in serializations)
-            {
-                yield return CreateSpreadWriteProperty(utf8JsonWriter, parameter, serializedName, valueSerialization, isRequired);
-            }
-            yield return utf8JsonWriter.WriteEndObject();
-        }
-
-        private static MethodBodyStatement CreateSpreadWriteProperty(Utf8JsonWriterExpression utf8JsonWriter, Parameter parameter, string serializedName, JsonSerialization valueSerialization, bool isRequired)
-        {
-            var writeProperty = new[]
-            {
-                utf8JsonWriter.WritePropertyName(serializedName),
-                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonWriter, valueSerialization, parameter)
-            };
-
-            if (isRequired)
-            {
-                return parameter.Type.IsNullable
-                    ? new IfElseStatement(IsNotNull(parameter), writeProperty, utf8JsonWriter.WriteNull(serializedName))
-                    : writeProperty;
-            }
-
-            var condition = TypeFactory.IsCollectionType(parameter.Type)
-                ? parameter.Type.IsNullable
-                    ? And(IsNotNull(parameter), InvokeOptional.IsCollectionDefined(parameter))
-                    : InvokeOptional.IsCollectionDefined(parameter)
-                : InvokeOptional.IsDefined(parameter);
-
-            return new IfElseStatement(condition, writeProperty, null);
-        }
-
         protected HttpMessageExpression InvokeCreateRequestMethod()
             => new(new InvokeInstanceMethodExpression(null, CreateMessageMethodName, CreateMessageMethodParameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
@@ -567,13 +545,13 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
-        protected static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)
+        protected static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
         {
             ValueExpression fromExpression = NullConditional(fromParameter);
 
             return fromParameter.Type.IsFrameworkType
-                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toType)
-                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toType);
+                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toParameter.Type)
+                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toParameter.Type);
         }
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)

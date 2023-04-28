@@ -533,6 +533,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public virtual CodeWriter Declaration(CodeWriterDeclaration declaration)
         {
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
+            _scopes.Peek().Declarations.Add(declaration);
             return Declaration(declaration.ActualName);
         }
 
@@ -587,9 +588,11 @@ namespace AutoRest.CSharp.Generation.Writers
             private readonly string? _end;
             private readonly bool _newLine;
 
-            public HashSet<string> Identifiers { get; } = new HashSet<string>();
+            public HashSet<string> Identifiers { get; } = new();
 
-            public HashSet<string> AllDefinedIdentifiers { get; } = new HashSet<string>();
+            public HashSet<string> AllDefinedIdentifiers { get; } = new();
+
+            public List<CodeWriterDeclaration> Declarations { get; } = new();
 
             public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
             {
@@ -603,6 +606,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (_writer != null)
                 {
                     _writer.PopScope(this);
+                    foreach (var declaration in Declarations)
+                    {
+                        declaration.SetActualName(null);
+                    }
+
+                    Declarations.Clear();
+
                     if (_end != null)
                     {
                         _writer.TrimNewLines();

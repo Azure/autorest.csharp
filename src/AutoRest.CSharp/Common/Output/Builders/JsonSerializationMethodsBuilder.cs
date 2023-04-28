@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        private static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
+        public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
             => new[]
             {
                 utf8JsonWriter.WriteStartObject(),
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WriteEndObject()
             };
 
-        public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
+        private static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
         {
             foreach (JsonPropertySerialization property in properties)
             {
@@ -90,21 +90,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement WriteProperty(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization property)
+        private static MethodBodyStatement WriteProperty(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization)
         {
-            var propertyNameReference = new MemberReference(null, property.PropertyName);
+            var writeProperty = new[]
+            {
+                utf8JsonWriter.WritePropertyName(serialization.SerializedName),
+                SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.Value)
+            };
 
-            var writePropertyNameLine = utf8JsonWriter.WritePropertyName(property.SerializedName);
-            var writePropertyValueBlock = property is { OptionalViaNullability: true, PropertyType: { IsNullable: true, IsValueType: true } }
-                ? SerializeExpression(utf8JsonWriter, property.ValueSerialization, new MemberReference(propertyNameReference, "Value"))
-                : SerializeExpression(utf8JsonWriter, property.ValueSerialization, propertyNameReference);
+            if (!serialization.ValueType.IsNullable)
+            {
+                return InvokeOptional.WrapInIsDefined(serialization, writeProperty);
+            }
 
-            MethodBodyStatement writeProperty = new[]{writePropertyNameLine, writePropertyValueBlock};
-            MethodBodyStatement writePropertyWithNullCheck = property.ValueType is { IsNullable: true }
-                ? new IfElseStatement(IsNotNull(propertyNameReference), writeProperty, utf8JsonWriter.WriteNull(property.SerializedName))
-                : writeProperty;
-
-            return InvokeOptional.WrapInIsDefined(property, writePropertyWithNullCheck);
+            var nullSafeWriteProperty = new IfElseStatement(IsNotNull(serialization.Value), writeProperty, utf8JsonWriter.WriteNull(serialization.SerializedName));
+            return InvokeOptional.WrapInIsDefined(serialization, nullSafeWriteProperty);
         }
 
         private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new MethodBodyStatement();
             }
 
-            var additionalPropertiesExpression = new DictionaryExpression(new FormattableStringToExpression($"{additionalProperties.PropertyName}"));
+            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Value);
             return new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
                 utf8JsonWriter.WritePropertyName(item.Key),
@@ -357,8 +357,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)
             {
-                var propertyDeclaration = new CodeWriterDeclaration(additionalProperties.PropertyName.ToVariableName());
-                propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.PropertyType));
+                var propertyDeclaration = new CodeWriterDeclaration(additionalProperties.SerializationConstructorParameterName);
+                propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.ValueType));
             }
 
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
@@ -397,8 +397,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new AssignValueStatement(propertyVariables[objAdditionalProperties].Declaration, dictionaryVariable);
             }
 
-            var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptional(v.Key, v.Value));
-            var parameters = serialization.Constructor.Parameters
+            var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => GetOptional(v.Key, v.Value));
+            var parameters = serialization.ConstructorParameters
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (jsonPropertySerialization.ValueType?.IsNullable == true)
+            if (jsonPropertySerialization.SerializedType?.IsNullable == true)
             {
                 yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
                 {
@@ -437,8 +437,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }, null);
             }
             else if (!jsonPropertySerialization.IsRequired &&
-                     jsonPropertySerialization.ValueType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
-                     jsonPropertySerialization.ValueType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
+                     jsonPropertySerialization.SerializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
+                     jsonPropertySerialization.SerializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
                 if (jsonPropertySerialization.PropertySerializations is null)
                 {
@@ -503,11 +503,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
             {
-                if (jsonProperty.ValueType != null)
+                if (jsonProperty.SerializedType != null)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
 
-                    var type = jsonProperty.ValueType;
+                    var type = jsonProperty.SerializedType;
                     if (!jsonProperty.IsRequired)
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
@@ -687,7 +687,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression GetOptional(JsonPropertySerialization jsonPropertySerialization, ObjectPropertyVariable variable)
         {
-            var targetType = jsonPropertySerialization.PropertyType;
+            var targetType = jsonPropertySerialization.ValueType;
             var sourceType = variable.Type;
             if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Optional<>))
             {

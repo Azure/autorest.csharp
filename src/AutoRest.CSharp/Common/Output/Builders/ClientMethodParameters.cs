@@ -2,19 +2,20 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal record ClientMethodParameters
-    (
-        IReadOnlyList<RequestPartSource> RequestParts,
+    (IReadOnlyList<RequestPartSource> RequestParts,
         IReadOnlyList<Parameter> CreateMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
-        IReadOnlyList<MethodParametersBuilder.ParameterLink> ParameterLinks
-    );
+        IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
+        IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions);
 
     internal record ClientPagingMethodParameters
     (
@@ -23,8 +24,10 @@ namespace AutoRest.CSharp.Output.Models
         IReadOnlyList<Parameter> CreateNextPageMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
-        IReadOnlyList<MethodParametersBuilder.ParameterLink> ParameterLinks
-    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, ParameterLinks);
+        IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
+        IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions
+
+    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, Arguments, Conversions);
 
     internal record ClientMethodReturnTypes
     (

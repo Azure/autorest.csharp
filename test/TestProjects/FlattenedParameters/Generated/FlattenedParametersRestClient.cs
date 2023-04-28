@@ -7,13 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using FlattenedParameters.Models;
 
 namespace FlattenedParameters
 {
@@ -47,12 +45,19 @@ namespace FlattenedParameters
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
-            {
-                Items = items?.ToList()
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (items != null)
+            {
+                content.JsonWriter.WritePropertyName("items"u8);
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in items)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
@@ -97,17 +102,19 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotNull/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema = new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema();
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartObject();
             if (items != null)
             {
-                foreach (var value in items)
+                content.JsonWriter.WritePropertyName("items"u8);
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in items)
                 {
-                    pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema.Items.Add(value);
+                    content.JsonWriter.WriteStringValue(item);
                 }
+                content.JsonWriter.WriteEndArray();
             }
-            var model = pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema;
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
@@ -152,13 +159,19 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
-            {
-                Required = required,
-                NonRequired = nonRequired
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (required != null)
+            {
+                content.JsonWriter.WritePropertyName("required"u8);
+                content.JsonWriter.WriteStringValue(required);
+            }
+            if (nonRequired != null)
+            {
+                content.JsonWriter.WritePropertyName("non_required"u8);
+                content.JsonWriter.WriteStringValue(nonRequired);
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
@@ -205,12 +218,16 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(required)
-            {
-                NonRequired = nonRequired
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("required"u8);
+            content.JsonWriter.WriteStringValue(required);
+            if (nonRequired != null)
+            {
+                content.JsonWriter.WritePropertyName("non_required"u8);
+                content.JsonWriter.WriteStringValue(nonRequired);
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }

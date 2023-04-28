@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public string ActualName => _actualName ?? _debuggerName ?? throw new InvalidOperationException("Declaration not initialized");
 
-        internal void SetActualName(string actualName)
+        internal void SetActualName(string? actualName)
         {
-            if (_actualName != null)
+            if (_actualName != null && actualName != null)
             {
-                throw new InvalidOperationException($"Declaration {_actualName} already initialized");
+                throw new InvalidOperationException($"Declaration {_actualName} already initialized, can't initialize it with {actualName} name.");
             }
 
             _actualName = actualName;
@@ -31,12 +31,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         internal void SetDebuggerName(string? debuggerName)
         {
-            if (_actualName != null)
+            if (_actualName == null)
             {
-                throw new InvalidOperationException($"Declaration {_actualName} already initialized, can't set debugger.");
+                _debuggerName = debuggerName;
             }
-
-            _debuggerName = debuggerName;
         }
     }
 }

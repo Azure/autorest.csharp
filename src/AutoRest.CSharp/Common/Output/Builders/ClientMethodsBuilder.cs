@@ -57,8 +57,8 @@ namespace AutoRest.CSharp.Output.Models
                         _ => Array.Empty<Parameter>()
                     };
 
-                    var (requestParts, createMessage, protocol, convenience, parameterLinks) = parameters;
-                    var pagingParameters = new ClientPagingMethodParameters(requestParts, createMessage, createNextPageMessageMethodParameters, protocol, convenience, parameterLinks);
+                    var (requestParts, createMessage, protocol, convenience, arguments, conversions) = parameters;
+                    var pagingParameters = new ClientPagingMethodParameters(requestParts, createMessage, createNextPageMessageMethodParameters, protocol, convenience, arguments, conversions);
 
                     yield return operation.LongRunning is { } longRunning
                         ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters)

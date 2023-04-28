@@ -16,21 +16,21 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class XmlCodeWriterExtensions
     {
-        public static Dictionary<PropertySerialization, CodeWriterDeclaration> ToDeserializeObjectCall(this CodeWriter writer, XmlObjectSerialization objectSerialization, CodeWriterDeclaration variable)
+        public static Dictionary<XmlPropertySerialization, CodeWriterDeclaration> ToDeserializeObjectCall(this CodeWriter writer, XmlObjectSerialization objectSerialization, CodeWriterDeclaration variable)
         {
-            var propertyVariables = new Dictionary<PropertySerialization, CodeWriterDeclaration>();
+            var propertyVariables = new Dictionary<XmlPropertySerialization, CodeWriterDeclaration>();
 
             CollectProperties(propertyVariables, objectSerialization);
 
             foreach (var propertyVariable in propertyVariables)
             {
                 var property = propertyVariable.Key;
-                writer.Line($"{property.PropertyType} {propertyVariable.Value:D} = default;");
+                writer.Line($"{property.ValueType} {propertyVariable.Value:D} = default;");
             }
 
             foreach (XmlObjectAttributeSerialization attribute in objectSerialization.Attributes)
             {
-                var attributeVariable = new CodeWriterDeclaration(attribute.PropertyName.ToVariableName() + "Attribute");
+                var attributeVariable = new CodeWriterDeclaration(attribute.SerializationConstructorParameterName + "Attribute");
                 using (writer.Scope($"if ({variable}.Attribute({attribute.SerializedName:L}) is {typeof(XAttribute)} {attributeVariable:D})"))
                 {
                     writer.Line($"{propertyVariables[attribute]} = {GetDeserializeValueCallFormattable(attribute.ValueSerialization, $"{attributeVariable}")};");
@@ -221,26 +221,26 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void CollectProperties(Dictionary<PropertySerialization, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
+        private static void CollectProperties(Dictionary<XmlPropertySerialization, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
         {
             foreach (var attribute in element.Attributes)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.PropertyName.ToVariableName()));
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.Elements)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.PropertyName.ToVariableName()));
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.EmbeddedArrays)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.PropertyName.ToVariableName()));
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
             }
 
             if (element.ContentSerialization != null)
             {
-                propertyVariables.Add(element.ContentSerialization, new CodeWriterDeclaration(element.ContentSerialization.PropertyName.ToVariableName()));
+                propertyVariables.Add(element.ContentSerialization, new CodeWriterDeclaration(element.ContentSerialization.SerializationConstructorParameterName));
             }
         }
     }

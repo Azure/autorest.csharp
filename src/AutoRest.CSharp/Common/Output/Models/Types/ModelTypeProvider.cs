@@ -127,7 +127,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     var declaredName = property.Declaration.Name;
                     var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
-                    var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
                     var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
                     //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
@@ -137,15 +136,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                     bool shouldSkipSerialization = ShouldSkipSerialization(property);
                     result.Add(new JsonPropertySerialization(
                         paramName,
-                        declaredName,
+                        new MemberReference(null, declaredName),
                         serializedName,
-                        property.ValueType,
+                        property.Declaration.Type,
                         property.ValueType,
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
-                        ShouldSkipDeserialization(property),
-                        optionalViaNullability));
+                        ShouldSkipDeserialization(property)));
                 }
             }
             return result;
@@ -385,7 +383,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false, EnsureIncludeSerializer(), EnsureIncludeDeserializer());
+            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()

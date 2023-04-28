@@ -20,46 +20,42 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             yield return xmlWriter.WriteStartElement(NullCoalescing(nameHint, Literal(objectSerialization.Name)));
 
-            foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
+            foreach (XmlObjectAttributeSerialization serialization in objectSerialization.Attributes)
             {
-                var expression = new MemberReference(null, property.PropertyName);
-                yield return InvokeOptional.WrapInIsDefined(property, WrapInNullCheck(property, new[]
+                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
                 {
-                    xmlWriter.WriteStartAttribute(property.SerializedName),
-                    SerializeValueExpression(xmlWriter, property.ValueSerialization, expression),
+                    xmlWriter.WriteStartAttribute(serialization.SerializedName),
+                    SerializeValueExpression(xmlWriter, serialization.ValueSerialization, serialization.Value),
                     xmlWriter.WriteEndAttribute()
                 }));
             }
 
-            foreach (XmlObjectElementSerialization property in objectSerialization.Elements)
+            foreach (XmlObjectElementSerialization serialization in objectSerialization.Elements)
             {
-                var expression = new MemberReference(null, property.PropertyName);
-                yield return InvokeOptional.WrapInIsDefined(property, WrapInNullCheck(property, SerializeExpression(xmlWriter, property.ValueSerialization, expression)));
+                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value)));
             }
 
-            foreach (XmlObjectArraySerialization property in objectSerialization.EmbeddedArrays)
+            foreach (XmlObjectArraySerialization serialization in objectSerialization.EmbeddedArrays)
             {
-                var expression = new MemberReference(null, property.PropertyName);
-                yield return InvokeOptional.WrapInIsDefined(property, WrapInNullCheck(property, SerializeExpression(xmlWriter, property.ArraySerialization, expression)));
+                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value)));
             }
 
             if (objectSerialization.ContentSerialization is { } contentSerialization)
             {
-                yield return SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, new MemberReference(null, contentSerialization.PropertyName));
+                yield return SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value);
             }
 
             yield return xmlWriter.WriteEndElement();
         }
 
-        private static MethodBodyStatement WrapInNullCheck(PropertySerialization property, MethodBodyStatement statement)
+        private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (property.ValueType is null || !property.ValueType.IsNullable)
+            if (serialization.SerializedType is null || !serialization.SerializedType.IsNullable)
             {
                 return statement;
             }
 
-            var propertyReference = new MemberReference(null, property.PropertyName);
-            return new IfElseStatement(IsNotNull(propertyReference), statement, null);
+            return new IfElseStatement(IsNotNull(serialization.Value), statement, null);
         }
 
         public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)

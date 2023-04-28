@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -260,15 +261,14 @@ namespace AutoRest.CSharp.Output.Builders
 
                 yield return new JsonPropertySerialization(
                     parameter.Name,
-                    objectProperty.Declaration.Name,
+                    new MemberReference(null, objectProperty.Declaration.Name),
                     property.SerializedName,
                     objectProperty.Declaration.Type,
                     objectProperty.ValueType,
                     BuildSerialization(property.Schema, objectProperty.ValueType, false),
                     property.IsRequired,
                     property.IsReadOnly,
-                    false,
-                    objectProperty.OptionalViaNullability);
+                    false);
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
@@ -296,7 +296,7 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter, false, false);
+            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class PropertyBag

@@ -20,17 +20,16 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToList), new[]{collection});
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToNullable), new[]{optional});
 
-            public static MethodBodyStatement WrapInIsDefined(PropertySerialization property, MethodBodyStatement statement)
+            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                if (property.IsRequired)
+                if (serialization.IsRequired)
                 {
                     return statement;
                 }
 
-                var propertyReference = new MemberReference(null, property.PropertyName);
-                return TypeFactory.IsCollectionType(property.PropertyType)
-                    ? new IfElseStatement(IsCollectionDefined(propertyReference), statement, null)
-                    : new IfElseStatement(IsDefined(propertyReference), statement, null);
+                return TypeFactory.IsCollectionType(serialization.ValueType)
+                    ? new IfElseStatement(IsCollectionDefined(serialization.Value), statement, null)
+                    : new IfElseStatement(IsDefined(serialization.Value), statement, null);
             }
         }
     }

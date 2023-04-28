@@ -5,27 +5,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class MethodParametersBuilder
     {
-        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<JsonSpreadParameterSerialization>? IntermediateSerialization)
+        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<ParameterConversionInfo> ConversionInfos)
         {
-            public ParameterLink(Parameter parameter) : this(new[]{parameter}, new[]{parameter}, null){}
-            public ParameterLink(Parameter convenienceParameters, Parameter protocolParameters) : this(new[]{convenienceParameters}, new[]{protocolParameters}, null){}
+            public ParameterLink(Parameter parameter) : this(new[]{parameter}, new[]{parameter}, Array.Empty<ParameterConversionInfo>()){}
+            public ParameterLink(Parameter convenienceParameters, Parameter protocolParameters) : this(new[]{convenienceParameters}, new[]{protocolParameters}, Array.Empty<ParameterConversionInfo>()){}
         }
 
-        internal sealed record JsonSpreadParameterSerialization(Parameter Parameter, string SerializedName, JsonSerialization ValueSerialization, bool IsRequired);
+        internal sealed record ParameterConversionInfo(InputModelProperty InputProperty, Parameter Parameter, JsonSerialization ValueSerialization);
 
         private static readonly Dictionary<string, RequestConditionHeaders> ConditionRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
@@ -39,7 +46,10 @@ namespace AutoRest.CSharp.Output.Models
         private readonly TypeFactory _typeFactory;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
-        private readonly List<ParameterLink> _parameterLinks;
+        private readonly List<Parameter> _protocolParameters;
+        private readonly List<Parameter> _convenienceParameters;
+        private readonly Dictionary<Parameter, ValueExpression> _arguments;
+        private readonly Dictionary<Parameter, MethodBodyStatement> _conversions;
 
         public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory)
         {
@@ -47,7 +57,10 @@ namespace AutoRest.CSharp.Output.Models
             _typeFactory = typeFactory;
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
-            _parameterLinks = new List<ParameterLink>();
+            _protocolParameters = new List<Parameter>();
+            _convenienceParameters = new List<Parameter>();
+            _arguments = new Dictionary<Parameter, ValueExpression>();
+            _conversions = new Dictionary<Parameter, MethodBodyStatement>();
         }
 
         public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters)
@@ -89,15 +102,17 @@ namespace AutoRest.CSharp.Output.Models
             (
                 _requestParts,
                 _createMessageParameters,
-                _parameterLinks.SelectMany(p => p.ProtocolParameters).ToList(),
-                _parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList(),
-                _parameterLinks
+                _protocolParameters,
+                _convenienceParameters,
+                _arguments,
+                _conversions
             );
         }
 
         public ClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
         {
             var parameters = new Dictionary<InputParameter, Parameter>();
+            (InputParameter, Parameter)? flatten = null;
             foreach (var inputParameter in sortedParameters)
             {
                 var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
@@ -106,12 +121,17 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     _createMessageParameters.Add(parameter);
                 }
+                else if (inputParameter.Kind == InputOperationParameterKind.Flattened)
+                {
+                    flatten = (inputParameter, parameter);
+                }
 
                 parameters.Add(inputParameter, parameter);
             }
 
-            _parameterLinks.AddRange(_createMessageParameters.Select(p => new ParameterLink(p)));
-            _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
+            _protocolParameters.AddRange(_createMessageParameters);
+            _convenienceParameters.AddRange(_convenienceParameters);
+            _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
             // for legacy logic, adding request parts unsorted
             foreach (var inputParameter in unsortedParameters)
@@ -120,13 +140,20 @@ namespace AutoRest.CSharp.Output.Models
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
             }
 
+            if (flatten is not null)
+            {
+                var (inputParameter, outputParameter) = flatten.Value;
+                CreateFlattenedConversions(inputParameter, outputParameter);
+            }
+
             return new ClientMethodParameters
             (
                 _requestParts,
                 _createMessageParameters,
-                _parameterLinks.SelectMany(p => p.ProtocolParameters).ToList(),
-                _parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList(),
-                _parameterLinks
+                _protocolParameters,
+                _convenienceParameters,
+                _arguments,
+                _conversions
             );
         }
 
@@ -134,7 +161,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (_operation.LongRunning != null)
             {
-                _parameterLinks.Add(new ParameterLink(KnownParameters.WaitForCompletion));
+                _convenienceParameters.Add(KnownParameters.WaitForCompletion);
+                _protocolParameters.Add(KnownParameters.WaitForCompletion);
             }
         }
 
@@ -149,7 +177,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
                     _createMessageParameters.Add(KnownParameters.MatchConditionsParameter);
-                    _parameterLinks.Add(new ParameterLink(KnownParameters.MatchConditionsParameter));
+                    _protocolParameters.Add(KnownParameters.MatchConditionsParameter);
+                    _convenienceParameters.Add(KnownParameters.MatchConditionsParameter);
                     AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
                     break;
                 case RequestConditionHeaders.IfMatch:
@@ -159,7 +188,8 @@ namespace AutoRest.CSharp.Output.Models
                 default:
                     var parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
                     _createMessageParameters.Add(parameter);
-                    _parameterLinks.Add(new ParameterLink(parameter));
+                    _protocolParameters.Add(parameter);
+                    _convenienceParameters.Add(parameter);
                     AddReference(parameter.Name, null, parameter, serializationFormat);
                     break;
             }
@@ -168,7 +198,21 @@ namespace AutoRest.CSharp.Output.Models
         private void AddRequestContext()
         {
             _createMessageParameters.Add(KnownParameters.RequestContext);
-            _parameterLinks.Add(new ParameterLink(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext));
+            _protocolParameters.Add(KnownParameters.RequestContext);
+            _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
+
+            if (_operation.Paging is not null)
+            {
+                _conversions[KnownParameters.RequestContext]
+                    = Declare(IfCancellationTokenCanBeCanceled(CancellationTokenExpression.KnownParameter), out var requestContext);
+                _arguments[KnownParameters.RequestContext] = requestContext;
+            }
+            else
+            {
+                _conversions[KnownParameters.RequestContext]
+                    = Declare(RequestContextExpression.FromCancellationToken(), out var requestContext);
+                _arguments[KnownParameters.RequestContext] = requestContext;
+            }
         }
 
         private void AddReferenceAndParameter(InputParameter inputParameter, Type parameterType)
@@ -204,20 +248,19 @@ namespace AutoRest.CSharp.Output.Models
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
                 _createMessageParameters.Add(protocolMethodParameter);
-                _parameterLinks.Add(new ParameterLink(Array.Empty<Parameter>(), new[]{ protocolMethodParameter }, null));
+                _protocolParameters.Add(protocolMethodParameter);
                 return;
             }
 
             if (inputParameter.Location == RequestLocation.None)
             {
-                _parameterLinks.Add(new ParameterLink(new[]{ protocolMethodParameter }, Array.Empty<Parameter>(), null));
+                _convenienceParameters.Add(protocolMethodParameter);
                 return;
             }
 
-            _createMessageParameters.Add(protocolMethodParameter);
             if (inputParameter is { Kind: InputOperationParameterKind.Spread })
             {
-                _parameterLinks.Add(CreateSpreadParameterLink(inputParameter, protocolMethodParameter));
+                CreateSpreadParameters(inputParameter, protocolMethodParameter);
             }
             else
             {
@@ -226,16 +269,25 @@ namespace AutoRest.CSharp.Output.Models
                     : _typeFactory.CreateType(inputParameter.Type);
 
                 var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
-                _parameterLinks.Add(new ParameterLink(convenienceMethodParameter, protocolMethodParameter));
+                _createMessageParameters.Add(protocolMethodParameter);
+                _protocolParameters.Add(protocolMethodParameter);
+                _convenienceParameters.Add(convenienceMethodParameter);
+                _arguments[protocolMethodParameter] = CreateConversion(convenienceMethodParameter, protocolMethodParameter);
             }
         }
 
-        private ParameterLink CreateSpreadParameterLink(InputParameter inputParameter, Parameter protocolMethodParameter)
+        private void CreateSpreadParameters(InputParameter inputParameter, Parameter protocolMethodParameter)
         {
             var model = inputParameter.Type as InputModelType;
             var requiredConvenienceMethodParameters = new List<Parameter>();
             var optionalConvenienceMethodParameters = new List<Parameter>();
-            var intermediateSerialization = new List<JsonSpreadParameterSerialization>();
+            var conversion = new List<MethodBodyStatement>
+            {
+                Var(protocolMethodParameter.Name, Utf8JsonRequestContentExpression.New(), out var requestContent),
+                Var("writer", requestContent.JsonWriter, out var utf8JsonWriter),
+                utf8JsonWriter.WriteStartObject()
+            };
+
             while (model is not null)
             {
                 foreach (var property in model.Properties)
@@ -245,14 +297,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
 
-                    var convenienceMethodParameterType = TypeFactory.GetInputType(_typeFactory.CreateType(property.Type));
-                    Parameter.CreateDefaultValue(ref convenienceMethodParameterType, _typeFactory, property.DefaultValue, InputOperationParameterKind.Method, property.IsRequired, out var defaultValue, out var initializer);
-                    var validation = property.IsRequired && initializer == null ? Parameter.GetValidation(convenienceMethodParameterType, inputParameter.Location, false) : Validation.None;
-                    var parameter = new Parameter(property.Name, property.Description, convenienceMethodParameterType, defaultValue, validation, initializer);
-
-                    var serializedName = property.SerializedName ?? property.Name;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, parameter.Type, false);
-                    var serialization = new JsonSpreadParameterSerialization(parameter, serializedName, valueSerialization, property.IsRequired);
+                    Parameter parameter = CreateSpreadParameter(inputParameter, property);
 
                     if (parameter.IsOptionalInSignature)
                     {
@@ -262,14 +307,72 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         requiredConvenienceMethodParameters.Add(parameter);
                     }
-                    intermediateSerialization.Add(serialization);
+
+                    conversion.Add(CreatePropertySerializationStatement(property, utf8JsonWriter, parameter));
                 }
 
                 model = model.BaseModel;
             }
 
-            var convenienceMethodParameters = requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters).ToArray();
-            return new ParameterLink(convenienceMethodParameters, new[] { protocolMethodParameter }, intermediateSerialization);
+            conversion.Add(utf8JsonWriter.WriteEndObject());
+            _conversions[protocolMethodParameter] = conversion;
+
+            _createMessageParameters.Add(protocolMethodParameter);
+            _protocolParameters.Add(protocolMethodParameter);
+            _convenienceParameters.AddRange(requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters));
+            _arguments[protocolMethodParameter] = requestContent;
+        }
+
+        private void CreateFlattenedConversions(InputParameter flattenParameter, Parameter parameter)
+        {
+            var conversion = new List<MethodBodyStatement>
+            {
+                Var("content", Utf8JsonRequestContentExpression.New(), out var content),
+                content.JsonWriter.WriteStartObject()
+            };
+
+            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
+            {
+                if (inputParameter is { FlattenedBodyProperty: { } property })
+                {
+                    conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, outputParameter));
+                }
+            }
+
+            conversion.Add(content.JsonWriter.WriteEndObject());
+            _conversions[parameter] = conversion;
+            _arguments[parameter] = content;
+        }
+
+        private Parameter CreateSpreadParameter(InputParameter inputParameter, InputModelProperty property)
+        {
+            var parameterType = TypeFactory.GetInputType(_typeFactory.CreateType(property.Type));
+            Parameter.CreateDefaultValue(ref parameterType, _typeFactory, property.DefaultValue, false, property.IsRequired, out var defaultValue, out var initializer);
+            var validation = property.IsRequired && initializer == null
+                ? Parameter.GetValidation(parameterType, inputParameter.Location, false)
+                : Validation.None;
+
+            return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
+        }
+
+        private static MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, Parameter parameter)
+        {
+            var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, parameter.Type, false);
+
+            var propertyName = property.SerializedName ?? property.Name;
+            var writePropertyStatement = new[]
+            {
+                jsonWriter.WritePropertyName(propertyName),
+                JsonSerializationMethodsBuilder.SerializeExpression(jsonWriter, valueSerialization, parameter)
+            };
+
+            var writeNullStatement = property.IsRequired ? jsonWriter.WriteNull(propertyName) : null;
+            if (parameter.Type.IsNullable)
+            {
+                return new IfElseStatement(IsNotNull(parameter), writePropertyStatement, writeNullStatement);
+            }
+
+            return writePropertyStatement;
         }
 
         private void AddContentTypeRequestParameter(InputParameter inputParameter)
@@ -291,7 +394,8 @@ namespace AutoRest.CSharp.Output.Models
             var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
             _createMessageParameters.Add(parameter);
-            _parameterLinks.Add(new ParameterLink(new[]{ parameter }, new[]{ parameter }, null));
+            _protocolParameters.Add(parameter);
+            _createMessageParameters.Add(parameter);
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);
         }
 
@@ -307,5 +411,41 @@ namespace AutoRest.CSharp.Output.Models
             InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
             _ => _typeFactory.CreateType(type).WithNullable(type.IsNullable)
         };
+
+        private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)
+            => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, RequestContextExpression.New(cancellationToken), Null));
+
+        private static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
+        {
+            if (fromParameter == toParameter)
+            {
+                return fromParameter;
+            }
+
+            ValueExpression fromExpression = NullConditional(fromParameter);
+            return fromParameter.Type.IsFrameworkType
+                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toParameter.Type)
+                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toParameter.Type);
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
+        {
+            if ((fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return fromExpression;
+            }
+
+            return RequestContentExpression.Create(fromExpression);
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
+        {
+            return fromTypeImplementation switch
+            {
+                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
+                SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
+                _ => fromExpression
+            };
+        }
     }
 }

@@ -27,13 +27,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var (createMessageMethod, operation) in restClient.RequestMethods)
+                    foreach (var (createMessageMethod, method) in restClient.LegacyMethods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, false, restClient.Parameters);
+                        writer.WriteMethod(method);
 
                         WriteOperation(writer, createMessageMethod, restClient.Fields, true);
                         WriteOperation(writer, createMessageMethod, restClient.Fields, false);
-                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(operation));
+                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(createMessageMethod.Operation));
                         if (protocolMethod != null)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
