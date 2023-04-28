@@ -209,7 +209,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -299,7 +299,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -371,7 +371,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -669,7 +669,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -766,7 +766,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -850,7 +850,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -1113,7 +1113,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -1203,7 +1203,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }

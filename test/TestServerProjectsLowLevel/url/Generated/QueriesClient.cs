@@ -2282,7 +2282,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2299,7 +2299,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/null", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2316,7 +2316,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2333,7 +2333,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/none/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2350,7 +2350,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/ssv/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
             }
@@ -2367,7 +2367,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/tsv/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
             }
@@ -2384,7 +2384,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/pipes/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
             }

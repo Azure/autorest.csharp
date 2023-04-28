@@ -508,7 +508,7 @@ namespace BodyAndPath_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemNameStream, true);
-            if (excluded != null)
+            if (excluded != null && Optional.IsCollectionDefined(excluded))
             {
                 foreach (var param in excluded)
                 {
