@@ -592,10 +592,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 var type = parameterType.FrameworkType;
 
                 // Refer to TypeFactory.cs as how number type is created
-                if (type == typeof(float) || type == typeof(decimal) || type == typeof(decimal) ||
-                    type == typeof(double) || type == typeof(long) || type == typeof(int))
+                if (type == typeof(long) || type == typeof(int))
                 {
                     return "1234";
+                }
+
+                if (type == typeof(float) || type == typeof(decimal) || type == typeof(double))
+                {
+                    return "3.14";
                 }
 
                 if (type == typeof(string))
@@ -698,6 +702,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.DurationConstant => "01:23:45",
                 InputTypeKind.Time => "01:23:45",
                 _ => "new {}"
+            },
+            InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
+            {
+                InputTypeKind.String => $"\"{literalType.Value}\"",
+                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
+                _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
             },
             InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
             _ => "new {}"
