@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var pagingInfo = clientMethod.PagingInfo;
             WriteProtocolMethodDocumentation(writer, clientMethod, true);
             WriteProtocolMethod(writer, clientMethod, fields, longRunning, pagingInfo, true);
-            WriteProtocolMethodDocumentation(writer, clientMethod,false);
+            WriteProtocolMethodDocumentation(writer, clientMethod, false);
             WriteProtocolMethod(writer, clientMethod, fields, longRunning, pagingInfo, false);
         }
 
@@ -538,7 +538,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.ToString().Trim().Replace("<", "{").Replace(">", "}"))));
+            var paramList = signature.Parameters.Select(p =>
+            {
+                var name = p.Type.IsFrameworkType ? CodeWriter.GetTypeNameMapping(p.Type.FrameworkType) ?? p.Type.Name : p.Type.Name;
+                if (p.Type.IsNullable && p.Type.IsValueType)
+                    name += "?";
+                return name.Replace("<", "{").Replace(">", "}");
+            });
+            builder.Append(string.Join(",", paramList));
             builder.Append(")");
             return builder.ToString();
         }
