@@ -1,0 +1,31 @@
+parameters:
+  JobCount: 0
+  Name: ""
+  
+jobs:
+- job: ${{ parameters.Name }}
+  timeoutInMinutes: 60
+  pool:
+    name: azsdk-pool-mms-ubuntu-2004-general
+    vmImage: ubuntu-20.04
+  
+  steps:
+  - checkout: self
+    fetchDepth: 1
+  - checkout: azure-sdk-tools
+    fetchDepth: 1
+  - template: eng/common/pipelines/templates/steps/sparse-checkout.yml@azure-sdk-tools
+    parameters:
+      Paths:
+      - "/*"
+      - "!SessionRecords"
+      Repositories:
+      - Name: Azure/azure-sdk-for-net
+        WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      SkipCheckoutNone: true
+  - pwsh: ./eng/GenerateSdkForNetCodeGenerationMatrix.ps1 -SdkForNetPath $(Build.SourcesDirectory)/azure-sdk-for-net -GroupCount ${{ parameters.JobCount }} -OutputFolder $(System.DefaultWorkingDirectory)/output
+    displayName: "Generate Matrix Files"
+    name: generate_job_matrix
+    workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+  - publish: $(System.DefaultWorkingDirectory)/output
+    artifact: matrix-props
