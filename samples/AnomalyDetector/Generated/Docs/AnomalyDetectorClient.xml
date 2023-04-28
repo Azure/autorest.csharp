@@ -9,11 +9,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -39,11 +37,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -349,11 +345,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -379,11 +373,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -673,11 +665,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateChangePointDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -700,11 +690,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new UnivariateChangePointDetectionOptions(
-new TimeSeriesPoint[] 
+var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[] 
 {
-    new TimeSeriesPoint(
-3.14)
+    new TimeSeriesPoint(3.14)
 {
         Timestamp = DateTimeOffset.UtcNow,
     }
@@ -1111,25 +1099,21 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var modelInfo = new ModelInfo(
-"<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
+var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
 {
     DataSchema = DataSchema.OneTable,
     DisplayName = "<DisplayName>",
     SlidingWindow = 1234,
-    AlignPolicy = new AlignPolicy(
-)
+    AlignPolicy = new AlignPolicy()
 {
         AlignMode = AlignMode.Inner,
         FillNAMethod = FillNAMethod.Previous,
         PaddingValue = 3.14,
     },
     Status = ModelStatus.Created,
-    DiagnosticsInfo = new DiagnosticsInfo(
-)
+    DiagnosticsInfo = new DiagnosticsInfo()
 {
-        ModelState = new ModelState(
-)
+        ModelState = new ModelState()
 {
             EpochIds = 
 {
@@ -1150,8 +1134,7 @@ var modelInfo = new ModelInfo(
         },
         VariableStates = 
 {
-            new VariableState(
-)
+            new VariableState()
 {
                 Variable = "<Variable>",
                 FilledNARatio = 3.14,
@@ -1174,25 +1157,21 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var modelInfo = new ModelInfo(
-"<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
+var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
 {
     DataSchema = DataSchema.OneTable,
     DisplayName = "<DisplayName>",
     SlidingWindow = 1234,
-    AlignPolicy = new AlignPolicy(
-)
+    AlignPolicy = new AlignPolicy()
 {
         AlignMode = AlignMode.Inner,
         FillNAMethod = FillNAMethod.Previous,
         PaddingValue = 3.14,
     },
     Status = ModelStatus.Created,
-    DiagnosticsInfo = new DiagnosticsInfo(
-)
+    DiagnosticsInfo = new DiagnosticsInfo()
 {
-        ModelState = new ModelState(
-)
+        ModelState = new ModelState()
 {
             EpochIds = 
 {
@@ -1213,8 +1192,7 @@ var modelInfo = new ModelInfo(
         },
         VariableStates = 
 {
-            new VariableState(
-)
+            new VariableState()
 {
                 Variable = "<Variable>",
                 FilledNARatio = 3.14,
@@ -1901,8 +1879,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new MultivariateBatchDetectionOptions(
-"<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
 var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
 ]]></code>
 </example>
@@ -1915,8 +1892,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new MultivariateBatchDetectionOptions(
-"<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
 var result = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code>
 </example>
@@ -2155,11 +2131,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new MultivariateLastDetectionOptions(
-new VariableValues[] 
+var options = new MultivariateLastDetectionOptions(new VariableValues[] 
 {
-    new VariableValues(
-"<variable>", new String[] 
+    new VariableValues("<variable>", new String[] 
 {
         "<null>"
     }, new Single[] 
@@ -2179,11 +2153,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var options = new MultivariateLastDetectionOptions(
-new VariableValues[] 
+var options = new MultivariateLastDetectionOptions(new VariableValues[] 
 {
-    new VariableValues(
-"<variable>", new String[] 
+    new VariableValues("<variable>", new String[] 
 {
         "<null>"
     }, new Single[] 

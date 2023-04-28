@@ -8,8 +8,7 @@ This sample shows how to call CreateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var resource = new Project(
-)
+var resource = new Project()
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -25,8 +24,7 @@ This sample shows how to call CreateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var resource = new Project(
-)
+var resource = new Project()
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -128,8 +126,7 @@ This sample shows how to call UpdateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var resource = new Project(
-)
+var resource = new Project()
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -145,8 +142,7 @@ This sample shows how to call UpdateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var resource = new Project(
-)
+var resource = new Project()
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -280,8 +276,7 @@ This sample shows how to call CreateThingAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var thing = new Thing(
-"<name>");
+var thing = new Thing("<name>");
 var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
 ]]></code>
 </example>
@@ -293,8 +288,7 @@ This sample shows how to call CreateThing with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
-var thing = new Thing(
-"<name>");
+var thing = new Thing("<name>");
 var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
 ]]></code>
 </example>

@@ -8,8 +8,7 @@ This sample shows how to call SpreadModelAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var thing = new Thing(
-"<name>", 1234);
+var thing = new Thing("<name>", 1234);
 var result = await client.SpreadModelAsync(thing);
 ]]></code>
 </example>
@@ -21,8 +20,7 @@ This sample shows how to call SpreadModel with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var thing = new Thing(
-"<name>", 1234);
+var thing = new Thing("<name>", 1234);
 var result = client.SpreadModel(thing);
 ]]></code>
 </example>
@@ -258,8 +256,7 @@ This sample shows how to call SpreadAliasWithModelAsync with required parameters
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var thing = new Thing(
-"<name>", 1234);
+var thing = new Thing("<name>", 1234);
 var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
 ]]></code>
 </example>
@@ -271,8 +268,7 @@ This sample shows how to call SpreadAliasWithModel with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var thing = new Thing(
-"<name>", 1234);
+var thing = new Thing("<name>", 1234);
 var result = client.SpreadAliasWithModel("<id>", 1234, thing);
 ]]></code>
 </example>

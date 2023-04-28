@@ -173,13 +173,11 @@ This sample shows how to call CreateOrReplaceAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var resource = new User(
-"<name>")
+var resource = new User("<name>")
 {
     Orders = 
 {
-        new UserOrder(
-1234, "<detail>")
+        new UserOrder(1234, "<detail>")
     },
 };
 var result = await client.CreateOrReplaceAsync(1234, resource);
@@ -192,13 +190,11 @@ This sample shows how to call CreateOrReplace with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var resource = new User(
-"<name>")
+var resource = new User("<name>")
 {
     Orders = 
 {
-        new UserOrder(
-1234, "<detail>")
+        new UserOrder(1234, "<detail>")
     },
 };
 var result = client.CreateOrReplace(1234, resource);

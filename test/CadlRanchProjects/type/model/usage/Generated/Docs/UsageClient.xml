@@ -7,8 +7,7 @@ This sample shows how to call InputAsync with required parameters.
 <code><![CDATA[
 var client = new UsageClient();
 
-var input = new InputRecord(
-"<requiredProp>");
+var input = new InputRecord("<requiredProp>");
 var result = await client.InputAsync(input);
 ]]></code>
 </example>
@@ -19,8 +18,7 @@ This sample shows how to call Input with required parameters.
 <code><![CDATA[
 var client = new UsageClient();
 
-var input = new InputRecord(
-"<requiredProp>");
+var input = new InputRecord("<requiredProp>");
 var result = client.Input(input);
 ]]></code>
 </example>
@@ -155,8 +153,7 @@ This sample shows how to call InputAndOutputAsync with required parameters.
 <code><![CDATA[
 var client = new UsageClient();
 
-var body = new InputOutputRecord(
-"<requiredProp>");
+var body = new InputOutputRecord("<requiredProp>");
 var result = await client.InputAndOutputAsync(body);
 ]]></code>
 </example>
@@ -167,8 +164,7 @@ This sample shows how to call InputAndOutput with required parameters.
 <code><![CDATA[
 var client = new UsageClient();
 
-var body = new InputOutputRecord(
-"<requiredProp>");
+var body = new InputOutputRecord("<requiredProp>");
 var result = client.InputAndOutput(body);
 ]]></code>
 </example>

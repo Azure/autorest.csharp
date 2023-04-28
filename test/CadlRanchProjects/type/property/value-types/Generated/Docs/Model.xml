@@ -81,9 +81,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetModelClient(<1.0.0>);
 
-var body = new ModelProperty(
-new InnerModel(
-"<property>"));
+var body = new ModelProperty(new InnerModel("<property>"));
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
@@ -94,9 +92,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetModelClient(<1.0.0>);
 
-var body = new ModelProperty(
-new InnerModel(
-"<property>"));
+var body = new ModelProperty(new InnerModel("<property>"));
 var result = client.Put(body);
 ]]></code>
 </example>

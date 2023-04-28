@@ -433,8 +433,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var thing = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = await client.AnonymousBodyAsync(thing);
 ]]></code>
 </example>
@@ -447,8 +446,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var thing = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = client.AnonymousBody(thing);
 ]]></code>
 </example>
@@ -673,8 +671,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var notFriend = new Friend(
-"<name>");
+var notFriend = new Friend("<name>");
 var result = await client.FriendlyModelAsync(notFriend);
 ]]></code>
 </example>
@@ -687,8 +684,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var notFriend = new Friend(
-"<name>");
+var notFriend = new Friend("<name>");
 var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>
@@ -951,15 +947,13 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var action = new RoundTripModel(
-"<requiredString>", 1234, new StringFixedEnum[] 
+var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
 {
     StringFixedEnum.One
 }, new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromString("<your binary data content>"),
 })
@@ -1003,15 +997,13 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var action = new RoundTripModel(
-"<requiredString>", 1234, new StringFixedEnum[] 
+var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
 {
     StringFixedEnum.One
 }, new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromString("<your binary data content>"),
 })
@@ -1877,8 +1869,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var body = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = await client.CreateLiteralAsync(body);
 ]]></code>
 </example>
@@ -1891,8 +1882,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var body = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = client.CreateLiteral(body);
 ]]></code>
 </example>
@@ -2265,8 +2255,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var body = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = await client.InternalProtocolAsync(body);
 ]]></code>
 </example>
@@ -2279,8 +2268,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint, credential);
 
-var body = new Thing(
-"<name>", "<requiredUnion>", "<requiredBadDescription>");
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
 var result = client.InternalProtocol(body);
 ]]></code>
 </example>

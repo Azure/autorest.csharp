@@ -8,9 +8,7 @@ This sample shows how to call InputToRoundTripAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -18,11 +16,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -42,9 +38,7 @@ This sample shows how to call InputToRoundTrip with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -52,11 +46,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -282,9 +274,7 @@ This sample shows how to call InputToRoundTripPrimitiveAsync with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -292,11 +282,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -316,9 +304,7 @@ This sample shows how to call InputToRoundTripPrimitive with required parameters
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -326,11 +312,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -544,8 +528,7 @@ This sample shows how to call InputToRoundTripOptionalAsync with required parame
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripOptionalModel(
-)
+var input = new RoundTripOptionalModel()
 {
     OptionalString = "<OptionalString>",
     OptionalInt = 1234,
@@ -559,17 +542,13 @@ var input = new RoundTripOptionalModel(
     },
     OptionalModelCollection = 
 {
-        new CollectionItem(
-new Dictionary<string, RecordItem>
+        new CollectionItem(new Dictionary<string, RecordItem>
 {
-            ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
         })
     },
-    OptionalModel = new DerivedModel(
-Array.Empty<CollectionItem>()),
-    OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(
-Array.Empty<CollectionItem>())
+    OptionalModel = new DerivedModel(Array.Empty<CollectionItem>()),
+    OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(Array.Empty<CollectionItem>())
 {
         OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
     },
@@ -602,8 +581,7 @@ This sample shows how to call InputToRoundTripOptional with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripOptionalModel(
-)
+var input = new RoundTripOptionalModel()
 {
     OptionalString = "<OptionalString>",
     OptionalInt = 1234,
@@ -617,17 +595,13 @@ var input = new RoundTripOptionalModel(
     },
     OptionalModelCollection = 
 {
-        new CollectionItem(
-new Dictionary<string, RecordItem>
+        new CollectionItem(new Dictionary<string, RecordItem>
 {
-            ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
         })
     },
-    OptionalModel = new DerivedModel(
-Array.Empty<CollectionItem>()),
-    OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(
-Array.Empty<CollectionItem>())
+    OptionalModel = new DerivedModel(Array.Empty<CollectionItem>()),
+    OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(Array.Empty<CollectionItem>())
 {
         OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
     },
@@ -980,9 +954,7 @@ This sample shows how to call InputToRoundTripReadOnlyAsync with required parame
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -990,11 +962,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -1014,9 +984,7 @@ This sample shows how to call InputToRoundTripReadOnly with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputModel(
-"<requiredString>", 1234, new BaseModel(
-), new Int32[] 
+var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[] 
 {
     1234
 }, new String[] 
@@ -1024,11 +992,9 @@ var input = new InputModel(
     "<null>"
 }, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
@@ -1290,18 +1256,14 @@ This sample shows how to call RoundTripToOutputAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripModel(
-"<requiredString>", 1234, new BaseModelWithDiscriminator(
-1234)
+var input = new RoundTripModel("<requiredString>", 1234, new BaseModelWithDiscriminator(1234)
 {
     OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
 }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, Int32>
 {
@@ -1321,18 +1283,14 @@ This sample shows how to call RoundTripToOutput with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripModel(
-"<requiredString>", 1234, new BaseModelWithDiscriminator(
-1234)
+var input = new RoundTripModel("<requiredString>", 1234, new BaseModelWithDiscriminator(1234)
 {
     OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
 }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 }, new Dictionary<string, Int32>
 {
@@ -1638,8 +1596,7 @@ This sample shows how to call InputRecursiveAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputRecursiveModel(
-"<message>");
+var input = new InputRecursiveModel("<message>");
 var result = await client.InputRecursiveAsync(input);
 ]]></code>
 </example>
@@ -1651,8 +1608,7 @@ This sample shows how to call InputRecursive with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new InputRecursiveModel(
-"<message>");
+var input = new InputRecursiveModel("<message>");
 var result = client.InputRecursive(input);
 ]]></code>
 </example>
@@ -1746,8 +1702,7 @@ This sample shows how to call RoundTripRecursiveAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripRecursiveModel(
-"<message>");
+var input = new RoundTripRecursiveModel("<message>");
 var result = await client.RoundTripRecursiveAsync(input);
 ]]></code>
 </example>
@@ -1759,8 +1714,7 @@ This sample shows how to call RoundTripRecursive with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripRecursiveModel(
-"<message>");
+var input = new RoundTripRecursiveModel("<message>");
 var result = client.RoundTripRecursive(input);
 ]]></code>
 </example>
@@ -1960,14 +1914,11 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripOnNoUse(
-"<baseModelProp>", new CollectionItem[] 
+var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 });
 var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
@@ -1981,14 +1932,11 @@ This sample shows how to call RoundTripToOutputWithNoUseBase with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var input = new RoundTripOnNoUse(
-"<baseModelProp>", new CollectionItem[] 
+var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
 {
-    new CollectionItem(
-new Dictionary<string, RecordItem>
+    new CollectionItem(new Dictionary<string, RecordItem>
 {
-        ["key"] = new RecordItem(
-Array.Empty<CollectionItem>()),
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 });
 var result = client.RoundTripToOutputWithNoUseBase(input);

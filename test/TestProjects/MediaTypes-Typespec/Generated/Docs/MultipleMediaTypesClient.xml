@@ -112,8 +112,7 @@ This sample shows how to call OneModelBodyOneContentTypeAsync with required para
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = new Body(
-"<id>");
+var body = new Body("<id>");
 var result = await client.OneModelBodyOneContentTypeAsync(body);
 ]]></code>
 </example>
@@ -125,8 +124,7 @@ This sample shows how to call OneModelBodyOneContentType with required parameter
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = new Body(
-"<id>");
+var body = new Body("<id>");
 var result = client.OneModelBodyOneContentType(body);
 ]]></code>
 </example>

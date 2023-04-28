@@ -77,8 +77,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
 
-var body = new BooleanProperty(
-true);
+var body = new BooleanProperty(true);
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
@@ -89,8 +88,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
 
-var body = new BooleanProperty(
-true);
+var body = new BooleanProperty(true);
 var result = client.Put(body);
 ]]></code>
 </example>

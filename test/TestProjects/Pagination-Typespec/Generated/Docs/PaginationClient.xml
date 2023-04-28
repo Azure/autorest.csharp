@@ -9,8 +9,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-var bodyInput = new ListLedgerEntryInputBody(
-"<requiredString>", 1234);
+var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 var result = client.GetPaginationLedgerEntriesAsync(bodyInput);]]></code>
 </example>
     </member>
@@ -22,8 +21,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-var bodyInput = new ListLedgerEntryInputBody(
-"<requiredString>", 1234);
+var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 var result = client.GetPaginationLedgerEntries(bodyInput);]]></code>
 </example>
     </member>

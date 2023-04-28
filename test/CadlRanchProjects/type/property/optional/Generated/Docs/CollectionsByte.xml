@@ -147,8 +147,7 @@ This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsByteClient(<1.0.0>);
 
-var body = new CollectionsByteProperty(
-)
+var body = new CollectionsByteProperty()
 {
     Property = 
 {
@@ -165,8 +164,7 @@ This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsByteClient(<1.0.0>);
 
-var body = new CollectionsByteProperty(
-)
+var body = new CollectionsByteProperty()
 {
     Property = 
 {
@@ -259,8 +257,7 @@ This sample shows how to call PutDefaultAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsByteClient(<1.0.0>);
 
-var body = new CollectionsByteProperty(
-)
+var body = new CollectionsByteProperty()
 {
     Property = 
 {
@@ -277,8 +274,7 @@ This sample shows how to call PutDefault with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsByteClient(<1.0.0>);
 
-var body = new CollectionsByteProperty(
-)
+var body = new CollectionsByteProperty()
 {
     Property = 
 {

@@ -77,8 +77,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
 
-var body = new CollectionsIntProperty(
-new Int32[] 
+var body = new CollectionsIntProperty(new Int32[] 
 {
     1234
 });
@@ -92,8 +91,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
 
-var body = new CollectionsIntProperty(
-new Int32[] 
+var body = new CollectionsIntProperty(new Int32[] 
 {
     1234
 });

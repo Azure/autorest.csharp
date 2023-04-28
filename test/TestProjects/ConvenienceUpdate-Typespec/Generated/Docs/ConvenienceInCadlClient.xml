@@ -77,8 +77,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with requir
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = await client.ConvenienceOptionalBeforeRequiredAsync(required, 1234);
 ]]></code>
 </example>
@@ -89,8 +88,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequired with required pa
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = client.ConvenienceOptionalBeforeRequired(required, 1234);
 ]]></code>
 </example>
@@ -589,8 +587,7 @@ This sample shows how to call ProtocolOptionalModelValueAsync with required para
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = await client.ProtocolOptionalModelValueAsync(optional);
 ]]></code>
 </example>
@@ -601,8 +598,7 @@ This sample shows how to call ProtocolOptionalModelValue with required parameter
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = client.ProtocolOptionalModelValue(optional);
 ]]></code>
 </example>
@@ -667,8 +663,7 @@ This sample shows how to call ProtocolRequiredModelAsync with required parameter
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = await client.ProtocolRequiredModelAsync(required);
 ]]></code>
 </example>
@@ -679,8 +674,7 @@ This sample shows how to call ProtocolRequiredModel with required parameters.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = client.ProtocolRequiredModel(required);
 ]]></code>
 </example>
@@ -1043,8 +1037,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalValueAsync wit
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = await client.ConvenienceOptionalModelWithOptionalValueAsync(optional);
 ]]></code>
 </example>
@@ -1055,8 +1048,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalValue with req
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = client.ConvenienceOptionalModelWithOptionalValue(optional);
 ]]></code>
 </example>
@@ -1121,8 +1113,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with req
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = await client.ConvenienceRequiredModelWithOptionalAsync(required);
 ]]></code>
 </example>
@@ -1133,8 +1124,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptional with required
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = client.ConvenienceRequiredModelWithOptional(required);
 ]]></code>
 </example>
@@ -1199,8 +1189,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with req
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
 ]]></code>
 </example>
@@ -1211,8 +1200,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with required
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var optional = new Model(
-"<id>");
+var optional = new Model("<id>");
 var result = client.ConvenienceOptionalModelWithRequired(optional);
 ]]></code>
 </example>
@@ -1277,8 +1265,7 @@ This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required 
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = await client.ProtocolOptionalBeforeRequiredAsync(required, 1234);
 ]]></code>
 </example>
@@ -1289,8 +1276,7 @@ This sample shows how to call ProtocolOptionalBeforeRequired with required param
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-var required = new Model(
-"<id>");
+var required = new Model("<id>");
 var result = client.ProtocolOptionalBeforeRequired(required, 1234);
 ]]></code>
 </example>

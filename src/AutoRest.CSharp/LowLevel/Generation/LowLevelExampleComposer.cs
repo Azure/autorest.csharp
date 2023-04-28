@@ -966,9 +966,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 var parameterExpr = ComposeCSharpType(allProperties, parameter.Type, parameter.Name, indent, true, visitedModels);
                 parameterExpressions.Add(parameterExpr);
             }
-            builder.Append($"new {model.Type.Name}(").AppendLine();
-            builder.Append(string.Join(", ", parameterExpressions));
-            builder.Append(")");
+            builder.Append($"new {model.Type.Name}(")
+                .Append(string.Join(", ", parameterExpressions))
+                .Append(")");
 
             // find other properties
             if (allProperties)

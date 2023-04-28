@@ -120,8 +120,7 @@ This sample shows how to call CreateAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var pet = new Pet(
-"<name>", 1234)
+var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };
@@ -136,8 +135,7 @@ This sample shows how to call Create with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var pet = new Pet(
-"<name>", 1234)
+var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };

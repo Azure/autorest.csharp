@@ -73,8 +73,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
 
-var body = new BaseModel(
-);
+var body = new BaseModel();
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
@@ -85,8 +84,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
 
-var body = new BaseModel(
-);
+var body = new BaseModel();
 var result = client.Put(body);
 ]]></code>
 </example>

@@ -77,8 +77,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
 
-var body = new DictionaryStringProperty(
-new Dictionary<string, string>
+var body = new DictionaryStringProperty(new Dictionary<string, string>
 {
     ["key"] = "<null>",
 });
@@ -92,8 +91,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
 
-var body = new DictionaryStringProperty(
-new Dictionary<string, string>
+var body = new DictionaryStringProperty(new Dictionary<string, string>
 {
     ["key"] = "<null>",
 });

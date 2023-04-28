@@ -155,8 +155,7 @@ This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
-var body = new RequiredAndOptionalProperty(
-1234)
+var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
@@ -170,8 +169,7 @@ This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
-var body = new RequiredAndOptionalProperty(
-1234)
+var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
@@ -265,8 +263,7 @@ This sample shows how to call PutRequiredOnlyAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
-var body = new RequiredAndOptionalProperty(
-1234)
+var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
@@ -280,8 +277,7 @@ This sample shows how to call PutRequiredOnly with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
-var body = new RequiredAndOptionalProperty(
-1234)
+var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
