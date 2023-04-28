@@ -129,8 +129,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
+        protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
+            => new List<CSharpType> { new CSharpType(typeof(IResource)) };
+
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
-            : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
+        : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
 
         private static IEnumerable<Operation> GetClientOperations(OperationSet operationSet, IEnumerable<Operation> operations)

@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -45,6 +46,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             WriteCreateResourceIdentifierMethods();
             _writer.Line();
+        }
+
+        // TODO: move the interface implementation to a dedicated place
+        protected internal override void WriteImplementations()
+        {
+            base.WriteImplementations();
+            _writer.Append($"{typeof(ISerializable)} {typeof(IResource)}.DataBag => new {This.ResourceName}Data();");
         }
 
         private void WriteCreateResourceIdentifierMethods()
