@@ -130,7 +130,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             _protocolParameters.AddRange(_createMessageParameters);
-            _convenienceParameters.AddRange(_convenienceParameters);
+            _convenienceParameters.AddRange(_createMessageParameters);
             _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
             // for legacy logic, adding request parts unsorted
