@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Output.Models
         protected IReadOnlyList<Parameter> ConvenienceMethodParameters { get; }
         protected IReadOnlyDictionary<Parameter, ValueExpression> ArgumentsMap { get; }
         protected IReadOnlyDictionary<Parameter, MethodBodyStatement> ConversionsMap { get; }
+        protected RequestContextExpression? CreateMessageRequestContext { get; }
 
         protected OperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
         {
@@ -77,6 +78,9 @@ namespace AutoRest.CSharp.Output.Models
             CreateMessageMethodParameters = clientMethodParameters.CreateMessage;
             ProtocolMethodParameters = clientMethodParameters.Protocol;
             ConvenienceMethodParameters = clientMethodParameters.Convenience;
+            CreateMessageRequestContext = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext with {DefaultValue = null})
+                    ? new RequestContextExpression(KnownParameters.RequestContext)
+                    : null;
 
             _fields = fields;
             _clientName = clientName;
@@ -194,10 +198,10 @@ namespace AutoRest.CSharp.Output.Models
 
         protected List<MethodBodyStatement> CreateHttpMessage(ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
         {
-            var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
+            var callPipelineCreateMessage = CreateMessageRequestContext is not null
                 ? responseClassifierType is not null
-                    ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext), new FormattableStringToExpression($"{responseClassifierType.Name}"))
-                    : PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
+                    ? PipelineField.CreateMessage(CreateMessageRequestContext, new FormattableStringToExpression($"{responseClassifierType.Name}"))
+                    : PipelineField.CreateMessage(CreateMessageRequestContext)
                 : PipelineField.CreateMessage();
 
             var statements = new List<MethodBodyStatement>

@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -21,15 +20,11 @@ namespace AutoRest.CSharp.Output.Models
     internal class OperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
         private readonly bool _headAsBoolean;
-        private readonly RequestContextExpression? _requestContext;
 
         public OperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodParameters clientMethodParameters)
             : base(operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, typeFactory), clientMethodParameters)
         {
             _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean;
-            _requestContext = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
-                ? new RequestContextExpression(KnownParameters.RequestContext)
-                : null;
         }
 
         private static ClientMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
@@ -47,8 +42,8 @@ namespace AutoRest.CSharp.Output.Models
             return WrapInDiagnosticScope(ProtocolMethodName,
                 Declare("message", InvokeCreateRequestMethod(), out var message),
                 _headAsBoolean
-                    ? Return(pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnosticsDeclaration, _requestContext, async))
-                    : Return(pipeline.ProcessMessage(message, _requestContext, null, async))
+                    ? Return(pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnosticsDeclaration, CreateMessageRequestContext, async))
+                    : Return(pipeline.ProcessMessage(message, CreateMessageRequestContext, null, async))
             );
         }
 

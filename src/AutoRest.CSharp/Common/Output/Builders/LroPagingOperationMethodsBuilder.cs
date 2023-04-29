@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(), out var message);
-            MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, RequestContext, async));
+            MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
 
             var body = nextPageRequestLine is not null
                 ? new[]{nextPageRequestLine, declareMessageLine, returnLine}

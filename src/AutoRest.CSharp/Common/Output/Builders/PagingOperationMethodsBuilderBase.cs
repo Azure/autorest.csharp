@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models
     {
         protected OperationPaging Paging { get; }
         protected CSharpType ResponseType { get; }
-        protected RequestContextExpression? RequestContext { get; }
 
         protected string? NextLinkName { get; }
         protected string ItemPropertyName { get; }
@@ -42,9 +41,6 @@ namespace AutoRest.CSharp.Output.Models
             NextLinkName = paging.NextLinkName;
 
             ResponseType = GetResponseType(operation, typeFactory, paging);
-            RequestContext = ProtocolMethodParameters.Contains(KnownParameters.RequestContext)
-                ? new RequestContextExpression(KnownParameters.RequestContext)
-                : null;
 
             CreateNextPageMessageMethodName = paging is { NextLinkOperation: { } nextLinkOperation }
                 ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
@@ -58,13 +54,13 @@ namespace AutoRest.CSharp.Output.Models
             yield return createRequestMethod;
             if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
             {
-                yield return BuildCreateNextPageRequestMethod(createRequestMethod.Signature.Name, createRequestMethod.Signature.Description, responseClassifierType);
+                yield return BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, createRequestMethod.Signature.Summary, createRequestMethod.Signature.Description, responseClassifierType);
             }
         }
 
-        private Method BuildCreateNextPageRequestMethod(string name, string? description, ResponseClassifierType responseClassifierType)
+        private Method BuildCreateNextPageRequestMethod(string name, string? summary, string? description, ResponseClassifierType responseClassifierType)
         {
-            var signature = new MethodSignature(CreateMessageMethodName, name, description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
+            var signature = new MethodSignature(name, summary, description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateNextPageMessageMethodParameters);
             return new Method(signature, BuildCreateNextPageRequestMethodBody(responseClassifierType).AsStatement());
         }
 
