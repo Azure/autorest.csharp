@@ -196,8 +196,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                             continue;
                         }
 
-                        var createNextPageMessage = methods.CreateMessageMethods.Count == 2 ? methods.CreateMessageMethods[1] : null;
-                        var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessage);
+                        var createNextPageMessageName = methods.RestClientNextPageMethod is not null
+                            ? methods.CreateMessageMethod.Signature.Name
+                            : null;
+
+                        var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessageName);
                         operations.Add(operation, new LongRunningOperation(operation, _typeFactory, info, _defaultNamespace, _sourceInputModel));
                     }
                 }

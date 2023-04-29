@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 var paging = operation.Paging;
                 if (paging != null)
                 {
-                    NextPageMethod = lroInfo.NextOperationMethod;
+                    NextPageMethodName = lroInfo.NextPageMethodName;
                     PagingResponse = new PagingResponseInfo(paging.NextLinkName, paging.ItemName, ResultType);
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get; }
-        public RestClientMethod? NextPageMethod { get; }
+        public string? NextPageMethodName { get; }
         public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }
         protected override string DefaultName { get; }

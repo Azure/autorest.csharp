@@ -21,8 +21,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly InputClient _inputClient;
         private readonly DataPlaneOutputLibrary _library;
         private Method[]? _pagingMethods;
-        private ClientMethod[]? _methods;
-        private LongRunningOperationMethod[]? _longRunningOperationMethods;
 
         protected override string DefaultName { get; }
         public string Description { get; }
@@ -37,33 +35,8 @@ namespace AutoRest.CSharp.Output.Models
             RestClient = restClient;
         }
 
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();
-
         public Method[] PagingMethods => _pagingMethods ??= RestClient.Methods.SelectMany(m => m.ConvenienceMethods).ToArray();
 
-        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
-
         protected override string DefaultAccessibility { get; } = "public";
-
-        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
-        {
-            foreach (var operation in _inputClient.Operations)
-            {
-                if (operation.LongRunning == null)
-                {
-                    continue;
-                }
-
-                var name = operation.Name.ToCleanName();
-                RestClientMethod startMethod = RestClient.GetOperationMethod(operation);
-
-                yield return new LongRunningOperationMethod(
-                    name,
-                    _library.FindLongRunningOperation(operation),
-                    startMethod,
-                    new Diagnostic($"{Declaration.Name}.Start{name}")
-                );
-            }
-        }
     }
 }

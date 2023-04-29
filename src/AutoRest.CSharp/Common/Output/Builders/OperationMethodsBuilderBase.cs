@@ -27,6 +27,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -91,7 +92,8 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildDpg()
         {
-            var createRequestMethods = BuildCreateRequestMethods(null, null).ToArray();
+            var responseClassifier = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, null, null, _fields, _typeFactory).ResponseClassifierType;
+            var createRequestMethods = BuildCreateRequestMethods(responseClassifier).ToArray();
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
             var convenienceMethods = Array.Empty<Method>();
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
@@ -106,46 +108,79 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(convenienceMethods, protocolMethods, BuildCreateRequestMethod(createRequestMethods[0].ResponseClassifierType), createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
+            var isPaging = Operation.Paging is not null;
+            var isLongRunning = Operation.LongRunning is not null;
+            return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, responseClassifier, Operation.ExternalDocsUrl, requestBodyType, responseBodyType, isPaging, isLongRunning, Operation.Paging?.ItemName ?? "value");
         }
 
-        public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        public IEnumerable<LegacyMethods> BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
-            var createRequestMethods = BuildCreateRequestMethods(headerModel, resourceDataType).ToArray();
-            var convenienceMethods = Operation.LongRunning is null
-                ? new[]{ BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) }
-                : Array.Empty<Method>();
+            var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
+            var isPaging = false;
+            foreach (var createRequestMethod in BuildCreateRequestMethods(restClientMethod.ResponseClassifierType))
+            {
+                RestClientMethod? nextPage = null;
+                if (isPaging)
+                {
+                    nextPage = BuildNextPageMethod(restClientMethod);
+                }
+                else
+                {
+                    isPaging = true;
+                }
 
-            return new LegacyMethods(Operation, createRequestMethods, convenienceMethods, BuildCreateRequestMethod(createRequestMethods[0].ResponseClassifierType));
+                var protocolMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+                var restClientConvenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+                var convenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+                yield return new LegacyMethods(Operation, convenienceMethods, createRequestMethod, null, restClientMethod, nextPage);
+            }
         }
 
-        protected virtual IEnumerable<RestClientMethod> BuildCreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
-            yield return RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
+            var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+
+            var pathSegments = method.Request.PathSegments
+                .Where(ps => ps.IsRaw)
+                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
+                .ToArray();
+
+            var request = new Request(RequestMethod.Get, pathSegments, Array.Empty<QueryParameter>(), method.Request.Headers, null);
+            var parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name).Prepend(nextPageUrlParameter).ToArray();
+            var responses = method.Responses;
+
+            // We hardcode 200 as expected response code for paged LRO results
+            if (method.Operation.LongRunning != null)
+            {
+                responses = new[]
+                {
+                    new Response(null, new[] { new StatusCodes(200, null) })
+                };
+            }
+
+            return new RestClientMethod(
+                $"{method.Name}NextPage",
+                method.Summary,
+                method.Description,
+                method.ReturnType,
+                request,
+                parameters,
+                responses,
+                method.HeaderModel,
+                bufferResponse: true,
+                accessibility: "internal",
+                method.Operation);
         }
 
-        private Method BuildCreateRequestMethod(ResponseClassifierType responseClassifierType)
+        protected virtual IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
         {
-            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters.Select(p => p with {DefaultValue = null}).ToArray());
-            return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
+            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
+            yield return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
         }
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType? responseClassifierType)
         {
-            var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
-                ? responseClassifierType is not null
-                    ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext), new FormattableStringToExpression($"{responseClassifierType.Name}"))
-                    : PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
-                : PipelineField.CreateMessage();
-
-            yield return Var("message", callPipelineCreateMessage, out var message);
-            yield return Var("request", message.Request, out var request);
-            if (!Operation.BufferResponse)
-            {
-                yield return Assign(message.BufferResponse, False);
-            }
-            yield return Assign(request.Method, new MemberReference(typeof(RequestMethod), Operation.HttpMethod.ToRequestMethodName()));
-            yield return Var("uri", RawRequestUriBuilderExpression.New(), out var uriBuilder);
+            yield return CreateHttpMessage(responseClassifierType, out var message, out var request, out var uriBuilder);
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return AddPath(uriBuilder, Operation.Path);
             yield return AddQuery(uriBuilder).AsStatement();
@@ -157,7 +192,32 @@ namespace AutoRest.CSharp.Output.Models
             yield return Return(message);
         }
 
-        private List<MethodBodyStatement> AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
+        protected List<MethodBodyStatement> CreateHttpMessage(ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
+        {
+            var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
+                ? responseClassifierType is not null
+                    ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext), new FormattableStringToExpression($"{responseClassifierType.Name}"))
+                    : PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
+                : PipelineField.CreateMessage();
+
+            var statements = new List<MethodBodyStatement>
+            {
+                Var("message", callPipelineCreateMessage, out message),
+                Var("request", message.Request, out request)
+            };
+
+            if (!Operation.BufferResponse)
+            {
+                statements.Add(Assign(message.BufferResponse, False));
+            }
+
+            statements.Add(Assign(request.Method, new MemberReference(typeof(RequestMethod), Operation.HttpMethod.ToRequestMethodName())));
+            statements.Add(Var("uri", RawRequestUriBuilderExpression.New(), out uriBuilder));
+
+            return statements;
+        }
+
+        protected List<MethodBodyStatement> AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
         {
             var lines = new List<MethodBodyStatement>();
             foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uri))
@@ -253,7 +313,7 @@ namespace AutoRest.CSharp.Output.Models
             return NullCheckRequestPartValue(value, outputParameter.Type, addToQuery);
         }
 
-        private IEnumerable<MethodBodyStatement> AddHeaders(RequestExpression request, bool addContentHeaders)
+        protected IEnumerable<MethodBodyStatement> AddHeaders(RequestExpression request, bool addContentHeaders)
         {
             foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
             {
@@ -286,7 +346,7 @@ namespace AutoRest.CSharp.Output.Models
             throw new InvalidOperationException();
         }
 
-        private MethodBodyStatement AddHeader(RequestExpression request, string nameInRequest, InputParameter inputParameter, Parameter outputParameter, SerializationFormat format)
+        protected MethodBodyStatement AddHeader(RequestExpression request, string nameInRequest, InputParameter inputParameter, Parameter outputParameter, SerializationFormat format)
         {
             var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
             var value = GetValueForRequestPart(inputParameter, outputParameter);
@@ -299,7 +359,7 @@ namespace AutoRest.CSharp.Output.Models
             return NullCheckRequestPartValue(value, outputParameter.Type, addToHeader);
         }
 
-        private MethodBodyStatement AddBody(RequestExpression request)
+        protected MethodBodyStatement AddBody(RequestExpression request)
         {
             var bodyParameters = new Dictionary<InputParameter, Parameter>();
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)

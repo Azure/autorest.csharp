@@ -120,7 +120,8 @@ namespace AutoRest.CSharp.Output.Models
                 // Grouped and flattened parameters shouldn't be added to methods
                 if (inputParameter.Kind == InputOperationParameterKind.Method)
                 {
-                    _createMessageParameters.Add(parameter);
+                    AddCreateMessageParameter(parameter);
+                    _protocolParameters.Add(parameter);
                 }
                 else if (inputParameter.Kind == InputOperationParameterKind.Flattened)
                 {
@@ -130,8 +131,7 @@ namespace AutoRest.CSharp.Output.Models
                 parameters.Add(inputParameter, parameter);
             }
 
-            _protocolParameters.AddRange(_createMessageParameters);
-            _convenienceParameters.AddRange(_createMessageParameters);
+            _convenienceParameters.AddRange(_protocolParameters);
             _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
             // for legacy logic, adding request parts unsorted
@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Output.Models
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _createMessageParameters.Add(KnownParameters.MatchConditionsParameter);
+                    AddCreateMessageParameter(KnownParameters.MatchConditionsParameter);
                     _protocolParameters.Add(KnownParameters.MatchConditionsParameter);
                     _convenienceParameters.Add(KnownParameters.MatchConditionsParameter);
                     AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.Output.Models
                     break;
                 default:
                     var parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
-                    _createMessageParameters.Add(parameter);
+                    AddCreateMessageParameter(parameter);
                     _protocolParameters.Add(parameter);
                     _convenienceParameters.Add(parameter);
                     AddReference(parameter.Name, null, parameter, serializationFormat);
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private void AddRequestContext()
         {
-            _createMessageParameters.Add(KnownParameters.RequestContext);
+            AddCreateMessageParameter(KnownParameters.RequestContext);
             _protocolParameters.Add(KnownParameters.RequestContext);
             _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
@@ -248,7 +248,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                _createMessageParameters.Add(protocolMethodParameter);
+                AddCreateMessageParameter(protocolMethodParameter);
                 _protocolParameters.Add(protocolMethodParameter);
                 return;
             }
@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Output.Models
                     : _typeFactory.CreateType(inputParameter.Type);
 
                 var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
-                _createMessageParameters.Add(protocolMethodParameter);
+                AddCreateMessageParameter(protocolMethodParameter);
                 _protocolParameters.Add(protocolMethodParameter);
                 _convenienceParameters.Add(convenienceMethodParameter);
 
@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Output.Models
             conversion.Add(utf8JsonWriter.WriteEndObject());
             _conversions[protocolMethodParameter] = conversion;
 
-            _createMessageParameters.Add(protocolMethodParameter);
+            AddCreateMessageParameter(protocolMethodParameter);
             _protocolParameters.Add(protocolMethodParameter);
             _convenienceParameters.AddRange(requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters));
             _arguments[protocolMethodParameter] = requestContent;
@@ -374,6 +374,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
         }
+
+        private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter with { DefaultValue = null });
 
         private static MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, Parameter parameter)
         {
@@ -413,7 +415,7 @@ namespace AutoRest.CSharp.Output.Models
             var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes);
             var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
-            _createMessageParameters.Add(parameter);
+            AddCreateMessageParameter(parameter);
             _protocolParameters.Add(parameter);
             _convenienceParameters.Add(parameter);
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);

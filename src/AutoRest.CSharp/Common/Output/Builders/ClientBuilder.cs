@@ -46,33 +46,5 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return name;
         }
-
-        /// <summary>
-        /// This function builds an enumerable of <see cref="ClientMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
-        /// </summary>
-        /// <param name="inputClient">The InputClient to build methods from</param>
-        /// <param name="restClient">The corresponding RestClient to the operation group</param>
-        /// <param name="declaration">The type declaration options</param>
-        /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
-        public static IEnumerable<ClientMethod> BuildMethods(InputClient inputClient, RestClient restClient, TypeDeclarationOptions declaration)
-        {
-            foreach (var operation in inputClient.Operations)
-            {
-                if (operation.LongRunning != null || operation.Paging != null)
-                {
-                    continue;
-                }
-
-                RestClientMethod startMethod = restClient.GetOperationMethod(operation);
-                var name = operation.Name.ToCleanName();
-
-                yield return new ClientMethod(
-                    name,
-                    startMethod,
-                    BuilderHelpers.EscapeXmlDescription(operation.Description),
-                    new Diagnostic($"{declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
-                    operation.Accessibility ?? "public");
-            }
-        }
     }
 }

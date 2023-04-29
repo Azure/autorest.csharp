@@ -57,16 +57,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in _client.ClientMethods)
                     {
-                        foreach (var method in clientMethod.ConvenienceMethods)
+                        foreach (var method in clientMethod.Convenience)
                         {
                             WriteConvenienceMethodDocumentation(_writer, method.Signature);
                             _writer.WriteMethod(method);
                         }
 
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.ProtocolMethods[0].Signature, true);
-                        _writer.WriteMethod(clientMethod.ProtocolMethods[0]);
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.ProtocolMethods[1].Signature, false);
-                        _writer.WriteMethod(clientMethod.ProtocolMethods[1]);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, true);
+                        _writer.WriteMethod(clientMethod.Protocol[0]);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, false);
+                        _writer.WriteMethod(clientMethod.Protocol[1]);
                     }
 
                     WriteSubClientFactoryMethod();
@@ -78,10 +78,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var method in _client.RequestNextPageMethods)
                     {
-                        WriteRequestCreationMethod(_writer, method, _client.Fields);
+                        _writer.WriteMethod(method);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethods.Any()))
+                    if (_client.ClientMethods.Any(cm => cm.Convenience.Any()))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -92,12 +92,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteProtocolMethods(CodeWriter writer, ClientFields fields, LowLevelClientMethod clientMethod)
         {
-            foreach (var requestMethod in clientMethod.RequestMethods)
+            foreach (var requestMethod in clientMethod.CreateRequest)
             {
-                WriteRequestCreationMethod(writer, requestMethod, fields);
+                writer.WriteMethod(requestMethod);
             }
 
-            foreach (var protocolMethod in clientMethod.ProtocolMethods)
+            foreach (var protocolMethod in clientMethod.Protocol)
             {
                 WriteProtocolMethodDocumentation(writer, clientMethod, (MethodSignature)protocolMethod.Signature);
                 writer.WriteMethod(protocolMethod);
@@ -261,11 +261,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 _writer.Line();
             }
-        }
-
-        public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
-        {
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
@@ -516,8 +511,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            var docInfo = clientMethod.RequestMethods[0].Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethods[0].Operation.ExternalDocsUrl}{Environment.NewLine}"
+            var docInfo = clientMethod.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.ExternalDocsUrl}{Environment.NewLine}"
                 : (FormattableString)$"";
 
             var schemaDesription = "";

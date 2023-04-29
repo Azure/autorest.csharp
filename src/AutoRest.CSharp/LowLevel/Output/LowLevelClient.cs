@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<Method> RequestMethods { get; }
-        public IReadOnlyList<RestClientMethod> RequestNextPageMethods { get; }
+        public IReadOnlyList<Method> RequestNextPageMethods { get; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
         public LowLevelClient? ParentClient;
@@ -71,12 +71,12 @@ namespace AutoRest.CSharp.Output.Models
                 .OrderBy(b => b.IsLongRunning ? 2 : b.IsPaging ? 1 : 0)
                 .ToArray();
 
-            RequestMethods = methods.Select(m => m.RequestMethod).ToArray();
+            RequestMethods = methods.Select(m => m.CreateRequest[0]).ToArray();
 
             // Temporary sorting to minimize amount of changes in generated code.
-            RequestNextPageMethods = methods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]).ToArray();
+            RequestNextPageMethods = methods.Where(m => m.CreateRequest.Count == 2).Select(m => m.CreateRequest[1]).ToArray();
 
-            ResponseClassifierTypes = methods.SelectMany(m => m.RequestMethods).Select(rm => rm.ResponseClassifierType).Distinct().ToArray();
+            ResponseClassifierTypes = methods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

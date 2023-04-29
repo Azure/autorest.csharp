@@ -27,11 +27,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientFields(writer, restClient);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var (createMessageMethod, _) in restClient.LegacyMethods)
+                    foreach (var method in restClient.Methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, true, restClient.Parameters);
-                        WriteOperation(writer, restClient, createMessageMethod, true);
-                        WriteOperation(writer, restClient, createMessageMethod, false);
+                        writer.WriteMethod(method.CreateMessageMethod);
+                        WriteOperation(writer, restClient, method.RestClientMethod, true);
+                        WriteOperation(writer, restClient, method.RestClientMethod, false);
                     }
                 }
             }

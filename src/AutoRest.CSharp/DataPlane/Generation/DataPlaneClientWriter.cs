@@ -49,12 +49,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WritePagingOperation(writer, pagingMethod);
                     }
-
-                    foreach (var longRunningOperation in client.LongRunningOperationMethods)
-                    {
-                        WriteStartOperationOperation(writer, longRunningOperation, true);
-                        WriteStartOperationOperation(writer, longRunningOperation, false);
-                    }
                 }
             }
         }
@@ -334,10 +328,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Append($").Request, originalResponse");
 
-                    var nextPageMethod = lroMethod.Operation.NextPageMethod;
+                    var nextPageMethod = lroMethod.Operation.NextPageMethodName;
                     if (nextPageMethod != null)
                     {
-                        writer.Append($", (_, nextLink) => RestClient.{RequestWriterHelpers.CreateRequestMethodName(nextPageMethod)}(nextLink, {parameters.GetIdentifiersFormattable()})");
+                        writer.Append($", (_, nextLink) => RestClient.{nextPageMethod}(nextLink, {parameters.GetIdentifiersFormattable()})");
                     }
 
                     writer.Line($");");

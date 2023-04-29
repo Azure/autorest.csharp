@@ -4,11 +4,12 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(IReadOnlyList<Method> ConvenienceMethods, IReadOnlyList<Method> ProtocolMethods, Method RequestMethod, IReadOnlyList<RestClientMethod> RequestMethods, InputType? RequestBodyType, InputType? ResponseBodyType, bool IsPaging, bool IsLongRunning, string PagingItemName);
+    internal record LowLevelClientMethod(IReadOnlyList<Method> Convenience, IReadOnlyList<Method> Protocol, IReadOnlyList<Method> CreateRequest, ResponseClassifierType ResponseClassifier, string? ExternalDocsUrl, InputType? RequestBodyType, InputType? ResponseBodyType, bool IsPaging, bool IsLongRunning, string PagingItemName);
 
-    internal record LegacyMethods(InputOperation Operation, IReadOnlyList<RestClientMethod> CreateMessageMethods, IReadOnlyList<Method> ConvenienceMethods, Method RequestMethod);
+    internal record LegacyMethods(InputOperation Operation, IReadOnlyList<Method> ConvenienceMethods, Method CreateMessageMethod, LowLevelClientMethod? ProtocolMethod, RestClientMethod RestClientMethod, RestClientMethod? RestClientNextPageMethod);
 }

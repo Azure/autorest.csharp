@@ -27,17 +27,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var (createMessageMethod, method) in restClient.LegacyMethods)
+                    foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(method);
+                        writer.WriteMethod(legacyMethod.CreateMessageMethod);
 
-                        WriteOperation(writer, createMessageMethod, restClient.Fields, true);
-                        WriteOperation(writer, createMessageMethod, restClient.Fields, false);
-                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(createMessageMethod.Operation));
-                        if (protocolMethod != null)
+                        WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, true);
+                        WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, false);
+                        if (legacyMethod.ProtocolMethod is {} protocolMethod)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
-                            responseClassifierTypes.Add(protocolMethod.RequestMethods[0].ResponseClassifierType);
+                            responseClassifierTypes.Add(protocolMethod.ResponseClassifier);
                         }
                     }
 

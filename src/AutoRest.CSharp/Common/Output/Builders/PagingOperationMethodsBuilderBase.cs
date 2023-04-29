@@ -5,17 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -53,14 +52,32 @@ namespace AutoRest.CSharp.Output.Models
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
         }
 
-        protected override IEnumerable<RestClientMethod> BuildCreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
         {
-            var createMessageMethod = base.BuildCreateRequestMethods(headerModel, resourceDataType).Single();
-            yield return createMessageMethod;
+            var createRequestMethod = base.BuildCreateRequestMethods(responseClassifierType).Single();
+            yield return createRequestMethod;
             if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
             {
-                yield return BuildNextPageMethod(createMessageMethod);
+                yield return BuildCreateNextPageRequestMethod(createRequestMethod.Signature.Name, createRequestMethod.Signature.Description, responseClassifierType);
             }
+        }
+
+        private Method BuildCreateNextPageRequestMethod(string name, string? description, ResponseClassifierType responseClassifierType)
+        {
+            var signature = new MethodSignature(CreateMessageMethodName, name, description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
+            return new Method(signature, BuildCreateNextPageRequestMethodBody(responseClassifierType).AsStatement());
+        }
+
+        private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody(ResponseClassifierType responseClassifierType)
+        {
+            yield return CreateHttpMessage(responseClassifierType, out var message, out var request, out var uriBuilder);
+            yield return AddUri(uriBuilder, Operation.Uri);
+            yield return uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false);
+            yield return Assign(request.Uri, uriBuilder);
+
+            yield return AddHeaders(request, false).AsStatement();
+            yield return AddBody(request);
+            yield return Return(message);
         }
 
         protected IEnumerable<MethodBodyStatement> AddPageableMethodArguments(List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
@@ -118,45 +135,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return TypeFactory.GetElementType(property.ValueType);
-        }
-
-        private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)
-            => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, RequestContextExpression.New(cancellationToken), Null));
-
-        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
-        {
-            var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
-
-            var pathSegments = method.Request.PathSegments
-                .Where(ps => ps.IsRaw)
-                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
-                .ToArray();
-
-            var request = new Request(RequestMethod.Get, pathSegments, Array.Empty<QueryParameter>(), method.Request.Headers, null);
-            var parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name).Prepend(nextPageUrlParameter).ToArray();
-            var responses = method.Responses;
-
-            // We hardcode 200 as expected response code for paged LRO results
-            if (method.Operation.LongRunning != null)
-            {
-                responses = new[]
-                {
-                    new Response(null, new[] { new StatusCodes(200, null) })
-                };
-            }
-
-            return new RestClientMethod(
-                $"{method.Name}NextPage",
-                method.Summary,
-                method.Description,
-                method.ReturnType,
-                request,
-                parameters,
-                responses,
-                method.HeaderModel,
-                bufferResponse: true,
-                accessibility: "internal",
-                method.Operation);
         }
     }
 }

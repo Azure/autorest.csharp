@@ -346,15 +346,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var (operation, createMessageMethods, _, _) in restClient.Methods)
+                foreach (var legacyMethod in restClient.Methods)
                 {
-                    if (createMessageMethods.Count != 2 || operation.Paging is not { } paging)
+                    if (legacyMethod.RestClientNextPageMethod is null)
                     {
                         continue;
                     }
 
-                    var method = createMessageMethods[0];
-                    var nextPageMethod = createMessageMethods[1];
+                    var method = legacyMethod.RestClientMethod;
+                    var nextPageMethod = legacyMethod.RestClientNextPageMethod;
                     if (method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody objectResponseBody)
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
@@ -365,7 +365,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         nextPageMethod,
                         method.Name,
                         new Diagnostic($"Placeholder.{method.Name}"),
-                        new PagingResponseInfo(paging.NextLinkName, paging.ItemName, objectResponseBody.Type));
+                        new PagingResponseInfo(/*paging.NextLinkName, paging.ItemName*/string.Empty, string.Empty, objectResponseBody.Type));
 
                     pagingMethods.Add(method, pagingMethod);
                 }
@@ -379,15 +379,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var (inputOperation, createMessageMethods, _, _) in restClient.Methods)
+                foreach (var legacyMethod in restClient.Methods)
                 {
-                    var restClientMethod = createMessageMethods[0];
+                    var restClientMethod = legacyMethod.RestClientMethod;
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                     {
                         continue;
                     }
 
-                    var operation = _inputOperationToOperation[inputOperation];
+                    var operation = _inputOperationToOperation[legacyMethod.Operation];
                     if (!restClientMethods.TryAdd(operation, restClientMethod))
                     {
                         throw new Exception($"An rest method '{operation.OperationId}' has already been added");
