@@ -72,7 +72,6 @@ namespace AutoRest.CSharp.Output.Models
             yield return Assign(request.Uri, uriBuilder);
 
             yield return AddHeaders(request, false).AsStatement();
-            yield return AddBody(request);
             yield return Return(message);
         }
 
