@@ -15,7 +15,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -27,14 +26,6 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class MethodParametersBuilder
     {
-        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<ParameterConversionInfo> ConversionInfos)
-        {
-            public ParameterLink(Parameter parameter) : this(new[]{parameter}, new[]{parameter}, Array.Empty<ParameterConversionInfo>()){}
-            public ParameterLink(Parameter convenienceParameters, Parameter protocolParameters) : this(new[]{convenienceParameters}, new[]{protocolParameters}, Array.Empty<ParameterConversionInfo>()){}
-        }
-
-        internal sealed record ParameterConversionInfo(InputModelProperty InputProperty, Parameter Parameter, JsonSerialization ValueSerialization);
-
         private static readonly Dictionary<string, RequestConditionHeaders> ConditionRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
             ["If-Match"] = RequestConditionHeaders.IfMatch,
@@ -102,9 +93,10 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientMethodParameters
             (
                 _requestParts,
-                _createMessageParameters,
+                _createMessageParameters.Select(p => p with{DefaultValue = null}).ToArray(),
                 _protocolParameters,
                 _convenienceParameters,
+                true,
                 _arguments,
                 _conversions
             );
@@ -153,6 +145,7 @@ namespace AutoRest.CSharp.Output.Models
                 _createMessageParameters,
                 _protocolParameters,
                 _convenienceParameters,
+                false,
                 _arguments,
                 _conversions
             );
@@ -375,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
             return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
         }
 
-        private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter with { DefaultValue = null });
+        private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter);
 
         private static MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, Parameter parameter)
         {

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(legacyMethod.CreateMessageMethod);
+                        writer.WriteMethod(legacyMethod.CreateMessageMethods[0]);
 
                         WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, true);
                         WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, false);

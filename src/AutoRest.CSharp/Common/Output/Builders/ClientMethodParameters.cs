@@ -10,12 +10,15 @@ using AutoRest.CSharp.Output.Models.Shared;
 namespace AutoRest.CSharp.Output.Models
 {
     internal record ClientMethodParameters
-    (IReadOnlyList<RequestPartSource> RequestParts,
+    (
+        IReadOnlyList<RequestPartSource> RequestParts,
         IReadOnlyList<Parameter> CreateMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
+        bool HasRequestContextInCreateMessage,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
-        IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions);
+        IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions
+    );
 
     internal record ClientPagingMethodParameters
     (
@@ -24,10 +27,17 @@ namespace AutoRest.CSharp.Output.Models
         IReadOnlyList<Parameter> CreateNextPageMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
+        bool HasRequestContextInCreateMessage,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
         IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions
 
-    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, Arguments, Conversions);
+    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, HasRequestContextInCreateMessage, Arguments, Conversions)
+    {
+        public ClientPagingMethodParameters(ClientMethodParameters parameters, IReadOnlyList<Parameter> createNextPageMessage)
+            : this(parameters.RequestParts, parameters.CreateMessage, createNextPageMessage, parameters.Protocol, parameters.Convenience, parameters.HasRequestContextInCreateMessage, parameters.Arguments, parameters.Conversions)
+        {
+        }
+    }
 
     internal record ClientMethodReturnTypes
     (

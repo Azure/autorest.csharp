@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     foreach (var method in restClient.Methods)
                     {
-                        writer.WriteMethod(method.CreateMessageMethod);
+                        writer.WriteMethod(method.CreateMessageMethods[0]);
                         WriteOperation(writer, restClient, method.RestClientMethod, true);
                         WriteOperation(writer, restClient, method.RestClientMethod, false);
                     }

@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         }
 
                         var createNextPageMessageName = methods.RestClientNextPageMethod is not null
-                            ? methods.CreateMessageMethod.Signature.Name
+                            ? methods.CreateMessageMethods[1].Signature.Name
                             : null;
 
                         var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessageName);

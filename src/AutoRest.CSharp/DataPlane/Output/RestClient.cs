@@ -48,10 +48,10 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(b => (Order: b is LroOperationMethodsBuilder ? 2 : b is PagingOperationMethodsBuilderBase ? 1 : 0, Methods: BuildMethods(library, b)))
                 .ToList();
 
-            Methods = methods.OrderBy(m => m.Order).SelectMany(m => m.Methods).ToList();
+            Methods = methods.OrderBy(m => m.Order).Select(m => m.Methods).ToList();
         }
 
-        protected virtual IEnumerable<LegacyMethods> BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
+        protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
             => methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)

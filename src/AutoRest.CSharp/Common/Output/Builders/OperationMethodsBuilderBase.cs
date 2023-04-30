@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
             CreateMessageMethodParameters = clientMethodParameters.CreateMessage;
             ProtocolMethodParameters = clientMethodParameters.Protocol;
             ConvenienceMethodParameters = clientMethodParameters.Convenience;
-            CreateMessageRequestContext = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext with {DefaultValue = null})
+            CreateMessageRequestContext = clientMethodParameters.HasRequestContextInCreateMessage
                     ? new RequestContextExpression(KnownParameters.RequestContext)
                     : null;
 
@@ -117,27 +117,16 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, responseClassifier, Operation.ExternalDocsUrl, requestBodyType, responseBodyType, isPaging, isLongRunning, Operation.Paging?.ItemName ?? "value");
         }
 
-        public IEnumerable<LegacyMethods> BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
             var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
-            var isPaging = false;
-            foreach (var createRequestMethod in BuildCreateRequestMethods(restClientMethod.ResponseClassifierType))
-            {
-                RestClientMethod? nextPage = null;
-                if (isPaging)
-                {
-                    nextPage = BuildNextPageMethod(restClientMethod);
-                }
-                else
-                {
-                    isPaging = true;
-                }
+            var createRequestMethods = BuildCreateRequestMethods(restClientMethod.ResponseClassifierType).ToArray();
+            RestClientMethod? nextPage = createRequestMethods.Length == 2 ? BuildNextPageMethod(restClientMethod) : null;
 
-                var protocolMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
-                var restClientConvenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
-                var convenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
-                yield return new LegacyMethods(Operation, convenienceMethods, createRequestMethod, null, restClientMethod, nextPage);
-            }
+            var protocolMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+            var restClientConvenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+            var convenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+            return new LegacyMethods(Operation, convenienceMethods, createRequestMethods, null, restClientMethod, nextPage);
         }
 
         private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
