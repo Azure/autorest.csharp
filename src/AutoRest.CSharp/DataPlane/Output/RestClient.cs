@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(b => (Order: b is LroOperationMethodsBuilder ? 2 : b is PagingOperationMethodsBuilderBase ? 1 : 0, Methods: BuildMethods(library, b)))
                 .ToList();
 
-            Methods = methods.OrderBy(m => m.Order).Select(m => m.Methods).ToList();
+            Methods = methods.Select(m => m.Methods).ToList();
         }
 
         protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)

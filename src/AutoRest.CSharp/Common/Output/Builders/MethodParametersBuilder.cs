@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientMethodParameters
             (
                 _requestParts,
-                _createMessageParameters.Select(p => p with{DefaultValue = null}).ToArray(),
+                _createMessageParameters,
                 _protocolParameters,
                 _convenienceParameters,
                 true,
@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
             return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
         }
 
-        private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter);
+        private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter with {DefaultValue = null});
 
         private static MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, Parameter parameter)
         {
