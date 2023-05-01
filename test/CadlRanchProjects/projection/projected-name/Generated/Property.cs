@@ -72,7 +72,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -106,7 +106,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -164,7 +164,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -198,7 +198,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,7 +256,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -290,7 +290,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -348,7 +348,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -382,7 +382,7 @@ namespace Projection.ProjectedName
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -54,16 +54,7 @@ namespace MixApiVersion
             _apiVersion = options.Version;
         }
 
-        /// <summary>
-        /// [Protocol Method]delete.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete a pet.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -89,16 +80,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]delete.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete a pet.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -124,11 +106,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -150,11 +128,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -176,11 +150,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -205,11 +175,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -234,16 +200,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -255,16 +212,7 @@ namespace MixApiVersion
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

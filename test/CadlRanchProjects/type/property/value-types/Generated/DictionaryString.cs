@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method]Get call
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method]Get call
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method]Put operation
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +186,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method]Put operation
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>

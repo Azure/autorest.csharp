@@ -74,7 +74,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -108,7 +108,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -158,7 +158,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -188,7 +188,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -242,7 +242,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -276,7 +276,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>

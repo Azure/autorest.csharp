@@ -47,11 +47,7 @@ namespace ServiceVersionOverride
             _apiVersion = options.Version;
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
@@ -76,11 +72,7 @@ namespace ServiceVersionOverride
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>

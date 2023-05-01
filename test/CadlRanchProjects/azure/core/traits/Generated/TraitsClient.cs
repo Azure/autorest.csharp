@@ -80,7 +80,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// [Protocol Method] Get a resource, sending and receiving headers.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,7 +116,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// [Protocol Method] Get a resource, sending and receiving headers.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -56,11 +56,7 @@ namespace Azure.Language.Authoring
             _apiVersion = options.Version;
         }
 
-        /// <summary>
-        /// [Protocol Method]Creates a new project or updates an existing one.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Creates a new project or updates an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -88,11 +84,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Creates a new project or updates an existing one.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Creates a new project or updates an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -120,11 +112,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets the details of a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets the details of a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -150,11 +138,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets the details of a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets the details of a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -180,11 +164,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -210,11 +190,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -240,11 +216,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a job to export a project&apos;s data. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="projectFileVersion"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -272,11 +244,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a job to export a project&apos;s data. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="projectFileVersion"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -304,11 +272,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a job to export a project&apos;s data. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -334,11 +298,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a job to export a project&apos;s data. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -364,11 +324,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a training job for a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a training job for a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -396,11 +352,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Triggers a training job for a project.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Triggers a training job for a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -428,11 +380,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets the details of a deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -460,11 +408,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Gets the details of a deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -492,11 +436,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Creates a new deployment or replaces an existing one.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Creates a new deployment or replaces an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -526,11 +466,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Creates a new deployment or replaces an existing one.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Creates a new deployment or replaces an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -560,11 +496,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a project deployment.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a project deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -592,11 +524,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a project deployment.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a project deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -624,11 +552,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Swaps two existing deployments with each other.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Swaps two existing deployments with each other. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -656,11 +580,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Swaps two existing deployments with each other.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Swaps two existing deployments with each other. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -725,7 +645,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing deployment job.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -764,7 +684,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing deployment job.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -839,7 +759,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing swap deployment job.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -878,7 +798,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing swap deployment job.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -916,11 +836,7 @@ namespace Azure.Language.Authoring
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Lists the existing projects.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Lists the existing projects. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -932,11 +848,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]Lists the existing projects.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Lists the existing projects. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -948,11 +860,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Lists the existing deployments. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -969,11 +877,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetDeployments", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Lists the existing deployments. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
@@ -990,11 +894,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetDeployments", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
         /// <param name="skip"> The Int32 to use. </param>
         /// <param name="maxpagesize"> The Int32 to use. </param>
@@ -1009,11 +909,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
         /// <param name="skip"> The Int32 to use. </param>
         /// <param name="maxpagesize"> The Int32 to use. </param>
@@ -1028,11 +924,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
         /// <param name="skip"> The Int32 to use. </param>
         /// <param name="maxpagesize"> The Int32 to use. </param>
@@ -1047,11 +939,7 @@ namespace Azure.Language.Authoring
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetTrainingConfigVersions", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
         /// <param name="skip"> The Int32 to use. </param>
         /// <param name="maxpagesize"> The Int32 to use. </param>

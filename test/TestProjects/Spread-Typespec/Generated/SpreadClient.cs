@@ -85,7 +85,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread a model as body.
+        /// [Protocol Method] spread a model as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -119,7 +119,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread a model as body.
+        /// [Protocol Method] spread a model as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -183,7 +183,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias as body.
+        /// [Protocol Method] spread an alias as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +217,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias as body.
+        /// [Protocol Method] spread an alias as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -289,7 +289,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which has multiple target property as body.
+        /// [Protocol Method] spread an alias which has multiple target property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -327,7 +327,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which has multiple target property as body.
+        /// [Protocol Method] spread an alias which has multiple target property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -399,7 +399,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which contains a complex model property as body.
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -437,7 +437,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which contains a complex model property as body.
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -513,7 +513,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains another alias property as body.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -551,7 +551,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains another alias property as body.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -659,7 +659,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains optional properties as body.
+        /// [Protocol Method] spread an alias with contains optional properties as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -697,7 +697,7 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains optional properties as body.
+        /// [Protocol Method] spread an alias with contains optional properties as body.
         /// <list type="bullet">
         /// <item>
         /// <description>

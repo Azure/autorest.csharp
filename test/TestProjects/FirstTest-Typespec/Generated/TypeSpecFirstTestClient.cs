@@ -119,7 +119,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -154,7 +154,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -188,11 +188,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]top level method2
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] top level method2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -213,11 +209,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]top level method2
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] top level method2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -238,11 +230,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]top level patch
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] top level patch. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -267,11 +255,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]top level patch
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] top level patch. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -323,7 +307,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]body parameter without body decorator
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -357,7 +341,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]body parameter without body decorator
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -417,7 +401,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Model can have its friendly name
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -451,7 +435,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Model can have its friendly name
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -484,11 +468,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -510,11 +490,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -536,11 +512,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return hi
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return hi. </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -568,11 +540,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return hi
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return hi. </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -637,7 +605,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -676,7 +644,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -714,11 +682,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return hi again
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return hi again. </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -748,11 +712,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return hi again
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return hi again. </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -801,7 +761,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi in demo2
+        /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -831,7 +791,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi in demo2
+        /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -887,7 +847,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Create with literal value
+        /// [Protocol Method] Create with literal value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -921,7 +881,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Create with literal value
+        /// [Protocol Method] Create with literal value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -973,7 +933,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Send literal parameters
+        /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1003,7 +963,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Send literal parameters
+        /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1032,11 +992,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]get extensible enum
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] get extensible enum. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1057,11 +1013,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]get extensible enum
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] get extensible enum. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1109,7 +1061,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1143,7 +1095,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1195,7 +1147,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1225,7 +1177,7 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
         /// <item>
         /// <description>

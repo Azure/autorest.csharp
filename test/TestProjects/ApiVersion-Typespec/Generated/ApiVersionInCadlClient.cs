@@ -105,7 +105,7 @@ namespace ApiVersionInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -146,7 +146,7 @@ namespace ApiVersionInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -63,7 +63,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -93,7 +93,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -151,7 +151,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +186,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -259,7 +259,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -289,7 +289,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -357,7 +357,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -387,7 +387,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -435,7 +435,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -465,7 +465,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -494,11 +494,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -519,11 +515,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -544,11 +536,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -569,11 +557,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -635,7 +619,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -666,7 +650,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -737,7 +721,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -768,7 +752,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -839,7 +823,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -870,7 +854,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -927,7 +911,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -961,7 +945,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1035,7 +1019,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1066,7 +1050,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1137,7 +1121,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1168,7 +1152,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1219,7 +1203,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1250,7 +1234,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1301,7 +1285,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1332,7 +1316,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1403,7 +1387,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1434,7 +1418,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1491,7 +1475,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1525,7 +1509,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1579,7 +1563,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1610,7 +1594,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1669,7 +1653,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1704,7 +1688,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>

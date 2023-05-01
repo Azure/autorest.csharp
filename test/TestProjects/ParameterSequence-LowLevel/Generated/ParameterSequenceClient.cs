@@ -57,16 +57,7 @@ namespace ParameterSequence_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]Get Item
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Get item.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -95,16 +86,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get Item
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Get item.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -133,16 +115,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Select Item
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Select item.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -171,16 +144,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Select Item
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Select item.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>

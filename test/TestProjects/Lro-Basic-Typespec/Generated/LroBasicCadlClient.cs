@@ -81,7 +81,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,7 +116,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -183,7 +183,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -221,7 +221,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -287,7 +287,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Long running RPC operation template
+        /// [Protocol Method] Long running RPC operation template
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -322,7 +322,7 @@ namespace LroBasicCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Long running RPC operation template
+        /// [Protocol Method] Long running RPC operation template
         /// <list type="bullet">
         /// <item>
         /// <description>

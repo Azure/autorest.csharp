@@ -46,11 +46,7 @@ namespace Parameters.CollectionFormat
             _apiVersion = apiVersion;
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
@@ -75,11 +71,7 @@ namespace Parameters.CollectionFormat
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>

@@ -71,7 +71,7 @@ namespace CustomizationsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip operation to make RootModel round-trip
+        /// [Protocol Method] RoundTrip operation to make RootModel round-trip
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -105,7 +105,7 @@ namespace CustomizationsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip operation to make RootModel round-trip
+        /// [Protocol Method] RoundTrip operation to make RootModel round-trip
         /// <list type="bullet">
         /// <item>
         /// <description>
