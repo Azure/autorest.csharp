@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(String,RequestContext)">
+    <member name="TopActionAsync(string,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +48,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction(String,RequestContext)">
+    <member name="TopAction(string,RequestContext)">
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
@@ -691,7 +691,7 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
-    <member name="AddTimeHeaderAsync(DateTimeOffset,RequestContext)">
+    <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -713,7 +713,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="AddTimeHeader(DateTimeOffset,RequestContext)">
+    <member name="AddTimeHeader(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -735,7 +735,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="SayHiAsync(String,String,String,RequestContext)">
+    <member name="SayHiAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -799,7 +799,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SayHi(String,String,String,RequestContext)">
+    <member name="SayHi(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
@@ -863,7 +863,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgainAsync(String,String,RequestContent,RequestContext)">
+    <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1039,7 +1039,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgain(String,String,RequestContent,RequestContext)">
+    <member name="HelloAgain(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1215,7 +1215,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentTypeAsync(String,String,RequestContent,RequestContext)">
+    <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1391,7 +1391,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentType(String,String,RequestContent,RequestContext)">
+    <member name="NoContentType(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
 <code><![CDATA[

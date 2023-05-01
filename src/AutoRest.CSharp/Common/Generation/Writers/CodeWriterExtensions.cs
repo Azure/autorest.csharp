@@ -261,10 +261,10 @@ namespace AutoRest.CSharp.Generation.Writers
             });
         }
 
-        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
+        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase, FormattableString? summaryText = null)
         {
             return writer
-                .WriteXmlDocumentationSummary($"{methodBase.SummaryText}")
+                .WriteXmlDocumentationSummary(summaryText ?? $"{methodBase.SummaryText}")
                 .WriteMethodDocumentationSignature(methodBase);
         }
 

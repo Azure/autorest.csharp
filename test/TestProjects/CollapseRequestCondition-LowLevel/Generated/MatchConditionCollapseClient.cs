@@ -57,12 +57,17 @@ namespace CollapseRequestCondition_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHeadAsync(String,MatchConditions,RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHeadAsync(string,MatchConditions,RequestContext)']/*" />
         public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -79,12 +84,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHead(String,MatchConditions,RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHead(string,MatchConditions,RequestContext)']/*" />
         public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -101,6 +111,11 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -123,6 +138,11 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -145,6 +165,11 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -166,6 +191,11 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

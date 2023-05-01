@@ -87,7 +87,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProjectAsync(WaitUntil,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -146,7 +146,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProject(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProject(WaitUntil,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call UpdateProject with required parameters and parse the result.
 <code><![CDATA[

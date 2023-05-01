@@ -64,7 +64,11 @@ namespace custom_baseUrl_more_options_LowLevel
             _dnsSuffix = dnsSuffix;
         }
 
-        /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a 200 to test a valid base uri
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
@@ -74,7 +78,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(String,String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));
@@ -95,7 +99,11 @@ namespace custom_baseUrl_more_options_LowLevel
             }
         }
 
-        /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a 200 to test a valid base uri
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
@@ -105,7 +113,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(String,String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));

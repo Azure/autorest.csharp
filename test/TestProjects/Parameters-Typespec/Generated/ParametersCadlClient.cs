@@ -64,12 +64,22 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="OperationAsync(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(int,int?,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(int start, int? end, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation");
@@ -86,12 +96,22 @@ namespace ParametersCadl
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Operation(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(int,int?,RequestContext)']/*" />
         public virtual Response Operation(int start, int? end, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation");
@@ -128,12 +148,22 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Operation2Async(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(int,int?,RequestContext)']/*" />
         public virtual async Task<Response> Operation2Async(int end, int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2");
@@ -150,12 +180,22 @@ namespace ParametersCadl
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Operation2(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(int,int?,RequestContext)']/*" />
         public virtual Response Operation2(int end, int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2");

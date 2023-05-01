@@ -67,7 +67,16 @@ namespace _Type._Enum.Fixed
             return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
         }
 
-        /// <summary> getKnownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]getKnownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetKnownValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -88,7 +97,16 @@ namespace _Type._Enum.Fixed
             }
         }
 
-        /// <summary> getKnownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]getKnownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetKnownValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -129,7 +147,16 @@ namespace _Type._Enum.Fixed
             return response;
         }
 
-        /// <summary> putKnownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]putKnownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -154,7 +181,16 @@ namespace _Type._Enum.Fixed
             }
         }
 
-        /// <summary> putKnownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]putKnownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutKnownValue(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -199,7 +235,16 @@ namespace _Type._Enum.Fixed
             return response;
         }
 
-        /// <summary> putUnknownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]putUnknownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -224,7 +269,16 @@ namespace _Type._Enum.Fixed
             }
         }
 
-        /// <summary> putUnknownValue. </summary>
+        /// <summary>
+        /// [Protocol Method]putUnknownValue
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutUnknownValue(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

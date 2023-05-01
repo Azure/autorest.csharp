@@ -82,7 +82,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Input model that has property of its own type. </summary>
+        /// <summary>
+        /// [Protocol Method]Input model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -107,7 +116,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input model that has property of its own type. </summary>
+        /// <summary>
+        /// [Protocol Method]Input model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTrip(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -158,7 +176,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
         }
 
-        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripPrimitive
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -183,7 +210,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripPrimitive
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripPrimitive(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -234,7 +270,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
         }
 
-        /// <summary> Input to RoundTripOptional. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripOptional
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -259,7 +304,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input to RoundTripOptional. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripOptional
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -312,7 +366,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
         }
 
-        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripReadOnly
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripReadOnlyAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -338,7 +401,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <summary>
+        /// [Protocol Method]Input to RoundTripReadOnly
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputToRoundTripReadOnly(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -390,7 +462,16 @@ namespace ModelsInCadl
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
 
-        /// <summary> RoundTrip to Output. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip to Output
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripToOutputAsync(RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -415,7 +496,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> RoundTrip to Output. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip to Output
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripToOutput(RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -466,7 +556,16 @@ namespace ModelsInCadl
             return response;
         }
 
-        /// <summary> Input recursive model. </summary>
+        /// <summary>
+        /// [Protocol Method]Input recursive model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputRecursiveAsync(InputRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -491,7 +590,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input recursive model. </summary>
+        /// <summary>
+        /// [Protocol Method]Input recursive model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InputRecursive(InputRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -542,7 +650,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
         }
 
-        /// <summary> RoundTrip recursive model. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip recursive model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -567,7 +684,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> RoundTrip recursive model. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip recursive model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -610,7 +736,16 @@ namespace ModelsInCadl
             return Response.FromValue(ErrorModel.FromResponse(response), response);
         }
 
-        /// <summary> Returns model that has property of its own type. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SelfReferenceAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -631,7 +766,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Returns model that has property of its own type. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns model that has property of its own type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SelfReference(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -678,7 +822,16 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
         }
 
-        /// <summary> Returns RoundTripOnNoUse. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns RoundTripOnNoUse
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -703,7 +856,16 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Returns RoundTripOnNoUse. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns RoundTripOnNoUse
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

@@ -58,8 +58,10 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Head request, no params.
+        /// [Protocol Method]Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -82,8 +84,10 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Head request, no params.
+        /// [Protocol Method]Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -106,15 +110,17 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -134,15 +140,17 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,RequestContext)']/*" />
         public virtual Response GetRequired(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -161,14 +169,18 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -187,14 +199,18 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,RequestContext)']/*" />
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -213,7 +229,11 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> POST a JSON. </summary>
+        /// <summary>
+        /// [Protocol Method]POST a JSON
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -238,7 +258,11 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> POST a JSON. </summary>
+        /// <summary>
+        /// [Protocol Method]POST a JSON
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -264,14 +288,16 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -289,14 +315,16 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,RequestContext)']/*" />
         public virtual Response GetOptional(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");

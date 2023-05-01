@@ -51,7 +51,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[
@@ -321,7 +321,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolOptionalQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolOptionalQueryAsync(int?,RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
 <code><![CDATA[
@@ -355,7 +355,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalQuery(Int32,RequestContext)">
+    <member name="ProtocolOptionalQuery(int?,RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalQuery and parse the result.
 <code><![CDATA[
@@ -389,7 +389,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolRequiredQueryAsync(int,RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredQueryAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -414,7 +414,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQuery(Int32,RequestContext)">
+    <member name="ProtocolRequiredQuery(int,RequestContext)">
 <example>
 This sample shows how to call ProtocolRequiredQuery with required parameters and parse the result.
 <code><![CDATA[
@@ -547,7 +547,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptionalAsync(int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
 <code><![CDATA[
@@ -581,7 +581,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptional(int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
 <code><![CDATA[
@@ -615,7 +615,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptionalAsync(int,RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -640,7 +640,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptional(int,RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptional with required parameters and parse the result.
 <code><![CDATA[
@@ -665,7 +665,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -690,7 +690,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequired(int?,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -715,7 +715,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequiredAsync(int,RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -740,7 +740,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequired(int,RequestContext)">
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -927,7 +927,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -965,7 +965,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)">
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[
