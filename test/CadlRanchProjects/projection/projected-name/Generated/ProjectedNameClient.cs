@@ -48,6 +48,11 @@ namespace Projection.ProjectedName
             _apiVersion = options.Version;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -68,6 +73,11 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -88,12 +98,17 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="defaultName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='ParameterAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='ParameterAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParameterAsync(string defaultName, RequestContext context = null)
         {
             Argument.AssertNotNull(defaultName, nameof(defaultName));
@@ -112,12 +127,17 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="defaultName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='Parameter(String,RequestContext)']/*" />
+        /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='Parameter(string,RequestContext)']/*" />
         public virtual Response Parameter(string defaultName, RequestContext context = null)
         {
             Argument.AssertNotNull(defaultName, nameof(defaultName));

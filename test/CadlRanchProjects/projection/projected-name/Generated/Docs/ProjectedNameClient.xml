@@ -23,7 +23,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ParameterAsync(String,RequestContext)">
+    <member name="ParameterAsync(string,RequestContext)">
 <example>
 This sample shows how to call ParameterAsync with required parameters.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Parameter(String,RequestContext)">
+    <member name="Parameter(string,RequestContext)">
 <example>
 This sample shows how to call Parameter with required parameters.
 <code><![CDATA[

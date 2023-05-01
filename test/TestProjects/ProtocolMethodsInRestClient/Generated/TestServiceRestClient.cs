@@ -137,7 +137,11 @@ namespace ProtocolMethodsInRestClient
             return message;
         }
 
-        /// <summary> Create or update resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Create or update resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="first"> First in group. </param>
@@ -160,7 +164,11 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        /// <summary> Create or update resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Create or update resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="second"> Second in group. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="first"> First in group. </param>
@@ -263,7 +271,11 @@ namespace ProtocolMethodsInRestClient
             return message;
         }
 
-        /// <summary> Delete resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -289,7 +301,11 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        /// <summary> Delete resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

@@ -70,7 +70,16 @@ namespace CustomizationsInCadl
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 
-        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip operation to make RootModel round-trip
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTripAsync(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -95,7 +104,16 @@ namespace CustomizationsInCadl
             }
         }
 
-        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
+        /// <summary>
+        /// [Protocol Method]RoundTrip operation to make RootModel round-trip
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RoundTrip(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

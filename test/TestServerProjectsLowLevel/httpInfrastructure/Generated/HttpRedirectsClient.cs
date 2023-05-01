@@ -57,7 +57,11 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 300 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -78,7 +82,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 300 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -99,7 +107,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 300 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -120,7 +132,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 300 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -141,7 +157,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 301 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -162,7 +182,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 301 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -183,7 +207,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 301 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -204,7 +232,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 301 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -225,7 +257,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -247,7 +283,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -269,7 +309,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 302 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -290,7 +334,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 302 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -311,7 +359,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 302 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -332,7 +384,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 302 status code and redirect to /http/success/200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -353,7 +409,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -375,7 +435,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -397,7 +461,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -419,7 +487,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -441,7 +513,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Redirect with 307, resulting in a 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Redirect with 307, resulting in a 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -462,7 +538,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Redirect with 307, resulting in a 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Redirect with 307, resulting in a 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -483,7 +563,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Redirect get with 307, resulting in a 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -504,7 +588,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Redirect get with 307, resulting in a 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -525,7 +613,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]options redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -546,7 +638,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]options redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -567,7 +663,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Put redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -589,7 +689,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Put redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -611,7 +715,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -633,7 +741,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -655,7 +767,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Post redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -677,7 +793,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Post redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -699,7 +819,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -721,7 +845,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete redirected with 307, resulting in a 200 after redirect
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

@@ -57,13 +57,17 @@ namespace header_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKeyAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKeyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
@@ -82,13 +86,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKey(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKey(string,RequestContext)']/*" />
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
@@ -107,7 +115,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -128,7 +140,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -149,13 +165,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKeyAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKeyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
@@ -174,13 +194,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKey(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKey(string,RequestContext)']/*" />
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
@@ -199,7 +223,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -220,7 +248,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -241,14 +273,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamIntegerAsync(String,Int32,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamIntegerAsync(string,int,RequestContext)']/*" />
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -267,14 +303,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamInteger(String,Int32,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamInteger(string,int,RequestContext)']/*" />
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -293,13 +333,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 1 or -2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseIntegerAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseIntegerAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -318,13 +362,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 1 or -2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseInteger(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseInteger(string,RequestContext)']/*" />
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -343,14 +391,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLongAsync(String,Int64,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLongAsync(string,long,RequestContext)']/*" />
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -369,14 +421,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLong(String,Int64,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLong(string,long,RequestContext)']/*" />
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -395,13 +451,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 105 or -2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLongAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLongAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -420,13 +480,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 105 or -2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLong(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLong(string,RequestContext)']/*" />
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -445,14 +509,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloatAsync(String,Single,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloatAsync(string,float,RequestContext)']/*" />
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -471,14 +539,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloat(String,Single,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloat(string,float,RequestContext)']/*" />
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -497,13 +569,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 0.07 or -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloatAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloatAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -522,13 +598,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 0.07 or -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloat(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloat(string,RequestContext)']/*" />
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -547,14 +627,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDoubleAsync(String,Double,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDoubleAsync(string,double,RequestContext)']/*" />
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -573,14 +657,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDouble(String,Double,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDouble(string,double,RequestContext)']/*" />
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -599,13 +687,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 7e120 or -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDoubleAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDoubleAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -624,13 +716,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: 7e120 or -3.0
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDouble(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDouble(string,RequestContext)']/*" />
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -649,14 +745,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBoolAsync(String,Boolean,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBoolAsync(string,bool,RequestContext)']/*" />
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -675,14 +775,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBool(String,Boolean,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBool(string,bool,RequestContext)']/*" />
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -701,13 +805,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: true or false
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBoolAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBoolAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -726,13 +834,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header value &quot;value&quot;: true or false
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBool(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBool(string,RequestContext)']/*" />
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -751,14 +863,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamStringAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamStringAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -777,14 +893,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamString(String,String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamString(string,string,RequestContext)']/*" />
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -803,13 +923,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseStringAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseStringAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -828,13 +952,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseString(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseString(string,RequestContext)']/*" />
         public virtual Response ResponseString(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -853,14 +981,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDateAsync(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDateAsync(string,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -879,14 +1011,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDate(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDate(string,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -905,13 +1041,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDateAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDateAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -930,13 +1070,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDate(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDate(string,RequestContext)']/*" />
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -955,14 +1099,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeAsync(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeAsync(string,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -981,14 +1129,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetime(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetime(string,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1007,13 +1159,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1032,13 +1188,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetime(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetime(string,RequestContext)']/*" />
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1057,14 +1217,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123Async(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123Async(string,DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1083,14 +1247,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123(String,DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123(string,DateTimeOffset?,RequestContext)']/*" />
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1109,13 +1277,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123Async(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123Async(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1134,13 +1306,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123(string,RequestContext)']/*" />
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1159,14 +1335,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDurationAsync(String,TimeSpan,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDurationAsync(string,TimeSpan,RequestContext)']/*" />
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1185,14 +1365,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDuration(String,TimeSpan,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDuration(string,TimeSpan,RequestContext)']/*" />
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1211,13 +1395,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;P123DT22H14M12.011S&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDurationAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDurationAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1236,13 +1424,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;P123DT22H14M12.011S&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDuration(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDuration(string,RequestContext)']/*" />
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1261,14 +1453,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(String,Byte[],RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(string,Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1288,14 +1484,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(String,Byte[],RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(string,Byte[],RequestContext)']/*" />
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1315,13 +1515,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByteAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByteAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1340,13 +1544,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByte(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByte(string,RequestContext)']/*" />
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1365,14 +1573,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnumAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnumAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1391,14 +1603,18 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnum(String,String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnum(string,string,RequestContext)']/*" />
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1417,13 +1633,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;GREY&quot; or null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnumAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnumAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1442,13 +1662,17 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a response with header values &quot;GREY&quot; or null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnum(String,RequestContext)']/*" />
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnum(string,RequestContext)']/*" />
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1467,7 +1691,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
+        /// <summary>
+        /// [Protocol Method]Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1488,7 +1716,11 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
+        /// <summary>
+        /// [Protocol Method]Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

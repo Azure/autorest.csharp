@@ -57,7 +57,11 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -78,7 +82,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -99,7 +107,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -120,7 +132,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -141,7 +157,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -163,7 +183,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -185,7 +209,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -207,7 +235,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

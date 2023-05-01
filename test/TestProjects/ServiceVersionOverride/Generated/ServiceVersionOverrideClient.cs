@@ -47,12 +47,17 @@ namespace ServiceVersionOverride
             _apiVersion = options.Version;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));
@@ -71,12 +76,17 @@ namespace ServiceVersionOverride
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(String,RequestContext)']/*" />
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(string,RequestContext)']/*" />
         public virtual Response Operation(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));

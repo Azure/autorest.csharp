@@ -57,12 +57,17 @@ namespace CollapseRequestCondition_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPutAsync(RequestContent,ETag,RequestContext)']/*" />
+        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPutAsync(RequestContent,ETag?,RequestContext)']/*" />
         public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -79,12 +84,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPut(RequestContent,ETag,RequestContext)']/*" />
+        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPut(RequestContent,ETag?,RequestContext)']/*" />
         public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -101,12 +111,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPutAsync(RequestContent,ETag,RequestContext)']/*" />
+        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPutAsync(RequestContent,ETag?,RequestContext)']/*" />
         public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
@@ -123,12 +138,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPut(RequestContent,ETag,RequestContext)']/*" />
+        /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPut(RequestContent,ETag?,RequestContext)']/*" />
         public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");

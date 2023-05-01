@@ -54,6 +54,11 @@ namespace Server.Path.Multiple
             _apiVersion = options.Version;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -74,6 +79,11 @@ namespace Server.Path.Multiple
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -94,13 +104,18 @@ namespace Server.Path.Multiple
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="keyword"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithOperationPathParamAsync(string keyword, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
@@ -119,13 +134,18 @@ namespace Server.Path.Multiple
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="keyword"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(String,RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,RequestContext)']/*" />
         public virtual Response WithOperationPathParam(string keyword, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));

@@ -59,7 +59,11 @@ namespace body_complex_LowLevel
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -80,7 +84,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -101,7 +109,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -126,7 +138,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -151,7 +167,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -172,7 +192,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -193,7 +217,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -214,7 +242,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -235,7 +267,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -256,7 +292,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -277,7 +317,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -298,7 +342,11 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>

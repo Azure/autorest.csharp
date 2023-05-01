@@ -56,13 +56,17 @@ namespace custom_baseUrl_paging_LowLevel
             _host = host;
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL and expect to concat after host
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -72,13 +76,17 @@ namespace custom_baseUrl_paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL and expect to concat after host
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -88,13 +96,17 @@ namespace custom_baseUrl_paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL with next operation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -104,13 +116,17 @@ namespace custom_baseUrl_paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL with next operation
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -120,14 +136,18 @@ namespace custom_baseUrl_paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -138,14 +158,18 @@ namespace custom_baseUrl_paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));

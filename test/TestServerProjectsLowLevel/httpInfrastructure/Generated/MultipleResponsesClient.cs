@@ -57,7 +57,11 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -78,7 +82,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -99,7 +107,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -120,7 +132,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -141,7 +157,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -162,7 +182,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -183,7 +207,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with no payload:. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with no payload:
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -204,7 +232,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with no payload:. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with no payload:
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -225,7 +257,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -246,7 +282,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -267,7 +307,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -288,7 +332,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -309,7 +357,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -330,7 +382,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -351,7 +407,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -372,7 +432,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -393,7 +457,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -414,7 +482,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -435,7 +507,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -456,7 +532,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -477,7 +557,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -498,7 +582,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -519,7 +607,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -540,7 +632,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -561,7 +657,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -582,7 +682,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -603,7 +707,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -624,7 +732,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -645,7 +757,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -666,7 +782,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -687,7 +807,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -708,7 +832,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -729,7 +857,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -750,7 +882,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 204 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 204 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -771,7 +907,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -792,7 +932,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -813,7 +957,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -834,7 +982,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -855,7 +1007,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -876,7 +1032,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -897,7 +1057,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -918,7 +1082,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -939,7 +1107,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -960,7 +1132,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -981,7 +1157,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1002,7 +1182,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1023,7 +1207,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1044,7 +1232,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1065,7 +1257,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1086,7 +1282,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1107,7 +1307,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1128,7 +1332,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1149,7 +1357,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1170,7 +1382,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1191,7 +1407,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1212,7 +1432,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1233,7 +1457,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1254,7 +1482,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1275,7 +1507,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1296,7 +1532,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1317,7 +1557,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload client should treat as an http error with no error model
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1338,7 +1582,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 400 response with no payload client should treat as an http error with no error model
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1359,7 +1607,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1380,7 +1632,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1401,7 +1657,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1422,7 +1682,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1443,7 +1707,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1464,7 +1732,11 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>

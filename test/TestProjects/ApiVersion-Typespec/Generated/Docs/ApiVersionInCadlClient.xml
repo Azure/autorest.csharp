@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBatchDetectionResultAsync(String,RequestContext)">
+    <member name="GetBatchDetectionResultAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -31,7 +31,7 @@ Schema for <c>DetectionResult</c>:
 
 </remarks>
     </member>
-    <member name="GetBatchDetectionResult(String,RequestContext)">
+    <member name="GetBatchDetectionResult(string,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters and parse the result.
 <code><![CDATA[
