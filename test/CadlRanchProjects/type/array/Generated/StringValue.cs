@@ -81,7 +81,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +111,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -165,7 +165,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -199,7 +199,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>

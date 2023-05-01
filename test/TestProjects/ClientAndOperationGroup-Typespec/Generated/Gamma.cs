@@ -45,11 +45,7 @@ namespace Azure.ClientAndOperationGroupService
             _apiVersion = apiVersion;
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -70,11 +66,7 @@ namespace Azure.ClientAndOperationGroupService
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -95,11 +87,7 @@ namespace Azure.ClientAndOperationGroupService
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -120,11 +108,7 @@ namespace Azure.ClientAndOperationGroupService
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

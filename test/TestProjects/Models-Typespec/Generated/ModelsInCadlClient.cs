@@ -83,7 +83,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input model that has property of its own type
+        /// [Protocol Method] Input model that has property of its own type
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input model that has property of its own type
+        /// [Protocol Method] Input model that has property of its own type
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -177,7 +177,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripPrimitive
+        /// [Protocol Method] Input to RoundTripPrimitive
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripPrimitive
+        /// [Protocol Method] Input to RoundTripPrimitive
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -271,7 +271,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripOptional
+        /// [Protocol Method] Input to RoundTripOptional
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -305,7 +305,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripOptional
+        /// [Protocol Method] Input to RoundTripOptional
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -367,7 +367,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripReadOnly
+        /// [Protocol Method] Input to RoundTripReadOnly
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -402,7 +402,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input to RoundTripReadOnly
+        /// [Protocol Method] Input to RoundTripReadOnly
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -463,7 +463,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip to Output
+        /// [Protocol Method] RoundTrip to Output
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -497,7 +497,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip to Output
+        /// [Protocol Method] RoundTrip to Output
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -557,7 +557,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input recursive model
+        /// [Protocol Method] Input recursive model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -591,7 +591,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Input recursive model
+        /// [Protocol Method] Input recursive model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -651,7 +651,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip recursive model
+        /// [Protocol Method] RoundTrip recursive model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -685,7 +685,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]RoundTrip recursive model
+        /// [Protocol Method] RoundTrip recursive model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -737,7 +737,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Returns model that has property of its own type
+        /// [Protocol Method] Returns model that has property of its own type
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -767,7 +767,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Returns model that has property of its own type
+        /// [Protocol Method] Returns model that has property of its own type
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -823,7 +823,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Returns RoundTripOnNoUse
+        /// [Protocol Method] Returns RoundTripOnNoUse
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -857,7 +857,7 @@ namespace ModelsInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Returns RoundTripOnNoUse
+        /// [Protocol Method] Returns RoundTripOnNoUse
         /// <list type="bullet">
         /// <item>
         /// <description>

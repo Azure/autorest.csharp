@@ -600,19 +600,22 @@ namespace AutoRest.CSharp.Generation.Writers
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"[Protocol Method]{methodSignature.SummaryText}");
-            builder.AppendLine($"<list type=\"bullet\">");
-            if (!methodSignature.DescriptionText.IsNullOrEmpty())
-            {
-                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
-            }
-
+            builder.AppendLine($"[Protocol Method] {methodSignature.SummaryText}");
             if (clientMethod.ConvenienceMethod != null)
             {
-                var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature.WithAsync(async));
-                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+                builder.AppendLine($"<list type=\"bullet\">");
+                if (!methodSignature.DescriptionText.IsNullOrEmpty())
+                {
+                    builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
+                }
+
+                if (clientMethod.ConvenienceMethod != null)
+                {
+                    var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature.WithAsync(async));
+                    builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+                }
+                builder.AppendLine($"</list>");
             }
-            builder.AppendLine($"</list>");
             return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
         }
 

@@ -46,11 +46,7 @@ namespace SubClients_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
@@ -76,11 +72,7 @@ namespace SubClients_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>

@@ -68,7 +68,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]getKnownValue
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +98,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]getKnownValue
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -148,7 +148,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]putKnownValue
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -182,7 +182,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]putKnownValue
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -236,7 +236,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]putUnknownValue
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -270,7 +270,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method]putUnknownValue
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>

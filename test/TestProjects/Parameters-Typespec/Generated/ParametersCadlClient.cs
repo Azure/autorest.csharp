@@ -65,7 +65,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -97,7 +97,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -181,7 +181,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>

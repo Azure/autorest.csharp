@@ -50,16 +50,7 @@ namespace _Specs_.Azure.Core.Basic
             _apiVersion = options.Version;
         }
 
-        /// <summary>
-        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Creates or updates a User
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Adds a user or updates a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -85,16 +76,7 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Creates or updates a User
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Adds a user or updates a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -151,7 +133,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -191,7 +173,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -253,7 +235,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Gets a user.
+        /// [Protocol Method] Gets a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -289,7 +271,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Gets a user.
+        /// [Protocol Method] Gets a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,16 +306,7 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a user.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Deletes a User
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a user. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -355,16 +328,7 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Deletes a user.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Deletes a User
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Deletes a user. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -417,7 +381,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Exports a user.
+        /// [Protocol Method] Exports a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -457,7 +421,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Exports a user.
+        /// [Protocol Method] Exports a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -533,7 +497,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Lists all users.
+        /// [Protocol Method] Lists all users.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -566,7 +530,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Lists all users.
+        /// [Protocol Method] Lists all users.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -619,7 +583,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -640,7 +604,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -681,7 +645,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -702,7 +666,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
         /// <item>
         /// <description>

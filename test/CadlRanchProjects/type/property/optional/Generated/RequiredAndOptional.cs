@@ -66,7 +66,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Get models that will return all properties in the model
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,7 +96,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Get models that will return all properties in the model
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,7 +144,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Get models that will return only the required properties
+        /// [Protocol Method] Get models that will return only the required properties
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -174,7 +174,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Get models that will return only the required properties
+        /// [Protocol Method] Get models that will return only the required properties
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -230,7 +230,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Put a body with all properties present.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -264,7 +264,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Put a body with all properties present.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +324,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Put a body with only required properties.
+        /// [Protocol Method] Put a body with only required properties.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -358,7 +358,7 @@ namespace _Type.Property.Optional
         }
 
         /// <summary>
-        /// [Protocol Method]Put a body with only required properties.
+        /// [Protocol Method] Put a body with only required properties.
         /// <list type="bullet">
         /// <item>
         /// <description>

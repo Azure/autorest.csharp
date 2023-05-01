@@ -57,11 +57,7 @@ namespace body_complex_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -82,11 +78,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -107,11 +99,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -136,11 +124,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -165,11 +149,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -190,11 +170,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -215,11 +191,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -240,11 +212,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -265,11 +233,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -290,11 +254,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -315,11 +275,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -340,11 +296,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -365,11 +317,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -394,11 +342,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -423,11 +367,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -452,11 +392,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -481,11 +417,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -510,11 +442,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

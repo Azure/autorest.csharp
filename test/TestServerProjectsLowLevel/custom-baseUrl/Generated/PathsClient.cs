@@ -57,11 +57,7 @@ namespace custom_baseUrl_LowLevel
             _host = host;
         }
 
-        /// <summary>
-        /// [Protocol Method]Get a 200 to test a valid base uri
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
@@ -86,11 +82,7 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get a 200 to test a valid base uri
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>

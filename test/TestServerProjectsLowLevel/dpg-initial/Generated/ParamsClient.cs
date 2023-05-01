@@ -58,10 +58,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Head request, no params.
+        /// [Protocol Method] Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -84,10 +82,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Head request, no params.
+        /// [Protocol Method] Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -110,10 +106,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -140,10 +134,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -169,11 +161,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -199,11 +187,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -229,11 +213,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]POST a JSON
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] POST a JSON. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -258,11 +238,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]POST a JSON
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] POST a JSON. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -288,10 +264,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -315,10 +289,8 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
-        /// <list type="bullet">
-        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

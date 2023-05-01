@@ -56,16 +56,7 @@ namespace PetStore
             _apiVersion = options.Version;
         }
 
-        /// <summary>
-        /// [Protocol Method]delete.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete a pet.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -87,16 +78,7 @@ namespace PetStore
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]delete.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete a pet.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -139,7 +121,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -170,7 +152,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -225,7 +207,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -259,7 +241,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -311,7 +293,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -346,7 +328,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -399,7 +381,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +412,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>

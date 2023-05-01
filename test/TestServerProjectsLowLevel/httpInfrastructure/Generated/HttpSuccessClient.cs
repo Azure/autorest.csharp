@@ -57,11 +57,7 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 200 status code if successful
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -82,11 +78,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 200 status code if successful
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -107,11 +99,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get 200 success. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -132,11 +120,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get 200 success. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -157,11 +141,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Options 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Options 200 success. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -182,11 +162,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Options 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Options 200 success. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -207,11 +183,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put boolean value true returning 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put boolean value true returning 200 success. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -233,11 +205,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put boolean value true returning 200 success
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put boolean value true returning 200 success. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -259,11 +227,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returning 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returning 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -285,11 +249,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returning 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returning 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -311,11 +271,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post bollean value true in request that returns a 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post bollean value true in request that returns a 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -337,11 +293,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post bollean value true in request that returns a 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post bollean value true in request that returns a 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -363,11 +315,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete simple boolean value true returns 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete simple boolean value true returns 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -389,11 +337,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete simple boolean value true returns 200
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete simple boolean value true returns 200. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -415,11 +359,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 201
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 201. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -441,11 +381,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 201
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 201. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -467,11 +403,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -493,11 +425,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -519,11 +447,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -545,11 +469,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -571,11 +491,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 202
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returns 202. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -597,11 +513,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 202
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returns 202. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -623,11 +535,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -649,11 +557,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -675,11 +579,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -701,11 +601,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -727,11 +623,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 204 status code if successful
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -752,11 +644,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 204 status code if successful
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -777,11 +665,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -803,11 +687,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -829,11 +709,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -855,11 +731,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -881,11 +753,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -907,11 +775,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -933,11 +797,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -959,11 +819,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -985,11 +841,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 404 status code
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 404 status code. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1010,11 +862,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Return 404 status code
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Return 404 status code. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

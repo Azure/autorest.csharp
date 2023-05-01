@@ -57,11 +57,7 @@ namespace CollapseRequestCondition_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -84,11 +80,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -111,11 +103,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -137,11 +125,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -163,11 +147,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -191,11 +171,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -219,11 +195,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -247,11 +219,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -275,11 +243,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -303,11 +267,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -331,11 +291,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -359,11 +315,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -387,11 +339,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -416,11 +364,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -445,11 +389,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -475,11 +415,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -505,11 +441,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -535,11 +467,7 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

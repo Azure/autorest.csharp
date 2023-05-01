@@ -51,11 +51,7 @@ namespace ResourceClients_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -76,11 +72,7 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -101,11 +93,7 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -117,11 +105,7 @@ namespace ResourceClients_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
-        /// <summary>
-        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
-        /// <list type="bullet">
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

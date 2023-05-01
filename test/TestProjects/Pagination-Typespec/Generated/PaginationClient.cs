@@ -94,7 +94,7 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -124,7 +124,7 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -174,7 +174,7 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]List upload detail for the discovery resource.
+        /// [Protocol Method] List upload detail for the discovery resource.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -195,7 +195,7 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]List upload detail for the discovery resource.
+        /// [Protocol Method] List upload detail for the discovery resource.
         /// <list type="bullet">
         /// <item>
         /// <description>

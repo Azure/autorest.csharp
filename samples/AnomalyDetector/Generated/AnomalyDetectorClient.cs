@@ -107,7 +107,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies for the entire series in batch.
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies for the entire series in batch.
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -225,7 +225,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomaly status of the latest point in time series.
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -265,7 +265,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomaly status of the latest point in time series.
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -333,7 +333,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect change point for the entire series
+        /// [Protocol Method] Detect change point for the entire series
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -372,7 +372,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect change point for the entire series
+        /// [Protocol Method] Detect change point for the entire series
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -447,7 +447,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -488,7 +488,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -573,7 +573,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Train a Multivariate Anomaly Detection Model
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -618,7 +618,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Train a Multivariate Anomaly Detection Model
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -662,16 +662,7 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete Multivariate Model
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete an existing multivariate model according to the modelId
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -697,16 +688,7 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary>
-        /// [Protocol Method]Delete Multivariate Model
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Delete an existing multivariate model according to the modelId
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
+        /// <summary> [Protocol Method] Delete Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -769,7 +751,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Model
+        /// [Protocol Method] Get Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -810,7 +792,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Model
+        /// [Protocol Method] Get Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -899,7 +881,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect Multivariate Anomaly
+        /// [Protocol Method] Detect Multivariate Anomaly
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -946,7 +928,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect Multivariate Anomaly
+        /// [Protocol Method] Detect Multivariate Anomaly
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1037,7 +1019,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies in the last point of the request body
+        /// [Protocol Method] Detect anomalies in the last point of the request body
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1082,7 +1064,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies in the last point of the request body
+        /// [Protocol Method] Detect anomalies in the last point of the request body
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1153,7 +1135,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]List Multivariate Models
+        /// [Protocol Method] List Multivariate Models
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1181,7 +1163,7 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]List Multivariate Models
+        /// [Protocol Method] List Multivariate Models
         /// <list type="bullet">
         /// <item>
         /// <description>
