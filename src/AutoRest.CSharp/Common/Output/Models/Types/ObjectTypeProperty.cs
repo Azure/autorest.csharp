@@ -8,8 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -26,12 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers)
         {
-            // now the default value will be set only when the model is generated from property bag
-            if ((enclosingType is ModelTypeProvider model && model.IsPropertyBag) ||
-                (inputModelProperty.Type is InputLiteralType)) // or the property is a literal type
-            {
-                DefaultValue = field.DefaultValue;
-            }
+            InitializationValue = field.DefaultValue;
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
@@ -71,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 isFlattenedProperty: true);
         }
 
-        public FormattableString? DefaultValue { get; }
+        public FormattableString? InitializationValue { get; }
 
         private bool IsFlattenedProperty { get; }
 

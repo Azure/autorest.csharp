@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(String,RequestContext)">
+    <member name="OperationAsync(string,RequestContext)">
 <example>
 This sample shows how to call OperationAsync with required parameters.
 <code><![CDATA[
@@ -12,7 +12,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Operation(String,RequestContext)">
+    <member name="Operation(string,RequestContext)">
 <example>
 This sample shows how to call Operation with required parameters.
 <code><![CDATA[

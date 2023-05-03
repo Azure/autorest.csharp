@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static string? GetTypeNameMapping(Type? type) => type switch
+        internal static string? GetTypeNameMapping(Type? type) => type switch
         {
             null => null,
             var t when t.IsGenericParameter => t.Name,

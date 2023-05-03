@@ -46,12 +46,13 @@ namespace Parameters.CollectionFormat
             _apiVersion = apiVersion;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='MultiAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='MultiAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> MultiAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -70,12 +71,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Multi(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Multi(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Multi(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -94,12 +96,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='SsvAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='SsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> SsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -118,12 +121,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Ssv(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Ssv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Ssv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -142,12 +146,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> TsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -166,12 +171,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Tsv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -190,12 +196,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='PipesAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='PipesAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> PipesAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -214,12 +221,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Pipes(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Pipes(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Pipes(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -238,12 +246,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='CsvAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='CsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -262,12 +271,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Csv(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Csv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Csv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -294,9 +304,12 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/multi", false);
-            foreach (var param in colors)
+            if (colors != null && Optional.IsCollectionDefined(colors))
             {
-                uri.AppendQuery("colors", param, true);
+                foreach (var param in colors)
+                {
+                    uri.AppendQuery("colors", param, true);
+                }
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -312,7 +325,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/ssv", false);
-            uri.AppendQueryDelimited("colors", colors, " ", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, " ", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -327,7 +343,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/tsv", false);
-            uri.AppendQueryDelimited("colors", colors, "\t", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, "\t", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -342,7 +361,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/pipes", false);
-            uri.AppendQueryDelimited("colors", colors, "|", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, "|", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -357,7 +379,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/csv", false);
-            uri.AppendQueryDelimited("colors", colors, ",", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, ",", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

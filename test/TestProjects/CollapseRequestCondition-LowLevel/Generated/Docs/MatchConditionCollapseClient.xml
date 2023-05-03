@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CollapseGetWithHeadAsync(String,MatchConditions,RequestContext)">
+    <member name="CollapseGetWithHeadAsync(string,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetWithHeadAsync.
 <code><![CDATA[
@@ -21,7 +21,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGetWithHead(String,MatchConditions,RequestContext)">
+    <member name="CollapseGetWithHead(string,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetWithHead.
 <code><![CDATA[
