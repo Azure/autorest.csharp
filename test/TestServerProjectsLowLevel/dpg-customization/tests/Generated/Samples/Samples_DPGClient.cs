@@ -71,8 +71,8 @@ namespace dpg_customization_LowLevel.Samples
 
             var operation = client.Lro(WaitUntil.Completed, "<mode>");
 
-            BinaryData data = operation.Value;
-            JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
         }

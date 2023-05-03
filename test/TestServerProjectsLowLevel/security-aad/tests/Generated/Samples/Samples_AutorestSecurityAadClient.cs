@@ -13,18 +13,18 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace Server.Path.Single.Samples
+namespace security_aad_LowLevel.Samples
 {
-    public class Samples_SingleClient
+    public class Samples_AutorestSecurityAadClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp()
+        public void Example_Head()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SingleClient(endpoint);
+            var credential = new DefaultAzureCredential();
+            var client = new AutorestSecurityAadClient(credential);
 
-            Response response = client.MyOp();
+            Response response = client.Head();
             Console.WriteLine(response.Status);
         }
     }

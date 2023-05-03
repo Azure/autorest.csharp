@@ -479,7 +479,7 @@ var data = new {
         },
     },
     optionalPlainDate = "2022-05-10",
-    optionalPlainTime = 01:23:45,
+    optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new[] {
         1234
     },
@@ -639,7 +639,7 @@ var data = new {
         },
     },
     optionalPlainDate = "2022-05-10",
-    optionalPlainTime = 01:23:45,
+    optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new[] {
         1234
     },
