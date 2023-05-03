@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new InheritanceClient(credential);
 
-Response response = await client.GetValidAsync();
+Response response = await client.GetValidAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("breed").ToString());
@@ -50,7 +50,7 @@ This sample shows how to call GetValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new InheritanceClient(credential);
 
-Response response = client.GetValid();
+Response response = client.GetValid(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("breed").ToString());
@@ -116,7 +116,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -174,7 +174,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = client.PutValid(RequestContent.Create(data));
+Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

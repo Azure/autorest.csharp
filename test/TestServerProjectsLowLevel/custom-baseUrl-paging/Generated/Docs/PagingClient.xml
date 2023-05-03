@@ -8,7 +8,7 @@ This sample shows how to call GetPagesPartialUrlAsync with required parameters a
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>"))
+await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -39,7 +39,7 @@ This sample shows how to call GetPagesPartialUrl with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrl("<accountName>"))
+foreach (var data in client.GetPagesPartialUrl("<accountName>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -70,7 +70,7 @@ This sample shows how to call GetPagesPartialUrlOperationAsync with required par
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>"))
+await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -101,7 +101,7 @@ This sample shows how to call GetPagesPartialUrlOperation with required paramete
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrlOperation("<accountName>"))
+foreach (var data in client.GetPagesPartialUrlOperation("<accountName>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -132,7 +132,7 @@ This sample shows how to call GetPagesPartialUrlOperationNextAsync with required
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
+await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -163,7 +163,7 @@ This sample shows how to call GetPagesPartialUrlOperationNext with required para
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
+foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());

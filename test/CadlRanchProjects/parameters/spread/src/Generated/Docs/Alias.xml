@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestBodyAsync with required request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAsRequestBodyRequest</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestBody with required request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAsRequestBodyRequest</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAsRequestParameterAsync(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestParameterAsync with required parameters and request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAsRequestParameterRequest</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAsRequestParameter(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestParameter with required parameters and request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAsRequestParameterRequest</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadWithMultipleParametersAsync(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadWithMultipleParametersAsync with required parameters and request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    prop1 = "<prop1>",
+    prop2 = "<prop2>",
+    prop3 = "<prop3>",
+    prop4 = "<prop4>",
+    prop5 = "<prop5>",
+    prop6 = "<prop6>",
+};
+
+Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadWithMultipleParametersRequest</c>:
+<code>{
+  prop1: string, # Required.
+  prop2: string, # Required.
+  prop3: string, # Required.
+  prop4: string, # Required.
+  prop5: string, # Required.
+  prop6: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadWithMultipleParameters(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadWithMultipleParameters with required parameters and request content.
+<code><![CDATA[
+var client = new SpreadClient().GetAliasClient(<1.0.0>);
+
+var data = new {
+    prop1 = "<prop1>",
+    prop2 = "<prop2>",
+    prop3 = "<prop3>",
+    prop4 = "<prop4>",
+    prop5 = "<prop5>",
+    prop6 = "<prop6>",
+};
+
+Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadWithMultipleParametersRequest</c>:
+<code>{
+  prop1: string, # Required.
+  prop2: string, # Required.
+  prop3: string, # Required.
+  prop4: string, # Required.
+  prop5: string, # Required.
+  prop6: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

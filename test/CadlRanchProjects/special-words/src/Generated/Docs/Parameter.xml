@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetWithIfAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetWithIfAsync with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetParameterClient(<1.0.0>);
+
+Response response = await client.GetWithIfAsync("<if>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetWithIf(string,RequestContext)">
+<example>
+This sample shows how to call GetWithIf with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetParameterClient(<1.0.0>);
+
+Response response = client.GetWithIf("<if>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetWithFilterAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetWithFilterAsync with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetParameterClient(<1.0.0>);
+
+Response response = await client.GetWithFilterAsync("<filter>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetWithFilter(string,RequestContext)">
+<example>
+This sample shows how to call GetWithFilter with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetParameterClient(<1.0.0>);
+
+Response response = client.GetWithFilter("<filter>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

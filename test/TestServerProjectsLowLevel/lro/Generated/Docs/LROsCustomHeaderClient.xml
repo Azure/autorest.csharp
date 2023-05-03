@@ -31,7 +31,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -111,7 +111,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -191,7 +191,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -271,7 +271,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -332,7 +332,7 @@ var data = new {};
 
 var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
 <code><![CDATA[
@@ -349,9 +349,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -386,7 +386,7 @@ var data = new {};
 
 var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
 <code><![CDATA[
@@ -403,9 +403,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -440,7 +440,7 @@ var data = new {};
 
 var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
 <code><![CDATA[
@@ -457,9 +457,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -494,7 +494,7 @@ var data = new {};
 
 var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
 <code><![CDATA[
@@ -511,9 +511,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>

@@ -8,7 +8,7 @@ This sample shows how to call GetNotExpandableAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetNotExpandableAsync();
+Response response = await client.GetNotExpandableAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -22,7 +22,7 @@ This sample shows how to call GetNotExpandable and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = client.GetNotExpandable();
+Response response = client.GetNotExpandable(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -38,7 +38,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
+Response response = await client.PutNotExpandableAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -52,7 +52,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = client.PutNotExpandable(RequestContent.Create(data));
+Response response = client.PutNotExpandable(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call GetReferencedAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetReferencedAsync();
+Response response = await client.GetReferencedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -78,7 +78,7 @@ This sample shows how to call GetReferenced and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = client.GetReferenced();
+Response response = client.GetReferenced(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -94,7 +94,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = await client.PutReferencedAsync(RequestContent.Create(data));
+Response response = await client.PutReferencedAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -108,7 +108,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = client.PutReferenced(RequestContent.Create(data));
+Response response = client.PutReferenced(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -120,7 +120,7 @@ This sample shows how to call GetReferencedConstantAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetReferencedConstantAsync();
+Response response = await client.GetReferencedConstantAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -148,7 +148,7 @@ This sample shows how to call GetReferencedConstant and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = client.GetReferencedConstant();
+Response response = client.GetReferencedConstant(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -193,7 +193,7 @@ var data = new {
     field1 = "<field1>",
 };
 
-Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -235,7 +235,7 @@ var data = new {
     field1 = "<field1>",
 };
 
-Response response = client.PutReferencedConstant(RequestContent.Create(data));
+Response response = client.PutReferencedConstant(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

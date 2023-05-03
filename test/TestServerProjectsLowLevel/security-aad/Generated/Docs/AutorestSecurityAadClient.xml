@@ -8,7 +8,7 @@ This sample shows how to call HeadAsync.
 var credential = new DefaultAzureCredential();
 var client = new AutorestSecurityAadClient(credential);
 
-Response response = await client.HeadAsync();
+Response response = await client.HeadAsync(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call Head.
 var credential = new DefaultAzureCredential();
 var client = new AutorestSecurityAadClient(credential);
 
-Response response = client.Head();
+Response response = client.Head(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

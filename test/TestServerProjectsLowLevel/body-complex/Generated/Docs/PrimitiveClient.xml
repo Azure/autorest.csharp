@@ -8,7 +8,7 @@ This sample shows how to call GetIntAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetIntAsync();
+Response response = await client.GetIntAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -36,7 +36,7 @@ This sample shows how to call GetInt and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetInt();
+Response response = client.GetInt(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -79,7 +79,7 @@ var data = new {
     field2 = 1234,
 };
 
-Response response = await client.PutIntAsync(RequestContent.Create(data));
+Response response = await client.PutIntAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -119,7 +119,7 @@ var data = new {
     field2 = 1234,
 };
 
-Response response = client.PutInt(RequestContent.Create(data));
+Response response = client.PutInt(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -144,7 +144,7 @@ This sample shows how to call GetLongAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetLongAsync();
+Response response = await client.GetLongAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -172,7 +172,7 @@ This sample shows how to call GetLong and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetLong();
+Response response = client.GetLong(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -215,7 +215,7 @@ var data = new {
     field2 = 1234L,
 };
 
-Response response = await client.PutLongAsync(RequestContent.Create(data));
+Response response = await client.PutLongAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -255,7 +255,7 @@ var data = new {
     field2 = 1234L,
 };
 
-Response response = client.PutLong(RequestContent.Create(data));
+Response response = client.PutLong(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -280,7 +280,7 @@ This sample shows how to call GetFloatAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetFloatAsync();
+Response response = await client.GetFloatAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -308,7 +308,7 @@ This sample shows how to call GetFloat and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetFloat();
+Response response = client.GetFloat(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -351,7 +351,7 @@ var data = new {
     field2 = 123.45f,
 };
 
-Response response = await client.PutFloatAsync(RequestContent.Create(data));
+Response response = await client.PutFloatAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -391,7 +391,7 @@ var data = new {
     field2 = 123.45f,
 };
 
-Response response = client.PutFloat(RequestContent.Create(data));
+Response response = client.PutFloat(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -416,7 +416,7 @@ This sample shows how to call GetDoubleAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDoubleAsync();
+Response response = await client.GetDoubleAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -444,7 +444,7 @@ This sample shows how to call GetDouble and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDouble();
+Response response = client.GetDouble(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -487,7 +487,7 @@ var data = new {
     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
 };
 
-Response response = await client.PutDoubleAsync(RequestContent.Create(data));
+Response response = await client.PutDoubleAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -527,7 +527,7 @@ var data = new {
     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
 };
 
-Response response = client.PutDouble(RequestContent.Create(data));
+Response response = client.PutDouble(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -552,7 +552,7 @@ This sample shows how to call GetBoolAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetBoolAsync();
+Response response = await client.GetBoolAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -580,7 +580,7 @@ This sample shows how to call GetBool and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetBool();
+Response response = client.GetBool(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -623,7 +623,7 @@ var data = new {
     field_false = true,
 };
 
-Response response = await client.PutBoolAsync(RequestContent.Create(data));
+Response response = await client.PutBoolAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -663,7 +663,7 @@ var data = new {
     field_false = true,
 };
 
-Response response = client.PutBool(RequestContent.Create(data));
+Response response = client.PutBool(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -688,7 +688,7 @@ This sample shows how to call GetStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetStringAsync();
+Response response = await client.GetStringAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -718,7 +718,7 @@ This sample shows how to call GetString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetString();
+Response response = client.GetString(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -764,7 +764,7 @@ var data = new {
     null = "<null>",
 };
 
-Response response = await client.PutStringAsync(RequestContent.Create(data));
+Response response = await client.PutStringAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -806,7 +806,7 @@ var data = new {
     null = "<null>",
 };
 
-Response response = client.PutString(RequestContent.Create(data));
+Response response = client.PutString(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -832,7 +832,7 @@ This sample shows how to call GetDateAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateAsync();
+Response response = await client.GetDateAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -860,7 +860,7 @@ This sample shows how to call GetDate and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDate();
+Response response = client.GetDate(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -903,7 +903,7 @@ var data = new {
     leap = "2022-05-10",
 };
 
-Response response = await client.PutDateAsync(RequestContent.Create(data));
+Response response = await client.PutDateAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -943,7 +943,7 @@ var data = new {
     leap = "2022-05-10",
 };
 
-Response response = client.PutDate(RequestContent.Create(data));
+Response response = client.PutDate(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -968,7 +968,7 @@ This sample shows how to call GetDateTimeAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateTimeAsync();
+Response response = await client.GetDateTimeAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -996,7 +996,7 @@ This sample shows how to call GetDateTime and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDateTime();
+Response response = client.GetDateTime(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1039,7 +1039,7 @@ var data = new {
     now = "2022-05-10T18:57:31.2311892Z",
 };
 
-Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
+Response response = await client.PutDateTimeAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1079,7 +1079,7 @@ var data = new {
     now = "2022-05-10T18:57:31.2311892Z",
 };
 
-Response response = client.PutDateTime(RequestContent.Create(data));
+Response response = client.PutDateTime(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1104,7 +1104,7 @@ This sample shows how to call GetDateTimeRfc1123Async and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateTimeRfc1123Async();
+Response response = await client.GetDateTimeRfc1123Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1132,7 +1132,7 @@ This sample shows how to call GetDateTimeRfc1123 and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDateTimeRfc1123();
+Response response = client.GetDateTimeRfc1123(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1175,7 +1175,7 @@ var data = new {
     now = "Tue, 10 May 2022 18:57:31 GMT",
 };
 
-Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
+Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1215,7 +1215,7 @@ var data = new {
     now = "Tue, 10 May 2022 18:57:31 GMT",
 };
 
-Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
+Response response = client.PutDateTimeRfc1123(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1240,7 +1240,7 @@ This sample shows how to call GetDurationAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDurationAsync();
+Response response = await client.GetDurationAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1266,7 +1266,7 @@ This sample shows how to call GetDuration and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDuration();
+Response response = client.GetDuration(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1306,7 +1306,7 @@ var data = new {
     field = PT1H23M45S,
 };
 
-Response response = await client.PutDurationAsync(RequestContent.Create(data));
+Response response = await client.PutDurationAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1344,7 +1344,7 @@ var data = new {
     field = PT1H23M45S,
 };
 
-Response response = client.PutDuration(RequestContent.Create(data));
+Response response = client.PutDuration(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1368,7 +1368,7 @@ This sample shows how to call GetByteAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetByteAsync();
+Response response = await client.GetByteAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1394,7 +1394,7 @@ This sample shows how to call GetByte and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetByte();
+Response response = client.GetByte(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -1434,7 +1434,7 @@ var data = new {
     field = new {},
 };
 
-Response response = await client.PutByteAsync(RequestContent.Create(data));
+Response response = await client.PutByteAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1472,7 +1472,7 @@ var data = new {
     field = new {},
 };
 
-Response response = client.PutByte(RequestContent.Create(data));
+Response response = client.PutByte(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

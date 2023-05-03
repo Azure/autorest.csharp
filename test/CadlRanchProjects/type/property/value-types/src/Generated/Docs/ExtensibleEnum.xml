@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetExtensibleEnumAsync(RequestContext)">
+<example>
+This sample shows how to call GetExtensibleEnumAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+
+Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>ExtensibleEnumProperty</c>:
+<code>{
+  property: &quot;ValueOne&quot; | &quot;ValueTwo&quot;, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetExtensibleEnum(RequestContext)">
+<example>
+This sample shows how to call GetExtensibleEnum with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+
+Response response = client.GetExtensibleEnum(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>ExtensibleEnumProperty</c>:
+<code>{
+  property: &quot;ValueOne&quot; | &quot;ValueTwo&quot;, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+
+var data = new {
+    property = "ValueOne",
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ExtensibleEnumProperty</c>:
+<code>{
+  property: &quot;ValueOne&quot; | &quot;ValueTwo&quot;, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+
+var data = new {
+    property = "ValueOne",
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ExtensibleEnumProperty</c>:
+<code>{
+  property: &quot;ValueOne&quot; | &quot;ValueTwo&quot;, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

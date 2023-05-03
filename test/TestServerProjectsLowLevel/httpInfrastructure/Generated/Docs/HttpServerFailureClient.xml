@@ -8,7 +8,7 @@ This sample shows how to call Head501Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
 
-Response response = await client.Head501Async();
+Response response = await client.Head501Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call Head501.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
 
-Response response = client.Head501();
+Response response = client.Head501(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call Get501Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
 
-Response response = await client.Get501Async();
+Response response = await client.Get501Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ This sample shows how to call Get501.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
 
-Response response = client.Get501();
+Response response = client.Get501(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -58,7 +58,7 @@ var client = new HttpServerFailureClient(credential);
 
 var data = true;
 
-Response response = await client.Post505Async(RequestContent.Create(data));
+Response response = await client.Post505Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -72,7 +72,7 @@ var client = new HttpServerFailureClient(credential);
 
 var data = true;
 
-Response response = client.Post505(RequestContent.Create(data));
+Response response = client.Post505(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -86,7 +86,7 @@ var client = new HttpServerFailureClient(credential);
 
 var data = true;
 
-Response response = await client.Delete505Async(RequestContent.Create(data));
+Response response = await client.Delete505Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -100,7 +100,7 @@ var client = new HttpServerFailureClient(credential);
 
 var data = true;
 
-Response response = client.Delete505(RequestContent.Create(data));
+Response response = client.Delete505(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

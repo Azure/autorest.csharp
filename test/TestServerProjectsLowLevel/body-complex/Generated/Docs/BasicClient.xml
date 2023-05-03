@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = await client.GetValidAsync();
+Response response = await client.GetValidAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -38,7 +38,7 @@ This sample shows how to call GetValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = client.GetValid();
+Response response = client.GetValid(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -84,7 +84,7 @@ var data = new {
     color = "cyan",
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -126,7 +126,7 @@ var data = new {
     color = "cyan",
 };
 
-Response response = client.PutValid(RequestContent.Create(data));
+Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -152,7 +152,7 @@ This sample shows how to call GetInvalidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = await client.GetInvalidAsync();
+Response response = await client.GetInvalidAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -182,7 +182,7 @@ This sample shows how to call GetInvalid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = client.GetInvalid();
+Response response = client.GetInvalid(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -212,7 +212,7 @@ This sample shows how to call GetEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = await client.GetEmptyAsync();
+Response response = await client.GetEmptyAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -242,7 +242,7 @@ This sample shows how to call GetEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = client.GetEmpty();
+Response response = client.GetEmpty(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -272,7 +272,7 @@ This sample shows how to call GetNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = await client.GetNullAsync();
+Response response = await client.GetNullAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -302,7 +302,7 @@ This sample shows how to call GetNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = client.GetNull();
+Response response = client.GetNull(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -332,7 +332,7 @@ This sample shows how to call GetNotProvidedAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = await client.GetNotProvidedAsync();
+Response response = await client.GetNotProvidedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -362,7 +362,7 @@ This sample shows how to call GetNotProvided and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new BasicClient(credential);
 
-Response response = client.GetNotProvided();
+Response response = client.GetNotProvided(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

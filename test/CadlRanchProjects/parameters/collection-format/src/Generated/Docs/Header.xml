@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CsvAsync(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call CsvAsync with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetHeaderClient(<1.0.0>);
+
+Response response = await client.CsvAsync(new String[]{"<colors>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Csv(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call Csv with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetHeaderClient(<1.0.0>);
+
+Response response = client.Csv(new String[]{"<colors>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

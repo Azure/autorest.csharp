@@ -31,7 +31,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -111,7 +111,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -191,7 +191,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -271,7 +271,7 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -328,7 +328,7 @@ This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync wit
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -369,7 +369,7 @@ This sample shows how to call DeleteProvisioning202Accepted200Succeeded with req
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
 BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -410,9 +410,9 @@ This sample shows how to call Delete202Retry200Async with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
@@ -423,9 +423,9 @@ This sample shows how to call Delete202Retry200 with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = client.Delete202Retry200(WaitUntil.Completed);
+var operation = client.Delete202Retry200(WaitUntil.Completed, new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
@@ -436,9 +436,9 @@ This sample shows how to call DeleteAsyncRelativeRetrySucceededAsync with requir
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed);
+var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
@@ -449,9 +449,9 @@ This sample shows how to call DeleteAsyncRelativeRetrySucceeded with required pa
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = client.DeleteAsyncRelativeRetrySucceeded(WaitUntil.Completed);
+var operation = client.DeleteAsyncRelativeRetrySucceeded(WaitUntil.Completed, new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
@@ -466,7 +466,7 @@ var data = new {};
 
 var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
 <code><![CDATA[
@@ -483,9 +483,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -520,7 +520,7 @@ var data = new {};
 
 var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
 <code><![CDATA[
@@ -537,9 +537,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -574,7 +574,7 @@ var data = new {};
 
 var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all parameters and request content.
 <code><![CDATA[
@@ -591,9 +591,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -628,7 +628,7 @@ var data = new {};
 
 var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameters and request content.
 <code><![CDATA[
@@ -645,9 +645,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>

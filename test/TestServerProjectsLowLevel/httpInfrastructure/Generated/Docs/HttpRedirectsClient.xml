@@ -8,7 +8,7 @@ This sample shows how to call Head300Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Head300Async();
+Response response = await client.Head300Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call Head300.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Head300();
+Response response = client.Head300(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call Get300Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get300Async();
+Response response = await client.Get300Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ This sample shows how to call Get300.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Get300();
+Response response = client.Get300(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,7 +56,7 @@ This sample shows how to call Head301Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Head301Async();
+Response response = await client.Head301Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -68,7 +68,7 @@ This sample shows how to call Head301.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Head301();
+Response response = client.Head301(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -80,7 +80,7 @@ This sample shows how to call Get301Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get301Async();
+Response response = await client.Get301Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -92,7 +92,7 @@ This sample shows how to call Get301.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Get301();
+Response response = client.Get301(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -106,7 +106,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Put301Async(RequestContent.Create(data));
+Response response = await client.Put301Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -120,7 +120,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Put301(RequestContent.Create(data));
+Response response = client.Put301(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -132,7 +132,7 @@ This sample shows how to call Head302Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Head302Async();
+Response response = await client.Head302Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -144,7 +144,7 @@ This sample shows how to call Head302.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Head302();
+Response response = client.Head302(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -156,7 +156,7 @@ This sample shows how to call Get302Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get302Async();
+Response response = await client.Get302Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -168,7 +168,7 @@ This sample shows how to call Get302.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Get302();
+Response response = client.Get302(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -182,7 +182,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Patch302Async(RequestContent.Create(data));
+Response response = await client.Patch302Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -196,7 +196,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Patch302(RequestContent.Create(data));
+Response response = client.Patch302(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -210,7 +210,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Post303Async(RequestContent.Create(data));
+Response response = await client.Post303Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -224,7 +224,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Post303(RequestContent.Create(data));
+Response response = client.Post303(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -236,7 +236,7 @@ This sample shows how to call Head307Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Head307Async();
+Response response = await client.Head307Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -248,7 +248,7 @@ This sample shows how to call Head307.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Head307();
+Response response = client.Head307(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -260,7 +260,7 @@ This sample shows how to call Get307Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get307Async();
+Response response = await client.Get307Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ This sample shows how to call Get307.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Get307();
+Response response = client.Get307(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -284,7 +284,7 @@ This sample shows how to call Options307Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Options307Async();
+Response response = await client.Options307Async(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -296,7 +296,7 @@ This sample shows how to call Options307.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Options307();
+Response response = client.Options307(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -310,7 +310,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Put307Async(RequestContent.Create(data));
+Response response = await client.Put307Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -324,7 +324,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Put307(RequestContent.Create(data));
+Response response = client.Put307(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -338,7 +338,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Patch307Async(RequestContent.Create(data));
+Response response = await client.Patch307Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -352,7 +352,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Patch307(RequestContent.Create(data));
+Response response = client.Patch307(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -366,7 +366,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Post307Async(RequestContent.Create(data));
+Response response = await client.Post307Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -380,7 +380,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Post307(RequestContent.Create(data));
+Response response = client.Post307(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -394,7 +394,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = await client.Delete307Async(RequestContent.Create(data));
+Response response = await client.Delete307Async(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -408,7 +408,7 @@ var client = new HttpRedirectsClient(credential);
 
 var data = true;
 
-Response response = client.Delete307(RequestContent.Create(data));
+Response response = client.Delete307(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
