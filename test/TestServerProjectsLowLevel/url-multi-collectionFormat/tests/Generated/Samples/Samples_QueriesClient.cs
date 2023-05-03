@@ -13,40 +13,40 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace HeadAsBooleanTrue_LowLevel.Samples
+namespace url_multi_collectionFormat_LowLevel.Samples
 {
-    public class Samples_HttpSuccessClient
+    public class Samples_QueriesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200()
+        public void Example_ArrayStringMultiNull()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new HttpSuccessClient(credential);
+            var client = new QueriesClient(credential);
 
-            Response response = client.Head200();
+            Response response = client.ArrayStringMultiNull();
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204()
+        public void Example_ArrayStringMultiEmpty()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new HttpSuccessClient(credential);
+            var client = new QueriesClient(credential);
 
-            Response response = client.Head204();
+            Response response = client.ArrayStringMultiEmpty();
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404()
+        public void Example_ArrayStringMultiValid()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new HttpSuccessClient(credential);
+            var client = new QueriesClient(credential);
 
-            Response response = client.Head404();
+            Response response = client.ArrayStringMultiValid();
             Console.WriteLine(response.Status);
         }
     }

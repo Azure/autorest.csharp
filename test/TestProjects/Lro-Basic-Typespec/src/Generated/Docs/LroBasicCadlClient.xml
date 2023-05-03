@@ -98,8 +98,8 @@ var data = new {};
 
 var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
@@ -114,8 +114,8 @@ var data = new {
 
 var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -157,8 +157,8 @@ var data = new {};
 
 var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
@@ -173,8 +173,8 @@ var data = new {
 
 var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -218,8 +218,8 @@ var data = new {
 
 var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
@@ -257,8 +257,8 @@ var data = new {
 
 var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>

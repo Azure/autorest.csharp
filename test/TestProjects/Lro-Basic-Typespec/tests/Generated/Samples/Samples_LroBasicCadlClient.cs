@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -41,8 +42,8 @@ namespace LroBasicCadl.Samples
 
             var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
-            BinaryData data = operation.Value;
-            JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -60,8 +61,8 @@ namespace LroBasicCadl.Samples
 
             var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
 
-            BinaryData data = operation.Value;
-            JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
     }

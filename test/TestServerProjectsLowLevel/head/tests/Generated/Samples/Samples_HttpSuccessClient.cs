@@ -13,7 +13,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace HeadAsBooleanTrue_LowLevel.Samples
+namespace head_LowLevel.Samples
 {
     public class Samples_HttpSuccessClient
     {

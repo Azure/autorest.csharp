@@ -1,0 +1,11 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "lro_LowLevel",
+  "LibraryName": "AutoRestLongRunningOperationTestService",
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+  ],
+  "public-clients": true,
+  "skip-csproj-packagereference": true
+}
