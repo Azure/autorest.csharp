@@ -80,13 +80,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.ProtocolMethodSignature.Parameters);
             builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, false, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, false, builder);
         }
 
         private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, true, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, true, builder);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
         private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
@@ -175,12 +175,18 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
-        private void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeWrappedCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine("<code><![CDATA[");
+            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            builder.Append("]]></code>");
+        }
+
+        internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
             ComposeGetClientCodes(builder);
             builder.AppendLine();
             if (clientMethod.RequestBodyType != null)
@@ -208,8 +214,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
             }
-
-            builder.Append("]]></code>");
         }
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
@@ -231,7 +235,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
             builder.AppendLine();
             using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
             {
@@ -251,12 +255,12 @@ namespace AutoRest.CSharp.Generation.Writers
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
             builder.AppendLine();
 
             if (clientMethod.ResponseBodyType == null)
             {
-                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status)");
+                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status);");
             }
             else
             {
@@ -310,7 +314,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -348,7 +352,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
             if (clientMethod.ResponseBodyType != null)
             {
                 ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
@@ -588,6 +592,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var valueType = parameterType.Arguments[1];
                     return $"new Dictionary<string, {valueType.Name}>{{ \"<test>\" = {MockParameterTypeValue(parameterName, valueType)} }}";
+                }
+
+                if (type == typeof(RequestContext))
+                {
+                    return $"new RequestContext()";
                 }
             }
 

@@ -24,7 +24,12 @@ function Invoke($command, $executePath=$repoRoot)
 
 function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
-    $outputPath = Join-Path $baseOutput "Generated"
+    $outputPath = $baseOutput
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = Join-Path $outputPath "src"
+    }
+
+    $outputPath = Join-Path $outputPath "Generated"
     if ($projectName -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
@@ -59,6 +64,10 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     $baseOutput = Resolve-Path -Path $baseOutput
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = $baseOutput
+
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = "$outputPath/src"
+    }
 
     if ($fast)
     {

@@ -39,6 +39,8 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
 }
 
 function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+    if($output.EndsWith("tests")) { return }
+
     if ($mainFile -eq "") {
         $mainFile = Get-TypeSpec-Entry $output
     }
@@ -64,17 +66,22 @@ function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [stri
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
-    $clientPath = Join-Path $directory "client.tsp"
+    $tspDirectory = $directory
+    if($tspDirectory.FullName.EndsWith("src")) {
+        $tspDirectory = $directory.Parent
+    }
+
+    $clientPath = Join-Path $tspDirectory "client.tsp"
     if (Test-Path $clientPath) {
         return $clientPath
     }
 
-    $mainPath = Join-Path $directory "main.tsp"
+    $mainPath = Join-Path $tspDirectory "main.tsp"
     if (Test-Path $mainPath) {
         return $mainPath
     }
 
-    $projectNamePath = Join-Path $directory "$($directory.Name).tsp"
+    $projectNamePath = Join-Path $tspDirectory "$($tspDirectory.Name).tsp"
     if (Test-Path $projectNamePath) {
         return $projectNamePath
     }
@@ -119,7 +126,9 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 
     if ($forTest) {
-        Add-Swagger-Test $testName $directory $testArguments
+        if(Test-Path "$directory/autorest.md") {
+            Add-Swagger-Test $testName $directory $testArguments
+        }
     }
     else {
         if ($testName.EndsWith("Typespec")) {
@@ -271,7 +280,7 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     }
     elseif ($key -eq "ConvenienceUpdate-Typespec" -or $key -eq "ConvenienceInitial-Typespec")
     {
-        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Typespec" "Generated"))"
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." ".." "ConvenienceInitial-Typespec" "src" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
