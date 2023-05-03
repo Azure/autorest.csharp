@@ -250,7 +250,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *
              * Console.WriteLine(operation.GetRawResponse().Status);
              * or
-             * BinaryData data = operation.Value;
+             * BinaryData responseData = operation.Value;
              * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                builder.AppendLine($"BinaryData data = operation.Value;");
+                builder.AppendLine($"BinaryData responseData = operation.Value;");
                 ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
         }
@@ -273,9 +273,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
-                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
+                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 0, builder, true))
                 {
-                    builder.AppendLine("    data.ToStream().CopyTo(outFileStream);");
+                    builder.AppendLine("    responseData.ToStream().CopyTo(outFileStream);");
                 }
                 return;
             }
@@ -285,11 +285,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (apiInvocationChainList.Count == 0)
             {
-                builder.AppendLine($"Console.WriteLine(data.ToString());");
+                builder.AppendLine($"Console.WriteLine(responseData.ToString());");
             }
             else
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
@@ -369,7 +369,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (Scope("if (response.ContentStream != null)", 0, builder, true))
                 {
-                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 4, builder, true))
+                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 4, builder, true))
                     {
                         builder.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
                     }
@@ -632,9 +632,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.Int32 => "1234",
                 InputTypeKind.Int64 => "1234L",
                 InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601 => "PT1H23M45S",
-                InputTypeKind.DurationConstant => "01:23:45",
-                InputTypeKind.Time => "01:23:45",
+                InputTypeKind.DurationISO8601 => "\"PT1H23M45S\"",
+                InputTypeKind.DurationConstant => "\"01:23:45\"",
+                InputTypeKind.Time => "\"01:23:45\"",
                 _ => "new {}"
             },
             InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
