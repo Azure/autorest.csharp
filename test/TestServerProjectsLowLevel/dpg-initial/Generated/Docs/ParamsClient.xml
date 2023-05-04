@@ -122,18 +122,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>PostInput</c>:
-<code>{
-  url: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PostParameters(RequestContent,RequestContext)">
 <example>
@@ -152,18 +140,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>PostInput</c>:
-<code>{
-  url: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetOptionalAsync(string,RequestContext)">
 <example>

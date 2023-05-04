@@ -13,18 +13,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="UpdateConvenience(RequestContext)">
 <example>
@@ -38,18 +26,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
 <example>
@@ -76,18 +52,6 @@ Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestC
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)">
 <example>
@@ -114,18 +78,6 @@ Response response = client.ConvenienceOptionalBeforeRequired(RequestContent.Crea
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolAsync(RequestContext)">
 <example>
@@ -139,18 +91,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Protocol(RequestContext)">
 <example>
@@ -164,18 +104,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceWithOptionalAsync(RequestContext)">
 <example>
@@ -189,18 +117,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceWithOptional(RequestContext)">
 <example>
@@ -214,18 +130,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceWithRequiredAsync(RequestContext)">
 <example>
@@ -239,18 +143,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceWithRequired(RequestContext)">
 <example>
@@ -264,18 +156,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceShouldNotGenerateAsync(RequestContext)">
 <example>
@@ -342,18 +222,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolOptionalQuery(int?,RequestContext)">
 <example>
@@ -376,18 +244,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolRequiredQueryAsync(int,RequestContext)">
 <example>
@@ -401,18 +257,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolRequiredQuery(int,RequestContext)">
 <example>
@@ -426,18 +270,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
 <example>
@@ -453,18 +285,6 @@ Response response = await client.ProtocolOptionalModelAsync(RequestContent.Creat
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
 <example>
@@ -480,18 +300,6 @@ Response response = client.ProtocolOptionalModel(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolRequiredModelAsync(RequestContent,RequestContext)">
 <example>
@@ -507,18 +315,6 @@ Response response = await client.ProtocolRequiredModelAsync(RequestContent.Creat
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolRequiredModel(RequestContent,RequestContext)">
 <example>
@@ -534,18 +330,6 @@ Response response = client.ProtocolRequiredModel(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalQueryWithOptionalAsync(int?,RequestContext)">
 <example>
@@ -568,18 +352,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalQueryWithOptional(int?,RequestContext)">
 <example>
@@ -602,18 +374,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredQueryWithOptionalAsync(int,RequestContext)">
 <example>
@@ -627,18 +387,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredQueryWithOptional(int,RequestContext)">
 <example>
@@ -652,18 +400,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,RequestContext)">
 <example>
@@ -677,18 +413,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalQueryWithRequired(int?,RequestContext)">
 <example>
@@ -702,18 +426,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredQueryWithRequiredAsync(int,RequestContext)">
 <example>
@@ -727,18 +439,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredQueryWithRequired(int,RequestContext)">
 <example>
@@ -752,18 +452,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
 <example>
@@ -779,18 +467,6 @@ Response response = await client.ConvenienceOptionalModelWithOptionalAsync(Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
 <example>
@@ -806,18 +482,6 @@ Response response = client.ConvenienceOptionalModelWithOptional(RequestContent.C
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)">
 <example>
@@ -833,18 +497,6 @@ Response response = await client.ConvenienceRequiredModelWithOptionalAsync(Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)">
 <example>
@@ -860,18 +512,6 @@ Response response = client.ConvenienceRequiredModelWithOptional(RequestContent.C
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
 <example>
@@ -887,18 +527,6 @@ Response response = await client.ConvenienceOptionalModelWithRequiredAsync(Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
 <example>
@@ -914,18 +542,6 @@ Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.C
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
 <example>
@@ -952,18 +568,6 @@ Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)">
 <example>
@@ -990,18 +594,6 @@ Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Model</c>:
-<code>{
-  id: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

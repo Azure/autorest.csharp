@@ -23,31 +23,6 @@ await foreach (var data in client.GetPaginationLedgerEntriesAsync(RequestContent
 }
 ]]></code>
 </example>
-<remarks>
-A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-
-Below is the JSON schema for the request payload and one item in the pageable response.
-
-Request Body:
-
-Schema for <c>ListLedgerEntryInputBody</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-}
-</code>
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  contents: string, # Required. Contents of the ledger entry.
-  collectionId: string, # Required.
-  transactionId: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPaginationLedgerEntries(RequestContent,RequestContext)">
 <example>
@@ -71,31 +46,6 @@ foreach (var data in client.GetPaginationLedgerEntries(RequestContent.Create(dat
 }
 ]]></code>
 </example>
-<remarks>
-A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-
-Below is the JSON schema for the request payload and one item in the pageable response.
-
-Request Body:
-
-Schema for <c>ListLedgerEntryInputBody</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-}
-</code>
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  contents: string, # Required. Contents of the ledger entry.
-  collectionId: string, # Required.
-  transactionId: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetLedgerEntriesAsync(RequestContext)">
 <example>
@@ -114,20 +64,6 @@ await foreach (var data in client.GetLedgerEntriesAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  contents: string, # Required. Contents of the ledger entry.
-  collectionId: string, # Required.
-  transactionId: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetLedgerEntries(RequestContext)">
 <example>
@@ -146,20 +82,6 @@ foreach (var data in client.GetLedgerEntries())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  contents: string, # Required. Contents of the ledger entry.
-  collectionId: string, # Required.
-  transactionId: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

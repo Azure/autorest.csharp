@@ -16,21 +16,6 @@ await foreach (var data in client.GetNoItemNamePagesAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValue</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNoItemNamePages(RequestContext)">
 <example>
@@ -47,21 +32,6 @@ foreach (var data in client.GetNoItemNamePages())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValue</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNullNextLinkNamePagesAsync(RequestContext)">
 <example>
@@ -78,21 +48,6 @@ await foreach (var data in client.GetNullNextLinkNamePagesAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNullNextLinkNamePages(RequestContext)">
 <example>
@@ -109,21 +64,6 @@ foreach (var data in client.GetNullNextLinkNamePages())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetSinglePagesAsync(RequestContext)">
 <example>
@@ -140,21 +80,6 @@ await foreach (var data in client.GetSinglePagesAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetSinglePages(RequestContext)">
 <example>
@@ -171,21 +96,6 @@ foreach (var data in client.GetSinglePages())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="FirstResponseEmptyAsync(RequestContext)">
 <example>
@@ -202,21 +112,6 @@ await foreach (var data in client.FirstResponseEmptyAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValue</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="FirstResponseEmpty(RequestContext)">
 <example>
@@ -233,21 +128,6 @@ foreach (var data in client.FirstResponseEmpty())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValue</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesAsync(string,int?,int?,RequestContext)">
 <example>
@@ -275,21 +155,6 @@ await foreach (var data in client.GetMultiplePagesAsync("<clientRequestId>", 123
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePages(string,int?,int?,RequestContext)">
 <example>
@@ -317,21 +182,6 @@ foreach (var data in client.GetMultiplePages("<clientRequestId>", 1234, 1234))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithQueryParamsAsync(int,RequestContext)">
 <example>
@@ -348,21 +198,6 @@ await foreach (var data in client.GetWithQueryParamsAsync(1234))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithQueryParams(int,RequestContext)">
 <example>
@@ -379,21 +214,6 @@ foreach (var data in client.GetWithQueryParams(1234))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="DuplicateParamsAsync(string,RequestContext)">
 <example>
@@ -421,21 +241,6 @@ await foreach (var data in client.DuplicateParamsAsync("<filter>"))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="DuplicateParams(string,RequestContext)">
 <example>
@@ -463,21 +268,6 @@ foreach (var data in client.DuplicateParams("<filter>"))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextOperationWithQueryParamsAsync(RequestContext)">
 <example>
@@ -494,21 +284,6 @@ await foreach (var data in client.NextOperationWithQueryParamsAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextOperationWithQueryParams(RequestContext)">
 <example>
@@ -525,21 +300,6 @@ foreach (var data in client.NextOperationWithQueryParams())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetOdataMultiplePagesAsync(string,int?,int?,RequestContext)">
 <example>
@@ -567,21 +327,6 @@ await foreach (var data in client.GetOdataMultiplePagesAsync("<clientRequestId>"
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetOdataMultiplePages(string,int?,int?,RequestContext)">
 <example>
@@ -609,21 +354,6 @@ foreach (var data in client.GetOdataMultiplePages("<clientRequestId>", 1234, 123
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesWithOffsetAsync(int,string,int?,int?,RequestContext)">
 <example>
@@ -651,21 +381,6 @@ await foreach (var data in client.GetMultiplePagesWithOffsetAsync(1234, "<client
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesWithOffset(int,string,int?,int?,RequestContext)">
 <example>
@@ -693,21 +408,6 @@ foreach (var data in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>"
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesRetryFirstAsync(RequestContext)">
 <example>
@@ -724,21 +424,6 @@ await foreach (var data in client.GetMultiplePagesRetryFirstAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesRetryFirst(RequestContext)">
 <example>
@@ -755,21 +440,6 @@ foreach (var data in client.GetMultiplePagesRetryFirst())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesRetrySecondAsync(RequestContext)">
 <example>
@@ -786,21 +456,6 @@ await foreach (var data in client.GetMultiplePagesRetrySecondAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesRetrySecond(RequestContext)">
 <example>
@@ -817,21 +472,6 @@ foreach (var data in client.GetMultiplePagesRetrySecond())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetSinglePagesFailureAsync(RequestContext)">
 <example>
@@ -848,21 +488,6 @@ await foreach (var data in client.GetSinglePagesFailureAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetSinglePagesFailure(RequestContext)">
 <example>
@@ -879,21 +504,6 @@ foreach (var data in client.GetSinglePagesFailure())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFailureAsync(RequestContext)">
 <example>
@@ -910,21 +520,6 @@ await foreach (var data in client.GetMultiplePagesFailureAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFailure(RequestContext)">
 <example>
@@ -941,21 +536,6 @@ foreach (var data in client.GetMultiplePagesFailure())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFailureUriAsync(RequestContext)">
 <example>
@@ -972,21 +552,6 @@ await foreach (var data in client.GetMultiplePagesFailureUriAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFailureUri(RequestContext)">
 <example>
@@ -1003,21 +568,6 @@ foreach (var data in client.GetMultiplePagesFailureUri())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFragmentNextLinkAsync(string,string,RequestContext)">
 <example>
@@ -1034,21 +584,6 @@ await foreach (var data in client.GetMultiplePagesFragmentNextLinkAsync("<tenant
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFragmentNextLink(string,string,RequestContext)">
 <example>
@@ -1065,21 +600,6 @@ foreach (var data in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVe
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,RequestContext)">
 <example>
@@ -1096,21 +616,6 @@ await foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLinkAs
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesFragmentWithGroupingNextLink(string,string,RequestContext)">
 <example>
@@ -1127,21 +632,6 @@ foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenan
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextFragmentAsync(string,string,string,RequestContext)">
 <example>
@@ -1158,21 +648,6 @@ await foreach (var data in client.NextFragmentAsync("<tenant>", "<nextLink>", "<
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextFragment(string,string,string,RequestContext)">
 <example>
@@ -1189,21 +664,6 @@ foreach (var data in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextFragmentWithGroupingAsync(string,string,string,RequestContext)">
 <example>
@@ -1220,21 +680,6 @@ await foreach (var data in client.NextFragmentWithGroupingAsync("<tenant>", "<ne
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="NextFragmentWithGrouping(string,string,string,RequestContext)">
 <example>
@@ -1251,21 +696,6 @@ foreach (var data in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>OdataProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext)">
 <example>
@@ -1329,21 +759,6 @@ await foreach (var data in operation.Value)
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMultiplePagesLRO(WaitUntil,string,int?,int?,RequestContext)">
 <example>
@@ -1375,21 +790,6 @@ foreach (var data in operation.Value)
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

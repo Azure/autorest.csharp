@@ -52,11 +52,11 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> [Protocol Method] Adds a user or updates a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(int id, RequestContent content, RequestContext context = null)
         {
@@ -78,11 +78,11 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> [Protocol Method] Adds a user or updates a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrUpdate(int id, RequestContent content, RequestContext context = null)
         {
@@ -137,7 +137,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or replaces a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -148,11 +148,11 @@ namespace _Specs_.Azure.Core.Basic
         /// </list>
         /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrReplaceAsync(int id, RequestContent content, RequestContext context = null)
         {
@@ -177,7 +177,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or replaces a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -188,11 +188,11 @@ namespace _Specs_.Azure.Core.Basic
         /// </list>
         /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrReplace(int id, RequestContent content, RequestContext context = null)
         {
@@ -239,7 +239,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Gets a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -252,7 +252,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
@@ -275,7 +275,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Gets a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -288,7 +288,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,RequestContext)']/*" />
         public virtual Response GetUser(int id, RequestContext context)
         {
@@ -385,7 +385,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Exports a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -400,7 +400,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
@@ -425,7 +425,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Exports a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -440,7 +440,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
@@ -501,7 +501,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Lists all Users
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -534,7 +534,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Lists all Users
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -587,6 +587,11 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="GetWithPageAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -606,6 +611,11 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary>
         /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -649,6 +659,11 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="GetWithCustomPageModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -668,6 +683,11 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary>
         /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.

@@ -64,7 +64,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatusAsync(Guid,Guid,RequestContext)']/*" />
         public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestContext context = null)
         {
@@ -87,7 +87,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatus(Guid,Guid,RequestContext)']/*" />
         public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestContext context = null)
         {
@@ -109,7 +109,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatusAsync(Guid,RequestContext)']/*" />
         public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestContext context = null)
         {
@@ -131,7 +131,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatus(Guid,RequestContext)']/*" />
         public virtual Response GetTranslationStatus(Guid id, RequestContext context = null)
         {
@@ -153,7 +153,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslationAsync(Guid,RequestContext)']/*" />
         public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestContext context = null)
         {
@@ -175,7 +175,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslation(Guid,RequestContext)']/*" />
         public virtual Response CancelTranslation(Guid id, RequestContext context = null)
         {
@@ -196,7 +196,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormatsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestContext context = null)
         {
@@ -217,7 +217,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormats(RequestContext)']/*" />
         public virtual Response GetSupportedDocumentFormats(RequestContext context = null)
         {
@@ -238,7 +238,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormatsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestContext context = null)
         {
@@ -259,7 +259,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormats(RequestContext)']/*" />
         public virtual Response GetSupportedGlossaryFormats(RequestContext context = null)
         {
@@ -280,7 +280,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSourcesAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestContext context = null)
         {
@@ -301,7 +301,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> [Protocol Method] Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSources(RequestContext)']/*" />
         public virtual Response GetSupportedStorageSources(RequestContext context = null)
         {
@@ -475,7 +475,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <summary> [Protocol Method] Submit a document translation request to the Document Translation service. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -502,7 +502,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <summary> [Protocol Method] Submit a document translation request to the Document Translation service. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

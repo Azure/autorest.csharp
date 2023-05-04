@@ -300,9 +300,6 @@ Response response = await client.StringUrlNonEncodedAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
-</remarks>
     </member>
     <member name="StringUrlNonEncoded(RequestContext)">
 <example>
@@ -315,9 +312,6 @@ Response response = client.StringUrlNonEncoded();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
-</remarks>
     </member>
     <member name="StringEmptyAsync(RequestContext)">
 <example>

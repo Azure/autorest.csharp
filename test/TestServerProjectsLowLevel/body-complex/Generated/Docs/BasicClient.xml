@@ -16,20 +16,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetValid(RequestContext)">
 <example>
@@ -46,20 +32,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
@@ -88,20 +60,6 @@ Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
@@ -130,20 +88,6 @@ Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetInvalidAsync(RequestContext)">
 <example>
@@ -160,20 +104,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetInvalid(RequestContext)">
 <example>
@@ -190,20 +120,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
 <example>
@@ -220,20 +136,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetEmpty(RequestContext)">
 <example>
@@ -250,20 +152,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNullAsync(RequestContext)">
 <example>
@@ -280,20 +168,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNull(RequestContext)">
 <example>
@@ -310,20 +184,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
 <example>
@@ -340,20 +200,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNotProvided(RequestContext)">
 <example>
@@ -370,20 +216,6 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Basic</c>:
-<code>{
-  id: number, # Optional. Basic Id
-  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
-  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

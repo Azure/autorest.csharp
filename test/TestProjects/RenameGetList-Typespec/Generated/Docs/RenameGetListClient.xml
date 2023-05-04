@@ -24,28 +24,6 @@ Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Project</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetProject(string,RequestContext)">
 <example>
@@ -70,28 +48,6 @@ Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Project</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDeploymentAsync(string,string,RequestContext)">
 <example>
@@ -106,18 +62,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Deployment</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDeployment(string,string,RequestContext)">
 <example>
@@ -132,18 +76,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Deployment</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetProjectsAsync(RequestContext)">
 <example>
@@ -169,28 +101,6 @@ await foreach (var data in client.GetProjectsAsync())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetProjects(RequestContext)">
 <example>
@@ -216,28 +126,6 @@ foreach (var data in client.GetProjects())
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDeploymentsAsync(string,RequestContext)">
 <example>
@@ -263,28 +151,6 @@ await foreach (var data in client.GetDeploymentsAsync("<projectName>"))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDeployments(string,RequestContext)">
 <example>
@@ -310,28 +176,6 @@ foreach (var data in client.GetDeployments("<projectName>"))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
-  storageInputContainerName: string, # Required. The storage container name.
-  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
-  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
-  description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
-  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
-  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
-  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
-  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

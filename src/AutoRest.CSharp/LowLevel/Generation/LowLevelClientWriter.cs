@@ -523,14 +523,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
-            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(_writer, methodSignature, clientMethod, hasResponseRemarks, async);
+            WriteMethodDocumentation(_writer, methodSignature, clientMethod, false, async);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
             }
         }
 
@@ -547,9 +545,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
-            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks, async);
-            WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod, false, async);
         }
 
         private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
@@ -604,10 +600,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (clientMethod.ConvenienceMethod != null)
             {
                 builder.AppendLine($"<list type=\"bullet\">");
-                if (!methodSignature.DescriptionText.IsNullOrEmpty())
-                {
-                    builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
-                }
+                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
 
                 if (clientMethod.ConvenienceMethod != null)
                 {

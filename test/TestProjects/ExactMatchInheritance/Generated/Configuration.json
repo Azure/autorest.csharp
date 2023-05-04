@@ -20,6 +20,8 @@
     "ResourceIdentifier",
     "DateTimeOffset",
     "ResourceType",
+    "ResourceType",
+    "IPAddress",
     "IPAddress"
   ],
   "KeepOrphanedModels": [

@@ -29,20 +29,6 @@ var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestCont
 Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -72,20 +58,6 @@ var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(
 Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="UpdateProjectAsync(WaitUntil,string,RequestContent,RequestContext)">
 <example>
@@ -121,30 +93,6 @@ Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="UpdateProject(WaitUntil,string,RequestContent,RequestContext)">
 <example>
@@ -180,30 +128,6 @@ Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Project</c>:
-<code>{
-  id: string, # Required.
-  description: string, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateThingAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -223,26 +147,6 @@ JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateThing(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -262,26 +166,6 @@ JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

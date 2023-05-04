@@ -20,28 +20,6 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  breed: string, # Optional.
-  color: string, # Optional.
-  hates: [
-    {
-      food: string, # Optional.
-      id: number, # Optional.
-      name: string, # Optional.
-    }
-  ], # Optional.
-  id: number, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetValid(RequestContext)">
 <example>
@@ -62,28 +40,6 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  breed: string, # Optional.
-  color: string, # Optional.
-  hates: [
-    {
-      food: string, # Optional.
-      id: number, # Optional.
-      name: string, # Optional.
-    }
-  ], # Optional.
-  id: number, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
@@ -120,28 +76,6 @@ Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  breed: string, # Optional.
-  color: string, # Optional.
-  hates: [
-    {
-      food: string, # Optional.
-      id: number, # Optional.
-      name: string, # Optional.
-    }
-  ], # Optional.
-  id: number, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
@@ -178,28 +112,6 @@ Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  breed: string, # Optional.
-  color: string, # Optional.
-  hates: [
-    {
-      food: string, # Optional.
-      id: number, # Optional.
-      name: string, # Optional.
-    }
-  ], # Optional.
-  id: number, # Optional.
-  name: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

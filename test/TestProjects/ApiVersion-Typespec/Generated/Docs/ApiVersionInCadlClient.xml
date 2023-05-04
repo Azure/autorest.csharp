@@ -15,21 +15,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 </example>
-<remarks>
-For asynchronous inference, get multivariate anomaly detection result based on
-resultId returned by the BatchDetectAnomaly api.
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DetectionResult</c>:
-<code>{
-  resultId: string, # Required. Result identifier, which is used to fetch the results of an inference call.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetBatchDetectionResult(string,RequestContext)">
 <example>
@@ -45,21 +30,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 </example>
-<remarks>
-For asynchronous inference, get multivariate anomaly detection result based on
-resultId returned by the BatchDetectAnomaly api.
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DetectionResult</c>:
-<code>{
-  resultId: string, # Required. Result identifier, which is used to fetch the results of an inference call.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

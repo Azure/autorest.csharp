@@ -24,9 +24,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Get item.
-</remarks>
     </member>
     <member name="GetItem(string,string,string,RequestContext)">
 <example>
@@ -51,9 +48,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Get item.
-</remarks>
     </member>
     <member name="SelectItemAsync(string,string,string,RequestContext)">
 <example>
@@ -78,9 +72,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Select item.
-</remarks>
     </member>
     <member name="SelectItem(string,string,string,RequestContext)">
 <example>
@@ -105,9 +96,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
-<remarks>
-Select item.
-</remarks>
     </member>
   </members>
 </doc>

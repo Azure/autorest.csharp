@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -88,7 +88,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -116,7 +116,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -146,7 +146,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -177,7 +177,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -207,7 +207,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -322,7 +322,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -356,7 +356,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

@@ -1503,19 +1503,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexNull(RequestContext)">
 <example>
@@ -1531,19 +1518,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexEmptyAsync(RequestContext)">
 <example>
@@ -1559,19 +1533,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexEmpty(RequestContext)">
 <example>
@@ -1587,19 +1548,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexItemNullAsync(RequestContext)">
 <example>
@@ -1615,19 +1563,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexItemNull(RequestContext)">
 <example>
@@ -1643,19 +1578,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexItemEmptyAsync(RequestContext)">
 <example>
@@ -1671,19 +1593,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexItemEmpty(RequestContext)">
 <example>
@@ -1699,19 +1608,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexValidAsync(RequestContext)">
 <example>
@@ -1727,19 +1623,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplexValid(RequestContext)">
 <example>
@@ -1755,19 +1638,6 @@ Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutComplexValidAsync(RequestContent,RequestContext)">
 <example>
@@ -1787,19 +1657,6 @@ Response response = await client.PutComplexValidAsync(RequestContent.Create(data
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutComplexValid(RequestContent,RequestContext)">
 <example>
@@ -1819,19 +1676,6 @@ Response response = client.PutComplexValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  integer: number, # Optional.
-  string: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetArrayNullAsync(RequestContext)">
 <example>

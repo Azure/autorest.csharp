@@ -25,28 +25,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="TopAction(string,RequestContext)">
 <example>
@@ -72,28 +50,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="TopAction2Async(RequestContext)">
 <example>
@@ -119,28 +75,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="TopAction2(RequestContext)">
 <example>
@@ -166,28 +100,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
 <example>
@@ -254,46 +166,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
 <example>
@@ -360,46 +232,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
 <example>
@@ -466,46 +298,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
 <example>
@@ -572,46 +364,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
 <example>
@@ -631,26 +383,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Friend</c>:
-<code>{
-  name: string, # Required. name of the NotFriend
-}
-</code>
-
-Response Body:
-
-Schema for <c>Friend</c>:
-<code>{
-  name: string, # Required. name of the NotFriend
-}
-</code>
-
-</remarks>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
 <example>
@@ -670,26 +402,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Friend</c>:
-<code>{
-  name: string, # Required. name of the NotFriend
-}
-</code>
-
-Response Body:
-
-Schema for <c>Friend</c>:
-<code>{
-  name: string, # Required. name of the NotFriend
-}
-</code>
-
-</remarks>
     </member>
     <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
 <example>
@@ -776,28 +488,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="SayHi(string,string,string,RequestContext)">
 <example>
@@ -840,28 +530,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -977,67 +645,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-  requiredModel: {
-    name: string, # Required. name of the Thing
-    requiredUnion: Union, # Required. required Union
-    requiredLiteralString: Literal, # Required. required literal string
-    requiredLiteralInt: Literal, # Required. required literal int
-    requiredLiteralDouble: Literal, # Required. required literal double
-    requiredLiteralBool: Literal, # Required. required literal bool
-    optionalLiteralString: Literal, # Optional. optional literal string
-    optionalLiteralInt: Literal, # Optional. optional literal int
-    optionalLiteralDouble: Literal, # Optional. optional literal double
-    optionalLiteralBool: Literal, # Optional. optional literal bool
-    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  }, # Required. Required model
-  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
-  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
-  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
-  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
-  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
-  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
-  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: any, # Required. required unknown
-  optionalUnknown: any, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloAgain(string,string,RequestContent,RequestContext)">
 <example>
@@ -1153,67 +760,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-  requiredModel: {
-    name: string, # Required. name of the Thing
-    requiredUnion: Union, # Required. required Union
-    requiredLiteralString: Literal, # Required. required literal string
-    requiredLiteralInt: Literal, # Required. required literal int
-    requiredLiteralDouble: Literal, # Required. required literal double
-    requiredLiteralBool: Literal, # Required. required literal bool
-    optionalLiteralString: Literal, # Optional. optional literal string
-    optionalLiteralInt: Literal, # Optional. optional literal int
-    optionalLiteralDouble: Literal, # Optional. optional literal double
-    optionalLiteralBool: Literal, # Optional. optional literal bool
-    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  }, # Required. Required model
-  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
-  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
-  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
-  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
-  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
-  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
-  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: any, # Required. required unknown
-  optionalUnknown: any, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -1329,67 +875,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-  requiredModel: {
-    name: string, # Required. name of the Thing
-    requiredUnion: Union, # Required. required Union
-    requiredLiteralString: Literal, # Required. required literal string
-    requiredLiteralInt: Literal, # Required. required literal int
-    requiredLiteralDouble: Literal, # Required. required literal double
-    requiredLiteralBool: Literal, # Required. required literal bool
-    optionalLiteralString: Literal, # Optional. optional literal string
-    optionalLiteralInt: Literal, # Optional. optional literal int
-    optionalLiteralDouble: Literal, # Optional. optional literal double
-    optionalLiteralBool: Literal, # Optional. optional literal bool
-    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  }, # Required. Required model
-  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
-  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
-  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
-  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
-  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
-  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
-  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: any, # Required. required unknown
-  optionalUnknown: any, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="NoContentType(string,string,RequestContent,RequestContext)">
 <example>
@@ -1505,67 +990,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-  requiredModel: {
-    name: string, # Required. name of the Thing
-    requiredUnion: Union, # Required. required Union
-    requiredLiteralString: Literal, # Required. required literal string
-    requiredLiteralInt: Literal, # Required. required literal int
-    requiredLiteralDouble: Literal, # Required. required literal double
-    requiredLiteralBool: Literal, # Required. required literal bool
-    optionalLiteralString: Literal, # Optional. optional literal string
-    optionalLiteralInt: Literal, # Optional. optional literal int
-    optionalLiteralDouble: Literal, # Optional. optional literal double
-    optionalLiteralBool: Literal, # Optional. optional literal bool
-    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  }, # Required. Required model
-  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
-  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
-  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
-  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
-  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
-  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
-  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: any, # Required. required unknown
-  optionalUnknown: any, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloDemo2Async(RequestContext)">
 <example>
@@ -1591,28 +1015,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloDemo2(RequestContext)">
 <example>
@@ -1638,28 +1040,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
 <example>
@@ -1726,46 +1106,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateLiteral(RequestContent,RequestContext)">
 <example>
@@ -1832,46 +1172,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloLiteralAsync(RequestContext)">
 <example>
@@ -1897,28 +1197,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="HelloLiteral(RequestContext)">
 <example>
@@ -1944,28 +1222,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUnknownValueAsync(RequestContext)">
 <example>
@@ -2062,46 +1318,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="InternalProtocol(RequestContent,RequestContext)">
 <example>
@@ -2168,46 +1384,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteralString: Literal, # Required. required literal string
-  requiredLiteralInt: Literal, # Required. required literal int
-  requiredLiteralDouble: Literal, # Required. required literal double
-  requiredLiteralBool: Literal, # Required. required literal bool
-  optionalLiteralString: Literal, # Optional. optional literal string
-  optionalLiteralInt: Literal, # Optional. optional literal int
-  optionalLiteralDouble: Literal, # Optional. optional literal double
-  optionalLiteralBool: Literal, # Optional. optional literal bool
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
     </member>
     <member name="StillConvenientAsync(RequestContext)">
 <example>
