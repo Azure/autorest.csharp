@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head300_Async()
+        public async Task Example_Head300_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -52,7 +53,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head300_AllParameters_Async()
+        public async Task Example_Head300_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -85,7 +86,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get300_Async()
+        public async Task Example_Get300_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -96,7 +97,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get300_AllParameters_Async()
+        public async Task Example_Get300_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -129,7 +130,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head301_Async()
+        public async Task Example_Head301_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -140,7 +141,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head301_AllParameters_Async()
+        public async Task Example_Head301_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -173,7 +174,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get301_Async()
+        public async Task Example_Get301_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -184,7 +185,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get301_AllParameters_Async()
+        public async Task Example_Get301_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -221,7 +222,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put301_Async()
+        public async Task Example_Put301_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -234,7 +235,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put301_AllParameters_Async()
+        public async Task Example_Put301_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -269,7 +270,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head302_Async()
+        public async Task Example_Head302_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -280,7 +281,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head302_AllParameters_Async()
+        public async Task Example_Head302_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -313,7 +314,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get302_Async()
+        public async Task Example_Get302_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -324,7 +325,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get302_AllParameters_Async()
+        public async Task Example_Get302_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -361,7 +362,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch302_Async()
+        public async Task Example_Patch302_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -374,7 +375,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch302_AllParameters_Async()
+        public async Task Example_Patch302_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -413,7 +414,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post303_Async()
+        public async Task Example_Post303_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -426,7 +427,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post303_AllParameters_Async()
+        public async Task Example_Post303_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -461,7 +462,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head307_Async()
+        public async Task Example_Head307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -472,7 +473,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head307_AllParameters_Async()
+        public async Task Example_Head307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -505,7 +506,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get307_Async()
+        public async Task Example_Get307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -516,7 +517,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get307_AllParameters_Async()
+        public async Task Example_Get307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -549,7 +550,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Options307_Async()
+        public async Task Example_Options307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -560,7 +561,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Options307_AllParameters_Async()
+        public async Task Example_Options307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -597,7 +598,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put307_Async()
+        public async Task Example_Put307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -610,7 +611,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put307_AllParameters_Async()
+        public async Task Example_Put307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -649,7 +650,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch307_Async()
+        public async Task Example_Patch307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -662,7 +663,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch307_AllParameters_Async()
+        public async Task Example_Patch307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -701,7 +702,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post307_Async()
+        public async Task Example_Post307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -714,7 +715,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post307_AllParameters_Async()
+        public async Task Example_Post307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -753,7 +754,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete307_Async()
+        public async Task Example_Delete307_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
@@ -766,7 +767,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete307_AllParameters_Async()
+        public async Task Example_Delete307_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);

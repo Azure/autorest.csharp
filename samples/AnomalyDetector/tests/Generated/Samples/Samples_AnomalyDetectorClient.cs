@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -86,7 +87,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateEntireSeries_Async()
+        public async Task Example_DetectUnivariateEntireSeries_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,7 +116,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateEntireSeries_AllParameters_Async()
+        public async Task Example_DetectUnivariateEntireSeries_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -222,7 +223,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateLastPoint_Async()
+        public async Task Example_DetectUnivariateLastPoint_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -252,7 +253,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateLastPoint_AllParameters_Async()
+        public async Task Example_DetectUnivariateLastPoint_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -346,7 +347,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateChangePoint_Async()
+        public async Task Example_DetectUnivariateChangePoint_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -370,7 +371,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectUnivariateChangePoint_AllParameters_Async()
+        public async Task Example_DetectUnivariateChangePoint_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -456,7 +457,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateBatchDetectionResult_Async()
+        public async Task Example_GetMultivariateBatchDetectionResult_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -476,7 +477,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateBatchDetectionResult_AllParameters_Async()
+        public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -615,7 +616,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TrainMultivariateModel_Async()
+        public async Task Example_TrainMultivariateModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -638,7 +639,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TrainMultivariateModel_AllParameters_Async()
+        public async Task Example_TrainMultivariateModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -743,7 +744,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeleteMultivariateModel_Async()
+        public async Task Example_DeleteMultivariateModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -755,7 +756,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeleteMultivariateModel_AllParameters_Async()
+        public async Task Example_DeleteMultivariateModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -820,7 +821,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateModel_Async()
+        public async Task Example_GetMultivariateModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -836,7 +837,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateModel_AllParameters_Async()
+        public async Task Example_GetMultivariateModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -944,7 +945,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectMultivariateBatchAnomaly_Async()
+        public async Task Example_DetectMultivariateBatchAnomaly_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -972,7 +973,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectMultivariateBatchAnomaly_AllParameters_Async()
+        public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1088,7 +1089,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectMultivariateLastAnomaly_Async()
+        public async Task Example_DetectMultivariateLastAnomaly_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1118,7 +1119,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DetectMultivariateLastAnomaly_AllParameters_Async()
+        public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1216,7 +1217,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateModels_Async()
+        public async Task Example_GetMultivariateModels_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1233,7 +1234,7 @@ namespace AnomalyDetector.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMultivariateModels_AllParameters_Async()
+        public async Task Example_GetMultivariateModels_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");

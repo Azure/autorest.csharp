@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ValidKey_Async()
+        public async Task Example_ValidKey_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
@@ -52,7 +53,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ValidKey_AllParameters_Async()
+        public async Task Example_ValidKey_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
@@ -85,7 +86,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ValidToken_Async()
+        public async Task Example_ValidToken_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
@@ -96,7 +97,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ValidToken_AllParameters_Async()
+        public async Task Example_ValidToken_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);

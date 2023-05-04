@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBooleanTrue_Async()
+        public async Task Example_GetBooleanTrue_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -52,7 +53,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBooleanTrue_AllParameters_Async()
+        public async Task Example_GetBooleanTrue_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -85,7 +86,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBooleanFalse_Async()
+        public async Task Example_GetBooleanFalse_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -96,7 +97,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBooleanFalse_AllParameters_Async()
+        public async Task Example_GetBooleanFalse_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -129,7 +130,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetIntOneMillion_Async()
+        public async Task Example_GetIntOneMillion_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -140,7 +141,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetIntOneMillion_AllParameters_Async()
+        public async Task Example_GetIntOneMillion_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -173,7 +174,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetIntNegativeOneMillion_Async()
+        public async Task Example_GetIntNegativeOneMillion_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -184,7 +185,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetIntNegativeOneMillion_AllParameters_Async()
+        public async Task Example_GetIntNegativeOneMillion_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -217,7 +218,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetTenBillion_Async()
+        public async Task Example_GetTenBillion_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -228,7 +229,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetTenBillion_AllParameters_Async()
+        public async Task Example_GetTenBillion_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -261,7 +262,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNegativeTenBillion_Async()
+        public async Task Example_GetNegativeTenBillion_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -272,7 +273,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNegativeTenBillion_AllParameters_Async()
+        public async Task Example_GetNegativeTenBillion_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -305,7 +306,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FloatScientificPositive_Async()
+        public async Task Example_FloatScientificPositive_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -316,7 +317,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FloatScientificPositive_AllParameters_Async()
+        public async Task Example_FloatScientificPositive_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -349,7 +350,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FloatScientificNegative_Async()
+        public async Task Example_FloatScientificNegative_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -360,7 +361,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FloatScientificNegative_AllParameters_Async()
+        public async Task Example_FloatScientificNegative_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -393,7 +394,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DoubleDecimalPositive_Async()
+        public async Task Example_DoubleDecimalPositive_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -404,7 +405,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DoubleDecimalPositive_AllParameters_Async()
+        public async Task Example_DoubleDecimalPositive_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -437,7 +438,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DoubleDecimalNegative_Async()
+        public async Task Example_DoubleDecimalNegative_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -448,7 +449,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DoubleDecimalNegative_AllParameters_Async()
+        public async Task Example_DoubleDecimalNegative_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -481,7 +482,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUnicode_Async()
+        public async Task Example_StringUnicode_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -492,7 +493,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUnicode_AllParameters_Async()
+        public async Task Example_StringUnicode_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -525,7 +526,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUrlEncoded_Async()
+        public async Task Example_StringUrlEncoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -536,7 +537,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUrlEncoded_AllParameters_Async()
+        public async Task Example_StringUrlEncoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -569,7 +570,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUrlNonEncoded_Async()
+        public async Task Example_StringUrlNonEncoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -580,7 +581,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringUrlNonEncoded_AllParameters_Async()
+        public async Task Example_StringUrlNonEncoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -613,7 +614,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringEmpty_Async()
+        public async Task Example_StringEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -624,7 +625,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringEmpty_AllParameters_Async()
+        public async Task Example_StringEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -657,7 +658,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringNull_Async()
+        public async Task Example_StringNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -668,7 +669,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_StringNull_AllParameters_Async()
+        public async Task Example_StringNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -701,7 +702,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_EnumValid_Async()
+        public async Task Example_EnumValid_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -712,7 +713,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_EnumValid_AllParameters_Async()
+        public async Task Example_EnumValid_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -745,7 +746,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_EnumNull_Async()
+        public async Task Example_EnumNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -756,7 +757,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_EnumNull_AllParameters_Async()
+        public async Task Example_EnumNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -789,7 +790,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteMultiByte_Async()
+        public async Task Example_ByteMultiByte_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -800,7 +801,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteMultiByte_AllParameters_Async()
+        public async Task Example_ByteMultiByte_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -833,7 +834,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteEmpty_Async()
+        public async Task Example_ByteEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -844,7 +845,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteEmpty_AllParameters_Async()
+        public async Task Example_ByteEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -877,7 +878,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteNull_Async()
+        public async Task Example_ByteNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -888,7 +889,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ByteNull_AllParameters_Async()
+        public async Task Example_ByteNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -921,7 +922,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateValid_Async()
+        public async Task Example_DateValid_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -932,7 +933,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateValid_AllParameters_Async()
+        public async Task Example_DateValid_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -965,7 +966,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateNull_Async()
+        public async Task Example_DateNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -976,7 +977,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateNull_AllParameters_Async()
+        public async Task Example_DateNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1009,7 +1010,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateTimeValid_Async()
+        public async Task Example_DateTimeValid_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1020,7 +1021,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateTimeValid_AllParameters_Async()
+        public async Task Example_DateTimeValid_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1053,7 +1054,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateTimeNull_Async()
+        public async Task Example_DateTimeNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1064,7 +1065,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DateTimeNull_AllParameters_Async()
+        public async Task Example_DateTimeNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1097,7 +1098,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Base64Url_Async()
+        public async Task Example_Base64Url_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1108,7 +1109,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Base64Url_AllParameters_Async()
+        public async Task Example_Base64Url_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1141,7 +1142,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ArrayCsvInPath_Async()
+        public async Task Example_ArrayCsvInPath_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1152,7 +1153,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_ArrayCsvInPath_AllParameters_Async()
+        public async Task Example_ArrayCsvInPath_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1185,7 +1186,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UnixTimeUrl_Async()
+        public async Task Example_UnixTimeUrl_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
@@ -1196,7 +1197,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UnixTimeUrl_AllParameters_Async()
+        public async Task Example_UnixTimeUrl_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);

@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -53,7 +54,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostValid_Async()
+        public async Task Example_PostValid_Async()
         {
             var client = new InheritanceClient();
 
@@ -70,7 +71,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostValid_AllParameters_Async()
+        public async Task Example_PostValid_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -115,7 +116,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetValid_Async()
+        public async Task Example_GetValid_Async()
         {
             var client = new InheritanceClient();
 
@@ -129,7 +130,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetValid_AllParameters_Async()
+        public async Task Example_GetValid_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -185,7 +186,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutValid_Async()
+        public async Task Example_PutValid_Async()
         {
             var client = new InheritanceClient();
 
@@ -206,7 +207,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutValid_AllParameters_Async()
+        public async Task Example_PutValid_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -251,7 +252,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetModel_Async()
+        public async Task Example_GetModel_Async()
         {
             var client = new InheritanceClient();
 
@@ -263,7 +264,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetModel_AllParameters_Async()
+        public async Task Example_GetModel_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -305,7 +306,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutModel_Async()
+        public async Task Example_PutModel_Async()
         {
             var client = new InheritanceClient();
 
@@ -320,7 +321,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutModel_AllParameters_Async()
+        public async Task Example_PutModel_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -359,7 +360,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetRecursiveModel_Async()
+        public async Task Example_GetRecursiveModel_Async()
         {
             var client = new InheritanceClient();
 
@@ -371,7 +372,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetRecursiveModel_AllParameters_Async()
+        public async Task Example_GetRecursiveModel_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -413,7 +414,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutRecursiveModel_Async()
+        public async Task Example_PutRecursiveModel_Async()
         {
             var client = new InheritanceClient();
 
@@ -428,7 +429,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutRecursiveModel_AllParameters_Async()
+        public async Task Example_PutRecursiveModel_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -467,7 +468,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMissingDiscriminator_Async()
+        public async Task Example_GetMissingDiscriminator_Async()
         {
             var client = new InheritanceClient();
 
@@ -479,7 +480,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMissingDiscriminator_AllParameters_Async()
+        public async Task Example_GetMissingDiscriminator_AllParameters_Async()
         {
             var client = new InheritanceClient();
 
@@ -515,7 +516,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWrongDiscriminator_Async()
+        public async Task Example_GetWrongDiscriminator_Async()
         {
             var client = new InheritanceClient();
 
@@ -527,7 +528,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWrongDiscriminator_AllParameters_Async()
+        public async Task Example_GetWrongDiscriminator_AllParameters_Async()
         {
             var client = new InheritanceClient();
 

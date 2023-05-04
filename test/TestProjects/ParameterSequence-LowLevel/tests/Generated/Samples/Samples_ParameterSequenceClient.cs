@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetItem_Async()
+        public async Task Example_GetItem_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
@@ -58,7 +59,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetItem_AllParameters_Async()
+        public async Task Example_GetItem_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
@@ -97,7 +98,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SelectItem_Async()
+        public async Task Example_SelectItem_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
@@ -110,7 +111,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SelectItem_AllParameters_Async()
+        public async Task Example_SelectItem_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);

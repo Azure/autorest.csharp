@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -84,7 +85,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAccountProperties_Async()
+        public async Task Example_GetAccountProperties_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -98,7 +99,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAccountProperties_AllParameters_Async()
+        public async Task Example_GetAccountProperties_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -221,7 +222,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UpdateAccountProperties_Async()
+        public async Task Example_UpdateAccountProperties_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -237,7 +238,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UpdateAccountProperties_AllParameters_Async()
+        public async Task Example_UpdateAccountProperties_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -322,7 +323,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAccessKeys_Async()
+        public async Task Example_GetAccessKeys_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -336,7 +337,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAccessKeys_AllParameters_Async()
+        public async Task Example_GetAccessKeys_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -387,7 +388,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_RegenerateAccessKey_Async()
+        public async Task Example_RegenerateAccessKey_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -403,7 +404,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_RegenerateAccessKey_AllParameters_Async()
+        public async Task Example_RegenerateAccessKey_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -537,7 +538,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetResourceSetRules_Async()
+        public async Task Example_GetResourceSetRules_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -552,7 +553,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetResourceSetRules_AllParameters_Async()
+        public async Task Example_GetResourceSetRules_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -692,7 +693,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetCollections_Async()
+        public async Task Example_GetCollections_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -707,7 +708,7 @@ namespace Azure.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetCollections_AllParameters_Async()
+        public async Task Example_GetCollections_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");

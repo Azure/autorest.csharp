@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_Async()
+        public async Task Example_Delete_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -52,7 +53,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_AllParameters_Async()
+        public async Task Example_Delete_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -92,7 +93,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Read_Async()
+        public async Task Example_Read_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -106,7 +107,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Read_AllParameters_Async()
+        public async Task Example_Read_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -163,7 +164,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Create_Async()
+        public async Task Example_Create_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -183,7 +184,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Create_AllParameters_Async()
+        public async Task Example_Create_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -234,7 +235,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPetByKind_Async()
+        public async Task Example_GetPetByKind_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -248,7 +249,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPetByKind_AllParameters_Async()
+        public async Task Example_GetPetByKind_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -292,7 +293,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFirstPet_Async()
+        public async Task Example_GetFirstPet_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
@@ -306,7 +307,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFirstPet_AllParameters_Async()
+        public async Task Example_GetFirstPet_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);

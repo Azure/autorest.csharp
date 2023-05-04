@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -62,7 +63,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProject_Async()
+        public async Task Example_GetProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -82,7 +83,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProject_AllParameters_Async()
+        public async Task Example_GetProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -131,7 +132,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployment_Async()
+        public async Task Example_GetDeployment_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -144,7 +145,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployment_AllParameters_Async()
+        public async Task Example_GetDeployment_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -202,7 +203,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProjects_Async()
+        public async Task Example_GetProjects_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -223,7 +224,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProjects_AllParameters_Async()
+        public async Task Example_GetProjects_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -292,7 +293,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployments_Async()
+        public async Task Example_GetDeployments_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
@@ -313,7 +314,7 @@ namespace Azure.RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployments_AllParameters_Async()
+        public async Task Example_GetDeployments_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);

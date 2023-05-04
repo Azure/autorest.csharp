@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_NoOperationParams_Async()
+        public async Task Example_NoOperationParams_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
@@ -52,7 +53,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_NoOperationParams_AllParameters_Async()
+        public async Task Example_NoOperationParams_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
@@ -85,7 +86,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_WithOperationPathParam_Async()
+        public async Task Example_WithOperationPathParam_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
@@ -96,7 +97,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_WithOperationPathParam_AllParameters_Async()
+        public async Task Example_WithOperationPathParam_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);

@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -63,7 +64,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TopAction_Async()
+        public async Task Example_TopAction_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -83,7 +84,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TopAction_AllParameters_Async()
+        public async Task Example_TopAction_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -151,7 +152,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TopAction2_Async()
+        public async Task Example_TopAction2_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -171,7 +172,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_TopAction2_AllParameters_Async()
+        public async Task Example_TopAction2_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -265,7 +266,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PatchAction_Async()
+        public async Task Example_PatchAction_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -296,7 +297,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PatchAction_AllParameters_Async()
+        public async Task Example_PatchAction_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -405,7 +406,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_AnonymousBody_Async()
+        public async Task Example_AnonymousBody_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -436,7 +437,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_AnonymousBody_AllParameters_Async()
+        public async Task Example_AnonymousBody_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -513,7 +514,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FriendlyModel_Async()
+        public async Task Example_FriendlyModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -532,7 +533,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_FriendlyModel_AllParameters_Async()
+        public async Task Example_FriendlyModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -575,7 +576,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_AddTimeHeader_Async()
+        public async Task Example_AddTimeHeader_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -587,7 +588,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_AddTimeHeader_AllParameters_Async()
+        public async Task Example_AddTimeHeader_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -643,7 +644,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SayHi_Async()
+        public async Task Example_SayHi_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -663,7 +664,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SayHi_AllParameters_Async()
+        public async Task Example_SayHi_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -813,7 +814,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloAgain_Async()
+        public async Task Example_HelloAgain_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -861,7 +862,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloAgain_AllParameters_Async()
+        public async Task Example_HelloAgain_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1065,7 +1066,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_NoContentType_Async()
+        public async Task Example_NoContentType_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1113,7 +1114,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_NoContentType_AllParameters_Async()
+        public async Task Example_NoContentType_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1235,7 +1236,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloDemo2_Async()
+        public async Task Example_HelloDemo2_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1255,7 +1256,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloDemo2_AllParameters_Async()
+        public async Task Example_HelloDemo2_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1349,7 +1350,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateLiteral_Async()
+        public async Task Example_CreateLiteral_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1380,7 +1381,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateLiteral_AllParameters_Async()
+        public async Task Example_CreateLiteral_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1463,7 +1464,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloLiteral_Async()
+        public async Task Example_HelloLiteral_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1483,7 +1484,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HelloLiteral_AllParameters_Async()
+        public async Task Example_HelloLiteral_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1535,7 +1536,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1549,7 +1550,7 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUnknownValue_AllParameters_Async()
+        public async Task Example_GetUnknownValue_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");

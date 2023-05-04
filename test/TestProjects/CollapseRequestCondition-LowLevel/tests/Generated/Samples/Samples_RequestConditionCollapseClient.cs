@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CollapsePut_Async()
+        public async Task Example_CollapsePut_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -58,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CollapsePut_AllParameters_Async()
+        public async Task Example_CollapsePut_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -93,7 +94,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CollapseGet_Async()
+        public async Task Example_CollapseGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -104,7 +105,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CollapseGet_AllParameters_Async()
+        public async Task Example_CollapseGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -137,7 +138,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfNoneMatchGet_Async()
+        public async Task Example_MissIfNoneMatchGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -148,7 +149,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfNoneMatchGet_AllParameters_Async()
+        public async Task Example_MissIfNoneMatchGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -181,7 +182,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfMatchGet_Async()
+        public async Task Example_MissIfMatchGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -192,7 +193,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfMatchGet_AllParameters_Async()
+        public async Task Example_MissIfMatchGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -225,7 +226,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfModifiedSinceGet_Async()
+        public async Task Example_MissIfModifiedSinceGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -236,7 +237,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfModifiedSinceGet_AllParameters_Async()
+        public async Task Example_MissIfModifiedSinceGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -269,7 +270,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfUnmodifiedSinceGet_Async()
+        public async Task Example_MissIfUnmodifiedSinceGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -280,7 +281,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfUnmodifiedSinceGet_AllParameters_Async()
+        public async Task Example_MissIfUnmodifiedSinceGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -313,7 +314,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfMatchIfNoneMatchGet_Async()
+        public async Task Example_MissIfMatchIfNoneMatchGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -324,7 +325,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_MissIfMatchIfNoneMatchGet_AllParameters_Async()
+        public async Task Example_MissIfMatchIfNoneMatchGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -357,7 +358,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfModifiedSinceGet_Async()
+        public async Task Example_IfModifiedSinceGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -368,7 +369,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfModifiedSinceGet_AllParameters_Async()
+        public async Task Example_IfModifiedSinceGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -401,7 +402,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfUnmodifiedSinceGet_Async()
+        public async Task Example_IfUnmodifiedSinceGet_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
@@ -412,7 +413,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfUnmodifiedSinceGet_AllParameters_Async()
+        public async Task Example_IfUnmodifiedSinceGet_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);

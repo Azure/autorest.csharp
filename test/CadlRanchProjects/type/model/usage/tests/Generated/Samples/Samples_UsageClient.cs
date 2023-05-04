@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -49,7 +50,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Input_Async()
+        public async Task Example_Input_Async()
         {
             var client = new UsageClient();
 
@@ -64,7 +65,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Input_AllParameters_Async()
+        public async Task Example_Input_AllParameters_Async()
         {
             var client = new UsageClient();
 
@@ -103,7 +104,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Output_Async()
+        public async Task Example_Output_Async()
         {
             var client = new UsageClient();
 
@@ -115,7 +116,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Output_AllParameters_Async()
+        public async Task Example_Output_AllParameters_Async()
         {
             var client = new UsageClient();
 
@@ -161,7 +162,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_InputAndOutput_Async()
+        public async Task Example_InputAndOutput_Async()
         {
             var client = new UsageClient();
 
@@ -178,7 +179,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_InputAndOutput_AllParameters_Async()
+        public async Task Example_InputAndOutput_AllParameters_Async()
         {
             var client = new UsageClient();
 

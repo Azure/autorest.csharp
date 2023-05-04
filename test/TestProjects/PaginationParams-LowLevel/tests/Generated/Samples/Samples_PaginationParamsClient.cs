@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -49,7 +50,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPaginationParams_Async()
+        public async Task Example_GetPaginationParams_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -63,7 +64,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPaginationParams_AllParameters_Async()
+        public async Task Example_GetPaginationParams_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -109,7 +110,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get2s_Async()
+        public async Task Example_Get2s_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -123,7 +124,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get2s_AllParameters_Async()
+        public async Task Example_Get2s_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -169,7 +170,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get3s_Async()
+        public async Task Example_Get3s_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -183,7 +184,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get3s_AllParameters_Async()
+        public async Task Example_Get3s_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -229,7 +230,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get4s_Async()
+        public async Task Example_Get4s_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
@@ -243,7 +244,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get4s_AllParameters_Async()
+        public async Task Example_Get4s_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);

@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAllWithValues_Async()
+        public async Task Example_GetAllWithValues_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -52,7 +53,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAllWithValues_AllParameters_Async()
+        public async Task Example_GetAllWithValues_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -85,7 +86,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGlobalQueryNull_Async()
+        public async Task Example_GetGlobalQueryNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -96,7 +97,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGlobalQueryNull_AllParameters_Async()
+        public async Task Example_GetGlobalQueryNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -129,7 +130,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGlobalAndLocalQueryNull_Async()
+        public async Task Example_GetGlobalAndLocalQueryNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -140,7 +141,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGlobalAndLocalQueryNull_AllParameters_Async()
+        public async Task Example_GetGlobalAndLocalQueryNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -173,7 +174,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetLocalPathItemQueryNull_Async()
+        public async Task Example_GetLocalPathItemQueryNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
@@ -184,7 +185,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetLocalPathItemQueryNull_AllParameters_Async()
+        public async Task Example_GetLocalPathItemQueryNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);

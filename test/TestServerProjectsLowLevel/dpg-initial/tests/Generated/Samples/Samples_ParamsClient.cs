@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HeadNoParams_Async()
+        public async Task Example_HeadNoParams_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -58,7 +59,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_HeadNoParams_AllParameters_Async()
+        public async Task Example_HeadNoParams_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -97,7 +98,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetRequired_Async()
+        public async Task Example_GetRequired_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -110,7 +111,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetRequired_AllParameters_Async()
+        public async Task Example_GetRequired_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -149,7 +150,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutRequiredOptional_Async()
+        public async Task Example_PutRequiredOptional_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -162,7 +163,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutRequiredOptional_AllParameters_Async()
+        public async Task Example_PutRequiredOptional_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -211,7 +212,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostParameters_Async()
+        public async Task Example_PostParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -229,7 +230,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostParameters_AllParameters_Async()
+        public async Task Example_PostParameters_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -273,7 +274,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetOptional_Async()
+        public async Task Example_GetOptional_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
@@ -286,7 +287,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetOptional_AllParameters_Async()
+        public async Task Example_GetOptional_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);

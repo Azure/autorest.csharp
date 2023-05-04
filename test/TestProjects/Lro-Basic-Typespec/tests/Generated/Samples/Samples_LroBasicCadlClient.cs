@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -51,7 +52,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateProject_Async()
+        public async Task Example_CreateProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);
@@ -65,7 +66,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateProject_AllParameters_Async()
+        public async Task Example_CreateProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);
@@ -121,7 +122,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UpdateProject_Async()
+        public async Task Example_UpdateProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);
@@ -137,7 +138,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_UpdateProject_AllParameters_Async()
+        public async Task Example_UpdateProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);
@@ -197,7 +198,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateThing_Async()
+        public async Task Example_CreateThing_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);
@@ -216,7 +217,7 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateThing_AllParameters_Async()
+        public async Task Example_CreateThing_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicCadlClient(endpoint);

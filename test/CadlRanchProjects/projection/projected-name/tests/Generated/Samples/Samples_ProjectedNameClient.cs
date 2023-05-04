@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -39,7 +40,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_Async()
+        public async Task Example_Operation_Async()
         {
             var client = new ProjectedNameClient();
 
@@ -49,7 +50,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_AllParameters_Async()
+        public async Task Example_Operation_AllParameters_Async()
         {
             var client = new ProjectedNameClient();
 
@@ -79,7 +80,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Parameter_Async()
+        public async Task Example_Parameter_Async()
         {
             var client = new ProjectedNameClient();
 
@@ -89,7 +90,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Parameter_AllParameters_Async()
+        public async Task Example_Parameter_AllParameters_Async()
         {
             var client = new ProjectedNameClient();
 

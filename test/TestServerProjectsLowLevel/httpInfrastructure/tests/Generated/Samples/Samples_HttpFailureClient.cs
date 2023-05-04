@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmptyError_Async()
+        public async Task Example_GetEmptyError_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);
@@ -58,7 +59,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmptyError_AllParameters_Async()
+        public async Task Example_GetEmptyError_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);
@@ -97,7 +98,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNoModelError_Async()
+        public async Task Example_GetNoModelError_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);
@@ -110,7 +111,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNoModelError_AllParameters_Async()
+        public async Task Example_GetNoModelError_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);
@@ -149,7 +150,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNoModelEmpty_Async()
+        public async Task Example_GetNoModelEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);
@@ -162,7 +163,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNoModelEmpty_AllParameters_Async()
+        public async Task Example_GetNoModelEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpFailureClient(credential);

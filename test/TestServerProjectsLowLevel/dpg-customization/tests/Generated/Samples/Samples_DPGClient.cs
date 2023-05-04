@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetModel_Async()
+        public async Task Example_GetModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -58,7 +59,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetModel_AllParameters_Async()
+        public async Task Example_GetModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -107,7 +108,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostModel_Async()
+        public async Task Example_PostModel_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -125,7 +126,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PostModel_AllParameters_Async()
+        public async Task Example_PostModel_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -171,7 +172,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPages_Async()
+        public async Task Example_GetPages_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -185,7 +186,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPages_AllParameters_Async()
+        public async Task Example_GetPages_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -229,7 +230,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Lro_Async()
+        public async Task Example_Lro_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
@@ -244,7 +245,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Lro_AllParameters_Async()
+        public async Task Example_Lro_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);

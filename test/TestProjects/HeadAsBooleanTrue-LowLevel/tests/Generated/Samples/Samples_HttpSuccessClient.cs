@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head200_Async()
+        public async Task Example_Head200_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
@@ -52,7 +53,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head200_AllParameters_Async()
+        public async Task Example_Head200_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
@@ -85,7 +86,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head204_Async()
+        public async Task Example_Head204_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
@@ -96,7 +97,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head204_AllParameters_Async()
+        public async Task Example_Head204_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
@@ -129,7 +130,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head404_Async()
+        public async Task Example_Head404_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
@@ -140,7 +141,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head404_AllParameters_Async()
+        public async Task Example_Head404_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);

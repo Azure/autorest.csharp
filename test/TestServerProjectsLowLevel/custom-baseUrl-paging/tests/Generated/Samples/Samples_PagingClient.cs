@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -48,7 +49,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrl_Async()
+        public async Task Example_GetPagesPartialUrl_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
@@ -62,7 +63,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrl_AllParameters_Async()
+        public async Task Example_GetPagesPartialUrl_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
@@ -106,7 +107,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrlOperation_Async()
+        public async Task Example_GetPagesPartialUrlOperation_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
@@ -120,7 +121,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrlOperation_AllParameters_Async()
+        public async Task Example_GetPagesPartialUrlOperation_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
@@ -164,7 +165,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrlOperationNext_Async()
+        public async Task Example_GetPagesPartialUrlOperationNext_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
@@ -178,7 +179,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPagesPartialUrlOperationNext_AllParameters_Async()
+        public async Task Example_GetPagesPartialUrlOperationNext_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);

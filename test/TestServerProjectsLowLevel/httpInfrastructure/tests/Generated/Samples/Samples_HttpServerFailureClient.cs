@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head501_Async()
+        public async Task Example_Head501_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -52,7 +53,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head501_AllParameters_Async()
+        public async Task Example_Head501_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -85,7 +86,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get501_Async()
+        public async Task Example_Get501_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -96,7 +97,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get501_AllParameters_Async()
+        public async Task Example_Get501_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -133,7 +134,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post505_Async()
+        public async Task Example_Post505_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -146,7 +147,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post505_AllParameters_Async()
+        public async Task Example_Post505_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -185,7 +186,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete505_Async()
+        public async Task Example_Delete505_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
@@ -198,7 +199,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete505_AllParameters_Async()
+        public async Task Example_Delete505_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);

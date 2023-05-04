@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -109,7 +110,7 @@ namespace CustomizationsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_RoundTrip_Async()
+        public async Task Example_RoundTrip_Async()
         {
             var client = new CustomizationsInCadlClient();
 
@@ -123,7 +124,7 @@ namespace CustomizationsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_RoundTrip_AllParameters_Async()
+        public async Task Example_RoundTrip_AllParameters_Async()
         {
             var client = new CustomizationsInCadlClient();
 

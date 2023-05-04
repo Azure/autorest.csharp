@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -44,7 +45,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SmokeTest_Async()
+        public async Task Example_SmokeTest_Async()
         {
             var client = new TraitsClient();
 
@@ -56,7 +57,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SmokeTest_AllParameters_Async()
+        public async Task Example_SmokeTest_AllParameters_Async()
         {
             var client = new TraitsClient();
 

@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -43,7 +44,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_Async()
+        public async Task Example_Operation_Async()
         {
             var client = new ParametersCadlClient();
 
@@ -55,7 +56,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_AllParameters_Async()
+        public async Task Example_Operation_AllParameters_Async()
         {
             var client = new ParametersCadlClient();
 
@@ -91,7 +92,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation2_Async()
+        public async Task Example_Operation2_Async()
         {
             var client = new ParametersCadlClient();
 
@@ -103,7 +104,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation2_AllParameters_Async()
+        public async Task Example_Operation2_AllParameters_Async()
         {
             var client = new ParametersCadlClient();
 

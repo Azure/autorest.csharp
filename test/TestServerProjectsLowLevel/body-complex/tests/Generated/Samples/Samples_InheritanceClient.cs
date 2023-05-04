@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -51,7 +52,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetValid_Async()
+        public async Task Example_GetValid_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
@@ -64,7 +65,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetValid_AllParameters_Async()
+        public async Task Example_GetValid_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
@@ -122,7 +123,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutValid_Async()
+        public async Task Example_PutValid_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
@@ -135,7 +136,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutValid_AllParameters_Async()
+        public async Task Example_PutValid_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);

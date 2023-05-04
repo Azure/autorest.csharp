@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -43,7 +44,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetKnownValue_Async()
+        public async Task Example_GetKnownValue_Async()
         {
             var client = new ExtensibleClient();
 
@@ -55,7 +56,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetKnownValue_AllParameters_Async()
+        public async Task Example_GetKnownValue_AllParameters_Async()
         {
             var client = new ExtensibleClient();
 
@@ -91,7 +92,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_Async()
         {
             var client = new ExtensibleClient();
 
@@ -103,7 +104,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUnknownValue_AllParameters_Async()
+        public async Task Example_GetUnknownValue_AllParameters_Async()
         {
             var client = new ExtensibleClient();
 
@@ -139,7 +140,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutKnownValue_Async()
+        public async Task Example_PutKnownValue_Async()
         {
             var client = new ExtensibleClient();
 
@@ -151,7 +152,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutKnownValue_AllParameters_Async()
+        public async Task Example_PutKnownValue_AllParameters_Async()
         {
             var client = new ExtensibleClient();
 
@@ -187,7 +188,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutUnknownValue_Async()
+        public async Task Example_PutUnknownValue_Async()
         {
             var client = new ExtensibleClient();
 
@@ -199,7 +200,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutUnknownValue_AllParameters_Async()
+        public async Task Example_PutUnknownValue_AllParameters_Async()
         {
             var client = new ExtensibleClient();
 

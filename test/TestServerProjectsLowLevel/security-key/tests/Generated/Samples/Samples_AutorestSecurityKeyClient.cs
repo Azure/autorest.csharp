@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace security_key_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head_Async()
+        public async Task Example_Head_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new AutorestSecurityKeyClient(credential);
@@ -52,7 +53,7 @@ namespace security_key_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head_AllParameters_Async()
+        public async Task Example_Head_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new AutorestSecurityKeyClient(credential);

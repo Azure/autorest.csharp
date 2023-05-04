@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -47,7 +48,7 @@ namespace ApiVersionInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBatchDetectionResult_Async()
+        public async Task Example_GetBatchDetectionResult_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,7 +62,7 @@ namespace ApiVersionInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBatchDetectionResult_AllParameters_Async()
+        public async Task Example_GetBatchDetectionResult_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");

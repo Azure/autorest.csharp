@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -53,7 +54,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFile_Async()
+        public async Task Example_GetFile_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
@@ -70,7 +71,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFile_AllParameters_Async()
+        public async Task Example_GetFile_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
@@ -121,7 +122,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFileLarge_Async()
+        public async Task Example_GetFileLarge_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
@@ -138,7 +139,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetFileLarge_AllParameters_Async()
+        public async Task Example_GetFileLarge_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
@@ -189,7 +190,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmptyFile_Async()
+        public async Task Example_GetEmptyFile_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
@@ -206,7 +207,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmptyFile_AllParameters_Async()
+        public async Task Example_GetEmptyFile_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);

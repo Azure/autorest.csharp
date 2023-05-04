@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -41,7 +42,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head408_Async()
+        public async Task Example_Head408_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -52,7 +53,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Head408_AllParameters_Async()
+        public async Task Example_Head408_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -89,7 +90,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put500_Async()
+        public async Task Example_Put500_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -102,7 +103,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put500_AllParameters_Async()
+        public async Task Example_Put500_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -141,7 +142,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch500_Async()
+        public async Task Example_Patch500_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -154,7 +155,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch500_AllParameters_Async()
+        public async Task Example_Patch500_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -189,7 +190,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get502_Async()
+        public async Task Example_Get502_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -200,7 +201,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Get502_AllParameters_Async()
+        public async Task Example_Get502_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -237,7 +238,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Options502_Async()
+        public async Task Example_Options502_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -250,7 +251,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Options502_AllParameters_Async()
+        public async Task Example_Options502_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -289,7 +290,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post503_Async()
+        public async Task Example_Post503_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -302,7 +303,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Post503_AllParameters_Async()
+        public async Task Example_Post503_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -341,7 +342,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete503_Async()
+        public async Task Example_Delete503_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -354,7 +355,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete503_AllParameters_Async()
+        public async Task Example_Delete503_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -393,7 +394,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put504_Async()
+        public async Task Example_Put504_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -406,7 +407,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Put504_AllParameters_Async()
+        public async Task Example_Put504_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -445,7 +446,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch504_Async()
+        public async Task Example_Patch504_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
@@ -458,7 +459,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Patch504_AllParameters_Async()
+        public async Task Example_Patch504_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);

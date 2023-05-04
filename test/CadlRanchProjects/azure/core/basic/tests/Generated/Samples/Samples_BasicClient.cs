@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -66,7 +67,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrUpdate_Async()
+        public async Task Example_CreateOrUpdate_Async()
         {
             var client = new BasicClient();
 
@@ -85,7 +86,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrUpdate_AllParameters_Async()
+        public async Task Example_CreateOrUpdate_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -160,7 +161,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrReplace_Async()
+        public async Task Example_CreateOrReplace_Async()
         {
             var client = new BasicClient();
 
@@ -179,7 +180,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrReplace_AllParameters_Async()
+        public async Task Example_CreateOrReplace_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -238,7 +239,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUser_Async()
+        public async Task Example_GetUser_Async()
         {
             var client = new BasicClient();
 
@@ -252,7 +253,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUser_AllParameters_Async()
+        public async Task Example_GetUser_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -289,7 +290,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_Async()
+        public async Task Example_Delete_Async()
         {
             var client = new BasicClient();
 
@@ -299,7 +300,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_AllParameters_Async()
+        public async Task Example_Delete_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -340,7 +341,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Export_Async()
+        public async Task Example_Export_Async()
         {
             var client = new BasicClient();
 
@@ -354,7 +355,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Export_AllParameters_Async()
+        public async Task Example_Export_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -404,7 +405,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUsers_Async()
+        public async Task Example_GetUsers_Async()
         {
             var client = new BasicClient();
 
@@ -419,7 +420,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetUsers_AllParameters_Async()
+        public async Task Example_GetUsers_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -470,7 +471,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWithPage_Async()
+        public async Task Example_GetWithPage_Async()
         {
             var client = new BasicClient();
 
@@ -485,7 +486,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWithPage_AllParameters_Async()
+        public async Task Example_GetWithPage_AllParameters_Async()
         {
             var client = new BasicClient();
 
@@ -536,7 +537,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWithCustomPageModel_Async()
+        public async Task Example_GetWithCustomPageModel_Async()
         {
             var client = new BasicClient();
 
@@ -551,7 +552,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWithCustomPageModel_AllParameters_Async()
+        public async Task Example_GetWithCustomPageModel_AllParameters_Async()
         {
             var client = new BasicClient();
 

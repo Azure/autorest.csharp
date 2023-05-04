@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -65,7 +66,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPaginationLedgerEntries_Async()
+        public async Task Example_GetPaginationLedgerEntries_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -88,7 +89,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetPaginationLedgerEntries_AllParameters_Async()
+        public async Task Example_GetPaginationLedgerEntries_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -145,7 +146,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetLedgerEntries_Async()
+        public async Task Example_GetLedgerEntries_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -162,7 +163,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetLedgerEntries_AllParameters_Async()
+        public async Task Example_GetLedgerEntries_AllParameters_Async()
         {
             var credential = new DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");

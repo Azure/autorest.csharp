@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -43,7 +44,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_Async()
+        public async Task Example_Operation_Async()
         {
             var client = new AccessibilityClient();
 
@@ -55,7 +56,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Operation_AllParameters_Async()
+        public async Task Example_Operation_AllParameters_Async()
         {
             var client = new AccessibilityClient();
 

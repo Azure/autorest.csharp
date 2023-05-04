@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfMatchPut_Async()
+        public async Task Example_IfMatchPut_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new NonCollapseClient(credential);
@@ -58,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfMatchPut_AllParameters_Async()
+        public async Task Example_IfMatchPut_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new NonCollapseClient(credential);
@@ -97,7 +98,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfNoneMatchPut_Async()
+        public async Task Example_IfNoneMatchPut_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new NonCollapseClient(credential);
@@ -110,7 +111,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_IfNoneMatchPut_AllParameters_Async()
+        public async Task Example_IfNoneMatchPut_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new NonCollapseClient(credential);

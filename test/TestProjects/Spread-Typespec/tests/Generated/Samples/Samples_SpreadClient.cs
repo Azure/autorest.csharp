@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -53,7 +54,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadModel_Async()
+        public async Task Example_SpreadModel_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -70,7 +71,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadModel_AllParameters_Async()
+        public async Task Example_SpreadModel_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -121,7 +122,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAlias_Async()
+        public async Task Example_SpreadAlias_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -138,7 +139,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAlias_AllParameters_Async()
+        public async Task Example_SpreadAlias_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -189,7 +190,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadMultiTargetAlias_Async()
+        public async Task Example_SpreadMultiTargetAlias_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -206,7 +207,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadMultiTargetAlias_AllParameters_Async()
+        public async Task Example_SpreadMultiTargetAlias_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -257,7 +258,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithModel_Async()
+        public async Task Example_SpreadAliasWithModel_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -274,7 +275,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithModel_AllParameters_Async()
+        public async Task Example_SpreadAliasWithModel_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -325,7 +326,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithSpreadAlias_Async()
+        public async Task Example_SpreadAliasWithSpreadAlias_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -342,7 +343,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithSpreadAlias_AllParameters_Async()
+        public async Task Example_SpreadAliasWithSpreadAlias_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -402,7 +403,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithOptionalProps_Async()
+        public async Task Example_SpreadAliasWithOptionalProps_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);
@@ -421,7 +422,7 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SpreadAliasWithOptionalProps_AllParameters_Async()
+        public async Task Example_SpreadAliasWithOptionalProps_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadClient(endpoint);

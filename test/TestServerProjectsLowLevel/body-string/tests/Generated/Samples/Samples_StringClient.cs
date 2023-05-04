@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNull_Async()
+        public async Task Example_GetNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -58,7 +59,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNull_AllParameters_Async()
+        public async Task Example_GetNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -97,7 +98,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutNull_Async()
+        public async Task Example_PutNull_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -110,7 +111,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutNull_AllParameters_Async()
+        public async Task Example_PutNull_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -149,7 +150,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -162,7 +163,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetEmpty_AllParameters_Async()
+        public async Task Example_GetEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -201,7 +202,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutEmpty_Async()
+        public async Task Example_PutEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -214,7 +215,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutEmpty_AllParameters_Async()
+        public async Task Example_PutEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -253,7 +254,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMbcs_Async()
+        public async Task Example_GetMbcs_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -266,7 +267,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetMbcs_AllParameters_Async()
+        public async Task Example_GetMbcs_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -305,7 +306,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutMbcs_Async()
+        public async Task Example_PutMbcs_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -318,7 +319,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutMbcs_AllParameters_Async()
+        public async Task Example_PutMbcs_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -357,7 +358,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWhitespace_Async()
+        public async Task Example_GetWhitespace_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -370,7 +371,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetWhitespace_AllParameters_Async()
+        public async Task Example_GetWhitespace_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -409,7 +410,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutWhitespace_Async()
+        public async Task Example_PutWhitespace_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -422,7 +423,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutWhitespace_AllParameters_Async()
+        public async Task Example_PutWhitespace_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -461,7 +462,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNotProvided_Async()
+        public async Task Example_GetNotProvided_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -474,7 +475,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNotProvided_AllParameters_Async()
+        public async Task Example_GetNotProvided_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -513,7 +514,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBase64Encoded_Async()
+        public async Task Example_GetBase64Encoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -526,7 +527,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBase64Encoded_AllParameters_Async()
+        public async Task Example_GetBase64Encoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -565,7 +566,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBase64UrlEncoded_Async()
+        public async Task Example_GetBase64UrlEncoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -578,7 +579,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetBase64UrlEncoded_AllParameters_Async()
+        public async Task Example_GetBase64UrlEncoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -617,7 +618,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutBase64UrlEncoded_Async()
+        public async Task Example_PutBase64UrlEncoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -630,7 +631,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutBase64UrlEncoded_AllParameters_Async()
+        public async Task Example_PutBase64UrlEncoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -669,7 +670,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNullBase64UrlEncoded_Async()
+        public async Task Example_GetNullBase64UrlEncoded_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
@@ -682,7 +683,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNullBase64UrlEncoded_AllParameters_Async()
+        public async Task Example_GetNullBase64UrlEncoded_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);

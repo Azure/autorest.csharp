@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetParameters_Async()
+        public async Task Example_GetParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
@@ -58,7 +59,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetParameters_AllParameters_Async()
+        public async Task Example_GetParameters_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
@@ -99,7 +100,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGroups_Async()
+        public async Task Example_GetGroups_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
@@ -113,7 +114,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetGroups_AllParameters_Async()
+        public async Task Example_GetGroups_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
@@ -155,7 +156,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAllItems_Async()
+        public async Task Example_GetAllItems_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
@@ -169,7 +170,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetAllItems_AllParameters_Async()
+        public async Task Example_GetAllItems_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);

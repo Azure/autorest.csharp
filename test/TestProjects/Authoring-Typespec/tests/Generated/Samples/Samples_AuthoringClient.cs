@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -82,7 +83,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrUpdate_Async()
+        public async Task Example_CreateOrUpdate_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -109,7 +110,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_CreateOrUpdate_AllParameters_Async()
+        public async Task Example_CreateOrUpdate_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -188,7 +189,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProject_Async()
+        public async Task Example_GetProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -208,7 +209,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProject_AllParameters_Async()
+        public async Task Example_GetProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -274,7 +275,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_Async()
+        public async Task Example_Delete_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -294,7 +295,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Delete_AllParameters_Async()
+        public async Task Example_Delete_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -339,7 +340,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Export_Async()
+        public async Task Example_Export_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -350,7 +351,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Export_AllParameters_Async()
+        public async Task Example_Export_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -383,7 +384,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Importx_Async()
+        public async Task Example_Importx_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -394,7 +395,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Importx_AllParameters_Async()
+        public async Task Example_Importx_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -437,7 +438,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Train_Async()
+        public async Task Example_Train_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -453,7 +454,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_Train_AllParameters_Async()
+        public async Task Example_Train_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -495,7 +496,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployment_Async()
+        public async Task Example_GetDeployment_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -508,7 +509,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployment_AllParameters_Async()
+        public async Task Example_GetDeployment_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -551,7 +552,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeployProject_Async()
+        public async Task Example_DeployProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -566,7 +567,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeployProject_AllParameters_Async()
+        public async Task Example_DeployProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -607,7 +608,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeleteDeployment_Async()
+        public async Task Example_DeleteDeployment_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -620,7 +621,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_DeleteDeployment_AllParameters_Async()
+        public async Task Example_DeleteDeployment_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -667,7 +668,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SwapDeployments_Async()
+        public async Task Example_SwapDeployments_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -684,7 +685,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_SwapDeployments_AllParameters_Async()
+        public async Task Example_SwapDeployments_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -747,7 +748,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeploymentStatus_Async()
+        public async Task Example_GetDeploymentStatus_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -769,7 +770,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeploymentStatus_AllParameters_Async()
+        public async Task Example_GetDeploymentStatus_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -839,7 +840,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetSwapDeploymentsStatus_Async()
+        public async Task Example_GetSwapDeploymentsStatus_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -861,7 +862,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetSwapDeploymentsStatus_AllParameters_Async()
+        public async Task Example_GetSwapDeploymentsStatus_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -930,7 +931,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProjects_Async()
+        public async Task Example_GetProjects_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -951,7 +952,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetProjects_AllParameters_Async()
+        public async Task Example_GetProjects_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1020,7 +1021,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployments_Async()
+        public async Task Example_GetDeployments_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1041,7 +1042,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetDeployments_AllParameters_Async()
+        public async Task Example_GetDeployments_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1095,7 +1096,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetSupportedLanguages_Async()
+        public async Task Example_GetSupportedLanguages_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1110,7 +1111,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetSupportedLanguages_AllParameters_Async()
+        public async Task Example_GetSupportedLanguages_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1155,7 +1156,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetTrainingConfigVersions_Async()
+        public async Task Example_GetTrainingConfigVersions_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
@@ -1170,7 +1171,7 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetTrainingConfigVersions_AllParameters_Async()
+        public async Task Example_GetTrainingConfigVersions_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);

@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -45,7 +46,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNotExpandable_Async()
+        public async Task Example_GetNotExpandable_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -58,7 +59,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetNotExpandable_AllParameters_Async()
+        public async Task Example_GetNotExpandable_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -97,7 +98,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutNotExpandable_Async()
+        public async Task Example_PutNotExpandable_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -110,7 +111,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutNotExpandable_AllParameters_Async()
+        public async Task Example_PutNotExpandable_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -149,7 +150,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetReferenced_Async()
+        public async Task Example_GetReferenced_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -162,7 +163,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetReferenced_AllParameters_Async()
+        public async Task Example_GetReferenced_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -201,7 +202,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutReferenced_Async()
+        public async Task Example_PutReferenced_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -214,7 +215,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutReferenced_AllParameters_Async()
+        public async Task Example_PutReferenced_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -254,7 +255,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetReferencedConstant_Async()
+        public async Task Example_GetReferencedConstant_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -267,7 +268,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_GetReferencedConstant_AllParameters_Async()
+        public async Task Example_GetReferencedConstant_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -314,7 +315,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutReferencedConstant_Async()
+        public async Task Example_PutReferencedConstant_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
@@ -330,7 +331,7 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async void Example_PutReferencedConstant_AllParameters_Async()
+        public async Task Example_PutReferencedConstant_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
