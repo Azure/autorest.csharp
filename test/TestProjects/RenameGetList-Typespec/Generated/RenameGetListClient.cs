@@ -54,14 +54,14 @@ namespace Azure.RenameGetList
             _apiVersion = options.Version;
         }
 
-        /// <summary> Gets the details of a project. </summary>
+        /// <summary> [Protocol Method] Gets the details of a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProjectAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProjectAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetProjectAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -80,14 +80,14 @@ namespace Azure.RenameGetList
             }
         }
 
-        /// <summary> Gets the details of a project. </summary>
+        /// <summary> [Protocol Method] Gets the details of a project. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProject(String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProject(string,RequestContext)']/*" />
         public virtual Response GetProject(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -106,7 +106,7 @@ namespace Azure.RenameGetList
             }
         }
 
-        /// <summary> Gets the details of a deployment. </summary>
+        /// <summary> [Protocol Method] Gets the details of a deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -114,7 +114,7 @@ namespace Azure.RenameGetList
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetDeploymentAsync(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -134,7 +134,7 @@ namespace Azure.RenameGetList
             }
         }
 
-        /// <summary> Gets the details of a deployment. </summary>
+        /// <summary> [Protocol Method] Gets the details of a deployment. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -142,7 +142,7 @@ namespace Azure.RenameGetList
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployment(String,String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployment(string,string,RequestContext)']/*" />
         public virtual Response GetDeployment(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -162,7 +162,7 @@ namespace Azure.RenameGetList
             }
         }
 
-        /// <summary> Lists the existing projects. </summary>
+        /// <summary> [Protocol Method] Lists the existing projects. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -174,7 +174,7 @@ namespace Azure.RenameGetList
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetProjects", "value", "nextLink", context);
         }
 
-        /// <summary> Lists the existing projects. </summary>
+        /// <summary> [Protocol Method] Lists the existing projects. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -186,14 +186,14 @@ namespace Azure.RenameGetList
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetProjects", "value", "nextLink", context);
         }
 
-        /// <summary> Lists the existing deployments. </summary>
+        /// <summary> [Protocol Method] Lists the existing deployments. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetDeploymentsAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -203,14 +203,14 @@ namespace Azure.RenameGetList
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetDeployments", "value", "nextLink", context);
         }
 
-        /// <summary> Lists the existing deployments. </summary>
+        /// <summary> [Protocol Method] Lists the existing deployments. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployments(String,RequestContext)']/*" />
+        /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployments(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetDeployments(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));

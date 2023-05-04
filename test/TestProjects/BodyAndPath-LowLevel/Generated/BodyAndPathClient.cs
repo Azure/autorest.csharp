@@ -58,7 +58,7 @@ namespace BodyAndPath_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -66,7 +66,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -86,7 +86,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -94,7 +94,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(string,RequestContent,RequestContext)']/*" />
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -114,7 +114,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
@@ -124,7 +124,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(String,RequestContent,ContentType,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -144,7 +144,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
@@ -154,7 +154,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(String,RequestContent,ContentType,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -174,7 +174,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create another product. </summary>
+        /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -183,7 +183,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -204,7 +204,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create another product. </summary>
+        /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -213,7 +213,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -234,7 +234,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List. </summary>
+        /// <summary> [Protocol Method] List. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -255,7 +255,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List. </summary>
+        /// <summary> [Protocol Method] List. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -276,7 +276,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List products. </summary>
+        /// <summary> [Protocol Method] List products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -297,7 +297,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List products. </summary>
+        /// <summary> [Protocol Method] List products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -318,6 +318,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
@@ -329,7 +330,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(String,String,String,RequestContent,String,String,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)']/*" />
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
@@ -351,6 +352,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
@@ -362,7 +364,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(String,String,String,RequestContent,String,String,RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,RequestContent,string,string,RequestContext)']/*" />
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));

@@ -58,13 +58,14 @@ namespace PaginationParams_LowLevel
             _apiVersion = options.Version;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParamsAsync(Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParamsAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationParamsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
@@ -72,13 +73,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParams(Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParams(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationParams(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
@@ -86,13 +88,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
         /// <param name="offset"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(Int32,Int32,Int64,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(int?,int?,long?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
@@ -100,13 +103,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
         /// <param name="offset"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(Int32,Int32,Int64,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(int?,int?,long?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get2s(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
@@ -114,13 +118,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3sAsync(Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3sAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get3sAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
@@ -128,13 +133,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3s(Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3s(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get3s(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
@@ -142,13 +148,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxcount"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4sAsync(Int32,Int32,Single,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4sAsync(int?,int?,float?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get4sAsync(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);
@@ -156,13 +163,14 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get4s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxcount"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4s(Int32,Int32,Single,RequestContext)']/*" />
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4s(int?,int?,float?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get4s(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);

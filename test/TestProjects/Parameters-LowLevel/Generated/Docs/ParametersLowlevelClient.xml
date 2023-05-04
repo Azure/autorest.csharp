@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="NoRequestBodyResponseBodyAsync(Int32,Int32,Int32,String,RequestContext)">
+    <member name="NoRequestBodyResponseBodyAsync(int,int?,int,string,RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="NoRequestBodyResponseBody(Int32,Int32,Int32,String,RequestContext)">
+    <member name="NoRequestBodyResponseBody(int,int?,int,string,RequestContext)">
 <example>
 This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="DeleteNoRequestBodyResponseBodyAsync(String,RequestContext)">
+    <member name="DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)">
 <example>
 This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -171,7 +171,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="DeleteNoRequestBodyResponseBody(String,RequestContext)">
+    <member name="DeleteNoRequestBodyResponseBody(string,RequestContext)">
 <example>
 This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
 <code><![CDATA[
@@ -237,7 +237,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersAsync(Int32,Int32,String,RequestContext)">
+    <member name="OptionalPathParametersAsync(int,int,string,RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersAsync with required parameters.
 <code><![CDATA[
@@ -257,7 +257,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParameters(Int32,Int32,String,RequestContext)">
+    <member name="OptionalPathParameters(int,int,string,RequestContext)">
 <example>
 This sample shows how to call OptionalPathParameters with required parameters.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersWithMixedSequenceAsync(Int32,String,Int32,RequestContext)">
+    <member name="OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with required parameters.
 <code><![CDATA[
@@ -297,7 +297,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathParametersWithMixedSequence(Int32,String,Int32,RequestContext)">
+    <member name="OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)">
 <example>
 This sample shows how to call OptionalPathParametersWithMixedSequence with required parameters.
 <code><![CDATA[
@@ -317,7 +317,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OptionalPathBodyParametersWithMixedSequenceAsync(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)">
+    <member name="OptionalPathBodyParametersWithMixedSequenceAsync(string,int,RequestContent,int,int?,int,RequestContext)">
 <example>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync with required parameters.
 <code><![CDATA[
@@ -357,7 +357,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="OptionalPathBodyParametersWithMixedSequence(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)">
+    <member name="OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)">
 <example>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequence with required parameters.
 <code><![CDATA[

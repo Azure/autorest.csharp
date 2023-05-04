@@ -343,7 +343,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNullAsync(String,RequestContext)">
+    <member name="StringNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call StringNullAsync with required parameters.
 <code><![CDATA[
@@ -355,7 +355,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNull(String,RequestContext)">
+    <member name="StringNull(string,RequestContext)">
 <example>
 This sample shows how to call StringNull with required parameters.
 <code><![CDATA[
@@ -367,7 +367,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValidAsync(String,RequestContext)">
+    <member name="EnumValidAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumValidAsync with required parameters.
 <code><![CDATA[
@@ -379,7 +379,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValid(String,RequestContext)">
+    <member name="EnumValid(string,RequestContext)">
 <example>
 This sample shows how to call EnumValid with required parameters.
 <code><![CDATA[
@@ -391,7 +391,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNullAsync(String,RequestContext)">
+    <member name="EnumNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumNullAsync with required parameters.
 <code><![CDATA[
@@ -403,7 +403,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNull(String,RequestContext)">
+    <member name="EnumNull(string,RequestContext)">
 <example>
 This sample shows how to call EnumNull with required parameters.
 <code><![CDATA[
@@ -607,7 +607,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayCsvInPathAsync(IEnumerable,RequestContext)">
+    <member name="ArrayCsvInPathAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayCsvInPathAsync with required parameters.
 <code><![CDATA[
@@ -619,7 +619,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayCsvInPath(IEnumerable,RequestContext)">
+    <member name="ArrayCsvInPath(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayCsvInPath with required parameters.
 <code><![CDATA[

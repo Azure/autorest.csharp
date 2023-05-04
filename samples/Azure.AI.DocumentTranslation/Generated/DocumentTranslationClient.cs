@@ -59,7 +59,7 @@ namespace Azure.AI.DocumentTranslation
             _endpoint = endpoint;
         }
 
-        /// <summary> Returns the status for a specific document. </summary>
+        /// <summary> [Protocol Method] Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -82,7 +82,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a specific document. </summary>
+        /// <summary> [Protocol Method] Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -105,7 +105,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a document translation request. </summary>
+        /// <summary> [Protocol Method] Returns the status for a document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -127,7 +127,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a document translation request. </summary>
+        /// <summary> [Protocol Method] Returns the status for a document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -149,7 +149,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <summary> [Protocol Method] Cancel a currently processing or queued translation. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -171,7 +171,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <summary> [Protocol Method] Cancel a currently processing or queued translation. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -193,7 +193,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported document formats. </summary>
+        /// <summary> [Protocol Method] Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -214,7 +214,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported document formats. </summary>
+        /// <summary> [Protocol Method] Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -235,7 +235,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <summary> [Protocol Method] Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -256,7 +256,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <summary> [Protocol Method] Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -277,7 +277,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <summary> [Protocol Method] Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -298,7 +298,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <summary> [Protocol Method] Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -319,7 +319,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
+        /// <summary> [Protocol Method] Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -349,7 +349,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -357,7 +357,7 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetTranslationsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
+        /// <summary> [Protocol Method] Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -387,7 +387,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -395,7 +395,7 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetTranslationsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
+        /// <summary> [Protocol Method] Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -426,7 +426,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -434,7 +434,7 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetDocumentsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
+        /// <summary> [Protocol Method] Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -465,7 +465,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -473,7 +473,7 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetDocumentsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <summary> [Protocol Method] Submit a document translation request to the Document Translation service. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
@@ -500,7 +500,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <summary> [Protocol Method] Submit a document translation request to the Document Translation service. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
