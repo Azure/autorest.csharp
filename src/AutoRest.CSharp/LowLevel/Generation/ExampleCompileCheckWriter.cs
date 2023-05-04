@@ -16,11 +16,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
 {
     internal class ExampleCompileCheckWriter
     {
-        private MethodSignature ExampleMethodSignature(string name) => new MethodSignature(
+        private MethodSignature ExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
             $"Example_{name}",
             null,
             null,
-            MethodSignatureModifiers.Public,
+            isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
             null,
             null,
             Array.Empty<Parameter>(),
@@ -28,11 +28,13 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private LowLevelClient _client;
         private CodeWriter _writer;
+        private LowLevelExampleComposer _exampleComposer;
 
         public ExampleCompileCheckWriter(LowLevelClient client)
         {
             _client = client;
             _writer = new CodeWriter();
+            _exampleComposer = new LowLevelExampleComposer(_client);
         }
 
         public void Write()
@@ -51,17 +53,39 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 {
                     foreach (var method in _client.ClientMethods)
                     {
-                        LowLevelExampleComposer exampleComposer = new LowLevelExampleComposer(_client);
-                        StringBuilder builder = new StringBuilder();
-                        exampleComposer.ComposeCodeSnippet(method, method.RequestMethod.Name, false, false, builder);
-                        using (_writer.WriteMethodDeclaration(ExampleMethodSignature(method.RequestMethod.Name)))
+                        //TODO: we should make this more obvious to determine if something is convenience only
+                        if ((method.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) > 0 &&
+                            !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
                         {
-                            _writer.AppendRaw(builder.ToString());
+                            WriteTestCompilation(method, false, false);
+                            WriteTestCompilation(method, false, true);
+                            WriteTestCompilation(method, true, false);
+                            WriteTestCompilation(method, true, true);
                         }
-                        _writer.Line();
                     }
                 }
             }
+        }
+
+        private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
+        {
+            StringBuilder builder = new StringBuilder();
+            var asyncKeyword = isAsync ? "Async" : "";
+            _exampleComposer.ComposeCodeSnippet(method, $"{method.RequestMethod.Name}{asyncKeyword}", isAsync, useAllParameters, builder);
+            var methodName = method.RequestMethod.Name;
+            if (useAllParameters)
+            {
+                methodName += "_AllParameters";
+            }
+            if (isAsync)
+            {
+                methodName += "_Async";
+            }
+            using (_writer.WriteMethodDeclaration(ExampleMethodSignature(methodName, isAsync)))
+            {
+                _writer.AppendRaw(builder.ToString());
+            }
+            _writer.Line();
         }
 
         public override string ToString()

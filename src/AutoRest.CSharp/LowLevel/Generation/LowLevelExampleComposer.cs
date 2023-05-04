@@ -13,6 +13,8 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Input;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -34,6 +36,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
         {
+            //skip non public protocol methods
+            if ((clientMethod.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) == 0)
+                return $"";
+
+            //skip obsolete protocol methods
+            if (clientMethod.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
+                return $"";
+
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
             var requestBodyType = clientMethod.RequestBodyType;
             var builder = new StringBuilder();
@@ -226,18 +236,18 @@ namespace AutoRest.CSharp.Generation.Writers
             /* CODE PATTEN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              *
-             * await foreach (var data in operation.Value)
+             * await foreach (var item in operation.Value)
              * {
-             *     Console.WriteLine(data.ToString());
+             *     Console.WriteLine(item.ToString());
              * or
-             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
              *     Console.WriteLine(result[.GetProperty(...)...].ToString());
              *     ...
              * }
              */
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
             builder.AppendLine();
-            using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -305,16 +315,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             /* GENERATED CODE PATTERN
-             * await foreach (var data in client.{methodName}(...))
+             * await foreach (var item in client.{methodName}(...))
              * {
-             *     Console.WriteLine(data.ToString());
+             *     Console.WriteLine(item.ToString());
              * or
-             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
              *     Console.WriteLine(result[.GetProperty(...)...].ToString());
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -333,12 +343,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (apiInvocationChainList.Count == 0)
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"Console.WriteLine(data.ToString());");
+                        builder.AppendLine($"Console.WriteLine(item.ToString());");
                     }
                     else
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;");
                         foreach (var apiInvocationChain in apiInvocationChainList)
                         {
                             builder.Append(' ', 4);
@@ -352,26 +362,33 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
+            var resposneType = "Response";
+            var responseVar = "response";
+            if (clientMethod.RequestMethod.Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
+            {
+                resposneType = "Response<bool>";
+                responseVar = "response.GetRawResponse()";
+            }
+            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), allParameters)});");
             if (clientMethod.ResponseBodyType != null)
             {
-                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
+                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, responseVar, builder);
             }
             else
             {
-                builder.AppendLine("Console.WriteLine(response.Status);");
+                builder.AppendLine($"Console.WriteLine({responseVar}.Status);");
             }
         }
 
-        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
+        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)
         {
             if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
-                using (Scope("if (response.ContentStream != null)", 0, builder, true))
+                using (Scope($"if ({responseVar}.ContentStream != null)", 0, builder, true))
                 {
                     using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 4, builder, true))
                     {
-                        builder.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
+                        builder.AppendLine($"        {responseVar}.ContentStream.CopyTo(outFileStream);");
                     }
                 }
                 return;
@@ -510,7 +527,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (defaultValue.Type.IsFrameworkType && defaultValue.Type.FrameworkType == typeof(string))
                     {
-                        return $"<{defaultValue.Value}>";
+                        return $"\"{defaultValue.Value}\"";
                     }
                     return JsonSerializer.Serialize(defaultValue.Value);
                 }
@@ -558,7 +575,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(MatchConditions))
                 {
-                    return "new MatchConditions { IfMatch = \"<YOUR_ETAG>\" }";
+                    return "new MatchConditions { IfMatch = new ETag(\"<YOUR_ETAG>\") }";
                 }
 
                 if (type == typeof(Guid))
@@ -690,10 +707,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
         {
-            if (visitedModels.Contains(model))
-            {
-                return "";
-            }
+            visitedModels.Add(model);
 
             /* GENERATED CODE PATTERN
                      * new {
@@ -725,7 +739,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 return "new {}";
             }
 
-            visitedModels.Add(model);
+            //remove references to my stack
+            _ = properties.RemoveAll(p =>
+                visitedModels.Contains(p.Type) ||
+                (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
+                (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
+
             var propertyExpressions = new List<string>();
             foreach (var property in properties)
             {
@@ -743,11 +762,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (propertyValueExpr != "")
                 {
                     var propertyExprBuilder = new StringBuilder();
-                    propertyExprBuilder.Append(' ', indent + 4).Append($"{property.SerializedName} = {propertyValueExpr},");
+                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
                     propertyExpressions.Add(propertyExprBuilder.ToString());
                 }
             }
-            visitedModels.Remove(model);
 
             if (propertyExpressions.Count == 0)
             {
@@ -762,7 +780,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     builder.AppendLine(expr);
                 }
             }
+
             return builder.ToString();
+        }
+
+        private string FixKeyWords(string serializedName)
+        {
+            return SyntaxFacts.GetKeywordKind(serializedName) == SyntaxKind.None ? serializedName : $"@{serializedName}";
         }
 
         private void ComposeGetClientCodes(StringBuilder builder)

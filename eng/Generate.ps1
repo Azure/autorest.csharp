@@ -54,6 +54,9 @@ function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [str
 
 function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs = "") {
     $projectDirectory = Join-Path $testServerDirectory $testName
+    if(Test-Path "$projectDirectory/*.sln") {
+        $projectDirectory = Join-path $projectDirectory "src"
+    }
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"

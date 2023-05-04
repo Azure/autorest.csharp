@@ -86,7 +86,7 @@
     },
     "body-array-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-array\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-array\\src\\Generated"
     },
     "body-boolean": {
       "commandName": "Project",
@@ -102,7 +102,7 @@
     },
     "body-complex-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-complex\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-complex\\src\\Generated"
     },
     "body-date": {
       "commandName": "Project",
@@ -130,7 +130,7 @@
     },
     "body-file-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-file\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-file\\src\\Generated"
     },
     "body-formdata": {
       "commandName": "Project",
@@ -154,7 +154,7 @@
     },
     "body-string-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-string\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-string\\src\\Generated"
     },
     "body-time": {
       "commandName": "Project",
@@ -194,7 +194,7 @@
     },
     "custom-baseUrl-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl\\src\\Generated"
     },
     "custom-baseUrl-more-options": {
       "commandName": "Project",
@@ -202,7 +202,7 @@
     },
     "custom-baseUrl-more-options-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-more-options\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-more-options\\src\\Generated"
     },
     "custom-baseUrl-paging": {
       "commandName": "Project",
@@ -210,7 +210,7 @@
     },
     "custom-baseUrl-paging-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\src\\Generated"
     },
     "Customizations-Typespec": {
       "commandName": "Project",
@@ -218,15 +218,15 @@
     },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\src\\Generated"
     },
     "dpg-initial-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-initial\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-initial\\src\\Generated"
     },
     "dpg-update1-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-update1\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-update1\\src\\Generated"
     },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
@@ -258,7 +258,7 @@
     },
     "head-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\head\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\head\\src\\Generated"
     },
     "HeadAsBooleanTrue": {
       "commandName": "Project",
@@ -274,7 +274,7 @@
     },
     "header-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\src\\Generated"
     },
     "HeaderCollectionPrefix": {
       "commandName": "Project",
@@ -286,7 +286,7 @@
     },
     "httpInfrastructure-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\httpInfrastructure\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\httpInfrastructure\\src\\Generated"
     },
     "Inheritance": {
       "commandName": "Project",
@@ -306,7 +306,7 @@
     },
     "lro-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\src\\Generated"
     },
     "lro-parameterized-endpoints": {
       "commandName": "Project",
@@ -318,7 +318,7 @@
     },
     "media_types-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\src\\Generated"
     },
     "MediaTypes-Typespec": {
       "commandName": "Project",
@@ -490,7 +490,7 @@
     },
     "paging-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\src\\Generated"
     },
     "Parameters-LowLevel": {
       "commandName": "Project",
@@ -538,11 +538,11 @@
     },
     "security-aad-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-aad\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-aad\\src\\Generated"
     },
     "security-key-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-key\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-key\\src\\Generated"
     },
     "SecurityDefinition-LowLevel": {
       "commandName": "Project",
@@ -666,7 +666,7 @@
     },
     "url-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url\\src\\Generated"
     },
     "url-multi-collectionFormat": {
       "commandName": "Project",
@@ -674,7 +674,7 @@
     },
     "url-multi-collectionFormat-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url-multi-collectionFormat\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url-multi-collectionFormat\\src\\Generated"
     },
     "validation": {
       "commandName": "Project",

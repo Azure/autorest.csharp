@@ -47,7 +47,11 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     }
 
     Invoke $command
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
 function AutoRest-Reset()
@@ -94,7 +98,11 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
         }        
     }
 
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
 function Invoke-TypespecSetup()
