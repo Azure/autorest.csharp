@@ -307,7 +307,6 @@ var data = new {
     fishtype = "salmon",
     species = "<species>",
     length = 123.45f,
-    siblings = new[] {},
 };
 
 Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
@@ -462,7 +461,6 @@ var data = new {
     fishtype = "salmon",
     species = "<species>",
     length = 123.45f,
-    siblings = new[] {},
 };
 
 Response response = client.PutValid(RequestContent.Create(data), new RequestContext());

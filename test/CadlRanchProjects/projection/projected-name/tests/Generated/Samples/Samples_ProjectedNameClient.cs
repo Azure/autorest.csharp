@@ -29,11 +29,71 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = client.Operation(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_Async()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = await client.OperationAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_AllParameters_Async()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = await client.OperationAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Parameter()
         {
             var client = new ProjectedNameClient();
 
             Response response = client.Parameter("<defaultName>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Parameter_AllParameters()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = client.Parameter("<defaultName>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Parameter_Async()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = await client.ParameterAsync("<defaultName>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Parameter_AllParameters_Async()
+        {
+            var client = new ProjectedNameClient();
+
+            Response response = await client.ParameterAsync("<defaultName>", new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

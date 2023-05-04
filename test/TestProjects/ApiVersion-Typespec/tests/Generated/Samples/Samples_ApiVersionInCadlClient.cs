@@ -30,5 +30,47 @@ namespace ApiVersionInCadl.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetBatchDetectionResult_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ApiVersionInCadlClient(endpoint, credential);
+
+            Response response = client.GetBatchDetectionResult("<resultId>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBatchDetectionResult_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ApiVersionInCadlClient(endpoint, credential);
+
+            Response response = await client.GetBatchDetectionResultAsync("<resultId>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBatchDetectionResult_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ApiVersionInCadlClient(endpoint, credential);
+
+            Response response = await client.GetBatchDetectionResultAsync("<resultId>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
+        }
     }
 }

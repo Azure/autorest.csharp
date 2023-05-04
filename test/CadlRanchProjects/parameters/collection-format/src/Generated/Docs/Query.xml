@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call MultiAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = await client.MultiAsync(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Multi with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = client.Multi(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call SsvAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = await client.SsvAsync(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -38,7 +38,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Ssv with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = client.Ssv(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call TsvAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = await client.TsvAsync(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -60,7 +60,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Tsv with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = client.Tsv(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -71,7 +71,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call PipesAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = await client.PipesAsync(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -82,7 +82,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Pipes with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = client.Pipes(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -93,7 +93,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = await client.CsvAsync(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);
@@ -104,7 +104,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Csv with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+var client = new CollectionFormatClient().GetQueryClient("1.0.0");
 
 Response response = client.Csv(new String[]{"<colors>"}, new RequestContext());
 Console.WriteLine(response.Status);

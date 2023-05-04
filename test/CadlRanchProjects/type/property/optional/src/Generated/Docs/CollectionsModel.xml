@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetAllAsync(new RequestContext());
 
@@ -34,7 +34,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetAll(new RequestContext());
 
@@ -63,7 +63,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call GetDefaultAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetDefaultAsync(new RequestContext());
 
@@ -92,7 +92,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call GetDefault with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetDefault(new RequestContext());
 
@@ -121,7 +121,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {};
 
@@ -130,7 +130,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {
@@ -165,7 +165,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call PutAll.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {};
 
@@ -174,7 +174,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAll with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {
@@ -209,7 +209,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {};
 
@@ -218,7 +218,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefaultAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {
@@ -253,7 +253,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call PutDefault.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {};
 
@@ -262,7 +262,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefault with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetCollectionsModelClient(<1.0.0>);
+var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {

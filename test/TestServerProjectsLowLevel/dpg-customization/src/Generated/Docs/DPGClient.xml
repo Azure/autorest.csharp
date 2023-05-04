@@ -144,9 +144,9 @@ This sample shows how to call GetPagesAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-await foreach (var data in client.GetPagesAsync("<mode>", new RequestContext()))
+await foreach (var item in client.GetPagesAsync("<mode>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
 }
 ]]></code>
@@ -171,9 +171,9 @@ This sample shows how to call GetPages with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-foreach (var data in client.GetPages("<mode>", new RequestContext()))
+foreach (var item in client.GetPages("<mode>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
 }
 ]]></code>

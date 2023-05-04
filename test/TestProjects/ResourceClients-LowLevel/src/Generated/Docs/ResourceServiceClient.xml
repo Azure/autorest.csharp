@@ -36,9 +36,9 @@ This sample shows how to call GetGroupsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
 
-await foreach (var data in client.GetGroupsAsync(new RequestContext()))
+await foreach (var item in client.GetGroupsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -51,9 +51,9 @@ This sample shows how to call GetGroups and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
 
-foreach (var data in client.GetGroups(new RequestContext()))
+foreach (var item in client.GetGroups(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -66,9 +66,9 @@ This sample shows how to call GetAllItemsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
 
-await foreach (var data in client.GetAllItemsAsync(new RequestContext()))
+await foreach (var item in client.GetAllItemsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -81,9 +81,9 @@ This sample shows how to call GetAllItems and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
 
-foreach (var data in client.GetAllItems(new RequestContext()))
+foreach (var item in client.GetAllItems(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>

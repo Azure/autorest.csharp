@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetDurationAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 Response response = await client.GetDurationAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>DurationProperty</c>:
 <example>
 This sample shows how to call GetDuration with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 Response response = client.GetDuration(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>DurationProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 var data = new {
     property = "PT1H23M45S",
@@ -82,7 +82,7 @@ Schema for <c>DurationProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 var data = new {
     property = "PT1H23M45S",

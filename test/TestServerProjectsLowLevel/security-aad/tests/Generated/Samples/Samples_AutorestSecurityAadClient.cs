@@ -27,5 +27,38 @@ namespace security_aad_LowLevel.Samples
             Response response = client.Head();
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Head_AllParameters()
+        {
+            var credential = new DefaultAzureCredential();
+            var client = new AutorestSecurityAadClient(credential);
+
+            Response response = client.Head(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var client = new AutorestSecurityAadClient(credential);
+
+            Response response = await client.HeadAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head_AllParameters_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var client = new AutorestSecurityAadClient(credential);
+
+            Response response = await client.HeadAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

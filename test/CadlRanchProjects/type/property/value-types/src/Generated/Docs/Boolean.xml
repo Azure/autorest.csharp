@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetBooleanAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
+var client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = await client.GetBooleanAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>BooleanProperty</c>:
 <example>
 This sample shows how to call GetBoolean with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
+var client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = client.GetBoolean(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>BooleanProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
+var client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 var data = new {
     property = true,
@@ -82,7 +82,7 @@ Schema for <c>BooleanProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBooleanClient(<1.0.0>);
+var client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 var data = new {
     property = true,

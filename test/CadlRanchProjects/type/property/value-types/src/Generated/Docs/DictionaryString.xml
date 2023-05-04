@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetDictionaryStringAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 Response response = await client.GetDictionaryStringAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>DictionaryStringProperty</c>:
 <example>
 This sample shows how to call GetDictionaryString with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 Response response = client.GetDictionaryString(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>DictionaryStringProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 var data = new {
     property = new {
@@ -84,7 +84,7 @@ Schema for <c>DictionaryStringProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 var data = new {
     property = new {

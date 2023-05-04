@@ -960,9 +960,9 @@ This sample shows how to call GetProjectsAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetProjectsAsync(new RequestContext()))
+await foreach (var item in client.GetProjectsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -1007,9 +1007,9 @@ This sample shows how to call GetProjects and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetProjects(new RequestContext()))
+foreach (var item in client.GetProjects(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -1054,9 +1054,9 @@ This sample shows how to call GetDeploymentsAsync with required parameters and p
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -1101,9 +1101,9 @@ This sample shows how to call GetDeployments with required parameters and parse 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetDeployments("<projectName>", new RequestContext()))
+foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -1148,9 +1148,9 @@ This sample shows how to call GetSupportedLanguagesAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetSupportedLanguagesAsync())
+await foreach (var item in client.GetSupportedLanguagesAsync())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
     Console.WriteLine(result.GetProperty("languageCode").ToString());
 }
@@ -1160,9 +1160,9 @@ This sample shows how to call GetSupportedLanguagesAsync with all parameters, an
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetSupportedLanguagesAsync(1234, 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
     Console.WriteLine(result.GetProperty("languageCode").ToString());
 }
@@ -1189,9 +1189,9 @@ This sample shows how to call GetSupportedLanguages and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetSupportedLanguages())
+foreach (var item in client.GetSupportedLanguages())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
     Console.WriteLine(result.GetProperty("languageCode").ToString());
 }
@@ -1201,9 +1201,9 @@ This sample shows how to call GetSupportedLanguages with all parameters, and how
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetSupportedLanguages(1234, 1234, 1234, new RequestContext()))
+foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
     Console.WriteLine(result.GetProperty("languageCode").ToString());
 }
@@ -1230,9 +1230,9 @@ This sample shows how to call GetTrainingConfigVersionsAsync and parse the resul
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetTrainingConfigVersionsAsync())
+await foreach (var item in client.GetTrainingConfigVersionsAsync())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }
@@ -1242,9 +1242,9 @@ This sample shows how to call GetTrainingConfigVersionsAsync with all parameters
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }
@@ -1271,9 +1271,9 @@ This sample shows how to call GetTrainingConfigVersions and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetTrainingConfigVersions())
+foreach (var item in client.GetTrainingConfigVersions())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }
@@ -1283,9 +1283,9 @@ This sample shows how to call GetTrainingConfigVersions with all parameters, and
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetTrainingConfigVersions(1234, 1234, 1234, new RequestContext()))
+foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }

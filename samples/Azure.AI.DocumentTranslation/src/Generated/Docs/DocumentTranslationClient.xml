@@ -652,9 +652,9 @@ This sample shows how to call GetTranslationsStatusAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-await foreach (var data in client.GetTranslationsStatusAsync())
+await foreach (var item in client.GetTranslationsStatusAsync())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -673,9 +673,9 @@ This sample shows how to call GetTranslationsStatusAsync with all parameters, an
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-await foreach (var data in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
+await foreach (var item in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -767,9 +767,9 @@ This sample shows how to call GetTranslationsStatus and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-foreach (var data in client.GetTranslationsStatus())
+foreach (var item in client.GetTranslationsStatus())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -788,9 +788,9 @@ This sample shows how to call GetTranslationsStatus with all parameters, and how
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-foreach (var data in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
+foreach (var item in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -882,9 +882,9 @@ This sample shows how to call GetDocumentsStatusAsync with required parameters a
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid()))
+await foreach (var item in client.GetDocumentsStatusAsync(Guid.NewGuid()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("sourcePath").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -899,9 +899,9 @@ This sample shows how to call GetDocumentsStatusAsync with all parameters, and h
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
+await foreach (var item in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("path").ToString());
     Console.WriteLine(result.GetProperty("sourcePath").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -984,9 +984,9 @@ This sample shows how to call GetDocumentsStatus with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-foreach (var data in client.GetDocumentsStatus(Guid.NewGuid()))
+foreach (var item in client.GetDocumentsStatus(Guid.NewGuid()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("sourcePath").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -1001,9 +1001,9 @@ This sample shows how to call GetDocumentsStatus with all parameters, and how to
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-foreach (var data in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
+foreach (var item in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("path").ToString());
     Console.WriteLine(result.GetProperty("sourcePath").ToString());
     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());

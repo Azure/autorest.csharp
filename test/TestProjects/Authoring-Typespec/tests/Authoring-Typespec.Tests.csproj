@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Authoring.csproj" />
+    <ProjectReference Include="..\src\Authoring-Typespec.csproj" />
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetExtensibleEnumAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = await client.GetExtensibleEnumAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 <example>
 This sample shows how to call GetExtensibleEnum with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = client.GetExtensibleEnum(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 var data = new {
     property = "ValueOne",
@@ -82,7 +82,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 var data = new {
     property = "ValueOne",

@@ -30,6 +30,39 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Head200_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = client.Head200(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head200_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head200Async();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head200_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head200Async(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Head204()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -41,12 +74,78 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Head204_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = client.Head204(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head204_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head204Async();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head204_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head204Async(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Head404()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Head404_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = client.Head404(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head404_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head404Async();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Head404_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new HttpSuccessClient(credential);
+
+            Response response = await client.Head404Async(new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

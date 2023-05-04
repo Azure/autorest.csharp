@@ -18,7 +18,7 @@ This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>, new RequestContext());
+Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, "start", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -42,7 +42,7 @@ This sample shows how to call NoRequestBodyResponseBody with all parameters, and
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>, new RequestContext());
+Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, "start", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -252,7 +252,7 @@ This sample shows how to call OptionalPathParametersAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersAsync(1234, 1234, <start>, new RequestContext());
+Response response = await client.OptionalPathParametersAsync(1234, 1234, "start", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ This sample shows how to call OptionalPathParameters with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = client.OptionalPathParameters(1234, 1234, <start>, new RequestContext());
+Response response = client.OptionalPathParameters(1234, 1234, "start", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -292,7 +292,7 @@ This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, <start>, 12, new RequestContext());
+Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -312,7 +312,7 @@ This sample shows how to call OptionalPathParametersWithMixedSequence with all p
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = client.OptionalPathParametersWithMixedSequence(1234, <start>, 12, new RequestContext());
+Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", 12, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

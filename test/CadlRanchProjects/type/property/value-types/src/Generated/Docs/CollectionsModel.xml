@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetCollectionsModelAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetCollectionsModelAsync(new RequestContext());
 
@@ -34,7 +34,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call GetCollectionsModel with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetCollectionsModel(new RequestContext());
 
@@ -63,7 +63,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {
@@ -98,7 +98,7 @@ Schema for <c>CollectionsModelProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
 var data = new {
     property = new[] {

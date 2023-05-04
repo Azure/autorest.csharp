@@ -34,6 +34,51 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeBody_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_AnalyzeBody_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_AnalyzeBody_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_AnalyzeBodyNoAcceptHeader()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -47,6 +92,45 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeBodyNoAcceptHeader_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_AnalyzeBodyNoAcceptHeader_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_AnalyzeBodyNoAcceptHeader_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ContentTypeWithEncoding()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -55,6 +139,51 @@ namespace media_types_LowLevel.Samples
             var data = "<String>";
 
             Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ContentTypeWithEncoding_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = client.ContentTypeWithEncoding(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ContentTypeWithEncoding_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ContentTypeWithEncoding_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -77,6 +206,51 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_BinaryBodyWithTwoContentTypes_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_BinaryBodyWithTwoContentTypes_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_BinaryBodyWithTwoContentTypes_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_BinaryBodyWithThreeContentTypes()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -92,6 +266,51 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_BinaryBodyWithThreeContentTypes_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_BinaryBodyWithThreeContentTypes_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_BinaryBodyWithThreeContentTypes_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = File.OpenRead("<filePath>");
+
+            Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutTextAndJsonBody()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -100,6 +319,51 @@ namespace media_types_LowLevel.Samples
             var data = "<String>";
 
             Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutTextAndJsonBody_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutTextAndJsonBody_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutTextAndJsonBody_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new MediaTypesClient(credential);
+
+            var data = "<String>";
+
+            Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

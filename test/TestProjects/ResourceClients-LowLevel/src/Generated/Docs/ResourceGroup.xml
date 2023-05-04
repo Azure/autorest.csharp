@@ -36,9 +36,9 @@ This sample shows how to call GetItemsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
 
-await foreach (var data in client.GetItemsAsync(new RequestContext()))
+await foreach (var item in client.GetItemsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -51,9 +51,9 @@ This sample shows how to call GetItems and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
 
-foreach (var data in client.GetItems(new RequestContext()))
+foreach (var item in client.GetItems(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>

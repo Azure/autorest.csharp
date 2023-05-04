@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetModelValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient(<1.0.0>);
+var client = new ArrayClient().GetModelValueClient("1.0.0");
 
 Response response = await client.GetModelValueAsync(new RequestContext());
 
@@ -32,7 +32,7 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call GetModelValue with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient(<1.0.0>);
+var client = new ArrayClient().GetModelValueClient("1.0.0");
 
 Response response = client.GetModelValue(new RequestContext());
 
@@ -59,12 +59,11 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient(<1.0.0>);
+var client = new ArrayClient().GetModelValueClient("1.0.0");
 
 var data = new[] {
     new {
         property = "<property>",
-        children = new[] {},
     }
 };
 
@@ -90,12 +89,11 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient(<1.0.0>);
+var client = new ArrayClient().GetModelValueClient("1.0.0");
 
 var data = new[] {
     new {
         property = "<property>",
-        children = new[] {},
     }
 };
 

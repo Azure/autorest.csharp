@@ -1953,9 +1953,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234, new RequestContext()))
+await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("createdTime").ToString());
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -2045,9 +2045,9 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-foreach (var data in client.GetMultivariateModels(1234, 1234, new RequestContext()))
+foreach (var item in client.GetMultivariateModels(1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("createdTime").ToString());
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());

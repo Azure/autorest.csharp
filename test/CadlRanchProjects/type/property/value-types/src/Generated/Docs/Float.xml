@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetFloatAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetFloatClient(<1.0.0>);
+var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
 Response response = await client.GetFloatAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>FloatProperty</c>:
 <example>
 This sample shows how to call GetFloat with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetFloatClient(<1.0.0>);
+var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
 Response response = client.GetFloat(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>FloatProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetFloatClient(<1.0.0>);
+var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
 var data = new {
     property = 123.45f,
@@ -82,7 +82,7 @@ Schema for <c>FloatProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetFloatClient(<1.0.0>);
+var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
 var data = new {
     property = 123.45f,

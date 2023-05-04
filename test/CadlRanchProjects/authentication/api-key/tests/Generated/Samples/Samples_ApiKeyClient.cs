@@ -30,12 +30,78 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Valid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = client.Valid(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Valid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = await client.ValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Valid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = await client.ValidAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Invalid()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new ApiKeyClient(credential);
 
             Response response = client.Invalid();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Invalid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = client.Invalid(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Invalid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = await client.InvalidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Invalid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ApiKeyClient(credential);
+
+            Response response = await client.InvalidAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

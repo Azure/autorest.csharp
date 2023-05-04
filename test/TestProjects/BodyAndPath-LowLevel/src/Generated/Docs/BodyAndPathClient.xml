@@ -210,7 +210,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = new {};
 
-Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>, new RequestContext());
+Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -234,7 +234,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = new {};
 
-Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>, new RequestContext());
+Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

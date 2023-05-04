@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 Response response = await client.GetModelAsync(new RequestContext());
 
@@ -28,7 +28,7 @@ Schema for <c>BaseModel</c>:
 <example>
 This sample shows how to call GetModel and parse the result.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 Response response = client.GetModel(new RequestContext());
 
@@ -51,7 +51,7 @@ Schema for <c>BaseModel</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 var data = new {};
 
@@ -75,7 +75,7 @@ Schema for <c>BaseModel</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 var data = new {};
 

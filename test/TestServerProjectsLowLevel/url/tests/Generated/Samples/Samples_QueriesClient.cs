@@ -30,12 +30,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetBooleanTrue_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetBooleanTrue(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanTrue_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanTrueAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanTrue_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanTrueAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanFalse()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.GetBooleanFalse();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetBooleanFalse_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetBooleanFalse(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanFalse_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanFalseAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanFalse_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanFalseAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -52,12 +118,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetBooleanNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetBooleanNull(true, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetBooleanNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetBooleanNullAsync(true, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetIntOneMillion()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.GetIntOneMillion();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetIntOneMillion_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetIntOneMillion(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntOneMillion_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntOneMillionAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntOneMillion_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntOneMillionAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -74,12 +206,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetIntNegativeOneMillion_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetIntNegativeOneMillion(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntNegativeOneMillion_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntNegativeOneMillionAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntNegativeOneMillion_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntNegativeOneMillionAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetIntNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.GetIntNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetIntNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetIntNull(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetIntNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetIntNullAsync(1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -96,12 +294,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetTenBillion_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetTenBillion(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetTenBillion_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetTenBillionAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetTenBillion_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetTenBillionAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetNegativeTenBillion()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.GetNegativeTenBillion();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNegativeTenBillion_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetNegativeTenBillion(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNegativeTenBillion_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetNegativeTenBillionAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNegativeTenBillion_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetNegativeTenBillionAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -118,12 +382,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetLongNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.GetLongNull(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetLongNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetLongNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetLongNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.GetLongNullAsync(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_FloatScientificPositive()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.FloatScientificPositive();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FloatScientificPositive_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.FloatScientificPositive(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatScientificPositive_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatScientificPositiveAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatScientificPositive_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatScientificPositiveAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -140,12 +470,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_FloatScientificNegative_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.FloatScientificNegative(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatScientificNegative_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatScientificNegativeAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatScientificNegative_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatScientificNegativeAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_FloatNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.FloatNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FloatNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.FloatNull(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FloatNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.FloatNullAsync(1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -162,12 +558,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_DoubleDecimalPositive_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DoubleDecimalPositive(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleDecimalPositive_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleDecimalPositiveAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleDecimalPositive_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleDecimalPositiveAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_DoubleDecimalNegative()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.DoubleDecimalNegative();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DoubleDecimalNegative_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DoubleDecimalNegative(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleDecimalNegative_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleDecimalNegativeAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleDecimalNegative_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleDecimalNegativeAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -184,12 +646,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_DoubleNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DoubleNull(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DoubleNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DoubleNullAsync(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_StringUnicode()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.StringUnicode();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringUnicode_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.StringUnicode(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringUnicode_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringUnicodeAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringUnicode_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringUnicodeAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -206,12 +734,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_StringUrlEncoded_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.StringUrlEncoded(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringUrlEncoded_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringUrlEncodedAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringUrlEncoded_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringUrlEncodedAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_StringEmpty()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.StringEmpty();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.StringEmpty(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringEmptyAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringEmptyAsync(new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -228,12 +822,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_StringNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.StringNull("<stringQuery>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_StringNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.StringNullAsync("<stringQuery>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_EnumValid()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.EnumValid();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_EnumValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.EnumValid("<enumQuery>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_EnumValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.EnumValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_EnumValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.EnumValidAsync("<enumQuery>", new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -250,12 +910,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_EnumNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.EnumNull("<enumQuery>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_EnumNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.EnumNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_EnumNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.EnumNullAsync("<enumQuery>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ByteMultiByte()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.ByteMultiByte();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ByteMultiByte_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ByteMultiByte(null, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteMultiByte_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteMultiByteAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteMultiByte_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteMultiByteAsync(null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -272,12 +998,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ByteEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ByteEmpty(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteEmptyAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteEmptyAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ByteNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.ByteNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ByteNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ByteNull(null, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ByteNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ByteNullAsync(null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -294,12 +1086,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_DateValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DateValid(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateValidAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_DateNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.DateNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DateNull(DateTimeOffset.UtcNow, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -316,12 +1174,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DateTimeValid(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateTimeValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateTimeValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateTimeValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateTimeValidAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_DateTimeNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.DateTimeNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.DateTimeNull(DateTimeOffset.UtcNow, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateTimeNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateTimeNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DateTimeNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -338,12 +1262,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringCsvValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringCsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringCsvNull()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvNull();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringCsvNull_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringCsvNull(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvNull_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvNullAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvNull_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvNullAsync(new string[] { "<arrayQuery>" }, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -360,12 +1350,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringCsvEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringCsvEmpty(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvEmptyAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringCsvEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringCsvEmptyAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringNoCollectionFormatEmpty()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.ArrayStringNoCollectionFormatEmpty();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringNoCollectionFormatEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringNoCollectionFormatEmpty(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringNoCollectionFormatEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringNoCollectionFormatEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[] { "<arrayQuery>" }, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -382,6 +1438,39 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringSsvValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringSsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringSsvValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringSsvValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringSsvValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringSsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringTsvValid()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -393,12 +1482,78 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringTsvValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringTsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringTsvValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringTsvValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringTsvValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringTsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringPipesValid()
         {
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
             Response response = client.ArrayStringPipesValid();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ArrayStringPipesValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = client.ArrayStringPipesValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringPipesValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringPipesValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_ArrayStringPipesValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new QueriesClient(credential);
+
+            Response response = await client.ArrayStringPipesValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

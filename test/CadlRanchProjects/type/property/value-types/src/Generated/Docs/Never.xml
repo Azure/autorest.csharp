@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetNeverAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient(<1.0.0>);
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 Response response = await client.GetNeverAsync(new RequestContext());
 
@@ -28,7 +28,7 @@ Schema for <c>NeverProperty</c>:
 <example>
 This sample shows how to call GetNever with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient(<1.0.0>);
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 Response response = client.GetNever(new RequestContext());
 
@@ -51,7 +51,7 @@ Schema for <c>NeverProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient(<1.0.0>);
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var data = new {};
 
@@ -75,7 +75,7 @@ Schema for <c>NeverProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient(<1.0.0>);
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var data = new {};
 

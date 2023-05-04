@@ -152,9 +152,9 @@ This sample shows how to call GetProjectsAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-await foreach (var data in client.GetProjectsAsync(new RequestContext()))
+await foreach (var item in client.GetProjectsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -199,9 +199,9 @@ This sample shows how to call GetProjects and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-foreach (var data in client.GetProjects(new RequestContext()))
+foreach (var item in client.GetProjects(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -246,9 +246,9 @@ This sample shows how to call GetDeploymentsAsync with required parameters and p
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-await foreach (var data in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -293,9 +293,9 @@ This sample shows how to call GetDeployments with required parameters and parse 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-foreach (var data in client.GetDeployments("<projectName>", new RequestContext()))
+foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());

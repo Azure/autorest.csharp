@@ -28,5 +28,43 @@ namespace _Specs_.Azure.Core.Traits.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SmokeTest_AllParameters()
+        {
+            var client = new TraitsClient();
+
+            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_SmokeTest_Async()
+        {
+            var client = new TraitsClient();
+
+            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_SmokeTest_AllParameters_Async()
+        {
+            var client = new TraitsClient();
+
+            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
     }
 }

@@ -27,5 +27,38 @@ namespace Server.Path.Single.Samples
             Response response = client.MyOp();
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_MyOp_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SingleClient(endpoint);
+
+            Response response = client.MyOp(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_MyOp_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SingleClient(endpoint);
+
+            Response response = await client.MyOpAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_MyOp_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SingleClient(endpoint);
+
+            Response response = await client.MyOpAsync(new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

@@ -761,7 +761,7 @@ var client = new PrimitiveClient(credential);
 var data = new {
     field = "<field>",
     empty = "<empty>",
-    null = "<null>",
+    @null = "<null>",
 };
 
 Response response = await client.PutStringAsync(RequestContent.Create(data), new RequestContext());
@@ -803,7 +803,7 @@ var client = new PrimitiveClient(credential);
 var data = new {
     field = "<field>",
     empty = "<empty>",
-    null = "<null>",
+    @null = "<null>",
 };
 
 Response response = client.PutString(RequestContent.Create(data), new RequestContext());

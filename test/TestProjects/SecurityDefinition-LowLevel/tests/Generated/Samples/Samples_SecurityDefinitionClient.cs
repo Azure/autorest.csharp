@@ -30,5 +30,55 @@ namespace SecurityDefinition_LowLevel.Samples
             Response response = client.Operation(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SecurityDefinitionClient(endpoint, credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SecurityDefinitionClient(endpoint, credential);
+
+            var data = new { };
+
+            Response response = await client.OperationAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SecurityDefinitionClient(endpoint, credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

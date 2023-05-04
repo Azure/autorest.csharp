@@ -218,9 +218,9 @@ This sample shows how to call GetPetsAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-await foreach (var data in client.GetPetsAsync(new RequestContext()))
+await foreach (var item in client.GetPetsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("petId").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
@@ -251,9 +251,9 @@ This sample shows how to call GetPets and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-foreach (var data in client.GetPets(new RequestContext()))
+foreach (var item in client.GetPets(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("petId").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());

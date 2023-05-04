@@ -1779,7 +1779,7 @@ var client = new ArrayClient(credential);
 var data = new[] {
     new {
         integer = 1234,
-        string = "<string>",
+        @string = "<string>",
     }
 };
 
@@ -1811,7 +1811,7 @@ var client = new ArrayClient(credential);
 var data = new[] {
     new {
         integer = 1234,
-        string = "<string>",
+        @string = "<string>",
     }
 };
 

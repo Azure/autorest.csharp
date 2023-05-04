@@ -31,11 +31,83 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = client.Operation(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_Async()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = await client.OperationAsync(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_AllParameters_Async()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = await client.OperationAsync(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Operation2()
         {
             var client = new ParametersCadlClient();
 
             Response response = client.Operation2(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation2_AllParameters()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = client.Operation2(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation2_Async()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = await client.Operation2Async(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation2_AllParameters_Async()
+        {
+            var client = new ParametersCadlClient();
+
+            Response response = await client.Operation2Async(1234, 1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());

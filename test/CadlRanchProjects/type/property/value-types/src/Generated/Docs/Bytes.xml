@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetByteAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 Response response = await client.GetByteAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>BytesProperty</c>:
 <example>
 This sample shows how to call GetByte with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 Response response = client.GetByte(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>BytesProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 var data = new {
     property = new {},
@@ -82,7 +82,7 @@ Schema for <c>BytesProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 var data = new {
     property = new {},

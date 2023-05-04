@@ -27,5 +27,38 @@ namespace custom_baseUrl_LowLevel.Samples
             Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PathsClient(credential);
+
+            Response response = client.GetEmpty("<accountName>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PathsClient(credential);
+
+            Response response = await client.GetEmptyAsync("<accountName>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PathsClient(credential);
+
+            Response response = await client.GetEmptyAsync("<accountName>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

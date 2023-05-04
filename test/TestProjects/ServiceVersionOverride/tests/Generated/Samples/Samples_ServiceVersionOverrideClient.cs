@@ -26,5 +26,35 @@ namespace ServiceVersionOverride.Samples
             Response response = client.Operation("<notApiVersionEnum>");
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            var client = new ServiceVersionOverrideClient();
+
+            Response response = client.Operation("<notApiVersionEnum>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_Async()
+        {
+            var client = new ServiceVersionOverrideClient();
+
+            Response response = await client.OperationAsync("<notApiVersionEnum>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Operation_AllParameters_Async()
+        {
+            var client = new ServiceVersionOverrideClient();
+
+            Response response = await client.OperationAsync("<notApiVersionEnum>", new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

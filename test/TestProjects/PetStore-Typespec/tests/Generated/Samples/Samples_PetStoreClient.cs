@@ -30,6 +30,39 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Delete_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.Delete(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Delete_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.DeleteAsync(1234);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Delete_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.DeleteAsync(1234, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Read()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -39,6 +72,50 @@ namespace PetStore.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Read_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.Read(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Read_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.ReadAsync(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Read_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.ReadAsync(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -64,6 +141,70 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Create_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+                tag = "<tag>",
+                age = 1234,
+            };
+
+            Response response = client.Create(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Create_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+                age = 1234,
+            };
+
+            Response response = await client.CreateAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Create_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+                tag = "<tag>",
+                age = 1234,
+            };
+
+            Response response = await client.CreateAsync(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetPetByKind()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -78,6 +219,50 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetPetByKind_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.GetPetByKind("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPetByKind_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetPetByKindAsync("<kind>");
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPetByKind_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetPetByKindAsync("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetFirstPet()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,6 +272,50 @@ namespace PetStore.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFirstPet_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.GetFirstPet(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetFirstPet_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetFirstPetAsync(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetFirstPet_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetFirstPetAsync(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
     }

@@ -33,6 +33,56 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateProject_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                description = "<description>",
+                name = "<name>",
+            };
+
+            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_CreateProject_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new { };
+
+            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_CreateProject_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                description = "<description>",
+                name = "<name>",
+            };
+
+            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_UpdateProject()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -49,6 +99,66 @@ namespace LroBasicCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_UpdateProject_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                description = "<description>",
+                name = "<name>",
+            };
+
+            var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_UpdateProject_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new { };
+
+            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_UpdateProject_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                description = "<description>",
+                name = "<name>",
+            };
+
+            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateThing()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -60,6 +170,63 @@ namespace LroBasicCadl.Samples
             };
 
             var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateThing_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+            };
+
+            var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_CreateThing_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+            };
+
+            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_CreateThing_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new LroBasicCadlClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+            };
+
+            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

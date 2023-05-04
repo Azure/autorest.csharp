@@ -1998,70 +1998,6 @@ Console.WriteLine(result.ToString());
 </example>
     </member>
     <member name="InternalProtocolAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InternalProtocolAsync with required request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call InternalProtocolAsync with all request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = await client.InternalProtocolAsync(RequestContent.Create(data), new RequestContext());
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -2104,70 +2040,6 @@ Schema for <c>Thing</c>:
 </remarks>
     </member>
     <member name="InternalProtocol(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InternalProtocol with required request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = client.InternalProtocol(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call InternalProtocol with all request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = client.InternalProtocol(RequestContent.Create(data), new RequestContext());
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -2210,30 +2082,8 @@ Schema for <c>Thing</c>:
 </remarks>
     </member>
     <member name="StillConvenientAsync(RequestContext)">
-<example>
-This sample shows how to call StillConvenientAsync with required parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-Response response = await client.StillConvenientAsync(new RequestContext());
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
     <member name="StillConvenient(RequestContext)">
-<example>
-This sample shows how to call StillConvenient with required parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-Response response = client.StillConvenient(new RequestContext());
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
   </members>
 </doc>

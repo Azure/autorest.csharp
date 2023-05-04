@@ -393,9 +393,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
 
-await foreach (var data in client.GetChildCollectionNamesAsync())
+await foreach (var item in client.GetChildCollectionNamesAsync())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -405,9 +405,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
 
-await foreach (var data in client.GetChildCollectionNamesAsync("<skipToken>", new RequestContext()))
+await foreach (var item in client.GetChildCollectionNamesAsync("<skipToken>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
 }
@@ -435,9 +435,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
 
-foreach (var data in client.GetChildCollectionNames())
+foreach (var item in client.GetChildCollectionNames())
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -447,9 +447,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
 
-foreach (var data in client.GetChildCollectionNames("<skipToken>", new RequestContext()))
+foreach (var item in client.GetChildCollectionNames("<skipToken>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
 }

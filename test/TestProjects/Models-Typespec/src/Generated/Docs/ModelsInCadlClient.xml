@@ -21,20 +21,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -124,20 +116,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -227,20 +211,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -324,20 +300,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -432,33 +400,12 @@ var data = new {
     optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
-    optionalModel = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
+    optionalModel = new {},
     optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -470,13 +417,7 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
@@ -592,33 +533,12 @@ var data = new {
     optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
-    optionalModel = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
+    optionalModel = new {},
     optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -630,13 +550,7 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
@@ -722,71 +636,6 @@ Schema for <c>RoundTripOptionalModel</c>:
 </remarks>
     </member>
     <member name="InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
-
-var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
-        "<String>"
-    },
-    requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
-            },
-        }
-    },
-    requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
-    },
-    requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-    requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
-};
-
-Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Create(data), new RequestContext());
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -843,71 +692,6 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 </remarks>
     </member>
     <member name="InputToRoundTripReadOnly(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
-
-var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
-        "<String>"
-    },
-    requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
-            },
-        }
-    },
-    requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
-    },
-    requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-    requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
-};
-
-Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data), new RequestContext());
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -982,9 +766,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -995,13 +777,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1029,9 +805,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1042,13 +816,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1125,9 +893,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1138,13 +904,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1172,9 +932,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1185,13 +943,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1508,9 +1260,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1565,9 +1315,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },

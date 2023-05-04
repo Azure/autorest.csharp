@@ -34,11 +34,92 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Input_AllParameters()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = client.Input(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Input_Async()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = await client.InputAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Input_AllParameters_Async()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = await client.InputAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Output()
         {
             var client = new UsageClient();
 
             Response response = client.Output(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Output_AllParameters()
+        {
+            var client = new UsageClient();
+
+            Response response = client.Output(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Output_Async()
+        {
+            var client = new UsageClient();
+
+            Response response = await client.OutputAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_Output_AllParameters_Async()
+        {
+            var client = new UsageClient();
+
+            Response response = await client.OutputAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -56,6 +137,57 @@ namespace _Type.Model.Usage.Samples
             };
 
             Response response = client.InputAndOutput(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_InputAndOutput_AllParameters()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = client.InputAndOutput(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputAndOutput_Async()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputAndOutput_AllParameters_Async()
+        {
+            var client = new UsageClient();
+
+            var data = new
+            {
+                requiredProp = "<requiredProp>",
+            };
+
+            Response response = await client.InputAndOutputAsync(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());

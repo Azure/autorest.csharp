@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetFloat32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetFloat32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetFloat32ValueClient("1.0.0");
 
 Response response = await client.GetFloat32ValueAsync(new RequestContext());
 
@@ -18,7 +18,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call GetFloat32Value with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetFloat32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetFloat32ValueClient("1.0.0");
 
 Response response = client.GetFloat32Value(new RequestContext());
 
@@ -31,7 +31,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetFloat32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetFloat32ValueClient("1.0.0");
 
 var data = new[] {
     123.45f
@@ -46,7 +46,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetFloat32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetFloat32ValueClient("1.0.0");
 
 var data = new[] {
     123.45f

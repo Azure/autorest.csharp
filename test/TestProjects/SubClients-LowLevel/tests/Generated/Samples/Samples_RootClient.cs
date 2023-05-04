@@ -29,5 +29,44 @@ namespace SubClients_LowLevel.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetCachedParameter_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new RootClient("<cachedParameter>", credential);
+
+            Response response = client.GetCachedParameter(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetCachedParameter_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new RootClient("<cachedParameter>", credential);
+
+            Response response = await client.GetCachedParameterAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetCachedParameter_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new RootClient("<cachedParameter>", credential);
+
+            Response response = await client.GetCachedParameterAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
     }
 }

@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MediaTypes.csproj" />
+    <ProjectReference Include="..\src\MediaTypes-Typespec.csproj" />
   </ItemGroup>
 </Project>

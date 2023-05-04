@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetCollectionsIntAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = await client.GetCollectionsIntAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>CollectionsIntProperty</c>:
 <example>
 This sample shows how to call GetCollectionsInt with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = client.GetCollectionsInt(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>CollectionsIntProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 var data = new {
     property = new[] {
@@ -84,7 +84,7 @@ Schema for <c>CollectionsIntProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsIntClient(<1.0.0>);
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 var data = new {
     property = new[] {

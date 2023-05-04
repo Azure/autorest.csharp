@@ -31,6 +31,42 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetKnownValue_AllParameters()
+        {
+            var client = new FixedClient();
+
+            Response response = client.GetKnownValue(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetKnownValue_Async()
+        {
+            var client = new FixedClient();
+
+            Response response = await client.GetKnownValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetKnownValue_AllParameters_Async()
+        {
+            var client = new FixedClient();
+
+            Response response = await client.GetKnownValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutKnownValue()
         {
             var client = new FixedClient();
@@ -43,6 +79,42 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_PutKnownValue_AllParameters()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = client.PutKnownValue(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutKnownValue_Async()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutKnownValue_AllParameters_Async()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = await client.PutKnownValueAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutUnknownValue()
         {
             var client = new FixedClient();
@@ -50,6 +122,42 @@ namespace _Type._Enum.Fixed.Samples
             var data = "Monday";
 
             Response response = client.PutUnknownValue(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutUnknownValue_AllParameters()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = client.PutUnknownValue(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutUnknownValue_Async()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_PutUnknownValue_AllParameters_Async()
+        {
+            var client = new FixedClient();
+
+            var data = "Monday";
+
+            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 Response response = await client.GetAllAsync(new RequestContext());
 
@@ -32,7 +32,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 Response response = client.GetAll(new RequestContext());
 
@@ -59,7 +59,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call GetRequiredOnlyAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 Response response = await client.GetRequiredOnlyAsync(new RequestContext());
 
@@ -86,7 +86,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call GetRequiredOnly with required parameters and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 Response response = client.GetRequiredOnly(new RequestContext());
 
@@ -113,7 +113,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutAllAsync with required request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     requiredProperty = 1234,
@@ -124,7 +124,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     optionalProperty = "<optionalProperty>",
@@ -153,7 +153,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutAll with required request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     requiredProperty = 1234,
@@ -164,7 +164,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAll with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     optionalProperty = "<optionalProperty>",
@@ -193,7 +193,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutRequiredOnlyAsync with required request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     requiredProperty = 1234,
@@ -204,7 +204,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRequiredOnlyAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     optionalProperty = "<optionalProperty>",
@@ -233,7 +233,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutRequiredOnly with required request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     requiredProperty = 1234,
@@ -244,7 +244,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRequiredOnly with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var data = new {
     optionalProperty = "<optionalProperty>",

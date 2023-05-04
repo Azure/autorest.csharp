@@ -29,5 +29,48 @@ namespace body_complex_LowLevel.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetValid_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new FlattencomplexClient(credential);
+
+            Response response = client.GetValid(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("propB1").ToString());
+            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetValid_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new FlattencomplexClient(credential);
+
+            Response response = await client.GetValidAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetValid_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new FlattencomplexClient(credential);
+
+            Response response = await client.GetValidAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("propB1").ToString());
+            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+        }
     }
 }

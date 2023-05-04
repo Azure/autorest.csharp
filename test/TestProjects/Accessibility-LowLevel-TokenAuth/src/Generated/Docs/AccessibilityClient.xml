@@ -30,32 +30,8 @@ Console.WriteLine(response.Status);
 </example>
     </member>
     <member name="OperationInternalAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call OperationInternalAsync with required request content.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new AccessibilityClient(credential);
-
-var data = "<String>";
-
-Response response = await client.OperationInternalAsync(RequestContent.Create(data), new RequestContext());
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
     <member name="OperationInternal(RequestContent,RequestContext)">
-<example>
-This sample shows how to call OperationInternal with required request content.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new AccessibilityClient(credential);
-
-var data = "<String>";
-
-Response response = client.OperationInternal(RequestContent.Create(data), new RequestContext());
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
   </members>
 </doc>

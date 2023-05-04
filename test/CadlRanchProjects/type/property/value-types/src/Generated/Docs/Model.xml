@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetModelClient("1.0.0");
 
 Response response = await client.GetModelAsync(new RequestContext());
 
@@ -32,7 +32,7 @@ Schema for <c>ModelProperty</c>:
 <example>
 This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetModelClient("1.0.0");
 
 Response response = client.GetModel(new RequestContext());
 
@@ -59,7 +59,7 @@ Schema for <c>ModelProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetModelClient("1.0.0");
 
 var data = new {
     property = new {
@@ -90,7 +90,7 @@ Schema for <c>ModelProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetModelClient(<1.0.0>);
+var client = new ValueTypesClient().GetModelClient("1.0.0");
 
 var data = new {
     property = new {

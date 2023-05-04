@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient(<1.0.0>);
+var client = new SpreadClient().GetModelClient("1.0.0");
 
 var data = new {
     name = "<name>",
@@ -32,7 +32,7 @@ Schema for <c>BodyParameter</c>:
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient(<1.0.0>);
+var client = new SpreadClient().GetModelClient("1.0.0");
 
 var data = new {
     name = "<name>",

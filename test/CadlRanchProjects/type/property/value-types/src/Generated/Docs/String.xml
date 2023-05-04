@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetStringAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetStringClient("1.0.0");
 
 Response response = await client.GetStringAsync(new RequestContext());
 
@@ -30,7 +30,7 @@ Schema for <c>StringProperty</c>:
 <example>
 This sample shows how to call GetString with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetStringClient("1.0.0");
 
 Response response = client.GetString(new RequestContext());
 
@@ -55,7 +55,7 @@ Schema for <c>StringProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetStringClient("1.0.0");
 
 var data = new {
     property = "<property>",
@@ -82,7 +82,7 @@ Schema for <c>StringProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetStringClient(<1.0.0>);
+var client = new ValueTypesClient().GetStringClient("1.0.0");
 
 var data = new {
     property = "<property>",

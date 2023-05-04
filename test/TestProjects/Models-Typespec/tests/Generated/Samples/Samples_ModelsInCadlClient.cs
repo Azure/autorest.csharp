@@ -38,22 +38,13 @@ namespace ModelsInCadl.Samples
                 requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
                 requiredModelRecord = new
                 {
-                    key = new
-                    {
-                        requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-                    },
+                    key = new { },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -68,6 +59,158 @@ namespace ModelsInCadl.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_InputToRoundTrip_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = client.InputToRoundTrip(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTrip_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTrip_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -97,22 +240,13 @@ namespace ModelsInCadl.Samples
                 requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
                 requiredModelRecord = new
                 {
-                    key = new
-                    {
-                        requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-                    },
+                    key = new { },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -123,6 +257,162 @@ namespace ModelsInCadl.Samples
             };
 
             Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(result.GetProperty("required_Double").ToString());
+            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_InputToRoundTripPrimitive_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(result.GetProperty("required_Double").ToString());
+            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTripPrimitive_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(result.GetProperty("required_Double").ToString());
+            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTripPrimitive_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new { },
+                requiredIntCollection = new[] {
+        1234
+    },
+                requiredStringCollection = new[] {
+        "<String>"
+    },
+                requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+                requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+                requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+            };
+
+            Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -154,66 +444,151 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTripReadOnly()
+        public void Example_InputToRoundTripOptional_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsInCadlClient(endpoint);
 
             var data = new
             {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
+                optionalString = "<optionalString>",
+                optionalInt = 1234,
+                optionalStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                optionalIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
-                requiredModelRecord = new
+                optionalModel = new { },
+                optionalModelWithPropertiesOnBase = new
                 {
-                    key = new
-                    {
-                        requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-                    },
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
+                optionalFixedStringEnum = "1",
+                optionalExtensibleEnum = "1",
+                optionalIntRecord = new
+                {
+                    key = 1234,
+                },
+                optionalStringRecord = new
+                {
+                    key = "<String>",
+                },
+                optionalModelRecord = new
+                {
+                    key = new { },
+                },
+                optionalPlainDate = "2022-05-10",
+                optionalPlainTime = "01:23:45",
+                optionalCollectionWithNullableIntElement = new[] {
+        1234
     },
             };
 
-            Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
+            Response response = client.InputToRoundTripOptional(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
+            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTripOptional_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new { };
+
+            Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputToRoundTripOptional_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                optionalString = "<optionalString>",
+                optionalInt = 1234,
+                optionalStringList = new[] {
+        "<String>"
+    },
+                optionalIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                optionalModel = new { },
+                optionalModelWithPropertiesOnBase = new
+                {
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+                optionalFixedStringEnum = "1",
+                optionalExtensibleEnum = "1",
+                optionalIntRecord = new
+                {
+                    key = 1234,
+                },
+                optionalStringRecord = new
+                {
+                    key = "<String>",
+                },
+                optionalModelRecord = new
+                {
+                    key = new { },
+                },
+                optionalPlainDate = "2022-05-10",
+                optionalPlainTime = "01:23:45",
+                optionalCollectionWithNullableIntElement = new[] {
+        1234
+    },
+            };
+
+            Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
+            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
@@ -237,9 +612,7 @@ namespace ModelsInCadl.Samples
                 requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -253,18 +626,151 @@ namespace ModelsInCadl.Samples
                 },
                 requiredModelRecord = new
                 {
-                    key = new
-                    {
-                        requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-                    },
+                    key = new { },
                 },
             };
 
             Response response = client.RoundTripToOutput(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTripToOutput_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new
+                {
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                    requiredPropertyOnBase = 1234,
+                },
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = "1",
+                requiredExtensibleEnum = "1",
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredIntRecord = new
+                {
+                    key = 1234,
+                },
+                requiredStringRecord = new
+                {
+                    key = "<String>",
+                },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+            };
+
+            Response response = client.RoundTripToOutput(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripToOutput_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new
+                {
+                    requiredPropertyOnBase = 1234,
+                },
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = "1",
+                requiredExtensibleEnum = "1",
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredIntRecord = new
+                {
+                    key = 1234,
+                },
+                requiredStringRecord = new
+                {
+                    key = "<String>",
+                },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+            };
+
+            Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripToOutput_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredModel = new
+                {
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                    requiredPropertyOnBase = 1234,
+                },
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = "1",
+                requiredExtensibleEnum = "1",
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                requiredIntRecord = new
+                {
+                    key = 1234,
+                },
+                requiredStringRecord = new
+                {
+                    key = "<String>",
+                },
+                requiredModelRecord = new
+                {
+                    key = new { },
+                },
+            };
+
+            Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -289,6 +795,54 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_InputRecursive_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = client.InputRecursive(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputRecursive_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_InputRecursive_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = await client.InputRecursiveAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripRecursive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -307,6 +861,62 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTripRecursive_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = client.RoundTripRecursive(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripRecursive_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripRecursive_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                message = "<message>",
+            };
+
+            Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SelfReference()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -316,6 +926,47 @@ namespace ModelsInCadl.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SelfReference_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = client.SelfReference(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_SelfReference_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = await client.SelfReferenceAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_SelfReference_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = await client.SelfReferenceAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
@@ -330,9 +981,7 @@ namespace ModelsInCadl.Samples
                 requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -340,6 +989,81 @@ namespace ModelsInCadl.Samples
             };
 
             Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTripToOutputWithNoUseBase_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                baseModelProp = "<baseModelProp>",
+            };
+
+            Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data), new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripToOutputWithNoUseBase_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                baseModelProp = "<baseModelProp>",
+            };
+
+            Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_RoundTripToOutputWithNoUseBase_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var data = new
+            {
+                requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+                baseModelProp = "<baseModelProp>",
+            };
+
+            Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("baseModelProp").ToString());

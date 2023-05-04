@@ -31,9 +31,78 @@ namespace Pagination.Samples
                 requiredInt = 1234,
             };
 
-            foreach (var data in client.GetPaginationLedgerEntries(RequestContent.Create(data)))
+            foreach (var item in client.GetPaginationLedgerEntries(RequestContent.Create(data)))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPaginationLedgerEntries_AllParameters()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+            };
+
+            foreach (var item in client.GetPaginationLedgerEntries(RequestContent.Create(data), new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPaginationLedgerEntries_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+            };
+
+            await foreach (var item in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data)))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPaginationLedgerEntries_AllParameters_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            var data = new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+            };
+
+            await foreach (var item in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data), new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("contents").ToString());
                 Console.WriteLine(result.GetProperty("collectionId").ToString());
                 Console.WriteLine(result.GetProperty("transactionId").ToString());
@@ -48,9 +117,60 @@ namespace Pagination.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
-            foreach (var data in client.GetLedgerEntries(new RequestContext()))
+            foreach (var item in client.GetLedgerEntries(new RequestContext()))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetLedgerEntries_AllParameters()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            foreach (var item in client.GetLedgerEntries(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetLedgerEntries_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetLedgerEntriesAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("contents").ToString());
+                Console.WriteLine(result.GetProperty("collectionId").ToString());
+                Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetLedgerEntries_AllParameters_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetLedgerEntriesAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("contents").ToString());
                 Console.WriteLine(result.GetProperty("collectionId").ToString());
                 Console.WriteLine(result.GetProperty("transactionId").ToString());

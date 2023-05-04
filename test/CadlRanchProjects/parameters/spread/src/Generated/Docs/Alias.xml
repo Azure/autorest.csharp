@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
@@ -32,7 +32,7 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
@@ -59,7 +59,7 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestParameterAsync with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
@@ -86,7 +86,7 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestParameter with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
@@ -113,7 +113,7 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 <example>
 This sample shows how to call SpreadWithMultipleParametersAsync with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     prop1 = "<prop1>",
@@ -150,7 +150,7 @@ Schema for <c>SpreadWithMultipleParametersRequest</c>:
 <example>
 This sample shows how to call SpreadWithMultipleParameters with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     prop1 = "<prop1>",

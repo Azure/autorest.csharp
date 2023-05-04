@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetDatetimeValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetDatetimeValueClient(<1.0.0>);
+var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(new RequestContext());
 
@@ -18,7 +18,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call GetDatetimeValue with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetDatetimeValueClient(<1.0.0>);
+var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 Response response = client.GetDatetimeValue(new RequestContext());
 
@@ -31,7 +31,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetDatetimeValueClient(<1.0.0>);
+var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 var data = new[] {
     "2022-05-10T14:57:31.2311892-04:00"
@@ -46,7 +46,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetDatetimeValueClient(<1.0.0>);
+var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 var data = new[] {
     "2022-05-10T14:57:31.2311892-04:00"

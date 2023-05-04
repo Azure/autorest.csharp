@@ -24,10 +24,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetNoItemNamePages())
+            foreach (var item in client.GetNoItemNamePages())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNoItemNamePages_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetNoItemNamePages(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNoItemNamePages_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetNoItemNamePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNoItemNamePages_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetNoItemNamePagesAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -38,10 +82,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetNullNextLinkNamePages())
+            foreach (var item in client.GetNullNextLinkNamePages())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNullNextLinkNamePages_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetNullNextLinkNamePages(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNullNextLinkNamePages_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetNullNextLinkNamePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetNullNextLinkNamePages_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetNullNextLinkNamePagesAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -52,10 +140,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetSinglePages())
+            foreach (var item in client.GetSinglePages())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetSinglePages_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetSinglePages(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetSinglePages_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetSinglePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetSinglePages_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetSinglePagesAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -66,10 +198,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.FirstResponseEmpty())
+            foreach (var item in client.FirstResponseEmpty())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstResponseEmpty_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.FirstResponseEmpty(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FirstResponseEmpty_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.FirstResponseEmptyAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_FirstResponseEmpty_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.FirstResponseEmptyAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -80,10 +256,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePages())
+            foreach (var item in client.GetMultiplePages())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePages_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePages_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePages_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -94,10 +314,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetWithQueryParams(1234))
+            foreach (var item in client.GetWithQueryParams(1234))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithQueryParams_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetWithQueryParams(1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetWithQueryParams_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetWithQueryParamsAsync(1234))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetWithQueryParams_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetWithQueryParamsAsync(1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -108,10 +372,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.DuplicateParams())
+            foreach (var item in client.DuplicateParams())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DuplicateParams_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.DuplicateParams("<filter>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DuplicateParams_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.DuplicateParamsAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_DuplicateParams_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.DuplicateParamsAsync("<filter>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -122,10 +430,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.NextOperationWithQueryParams())
+            foreach (var item in client.NextOperationWithQueryParams())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NextOperationWithQueryParams_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.NextOperationWithQueryParams(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextOperationWithQueryParams_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextOperationWithQueryParamsAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextOperationWithQueryParams_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextOperationWithQueryParamsAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -136,10 +488,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetOdataMultiplePages())
+            foreach (var item in client.GetOdataMultiplePages())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetOdataMultiplePages_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetOdataMultiplePages_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetOdataMultiplePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetOdataMultiplePages_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -150,10 +546,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesWithOffset(1234))
+            foreach (var item in client.GetMultiplePagesWithOffset(1234))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesWithOffset_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesWithOffset_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesWithOffset_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -164,10 +604,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesRetryFirst())
+            foreach (var item in client.GetMultiplePagesRetryFirst())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesRetryFirst_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesRetryFirst(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesRetryFirst_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesRetryFirstAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesRetryFirst_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesRetryFirstAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -178,10 +662,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesRetrySecond())
+            foreach (var item in client.GetMultiplePagesRetrySecond())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesRetrySecond_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesRetrySecond(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesRetrySecond_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesRetrySecondAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesRetrySecond_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesRetrySecondAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -192,10 +720,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetSinglePagesFailure())
+            foreach (var item in client.GetSinglePagesFailure())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetSinglePagesFailure_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetSinglePagesFailure(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetSinglePagesFailure_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetSinglePagesFailureAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetSinglePagesFailure_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetSinglePagesFailureAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -206,10 +778,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesFailure())
+            foreach (var item in client.GetMultiplePagesFailure())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesFailure_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesFailure(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFailure_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFailureAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFailure_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFailureAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -220,10 +836,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesFailureUri())
+            foreach (var item in client.GetMultiplePagesFailureUri())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesFailureUri_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesFailureUri(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFailureUri_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFailureUriAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFailureUri_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFailureUriAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -234,10 +894,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>"))
+            foreach (var item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>"))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesFragmentNextLink_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFragmentNextLink_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFragmentNextLink_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -248,10 +952,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>"))
+            foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>"))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFragmentWithGroupingNextLink_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -262,10 +1010,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>"))
+            foreach (var item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>"))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NextFragment_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextFragment_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextFragment_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -276,10 +1068,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>"))
+            foreach (var item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>"))
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NextFragmentWithGrouping_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextFragmentWithGrouping_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_NextFragmentWithGrouping_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -290,10 +1126,54 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var data in client.GetPagingModelWithItemNameWithXMSClientName())
+            foreach (var item in client.GetPagingModelWithItemNameWithXMSClientName())
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPagingModelWithItemNameWithXMSClientName_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            foreach (var item in client.GetPagingModelWithItemNameWithXMSClientName(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPagingModelWithItemNameWithXMSClientName_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetPagingModelWithItemNameWithXMSClientNameAsync())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetPagingModelWithItemNameWithXMSClientName_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            await foreach (var item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -306,10 +1186,60 @@ namespace paging_LowLevel.Samples
 
             var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
 
-            foreach (var data in operation.Value)
+            foreach (var item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMultiplePagesLRO_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+
+            foreach (var item in operation.Value)
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesLRO_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
+
+            await foreach (var item in operation.Value)
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async void Example_GetMultiplePagesLRO_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new PagingClient(credential);
+
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+
+            await foreach (var item in operation.Value)
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
     }

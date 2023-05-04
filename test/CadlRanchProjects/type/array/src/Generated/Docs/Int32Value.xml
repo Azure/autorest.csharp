@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetInt32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetInt32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
 Response response = await client.GetInt32ValueAsync(new RequestContext());
 
@@ -18,7 +18,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call GetInt32Value with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetInt32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
 Response response = client.GetInt32Value(new RequestContext());
 
@@ -31,7 +31,7 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetInt32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
 var data = new[] {
     1234
@@ -46,7 +46,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetInt32ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
 var data = new[] {
     1234

@@ -8,9 +8,9 @@ This sample shows how to call GetPagesPartialUrlAsync with required parameters a
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>", new RequestContext()))
+await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -39,9 +39,9 @@ This sample shows how to call GetPagesPartialUrl with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrl("<accountName>", new RequestContext()))
+foreach (var item in client.GetPagesPartialUrl("<accountName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -70,9 +70,9 @@ This sample shows how to call GetPagesPartialUrlOperationAsync with required par
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>", new RequestContext()))
+await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -101,9 +101,9 @@ This sample shows how to call GetPagesPartialUrlOperation with required paramete
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrlOperation("<accountName>", new RequestContext()))
+foreach (var item in client.GetPagesPartialUrlOperation("<accountName>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -132,9 +132,9 @@ This sample shows how to call GetPagesPartialUrlOperationNextAsync with required
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", new RequestContext()))
+await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -163,9 +163,9 @@ This sample shows how to call GetPagesPartialUrlOperationNext with required para
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", new RequestContext()))
+foreach (var item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }

@@ -36,9 +36,9 @@ This sample shows how to call GetAllAsync with required parameters and parse the
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-await foreach (var data in client.GetAllAsync("<filter>", new RequestContext()))
+await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -51,9 +51,9 @@ This sample shows how to call GetAll with required parameters and parse the resu
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-foreach (var data in client.GetAll("<filter>", new RequestContext()))
+foreach (var item in client.GetAll("<filter>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
