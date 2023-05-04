@@ -4,16 +4,16 @@
 using System;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using ExactMatchFlattenInheritance;
-using ExactMatchFlattenInheritance.Models;
+using MgmtExactMatchFlattenInheritance;
+using MgmtExactMatchFlattenInheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class ExactMatchFlattenInheritanceTests : TestProjectTests
+    public class MgmtExactMatchFlattenInheritanceTests : TestProjectTests
     {
-        public ExactMatchFlattenInheritanceTests()
-            : base("ExactMatchFlattenInheritance")
+        public MgmtExactMatchFlattenInheritanceTests()
+            : base("MgmtExactMatchFlattenInheritance")
         {
         }
 

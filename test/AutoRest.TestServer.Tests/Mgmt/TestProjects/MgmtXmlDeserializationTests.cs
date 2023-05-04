@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Xml.Linq;
 using NUnit.Framework;
-using XmlDeserialization;
+using MgmtXmlDeserialization;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class XmlDeserializationTests : TestProjectTests
+    public class MgmtXmlDeserializationTests : TestProjectTests
     {
-        public XmlDeserializationTests()
-            : base("XmlDeserialization") { }
+        public MgmtXmlDeserializationTests()
+            : base("MgmtXmlDeserialization") { }
 
         [Test]
         public void ValidateXmlDeserialization()

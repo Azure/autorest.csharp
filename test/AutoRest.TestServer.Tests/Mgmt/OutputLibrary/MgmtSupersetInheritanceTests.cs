@@ -3,8 +3,8 @@
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    internal class NoTypeReplacementTests : OutputLibraryTestBase
+    internal class MgmtSupersetInheritanceTests : OutputLibraryTestBase
     {
-        public NoTypeReplacementTests() : base("NoTypeReplacement") { }
+        public MgmtSupersetInheritanceTests() : base("MgmtSupersetInheritance") { }
     }
 }

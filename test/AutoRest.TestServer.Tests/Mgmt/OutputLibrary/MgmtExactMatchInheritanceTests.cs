@@ -3,8 +3,8 @@
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    internal class ExactMatchInheritanceTests : OutputLibraryTestBase
+    internal class MgmtExactMatchInheritanceTests : OutputLibraryTestBase
     {
-        public ExactMatchInheritanceTests() : base("ExactMatchInheritance") { }
+        public MgmtExactMatchInheritanceTests() : base("MgmtExactMatchInheritance") { }
     }
 }

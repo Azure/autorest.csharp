@@ -5,15 +5,15 @@ using System;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using NUnit.Framework;
-using SupersetFlattenInheritance;
-using SupersetFlattenInheritance.Models;
+using MgmtSupersetFlattenInheritance;
+using MgmtSupersetFlattenInheritance.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class SupersetFlattenInheritanceTests : TestProjectTests
+    public class MgmtSupersetFlattenInheritanceTests : TestProjectTests
     {
-        public SupersetFlattenInheritanceTests()
-            : base("SupersetFlattenInheritance")
+        public MgmtSupersetFlattenInheritanceTests()
+            : base("MgmtSupersetFlattenInheritance")
         {
         }
 

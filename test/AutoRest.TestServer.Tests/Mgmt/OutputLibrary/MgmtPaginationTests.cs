@@ -3,8 +3,8 @@
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    internal class PaginationTests : OutputLibraryTestBase
+    internal class MgmtPaginationTests : OutputLibraryTestBase
     {
-        public PaginationTests() : base("Pagination") { }
+        public MgmtPaginationTests() : base("MgmtPagination") { }
     }
 }

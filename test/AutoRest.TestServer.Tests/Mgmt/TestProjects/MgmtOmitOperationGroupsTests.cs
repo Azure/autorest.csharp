@@ -3,10 +3,10 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class OmitOperationGroupTests : TestProjectTests
+    public class MgmtOmitOperationGroupTests : TestProjectTests
     {
-        public OmitOperationGroupTests()
-            : base("OmitOperationGroups")
+        public MgmtOmitOperationGroupTests()
+            : base("MgmtOmitOperationGroups")
         {
         }
 
@@ -40,7 +40,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private string GetTypeName(string className)
         {
-            string @namespace = "OmitOperationGroups";
+            string @namespace = "MgmtOmitOperationGroups";
 
             return className.EndsWith("Data") ? $"{@namespace}.{className}" : $"{@namespace}.Models.{className}";
         }

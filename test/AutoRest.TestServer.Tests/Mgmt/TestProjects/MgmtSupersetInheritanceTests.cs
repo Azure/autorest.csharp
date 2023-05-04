@@ -5,15 +5,15 @@ using System;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using NUnit.Framework;
-using SupersetInheritance;
-using SupersetInheritance.Models;
+using MgmtSupersetInheritance;
+using MgmtSupersetInheritance.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class SupersetInheritanceTests : TestProjectTests
+    public class MgmtSupersetInheritanceTests : TestProjectTests
     {
-        public SupersetInheritanceTests()
-            : base("SupersetInheritance")
+        public MgmtSupersetInheritanceTests()
+            : base("MgmtSupersetInheritance")
         {
         }
 

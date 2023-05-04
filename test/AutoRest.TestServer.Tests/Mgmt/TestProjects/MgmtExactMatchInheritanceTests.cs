@@ -10,16 +10,16 @@ using System.Text.Json.Serialization;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using ExactMatchInheritance;
-using ExactMatchInheritance.Models;
+using MgmtExactMatchInheritance;
+using MgmtExactMatchInheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class ExactMatchInheritanceTests : TestProjectTests
+    public class MgmtExactMatchInheritanceTests : TestProjectTests
     {
-        public ExactMatchInheritanceTests()
-            : base("ExactMatchInheritance")
+        public MgmtExactMatchInheritanceTests()
+            : base("MgmtExactMatchInheritance")
         {
         }
 
