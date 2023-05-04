@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     public partial class Shark : IUtf8JsonSerializable
     {
@@ -44,7 +44,7 @@ namespace Models.Inheritance.Models
                     continue;
                 }
             }
-            return new Shark(age);
+            return new Shark(kind, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

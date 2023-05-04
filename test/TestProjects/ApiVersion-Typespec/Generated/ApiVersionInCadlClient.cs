@@ -77,23 +77,13 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultValueAsync(string resultId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
-            using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
-                return Response.FromValue(DetectionResult.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
+            return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
@@ -105,34 +95,39 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        public virtual Response<DetectionResult> GetBatchDetectionResultValue(string resultId, CancellationToken cancellationToken = default)
+        public virtual Response<DetectionResult> GetBatchDetectionResult(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
-            using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetBatchDetectionResult(resultId, context);
-                return Response.FromValue(DetectionResult.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetBatchDetectionResult(resultId, context);
+            return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="resultId"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(String,RequestContext)']/*" />
-        public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context = null)
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
@@ -150,15 +145,30 @@ namespace ApiVersionInCadl
             }
         }
 
-        /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetBatchDetectionResult(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="resultId"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(String,RequestContext)']/*" />
-        public virtual Response GetBatchDetectionResult(string resultId, RequestContext context = null)
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,RequestContext)']/*" />
+        public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 

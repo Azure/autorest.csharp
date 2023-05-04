@@ -24,10 +24,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
+        private readonly IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> _armResourceExtensionOperations;
 
-        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations)
+        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations, Dictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations)
         {
             _extensionOperations = extensionOperations;
+            _armResourceExtensionOperations = armResourceExtensionOperations;
         }
 
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionInfo.ExtensionWrapper;
@@ -55,17 +57,22 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var extension = new MgmtExtension(operations, extensionClients, type);
                 extensionDict.Add(type, extension);
             }
+            // add ArmResourceExtension methods
+            extensionDict.Add(typeof(ArmResource), new ArmResourceExtension(_armResourceExtensionOperations, extensionClients));
             // add the ArmClientExtension
             extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
 
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();
-            foreach (var type in RequestPath.ExtensionChoices.Keys)
+            foreach (var (type, extension) in extensionDict)
             {
+                // explicitly skip ArmClient because it should not have an extension client
+                if (type.Equals(typeof(ArmClient)))
+                    continue;
                 // we add an empty list for the type to ensure that the corresponding extension client will always be constructed, even empty
                 resourceToOperationsDict.Add(type, new());
-                foreach (var operation in extensionDict[type].AllOperations)
+                foreach (var operation in extension.AllOperations)
                 {
                     resourceToOperationsDict.AddInList(type, operation);
                 }

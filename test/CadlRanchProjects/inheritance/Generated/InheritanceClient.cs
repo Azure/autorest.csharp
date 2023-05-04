@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Models.Inheritance.Models;
+using _Type.Model.Inheritance.Models;
 
-namespace Models.Inheritance
+namespace _Type.Model.Inheritance
 {
     // Data plane generated client.
     /// <summary> Illustrates inheritance and polymorphic model. </summary>
@@ -73,6 +73,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PostValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -97,6 +107,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PostValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -122,46 +142,36 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Siamese>> GetValidValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValidValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetValidAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Siamese.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetValidAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Siamese> GetValidValue(CancellationToken cancellationToken = default)
+        public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValidValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetValid(context);
-                return Response.FromValue(Siamese.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetValid(context);
+            return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetValidAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
@@ -177,11 +187,21 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetValid(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
-        public virtual Response GetValid(RequestContext context = null)
+        public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
@@ -221,6 +241,16 @@ namespace Models.Inheritance
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -245,6 +275,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -270,46 +310,36 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetModel(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
@@ -325,11 +355,21 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
-        public virtual Response GetModel(RequestContext context = null)
+        public virtual Response GetModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
@@ -369,6 +409,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -393,6 +443,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -418,46 +478,36 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetRecursiveModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetRecursiveModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetRecursiveModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetRecursiveModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetRecursiveModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetRecursiveModel(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRecursiveModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
@@ -473,11 +523,21 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRecursiveModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
-        public virtual Response GetRecursiveModel(RequestContext context = null)
+        public virtual Response GetRecursiveModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
@@ -517,6 +577,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRecursiveModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -541,6 +611,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRecursiveModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -566,46 +646,36 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetMissingDiscriminatorValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetMissingDiscriminatorValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetMissingDiscriminator(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetMissingDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetMissingDiscriminator(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMissingDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
@@ -621,11 +691,21 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMissingDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
-        public virtual Response GetMissingDiscriminator(RequestContext context = null)
+        public virtual Response GetMissingDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
@@ -642,46 +722,36 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetWrongDiscriminatorValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetWrongDiscriminatorValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetWrongDiscriminator(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetWrongDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetWrongDiscriminator(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWrongDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();
@@ -697,11 +767,21 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWrongDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
-        public virtual Response GetWrongDiscriminator(RequestContext context = null)
+        public virtual Response GetWrongDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();
@@ -724,7 +804,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -740,7 +820,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -754,7 +834,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -770,7 +850,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -784,7 +864,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -800,7 +880,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -814,7 +894,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -830,7 +910,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/missingdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/missingdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -844,7 +924,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/wrongdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/wrongdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

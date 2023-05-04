@@ -73,8 +73,32 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Enum must have at least one value");
             }
 
-            valueType ??= InputPrimitiveType.Int32;
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, normalizeValues(allowedValues, valueType), isExtendable);
+            InputPrimitiveType? currentType = null;
+            foreach (var value in allowedValues)
+            {
+                switch (value.Value)
+                {
+                    case int i:
+                        if (currentType == InputPrimitiveType.String)
+                            throw new JsonException($"Enum value types are not consistent.");
+                        if (currentType != InputPrimitiveType.Float32) currentType = InputPrimitiveType.Int32;
+                        break;
+                    case float f:
+                        if (currentType == InputPrimitiveType.String)
+                            throw new JsonException($"Enum value types are not consistent.");
+                        currentType = InputPrimitiveType.Float32;
+                        break;
+                    case string:
+                        if (currentType == InputPrimitiveType.Int32 || currentType == InputPrimitiveType.Float32) throw new JsonException($"Enum value types are not consistent.");
+                        currentType = InputPrimitiveType.String;
+                        break;
+                    default:
+                        throw new JsonException($"Unsupported enum value type, expect string, int or float.");
+                }
+            }
+            valueType = currentType ?? throw new JsonException("Enum value type must be set.");
+
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
@@ -82,7 +106,7 @@ namespace AutoRest.CSharp.Common.Input
             return enumType;
         }
 
-        private static IReadOnlyList<InputEnumTypeValue> normalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, InputPrimitiveType valueType)
+        private static IReadOnlyList<InputEnumTypeValue> NormalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, InputPrimitiveType valueType)
         {
             var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
 
@@ -97,13 +121,23 @@ namespace AutoRest.CSharp.Common.Input
                 case InputTypeKind.Int32:
                     foreach (var value in allowedValues)
                     {
-                        concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (Int32)value.Value, value.Description));
+                        concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (int)value.Value, value.Description));
                     }
                     break;
                 case InputTypeKind.Float32:
                     foreach (var value in allowedValues)
                     {
-                        concreteValues.Add(new InputEnumTypeFloatValue(value.Name, (float)value.Value, value.Description));
+                        switch (value.Value)
+                        {
+                            case int i:
+                                concreteValues.Add(new InputEnumTypeFloatValue(value.Name, i, value.Description));
+                                break;
+                            case float f:
+                                concreteValues.Add(new InputEnumTypeFloatValue(value.Name, f, value.Description));
+                                break;
+                            default:
+                                throw new JsonException($"Enum value type of ${value.Name} cannot cast to float.");
+                        }
                     }
                     break;
                 default:

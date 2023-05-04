@@ -63,8 +63,7 @@ namespace Azure.Core
                 case >= 400 and < 500:
                     return Response.FromValue(false, response);
                 default:
-                    var exception = await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
-                    return new ErrorResponse<bool>(response, exception);
+                    return new ErrorResponse<bool>(response, new RequestFailedException(response));
             }
         }
 
@@ -78,8 +77,7 @@ namespace Azure.Core
                 case >= 400 and < 500:
                     return Response.FromValue(false, response);
                 default:
-                    var exception = clientDiagnostics.CreateRequestFailedException(response);
-                    return new ErrorResponse<bool>(response, exception);
+                    return new ErrorResponse<bool>(response, new RequestFailedException(response));
             }
         }
 

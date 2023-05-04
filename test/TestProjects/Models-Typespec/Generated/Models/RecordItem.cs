@@ -21,5 +21,11 @@ namespace ModelsInCadl.Models
         {
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
         }
+
+        /// <summary> Initializes a new instance of RecordItem. </summary>
+        /// <param name="requiredCollection"> Required collection. </param>
+        internal RecordItem(IList<CollectionItem> requiredCollection) : base(requiredCollection)
+        {
+        }
     }
 }

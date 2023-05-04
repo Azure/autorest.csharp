@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="MultiAsync(IEnumerable,RequestContext)">
+    <member name="MultiAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call MultiAsync with required parameters.
 <code><![CDATA[
@@ -12,7 +12,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Multi(IEnumerable,RequestContext)">
+    <member name="Multi(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Multi with required parameters.
 <code><![CDATA[
@@ -23,7 +23,73 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CsvAsync(IEnumerable,RequestContext)">
+    <member name="SsvAsync(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call SsvAsync with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = await client.SsvAsync(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Ssv(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call Ssv with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = client.Ssv(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="TsvAsync(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call TsvAsync with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = await client.TsvAsync(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Tsv(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call Tsv with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = client.Tsv(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PipesAsync(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call PipesAsync with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = await client.PipesAsync(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Pipes(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call Pipes with required parameters.
+<code><![CDATA[
+var client = new CollectionFormatClient().GetQueryClient(<1.0.0>);
+
+Response response = client.Pipes(new String[]{"<colors>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CsvAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
@@ -34,7 +100,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Csv(IEnumerable,RequestContext)">
+    <member name="Csv(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Csv with required parameters.
 <code><![CDATA[

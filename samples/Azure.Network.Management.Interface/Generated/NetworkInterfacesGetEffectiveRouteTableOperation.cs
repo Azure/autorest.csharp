@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface
         internal NetworkInterfacesGetEffectiveRouteTableOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<EffectiveRouteListResult> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<EffectiveRouteListResult>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfacesGetEffectiveRouteTableOperation");
+            _operation = new OperationInternal<EffectiveRouteListResult>(nextLinkOperation, clientDiagnostics, response, "NetworkInterfacesGetEffectiveRouteTableOperation");
         }
 
         /// <inheritdoc />

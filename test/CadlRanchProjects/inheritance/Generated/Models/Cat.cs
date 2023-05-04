@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     /// <summary> The second level model in the normal multiple levels inheritance. </summary>
     public partial class Cat : Pet
@@ -17,7 +17,7 @@ namespace Models.Inheritance.Models
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Cat(string name, int age) : base(name)
+        internal Cat(string name, int age) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

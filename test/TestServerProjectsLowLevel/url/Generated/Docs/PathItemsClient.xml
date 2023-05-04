@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllWithValuesAsync(String,String,String,String,RequestContext)">
+    <member name="GetAllWithValuesAsync(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetAllWithValuesAsync with required parameters.
 <code><![CDATA[
@@ -21,7 +21,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetAllWithValues(String,String,String,String,RequestContext)">
+    <member name="GetAllWithValues(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetAllWithValues with required parameters.
 <code><![CDATA[
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetGlobalQueryNullAsync(String,String,String,String,RequestContext)">
+    <member name="GetGlobalQueryNullAsync(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetGlobalQueryNullAsync with required parameters.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetGlobalQueryNull(String,String,String,String,RequestContext)">
+    <member name="GetGlobalQueryNull(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetGlobalQueryNull with required parameters.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetGlobalAndLocalQueryNullAsync(String,String,String,String,RequestContext)">
+    <member name="GetGlobalAndLocalQueryNullAsync(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetGlobalAndLocalQueryNullAsync with required parameters.
 <code><![CDATA[
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetGlobalAndLocalQueryNull(String,String,String,String,RequestContext)">
+    <member name="GetGlobalAndLocalQueryNull(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetGlobalAndLocalQueryNull with required parameters.
 <code><![CDATA[
@@ -121,7 +121,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLocalPathItemQueryNullAsync(String,String,String,String,RequestContext)">
+    <member name="GetLocalPathItemQueryNullAsync(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetLocalPathItemQueryNullAsync with required parameters.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLocalPathItemQueryNull(String,String,String,String,RequestContext)">
+    <member name="GetLocalPathItemQueryNull(string,string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetLocalPathItemQueryNull with required parameters.
 <code><![CDATA[

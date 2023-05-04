@@ -61,11 +61,11 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 Array.Empty<InputModelType>(),
                 null,
-                null,
-                false,
-                true);
+                null)
+            {
+                IsPropertyBag = true
+            };
             return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
-            ;
         }
 
         protected override bool EnsureShouldValidateParameter()
@@ -79,9 +79,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 
         private FormattableString? GetDefaultValue(Parameter parameter)
         {
-            if (parameter.DefaultValue != null)
+            if (parameter.DefaultValue is { } defaultValue && defaultValue.Value != null)
             {
-                return parameter.DefaultValue?.GetConstantFormattable();
+                return defaultValue.GetConstantFormattable();
             }
             return null;
         }

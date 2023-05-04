@@ -58,12 +58,12 @@ namespace url_multi_collectionFormat_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get a null array of string using the multi-array format. </summary>
+        /// <summary> [Protocol Method] Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNullAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNullAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -80,12 +80,12 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <summary> Get a null array of string using the multi-array format. </summary>
+        /// <summary> [Protocol Method] Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNull(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNull(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -102,12 +102,12 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <summary> Get an empty array [] of string using the multi-array format. </summary>
+        /// <summary> [Protocol Method] Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmptyAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmptyAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -124,12 +124,12 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <summary> Get an empty array [] of string using the multi-array format. </summary>
+        /// <summary> [Protocol Method] Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmpty(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmpty(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -146,12 +146,12 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
+        /// <summary> [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValidAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -168,12 +168,12 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
+        /// <summary> [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValid(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -198,7 +198,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -218,7 +218,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -238,7 +238,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {

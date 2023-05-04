@@ -16,7 +16,7 @@ namespace ModelsInCadl.Models
         /// <summary> Initializes a new instance of NoUseBase. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
-        public NoUseBase(string baseModelProp)
+        internal NoUseBase(string baseModelProp)
         {
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 

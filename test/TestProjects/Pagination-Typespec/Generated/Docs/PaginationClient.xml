@@ -99,7 +99,7 @@ Schema for <c>Array</c>:
     </member>
     <member name="GetLedgerEntriesAsync(RequestContext)">
 <example>
-This sample shows how to call GetLedgerEntriesAsync and parse the result.
+This sample shows how to call GetLedgerEntriesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -131,7 +131,7 @@ Schema for <c>Array</c>:
     </member>
     <member name="GetLedgerEntries(RequestContext)">
 <example>
-This sample shows how to call GetLedgerEntries and parse the result.
+This sample shows how to call GetLedgerEntries with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");

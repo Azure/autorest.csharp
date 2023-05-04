@@ -29,7 +29,7 @@ namespace lro
         internal LROsPostDoubleHeadersFinalAzureHeaderGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.AzureAsyncOperation);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
         }
 
         /// <inheritdoc />
