@@ -1,6 +1,7 @@
 {
     "CadlRanchProjects": [
         "type/array",
+        "type/dictionary",
         "type/enum/extensible",
         "type/enum/fixed",
         "type/model/usage",
@@ -9,7 +10,6 @@
         "authentication/api-key",
         "authentication/oauth2",
         "authentication/union",
-        "dictionary",
         "azure/core/basic",
         "azure/core/traits",
         "projection/projected-name",
