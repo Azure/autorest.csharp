@@ -184,6 +184,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
     },
+    "ConvenienceUpdate-Typespec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceUpdate-Typespec\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Typespec\\Generated"
+    },
     "custom-baseUrl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\Generated"
@@ -592,10 +596,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\SomeFolder\\Generated"
     },
-    "typespec-arrays/item-types": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\arrays\\item-types\\Generated"
-    },
     "typespec-authentication/api-key": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\api-key\\Generated"
@@ -608,45 +608,65 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
     },
-    "typespec-azure/core": {
+    "typespec-azure/core/basic": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\Generated"
     },
-    "typespec-collectionFormat": {
+    "typespec-azure/core/traits": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\collectionFormat\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\Generated"
     },
     "typespec-dictionary": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\dictionary\\Generated"
     },
-    "typespec-enums/extensible": {
+    "typespec-parameters/collection-format": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\Generated"
     },
-    "typespec-hello": {
+    "typespec-parameters/spread": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\hello\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\spread\\Generated"
     },
-    "typespec-models/property-optional": {
+    "typespec-projection/projected-name": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-optional\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\projected-name\\Generated"
     },
-    "typespec-models/property-types": {
+    "typespec-server/path/multiple": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-types\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\multiple\\Generated"
     },
-    "typespec-models/usage": {
+    "typespec-server/path/single": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
-    },
-    "typespec-projection": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\single\\Generated"
     },
     "typespec-special-words": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-words\\Generated"
+    },
+    "typespec-type/array": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\array\\Generated"
+    },
+    "typespec-type/enum/extensible": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\enum\\extensible\\Generated"
+    },
+    "typespec-type/enum/fixed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\enum\\fixed\\Generated"
+    },
+    "typespec-type/model/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\usage\\Generated"
+    },
+    "typespec-type/property/optional": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\optional\\Generated"
+    },
+    "typespec-type/property/value-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\value-types\\Generated"
     },
     "url": {
       "commandName": "Project",

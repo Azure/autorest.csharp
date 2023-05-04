@@ -27,7 +27,7 @@ namespace lro
         internal LrosaDsPostNonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LrosaDsPostNonRetry400Operation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LrosaDsPostNonRetry400Operation");
         }
 
         /// <inheritdoc />

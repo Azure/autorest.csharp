@@ -1,16 +1,16 @@
 {
  "$id": "1",
- "Name": "Models.Inheritance",
+ "Name": "Type.Model.Inheritance",
  "Description": "Illustrates inheritance and polymorphic model.",
  "ApiVersions": [
-  "2021-03-25"
+  "1.0.0"
  ],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "This is base model for non-discriminator normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "None",
@@ -35,7 +35,7 @@
   {
    "$id": "5",
    "Name": "Cat",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "The second level model in the normal multiple levels inheritance.",
    "IsNullable": false,
    "BaseModel": {
@@ -63,7 +63,7 @@
   {
    "$id": "8",
    "Name": "Siamese",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
    "BaseModel": {
@@ -91,7 +91,7 @@
   {
    "$id": "11",
    "Name": "Fish",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "This is base model for polymorphic multiple levels inheritance with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
@@ -117,7 +117,7 @@
   {
    "$id": "14",
    "Name": "Shark",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.",
    "IsNullable": false,
    "DiscriminatorValue": "shark",
@@ -130,7 +130,7 @@
   {
    "$id": "15",
    "Name": "Salmon",
-   "Namespace": "Models.Inheritance",
+   "Namespace": "Type.Model.Inheritance",
    "Description": "The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.",
    "IsNullable": false,
    "DiscriminatorValue": "salmon",
@@ -335,7 +335,7 @@
          "Kind": "String",
          "IsNullable": false
         },
-        "Value": "2021-03-25"
+        "Value": "1.0.0"
        }
       }
      ],
@@ -353,7 +353,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/models/inheritance/valid",
+     "Path": "/type/model/inheritance/valid",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -417,7 +417,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/models/inheritance/valid",
+     "Path": "/type/model/inheritance/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -522,7 +522,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/models/inheritance/valid",
+     "Path": "/type/model/inheritance/valid",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -586,7 +586,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/model",
+     "Path": "/type/model/inheritance/discriminated/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -688,7 +688,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/model",
+     "Path": "/type/model/inheritance/discriminated/model",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -752,7 +752,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/recursivemodel",
+     "Path": "/type/model/inheritance/discriminated/recursivemodel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -854,7 +854,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/recursivemodel",
+     "Path": "/type/model/inheritance/discriminated/recursivemodel",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -918,7 +918,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/missingdiscriminator",
+     "Path": "/type/model/inheritance/discriminated/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -979,7 +979,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/models/inheritance/discriminated/wrongdiscriminator",
+     "Path": "/type/model/inheritance/discriminated/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

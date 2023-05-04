@@ -57,7 +57,7 @@ namespace body_string_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get null string value value. </summary>
+        /// <summary> [Protocol Method] Get null string value value. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -78,7 +78,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get null string value value. </summary>
+        /// <summary> [Protocol Method] Get null string value value. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -99,7 +99,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value null. </summary>
+        /// <summary> [Protocol Method] Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -121,7 +121,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value null. </summary>
+        /// <summary> [Protocol Method] Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -143,7 +143,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <summary> [Protocol Method] Get empty string value value &apos;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -164,7 +164,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <summary> [Protocol Method] Get empty string value value &apos;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -185,7 +185,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <summary> [Protocol Method] Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -210,7 +210,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <summary> [Protocol Method] Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -235,7 +235,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <summary> [Protocol Method] Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -256,7 +256,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <summary> [Protocol Method] Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -277,7 +277,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <summary> [Protocol Method] Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -302,7 +302,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <summary> [Protocol Method] Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -327,7 +327,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <summary> [Protocol Method] Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -348,7 +348,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <summary> [Protocol Method] Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -369,7 +369,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <summary> [Protocol Method] Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -394,7 +394,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <summary> [Protocol Method] Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -419,7 +419,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <summary> [Protocol Method] Get String value when no string value is sent in response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -440,7 +440,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <summary> [Protocol Method] Get String value when no string value is sent in response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -461,7 +461,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get value that is base64 encoded. </summary>
+        /// <summary> [Protocol Method] Get value that is base64 encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -482,7 +482,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get value that is base64 encoded. </summary>
+        /// <summary> [Protocol Method] Get value that is base64 encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -503,7 +503,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get value that is base64url encoded. </summary>
+        /// <summary> [Protocol Method] Get value that is base64url encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -524,7 +524,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get value that is base64url encoded. </summary>
+        /// <summary> [Protocol Method] Get value that is base64url encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -545,7 +545,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Put value that is base64url encoded. </summary>
+        /// <summary> [Protocol Method] Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -570,7 +570,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Put value that is base64url encoded. </summary>
+        /// <summary> [Protocol Method] Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -595,7 +595,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <summary> [Protocol Method] Get null value that is expected to be base64url encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -616,7 +616,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <summary> [Protocol Method] Get null value that is expected to be base64url encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

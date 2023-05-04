@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="HeadNoParamsAsync(String,RequestContext)">
+    <member name="HeadNoParamsAsync(string,RequestContext)">
 <example>
 This sample shows how to call HeadNoParamsAsync and parse the result.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="HeadNoParams(String,RequestContext)">
+    <member name="HeadNoParams(string,RequestContext)">
 <example>
 This sample shows how to call HeadNoParams and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetRequiredAsync(String,String,RequestContext)">
+    <member name="GetRequiredAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -73,7 +73,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetRequired(String,String,RequestContext)">
+    <member name="GetRequired(string,string,RequestContext)">
 <example>
 This sample shows how to call GetRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -97,7 +97,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutRequiredOptionalAsync(String,String,String,RequestContext)">
+    <member name="PutRequiredOptionalAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call PutRequiredOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -121,7 +121,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutRequiredOptional(String,String,String,RequestContext)">
+    <member name="PutRequiredOptional(string,string,string,RequestContext)">
 <example>
 This sample shows how to call PutRequiredOptional with required parameters and parse the result.
 <code><![CDATA[
@@ -229,7 +229,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetOptionalAsync(String,String,RequestContext)">
+    <member name="GetOptionalAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetOptionalAsync and parse the result.
 <code><![CDATA[
@@ -253,7 +253,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetOptional(String,String,RequestContext)">
+    <member name="GetOptional(string,string,RequestContext)">
 <example>
 This sample shows how to call GetOptional and parse the result.
 <code><![CDATA[
