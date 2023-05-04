@@ -786,7 +786,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string FixKeyWords(string serializedName)
         {
-            return SyntaxFacts.GetKeywordKind(serializedName) == SyntaxKind.None ? serializedName : $"@{serializedName}";
+            var result = serializedName.Replace('-', '_');
+            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 
         private void ComposeGetClientCodes(StringBuilder builder)
@@ -864,7 +865,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 client = client.ParentClient;
             }
-            callChain.Push(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
+            callChain.Push(client.GetEffectiveCtor());
 
             return callChain.ToList();
         }

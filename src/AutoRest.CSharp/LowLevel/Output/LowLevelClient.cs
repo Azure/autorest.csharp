@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -14,6 +16,8 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
@@ -28,7 +32,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
-        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility => "public";
 
         private ConstructorSignature? _subClientInternalConstructor;
@@ -52,7 +55,6 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = libraryName;
             _typeFactory = typeFactory;
             DefaultName = name;
-            DefaultNamespace = ns;
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
@@ -249,5 +251,108 @@ namespace AutoRest.CSharp.Output.Models
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
+
+        internal MethodSignatureBase GetEffectiveCtor()
+        {
+            List<ConstructorSignature> candidates = new List<ConstructorSignature>(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
+
+            if (ExistingType is not null)
+            {
+                //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+                //remove suppressed ctors from the candidates
+                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+                {
+                    if (attribute.ConstructorArguments.Length != 2)
+                        continue;
+                    var classTarget = attribute.ConstructorArguments[0].Value;
+                    if (classTarget is null || !classTarget.Equals(DefaultName))
+                        continue;
+
+                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values));
+                }
+
+                // add custom ctors into the candidates
+                foreach (var existingCtor in ExistingType.Constructors)
+                {
+                    var parameters = existingCtor.Parameters;
+                    var modifiers = GetModifiers(existingCtor);
+                    bool isPublic = modifiers.HasFlag(MethodSignatureModifiers.Public);
+                    //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
+                    if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
+                    {
+                        continue;
+                    }
+                    var ctor = new ConstructorSignature(
+                        DefaultName,
+                        GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
+                        null,
+                        modifiers,
+                        parameters.Select(p => new Parameter(
+                            p.Name,
+                            p.GetDocumentationCommentXml(),
+                            ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
+                            null,
+                            ValidationType.None,
+                            null)).ToArray(),
+                        null);
+                    candidates.Add(ctor);
+                }
+            }
+
+            return candidates.OrderBy(c => c.Parameters.Count).First();
+        }
+
+        private string? GetSummaryPortion(string? xmlComment)
+        {
+            if (xmlComment is null)
+                return null;
+
+            ReadOnlySpan<char> span = xmlComment.AsSpan();
+            int start = span.IndexOf("<summary>");
+            if (start == -1)
+                return null;
+            start += 9;
+            int end = span.IndexOf("</summary>");
+            if (end == -1)
+                return null;
+            return span.Slice(start, end - start).Trim().ToString();
+        }
+
+        private bool IsParamMatch(IReadOnlyList<Parameter> ctorParameters, ImmutableArray<TypedConstant> suppressionParameters)
+        {
+            if (ctorParameters.Count != suppressionParameters.Length)
+                return false;
+
+            HashSet<string> ctorParamHash = new HashSet<string>(ctorParameters.Select(p => p.Type.Name));
+            foreach (var suppressionParam in suppressionParameters)
+            {
+                if (!ctorParamHash.Contains(((INamedTypeSymbol)suppressionParam.Value!).Name))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private MethodSignatureModifiers GetModifiers(IMethodSymbol existingCtor)
+        {
+            MethodSignatureModifiers result = GetAccessModifier(existingCtor.DeclaredAccessibility);
+            if (existingCtor.IsStatic)
+            {
+                result |= MethodSignatureModifiers.Static;
+            }
+            if (existingCtor.IsVirtual)
+            {
+                result |= MethodSignatureModifiers.Virtual;
+            }
+            return result;
+        }
+
+        private MethodSignatureModifiers GetAccessModifier(Accessibility declaredAccessibility) => declaredAccessibility switch
+        {
+            Accessibility.Public => MethodSignatureModifiers.Public,
+            Accessibility.Protected => MethodSignatureModifiers.Protected,
+            Accessibility.Internal => MethodSignatureModifiers.Internal,
+            _ => MethodSignatureModifiers.Private
+        };
     }
 }
