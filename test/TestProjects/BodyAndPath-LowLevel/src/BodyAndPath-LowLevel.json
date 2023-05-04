@@ -218,8 +218,10 @@
               "name": "bodyParameter",
               "description": "Body parameter, should be replaced with RequestContent.",
               "in": "body",
-              "required": false,
-              "schema": {}
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BodyParam"
+              }
             }
           ],
           "responses": {
@@ -230,7 +232,17 @@
         }
       }
     },
-    "definitions": {},
+    "definitions": {
+        "BodyParam": {
+            "description": "Body parameter.",
+            "properties": {
+                "invalid-int-name": {
+                    "description": "Invalid int parameter.",
+                    "type": "integer"
+                }
+            }
+        }
+    },
     "parameters": {
       "SubscriptionIdParamterer": {
         "name": "subscriptionId",

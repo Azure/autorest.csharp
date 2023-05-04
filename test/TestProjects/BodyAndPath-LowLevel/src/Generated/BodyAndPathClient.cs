@@ -326,7 +326,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -336,6 +336,7 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
             Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
@@ -360,7 +361,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -370,6 +371,7 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
             Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");

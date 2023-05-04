@@ -298,7 +298,10 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = new
+            {
+                invalid_int_name = 1234,
+            };
 
             Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
             Console.WriteLine(response.Status);
@@ -324,7 +327,10 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = new
+            {
+                invalid_int_name = 1234,
+            };
 
             Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
             Console.WriteLine(response.Status);

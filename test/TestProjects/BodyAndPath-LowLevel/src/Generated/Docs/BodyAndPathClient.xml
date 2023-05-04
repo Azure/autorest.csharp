@@ -193,7 +193,7 @@ List all products.
     </member>
     <member name="UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)">
 <example>
-This sample shows how to call UpdateAsync with required parameters and request content.
+This sample shows how to call UpdateAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
@@ -208,16 +208,30 @@ This sample shows how to call UpdateAsync with all parameters and request conten
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = new {
+    invalid_int_name = 1234,
+};
 
 Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  invalid-int-name: number, # Optional. Invalid int parameter.
+}
+</code>
+
+</remarks>
     </member>
     <member name="Update(string,string,string,RequestContent,string,string,RequestContext)">
 <example>
-This sample shows how to call Update with required parameters and request content.
+This sample shows how to call Update with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
@@ -232,12 +246,26 @@ This sample shows how to call Update with all parameters and request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = new {
+    invalid_int_name = 1234,
+};
 
 Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  invalid-int-name: number, # Optional. Invalid int parameter.
+}
+</code>
+
+</remarks>
     </member>
   </members>
 </doc>

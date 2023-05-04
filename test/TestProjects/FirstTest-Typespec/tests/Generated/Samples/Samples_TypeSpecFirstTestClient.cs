@@ -22,9 +22,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TopAction()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.TopAction("<action>", new RequestContext());
 
@@ -42,9 +41,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TopAction_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.TopAction("<action>", new RequestContext());
 
@@ -66,9 +64,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.TopActionAsync("<action>", new RequestContext());
 
@@ -86,9 +83,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.TopActionAsync("<action>", new RequestContext());
 
@@ -110,9 +106,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.TopAction2();
 
@@ -130,9 +125,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.TopAction2(new RequestContext());
 
@@ -154,9 +148,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction2_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.TopAction2Async();
 
@@ -174,9 +167,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction2_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.TopAction2Async(new RequestContext());
 
@@ -198,9 +190,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchAction()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -229,9 +220,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchAction_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -268,9 +258,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchAction_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -299,9 +288,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchAction_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -338,9 +326,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnonymousBody()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -369,9 +356,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnonymousBody_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -408,9 +394,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnonymousBody_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -439,9 +424,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnonymousBody_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -478,9 +462,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FriendlyModel()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -497,9 +480,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FriendlyModel_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -516,9 +498,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FriendlyModel_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -535,9 +516,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FriendlyModel_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -554,9 +534,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AddTimeHeader()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.AddTimeHeader();
             Console.WriteLine(response.Status);
@@ -566,9 +545,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AddTimeHeader_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.AddTimeHeader(DateTimeOffset.UtcNow, new RequestContext());
             Console.WriteLine(response.Status);
@@ -578,9 +556,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AddTimeHeader_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
             Console.WriteLine(response.Status);
@@ -590,9 +567,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AddTimeHeader_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow, new RequestContext());
             Console.WriteLine(response.Status);
@@ -602,9 +578,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SayHi()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
@@ -622,9 +597,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SayHi_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
@@ -646,9 +620,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SayHi_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
 
@@ -666,9 +639,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SayHi_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
@@ -690,9 +662,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloAgain()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -738,9 +709,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloAgain_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -816,9 +786,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloAgain_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -864,9 +833,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloAgain_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -942,9 +910,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -990,9 +957,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1068,9 +1034,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoContentType_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1116,9 +1081,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoContentType_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1194,9 +1158,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloDemo2()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.HelloDemo2(new RequestContext());
 
@@ -1214,9 +1177,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloDemo2_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.HelloDemo2(new RequestContext());
 
@@ -1238,9 +1200,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloDemo2_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.HelloDemo2Async(new RequestContext());
 
@@ -1258,9 +1219,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloDemo2_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.HelloDemo2Async(new RequestContext());
 
@@ -1282,9 +1242,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1313,9 +1272,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1352,9 +1310,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateLiteral_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1383,9 +1340,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateLiteral_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             var data = new
             {
@@ -1422,9 +1378,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.HelloLiteral(new RequestContext());
 
@@ -1442,9 +1397,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.HelloLiteral(new RequestContext());
 
@@ -1466,9 +1420,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloLiteral_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.HelloLiteralAsync(new RequestContext());
 
@@ -1486,9 +1439,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloLiteral_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.HelloLiteralAsync(new RequestContext());
 
@@ -1510,9 +1462,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.GetUnknownValue();
 
@@ -1524,9 +1475,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = client.GetUnknownValue(new RequestContext());
 
@@ -1538,9 +1488,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.GetUnknownValueAsync();
 
@@ -1552,9 +1501,8 @@ namespace TypeSpecFirstTest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new TypeSpecFirstTestClient(endpoint, credential);
+            var client = new TypeSpecFirstTestClient(endpoint);
 
             Response response = await client.GetUnknownValueAsync(new RequestContext());
 
