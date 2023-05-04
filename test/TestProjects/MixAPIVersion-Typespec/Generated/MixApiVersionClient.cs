@@ -54,14 +54,14 @@ namespace MixApiVersion
             _apiVersion = options.Version;
         }
 
-        /// <summary> delete. </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='DeleteAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='DeleteAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(string name, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -80,14 +80,14 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> delete. </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Delete(String,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Delete(string,RequestContext)']/*" />
         public virtual Response Delete(string name, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -106,12 +106,12 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary> [Protocol Method] Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='ReadAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
@@ -128,12 +128,12 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary> [Protocol Method] Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Read(int,RequestContext)']/*" />
         public virtual Response Read(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
@@ -150,6 +150,7 @@ namespace MixApiVersion
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -174,6 +175,7 @@ namespace MixApiVersion
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -198,7 +200,7 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
+        /// <summary> [Protocol Method] Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -210,7 +212,7 @@ namespace MixApiVersion
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
+        /// <summary> [Protocol Method] Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

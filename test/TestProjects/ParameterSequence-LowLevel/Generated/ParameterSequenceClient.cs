@@ -57,7 +57,7 @@ namespace ParameterSequence_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get Item. </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -66,7 +66,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -86,7 +86,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Get Item. </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -95,7 +95,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(string,string,string,RequestContext)']/*" />
         public virtual Response GetItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -115,7 +115,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Select Item. </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -124,7 +124,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -144,7 +144,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Select Item. </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -153,7 +153,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(string,string,string,RequestContext)']/*" />
         public virtual Response SelectItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));

@@ -46,12 +46,13 @@ namespace Parameters.CollectionFormat
             _apiVersion = apiVersion;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='CsvAsync(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='CsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -70,12 +71,13 @@ namespace Parameters.CollectionFormat
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Csv(IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Csv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Csv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));

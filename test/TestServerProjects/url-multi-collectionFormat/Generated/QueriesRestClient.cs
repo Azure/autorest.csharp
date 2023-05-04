@@ -43,7 +43,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -67,7 +67,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -83,7 +83,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -95,7 +95,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -119,7 +119,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -135,7 +135,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -147,7 +147,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -171,7 +171,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -187,7 +187,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

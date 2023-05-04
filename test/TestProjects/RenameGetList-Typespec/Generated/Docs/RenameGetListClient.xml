@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetProjectAsync(String,RequestContext)">
+    <member name="GetProjectAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetProjectAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetProject(String,RequestContext)">
+    <member name="GetProject(string,RequestContext)">
 <example>
 This sample shows how to call GetProject with required parameters and parse the result.
 <code><![CDATA[
@@ -93,7 +93,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentAsync(String,String,RequestContext)">
+    <member name="GetDeploymentAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -119,7 +119,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="GetDeployment(String,String,RequestContext)">
+    <member name="GetDeployment(string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeployment with required parameters and parse the result.
 <code><![CDATA[
@@ -239,7 +239,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentsAsync(String,RequestContext)">
+    <member name="GetDeploymentsAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -286,7 +286,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetDeployments(String,RequestContext)">
+    <member name="GetDeployments(string,RequestContext)">
 <example>
 This sample shows how to call GetDeployments with required parameters and parse the result.
 <code><![CDATA[

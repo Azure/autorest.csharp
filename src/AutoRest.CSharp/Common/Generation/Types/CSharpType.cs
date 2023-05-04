@@ -192,5 +192,19 @@ namespace AutoRest.CSharp.Generation.Types
             provider = this.Implementation as T;
             return provider != null;
         }
+
+        internal string ConvertParamNameForDocs()
+        {
+            var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
+            if (IsNullable && IsValueType)
+                name += "?";
+            if (Arguments is not null && Arguments.Count() > 0)
+            {
+                name += "{";
+                name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));
+                name += "}";
+            }
+            return name;
+        }
     }
 }

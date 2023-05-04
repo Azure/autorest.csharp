@@ -11,6 +11,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using MgmtScopeResource;
+using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource.Mock
 {
@@ -42,6 +43,52 @@ namespace MgmtScopeResource.Mock
         }
 
         /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSourceScope</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(Filter? filter = null, CancellationToken cancellationToken = default)
+        {
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(Id, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, Id, filter);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ResourceLinkResourceExtension.GetAll", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSourceScope</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResourceLinkResource> GetAll(Filter? filter = null, CancellationToken cancellationToken = default)
+        {
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(Id, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, Id, filter);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ResourceLinkResourceExtension.GetAll", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary>
         /// Gets all the linked resources for the subscription.
         /// <list type="bullet">
         /// <item>
@@ -59,8 +106,8 @@ namespace MgmtScopeResource.Mock
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(string filter = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, filter);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, filter);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ResourceLinkResourceExtension.GetResourceLinks", "value", "nextLink", cancellationToken);
         }
 
@@ -82,8 +129,8 @@ namespace MgmtScopeResource.Mock
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLinkResource> GetResourceLinks(string filter = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, filter);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, filter);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), ResourceLinkClientDiagnostics, Pipeline, "ResourceLinkResourceExtension.GetResourceLinks", "value", "nextLink", cancellationToken);
         }
     }

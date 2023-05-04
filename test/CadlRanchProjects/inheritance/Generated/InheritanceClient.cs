@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Models.Inheritance.Models;
+using _Type.Model.Inheritance.Models;
 
-namespace Models.Inheritance
+namespace _Type.Model.Inheritance
 {
     // Data plane generated client.
     /// <summary> Illustrates inheritance and polymorphic model. </summary>
@@ -73,6 +73,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PostValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -97,6 +107,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PostValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -137,6 +157,16 @@ namespace Models.Inheritance
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetValidAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -157,6 +187,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetValid(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -201,6 +241,16 @@ namespace Models.Inheritance
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -225,6 +275,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -265,6 +325,16 @@ namespace Models.Inheritance
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -285,6 +355,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -329,6 +409,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -353,6 +443,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -393,6 +493,16 @@ namespace Models.Inheritance
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRecursiveModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -413,6 +523,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRecursiveModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -457,6 +577,16 @@ namespace Models.Inheritance
             return response;
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRecursiveModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -481,6 +611,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRecursiveModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -521,6 +661,16 @@ namespace Models.Inheritance
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMissingDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -541,6 +691,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMissingDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -577,6 +737,16 @@ namespace Models.Inheritance
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWrongDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -597,6 +767,16 @@ namespace Models.Inheritance
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWrongDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -624,7 +804,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -640,7 +820,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -654,7 +834,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -670,7 +850,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -684,7 +864,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -700,7 +880,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -714,7 +894,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -730,7 +910,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/missingdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/missingdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -744,7 +924,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/wrongdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/wrongdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

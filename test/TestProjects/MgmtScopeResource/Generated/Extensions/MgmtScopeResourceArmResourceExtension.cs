@@ -5,15 +5,22 @@
 
 #nullable disable
 
+using System.Threading;
+using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using MgmtScopeResource;
+using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource.Mock
 {
     /// <summary> A class to add extension methods to ArmResource. </summary>
     public partial class MgmtScopeResourceArmResourceExtension : ArmResource
     {
+        private ClientDiagnostics _marketplacesClientDiagnostics;
+        private MarketplacesRestOperations _marketplacesRestClient;
+
         /// <summary> Initializes a new instance of the <see cref="MgmtScopeResourceArmResourceExtension"/> class for mocking. </summary>
         protected MgmtScopeResourceArmResourceExtension()
         {
@@ -25,6 +32,9 @@ namespace MgmtScopeResource.Mock
         internal MgmtScopeResourceArmResourceExtension(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
+
+        private ClientDiagnostics MarketplacesClientDiagnostics => _marketplacesClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private MarketplacesRestOperations MarketplacesRestClient => _marketplacesRestClient ??= new MarketplacesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -51,6 +61,56 @@ namespace MgmtScopeResource.Mock
         public virtual GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments()
         {
             return GetCachedClient(Client => new GuestConfigurationAssignmentCollection(Client, Id));
+        }
+
+        /// <summary>
+        /// Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this API only for May 1, 2014 or later.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Consumption/marketplaces</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Marketplaces_List</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports &apos;eq&apos;, &apos;lt&apos;, &apos;gt&apos;, &apos;le&apos;, &apos;ge&apos;, and &apos;and&apos;. It does not currently support &apos;ne&apos;, &apos;or&apos;, or &apos;not&apos;. </param>
+        /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
+        /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="Marketplace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Marketplace> GetMarketplacesAsync(string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
+        {
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(Id, filter, top, skiptoken);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, Id, filter, top, skiptoken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Marketplace.DeserializeMarketplace, MarketplacesClientDiagnostics, Pipeline, "MgmtScopeResourceArmResourceExtension.GetMarketplaces", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary>
+        /// Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this API only for May 1, 2014 or later.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Consumption/marketplaces</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Marketplaces_List</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports &apos;eq&apos;, &apos;lt&apos;, &apos;gt&apos;, &apos;le&apos;, &apos;ge&apos;, and &apos;and&apos;. It does not currently support &apos;ne&apos;, &apos;or&apos;, or &apos;not&apos;. </param>
+        /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
+        /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="Marketplace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Marketplace> GetMarketplaces(string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
+        {
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(Id, filter, top, skiptoken);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, Id, filter, top, skiptoken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Marketplace.DeserializeMarketplace, MarketplacesClientDiagnostics, Pipeline, "MgmtScopeResourceArmResourceExtension.GetMarketplaces", "value", "nextLink", cancellationToken);
         }
     }
 }

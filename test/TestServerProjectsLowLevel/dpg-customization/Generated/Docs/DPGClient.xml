@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetModelAsync(String,RequestContext)">
+    <member name="GetModelAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetModel(String,RequestContext)">
+    <member name="GetModel(string,RequestContext)">
 <example>
 This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="PostModelAsync(String,RequestContent,RequestContext)">
+    <member name="PostModelAsync(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -97,7 +97,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="PostModel(String,RequestContent,RequestContext)">
+    <member name="PostModel(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostModel with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetPagesAsync(String,RequestContext)">
+    <member name="GetPagesAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetPagesAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -164,7 +164,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPages(String,RequestContext)">
+    <member name="GetPages(string,RequestContext)">
 <example>
 This sample shows how to call GetPages with required parameters and parse the result.
 <code><![CDATA[
@@ -191,7 +191,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="LroAsync(WaitUntil,String,RequestContext)">
+    <member name="LroAsync(WaitUntil,string,RequestContext)">
 <example>
 This sample shows how to call LroAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -220,7 +220,7 @@ Schema for <c>LROProduct</c>:
 
 </remarks>
     </member>
-    <member name="Lro(WaitUntil,String,RequestContext)">
+    <member name="Lro(WaitUntil,string,RequestContext)">
 <example>
 This sample shows how to call Lro with required parameters and parse the result.
 <code><![CDATA[
