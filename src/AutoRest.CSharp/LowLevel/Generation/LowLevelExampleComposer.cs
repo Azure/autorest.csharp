@@ -26,10 +26,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ClientTypeName { get; }
         private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private LowLevelClient _client;
 
 
         public LowLevelExampleComposer(LowLevelClient client)
         {
+            _client = client;
             ClientTypeName = client.Type.Name;
             ClientInvocationChain = GetClientInvocationChain(client);
         }
@@ -42,6 +44,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             //skip obsolete protocol methods
             if (clientMethod.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
+                return $"";
+
+            //skip suppressed protocol methods
+            if (_client.IsMethodSuppressed(clientMethod))
                 return $"";
 
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);

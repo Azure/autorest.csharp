@@ -100,6 +100,13 @@ namespace AutoRest.CSharp.Output.Models
         private LowLevelSubClientFactoryMethod? _factoryMethod;
         public LowLevelSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
 
+        public IEnumerable<LowLevelClientMethod> CustomMethods()
+        {
+            //TODO: get all custom methods using similar method to GetEffectiveCtor
+            yield break;
+        }
+
+
         public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
             var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
@@ -254,6 +261,9 @@ namespace AutoRest.CSharp.Output.Models
 
         internal MethodSignatureBase GetEffectiveCtor()
         {
+            //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
+            //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
+
             List<ConstructorSignature> candidates = new List<ConstructorSignature>(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
 
             if (ExistingType is not null)
@@ -318,16 +328,26 @@ namespace AutoRest.CSharp.Output.Models
             return span.Slice(start, end - start).Trim().ToString();
         }
 
-        private bool IsParamMatch(IReadOnlyList<Parameter> ctorParameters, ImmutableArray<TypedConstant> suppressionParameters)
+        private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, ImmutableArray<TypedConstant> suppressionParameters)
         {
-            if (ctorParameters.Count != suppressionParameters.Length)
+            if (methodParameters.Count != suppressionParameters.Length)
                 return false;
 
-            HashSet<string> ctorParamHash = new HashSet<string>(ctorParameters.Select(p => p.Type.Name));
-            foreach (var suppressionParam in suppressionParameters)
+            for (int i = 0; i < methodParameters.Count; i++)
             {
-                if (!ctorParamHash.Contains(((INamedTypeSymbol)suppressionParam.Value!).Name))
-                    return false;
+                var namedSymbol = ((INamedTypeSymbol)suppressionParameters[i].Value!);
+                var suppressionParamType = namedSymbol.GetCSharpType(_typeFactory);
+                var methodParamType = methodParameters[i].Type;
+                if (suppressionParamType is null)
+                {
+                    if (methodParamType.Name != namedSymbol.Name)
+                        return false;
+                }
+                else
+                {
+                    if (methodParamType.Name != suppressionParamType.Name || (methodParamType.IsValueType && methodParamType.IsNullable != suppressionParamType.IsNullable))
+                        return false;
+                }
             }
 
             return true;
@@ -354,5 +374,27 @@ namespace AutoRest.CSharp.Output.Models
             Accessibility.Internal => MethodSignatureModifiers.Internal,
             _ => MethodSignatureModifiers.Private
         };
+
+        internal bool IsMethodSuppressed(LowLevelClientMethod clientMethod)
+        {
+            if (ExistingType is null)
+                return false;
+
+            //[CodeGenSuppress("GetTests", typeof(string), typeof(string), typeof(DateTimeOffset?), typeof(DateTimeOffset?), typeof(int?), typeof(RequestContext))]
+            //remove suppressed ctors from the candidates
+            foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+            {
+                if (attribute.ConstructorArguments.Length != 2)
+                    continue;
+                var methodTarget = attribute.ConstructorArguments[0].Value;
+                if (methodTarget is null || !methodTarget.Equals(clientMethod.RequestMethod.Name))
+                    continue;
+
+                if (IsParamMatch(clientMethod.ProtocolMethodSignature.Parameters, attribute.ConstructorArguments[1].Values))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
