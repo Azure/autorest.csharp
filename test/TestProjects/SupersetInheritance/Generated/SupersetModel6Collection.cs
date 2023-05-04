@@ -81,7 +81,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel6RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel6RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, data, cancellationToken);
-                var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace SupersetInheritance
                 var response = await _supersetModel6RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel6Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel6Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace SupersetInheritance
                 var response = _supersetModel6RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel6Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel6Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace SupersetInheritance
         public virtual AsyncPageable<SupersetModel6Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel6RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel6Resource(Client, SupersetModel6Data.DeserializeSupersetModel6Data(e)), _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = SupersetModel6Data.DeserializeSupersetModel6Data(e); return new SupersetModel6Resource(Client, data, data.Id); }, _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace SupersetInheritance
         public virtual Pageable<SupersetModel6Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel6RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel6Resource(Client, SupersetModel6Data.DeserializeSupersetModel6Data(e)), _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = SupersetModel6Data.DeserializeSupersetModel6Data(e); return new SupersetModel6Resource(Client, data, data.Id); }, _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

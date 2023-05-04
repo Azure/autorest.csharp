@@ -45,7 +45,8 @@ namespace ResourceRename
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKeyInfoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -111,7 +112,7 @@ namespace ResourceRename
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,7 +144,7 @@ namespace ResourceRename
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -243,7 +244,7 @@ namespace ResourceRename
             try
             {
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response), response.GetRawResponse()));
+                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -278,7 +279,7 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, cancellationToken);
-                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response), response.GetRawResponse()));
+                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

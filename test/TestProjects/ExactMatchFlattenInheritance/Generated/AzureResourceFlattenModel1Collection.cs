@@ -82,7 +82,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _azureResourceFlattenModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _azureResourceFlattenModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -163,7 +163,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _azureResourceFlattenModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _azureResourceFlattenModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _azureResourceFlattenModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AzureResourceFlattenModel1Resource(Client, AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e)), _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e); return new AzureResourceFlattenModel1Resource(Client, data, data.Id); }, _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace ExactMatchFlattenInheritance
         public virtual Pageable<AzureResourceFlattenModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _azureResourceFlattenModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AzureResourceFlattenModel1Resource(Client, AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e)), _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e); return new AzureResourceFlattenModel1Resource(Client, data, data.Id); }, _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

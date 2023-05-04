@@ -162,7 +162,7 @@ namespace SubscriptionExtensions
                 var response = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OvenResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OvenResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace SubscriptionExtensions
                 var response = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OvenResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OvenResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace SubscriptionExtensions
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = OvenData.DeserializeOvenData(e); return new OvenResource(Client, data, data.Id); }, _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace SubscriptionExtensions
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = OvenData.DeserializeOvenData(e); return new OvenResource(Client, data, data.Id); }, _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

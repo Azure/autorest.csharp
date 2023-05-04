@@ -81,7 +81,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _resourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _resourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data, cancellationToken);
-                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace SupersetFlattenInheritance
                 var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace SupersetFlattenInheritance
                 var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace SupersetFlattenInheritance
         public virtual AsyncPageable<ResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = ResourceModel1Data.DeserializeResourceModel1Data(e); return new ResourceModel1Resource(Client, data, data.Id); }, _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace SupersetFlattenInheritance
         public virtual Pageable<ResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = ResourceModel1Data.DeserializeResourceModel1Data(e); return new ResourceModel1Resource(Client, data, data.Id); }, _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

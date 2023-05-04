@@ -164,7 +164,7 @@ namespace TenantOnly
                 var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccountResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace TenantOnly
                 var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccountResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace TenantOnly
         public virtual AsyncPageable<BillingAccountResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = BillingAccountData.DeserializeBillingAccountData(e); return new BillingAccountResource(Client, data, data.Id); }, _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace TenantOnly
         public virtual Pageable<BillingAccountResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = BillingAccountData.DeserializeBillingAccountData(e); return new BillingAccountResource(Client, data, data.Id); }, _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -81,7 +81,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, data, cancellationToken);
-                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace NoTypeReplacement
         public virtual AsyncPageable<NoTypeReplacementModel3Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel3RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel3Resource(Client, NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e)), _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e); return new NoTypeReplacementModel3Resource(Client, data, data.Id); }, _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace NoTypeReplacement
         public virtual Pageable<NoTypeReplacementModel3Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel3RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NoTypeReplacementModel3Resource(Client, NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e)), _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e); return new NoTypeReplacementModel3Resource(Client, data, data.Id); }, _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

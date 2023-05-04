@@ -82,7 +82,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _toasterRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionExtensionsArmOperation<ToasterResource>(Response.FromValue(new ToasterResource(Client, response), response.GetRawResponse()));
+                var operation = new SubscriptionExtensionsArmOperation<ToasterResource>(Response.FromValue(new ToasterResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _toasterRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, data, cancellationToken);
-                var operation = new SubscriptionExtensionsArmOperation<ToasterResource>(Response.FromValue(new ToasterResource(Client, response), response.GetRawResponse()));
+                var operation = new SubscriptionExtensionsArmOperation<ToasterResource>(Response.FromValue(new ToasterResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace SubscriptionExtensions
                 var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ToasterResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ToasterResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace SubscriptionExtensions
                 var response = _toasterRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ToasterResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ToasterResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace SubscriptionExtensions
         public virtual AsyncPageable<ToasterResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = ToasterData.DeserializeToasterData(e); return new ToasterResource(Client, data, data.Id); }, _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace SubscriptionExtensions
         public virtual Pageable<ToasterResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = ToasterData.DeserializeToasterData(e); return new ToasterResource(Client, data, data.Id); }, _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

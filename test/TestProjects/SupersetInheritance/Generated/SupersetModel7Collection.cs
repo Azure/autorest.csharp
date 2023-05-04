@@ -81,7 +81,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel7RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel7RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data, cancellationToken);
-                var operation = new SupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()));
+                var operation = new SupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace SupersetInheritance
                 var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel7Resource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace SupersetInheritance
                 var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel7Resource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace SupersetInheritance
         public virtual AsyncPageable<SupersetModel7Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel7RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel7Resource(Client, SupersetModel7Data.DeserializeSupersetModel7Data(e)), _supersetModel7ClientDiagnostics, Pipeline, "SupersetModel7Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = SupersetModel7Data.DeserializeSupersetModel7Data(e); return new SupersetModel7Resource(Client, data, new ResourceIdentifier(data.Id)); }, _supersetModel7ClientDiagnostics, Pipeline, "SupersetModel7Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace SupersetInheritance
         public virtual Pageable<SupersetModel7Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel7RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel7Resource(Client, SupersetModel7Data.DeserializeSupersetModel7Data(e)), _supersetModel7ClientDiagnostics, Pipeline, "SupersetModel7Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = SupersetModel7Data.DeserializeSupersetModel7Data(e); return new SupersetModel7Resource(Client, data, new ResourceIdentifier(data.Id)); }, _supersetModel7ClientDiagnostics, Pipeline, "SupersetModel7Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

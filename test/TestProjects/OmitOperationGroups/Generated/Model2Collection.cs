@@ -81,7 +81,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
+                var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, data, cancellationToken);
-                var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
+                var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace OmitOperationGroups
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace OmitOperationGroups
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace OmitOperationGroups
         public virtual AsyncPageable<Model2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = Model2Data.DeserializeModel2Data(e); return new Model2Resource(Client, data, data.Id); }, _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace OmitOperationGroups
         public virtual Pageable<Model2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = Model2Data.DeserializeModel2Data(e); return new Model2Resource(Client, data, data.Id); }, _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

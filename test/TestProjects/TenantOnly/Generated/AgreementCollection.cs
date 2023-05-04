@@ -81,7 +81,7 @@ namespace TenantOnly
                 var response = await _agreementRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AgreementResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -119,7 +119,7 @@ namespace TenantOnly
                 var response = _agreementRestClient.Get(Id.Name, agreementName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AgreementResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace TenantOnly
         public virtual AsyncPageable<AgreementResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _agreementRestClient.CreateListRequest(Id.Name, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = AgreementData.DeserializeAgreementData(e); return new AgreementResource(Client, data, data.Id); }, _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace TenantOnly
         public virtual Pageable<AgreementResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _agreementRestClient.CreateListRequest(Id.Name, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = AgreementData.DeserializeAgreementData(e); return new AgreementResource(Client, data, data.Id); }, _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

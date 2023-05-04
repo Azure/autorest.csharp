@@ -81,7 +81,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, data, cancellationToken);
-                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace ExactMatchInheritance
         public virtual AsyncPageable<ExactMatchModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ExactMatchModel1Resource(Client, ExactMatchModel1Data.DeserializeExactMatchModel1Data(e)), _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = ExactMatchModel1Data.DeserializeExactMatchModel1Data(e); return new ExactMatchModel1Resource(Client, data, data.Id); }, _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace ExactMatchInheritance
         public virtual Pageable<ExactMatchModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ExactMatchModel1Resource(Client, ExactMatchModel1Data.DeserializeExactMatchModel1Data(e)), _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = ExactMatchModel1Data.DeserializeExactMatchModel1Data(e); return new ExactMatchModel1Resource(Client, data, data.Id); }, _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

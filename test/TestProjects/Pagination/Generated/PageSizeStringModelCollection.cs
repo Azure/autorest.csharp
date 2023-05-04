@@ -81,7 +81,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeStringModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeStringModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace Pagination
                 var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace Pagination
                 var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeStringModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeStringModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeStringModelData.DeserializePageSizeStringModelData(e); return new PageSizeStringModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeStringModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeStringModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeStringModelData.DeserializePageSizeStringModelData(e); return new PageSizeStringModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -81,7 +81,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeNumericModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new PaginationArmOperation<PageSizeNumericModelResource>(Response.FromValue(new PageSizeNumericModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeNumericModelResource>(Response.FromValue(new PageSizeNumericModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeNumericModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new PaginationArmOperation<PageSizeNumericModelResource>(Response.FromValue(new PageSizeNumericModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeNumericModelResource>(Response.FromValue(new PageSizeNumericModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace Pagination
                 var response = await _pageSizeNumericModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeNumericModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace Pagination
                 var response = _pageSizeNumericModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeNumericModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeNumericModelData.DeserializePageSizeNumericModelData(e); return new PageSizeNumericModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeNumericModelData.DeserializePageSizeNumericModelData(e); return new PageSizeNumericModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -82,7 +82,7 @@ namespace ResourceRename
             try
             {
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response), response.GetRawResponse()));
+                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
-                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response), response.GetRawResponse()));
+                var operation = new ResourceRenameArmOperation<SshPublicKeyInfoResource>(Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace ResourceRename
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace ResourceRename
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace ResourceRename
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyInfoResource(Client, SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e)), _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e); return new SshPublicKeyInfoResource(Client, data, data.Id); }, _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace ResourceRename
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyInfoResource(Client, SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e)), _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e); return new SshPublicKeyInfoResource(Client, data, data.Id); }, _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

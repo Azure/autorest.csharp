@@ -27,14 +27,14 @@ namespace TenantOnly
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccountResource(_client, data);
+            return new BillingAccountResource(_client, data, data.Id);
         }
 
         async ValueTask<BillingAccountResource> IOperationSource<BillingAccountResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccountResource(_client, data);
+            return new BillingAccountResource(_client, data, data.Id);
         }
     }
 }

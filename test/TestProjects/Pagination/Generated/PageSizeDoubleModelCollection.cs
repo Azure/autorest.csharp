@@ -81,7 +81,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeDoubleModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new PaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeDoubleModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new PaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace Pagination
                 var response = await _pageSizeDoubleModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace Pagination
                 var response = _pageSizeDoubleModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e); return new PageSizeDoubleModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e); return new PageSizeDoubleModelResource(Client, data, new ResourceIdentifier(data.Id)); }, _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
