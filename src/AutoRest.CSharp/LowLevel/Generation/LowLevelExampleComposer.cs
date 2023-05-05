@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"";
 
             //skip if there are no valid ctors
-            if (_client.GetEffectiveCtor() is null)
+            if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
                 return $"";
 
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);

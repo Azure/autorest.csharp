@@ -208,6 +208,8 @@ internal class PostProcessor
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
         var referencedSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
 
+        referencedSymbols = AddSampleSymbols(referencedSymbols, definitions.DeclaredSymbols);
+
         var symbolsToRemove = definitions.DeclaredSymbols.Except(referencedSymbols);
 
         var nodesToRemove = new List<BaseTypeDeclarationSyntax>();
@@ -220,6 +222,19 @@ internal class PostProcessor
         project = await RemoveModelsAsync(project, nodesToRemove);
 
         return project;
+    }
+
+    private IEnumerable<INamedTypeSymbol> AddSampleSymbols(IEnumerable<INamedTypeSymbol> referencedSymbols, ImmutableHashSet<INamedTypeSymbol> declaredSymbols)
+    {
+        List<INamedTypeSymbol> symbolsToAdd = new List<INamedTypeSymbol>();
+        foreach (var symbol in declaredSymbols)
+        {
+            if (symbol.ContainingNamespace.Name == "Samples" && symbol.Name.StartsWith("Samples_") && !referencedSymbols.Any(s => s.Name == symbol.Name))
+            {
+                symbolsToAdd.Add(symbol);
+            }
+        }
+        return referencedSymbols.Concat(symbolsToAdd);
     }
 
     /// <summary>

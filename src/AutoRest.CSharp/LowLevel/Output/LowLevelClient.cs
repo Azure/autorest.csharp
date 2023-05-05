@@ -290,7 +290,8 @@ namespace AutoRest.CSharp.Output.Models
                     //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
                     if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
                     {
-                        candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p=>(INamedTypeSymbol)p.Type).ToArray()));
+                        if (!isPublic)
+                            candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray()));
                         continue;
                     }
                     var ctor = new ConstructorSignature(

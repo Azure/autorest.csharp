@@ -26,7 +26,7 @@
     },
     "AnomalyDetector": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AnomalyDetector\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AnomalyDetector\\src\\Generated"
     },
     "ApiVersion": {
       "commandName": "Project",
@@ -54,7 +54,7 @@
     },
     "Azure.AI.DocumentTranslation": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\src\\Generated"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
@@ -62,7 +62,7 @@
     },
     "Azure.Analytics.Purview.Account": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\src\\Generated"
     },
     "Azure.Management.Storage": {
       "commandName": "Project",
@@ -78,7 +78,7 @@
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\src\\Generated"
     },
     "body-array": {
       "commandName": "Project",
@@ -359,6 +359,10 @@
     "MgmtMockAndSample": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\src\\Generated"
+    },
+    "MgmtMockAndSample.Tests": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\tests\\Generated"
     },
     "MgmtMultipleParentResource": {
       "commandName": "Project",
