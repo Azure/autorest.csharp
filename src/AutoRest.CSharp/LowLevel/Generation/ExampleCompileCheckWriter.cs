@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.UseNamespace("System");
             _writer.UseNamespace("System.IO");
             _writer.UseNamespace("System.Text.Json");
-            if (Configuration.ModelNamespace)
+            if (Configuration.ModelNamespace && _client.HasConvenienceMethods)
                 _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))

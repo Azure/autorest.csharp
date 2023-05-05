@@ -423,5 +423,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return false;
         }
+
+        private bool? _hasConvenienceMethods;
+        internal bool HasConvenienceMethods => _hasConvenienceMethods ??= AllClientMethods.Any(m => m.ConvenienceMethod is not null && m.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public));
     }
 }
