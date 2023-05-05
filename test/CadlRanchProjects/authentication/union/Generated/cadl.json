@@ -126,8 +126,7 @@
      "Path": "/authentication/union/validkey",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "16",
@@ -186,8 +185,7 @@
      "Path": "/authentication/union/validtoken",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

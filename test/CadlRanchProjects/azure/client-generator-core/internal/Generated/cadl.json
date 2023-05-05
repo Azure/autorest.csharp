@@ -14,7 +14,6 @@
    "Description": "This is a model only used by public operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -37,10 +36,10 @@
    "$id": "5",
    "Name": "InternalModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
+   "Accessibility": "internal",
    "Description": "This is a model only used by internal operation. It should be generated but not exported.",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": true,
    "Properties": [
     {
      "$id": "6",
@@ -66,7 +65,6 @@
    "Description": "This is a model used by both public and internal operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "9",
@@ -227,13 +225,13 @@
      "Path": "/azure/client-generator-core/internal/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "27",
      "Name": "internalOnly",
      "ResourceName": "Internal",
+     "Accessibility": "internal",
      "Parameters": [
       {
        "$ref": "13"
@@ -309,8 +307,7 @@
      "Path": "/azure/client-generator-core/internal/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -402,13 +399,13 @@
      "Path": "/azure/client-generator-core/internal/shared/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
      "Name": "internal",
      "ResourceName": "Shared",
+     "Accessibility": "internal",
      "Parameters": [
       {
        "$ref": "13"
@@ -484,8 +481,7 @@
      "Path": "/azure/client-generator-core/internal/shared/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

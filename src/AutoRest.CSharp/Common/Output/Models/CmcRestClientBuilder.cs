@@ -143,8 +143,7 @@ namespace AutoRest.CSharp.Output.Models
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
-                    GenerateConvenienceMethod: false,
-                    IsInternal: false);
+                    GenerateConvenienceMethod: false);
             }
             return new InputOperation();
         }

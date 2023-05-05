@@ -14,7 +14,6 @@
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -40,7 +39,6 @@
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "6",
@@ -66,7 +64,6 @@
    "Description": "Model with a datetime property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "9",
@@ -92,7 +89,6 @@
    "Description": "Model with a duration property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "12",
@@ -118,7 +114,6 @@
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "15",
@@ -149,7 +144,6 @@
    "Description": "Model with collection models properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "19",
@@ -177,7 +171,6 @@
    "Description": "Model with required and optional properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "22",
@@ -344,8 +337,7 @@
      "Path": "/type/property/optional/string/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "42",
@@ -407,8 +399,7 @@
      "Path": "/type/property/optional/string/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "47",
@@ -514,8 +505,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "56",
@@ -621,8 +611,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -696,8 +685,7 @@
      "Path": "/type/property/optional/bytes/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "72",
@@ -759,8 +747,7 @@
      "Path": "/type/property/optional/bytes/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "77",
@@ -866,8 +853,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "86",
@@ -973,8 +959,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1048,8 +1033,7 @@
      "Path": "/type/property/optional/datetime/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "102",
@@ -1111,8 +1095,7 @@
      "Path": "/type/property/optional/datetime/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "107",
@@ -1218,8 +1201,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "116",
@@ -1325,8 +1307,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1400,8 +1381,7 @@
      "Path": "/type/property/optional/duration/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "132",
@@ -1463,8 +1443,7 @@
      "Path": "/type/property/optional/duration/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "137",
@@ -1570,8 +1549,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "146",
@@ -1677,8 +1655,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1752,8 +1729,7 @@
      "Path": "/type/property/optional/collections/bytes/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "162",
@@ -1815,8 +1791,7 @@
      "Path": "/type/property/optional/collections/bytes/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "167",
@@ -1922,8 +1897,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "176",
@@ -2029,8 +2003,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2104,8 +2077,7 @@
      "Path": "/type/property/optional/collections/model/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "192",
@@ -2167,8 +2139,7 @@
      "Path": "/type/property/optional/collections/model/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "197",
@@ -2274,8 +2245,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "206",
@@ -2381,8 +2351,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2456,8 +2425,7 @@
      "Path": "/type/property/optional/requiredAndOptional/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "222",
@@ -2519,8 +2487,7 @@
      "Path": "/type/property/optional/requiredAndOptional/requiredOnly",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "227",
@@ -2626,8 +2593,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "236",
@@ -2733,8 +2699,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

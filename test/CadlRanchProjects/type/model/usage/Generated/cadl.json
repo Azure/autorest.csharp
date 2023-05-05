@@ -14,7 +14,6 @@
    "Description": "Record used in operation parameters",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -40,7 +39,6 @@
    "Description": "Record used in operation return type",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "6",
@@ -66,7 +64,6 @@
    "Description": "Record used both as operation parameter and return type",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "9",
@@ -251,8 +248,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "29",
@@ -313,8 +309,7 @@
      "Path": "/type/model/usage/output",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "34",
@@ -422,8 +417,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

@@ -61,8 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 Array.Empty<InputModelType>(),
                 null,
-                null,
-                false)
+                null)
             {
                 IsPropertyBag = true
             };

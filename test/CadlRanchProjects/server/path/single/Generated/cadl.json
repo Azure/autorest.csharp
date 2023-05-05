@@ -115,8 +115,7 @@
      "Path": "/server/path/single/myOp",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

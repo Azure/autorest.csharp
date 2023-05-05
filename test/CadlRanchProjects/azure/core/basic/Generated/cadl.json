@@ -3,7 +3,6 @@
  "Name": "_Specs_.Azure.Core.Basic",
  "Description": "Illustrates bodies templated with Azure Core",
  "ApiVersions": [
-  "1.0.0",
   "2022-12-01-preview"
  ],
  "Enums": [],
@@ -15,7 +14,6 @@
    "Description": "Details about a user.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -62,7 +60,6 @@
        "Description": "UserOrder for testing list with expand.",
        "IsNullable": false,
        "Usage": "RoundTrip",
-       "IsInternal": false,
        "Properties": [
         {
          "$id": "10",
@@ -144,7 +141,6 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "19",
@@ -187,7 +183,6 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "24",
@@ -229,7 +224,6 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "29",
@@ -477,8 +471,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "55",
@@ -622,8 +615,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "67",
@@ -707,8 +699,7 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "74",
@@ -938,8 +929,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "97",
@@ -1006,8 +996,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "103",
@@ -1074,8 +1063,7 @@
       "ItemName": "items"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "109",
@@ -1156,8 +1144,7 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "116",
@@ -1262,8 +1249,7 @@
      "Path": "/azure/core/basic/users/{id}:export",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

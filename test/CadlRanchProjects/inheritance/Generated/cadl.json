@@ -14,7 +14,6 @@
    "Description": "This is base model for non-discriminator normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -43,7 +42,6 @@
     "$ref": "2"
    },
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "6",
@@ -72,7 +70,6 @@
     "$ref": "5"
    },
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "9",
@@ -99,7 +96,6 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "12",
@@ -129,7 +125,6 @@
     "$ref": "11"
    },
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": []
   },
   {
@@ -143,7 +138,6 @@
     "$ref": "11"
    },
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "16",
@@ -365,8 +359,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "40",
@@ -427,8 +420,7 @@
      "Path": "/type/model/inheritance/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "45",
@@ -536,8 +528,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "54",
@@ -598,8 +589,7 @@
      "Path": "/type/model/inheritance/discriminated/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "59",
@@ -704,8 +694,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "68",
@@ -766,8 +755,7 @@
      "Path": "/type/model/inheritance/discriminated/recursivemodel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "73",
@@ -872,8 +860,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "82",
@@ -934,8 +921,7 @@
      "Path": "/type/model/inheritance/discriminated/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "87",
@@ -996,8 +982,7 @@
      "Path": "/type/model/inheritance/discriminated/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

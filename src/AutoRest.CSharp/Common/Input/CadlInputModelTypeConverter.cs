@@ -52,8 +52,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyValue)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel)
-                    || reader.TryReadBoolean(nameof(InputModelType.IsInternal), ref isInternal);
+                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
 
                 if (isKnownProperty)
                 {
@@ -87,7 +86,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, isInternal);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue);
             if (id != null)
             {
                 resolver.AddReference(id, model);

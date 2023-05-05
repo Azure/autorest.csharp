@@ -224,7 +224,6 @@
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "35",
@@ -472,7 +471,6 @@
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "70",
@@ -498,7 +496,6 @@
    "Description": "this is a roundtrip model",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "73",
@@ -978,8 +975,7 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "130",
@@ -1041,8 +1037,7 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "135",
@@ -1151,8 +1146,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "144",
@@ -1262,8 +1256,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "153",
@@ -1373,8 +1366,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "162",
@@ -1452,8 +1444,7 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "169",
@@ -1575,8 +1566,7 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "180",
@@ -1731,8 +1721,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "194",
@@ -1881,8 +1870,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "207",
@@ -1944,8 +1932,7 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "212",
@@ -2054,8 +2041,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "221",
@@ -2216,8 +2202,7 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "238",
@@ -2279,8 +2264,7 @@
      "Path": "/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "243",
@@ -2389,8 +2373,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "252",
@@ -2449,8 +2432,7 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

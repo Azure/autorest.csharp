@@ -12,7 +12,6 @@
    "Namespace": "LroBasicCadl",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -67,7 +66,6 @@
    "Namespace": "LroBasicCadl",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "10",
@@ -281,8 +279,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "34",
@@ -478,8 +475,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "54",
@@ -630,8 +626,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

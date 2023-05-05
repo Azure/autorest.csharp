@@ -14,7 +14,6 @@
    "Description": "Pet",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -70,7 +69,6 @@
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "10",
@@ -86,7 +84,6 @@
        "Namespace": "MixApiVersion",
        "IsNullable": false,
        "Usage": "None",
-       "IsInternal": false,
        "Properties": [
         {
          "$id": "13",
@@ -292,8 +289,7 @@
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "35",
@@ -388,8 +384,7 @@
      "Path": "/pets/{petId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "43",
@@ -527,8 +522,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "56",
@@ -596,8 +590,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

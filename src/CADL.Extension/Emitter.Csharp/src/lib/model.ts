@@ -389,6 +389,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Accessibility: isInternal(context, m) ? "internal" : undefined,
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -397,7 +398,6 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                IsInternal: isInternal(context, m),
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 

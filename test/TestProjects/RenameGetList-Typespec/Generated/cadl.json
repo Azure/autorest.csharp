@@ -43,7 +43,6 @@
    "Namespace": "Azure.RenameGetList",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "7",
@@ -227,7 +226,6 @@
    "Description": "Paged collection of Project items",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "31",
@@ -269,7 +267,6 @@
    "Namespace": "Azure.RenameGetList",
    "IsNullable": false,
    "Usage": "None",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "36",
@@ -420,8 +417,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "52",
@@ -488,8 +484,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "58",
@@ -591,8 +586,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "67",
@@ -679,8 +673,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsInternal": false
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

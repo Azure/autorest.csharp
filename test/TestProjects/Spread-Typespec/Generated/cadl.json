@@ -13,7 +13,6 @@
    "Namespace": "Spread",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -53,7 +52,6 @@
    "Namespace": "Spread",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "8",
@@ -93,7 +91,6 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "13",
@@ -133,7 +130,6 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "18",
@@ -173,7 +169,6 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
-   "IsInternal": false,
    "Properties": [
     {
      "$id": "23",
@@ -418,8 +413,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "51",
@@ -525,8 +519,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "60",
@@ -672,8 +665,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "73",
@@ -819,8 +811,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "86",
@@ -966,8 +957,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "99",
@@ -1113,8 +1103,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsInternal": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

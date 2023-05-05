@@ -199,6 +199,7 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
+        Accessibility: isInternal(sdkContext, op) ? "internal" : undefined,
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
@@ -215,8 +216,7 @@ export function loadOperation(
         ),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
-        GenerateConvenienceMethod: generateConvenience,
-        IsInternal: isInternal(sdkContext, op)
+        GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
     function loadOperationParameter(
