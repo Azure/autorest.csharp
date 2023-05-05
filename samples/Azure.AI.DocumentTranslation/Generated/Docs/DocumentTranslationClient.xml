@@ -645,7 +645,7 @@ Schema for <c>SupportedStorageSources</c>:
 
 </remarks>
     </member>
-    <member name="GetTranslationsStatusAsync(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)">
+    <member name="GetTranslationsStatusAsync(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetTranslationsStatusAsync and parse the result.
 <code><![CDATA[
@@ -760,7 +760,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetTranslationsStatus(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)">
+    <member name="GetTranslationsStatus(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetTranslationsStatus and parse the result.
 <code><![CDATA[
@@ -875,7 +875,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetDocumentsStatusAsync(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)">
+    <member name="GetDocumentsStatusAsync(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetDocumentsStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -977,7 +977,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetDocumentsStatus(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)">
+    <member name="GetDocumentsStatus(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetDocumentsStatus with required parameters and parse the result.
 <code><![CDATA[

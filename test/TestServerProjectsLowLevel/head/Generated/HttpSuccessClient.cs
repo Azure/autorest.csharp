@@ -57,7 +57,7 @@ namespace head_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Return 200 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -78,7 +78,7 @@ namespace head_LowLevel
             }
         }
 
-        /// <summary> Return 200 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -99,7 +99,7 @@ namespace head_LowLevel
             }
         }
 
-        /// <summary> Return 204 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -120,7 +120,7 @@ namespace head_LowLevel
             }
         }
 
-        /// <summary> Return 204 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -141,7 +141,7 @@ namespace head_LowLevel
             }
         }
 
-        /// <summary> Return 404 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -162,7 +162,7 @@ namespace head_LowLevel
             }
         }
 
-        /// <summary> Return 404 status code if successful. </summary>
+        /// <summary> [Protocol Method] Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

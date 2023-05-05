@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SmokeTestAsync(Int32,String,RequestConditions,RequestContext)">
+    <member name="SmokeTestAsync(int,string,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call SmokeTestAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="SmokeTest(Int32,String,RequestConditions,RequestContext)">
+    <member name="SmokeTest(int,string,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call SmokeTest with required parameters and parse the result.
 <code><![CDATA[

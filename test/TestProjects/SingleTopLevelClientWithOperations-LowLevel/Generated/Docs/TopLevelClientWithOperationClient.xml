@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetAllAsync(String,RequestContext)">
+    <member name="GetAllAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -44,7 +44,7 @@ await foreach (var data in client.GetAllAsync("<filter>"))
 ]]></code>
 </example>
     </member>
-    <member name="GetAll(String,RequestContext)">
+    <member name="GetAll(string,RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[

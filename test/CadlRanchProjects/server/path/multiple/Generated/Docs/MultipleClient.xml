@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="WithOperationPathParamAsync(String,RequestContext)">
+    <member name="WithOperationPathParamAsync(string,RequestContext)">
 <example>
 This sample shows how to call WithOperationPathParamAsync with required parameters.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="WithOperationPathParam(String,RequestContext)">
+    <member name="WithOperationPathParam(string,RequestContext)">
 <example>
 This sample shows how to call WithOperationPathParam with required parameters.
 <code><![CDATA[
