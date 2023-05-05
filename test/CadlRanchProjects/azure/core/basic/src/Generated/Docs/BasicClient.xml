@@ -43,46 +43,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Creates or updates a User
-
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateOrUpdate(int,RequestContent,RequestContext)">
 <example>
@@ -126,46 +86,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Creates or updates a User
-
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateOrReplaceAsync(int,RequestContent,RequestContext)">
 <example>
@@ -209,46 +129,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Creates or replaces a User
-
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateOrReplace(int,RequestContent,RequestContext)">
 <example>
@@ -292,46 +172,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Creates or replaces a User
-
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUserAsync(int,RequestContext)">
 <example>
@@ -350,29 +190,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Gets a User
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUser(int,RequestContext)">
 <example>
@@ -391,29 +208,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Gets a User
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="DeleteAsync(int,RequestContext)">
 <example>
@@ -425,9 +219,6 @@ Response response = await client.DeleteAsync(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Deletes a User
-</remarks>
     </member>
     <member name="Delete(int,RequestContext)">
 <example>
@@ -439,9 +230,6 @@ Response response = client.Delete(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Deletes a User
-</remarks>
     </member>
     <member name="ExportAsync(int,string,RequestContext)">
 <example>
@@ -460,29 +248,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Exports a User
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Export(int,string,RequestContext)">
 <example>
@@ -501,29 +266,6 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
-<remarks>
-Exports a User
-
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>User</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [
-    {
-      id: number, # Required. The user&apos;s id.
-      userId: number, # Required. The user&apos;s id.
-      detail: string, # Required. The user&apos;s order detail
-    }
-  ], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)">
 <example>
@@ -543,23 +285,6 @@ await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"
 }
 ]]></code>
 </example>
-<remarks>
-Lists all Users
-
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)">
 <example>
@@ -579,23 +304,6 @@ foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}
 }
 ]]></code>
 </example>
-<remarks>
-Lists all Users
-
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithPageAsync(RequestContext)">
 <example>
@@ -615,21 +323,6 @@ await foreach (var item in client.GetWithPageAsync(new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithPage(RequestContext)">
 <example>
@@ -649,21 +342,6 @@ foreach (var item in client.GetWithPage(new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithCustomPageModelAsync(RequestContext)">
 <example>
@@ -683,21 +361,6 @@ await foreach (var item in client.GetWithCustomPageModelAsync(new RequestContext
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWithCustomPageModel(RequestContext)">
 <example>
@@ -717,21 +380,6 @@ foreach (var item in client.GetWithCustomPageModel(new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  id: number, # Required. The user&apos;s id.
-  name: string, # Required. The user&apos;s name.
-  orders: [UserOrder], # Optional. The user&apos;s order list
-  etag: string, # Required. The entity tag for this resource.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

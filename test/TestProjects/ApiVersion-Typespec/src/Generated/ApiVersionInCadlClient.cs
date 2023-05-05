@@ -109,8 +109,7 @@ namespace ApiVersionInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -125,7 +124,7 @@ namespace ApiVersionInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
@@ -150,8 +149,7 @@ namespace ApiVersionInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -166,7 +164,7 @@ namespace ApiVersionInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,RequestContext)']/*" />
         public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {

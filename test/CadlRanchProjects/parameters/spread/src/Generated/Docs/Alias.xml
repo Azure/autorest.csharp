@@ -15,18 +15,6 @@ Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadAsRequestBodyRequest</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
 <example>
@@ -42,18 +30,6 @@ Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadAsRequestBodyRequest</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="SpreadAsRequestParameterAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -69,18 +45,6 @@ Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTest
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadAsRequestParameterRequest</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="SpreadAsRequestParameter(string,string,RequestContent,RequestContext)">
 <example>
@@ -96,18 +60,6 @@ Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadAsRequestParameterRequest</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="SpreadWithMultipleParametersAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -128,23 +80,6 @@ Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMs
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadWithMultipleParametersRequest</c>:
-<code>{
-  prop1: string, # Required.
-  prop2: string, # Required.
-  prop3: string, # Required.
-  prop4: string, # Required.
-  prop5: string, # Required.
-  prop6: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="SpreadWithMultipleParameters(string,string,RequestContent,RequestContext)">
 <example>
@@ -165,23 +100,6 @@ Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>SpreadWithMultipleParametersRequest</c>:
-<code>{
-  prop1: string, # Required.
-  prop2: string, # Required.
-  prop3: string, # Required.
-  prop4: string, # Required.
-  prop5: string, # Required.
-  prop6: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

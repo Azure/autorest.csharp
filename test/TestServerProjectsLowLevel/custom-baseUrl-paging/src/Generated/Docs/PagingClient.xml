@@ -16,21 +16,6 @@ await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>", new R
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagesPartialUrl(string,RequestContext)">
 <example>
@@ -47,21 +32,6 @@ foreach (var item in client.GetPagesPartialUrl("<accountName>", new RequestConte
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagesPartialUrlOperationAsync(string,RequestContext)">
 <example>
@@ -78,21 +48,6 @@ await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagesPartialUrlOperation(string,RequestContext)">
 <example>
@@ -109,21 +64,6 @@ foreach (var item in client.GetPagesPartialUrlOperation("<accountName>", new Req
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)">
 <example>
@@ -140,21 +80,6 @@ await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<account
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPagesPartialUrlOperationNext(string,string,RequestContext)">
 <example>
@@ -171,21 +96,6 @@ foreach (var item in client.GetPagesPartialUrlOperationNext("<accountName>", "<n
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  properties: {
-    id: number, # Optional.
-    name: string, # Optional.
-  }, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

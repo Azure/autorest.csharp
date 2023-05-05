@@ -15,18 +15,6 @@ Response response = await client.JsonAsync(RequestContent.Create(data), new Requ
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>JsonProjectedNameModel</c>:
-<code>{
-  wireName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="Json(RequestContent,RequestContext)">
 <example>
@@ -42,18 +30,6 @@ Response response = client.Json(RequestContent.Create(data), new RequestContext(
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>JsonProjectedNameModel</c>:
-<code>{
-  wireName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="ClientAsync(RequestContent,RequestContext)">
 <example>
@@ -69,18 +45,6 @@ Response response = await client.ClientAsync(RequestContent.Create(data), new Re
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ClientProjectedNameModel</c>:
-<code>{
-  defaultName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="Client(RequestContent,RequestContext)">
 <example>
@@ -96,18 +60,6 @@ Response response = client.Client(RequestContent.Create(data), new RequestContex
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ClientProjectedNameModel</c>:
-<code>{
-  defaultName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="LanguageAsync(RequestContent,RequestContext)">
 <example>
@@ -123,18 +75,6 @@ Response response = await client.LanguageAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>LanguageProjectedNameModel</c>:
-<code>{
-  defaultName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="Language(RequestContent,RequestContext)">
 <example>
@@ -150,18 +90,6 @@ Response response = client.Language(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>LanguageProjectedNameModel</c>:
-<code>{
-  defaultName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="JsonAndClientAsync(RequestContent,RequestContext)">
 <example>
@@ -177,18 +105,6 @@ Response response = await client.JsonAndClientAsync(RequestContent.Create(data),
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>JsonAndClientProjectedNameModel</c>:
-<code>{
-  wireName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
     <member name="JsonAndClient(RequestContent,RequestContext)">
 <example>
@@ -204,18 +120,6 @@ Response response = client.JsonAndClient(RequestContent.Create(data), new Reques
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>JsonAndClientProjectedNameModel</c>:
-<code>{
-  wireName: boolean, # Required. Pass in true
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

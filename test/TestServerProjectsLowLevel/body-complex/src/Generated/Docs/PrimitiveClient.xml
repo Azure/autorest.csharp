@@ -15,19 +15,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>IntWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetInt(RequestContext)">
 <example>
@@ -43,19 +30,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>IntWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutIntAsync(RequestContent,RequestContext)">
 <example>
@@ -83,19 +57,6 @@ Response response = await client.PutIntAsync(RequestContent.Create(data), new Re
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>IntWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutInt(RequestContent,RequestContext)">
 <example>
@@ -123,19 +84,6 @@ Response response = client.PutInt(RequestContent.Create(data), new RequestContex
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>IntWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetLongAsync(RequestContext)">
 <example>
@@ -151,19 +99,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>LongWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetLong(RequestContext)">
 <example>
@@ -179,19 +114,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>LongWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutLongAsync(RequestContent,RequestContext)">
 <example>
@@ -219,19 +141,6 @@ Response response = await client.PutLongAsync(RequestContent.Create(data), new R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>LongWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutLong(RequestContent,RequestContext)">
 <example>
@@ -259,19 +168,6 @@ Response response = client.PutLong(RequestContent.Create(data), new RequestConte
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>LongWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetFloatAsync(RequestContext)">
 <example>
@@ -287,19 +183,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>FloatWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetFloat(RequestContext)">
 <example>
@@ -315,19 +198,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>FloatWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutFloatAsync(RequestContent,RequestContext)">
 <example>
@@ -355,19 +225,6 @@ Response response = await client.PutFloatAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>FloatWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutFloat(RequestContent,RequestContext)">
 <example>
@@ -395,19 +252,6 @@ Response response = client.PutFloat(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>FloatWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field2: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDoubleAsync(RequestContext)">
 <example>
@@ -423,19 +267,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DoubleWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDouble(RequestContext)">
 <example>
@@ -451,19 +282,6 @@ Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DoubleWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDoubleAsync(RequestContent,RequestContext)">
 <example>
@@ -491,19 +309,6 @@ Response response = await client.PutDoubleAsync(RequestContent.Create(data), new
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DoubleWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDouble(RequestContent,RequestContext)">
 <example>
@@ -531,19 +336,6 @@ Response response = client.PutDouble(RequestContent.Create(data), new RequestCon
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DoubleWrapper</c>:
-<code>{
-  field1: number, # Optional.
-  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetBoolAsync(RequestContext)">
 <example>
@@ -559,19 +351,6 @@ Console.WriteLine(result.GetProperty("field_true").ToString());
 Console.WriteLine(result.GetProperty("field_false").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>BooleanWrapper</c>:
-<code>{
-  field_true: boolean, # Optional.
-  field_false: boolean, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetBool(RequestContext)">
 <example>
@@ -587,19 +366,6 @@ Console.WriteLine(result.GetProperty("field_true").ToString());
 Console.WriteLine(result.GetProperty("field_false").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>BooleanWrapper</c>:
-<code>{
-  field_true: boolean, # Optional.
-  field_false: boolean, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutBoolAsync(RequestContent,RequestContext)">
 <example>
@@ -627,19 +393,6 @@ Response response = await client.PutBoolAsync(RequestContent.Create(data), new R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BooleanWrapper</c>:
-<code>{
-  field_true: boolean, # Optional.
-  field_false: boolean, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutBool(RequestContent,RequestContext)">
 <example>
@@ -667,19 +420,6 @@ Response response = client.PutBool(RequestContent.Create(data), new RequestConte
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BooleanWrapper</c>:
-<code>{
-  field_true: boolean, # Optional.
-  field_false: boolean, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetStringAsync(RequestContext)">
 <example>
@@ -696,20 +436,6 @@ Console.WriteLine(result.GetProperty("empty").ToString());
 Console.WriteLine(result.GetProperty("null").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>StringWrapper</c>:
-<code>{
-  field: string, # Optional.
-  empty: string, # Optional.
-  null: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetString(RequestContext)">
 <example>
@@ -726,20 +452,6 @@ Console.WriteLine(result.GetProperty("empty").ToString());
 Console.WriteLine(result.GetProperty("null").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>StringWrapper</c>:
-<code>{
-  field: string, # Optional.
-  empty: string, # Optional.
-  null: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutStringAsync(RequestContent,RequestContext)">
 <example>
@@ -768,20 +480,6 @@ Response response = await client.PutStringAsync(RequestContent.Create(data), new
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>StringWrapper</c>:
-<code>{
-  field: string, # Optional.
-  empty: string, # Optional.
-  null: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutString(RequestContent,RequestContext)">
 <example>
@@ -810,20 +508,6 @@ Response response = client.PutString(RequestContent.Create(data), new RequestCon
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>StringWrapper</c>:
-<code>{
-  field: string, # Optional.
-  empty: string, # Optional.
-  null: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDateAsync(RequestContext)">
 <example>
@@ -839,19 +523,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("leap").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DateWrapper</c>:
-<code>{
-  field: string (date), # Optional.
-  leap: string (date), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDate(RequestContext)">
 <example>
@@ -867,19 +538,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("leap").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DateWrapper</c>:
-<code>{
-  field: string (date), # Optional.
-  leap: string (date), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDateAsync(RequestContent,RequestContext)">
 <example>
@@ -907,19 +565,6 @@ Response response = await client.PutDateAsync(RequestContent.Create(data), new R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DateWrapper</c>:
-<code>{
-  field: string (date), # Optional.
-  leap: string (date), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDate(RequestContent,RequestContext)">
 <example>
@@ -947,19 +592,6 @@ Response response = client.PutDate(RequestContent.Create(data), new RequestConte
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DateWrapper</c>:
-<code>{
-  field: string (date), # Optional.
-  leap: string (date), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDateTimeAsync(RequestContext)">
 <example>
@@ -975,19 +607,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DatetimeWrapper</c>:
-<code>{
-  field: string (ISO 8601 Format), # Optional.
-  now: string (ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDateTime(RequestContext)">
 <example>
@@ -1003,19 +622,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DatetimeWrapper</c>:
-<code>{
-  field: string (ISO 8601 Format), # Optional.
-  now: string (ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDateTimeAsync(RequestContent,RequestContext)">
 <example>
@@ -1043,19 +649,6 @@ Response response = await client.PutDateTimeAsync(RequestContent.Create(data), n
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DatetimeWrapper</c>:
-<code>{
-  field: string (ISO 8601 Format), # Optional.
-  now: string (ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDateTime(RequestContent,RequestContext)">
 <example>
@@ -1083,19 +676,6 @@ Response response = client.PutDateTime(RequestContent.Create(data), new RequestC
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DatetimeWrapper</c>:
-<code>{
-  field: string (ISO 8601 Format), # Optional.
-  now: string (ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDateTimeRfc1123Async(RequestContext)">
 <example>
@@ -1111,19 +691,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Datetimerfc1123Wrapper</c>:
-<code>{
-  field: string (RFC1123 Format), # Optional.
-  now: string (RFC1123 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDateTimeRfc1123(RequestContext)">
 <example>
@@ -1139,19 +706,6 @@ Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Datetimerfc1123Wrapper</c>:
-<code>{
-  field: string (RFC1123 Format), # Optional.
-  now: string (RFC1123 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDateTimeRfc1123Async(RequestContent,RequestContext)">
 <example>
@@ -1179,19 +733,6 @@ Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(d
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Datetimerfc1123Wrapper</c>:
-<code>{
-  field: string (RFC1123 Format), # Optional.
-  now: string (RFC1123 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDateTimeRfc1123(RequestContent,RequestContext)">
 <example>
@@ -1219,19 +760,6 @@ Response response = client.PutDateTimeRfc1123(RequestContent.Create(data), new R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Datetimerfc1123Wrapper</c>:
-<code>{
-  field: string (RFC1123 Format), # Optional.
-  now: string (RFC1123 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDurationAsync(RequestContext)">
 <example>
@@ -1246,18 +774,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DurationWrapper</c>:
-<code>{
-  field: string (duration ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetDuration(RequestContext)">
 <example>
@@ -1272,18 +788,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DurationWrapper</c>:
-<code>{
-  field: string (duration ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDurationAsync(RequestContent,RequestContext)">
 <example>
@@ -1310,18 +814,6 @@ Response response = await client.PutDurationAsync(RequestContent.Create(data), n
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DurationWrapper</c>:
-<code>{
-  field: string (duration ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutDuration(RequestContent,RequestContext)">
 <example>
@@ -1348,18 +840,6 @@ Response response = client.PutDuration(RequestContent.Create(data), new RequestC
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>DurationWrapper</c>:
-<code>{
-  field: string (duration ISO 8601 Format), # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetByteAsync(RequestContext)">
 <example>
@@ -1374,18 +854,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ByteWrapper</c>:
-<code>{
-  field: Bytes, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetByte(RequestContext)">
 <example>
@@ -1400,18 +868,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ByteWrapper</c>:
-<code>{
-  field: Bytes, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutByteAsync(RequestContent,RequestContext)">
 <example>
@@ -1438,18 +894,6 @@ Response response = await client.PutByteAsync(RequestContent.Create(data), new R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ByteWrapper</c>:
-<code>{
-  field: Bytes, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutByte(RequestContent,RequestContext)">
 <example>
@@ -1476,18 +920,6 @@ Response response = client.PutByte(RequestContent.Create(data), new RequestConte
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ByteWrapper</c>:
-<code>{
-  field: Bytes, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>
