@@ -64,10 +64,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\src\\Generated"
     },
-    "Azure.Management.Storage": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\Generated"
-    },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
@@ -75,6 +71,10 @@
     "Azure.ResourceManager.Sample": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"
+    },
+    "Azure.ResourceManager.Storage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Storage\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
@@ -228,14 +228,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-update1\\src\\Generated"
     },
-    "ExactMatchFlattenInheritance": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"
-    },
-    "ExactMatchInheritance": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchInheritance\\Generated"
-    },
     "extensible-enums-swagger": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\Generated"
@@ -332,6 +324,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtDiscriminator\\Generated"
     },
+    "MgmtExactMatchFlattenInheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExactMatchFlattenInheritance\\Generated"
+    },
+    "MgmtExactMatchInheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExactMatchInheritance\\Generated"
+    },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
@@ -372,6 +372,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtNonStringPathVariable\\Generated"
     },
+    "MgmtNoTypeReplacement": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtNoTypeReplacement\\Generated"
+    },
+    "MgmtOmitOperationGroups": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOmitOperationGroups\\Generated"
+    },
     "MgmtOperations": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOperations\\Generated"
@@ -379,6 +387,10 @@
     "MgmtOptionalConstant": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOptionalConstant\\Generated"
+    },
+    "MgmtPagination": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPagination\\Generated"
     },
     "MgmtParamOrdering": {
       "commandName": "Project",
@@ -399,6 +411,10 @@
     "MgmtPropertyChooser": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPropertyChooser\\Generated"
+    },
+    "MgmtReferenceTypes": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtReferenceTypes\\Generated"
     },
     "MgmtRenameRules": {
       "commandName": "Project",
@@ -423,6 +439,18 @@
     "MgmtSubscriptionNameParameter": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSubscriptionNameParameter\\Generated"
+    },
+    "MgmtSupersetFlattenInheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSupersetFlattenInheritance\\Generated"
+    },
+    "MgmtSupersetInheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSupersetInheritance\\Generated"
+    },
+    "MgmtXmlDeserialization": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\Generated"
     },
     "MixAPIVersion-Typespec": {
       "commandName": "Project",
@@ -464,21 +492,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"
     },
-    "NoTypeReplacement": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoTypeReplacement\\Generated"
-    },
     "object-type": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
-    },
-    "OmitOperationGroups": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\OmitOperationGroups\\Generated"
-    },
-    "Pagination": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination\\Generated"
     },
     "Pagination-Typespec": {
       "commandName": "Project",
@@ -520,10 +536,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PublicClientCtor\\Generated"
     },
-    "ReferenceTypes": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ReferenceTypes\\Generated"
-    },
     "RenameGetList-Typespec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-Typespec\\src\\Generated"
@@ -535,10 +547,6 @@
     "ResourceClients-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceClients-LowLevel\\src\\Generated"
-    },
-    "ResourceRename": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
     },
     "security-aad-LowLevel": {
       "commandName": "Project",
@@ -572,25 +580,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SubClients-LowLevel\\src\\Generated"
     },
-    "SubscriptionExtensions": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SubscriptionExtensions\\Generated"
-    },
     "subscriptionId-apiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\subscriptionId-apiVersion\\Generated"
-    },
-    "SupersetFlattenInheritance": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SupersetFlattenInheritance\\Generated"
-    },
-    "SupersetInheritance": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SupersetInheritance\\Generated"
-    },
-    "TenantOnly": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TenantOnly\\Generated"
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
@@ -644,6 +636,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\array\\Generated"
     },
+    "typespec-type/dictionary": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\dictionary\\Generated"
+    },
     "typespec-type/enum/extensible": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\enum\\extensible\\Generated"
@@ -687,10 +683,6 @@
     "xml-service": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\Generated"
-    },
-    "XmlDeserialization": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\XmlDeserialization\\Generated"
     },
     "xms-error-responses": {
       "commandName": "Project",
