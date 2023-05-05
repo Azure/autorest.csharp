@@ -1,6 +1,6 @@
 ```yaml
 title: PurviewAccount
-require: $(this-folder)/../../readme.md
+require: $(this-folder)/../../../readme.md
 input-file: https://github.com/Azure/azure-rest-api-specs/blob/b2bddfe2e59b5b14e559e0433b6e6d057bcff95d/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
 namespace: Azure.Analytics.Purview.Account
 data-plane: true
