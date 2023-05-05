@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (classTarget is null || !classTarget.Equals(DefaultName))
                         continue;
 
-                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc=> (INamedTypeSymbol)(tc.Value!)).ToArray()));
+                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()));
                 }
 
                 // add custom ctors into the candidates
@@ -337,19 +337,8 @@ namespace AutoRest.CSharp.Output.Models
 
             for (int i = 0; i < methodParameters.Count; i++)
             {
-                var namedSymbol = suppressionParameters[i];
-                var suppressionParamType = namedSymbol.GetCSharpType(_typeFactory);
-                var methodParamType = methodParameters[i].Type;
-                if (suppressionParamType is null)
-                {
-                    if (methodParamType.Name != namedSymbol.Name)
-                        return false;
-                }
-                else
-                {
-                    if (methodParamType.Name != suppressionParamType.Name || (methodParamType.IsValueType && methodParamType.IsNullable != suppressionParamType.IsNullable))
-                        return false;
-                }
+                if (!suppressionParameters[i].IsSameType(methodParameters[i].Type))
+                    return false;
             }
 
             return true;
@@ -421,24 +410,10 @@ namespace AutoRest.CSharp.Output.Models
                     bool allEqual = true;
                     for (int i = 0; i < methodSymbol.Parameters.Length; i++)
                     {
-                        var methodParamType = (INamedTypeSymbol)methodSymbol.Parameters[i].Type;
-                        var csharpMethodParamType = methodParamType.GetCSharpType(_typeFactory);
-                        var protocolParamType = method.ProtocolMethodSignature.Parameters[i].Type;
-                        if (csharpMethodParamType == null)
+                        if (!((INamedTypeSymbol)methodSymbol.Parameters[i].Type).IsSameType(method.ProtocolMethodSignature.Parameters[i].Type))
                         {
-                            if (methodParamType.Name != protocolParamType.Name)
-                            {
-                                allEqual = false;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (csharpMethodParamType.Name != protocolParamType.Name || (csharpMethodParamType.IsValueType && csharpMethodParamType.IsNullable != protocolParamType.IsNullable))
-                            {
-                                allEqual = false;
-                                break;
-                            }
+                            allEqual = false;
+                            break;
                         }
                     }
                     if (allEqual)
