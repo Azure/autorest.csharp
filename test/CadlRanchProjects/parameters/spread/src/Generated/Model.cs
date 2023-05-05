@@ -76,11 +76,6 @@ namespace Parameters.Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -113,11 +108,6 @@ namespace Parameters.Spread
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAsRequestBody(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.

@@ -88,11 +88,6 @@ namespace SpecialWords
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="GetModelValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -121,11 +116,6 @@ namespace SpecialWords
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetModelValue(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -182,11 +172,6 @@ namespace SpecialWords
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="PutAsync(BaseModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -219,11 +204,6 @@ namespace SpecialWords
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="Put(BaseModel,CancellationToken)"/> convenience overload with strongly typed models first.

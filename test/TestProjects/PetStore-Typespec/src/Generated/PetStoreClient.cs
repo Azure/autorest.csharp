@@ -143,11 +143,6 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="ReadAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -177,11 +172,6 @@ namespace PetStore
         /// <summary>
         /// [Protocol Method]Returns a pet. Supports eTags.
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="Read(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -239,11 +229,6 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="CreateAsync(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -276,11 +261,6 @@ namespace PetStore
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="Create(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -335,11 +315,6 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="GetPetByKindAsync(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -373,11 +348,6 @@ namespace PetStore
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetPetByKind(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -433,11 +403,6 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="GetFirstPetAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -467,11 +432,6 @@ namespace PetStore
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetFirstPet(int?,CancellationToken)"/> convenience overload with strongly typed models first.

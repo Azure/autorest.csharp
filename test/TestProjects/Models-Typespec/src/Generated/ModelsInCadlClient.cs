@@ -87,11 +87,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="InputToRoundTripAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -124,11 +119,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Input model that has property of its own type
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InputToRoundTrip(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -191,11 +181,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -228,11 +213,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Input to RoundTripPrimitive
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InputToRoundTripPrimitive(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -295,11 +275,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -332,11 +307,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Input to RoundTripOptional
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -401,11 +371,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="InputToRoundTripReadOnlyAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -439,11 +404,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Input to RoundTripReadOnly
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InputToRoundTripReadOnly(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -507,11 +467,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="RoundTripToOutputAsync(RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -544,11 +499,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]RoundTrip to Output
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="RoundTripToOutput(RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -611,11 +561,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="InputRecursiveAsync(InputRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -648,11 +593,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Input recursive model
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InputRecursive(InputRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -715,11 +655,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -752,11 +687,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]RoundTrip recursive model
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -811,11 +741,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="SelfReferenceAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -844,11 +769,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Returns model that has property of its own type
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SelfReference(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -907,11 +827,6 @@ namespace ModelsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -944,11 +859,6 @@ namespace ModelsInCadl
         /// <summary>
         /// [Protocol Method]Returns RoundTripOnNoUse
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)"/> convenience overload with strongly typed models first.

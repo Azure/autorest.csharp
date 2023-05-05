@@ -87,11 +87,6 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -125,11 +120,6 @@ namespace MultipleMediaTypes
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -195,11 +185,6 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="OneStringBodyThreeContentTypesAsync(string,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -233,11 +218,6 @@ namespace MultipleMediaTypes
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="OneStringBodyThreeContentTypes(string,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -299,11 +279,6 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="OneModelBodyOneContentTypeAsync(Body,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -336,11 +311,6 @@ namespace MultipleMediaTypes
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="OneModelBodyOneContentType(Body,CancellationToken)"/> convenience overload with strongly typed models first.

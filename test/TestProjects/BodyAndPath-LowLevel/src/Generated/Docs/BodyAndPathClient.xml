@@ -186,18 +186,6 @@ Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", Re
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BodyParam</c>:
-<code>{
-  invalid-int-name: number, # Optional. Invalid int parameter.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Update(string,string,string,RequestContent,string,string,RequestContext)">
 <example>
@@ -224,18 +212,6 @@ Response response = client.Update("<item3>", "<item2>", "<item4>", RequestConten
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BodyParam</c>:
-<code>{
-  invalid-int-name: number, # Optional. Invalid int parameter.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

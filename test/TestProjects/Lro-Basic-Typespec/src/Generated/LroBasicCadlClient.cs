@@ -85,11 +85,6 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="CreateProjectAsync(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -123,11 +118,6 @@ namespace LroBasicCadl
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="CreateProject(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -197,11 +187,6 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="UpdateProjectAsync(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -238,11 +223,6 @@ namespace LroBasicCadl
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="UpdateProject(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -311,11 +291,6 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="CreateThingAsync(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -349,11 +324,6 @@ namespace LroBasicCadl
         /// <summary>
         /// [Protocol Method]Long running RPC operation template
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="CreateThing(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.

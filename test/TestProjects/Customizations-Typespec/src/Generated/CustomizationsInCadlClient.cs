@@ -75,11 +75,6 @@ namespace CustomizationsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
         /// Please try the simpler <see cref="RoundTripAsync(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -112,11 +107,6 @@ namespace CustomizationsInCadl
         /// <summary>
         /// [Protocol Method]RoundTrip operation to make RootModel round-trip
         /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="RoundTrip(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.

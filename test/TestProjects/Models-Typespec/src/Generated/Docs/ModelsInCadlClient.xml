@@ -50,51 +50,6 @@ Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredModel: {
-    optionalPropertyOnBase: string, # Optional. Optional property on base
-    requiredPropertyOnBase: number, # Required. Required property on base
-  }, # Required. Required model with discriminator
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTrip(RequestContent,RequestContext)">
 <example>
@@ -145,51 +100,6 @@ Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredModel: {
-    optionalPropertyOnBase: string, # Optional. Optional property on base
-    requiredPropertyOnBase: number, # Required. Required property on base
-  }, # Required. Required model with discriminator
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)">
 <example>
@@ -241,44 +151,6 @@ Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripPrimitiveModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredInt64: number, # Required. Required int64, illustrating a value type property.
-  requiredSafeInt: number, # Required. Required safeint, illustrating a value type property.
-  requiredFloat: number, # Required. Required float, illustrating a value type property.
-  required_Double: number, # Required. Required double, illustrating a value type property.
-  requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
-  requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
-  requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripPrimitive(RequestContent,RequestContext)">
 <example>
@@ -330,44 +202,6 @@ Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripPrimitiveModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredInt64: number, # Required. Required int64, illustrating a value type property.
-  requiredSafeInt: number, # Required. Required safeint, illustrating a value type property.
-  requiredFloat: number, # Required. Required float, illustrating a value type property.
-  required_Double: number, # Required. Required double, illustrating a value type property.
-  requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
-  requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
-  requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripOptionalAsync(RequestContent,RequestContext)">
 <example>
@@ -443,64 +277,6 @@ Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripOptionalModel</c>:
-<code>{
-  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
-  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
-  optionalStringList: [string], # Optional. Optional string collection.
-  optionalIntList: [number], # Optional. Optional int collection.
-  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Optional. Optional model.
-  optionalModelWithPropertiesOnBase: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-    optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Optional. Optional model with properties on base
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  optionalPlainDate: string (date), # Optional. Optional plainDate
-  optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripOptionalModel</c>:
-<code>{
-  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
-  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
-  optionalStringList: [string], # Optional. Optional string collection.
-  optionalIntList: [number], # Optional. Optional int collection.
-  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Optional. Optional model.
-  optionalModelWithPropertiesOnBase: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-    optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Optional. Optional model with properties on base
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  optionalPlainDate: string (date), # Optional. Optional plainDate
-  optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripOptional(RequestContent,RequestContext)">
 <example>
@@ -576,176 +352,10 @@ Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripOptionalModel</c>:
-<code>{
-  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
-  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
-  optionalStringList: [string], # Optional. Optional string collection.
-  optionalIntList: [number], # Optional. Optional int collection.
-  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Optional. Optional model.
-  optionalModelWithPropertiesOnBase: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-    optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Optional. Optional model with properties on base
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  optionalPlainDate: string (date), # Optional. Optional plainDate
-  optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripOptionalModel</c>:
-<code>{
-  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
-  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
-  optionalStringList: [string], # Optional. Optional string collection.
-  optionalIntList: [number], # Optional. Optional int collection.
-  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Optional. Optional model.
-  optionalModelWithPropertiesOnBase: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-    optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Optional. Optional model with properties on base
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  optionalPlainDate: string (date), # Optional. Optional plainDate
-  optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)">
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripReadOnlyModel</c>:
-<code>{
-  requiredReadonlyString: string, # Required. Required string, illustrating a readonly reference type property.
-  requiredReadonlyInt: number, # Required. Required int, illustrating a readonly value type property.
-  optionalReadonlyString: string, # Optional. Optional string, illustrating a readonly reference type property.
-  optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
-  requiredReadonlyModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Required. Required readonly model.
-  optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
-  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
-  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly extensible enum
-  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly fixed string enum
-  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly extensible enum
-  requiredReadonlyStringList: [string], # Required. Required readonly string collection.
-  requiredReadonlyIntList: [number], # Required. Required readonly int collection.
-  requiredReadOnlyModelCollection: [CollectionItem], # Required. Required model collection
-  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  optionalReadonlyStringList: [string], # Optional. Optional readonly string collection.
-  optionalReadonlyIntList: [number], # Optional. Optional readonly int collection.
-  optionalReadOnlyModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
-  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
-  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputToRoundTripReadOnly(RequestContent,RequestContext)">
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-  }, # Required. Required model
-  requiredIntCollection: [number], # Required. Required primitive value type collection
-  requiredStringCollection: [string], # Required. Required primitive reference type collection
-  requiredModelCollection: [CollectionItem], # Required. Required model collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripReadOnlyModel</c>:
-<code>{
-  requiredReadonlyString: string, # Required. Required string, illustrating a readonly reference type property.
-  requiredReadonlyInt: number, # Required. Required int, illustrating a readonly value type property.
-  optionalReadonlyString: string, # Optional. Optional string, illustrating a readonly reference type property.
-  optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
-  requiredReadonlyModel: {
-    requiredCollection: [CollectionItem], # Required. Required collection
-  }, # Required. Required readonly model.
-  optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
-  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
-  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly extensible enum
-  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly fixed string enum
-  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly extensible enum
-  requiredReadonlyStringList: [string], # Required. Required readonly string collection.
-  requiredReadonlyIntList: [number], # Required. Required readonly int collection.
-  requiredReadOnlyModelCollection: [CollectionItem], # Required. Required model collection
-  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  optionalReadonlyStringList: [string], # Optional. Optional readonly string collection.
-  optionalReadonlyIntList: [number], # Optional. Optional readonly int collection.
-  optionalReadOnlyModelCollection: [CollectionItem], # Optional. Optional model collection
-  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
-  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
-  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripToOutputAsync(RequestContent,RequestContext)">
 <example>
@@ -827,52 +437,6 @@ Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredModel: {
-    optionalPropertyOnBase: string, # Optional. Optional property on base
-    requiredPropertyOnBase: number, # Required. Required property on base
-  }, # Required. Required model with discriminator
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
-}
-</code>
-
-Response Body:
-
-Schema for <c>OutputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-    requiredCollection: [
-      {
-        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-      }
-    ], # Required. Required collection
-  }, # Required. Required model
-  requiredCollection: [CollectionItem], # Required. Required collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripToOutput(RequestContent,RequestContext)">
 <example>
@@ -954,52 +518,6 @@ Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredModel: {
-    optionalPropertyOnBase: string, # Optional. Optional property on base
-    requiredPropertyOnBase: number, # Required. Required property on base
-  }, # Required. Required model with discriminator
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
-}
-</code>
-
-Response Body:
-
-Schema for <c>OutputModel</c>:
-<code>{
-  requiredString: string, # Required. Required string
-  requiredInt: number, # Required. Required int
-  requiredModel: {
-    requiredCollection: [
-      {
-        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-      }
-    ], # Required. Required collection
-  }, # Required. Required model
-  requiredCollection: [CollectionItem], # Required. Required collection
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputRecursiveAsync(RequestContent,RequestContext)">
 <example>
@@ -1028,19 +546,6 @@ Response response = await client.InputRecursiveAsync(RequestContent.Create(data)
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>InputRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: InputRecursiveModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputRecursive(RequestContent,RequestContext)">
 <example>
@@ -1069,19 +574,6 @@ Response response = client.InputRecursive(RequestContent.Create(data), new Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>InputRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: InputRecursiveModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripRecursiveAsync(RequestContent,RequestContext)">
 <example>
@@ -1115,28 +607,6 @@ Console.WriteLine(result.GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: RoundTripRecursiveModel, # Optional. Required Record
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: RoundTripRecursiveModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripRecursive(RequestContent,RequestContext)">
 <example>
@@ -1170,28 +640,6 @@ Console.WriteLine(result.GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: RoundTripRecursiveModel, # Optional. Required Record
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripRecursiveModel</c>:
-<code>{
-  message: string, # Required. Message
-  inner: RoundTripRecursiveModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="SelfReferenceAsync(RequestContext)">
 <example>
@@ -1207,19 +655,6 @@ Console.WriteLine(result.GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ErrorModel</c>:
-<code>{
-  message: string, # Required. Error message
-  innerError: ErrorModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="SelfReference(RequestContext)">
 <example>
@@ -1235,19 +670,6 @@ Console.WriteLine(result.GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ErrorModel</c>:
-<code>{
-  message: string, # Required. Error message
-  innerError: ErrorModel, # Optional. Required Record
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripToOutputWithNoUseBaseAsync(RequestContent,RequestContext)">
 <example>
@@ -1273,36 +695,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripOnNoUse</c>:
-<code>{
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  baseModelProp: string, # Required. base model property
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripOnNoUse</c>:
-<code>{
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  baseModelProp: string, # Required. base model property
-}
-</code>
-
-</remarks>
     </member>
     <member name="RoundTripToOutputWithNoUseBase(RequestContent,RequestContext)">
 <example>
@@ -1328,36 +720,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripOnNoUse</c>:
-<code>{
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  baseModelProp: string, # Required. base model property
-}
-</code>
-
-Response Body:
-
-Schema for <c>RoundTripOnNoUse</c>:
-<code>{
-  requiredCollection: [
-    {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-    }
-  ], # Required. Required collection
-  baseModelProp: string, # Required. base model property
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>
