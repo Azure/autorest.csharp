@@ -485,7 +485,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateResourceGroupExtensions()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no ResourceGroupExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no ResourceGroupExtension.
             {
                 return;
             }
@@ -495,7 +495,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             if (resourceExtensions == null)
             {
-                Assert.IsTrue(resourceCollections.Any(), $"The extension class is not found while there are{resourceCollections.Count()} resource collections");
+                Assert.IsTrue(resourceCollections.Any(), $"The extension class is not found while there are {resourceCollections.Count()} resource collections");
             }
 
             foreach (var type in resourceCollections)
@@ -642,7 +642,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionResourceExtensionsGetResourceCollection()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
@@ -677,7 +677,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionResourceExtensionsListResource()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
