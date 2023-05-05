@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetPagesPartialUrlAsync(String,RequestContext)">
+    <member name="GetPagesPartialUrlAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrlAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -32,7 +32,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagesPartialUrl(String,RequestContext)">
+    <member name="GetPagesPartialUrl(string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrl with required parameters and parse the result.
 <code><![CDATA[
@@ -63,7 +63,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagesPartialUrlOperationAsync(String,RequestContext)">
+    <member name="GetPagesPartialUrlOperationAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrlOperationAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -94,7 +94,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagesPartialUrlOperation(String,RequestContext)">
+    <member name="GetPagesPartialUrlOperation(string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrlOperation with required parameters and parse the result.
 <code><![CDATA[
@@ -125,7 +125,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagesPartialUrlOperationNextAsync(String,String,RequestContext)">
+    <member name="GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrlOperationNextAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -156,7 +156,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagesPartialUrlOperationNext(String,String,RequestContext)">
+    <member name="GetPagesPartialUrlOperationNext(string,string,RequestContext)">
 <example>
 This sample shows how to call GetPagesPartialUrlOperationNext with required parameters and parse the result.
 <code><![CDATA[

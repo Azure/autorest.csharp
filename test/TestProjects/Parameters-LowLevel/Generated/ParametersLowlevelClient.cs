@@ -57,7 +57,7 @@ namespace Parameters_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> No RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -65,7 +65,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(Int32,Int32,Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int?,int,string,RequestContext)']/*" />
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
@@ -82,7 +82,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -90,7 +90,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(Int32,Int32,Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int?,int,string,RequestContext)']/*" />
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
@@ -107,7 +107,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -129,7 +129,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,13 +151,13 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Delete. </summary>
+        /// <summary> [Protocol Method] Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -176,13 +176,13 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Delete. </summary>
+        /// <summary> [Protocol Method] Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,RequestContext)']/*" />
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -201,7 +201,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -222,7 +222,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -243,7 +243,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -265,7 +265,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -287,7 +287,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional PathParameters. </summary>
+        /// <summary> [Protocol Method] Optional PathParameters. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="name"> Query parameter status. </param>
@@ -296,7 +296,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(Int32,Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,int,string,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersAsync(int id, int skip, string name = "start", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -315,7 +315,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional PathParameters. </summary>
+        /// <summary> [Protocol Method] Optional PathParameters. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="name"> Query parameter status. </param>
@@ -324,7 +324,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(Int32,Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,int,string,RequestContext)']/*" />
         public virtual Response OptionalPathParameters(int id, int skip, string name = "start", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -343,7 +343,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path parameters with mixed sequence. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -352,7 +352,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(Int32,String,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name = "start", int skip = 12, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -371,7 +371,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path parameters with mixed sequence. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -380,7 +380,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(Int32,String,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)']/*" />
         public virtual Response OptionalPathParametersWithMixedSequence(int id, string name = "start", int skip = 12, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -399,7 +399,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path/body parameters with mixed sequence. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -411,7 +411,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -430,7 +430,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path/body parameters with mixed sequence. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -442,7 +442,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(String,Int32,RequestContent,Int32,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
         public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));

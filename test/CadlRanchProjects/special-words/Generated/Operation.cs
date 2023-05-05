@@ -45,6 +45,7 @@ namespace SpecialWords
             _apiVersion = apiVersion;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -65,6 +66,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

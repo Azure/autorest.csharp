@@ -117,9 +117,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("set;");
             }
             writer.AppendRaw("}");
-            if (property.DefaultValue != null)
+            if (property.InitializationValue != null)
             {
-                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
+                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
             }
 
             writer.Line();

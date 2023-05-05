@@ -4,7 +4,7 @@
 using AutoRest.TestServer.Tests;
 using System.Text;
 using NUnit.Framework;
-using Pagination;
+using MgmtPagination;
 using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
 using System;
