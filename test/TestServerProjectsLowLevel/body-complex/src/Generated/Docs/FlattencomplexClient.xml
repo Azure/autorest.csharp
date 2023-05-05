@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetValidAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetValidAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new FlattencomplexClient(credential);
+
+Response response = await client.GetValidAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+<details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
+<code>{
+  propD1: string, # Optional.
+  kind: Kind1, # Required.
+  propB1: string, # Optional.
+  helper: {
+    propBH1: string, # Optional.
+  }, # Optional.
+}
+</code>
+</details>
+
+</remarks>
+    </member>
+    <member name="GetValid(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetValid and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new FlattencomplexClient(credential);
+
+Response response = client.GetValid(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+<details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
+<code>{
+  propD1: string, # Optional.
+  kind: Kind1, # Required.
+  propB1: string, # Optional.
+  helper: {
+    propBH1: string, # Optional.
+  }, # Optional.
+}
+</code>
+</details>
+
+</remarks>
+    </member>
+  </members>
+</doc>

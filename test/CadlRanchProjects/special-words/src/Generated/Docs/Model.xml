@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetModelValueAsync.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+
+var result = await client.GetModelValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetModelValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetModelValue.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+
+var result = client.GetModelValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetModelAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetModelAsync and parse the result.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
+
+Response response = await client.GetModelAsync(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>BaseModel</c>:
+<code>{
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModel(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetModel and parse the result.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
+
+Response response = client.GetModel(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>BaseModel</c>:
+<code>{
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(global::SpecialWords.Models.BaseModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+
+var body = new BaseModel();
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::SpecialWords.Models.BaseModel,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+
+var body = new BaseModel();
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
+
+var data = new {};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BaseModel</c>:
+<code>{
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
+
+var data = new {};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BaseModel</c>:
+<code>{
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

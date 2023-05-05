@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="Head200Async(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head200Async.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = await client.Head200Async(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Head200(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head200.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = client.Head200(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Head204Async(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head204Async.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = await client.Head204Async(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Head204(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head204.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = client.Head204(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Head404Async(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head404Async.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = await client.Head404Async(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Head404(global::Azure.RequestContext)">
+<example>
+This sample shows how to call Head404.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new HttpSuccessClient(credential);
+
+Response response = client.Head404(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

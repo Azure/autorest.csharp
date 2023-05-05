@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetDatetimeAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDatetimeAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient(<1.0.0>);
+
+var result = await client.GetDatetimeAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetDatetime(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDatetime.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient(<1.0.0>);
+
+var result = client.GetDatetime();
+]]></code>
+</example>
+    </member>
+    <member name="GetDatetimeAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetDatetimeAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+
+Response response = await client.GetDatetimeAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>DatetimeProperty</c>:
+<code>{
+  property: string (date &amp; time), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetDatetime(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetDatetime with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+
+Response response = client.GetDatetime(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>DatetimeProperty</c>:
+<code>{
+  property: string (date &amp; time), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient(<1.0.0>);
+
+var body = new DatetimeProperty(DateTimeOffset.UtcNow);
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::_Type.Property.ValueTypes.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient(<1.0.0>);
+
+var body = new DatetimeProperty(DateTimeOffset.UtcNow);
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+
+var data = new {
+    property = "2022-05-10T14:57:31.2311892-04:00",
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>DatetimeProperty</c>:
+<code>{
+  property: string (date &amp; time), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+
+var data = new {
+    property = "2022-05-10T14:57:31.2311892-04:00",
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>DatetimeProperty</c>:
+<code>{
+  property: string (date &amp; time), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

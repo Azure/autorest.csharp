@@ -10,7 +10,20 @@ namespace AutoRest.CSharp.Utilities
 {
     internal static class NamedTypeSymbolExtensions
     {
+        private const string GeneratedLibrary = "GeneratedCode";
         private static readonly SymbolDisplayFormat FullyQualifiedNameFormat = new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+
+        public static CSharpType? GetCSharpType(this INamedTypeSymbol symbol, TypeFactory factory)
+        {
+            if (symbol.ContainingAssembly.Name == GeneratedLibrary)
+            {
+                return factory.GetLibraryTypeByName(symbol.Name);
+            }
+            else
+            {
+                return GetCSharpType(symbol);
+            }
+        }
 
         public static CSharpType GetCSharpType(this INamedTypeSymbol symbol)
         {

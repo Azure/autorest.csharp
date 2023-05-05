@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetNotExpandableAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetNotExpandableAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = await client.GetNotExpandableAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNotExpandable(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetNotExpandable and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = client.GetNotExpandable(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutNotExpandableAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutNotExpandableAsync with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = "red color";
+
+Response response = await client.PutNotExpandableAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutNotExpandable(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutNotExpandable with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = "red color";
+
+Response response = client.PutNotExpandable(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetReferencedAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetReferencedAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = await client.GetReferencedAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetReferenced(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetReferenced and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = client.GetReferenced(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutReferencedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutReferencedAsync with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = "red color";
+
+Response response = await client.PutReferencedAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutReferenced(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutReferenced with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = "red color";
+
+Response response = client.PutReferenced(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetReferencedConstantAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetReferencedConstantAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = await client.GetReferencedConstantAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+Console.WriteLine(result.GetProperty("field1").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>RefColorConstant</c>:
+<code>{
+  ColorConstant: string, # Required. Referenced Color Constant Description.
+  field1: string, # Optional. Sample string.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetReferencedConstant(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetReferencedConstant and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+Response response = client.GetReferencedConstant(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+Console.WriteLine(result.GetProperty("field1").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>RefColorConstant</c>:
+<code>{
+  ColorConstant: string, # Required. Referenced Color Constant Description.
+  field1: string, # Optional. Sample string.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutReferencedConstantAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutReferencedConstantAsync with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = new {
+    ColorConstant = "<ColorConstant>",
+};
+
+Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutReferencedConstantAsync with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = new {
+    ColorConstant = "<ColorConstant>",
+    field1 = "<field1>",
+};
+
+Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>RefColorConstant</c>:
+<code>{
+  ColorConstant: string, # Required. Referenced Color Constant Description.
+  field1: string, # Optional. Sample string.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutReferencedConstant(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutReferencedConstant with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = new {
+    ColorConstant = "<ColorConstant>",
+};
+
+Response response = client.PutReferencedConstant(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutReferencedConstant with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new EnumClient(credential);
+
+var data = new {
+    ColorConstant = "<ColorConstant>",
+    field1 = "<field1>",
+};
+
+Response response = client.PutReferencedConstant(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>RefColorConstant</c>:
+<code>{
+  ColorConstant: string, # Required. Referenced Color Constant Description.
+  field1: string, # Optional. Sample string.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

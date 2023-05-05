@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetDurationValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDurationValueAsync.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient(<1.0.0>);
+
+var result = await client.GetDurationValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetDurationValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDurationValue.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient(<1.0.0>);
+
+var result = client.GetDurationValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetDurationValueAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetDurationValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient("1.0.0");
+
+Response response = await client.GetDurationValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetDurationValue(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetDurationValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient("1.0.0");
+
+Response response = client.GetDurationValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(object,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient(<1.0.0>);
+
+var body = null;
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(object,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient(<1.0.0>);
+
+var body = null;
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient("1.0.0");
+
+var data = new[] {
+    "PT1H23M45S"
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetDurationValueClient("1.0.0");
+
+var data = new[] {
+    "PT1H23M45S"
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

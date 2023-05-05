@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SpreadAsRequestBodyAsync(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
+<code><![CDATA[
+var client = new SpreadClient().GetModelClient(<1.0.0>);
+
+var bodyParameter = new BodyParameter("<name>");
+var result = await client.SpreadAsRequestBodyAsync(bodyParameter);
+]]></code>
+</example>
+    </member>
+    <member name="SpreadAsRequestBody(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call SpreadAsRequestBody with required parameters.
+<code><![CDATA[
+var client = new SpreadClient().GetModelClient(<1.0.0>);
+
+var bodyParameter = new BodyParameter("<name>");
+var result = client.SpreadAsRequestBody(bodyParameter);
+]]></code>
+</example>
+    </member>
+    <member name="SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestBodyAsync with required request content.
+<code><![CDATA[
+var client = new SpreadClient().GetModelClient("1.0.0");
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParameter</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+<example>
+This sample shows how to call SpreadAsRequestBody with required request content.
+<code><![CDATA[
+var client = new SpreadClient().GetModelClient("1.0.0");
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParameter</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

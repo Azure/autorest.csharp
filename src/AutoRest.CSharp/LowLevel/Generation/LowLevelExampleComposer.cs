@@ -14,6 +14,8 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Input;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -25,16 +27,34 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ClientTypeName { get; }
         private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private LowLevelClient _client;
 
 
         public LowLevelExampleComposer(LowLevelClient client)
         {
+            _client = client;
             ClientTypeName = client.Type.Name;
             ClientInvocationChain = GetClientInvocationChain(client);
         }
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
         {
+            //skip non public protocol methods
+            if ((clientMethod.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) == 0)
+                return $"";
+
+            //skip obsolete protocol methods
+            if (clientMethod.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
+                return $"";
+
+            //skip suppressed protocol methods
+            if (_client.IsMethodSuppressed(clientMethod))
+                return $"";
+
+            //skip if there are no valid ctors
+            if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
+                return $"";
+
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
             var requestBodyType = clientMethod.RequestBodyType;
             var builder = new StringBuilder();
@@ -99,13 +119,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.ProtocolMethodSignature.Parameters);
             builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, false, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, false, builder);
         }
 
         private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, true, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, true, builder);
         }
 
         private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, StringBuilder builder)
@@ -178,7 +198,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
         private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
@@ -200,18 +220,24 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
         private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName}.");
-            ComposeCodeSnippet(convenienceMethod, methodName, async, allParameters, builder);
+            ComposeWrappedCodeSnippet(convenienceMethod, methodName, async, allParameters, builder);
         }
 
-        private void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeWrappedCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine("<code><![CDATA[");
+            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            builder.Append("]]></code>");
+        }
+
+        internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
             ComposeGetClientCodes(builder);
             builder.AppendLine();
             if (clientMethod.RequestBodyType != null)
@@ -239,8 +265,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
             }
-
-            builder.Append("]]></code>");
         }
 
         private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
@@ -289,18 +313,18 @@ namespace AutoRest.CSharp.Generation.Writers
             /* CODE PATTEN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              *
-             * await foreach (var data in operation.Value)
+             * await foreach (var item in operation.Value)
              * {
-             *     Console.WriteLine(data.ToString());
+             *     Console.WriteLine(item.ToString());
              * or
-             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
              *     Console.WriteLine(result[.GetProperty(...)...].ToString());
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
             builder.AppendLine();
-            using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -313,21 +337,21 @@ namespace AutoRest.CSharp.Generation.Writers
              *
              * Console.WriteLine(operation.GetRawResponse().Status);
              * or
-             * BinaryData data = operation.Value;
+             * BinaryData responseData = operation.Value;
              * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
             builder.AppendLine();
 
             if (clientMethod.ResponseBodyType == null)
             {
-                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status)");
+                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status);");
             }
             else
             {
-                builder.AppendLine($"BinaryData data = operation.Value;");
+                builder.AppendLine($"BinaryData responseData = operation.Value;");
                 ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
         }
@@ -337,16 +361,16 @@ namespace AutoRest.CSharp.Generation.Writers
             /* GENERATED CODE PATTERN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.ToList(), MockParameterValue, allParameters)});");
         }
 
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
             if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
-                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
+                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 0, builder, true))
                 {
-                    builder.AppendLine("    data.ToStream().CopyTo(outFileStream);");
+                    builder.AppendLine("    responseData.ToStream().CopyTo(outFileStream);");
                 }
                 return;
             }
@@ -356,11 +380,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (apiInvocationChainList.Count == 0)
             {
-                builder.AppendLine($"Console.WriteLine(data.ToString());");
+                builder.AppendLine($"Console.WriteLine(responseData.ToString());");
             }
             else
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
@@ -376,16 +400,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             /* GENERATED CODE PATTERN
-             * await foreach (var data in client.{methodName}(...))
+             * await foreach (var item in client.{methodName}(...))
              * {
-             *     Console.WriteLine(data.ToString());
+             *     Console.WriteLine(item.ToString());
              * or
-             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
              *     Console.WriteLine(result[.GetProperty(...)...].ToString());
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -410,12 +434,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (apiInvocationChainList.Count == 0)
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"Console.WriteLine(data.ToString());");
+                        builder.AppendLine($"Console.WriteLine(item.ToString());");
                     }
                     else
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;");
                         foreach (var apiInvocationChain in apiInvocationChainList)
                         {
                             builder.Append(' ', 4);
@@ -429,14 +453,21 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"Response response = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
+            var resposneType = "Response";
+            var responseVar = "response";
+            if (clientMethod.RequestMethod.Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
+            {
+                resposneType = "Response<bool>";
+                responseVar = "response.GetRawResponse()";
+            }
+            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
             if (clientMethod.ResponseBodyType != null)
             {
-                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
+                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, responseVar, builder);
             }
             else
             {
-                builder.AppendLine("Console.WriteLine(response.Status);");
+                builder.AppendLine($"Console.WriteLine({responseVar}.Status);");
             }
         }
 
@@ -447,15 +478,15 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
-        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
+        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)
         {
             if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
-                using (Scope("if (response.ContentStream != null)", 0, builder, true))
+                using (Scope($"if ({responseVar}.ContentStream != null)", 0, builder, true))
                 {
-                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 4, builder, true))
+                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 4, builder, true))
                     {
-                        builder.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
+                        builder.AppendLine($"        {responseVar}.ContentStream.CopyTo(outFileStream);");
                     }
                 }
                 return;
@@ -604,7 +635,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (defaultValue.Type.IsFrameworkType && defaultValue.Type.FrameworkType == typeof(string))
                     {
-                        return $"<{defaultValue.Value}>";
+                        return $"\"{defaultValue.Value}\"";
                     }
                     return JsonSerializer.Serialize(defaultValue.Value);
                 }
@@ -656,7 +687,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(MatchConditions))
                 {
-                    return "new MatchConditions { IfMatch = \"<YOUR_ETAG>\" }";
+                    return "new MatchConditions { IfMatch = new ETag(\"<YOUR_ETAG>\") }";
                 }
 
                 if (type == typeof(Guid))
@@ -695,6 +726,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(BinaryData))
                 {
                     return $"BinaryData.FromString(\"<your binary data content>\")";
+                }
+
+                if (type == typeof(RequestContext))
+                {
+                    return $"new RequestContext()";
                 }
             }
 
@@ -738,9 +774,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.Int32 => "1234",
                 InputTypeKind.Int64 => "1234L",
                 InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601 => "PT1H23M45S",
-                InputTypeKind.DurationConstant => "01:23:45",
-                InputTypeKind.Time => "01:23:45",
+                InputTypeKind.DurationISO8601 => "\"PT1H23M45S\"",
+                InputTypeKind.DurationConstant => "\"01:23:45\"",
+                InputTypeKind.Time => "\"01:23:45\"",
                 _ => "new {}"
             },
             InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
@@ -868,8 +904,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
         {
-            if (visitedModels.Contains(model))
-                return string.Empty;
+            visitedModels.Add(model);
 
             /* GENERATED CODE PATTERN
                      * new {
@@ -901,7 +936,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 return "new {}";
             }
 
-            visitedModels.Add(model);
+            //remove references to my stack
+            _ = properties.RemoveAll(p =>
+                visitedModels.Contains(p.Type) ||
+                (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
+                (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
+
             var propertyExpressions = new List<string>();
             foreach (var property in properties)
             {
@@ -919,11 +959,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (propertyValueExpr != "")
                 {
                     var propertyExprBuilder = new StringBuilder();
-                    propertyExprBuilder.Append(' ', indent + 4).Append($"{property.SerializedName} = {propertyValueExpr},");
+                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
                     propertyExpressions.Add(propertyExprBuilder.ToString());
                 }
             }
-            visitedModels.Remove(model);
 
             if (propertyExpressions.Count == 0)
             {
@@ -1006,6 +1045,12 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
 
+        private string FixKeyWords(string serializedName)
+        {
+            var result = serializedName.Replace('-', '_');
+            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
+        }
+
         private void ComposeGetClientCodes(StringBuilder builder)
         {
             var clientConstructor = ClientInvocationChain[0];
@@ -1081,7 +1126,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 client = client.ParentClient;
             }
-            callChain.Push(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
+            callChain.Push(client.GetEffectiveCtor()!);
 
             return callChain.ToList();
         }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetGroupAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetGroupAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
+
+Response response = await client.GetGroupAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetGroup(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetGroup and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
+
+Response response = client.GetGroup(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetItemsAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetItemsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
+
+await foreach (var item in client.GetItemsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetItems(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetItems and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
+
+foreach (var item in client.GetItems(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

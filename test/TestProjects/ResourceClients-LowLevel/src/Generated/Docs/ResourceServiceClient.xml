@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetParametersAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetParametersAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+Response response = await client.GetParametersAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetParameters(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetParameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+Response response = client.GetParameters(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetGroupsAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetGroupsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+await foreach (var item in client.GetGroupsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetGroups(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetGroups and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+foreach (var item in client.GetGroups(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetAllItemsAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetAllItemsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+await foreach (var item in client.GetAllItemsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetAllItems(global::Azure.RequestContext)">
+<example>
+This sample shows how to call GetAllItems and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ResourceServiceClient(credential);
+
+foreach (var item in client.GetAllItems(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

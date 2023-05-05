@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="ValidKeyAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call ValidKeyAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new UnionClient(credential);
+
+Response response = await client.ValidKeyAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ValidKey(global::Azure.RequestContext)">
+<example>
+This sample shows how to call ValidKey.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new UnionClient(credential);
+
+Response response = client.ValidKey(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ValidTokenAsync(global::Azure.RequestContext)">
+<example>
+This sample shows how to call ValidTokenAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new UnionClient(credential);
+
+Response response = await client.ValidTokenAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ValidToken(global::Azure.RequestContext)">
+<example>
+This sample shows how to call ValidToken.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new UnionClient(credential);
+
+Response response = client.ValidToken(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

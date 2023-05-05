@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Azure.Core.Expressions.DataFactory;
-using ExactMatchInheritance;
 using Inheritance.Models;
 using NUnit.Framework;
 
