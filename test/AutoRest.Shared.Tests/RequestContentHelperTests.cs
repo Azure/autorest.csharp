@@ -9,14 +9,17 @@ namespace Azure.Core.Tests
 {
     public class RequestContentHelperTests
     {
-        [Test]
-        public void TestGenericFromDictionary()
+        [TestCase(1, 2)]
+        [TestCase("a", "b")]
+        [TestCase(true, false)]
+        public void TestGenericFromDictionary<T>(T expectedValue1, T expectedValue2)
         {
-            var content = RequestContentHelper.FromDictionary(new Dictionary<string, int>()
+            var expectedDictionary = new Dictionary<string, T>()
             {
-                {"k1", 1 },
-                {"k2", 2 }
-            });
+                {"k1", expectedValue1 },
+                {"k2", expectedValue2 }
+            };
+            var content = RequestContentHelper.FromDictionary(expectedDictionary);
 
             var stream = new MemoryStream();
             content.WriteTo(stream, default);
@@ -26,7 +29,18 @@ namespace Azure.Core.Tests
             int count = 1;
             foreach (var property in document.RootElement.EnumerateObject())
             {
-                Assert.AreEqual(count++, property.Value.GetInt32());
+                if (typeof(T) == typeof(int))
+                {
+                    Assert.AreEqual(expectedDictionary["k" + count++], property.Value.GetInt32());
+                }
+                else if (typeof(T) == typeof(string))
+                {
+                    Assert.AreEqual(expectedDictionary["k" + count++], property.Value.GetString());
+                }
+                else if (typeof(T) == typeof(bool))
+                {
+                    Assert.AreEqual(expectedDictionary["k" + count++], property.Value.GetBoolean());
+                }
             }
         }
 

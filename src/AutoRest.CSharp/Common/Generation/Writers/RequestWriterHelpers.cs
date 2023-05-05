@@ -230,15 +230,17 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        public static CodeWriterDeclaration WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration? request, ObjectSerialization bodySerialization, FormattableString value)
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration? request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            var content = new CodeWriterDeclaration("content");
             switch (bodySerialization)
             {
                 case JsonSerialization jsonSerialization:
                     {
+                        var content = new CodeWriterDeclaration("content");
+
                         writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
                         writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
+                        writer.Line($"{request}.Content = {content};");
                         if (request != null)
                         {
                             writer.Line($"{request}.Content = {content};");
@@ -247,8 +249,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 case XmlElementSerialization xmlSerialization:
                     {
+                        var content = new CodeWriterDeclaration("content");
+
                         writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
                         writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
+                        writer.Line($"{request}.Content = {content};");
                         if (request != null)
                         {
                             writer.Line($"{request}.Content = {content};");
@@ -258,7 +263,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 default:
                     throw new NotImplementedException(bodySerialization.ToString());
             }
-            return content;
         }
 
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)

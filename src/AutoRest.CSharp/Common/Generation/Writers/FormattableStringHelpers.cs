@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
         {
-            if (TypeFactory.IsDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (TypeFactory.IsReadWriteDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
             }
