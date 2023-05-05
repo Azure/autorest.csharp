@@ -44,42 +44,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -124,42 +88,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutAsyncRelativeRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -204,42 +132,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutAsyncRelativeRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -284,42 +176,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="DeleteProvisioning202Accepted200SucceededAsync(WaitUntil,RequestContext)">
 <example>
@@ -341,26 +197,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="DeleteProvisioning202Accepted200Succeeded(WaitUntil,RequestContext)">
 <example>
@@ -382,26 +218,6 @@ Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="Delete202Retry200Async(WaitUntil,RequestContext)">
 <example>
@@ -488,26 +304,6 @@ var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestCo
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="Post202Retry200(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -542,26 +338,6 @@ var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Creat
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="PostAsyncRelativeRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -596,26 +372,6 @@ var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Comp
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
     <member name="PostAsyncRelativeRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
@@ -650,26 +406,6 @@ var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, Requ
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Product</c>:
-<code>{
-  properties: {
-    provisioningState: string, # Optional.
-    provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-  }, # Optional.
-  id: string, # Optional. Resource Id
-  type: string, # Optional. Resource Type
-  tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-  location: string, # Optional. Resource Location
-  name: string, # Optional. Resource Name
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

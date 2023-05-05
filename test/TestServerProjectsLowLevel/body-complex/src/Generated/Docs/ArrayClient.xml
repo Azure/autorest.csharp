@@ -14,18 +14,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetValid(RequestContext)">
 <example>
@@ -40,18 +28,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
@@ -80,18 +56,6 @@ Response response = await client.PutValidAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
@@ -120,18 +84,6 @@ Response response = client.PutValid(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
 <example>
@@ -146,18 +98,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetEmpty(RequestContext)">
 <example>
@@ -172,18 +112,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
 <example>
@@ -212,18 +140,6 @@ Response response = await client.PutEmptyAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutEmpty(RequestContent,RequestContext)">
 <example>
@@ -252,18 +168,6 @@ Response response = client.PutEmpty(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
 <example>
@@ -278,18 +182,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNotProvided(RequestContext)">
 <example>
@@ -304,18 +196,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>ArrayWrapper</c>:
-<code>{
-  array: [string], # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

@@ -59,10 +59,19 @@ namespace body_complex_LowLevel
             _apiVersion = options.Version;
         }
 
-        /// <summary> [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
@@ -80,10 +89,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
@@ -101,8 +119,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <summary>
+        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -126,8 +153,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <summary>
+        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,10 +187,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
         {
@@ -172,10 +217,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
         public virtual Response GetInvalid(RequestContext context = null)
         {
@@ -193,10 +247,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
@@ -214,10 +277,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
@@ -235,10 +307,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
@@ -256,10 +337,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
         public virtual Response GetNull(RequestContext context = null)
         {
@@ -277,10 +367,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
@@ -298,10 +397,19 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
         public virtual Response GetNotProvided(RequestContext context = null)
         {

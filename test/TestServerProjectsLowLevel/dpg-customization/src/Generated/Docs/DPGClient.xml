@@ -14,20 +14,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="GetModel(string,RequestContext)">
 <example>
@@ -42,20 +28,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PostModelAsync(string,RequestContent,RequestContext)">
 <example>
@@ -74,28 +46,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Input</c>:
-<code>{
-  hello: string, # Required.
-}
-</code>
-
-Response Body:
-
-<details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PostModel(string,RequestContent,RequestContext)">
 <example>
@@ -114,28 +64,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Input</c>:
-<code>{
-  hello: string, # Required.
-}
-</code>
-
-Response Body:
-
-<details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="GetPagesAsync(string,RequestContext)">
 <example>
@@ -151,18 +79,6 @@ await foreach (var item in client.GetPagesAsync("<mode>", new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPages(string,RequestContext)">
 <example>
@@ -178,18 +94,6 @@ foreach (var item in client.GetPages("<mode>", new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>ProductResultValues</c>:
-<code>{
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="LroAsync(WaitUntil,string,RequestContext)">
 <example>
@@ -206,19 +110,6 @@ Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Lro(WaitUntil,string,RequestContext)">
 <example>
@@ -235,19 +126,6 @@ Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>LROProduct</c>:
-<code>{
-  provisioningState: string, # Required.
-  received: &quot;raw&quot; | &quot;model&quot;, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>
