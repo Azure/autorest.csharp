@@ -596,12 +596,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"[Protocol Method]{methodSignature.SummaryText}");
+            builder.AppendLine($"[Protocol Method] {methodSignature.SummaryText}");
             builder.AppendLine($"<list type=\"bullet\">");
-            if (!methodSignature.DescriptionText.IsNullOrEmpty())
-            {
-                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
-            }
+            builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
 
             if (clientMethod.ConvenienceMethod != null)
             {
