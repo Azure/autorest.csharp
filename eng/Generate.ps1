@@ -129,7 +129,7 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 
     if ($forTest) {
-        if(Test-Path "$directory/autorest.md") {
+        if(Test-Path "$directory/readme.md") {
             Add-Swagger-Test $testName $directory $testArguments
         }
     }
@@ -178,7 +178,7 @@ if (!($Exclude -contains "TestProjects")) {
             Add-Swagger $testName $directory $testArguments
         }
         else {
-            throw "There is no tspconfig.yaml file or autorest.md file or swagger json file $testName.json found in test project $testName"
+            throw "There is no tspconfig.yaml file or readme.md file or swagger json file $testName.json found in test project $testName"
         }
     }
 }
@@ -190,6 +190,9 @@ if (!($Exclude -contains "Samples")) {
     foreach ($directory in Get-ChildItem $sampleProjectsRoot -Directory) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
+        if (Test-Path "$projectDirectory/*.sln") {
+            $projectDirectory = Join-Path $projectDirectory "src"
+        }
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
         $tspConfigPath = Join-Path $directory "tspconfig.yaml"
 
@@ -199,13 +202,13 @@ if (!($Exclude -contains "Samples")) {
         }
         elseif (Test-Path $tspConfigPath) {
             # for typespec projects
-            $tspMain = Join-Path $projectDirectory "main.tsp"
-            $tspClient = Join-Path $projectDirectory "client.tsp"
+            $tspMain = Join-Path $projectDirectory ".." "main.tsp"
+            $tspClient = Join-Path $projectDirectory ".."  "client.tsp"
             $mainTspFile = if (Test-Path $tspClient) { Resolve-Path $tspClient } else { Resolve-Path $tspMain }
             Add-Typespec $sampleName $projectDirectory $mainTspFile
         }
         else {
-            throw "There is no tspconfig.yaml file or autorest.md file found in sample project $sampleName"
+            throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"
         }
     }
 }
