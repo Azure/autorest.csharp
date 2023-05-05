@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBooleanTrueAsync(global::Azure.RequestContext)">
+    <member name="GetBooleanTrueAsync(RequestContext)">
 <example>
 This sample shows how to call GetBooleanTrueAsync.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanTrue(global::Azure.RequestContext)">
+    <member name="GetBooleanTrue(RequestContext)">
 <example>
 This sample shows how to call GetBooleanTrue.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanFalseAsync(global::Azure.RequestContext)">
+    <member name="GetBooleanFalseAsync(RequestContext)">
 <example>
 This sample shows how to call GetBooleanFalseAsync.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanFalse(global::Azure.RequestContext)">
+    <member name="GetBooleanFalse(RequestContext)">
 <example>
 This sample shows how to call GetBooleanFalse.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanNullAsync(bool?,global::Azure.RequestContext)">
+    <member name="GetBooleanNullAsync(bool?,RequestContext)">
 <example>
 This sample shows how to call GetBooleanNullAsync.
 <code><![CDATA[
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanNull(bool?,global::Azure.RequestContext)">
+    <member name="GetBooleanNull(bool?,RequestContext)">
 <example>
 This sample shows how to call GetBooleanNull.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntOneMillionAsync(global::Azure.RequestContext)">
+    <member name="GetIntOneMillionAsync(RequestContext)">
 <example>
 This sample shows how to call GetIntOneMillionAsync.
 <code><![CDATA[
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntOneMillion(global::Azure.RequestContext)">
+    <member name="GetIntOneMillion(RequestContext)">
 <example>
 This sample shows how to call GetIntOneMillion.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNegativeOneMillionAsync(global::Azure.RequestContext)">
+    <member name="GetIntNegativeOneMillionAsync(RequestContext)">
 <example>
 This sample shows how to call GetIntNegativeOneMillionAsync.
 <code><![CDATA[
@@ -125,7 +125,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNegativeOneMillion(global::Azure.RequestContext)">
+    <member name="GetIntNegativeOneMillion(RequestContext)">
 <example>
 This sample shows how to call GetIntNegativeOneMillion.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNullAsync(int?,global::Azure.RequestContext)">
+    <member name="GetIntNullAsync(int?,RequestContext)">
 <example>
 This sample shows how to call GetIntNullAsync.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNull(int?,global::Azure.RequestContext)">
+    <member name="GetIntNull(int?,RequestContext)">
 <example>
 This sample shows how to call GetIntNull.
 <code><![CDATA[
@@ -177,7 +177,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetTenBillionAsync(global::Azure.RequestContext)">
+    <member name="GetTenBillionAsync(RequestContext)">
 <example>
 This sample shows how to call GetTenBillionAsync.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetTenBillion(global::Azure.RequestContext)">
+    <member name="GetTenBillion(RequestContext)">
 <example>
 This sample shows how to call GetTenBillion.
 <code><![CDATA[
@@ -201,7 +201,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetNegativeTenBillionAsync(global::Azure.RequestContext)">
+    <member name="GetNegativeTenBillionAsync(RequestContext)">
 <example>
 This sample shows how to call GetNegativeTenBillionAsync.
 <code><![CDATA[
@@ -213,7 +213,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetNegativeTenBillion(global::Azure.RequestContext)">
+    <member name="GetNegativeTenBillion(RequestContext)">
 <example>
 This sample shows how to call GetNegativeTenBillion.
 <code><![CDATA[
@@ -225,7 +225,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLongNullAsync(long?,global::Azure.RequestContext)">
+    <member name="GetLongNullAsync(long?,RequestContext)">
 <example>
 This sample shows how to call GetLongNullAsync.
 <code><![CDATA[
@@ -245,7 +245,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLongNull(long?,global::Azure.RequestContext)">
+    <member name="GetLongNull(long?,RequestContext)">
 <example>
 This sample shows how to call GetLongNull.
 <code><![CDATA[
@@ -265,7 +265,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatScientificPositiveAsync(global::Azure.RequestContext)">
+    <member name="FloatScientificPositiveAsync(RequestContext)">
 <example>
 This sample shows how to call FloatScientificPositiveAsync.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatScientificPositive(global::Azure.RequestContext)">
+    <member name="FloatScientificPositive(RequestContext)">
 <example>
 This sample shows how to call FloatScientificPositive.
 <code><![CDATA[
@@ -289,7 +289,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatScientificNegativeAsync(global::Azure.RequestContext)">
+    <member name="FloatScientificNegativeAsync(RequestContext)">
 <example>
 This sample shows how to call FloatScientificNegativeAsync.
 <code><![CDATA[
@@ -301,7 +301,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatScientificNegative(global::Azure.RequestContext)">
+    <member name="FloatScientificNegative(RequestContext)">
 <example>
 This sample shows how to call FloatScientificNegative.
 <code><![CDATA[
@@ -313,7 +313,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatNullAsync(float?,global::Azure.RequestContext)">
+    <member name="FloatNullAsync(float?,RequestContext)">
 <example>
 This sample shows how to call FloatNullAsync.
 <code><![CDATA[
@@ -333,7 +333,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatNull(float?,global::Azure.RequestContext)">
+    <member name="FloatNull(float?,RequestContext)">
 <example>
 This sample shows how to call FloatNull.
 <code><![CDATA[
@@ -353,7 +353,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleDecimalPositiveAsync(global::Azure.RequestContext)">
+    <member name="DoubleDecimalPositiveAsync(RequestContext)">
 <example>
 This sample shows how to call DoubleDecimalPositiveAsync.
 <code><![CDATA[
@@ -365,7 +365,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleDecimalPositive(global::Azure.RequestContext)">
+    <member name="DoubleDecimalPositive(RequestContext)">
 <example>
 This sample shows how to call DoubleDecimalPositive.
 <code><![CDATA[
@@ -377,7 +377,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleDecimalNegativeAsync(global::Azure.RequestContext)">
+    <member name="DoubleDecimalNegativeAsync(RequestContext)">
 <example>
 This sample shows how to call DoubleDecimalNegativeAsync.
 <code><![CDATA[
@@ -389,7 +389,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleDecimalNegative(global::Azure.RequestContext)">
+    <member name="DoubleDecimalNegative(RequestContext)">
 <example>
 This sample shows how to call DoubleDecimalNegative.
 <code><![CDATA[
@@ -401,7 +401,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleNullAsync(double?,global::Azure.RequestContext)">
+    <member name="DoubleNullAsync(double?,RequestContext)">
 <example>
 This sample shows how to call DoubleNullAsync.
 <code><![CDATA[
@@ -421,7 +421,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleNull(double?,global::Azure.RequestContext)">
+    <member name="DoubleNull(double?,RequestContext)">
 <example>
 This sample shows how to call DoubleNull.
 <code><![CDATA[
@@ -441,7 +441,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringUnicodeAsync(global::Azure.RequestContext)">
+    <member name="StringUnicodeAsync(RequestContext)">
 <example>
 This sample shows how to call StringUnicodeAsync.
 <code><![CDATA[
@@ -453,7 +453,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringUnicode(global::Azure.RequestContext)">
+    <member name="StringUnicode(RequestContext)">
 <example>
 This sample shows how to call StringUnicode.
 <code><![CDATA[
@@ -465,7 +465,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringUrlEncodedAsync(global::Azure.RequestContext)">
+    <member name="StringUrlEncodedAsync(RequestContext)">
 <example>
 This sample shows how to call StringUrlEncodedAsync.
 <code><![CDATA[
@@ -477,7 +477,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringUrlEncoded(global::Azure.RequestContext)">
+    <member name="StringUrlEncoded(RequestContext)">
 <example>
 This sample shows how to call StringUrlEncoded.
 <code><![CDATA[
@@ -489,7 +489,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringEmptyAsync(global::Azure.RequestContext)">
+    <member name="StringEmptyAsync(RequestContext)">
 <example>
 This sample shows how to call StringEmptyAsync.
 <code><![CDATA[
@@ -501,7 +501,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringEmpty(global::Azure.RequestContext)">
+    <member name="StringEmpty(RequestContext)">
 <example>
 This sample shows how to call StringEmpty.
 <code><![CDATA[
@@ -513,7 +513,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNullAsync(string,global::Azure.RequestContext)">
+    <member name="StringNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call StringNullAsync.
 <code><![CDATA[
@@ -533,7 +533,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNull(string,global::Azure.RequestContext)">
+    <member name="StringNull(string,RequestContext)">
 <example>
 This sample shows how to call StringNull.
 <code><![CDATA[
@@ -553,7 +553,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValidAsync(string,global::Azure.RequestContext)">
+    <member name="EnumValidAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumValidAsync.
 <code><![CDATA[
@@ -573,7 +573,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValid(string,global::Azure.RequestContext)">
+    <member name="EnumValid(string,RequestContext)">
 <example>
 This sample shows how to call EnumValid.
 <code><![CDATA[
@@ -593,7 +593,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNullAsync(string,global::Azure.RequestContext)">
+    <member name="EnumNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumNullAsync.
 <code><![CDATA[
@@ -613,7 +613,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNull(string,global::Azure.RequestContext)">
+    <member name="EnumNull(string,RequestContext)">
 <example>
 This sample shows how to call EnumNull.
 <code><![CDATA[
@@ -633,7 +633,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteMultiByteAsync(global::System.Byte[],global::Azure.RequestContext)">
+    <member name="ByteMultiByteAsync(Byte[],RequestContext)">
 <example>
 This sample shows how to call ByteMultiByteAsync.
 <code><![CDATA[
@@ -653,7 +653,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteMultiByte(global::System.Byte[],global::Azure.RequestContext)">
+    <member name="ByteMultiByte(Byte[],RequestContext)">
 <example>
 This sample shows how to call ByteMultiByte.
 <code><![CDATA[
@@ -673,7 +673,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteEmptyAsync(global::Azure.RequestContext)">
+    <member name="ByteEmptyAsync(RequestContext)">
 <example>
 This sample shows how to call ByteEmptyAsync.
 <code><![CDATA[
@@ -685,7 +685,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteEmpty(global::Azure.RequestContext)">
+    <member name="ByteEmpty(RequestContext)">
 <example>
 This sample shows how to call ByteEmpty.
 <code><![CDATA[
@@ -697,7 +697,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteNullAsync(global::System.Byte[],global::Azure.RequestContext)">
+    <member name="ByteNullAsync(Byte[],RequestContext)">
 <example>
 This sample shows how to call ByteNullAsync.
 <code><![CDATA[
@@ -717,7 +717,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteNull(global::System.Byte[],global::Azure.RequestContext)">
+    <member name="ByteNull(Byte[],RequestContext)">
 <example>
 This sample shows how to call ByteNull.
 <code><![CDATA[
@@ -737,7 +737,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateValidAsync(global::Azure.RequestContext)">
+    <member name="DateValidAsync(RequestContext)">
 <example>
 This sample shows how to call DateValidAsync.
 <code><![CDATA[
@@ -749,7 +749,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateValid(global::Azure.RequestContext)">
+    <member name="DateValid(RequestContext)">
 <example>
 This sample shows how to call DateValid.
 <code><![CDATA[
@@ -761,7 +761,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateNullAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="DateNullAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateNullAsync.
 <code><![CDATA[
@@ -781,7 +781,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateNull(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="DateNull(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateNull.
 <code><![CDATA[
@@ -801,7 +801,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeValidAsync(global::Azure.RequestContext)">
+    <member name="DateTimeValidAsync(RequestContext)">
 <example>
 This sample shows how to call DateTimeValidAsync.
 <code><![CDATA[
@@ -813,7 +813,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeValid(global::Azure.RequestContext)">
+    <member name="DateTimeValid(RequestContext)">
 <example>
 This sample shows how to call DateTimeValid.
 <code><![CDATA[
@@ -825,7 +825,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeNullAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="DateTimeNullAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateTimeNullAsync.
 <code><![CDATA[
@@ -845,7 +845,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeNull(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="DateTimeNull(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateTimeNull.
 <code><![CDATA[
@@ -865,7 +865,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvValidAsync.
 <code><![CDATA[
@@ -885,7 +885,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvValid.
 <code><![CDATA[
@@ -905,7 +905,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvNullAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvNullAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvNullAsync.
 <code><![CDATA[
@@ -925,7 +925,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvNull(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvNull(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvNull.
 <code><![CDATA[
@@ -945,7 +945,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvEmptyAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvEmptyAsync.
 <code><![CDATA[
@@ -965,7 +965,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringCsvEmpty(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvEmpty.
 <code><![CDATA[
@@ -985,7 +985,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringNoCollectionFormatEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringNoCollectionFormatEmptyAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringNoCollectionFormatEmptyAsync.
 <code><![CDATA[
@@ -1005,7 +1005,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringNoCollectionFormatEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringNoCollectionFormatEmpty(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringNoCollectionFormatEmpty.
 <code><![CDATA[
@@ -1025,7 +1025,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringSsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringSsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringSsvValidAsync.
 <code><![CDATA[
@@ -1045,7 +1045,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringSsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringSsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringSsvValid.
 <code><![CDATA[
@@ -1065,7 +1065,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringTsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringTsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringTsvValidAsync.
 <code><![CDATA[
@@ -1085,7 +1085,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringTsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringTsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringTsvValid.
 <code><![CDATA[
@@ -1105,7 +1105,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringPipesValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringPipesValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringPipesValidAsync.
 <code><![CDATA[
@@ -1125,7 +1125,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringPipesValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringPipesValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringPipesValid.
 <code><![CDATA[

@@ -53,7 +53,7 @@ namespace ServiceVersionOverride
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));
@@ -78,7 +78,7 @@ namespace ServiceVersionOverride
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(string,RequestContext)']/*" />
         public virtual Response Operation(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));

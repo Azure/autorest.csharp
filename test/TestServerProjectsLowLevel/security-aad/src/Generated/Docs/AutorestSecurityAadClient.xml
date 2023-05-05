@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="HeadAsync(global::Azure.RequestContext)">
+    <member name="HeadAsync(RequestContext)">
 <example>
 This sample shows how to call HeadAsync.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head(global::Azure.RequestContext)">
+    <member name="Head(RequestContext)">
 <example>
 This sample shows how to call Head.
 <code><![CDATA[

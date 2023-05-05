@@ -52,7 +52,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='MultiAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='MultiAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> MultiAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -77,7 +77,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Multi(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Multi(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Multi(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -102,7 +102,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='SsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='SsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> SsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -127,7 +127,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Ssv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Ssv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Ssv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -152,7 +152,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> TsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -177,7 +177,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Tsv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -202,7 +202,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='PipesAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='PipesAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> PipesAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -227,7 +227,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Pipes(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Pipes(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Pipes(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -252,7 +252,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='CsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='CsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));
@@ -277,7 +277,7 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Csv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Csv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Csv(IEnumerable<string> colors, RequestContext context = null)
         {
             Argument.AssertNotNull(colors, nameof(colors));

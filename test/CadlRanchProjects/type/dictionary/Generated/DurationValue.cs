@@ -49,7 +49,7 @@ namespace _Type._Dictionary
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, TimeSpan>>> GetDurationValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -66,7 +66,7 @@ namespace _Type._Dictionary
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, TimeSpan>> GetDurationValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -95,7 +95,7 @@ namespace _Type._Dictionary
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDurationValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValue");
@@ -125,7 +125,7 @@ namespace _Type._Dictionary
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(RequestContext)']/*" />
         public virtual Response GetDurationValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValue");
@@ -145,7 +145,7 @@ namespace _Type._Dictionary
         /// <param name="body"> The Dictionary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(global::System.Collections.Generic.IDictionary{string, global::System.TimeSpan},global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,TimeSpan},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, TimeSpan> body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -158,7 +158,7 @@ namespace _Type._Dictionary
         /// <param name="body"> The Dictionary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(global::System.Collections.Generic.IDictionary{string, global::System.TimeSpan},global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(IDictionary{string,TimeSpan},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, TimeSpan> body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -173,7 +173,7 @@ namespace _Type._Dictionary
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string, TimeSpan},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(IDictionary{string,TimeSpan},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -183,7 +183,7 @@ namespace _Type._Dictionary
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -207,7 +207,7 @@ namespace _Type._Dictionary
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string, TimeSpan},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(IDictionary{string,TimeSpan},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -217,7 +217,7 @@ namespace _Type._Dictionary
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

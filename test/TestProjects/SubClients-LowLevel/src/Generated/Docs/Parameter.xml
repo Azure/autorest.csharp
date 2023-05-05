@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetSubParameterAsync(string,global::Azure.RequestContext)">
+    <member name="GetSubParameterAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetSubParameterAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetSubParameter(string,global::Azure.RequestContext)">
+    <member name="GetSubParameter(string,RequestContext)">
 <example>
 This sample shows how to call GetSubParameter with required parameters and parse the result.
 <code><![CDATA[

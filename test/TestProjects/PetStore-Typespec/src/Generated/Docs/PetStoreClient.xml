@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="DeleteAsync(int,global::Azure.RequestContext)">
+    <member name="DeleteAsync(int,RequestContext)">
 <example>
 This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="Delete(int,global::Azure.RequestContext)">
+    <member name="Delete(int,RequestContext)">
 <example>
 This sample shows how to call Delete with required parameters.
 <code><![CDATA[
@@ -31,7 +31,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="ReadAsync(int,global::System.Threading.CancellationToken)">
+    <member name="ReadAsync(int,CancellationToken)">
 <example>
 This sample shows how to call ReadAsync with required parameters.
 <code><![CDATA[
@@ -42,7 +42,7 @@ var result = await client.ReadAsync(1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="Read(int,global::System.Threading.CancellationToken)">
+    <member name="Read(int,CancellationToken)">
 <example>
 This sample shows how to call Read with required parameters.
 <code><![CDATA[
@@ -53,7 +53,7 @@ var result = client.Read(1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="ReadAsync(int,global::Azure.RequestContext)">
+    <member name="ReadAsync(int,RequestContext)">
 <example>
 This sample shows how to call ReadAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -83,7 +83,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="Read(int,global::Azure.RequestContext)">
+    <member name="Read(int,RequestContext)">
 <example>
 This sample shows how to call Read with required parameters and parse the result.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="CreateAsync(global::PetStore.Models.Pet,global::System.Threading.CancellationToken)">
+    <member name="CreateAsync(Pet,CancellationToken)">
 <example>
 This sample shows how to call CreateAsync with required parameters.
 <code><![CDATA[
@@ -128,7 +128,7 @@ var result = await client.CreateAsync(pet, default);
 ]]></code>
 </example>
     </member>
-    <member name="Create(global::PetStore.Models.Pet,global::System.Threading.CancellationToken)">
+    <member name="Create(Pet,CancellationToken)">
 <example>
 This sample shows how to call Create with required parameters.
 <code><![CDATA[
@@ -143,7 +143,7 @@ var result = client.Create(pet, default);
 ]]></code>
 </example>
     </member>
-    <member name="CreateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -205,7 +205,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="Create(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Create(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Create with required request content, and how to parse the result.
 <code><![CDATA[
@@ -267,7 +267,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetPetByKindAsync(global::PetStore.Models.PetKind,global::System.Threading.CancellationToken)">
+    <member name="GetPetByKindAsync(PetKind,CancellationToken)">
 <example>
 This sample shows how to call GetPetByKindAsync with required parameters.
 <code><![CDATA[
@@ -278,7 +278,7 @@ var result = await client.GetPetByKindAsync(null, default);
 ]]></code>
 </example>
     </member>
-    <member name="GetPetByKind(global::PetStore.Models.PetKind,global::System.Threading.CancellationToken)">
+    <member name="GetPetByKind(PetKind,CancellationToken)">
 <example>
 This sample shows how to call GetPetByKind with required parameters.
 <code><![CDATA[
@@ -289,7 +289,7 @@ var result = client.GetPetByKind(null, default);
 ]]></code>
 </example>
     </member>
-    <member name="GetPetByKindAsync(string,global::Azure.RequestContext)">
+    <member name="GetPetByKindAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetPetByKindAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -319,7 +319,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetPetByKind(string,global::Azure.RequestContext)">
+    <member name="GetPetByKind(string,RequestContext)">
 <example>
 This sample shows how to call GetPetByKind with required parameters and parse the result.
 <code><![CDATA[
@@ -349,7 +349,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetFirstPetAsync(int?,global::System.Threading.CancellationToken)">
+    <member name="GetFirstPetAsync(int?,CancellationToken)">
 <example>
 This sample shows how to call GetFirstPetAsync with required parameters.
 <code><![CDATA[
@@ -360,7 +360,7 @@ var result = await client.GetFirstPetAsync(1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="GetFirstPet(int?,global::System.Threading.CancellationToken)">
+    <member name="GetFirstPet(int?,CancellationToken)">
 <example>
 This sample shows how to call GetFirstPet with required parameters.
 <code><![CDATA[
@@ -371,7 +371,7 @@ var result = client.GetFirstPet(1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="GetFirstPetAsync(int?,global::Azure.RequestContext)">
+    <member name="GetFirstPetAsync(int?,RequestContext)">
 <example>
 This sample shows how to call GetFirstPetAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -401,7 +401,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetFirstPet(int?,global::Azure.RequestContext)">
+    <member name="GetFirstPet(int?,RequestContext)">
 <example>
 This sample shows how to call GetFirstPet with required parameters and parse the result.
 <code><![CDATA[

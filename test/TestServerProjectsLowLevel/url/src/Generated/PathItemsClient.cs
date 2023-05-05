@@ -77,7 +77,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValuesAsync(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValuesAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -107,7 +107,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValues(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValues(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -137,7 +137,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNullAsync(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -167,7 +167,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNull(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -197,7 +197,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNullAsync(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -227,7 +227,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNull(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -257,7 +257,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNullAsync(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -287,7 +287,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNull(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));

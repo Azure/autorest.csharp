@@ -65,7 +65,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatusAsync(global::System.Guid,global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatusAsync(Guid,Guid,RequestContext)']/*" />
         public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -88,7 +88,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatus(global::System.Guid,global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatus(Guid,Guid,RequestContext)']/*" />
         public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -110,7 +110,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatusAsync(global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatusAsync(Guid,RequestContext)']/*" />
         public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -132,7 +132,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatus(global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatus(Guid,RequestContext)']/*" />
         public virtual Response GetTranslationStatus(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -154,7 +154,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslationAsync(global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslationAsync(Guid,RequestContext)']/*" />
         public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -176,7 +176,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslation(global::System.Guid,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslation(Guid,RequestContext)']/*" />
         public virtual Response CancelTranslation(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -197,7 +197,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormatsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormatsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -218,7 +218,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormats(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormats(RequestContext)']/*" />
         public virtual Response GetSupportedDocumentFormats(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -239,7 +239,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormatsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormatsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -260,7 +260,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormats(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormats(RequestContext)']/*" />
         public virtual Response GetSupportedGlossaryFormats(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -281,7 +281,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSourcesAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSourcesAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -302,7 +302,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSources(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSources(RequestContext)']/*" />
         public virtual Response GetSupportedStorageSources(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -349,7 +349,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -387,7 +387,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -426,7 +426,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -465,7 +465,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -481,7 +481,7 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslationAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslationAsync(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Operation> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -508,7 +508,7 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslation(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslation(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
         public virtual Operation StartTranslation(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

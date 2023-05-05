@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetIntAsync(global::Azure.RequestContext)">
+    <member name="GetIntAsync(RequestContext)">
 <example>
 This sample shows how to call GetIntAsync and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Schema for <c>IntWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetInt(global::Azure.RequestContext)">
+    <member name="GetInt(RequestContext)">
 <example>
 This sample shows how to call GetInt and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Schema for <c>IntWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutIntAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutIntAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutIntAsync.
 <code><![CDATA[
@@ -97,7 +97,7 @@ Schema for <c>IntWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutInt(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutInt(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutInt.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Schema for <c>IntWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetLongAsync(global::Azure.RequestContext)">
+    <member name="GetLongAsync(RequestContext)">
 <example>
 This sample shows how to call GetLongAsync and parse the result.
 <code><![CDATA[
@@ -165,7 +165,7 @@ Schema for <c>LongWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetLong(global::Azure.RequestContext)">
+    <member name="GetLong(RequestContext)">
 <example>
 This sample shows how to call GetLong and parse the result.
 <code><![CDATA[
@@ -193,7 +193,7 @@ Schema for <c>LongWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutLongAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutLongAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutLongAsync.
 <code><![CDATA[
@@ -233,7 +233,7 @@ Schema for <c>LongWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutLong(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutLong(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutLong.
 <code><![CDATA[
@@ -273,7 +273,7 @@ Schema for <c>LongWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetFloatAsync(global::Azure.RequestContext)">
+    <member name="GetFloatAsync(RequestContext)">
 <example>
 This sample shows how to call GetFloatAsync and parse the result.
 <code><![CDATA[
@@ -301,7 +301,7 @@ Schema for <c>FloatWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetFloat(global::Azure.RequestContext)">
+    <member name="GetFloat(RequestContext)">
 <example>
 This sample shows how to call GetFloat and parse the result.
 <code><![CDATA[
@@ -329,7 +329,7 @@ Schema for <c>FloatWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutFloatAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutFloatAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutFloatAsync.
 <code><![CDATA[
@@ -369,7 +369,7 @@ Schema for <c>FloatWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutFloat(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutFloat(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutFloat.
 <code><![CDATA[
@@ -409,7 +409,7 @@ Schema for <c>FloatWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDoubleAsync(global::Azure.RequestContext)">
+    <member name="GetDoubleAsync(RequestContext)">
 <example>
 This sample shows how to call GetDoubleAsync and parse the result.
 <code><![CDATA[
@@ -437,7 +437,7 @@ Schema for <c>DoubleWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDouble(global::Azure.RequestContext)">
+    <member name="GetDouble(RequestContext)">
 <example>
 This sample shows how to call GetDouble and parse the result.
 <code><![CDATA[
@@ -465,7 +465,7 @@ Schema for <c>DoubleWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDoubleAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDoubleAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDoubleAsync.
 <code><![CDATA[
@@ -505,7 +505,7 @@ Schema for <c>DoubleWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDouble(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDouble(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDouble.
 <code><![CDATA[
@@ -545,7 +545,7 @@ Schema for <c>DoubleWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetBoolAsync(global::Azure.RequestContext)">
+    <member name="GetBoolAsync(RequestContext)">
 <example>
 This sample shows how to call GetBoolAsync and parse the result.
 <code><![CDATA[
@@ -573,7 +573,7 @@ Schema for <c>BooleanWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetBool(global::Azure.RequestContext)">
+    <member name="GetBool(RequestContext)">
 <example>
 This sample shows how to call GetBool and parse the result.
 <code><![CDATA[
@@ -601,7 +601,7 @@ Schema for <c>BooleanWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutBoolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutBoolAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutBoolAsync.
 <code><![CDATA[
@@ -641,7 +641,7 @@ Schema for <c>BooleanWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutBool(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutBool(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutBool.
 <code><![CDATA[
@@ -681,7 +681,7 @@ Schema for <c>BooleanWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetStringAsync(global::Azure.RequestContext)">
+    <member name="GetStringAsync(RequestContext)">
 <example>
 This sample shows how to call GetStringAsync and parse the result.
 <code><![CDATA[
@@ -711,7 +711,7 @@ Schema for <c>StringWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetString(global::Azure.RequestContext)">
+    <member name="GetString(RequestContext)">
 <example>
 This sample shows how to call GetString and parse the result.
 <code><![CDATA[
@@ -741,7 +741,7 @@ Schema for <c>StringWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutStringAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutStringAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutStringAsync.
 <code><![CDATA[
@@ -783,7 +783,7 @@ Schema for <c>StringWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutString(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutString(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutString.
 <code><![CDATA[
@@ -825,7 +825,7 @@ Schema for <c>StringWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDateAsync(global::Azure.RequestContext)">
+    <member name="GetDateAsync(RequestContext)">
 <example>
 This sample shows how to call GetDateAsync and parse the result.
 <code><![CDATA[
@@ -853,7 +853,7 @@ Schema for <c>DateWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDate(global::Azure.RequestContext)">
+    <member name="GetDate(RequestContext)">
 <example>
 This sample shows how to call GetDate and parse the result.
 <code><![CDATA[
@@ -881,7 +881,7 @@ Schema for <c>DateWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDateAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDateAsync.
 <code><![CDATA[
@@ -921,7 +921,7 @@ Schema for <c>DateWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDate(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDate(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDate.
 <code><![CDATA[
@@ -961,7 +961,7 @@ Schema for <c>DateWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDateTimeAsync(global::Azure.RequestContext)">
+    <member name="GetDateTimeAsync(RequestContext)">
 <example>
 This sample shows how to call GetDateTimeAsync and parse the result.
 <code><![CDATA[
@@ -989,7 +989,7 @@ Schema for <c>DatetimeWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDateTime(global::Azure.RequestContext)">
+    <member name="GetDateTime(RequestContext)">
 <example>
 This sample shows how to call GetDateTime and parse the result.
 <code><![CDATA[
@@ -1017,7 +1017,7 @@ Schema for <c>DatetimeWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDateTimeAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDateTimeAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDateTimeAsync.
 <code><![CDATA[
@@ -1057,7 +1057,7 @@ Schema for <c>DatetimeWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDateTime(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDateTime(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDateTime.
 <code><![CDATA[
@@ -1097,7 +1097,7 @@ Schema for <c>DatetimeWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDateTimeRfc1123Async(global::Azure.RequestContext)">
+    <member name="GetDateTimeRfc1123Async(RequestContext)">
 <example>
 This sample shows how to call GetDateTimeRfc1123Async and parse the result.
 <code><![CDATA[
@@ -1125,7 +1125,7 @@ Schema for <c>Datetimerfc1123Wrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDateTimeRfc1123(global::Azure.RequestContext)">
+    <member name="GetDateTimeRfc1123(RequestContext)">
 <example>
 This sample shows how to call GetDateTimeRfc1123 and parse the result.
 <code><![CDATA[
@@ -1153,7 +1153,7 @@ Schema for <c>Datetimerfc1123Wrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDateTimeRfc1123Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDateTimeRfc1123Async(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDateTimeRfc1123Async.
 <code><![CDATA[
@@ -1193,7 +1193,7 @@ Schema for <c>Datetimerfc1123Wrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDateTimeRfc1123(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDateTimeRfc1123(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDateTimeRfc1123.
 <code><![CDATA[
@@ -1233,7 +1233,7 @@ Schema for <c>Datetimerfc1123Wrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDurationAsync(global::Azure.RequestContext)">
+    <member name="GetDurationAsync(RequestContext)">
 <example>
 This sample shows how to call GetDurationAsync and parse the result.
 <code><![CDATA[
@@ -1259,7 +1259,7 @@ Schema for <c>DurationWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetDuration(global::Azure.RequestContext)">
+    <member name="GetDuration(RequestContext)">
 <example>
 This sample shows how to call GetDuration and parse the result.
 <code><![CDATA[
@@ -1285,7 +1285,7 @@ Schema for <c>DurationWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDurationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDurationAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDurationAsync.
 <code><![CDATA[
@@ -1323,7 +1323,7 @@ Schema for <c>DurationWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutDuration(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDuration(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDuration.
 <code><![CDATA[
@@ -1361,7 +1361,7 @@ Schema for <c>DurationWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetByteAsync(global::Azure.RequestContext)">
+    <member name="GetByteAsync(RequestContext)">
 <example>
 This sample shows how to call GetByteAsync and parse the result.
 <code><![CDATA[
@@ -1387,7 +1387,7 @@ Schema for <c>ByteWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetByte(global::Azure.RequestContext)">
+    <member name="GetByte(RequestContext)">
 <example>
 This sample shows how to call GetByte and parse the result.
 <code><![CDATA[
@@ -1413,7 +1413,7 @@ Schema for <c>ByteWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutByteAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutByteAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutByteAsync.
 <code><![CDATA[
@@ -1451,7 +1451,7 @@ Schema for <c>ByteWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutByte(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutByte(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutByte.
 <code><![CDATA[

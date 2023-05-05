@@ -50,7 +50,7 @@ namespace Parameters.Spread
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
@@ -63,7 +63,7 @@ namespace Parameters.Spread
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(BodyParameter,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestBody(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
@@ -88,7 +88,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -122,7 +122,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAsRequestBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

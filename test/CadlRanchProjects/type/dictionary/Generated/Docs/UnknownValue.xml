@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetUnknownValueAsync(global::System.Threading.CancellationToken)">
+    <member name="GetUnknownValueAsync(CancellationToken)">
 <example>
 This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetUnknownValueAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValue(global::System.Threading.CancellationToken)">
+    <member name="GetUnknownValue(CancellationToken)">
 <example>
 This sample shows how to call GetUnknownValue.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetUnknownValue(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValueAsync(global::Azure.RequestContext)">
+    <member name="GetUnknownValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValue(global::Azure.RequestContext)">
+    <member name="GetUnknownValue(RequestContext)">
 <example>
 This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::System.Collections.Generic.IDictionary{string, global::System.BinaryData},global::System.Threading.CancellationToken)">
+    <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -61,7 +61,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::System.Collections.Generic.IDictionary{string, global::System.BinaryData},global::System.Threading.CancellationToken)">
+    <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -75,7 +75,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -90,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

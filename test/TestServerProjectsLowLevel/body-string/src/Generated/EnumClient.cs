@@ -61,7 +61,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandableAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandableAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNotExpandableAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -82,7 +82,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandable(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandable(RequestContext)']/*" />
         public virtual Response GetNotExpandable(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -105,7 +105,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandableAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandableAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -130,7 +130,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandable(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandable(RequestContent,RequestContext)']/*" />
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -153,7 +153,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetReferencedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -174,7 +174,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferenced(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferenced(RequestContext)']/*" />
         public virtual Response GetReferenced(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -197,7 +197,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -222,7 +222,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferenced(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferenced(RequestContent,RequestContext)']/*" />
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -245,7 +245,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstantAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstantAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetReferencedConstantAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
@@ -266,7 +266,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstant(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstant(RequestContext)']/*" />
         public virtual Response GetReferencedConstant(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
@@ -289,7 +289,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstantAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstantAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -314,7 +314,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstant(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstant(RequestContent,RequestContext)']/*" />
         public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -63,7 +63,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHeadAsync(string,global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHeadAsync(string,MatchConditions,RequestContext)']/*" />
         public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -86,7 +86,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHead(string,global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetWithHead(string,MatchConditions,RequestContext)']/*" />
         public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -109,7 +109,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(global::Azure.Core.RequestContent,global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(RequestContent,MatchConditions,RequestContext)']/*" />
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
@@ -132,7 +132,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(global::Azure.Core.RequestContent,global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(RequestContent,MatchConditions,RequestContext)']/*" />
         public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
@@ -154,7 +154,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetAsync(global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetAsync(MatchConditions,RequestContext)']/*" />
         public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
@@ -176,7 +176,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGet(global::Azure.MatchConditions,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGet(MatchConditions,RequestContext)']/*" />
         public virtual Response CollapseGet(MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBatchDetectionResultAsync(string,global::System.Threading.CancellationToken)">
+    <member name="GetBatchDetectionResultAsync(string,CancellationToken)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters.
 <code><![CDATA[
@@ -13,7 +13,7 @@ var result = await client.GetBatchDetectionResultAsync("<resultId>", default);
 ]]></code>
 </example>
     </member>
-    <member name="GetBatchDetectionResult(string,global::System.Threading.CancellationToken)">
+    <member name="GetBatchDetectionResult(string,CancellationToken)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters.
 <code><![CDATA[
@@ -25,7 +25,7 @@ var result = client.GetBatchDetectionResult("<resultId>", default);
 ]]></code>
 </example>
     </member>
-    <member name="GetBatchDetectionResultAsync(string,global::Azure.RequestContext)">
+    <member name="GetBatchDetectionResultAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>DetectionResult</c>:
 
 </remarks>
     </member>
-    <member name="GetBatchDetectionResult(string,global::Azure.RequestContext)">
+    <member name="GetBatchDetectionResult(string,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters and parse the result.
 <code><![CDATA[

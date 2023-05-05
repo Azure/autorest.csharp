@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(global::Azure.RequestContext)">
+    <member name="OperationAsync(RequestContext)">
 <example>
 This sample shows how to call OperationAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Operation(global::Azure.RequestContext)">
+    <member name="Operation(RequestContext)">
 <example>
 This sample shows how to call Operation and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetAllAsync(string,global::Azure.RequestContext)">
+    <member name="GetAllAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -44,7 +44,7 @@ await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
 ]]></code>
 </example>
     </member>
-    <member name="GetAll(string,global::Azure.RequestContext)">
+    <member name="GetAll(string,RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[

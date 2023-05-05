@@ -50,7 +50,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client5.xml" path="doc/members/member[@name='OperationAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Client5.xml" path="doc/members/member[@name='OperationAsync(RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");
@@ -71,7 +71,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client5.xml" path="doc/members/member[@name='Operation(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Client5.xml" path="doc/members/member[@name='Operation(RequestContext)']/*" />
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNoItemNamePagesAsync(global::Azure.RequestContext)">
+    <member name="GetNoItemNamePagesAsync(RequestContext)">
 <example>
 This sample shows how to call GetNoItemNamePagesAsync and parse the result.
 <code><![CDATA[
@@ -32,7 +32,7 @@ Schema for <c>ProductResultValue</c>:
 
 </remarks>
     </member>
-    <member name="GetNoItemNamePages(global::Azure.RequestContext)">
+    <member name="GetNoItemNamePages(RequestContext)">
 <example>
 This sample shows how to call GetNoItemNamePages and parse the result.
 <code><![CDATA[
@@ -63,7 +63,7 @@ Schema for <c>ProductResultValue</c>:
 
 </remarks>
     </member>
-    <member name="GetNullNextLinkNamePagesAsync(global::Azure.RequestContext)">
+    <member name="GetNullNextLinkNamePagesAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullNextLinkNamePagesAsync and parse the result.
 <code><![CDATA[
@@ -94,7 +94,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetNullNextLinkNamePages(global::Azure.RequestContext)">
+    <member name="GetNullNextLinkNamePages(RequestContext)">
 <example>
 This sample shows how to call GetNullNextLinkNamePages and parse the result.
 <code><![CDATA[
@@ -125,7 +125,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetSinglePagesAsync(global::Azure.RequestContext)">
+    <member name="GetSinglePagesAsync(RequestContext)">
 <example>
 This sample shows how to call GetSinglePagesAsync and parse the result.
 <code><![CDATA[
@@ -156,7 +156,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetSinglePages(global::Azure.RequestContext)">
+    <member name="GetSinglePages(RequestContext)">
 <example>
 This sample shows how to call GetSinglePages and parse the result.
 <code><![CDATA[
@@ -187,7 +187,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="FirstResponseEmptyAsync(global::Azure.RequestContext)">
+    <member name="FirstResponseEmptyAsync(RequestContext)">
 <example>
 This sample shows how to call FirstResponseEmptyAsync and parse the result.
 <code><![CDATA[
@@ -218,7 +218,7 @@ Schema for <c>ProductResultValue</c>:
 
 </remarks>
     </member>
-    <member name="FirstResponseEmpty(global::Azure.RequestContext)">
+    <member name="FirstResponseEmpty(RequestContext)">
 <example>
 This sample shows how to call FirstResponseEmpty and parse the result.
 <code><![CDATA[
@@ -249,7 +249,7 @@ Schema for <c>ProductResultValue</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesAsync(string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesAsync(string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesAsync and parse the result.
 <code><![CDATA[
@@ -291,7 +291,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePages(string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePages(string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePages and parse the result.
 <code><![CDATA[
@@ -333,7 +333,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetWithQueryParamsAsync(int,global::Azure.RequestContext)">
+    <member name="GetWithQueryParamsAsync(int,RequestContext)">
 <example>
 This sample shows how to call GetWithQueryParamsAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -364,7 +364,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetWithQueryParams(int,global::Azure.RequestContext)">
+    <member name="GetWithQueryParams(int,RequestContext)">
 <example>
 This sample shows how to call GetWithQueryParams with required parameters and parse the result.
 <code><![CDATA[
@@ -395,7 +395,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="DuplicateParamsAsync(string,global::Azure.RequestContext)">
+    <member name="DuplicateParamsAsync(string,RequestContext)">
 <example>
 This sample shows how to call DuplicateParamsAsync and parse the result.
 <code><![CDATA[
@@ -437,7 +437,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="DuplicateParams(string,global::Azure.RequestContext)">
+    <member name="DuplicateParams(string,RequestContext)">
 <example>
 This sample shows how to call DuplicateParams and parse the result.
 <code><![CDATA[
@@ -479,7 +479,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextOperationWithQueryParamsAsync(global::Azure.RequestContext)">
+    <member name="NextOperationWithQueryParamsAsync(RequestContext)">
 <example>
 This sample shows how to call NextOperationWithQueryParamsAsync and parse the result.
 <code><![CDATA[
@@ -510,7 +510,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextOperationWithQueryParams(global::Azure.RequestContext)">
+    <member name="NextOperationWithQueryParams(RequestContext)">
 <example>
 This sample shows how to call NextOperationWithQueryParams and parse the result.
 <code><![CDATA[
@@ -541,7 +541,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetOdataMultiplePagesAsync(string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetOdataMultiplePagesAsync(string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetOdataMultiplePagesAsync and parse the result.
 <code><![CDATA[
@@ -583,7 +583,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetOdataMultiplePages(string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetOdataMultiplePages(string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetOdataMultiplePages and parse the result.
 <code><![CDATA[
@@ -625,7 +625,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesWithOffsetAsync(int,string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesWithOffsetAsync(int,string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesWithOffsetAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -667,7 +667,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesWithOffset(int,string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesWithOffset(int,string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesWithOffset with required parameters and parse the result.
 <code><![CDATA[
@@ -709,7 +709,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesRetryFirstAsync(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesRetryFirstAsync(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesRetryFirstAsync and parse the result.
 <code><![CDATA[
@@ -740,7 +740,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesRetryFirst(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesRetryFirst(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesRetryFirst and parse the result.
 <code><![CDATA[
@@ -771,7 +771,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesRetrySecondAsync(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesRetrySecondAsync(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesRetrySecondAsync and parse the result.
 <code><![CDATA[
@@ -802,7 +802,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesRetrySecond(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesRetrySecond(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesRetrySecond and parse the result.
 <code><![CDATA[
@@ -833,7 +833,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetSinglePagesFailureAsync(global::Azure.RequestContext)">
+    <member name="GetSinglePagesFailureAsync(RequestContext)">
 <example>
 This sample shows how to call GetSinglePagesFailureAsync and parse the result.
 <code><![CDATA[
@@ -864,7 +864,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetSinglePagesFailure(global::Azure.RequestContext)">
+    <member name="GetSinglePagesFailure(RequestContext)">
 <example>
 This sample shows how to call GetSinglePagesFailure and parse the result.
 <code><![CDATA[
@@ -895,7 +895,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFailureAsync(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFailureAsync(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFailureAsync and parse the result.
 <code><![CDATA[
@@ -926,7 +926,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFailure(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFailure(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFailure and parse the result.
 <code><![CDATA[
@@ -957,7 +957,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFailureUriAsync(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFailureUriAsync(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFailureUriAsync and parse the result.
 <code><![CDATA[
@@ -988,7 +988,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFailureUri(global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFailureUri(RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFailureUri and parse the result.
 <code><![CDATA[
@@ -1019,7 +1019,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFragmentNextLinkAsync(string,string,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFragmentNextLinkAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFragmentNextLinkAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1050,7 +1050,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFragmentNextLink(string,string,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFragmentNextLink(string,string,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFragmentNextLink with required parameters and parse the result.
 <code><![CDATA[
@@ -1081,7 +1081,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLinkAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1112,7 +1112,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesFragmentWithGroupingNextLink(string,string,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesFragmentWithGroupingNextLink(string,string,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLink with required parameters and parse the result.
 <code><![CDATA[
@@ -1143,7 +1143,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextFragmentAsync(string,string,string,global::Azure.RequestContext)">
+    <member name="NextFragmentAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call NextFragmentAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1174,7 +1174,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextFragment(string,string,string,global::Azure.RequestContext)">
+    <member name="NextFragment(string,string,string,RequestContext)">
 <example>
 This sample shows how to call NextFragment with required parameters and parse the result.
 <code><![CDATA[
@@ -1205,7 +1205,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextFragmentWithGroupingAsync(string,string,string,global::Azure.RequestContext)">
+    <member name="NextFragmentWithGroupingAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call NextFragmentWithGroupingAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1236,7 +1236,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="NextFragmentWithGrouping(string,string,string,global::Azure.RequestContext)">
+    <member name="NextFragmentWithGrouping(string,string,string,RequestContext)">
 <example>
 This sample shows how to call NextFragmentWithGrouping with required parameters and parse the result.
 <code><![CDATA[
@@ -1267,7 +1267,7 @@ Schema for <c>OdataProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetPagingModelWithItemNameWithXMSClientNameAsync(global::Azure.RequestContext)">
+    <member name="GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext)">
 <example>
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientNameAsync and parse the result.
 <code><![CDATA[
@@ -1283,7 +1283,7 @@ await foreach (var item in client.GetPagingModelWithItemNameWithXMSClientNameAsy
 ]]></code>
 </example>
     </member>
-    <member name="GetPagingModelWithItemNameWithXMSClientName(global::Azure.RequestContext)">
+    <member name="GetPagingModelWithItemNameWithXMSClientName(RequestContext)">
 <example>
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientName and parse the result.
 <code><![CDATA[
@@ -1299,7 +1299,7 @@ foreach (var item in client.GetPagingModelWithItemNameWithXMSClientName(new Requ
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesLROAsync(global::Azure.WaitUntil,string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesLROAsync(WaitUntil,string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesLROAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1345,7 +1345,7 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultiplePagesLRO(global::Azure.WaitUntil,string,int?,int?,global::Azure.RequestContext)">
+    <member name="GetMultiplePagesLRO(WaitUntil,string,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesLRO with required parameters and parse the result.
 <code><![CDATA[

@@ -50,7 +50,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -59,7 +59,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekExtensibleEnum> GetKnownValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -80,7 +80,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetKnownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
@@ -110,7 +110,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(RequestContext)']/*" />
         public virtual Response GetKnownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
@@ -128,7 +128,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -137,7 +137,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekExtensibleEnum> GetUnknownValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -158,7 +158,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
@@ -188,7 +188,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
@@ -207,7 +207,7 @@ namespace _Type._Enum.Extensible
 
         /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -217,7 +217,7 @@ namespace _Type._Enum.Extensible
 
         /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -240,7 +240,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -274,7 +274,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutKnownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -295,7 +295,7 @@ namespace _Type._Enum.Extensible
 
         /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -305,7 +305,7 @@ namespace _Type._Enum.Extensible
 
         /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(global::_Type._Enum.Extensible.Models.DaysOfWeekExtensibleEnum,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -328,7 +328,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -362,7 +362,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutUnknownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -61,7 +61,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Head408Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Head408Async(RequestContext)']/*" />
         public virtual async Task<Response> Head408Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Head408(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Head408(RequestContext)']/*" />
         public virtual Response Head408(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
@@ -104,7 +104,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
@@ -126,7 +126,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500(RequestContent,RequestContext)']/*" />
         public virtual Response Put500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
@@ -148,7 +148,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
@@ -170,7 +170,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500(RequestContent,RequestContext)']/*" />
         public virtual Response Patch500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
@@ -191,7 +191,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Get502Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Get502Async(RequestContext)']/*" />
         public virtual async Task<Response> Get502Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
@@ -212,7 +212,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Get502(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Get502(RequestContext)']/*" />
         public virtual Response Get502(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
@@ -233,7 +233,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502Async(RequestContext)']/*" />
         public virtual async Task<Response> Options502Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
@@ -254,7 +254,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502(RequestContext)']/*" />
         public virtual Response Options502(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
@@ -276,7 +276,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
@@ -298,7 +298,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503(RequestContent,RequestContext)']/*" />
         public virtual Response Post503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
@@ -320,7 +320,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
@@ -342,7 +342,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503(RequestContent,RequestContext)']/*" />
         public virtual Response Delete503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
@@ -364,7 +364,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
@@ -386,7 +386,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504(RequestContent,RequestContext)']/*" />
         public virtual Response Put504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
@@ -408,7 +408,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
@@ -430,7 +430,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504(RequestContent,RequestContext)']/*" />
         public virtual Response Patch504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Get200Model204NoModelDefaultError200ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError200ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError200ValidAsync and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError200Valid(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError200Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError200Valid and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError204ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError204ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError204ValidAsync and parse the result.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError204Valid(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError204Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError204Valid and parse the result.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError201InvalidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError201InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError201InvalidAsync and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError201Invalid(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError201Invalid(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError201Invalid and parse the result.
 <code><![CDATA[
@@ -169,7 +169,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError202NoneAsync(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError202NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError202NoneAsync and parse the result.
 <code><![CDATA[
@@ -197,7 +197,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError202None(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError202None(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError202None and parse the result.
 <code><![CDATA[
@@ -225,7 +225,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError400ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError400ValidAsync and parse the result.
 <code><![CDATA[
@@ -253,7 +253,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model204NoModelDefaultError400Valid(global::Azure.RequestContext)">
+    <member name="Get200Model204NoModelDefaultError400Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model204NoModelDefaultError400Valid and parse the result.
 <code><![CDATA[
@@ -281,7 +281,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError200ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError200ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError200ValidAsync and parse the result.
 <code><![CDATA[
@@ -309,7 +309,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError200Valid(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError200Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError200Valid and parse the result.
 <code><![CDATA[
@@ -337,7 +337,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError201ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError201ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError201ValidAsync and parse the result.
 <code><![CDATA[
@@ -365,7 +365,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError201Valid(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError201Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError201Valid and parse the result.
 <code><![CDATA[
@@ -393,7 +393,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError400ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError400ValidAsync and parse the result.
 <code><![CDATA[
@@ -421,7 +421,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200Model201ModelDefaultError400Valid(global::Azure.RequestContext)">
+    <member name="Get200Model201ModelDefaultError400Valid(RequestContext)">
 <example>
 This sample shows how to call Get200Model201ModelDefaultError400Valid and parse the result.
 <code><![CDATA[
@@ -449,7 +449,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200ValidAsync and parse the result.
 <code><![CDATA[
@@ -477,7 +477,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError200Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200Valid and parse the result.
 <code><![CDATA[
@@ -505,7 +505,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201ValidAsync and parse the result.
 <code><![CDATA[
@@ -533,7 +533,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError201Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201Valid and parse the result.
 <code><![CDATA[
@@ -561,7 +561,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404ValidAsync and parse the result.
 <code><![CDATA[
@@ -589,7 +589,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError404Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404Valid and parse the result.
 <code><![CDATA[
@@ -617,7 +617,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400ValidAsync and parse the result.
 <code><![CDATA[
@@ -645,7 +645,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA201ModelC404ModelDDefaultError400Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400Valid and parse the result.
 <code><![CDATA[
@@ -673,7 +673,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get202None204NoneDefaultError202NoneAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError202NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError202NoneAsync.
 <code><![CDATA[
@@ -685,7 +685,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultError202None(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError202None(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError202None.
 <code><![CDATA[
@@ -697,7 +697,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultError204NoneAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError204NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError204NoneAsync.
 <code><![CDATA[
@@ -709,7 +709,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultError204None(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError204None(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError204None.
 <code><![CDATA[
@@ -721,7 +721,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultError400ValidAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError400ValidAsync.
 <code><![CDATA[
@@ -733,7 +733,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultError400Valid(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultError400Valid(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultError400Valid.
 <code><![CDATA[
@@ -745,7 +745,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone202InvalidAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone202InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone202InvalidAsync.
 <code><![CDATA[
@@ -757,7 +757,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone202Invalid(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone202Invalid(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone202Invalid.
 <code><![CDATA[
@@ -769,7 +769,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone204NoneAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone204NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone204NoneAsync.
 <code><![CDATA[
@@ -781,7 +781,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone204None(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone204None(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone204None.
 <code><![CDATA[
@@ -793,7 +793,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone400NoneAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone400NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone400NoneAsync.
 <code><![CDATA[
@@ -805,7 +805,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone400None(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone400None(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone400None.
 <code><![CDATA[
@@ -817,7 +817,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone400InvalidAsync(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone400InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone400InvalidAsync.
 <code><![CDATA[
@@ -829,7 +829,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get202None204NoneDefaultNone400Invalid(global::Azure.RequestContext)">
+    <member name="Get202None204NoneDefaultNone400Invalid(RequestContext)">
 <example>
 This sample shows how to call Get202None204NoneDefaultNone400Invalid.
 <code><![CDATA[
@@ -841,7 +841,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultModelA200ValidAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA200ValidAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA200ValidAsync and parse the result.
 <code><![CDATA[
@@ -869,7 +869,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetDefaultModelA200Valid(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA200Valid(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA200Valid and parse the result.
 <code><![CDATA[
@@ -897,7 +897,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetDefaultModelA200NoneAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA200NoneAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA200NoneAsync and parse the result.
 <code><![CDATA[
@@ -925,7 +925,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetDefaultModelA200None(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA200None(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA200None and parse the result.
 <code><![CDATA[
@@ -953,7 +953,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetDefaultModelA400ValidAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA400ValidAsync.
 <code><![CDATA[
@@ -965,7 +965,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultModelA400Valid(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA400Valid(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA400Valid.
 <code><![CDATA[
@@ -977,7 +977,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultModelA400NoneAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA400NoneAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA400NoneAsync.
 <code><![CDATA[
@@ -989,7 +989,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultModelA400None(global::Azure.RequestContext)">
+    <member name="GetDefaultModelA400None(RequestContext)">
 <example>
 This sample shows how to call GetDefaultModelA400None.
 <code><![CDATA[
@@ -1001,7 +1001,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone200InvalidAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultNone200InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone200InvalidAsync.
 <code><![CDATA[
@@ -1013,7 +1013,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone200Invalid(global::Azure.RequestContext)">
+    <member name="GetDefaultNone200Invalid(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone200Invalid.
 <code><![CDATA[
@@ -1025,7 +1025,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone200NoneAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultNone200NoneAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone200NoneAsync.
 <code><![CDATA[
@@ -1037,7 +1037,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone200None(global::Azure.RequestContext)">
+    <member name="GetDefaultNone200None(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone200None.
 <code><![CDATA[
@@ -1049,7 +1049,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone400InvalidAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultNone400InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone400InvalidAsync.
 <code><![CDATA[
@@ -1061,7 +1061,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone400Invalid(global::Azure.RequestContext)">
+    <member name="GetDefaultNone400Invalid(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone400Invalid.
 <code><![CDATA[
@@ -1073,7 +1073,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone400NoneAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultNone400NoneAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone400NoneAsync.
 <code><![CDATA[
@@ -1085,7 +1085,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultNone400None(global::Azure.RequestContext)">
+    <member name="GetDefaultNone400None(RequestContext)">
 <example>
 This sample shows how to call GetDefaultNone400None.
 <code><![CDATA[
@@ -1097,7 +1097,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get200ModelA200NoneAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA200NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200NoneAsync and parse the result.
 <code><![CDATA[
@@ -1125,7 +1125,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA200None(global::Azure.RequestContext)">
+    <member name="Get200ModelA200None(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200None and parse the result.
 <code><![CDATA[
@@ -1153,7 +1153,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA200ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA200ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200ValidAsync and parse the result.
 <code><![CDATA[
@@ -1181,7 +1181,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA200Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA200Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200Valid and parse the result.
 <code><![CDATA[
@@ -1209,7 +1209,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA200InvalidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA200InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200InvalidAsync and parse the result.
 <code><![CDATA[
@@ -1237,7 +1237,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA200Invalid(global::Azure.RequestContext)">
+    <member name="Get200ModelA200Invalid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA200Invalid and parse the result.
 <code><![CDATA[
@@ -1265,7 +1265,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400NoneAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA400NoneAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400NoneAsync and parse the result.
 <code><![CDATA[
@@ -1293,7 +1293,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400None(global::Azure.RequestContext)">
+    <member name="Get200ModelA400None(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400None and parse the result.
 <code><![CDATA[
@@ -1321,7 +1321,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA400ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400ValidAsync and parse the result.
 <code><![CDATA[
@@ -1349,7 +1349,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA400Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400Valid and parse the result.
 <code><![CDATA[
@@ -1377,7 +1377,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400InvalidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA400InvalidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400InvalidAsync and parse the result.
 <code><![CDATA[
@@ -1405,7 +1405,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA400Invalid(global::Azure.RequestContext)">
+    <member name="Get200ModelA400Invalid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA400Invalid and parse the result.
 <code><![CDATA[
@@ -1433,7 +1433,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA202ValidAsync(global::Azure.RequestContext)">
+    <member name="Get200ModelA202ValidAsync(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA202ValidAsync and parse the result.
 <code><![CDATA[
@@ -1461,7 +1461,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="Get200ModelA202Valid(global::Azure.RequestContext)">
+    <member name="Get200ModelA202Valid(RequestContext)">
 <example>
 This sample shows how to call Get200ModelA202Valid and parse the result.
 <code><![CDATA[

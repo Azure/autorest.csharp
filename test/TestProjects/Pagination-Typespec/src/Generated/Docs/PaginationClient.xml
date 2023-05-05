@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetPaginationLedgerEntriesAsync(global::Pagination.Models.ListLedgerEntryInputBody,global::System.Threading.CancellationToken)">
+    <member name="GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)">
 <example>
 This sample shows how to call GetPaginationLedgerEntriesAsync with required parameters.
 <code><![CDATA[
@@ -13,7 +13,7 @@ var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 var result = client.GetPaginationLedgerEntriesAsync(bodyInput, default);]]></code>
 </example>
     </member>
-    <member name="GetPaginationLedgerEntries(global::Pagination.Models.ListLedgerEntryInputBody,global::System.Threading.CancellationToken)">
+    <member name="GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)">
 <example>
 This sample shows how to call GetPaginationLedgerEntries with required parameters.
 <code><![CDATA[
@@ -25,7 +25,7 @@ var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 var result = client.GetPaginationLedgerEntries(bodyInput, default);]]></code>
 </example>
     </member>
-    <member name="GetPaginationLedgerEntriesAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call GetPaginationLedgerEntriesAsync with required request content and parse the result.
 <code><![CDATA[
@@ -73,7 +73,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetPaginationLedgerEntries(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="GetPaginationLedgerEntries(RequestContent,RequestContext)">
 <example>
 This sample shows how to call GetPaginationLedgerEntries with required request content and parse the result.
 <code><![CDATA[
@@ -121,7 +121,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetLedgerEntriesAsync(global::System.Threading.CancellationToken)">
+    <member name="GetLedgerEntriesAsync(CancellationToken)">
 <example>
 This sample shows how to call GetLedgerEntriesAsync.
 <code><![CDATA[
@@ -132,7 +132,7 @@ var client = new PaginationClient(endpoint, credential);
 var result = client.GetLedgerEntriesAsync(default);]]></code>
 </example>
     </member>
-    <member name="GetLedgerEntries(global::System.Threading.CancellationToken)">
+    <member name="GetLedgerEntries(CancellationToken)">
 <example>
 This sample shows how to call GetLedgerEntries.
 <code><![CDATA[
@@ -143,7 +143,7 @@ var client = new PaginationClient(endpoint, credential);
 var result = client.GetLedgerEntries(default);]]></code>
 </example>
     </member>
-    <member name="GetLedgerEntriesAsync(global::Azure.RequestContext)">
+    <member name="GetLedgerEntriesAsync(RequestContext)">
 <example>
 This sample shows how to call GetLedgerEntriesAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -175,7 +175,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetLedgerEntries(global::Azure.RequestContext)">
+    <member name="GetLedgerEntries(RequestContext)">
 <example>
 This sample shows how to call GetLedgerEntries with required parameters and parse the result.
 <code><![CDATA[

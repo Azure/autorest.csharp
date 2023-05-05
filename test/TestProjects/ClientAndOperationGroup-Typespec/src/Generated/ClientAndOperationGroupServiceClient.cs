@@ -59,7 +59,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='ZeroAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='ZeroAsync(RequestContext)']/*" />
         public virtual async Task<Response> ZeroAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.Zero");
@@ -80,7 +80,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='Zero(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='Zero(RequestContext)']/*" />
         public virtual Response Zero(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.Zero");
@@ -101,7 +101,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='OneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='OneAsync(RequestContext)']/*" />
         public virtual async Task<Response> OneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.One");
@@ -122,7 +122,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='One(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='One(RequestContext)']/*" />
         public virtual Response One(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.One");

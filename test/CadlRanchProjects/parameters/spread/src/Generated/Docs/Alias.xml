@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadAsRequestBodyAsync(string,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestBodyAsync(string,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.SpreadAsRequestBodyAsync("<name>", default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestBody(string,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestBody(string,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestBody with required parameters.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.SpreadAsRequestBody("<name>", default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
@@ -48,7 +48,7 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[
@@ -75,7 +75,7 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAsRequestParameterAsync(string,string,string,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestParameterAsync(string,string,string,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestParameterAsync with required parameters.
 <code><![CDATA[
@@ -85,7 +85,7 @@ var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestParameter(string,string,string,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestParameter(string,string,string,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestParameter with required parameters.
 <code><![CDATA[
@@ -95,7 +95,7 @@ var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>"
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestParameterAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestParameterAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestParameterAsync with required parameters and request content.
 <code><![CDATA[
@@ -122,7 +122,7 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAsRequestParameter(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestParameter(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestParameter with required parameters and request content.
 <code><![CDATA[
@@ -149,7 +149,7 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadWithMultipleParametersAsync(string,string,string,string,string,string,string,string,global::System.Threading.CancellationToken)">
+    <member name="SpreadWithMultipleParametersAsync(string,string,string,string,string,string,string,string,CancellationToken)">
 <example>
 This sample shows how to call SpreadWithMultipleParametersAsync with required parameters.
 <code><![CDATA[
@@ -159,7 +159,7 @@ var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHea
 ]]></code>
 </example>
     </member>
-    <member name="SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,global::System.Threading.CancellationToken)">
+    <member name="SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,CancellationToken)">
 <example>
 This sample shows how to call SpreadWithMultipleParameters with required parameters.
 <code><![CDATA[
@@ -169,7 +169,7 @@ var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<pr
 ]]></code>
 </example>
     </member>
-    <member name="SpreadWithMultipleParametersAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadWithMultipleParametersAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadWithMultipleParametersAsync with required parameters and request content.
 <code><![CDATA[
@@ -206,7 +206,7 @@ Schema for <c>SpreadWithMultipleParametersRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadWithMultipleParameters(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadWithMultipleParameters(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadWithMultipleParameters with required parameters and request content.
 <code><![CDATA[

@@ -63,7 +63,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModelAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModelAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -88,7 +88,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModel(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModel(string,RequestContext)']/*" />
         public virtual Response GetModel(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -114,7 +114,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModelAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModelAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostModelAsync(string mode, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -141,7 +141,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModel(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModel(string,RequestContent,RequestContext)']/*" />
         public virtual Response PostModel(string mode, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -167,7 +167,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPagesAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPagesAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -183,7 +183,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPages(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPages(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -200,7 +200,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='LroAsync(global::Azure.WaitUntil,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='LroAsync(WaitUntil,string,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> LroAsync(WaitUntil waitUntil, string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
@@ -226,7 +226,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='Lro(global::Azure.WaitUntil,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='Lro(WaitUntil,string,RequestContext)']/*" />
         public virtual Operation<BinaryData> Lro(WaitUntil waitUntil, string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));

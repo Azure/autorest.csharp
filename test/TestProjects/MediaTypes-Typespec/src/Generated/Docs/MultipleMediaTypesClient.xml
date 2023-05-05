@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OneBinaryBodyTwoContentTypesAsync(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)">
+    <member name="OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)">
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync with required parameters.
 <code><![CDATA[
@@ -13,7 +13,7 @@ var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.Ap
 ]]></code>
 </example>
     </member>
-    <member name="OneBinaryBodyTwoContentTypes(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)">
+    <member name="OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)">
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypes with required parameters.
 <code><![CDATA[
@@ -25,7 +25,7 @@ var result = client.OneBinaryBodyTwoContentTypes(body, ContentType.ApplicationOc
 ]]></code>
 </example>
     </member>
-    <member name="OneBinaryBodyTwoContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync with required parameters and request content.
 <code><![CDATA[
@@ -39,7 +39,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneBinaryBodyTwoContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypes with required parameters and request content.
 <code><![CDATA[
@@ -53,7 +53,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypesAsync(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)">
+    <member name="OneStringBodyThreeContentTypesAsync(string,ContentType,CancellationToken)">
 <example>
 This sample shows how to call OneStringBodyThreeContentTypesAsync with required parameters.
 <code><![CDATA[
@@ -65,7 +65,7 @@ var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypes(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)">
+    <member name="OneStringBodyThreeContentTypes(string,ContentType,CancellationToken)">
 <example>
 This sample shows how to call OneStringBodyThreeContentTypes with required parameters.
 <code><![CDATA[
@@ -77,7 +77,7 @@ var result = client.OneStringBodyThreeContentTypes(body, ContentType.Application
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call OneStringBodyThreeContentTypesAsync with required parameters and request content.
 <code><![CDATA[
@@ -91,7 +91,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call OneStringBodyThreeContentTypes with required parameters and request content.
 <code><![CDATA[
@@ -105,7 +105,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneModelBodyOneContentTypeAsync(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)">
+    <member name="OneModelBodyOneContentTypeAsync(Body,CancellationToken)">
 <example>
 This sample shows how to call OneModelBodyOneContentTypeAsync with required parameters.
 <code><![CDATA[
@@ -117,7 +117,7 @@ var result = await client.OneModelBodyOneContentTypeAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="OneModelBodyOneContentType(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)">
+    <member name="OneModelBodyOneContentType(Body,CancellationToken)">
 <example>
 This sample shows how to call OneModelBodyOneContentType with required parameters.
 <code><![CDATA[
@@ -129,7 +129,7 @@ var result = client.OneModelBodyOneContentType(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="OneModelBodyOneContentTypeAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call OneModelBodyOneContentTypeAsync with required request content.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Schema for <c>Body</c>:
 
 </remarks>
     </member>
-    <member name="OneModelBodyOneContentType(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="OneModelBodyOneContentType(RequestContent,RequestContext)">
 <example>
 This sample shows how to call OneModelBodyOneContentType with required request content.
 <code><![CDATA[

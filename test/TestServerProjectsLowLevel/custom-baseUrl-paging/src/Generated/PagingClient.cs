@@ -62,7 +62,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -78,7 +78,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -94,7 +94,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -110,7 +110,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -127,7 +127,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -145,7 +145,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));

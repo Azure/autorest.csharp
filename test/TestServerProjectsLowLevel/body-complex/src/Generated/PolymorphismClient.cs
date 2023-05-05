@@ -61,7 +61,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -82,7 +82,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -105,7 +105,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -130,7 +130,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntaxAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntaxAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -174,7 +174,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntax(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntax(RequestContext)']/*" />
         public virtual Response GetDotSyntax(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -195,7 +195,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminatorAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -216,7 +216,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminator(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminator(RequestContext)']/*" />
         public virtual Response GetComposedWithDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -237,7 +237,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminatorAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -258,7 +258,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminator(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminator(RequestContext)']/*" />
         public virtual Response GetComposedWithoutDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -279,7 +279,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicatedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicatedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplicatedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -300,7 +300,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicated(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicated(RequestContext)']/*" />
         public virtual Response GetComplicated(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -323,7 +323,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicatedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicatedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -348,7 +348,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicated(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicated(RequestContent,RequestContext)']/*" />
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -373,7 +373,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminatorAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminatorAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -398,7 +398,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminator(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminator(RequestContent,RequestContext)']/*" />
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -423,7 +423,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequiredAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -448,7 +448,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequired(RequestContent,RequestContext)']/*" />
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

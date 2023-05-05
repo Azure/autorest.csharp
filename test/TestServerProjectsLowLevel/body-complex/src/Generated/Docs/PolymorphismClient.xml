@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetValidAsync(global::Azure.RequestContext)">
+    <member name="GetValidAsync(RequestContext)">
 <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ This method takes one of the JSON objects below as a payload. Please select a JS
 
 </remarks>
     </member>
-    <member name="GetValid(global::Azure.RequestContext)">
+    <member name="GetValid(RequestContext)">
 <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
@@ -281,7 +281,7 @@ This method takes one of the JSON objects below as a payload. Please select a JS
 
 </remarks>
     </member>
-    <member name="PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValidAsync with required request content.
 <code><![CDATA[
@@ -435,7 +435,7 @@ This method takes one of the JSON objects below as a payload. Please select a JS
 
 </remarks>
     </member>
-    <member name="PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValid(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValid with required request content.
 <code><![CDATA[
@@ -589,7 +589,7 @@ This method takes one of the JSON objects below as a payload. Please select a JS
 
 </remarks>
     </member>
-    <member name="GetDotSyntaxAsync(global::Azure.RequestContext)">
+    <member name="GetDotSyntaxAsync(RequestContext)">
 <example>
 This sample shows how to call GetDotSyntaxAsync and parse the result.
 <code><![CDATA[
@@ -620,7 +620,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetDotSyntax(global::Azure.RequestContext)">
+    <member name="GetDotSyntax(RequestContext)">
 <example>
 This sample shows how to call GetDotSyntax and parse the result.
 <code><![CDATA[
@@ -651,7 +651,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetComposedWithDiscriminatorAsync(global::Azure.RequestContext)">
+    <member name="GetComposedWithDiscriminatorAsync(RequestContext)">
 <example>
 This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
 <code><![CDATA[
@@ -699,7 +699,7 @@ Schema for <c>DotFishMarket</c>:
 
 </remarks>
     </member>
-    <member name="GetComposedWithDiscriminator(global::Azure.RequestContext)">
+    <member name="GetComposedWithDiscriminator(RequestContext)">
 <example>
 This sample shows how to call GetComposedWithDiscriminator and parse the result.
 <code><![CDATA[
@@ -747,7 +747,7 @@ Schema for <c>DotFishMarket</c>:
 
 </remarks>
     </member>
-    <member name="GetComposedWithoutDiscriminatorAsync(global::Azure.RequestContext)">
+    <member name="GetComposedWithoutDiscriminatorAsync(RequestContext)">
 <example>
 This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
 <code><![CDATA[
@@ -795,7 +795,7 @@ Schema for <c>DotFishMarket</c>:
 
 </remarks>
     </member>
-    <member name="GetComposedWithoutDiscriminator(global::Azure.RequestContext)">
+    <member name="GetComposedWithoutDiscriminator(RequestContext)">
 <example>
 This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
 <code><![CDATA[
@@ -843,7 +843,7 @@ Schema for <c>DotFishMarket</c>:
 
 </remarks>
     </member>
-    <member name="GetComplicatedAsync(global::Azure.RequestContext)">
+    <member name="GetComplicatedAsync(RequestContext)">
 <example>
 This sample shows how to call GetComplicatedAsync and parse the result.
 <code><![CDATA[
@@ -890,7 +890,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetComplicated(global::Azure.RequestContext)">
+    <member name="GetComplicated(RequestContext)">
 <example>
 This sample shows how to call GetComplicated and parse the result.
 <code><![CDATA[
@@ -937,7 +937,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="PutComplicatedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutComplicatedAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutComplicatedAsync with required request content.
 <code><![CDATA[
@@ -1006,7 +1006,7 @@ Request Body:
 
 </remarks>
     </member>
-    <member name="PutComplicated(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutComplicated(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutComplicated with required request content.
 <code><![CDATA[
@@ -1075,7 +1075,7 @@ Request Body:
 
 </remarks>
     </member>
-    <member name="PutMissingDiscriminatorAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutMissingDiscriminatorAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutMissingDiscriminatorAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1177,7 +1177,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="PutMissingDiscriminator(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutMissingDiscriminator(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutMissingDiscriminator with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1279,7 +1279,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="PutValidMissingRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValidMissingRequiredAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValidMissingRequiredAsync with required request content.
 <code><![CDATA[
@@ -1433,7 +1433,7 @@ This method takes one of the JSON objects below as a payload. Please select a JS
 
 </remarks>
     </member>
-    <member name="PutValidMissingRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValidMissingRequired(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValidMissingRequired with required request content.
 <code><![CDATA[

@@ -60,7 +60,7 @@ namespace MultipleMediaTypes
         /// <param name="contentType"> The Union to use. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)']/*" />
         public virtual async Task<Response> OneBinaryBodyTwoContentTypesAsync(BinaryData body, ContentType contentType, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -74,7 +74,7 @@ namespace MultipleMediaTypes
         /// <param name="contentType"> The Union to use. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)']/*" />
         public virtual Response OneBinaryBodyTwoContentTypes(BinaryData body, ContentType contentType, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -100,7 +100,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneBinaryBodyTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -135,7 +135,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneBinaryBodyTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -159,7 +159,7 @@ namespace MultipleMediaTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(string,ContentType,CancellationToken)']/*" />
         public virtual async Task<Response> OneStringBodyThreeContentTypesAsync(string body, ContentType contentType, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -174,7 +174,7 @@ namespace MultipleMediaTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(string,ContentType,CancellationToken)']/*" />
         public virtual Response OneStringBodyThreeContentTypes(string body, ContentType contentType, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -200,7 +200,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneStringBodyThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -235,7 +235,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneStringBodyThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -257,7 +257,7 @@ namespace MultipleMediaTypes
         /// <param name="body"> The Body to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(Body,CancellationToken)']/*" />
         public virtual async Task<Response> OneModelBodyOneContentTypeAsync(Body body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -270,7 +270,7 @@ namespace MultipleMediaTypes
         /// <param name="body"> The Body to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(Body,CancellationToken)']/*" />
         public virtual Response OneModelBodyOneContentType(Body body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -295,7 +295,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OneModelBodyOneContentTypeAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -329,7 +329,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(RequestContent,RequestContext)']/*" />
         public virtual Response OneModelBodyOneContentType(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

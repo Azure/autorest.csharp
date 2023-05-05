@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDictionaryStringAsync(global::System.Threading.CancellationToken)">
+    <member name="GetDictionaryStringAsync(CancellationToken)">
 <example>
 This sample shows how to call GetDictionaryStringAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetDictionaryStringAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryString(global::System.Threading.CancellationToken)">
+    <member name="GetDictionaryString(CancellationToken)">
 <example>
 This sample shows how to call GetDictionaryString.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetDictionaryString(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetDictionaryStringAsync(global::Azure.RequestContext)">
+    <member name="GetDictionaryStringAsync(RequestContext)">
 <example>
 This sample shows how to call GetDictionaryStringAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -46,7 +46,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDictionaryString(global::Azure.RequestContext)">
+    <member name="GetDictionaryString(RequestContext)">
 <example>
 This sample shows how to call GetDictionaryString with required parameters and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.DictionaryStringProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAsync(DictionaryStringProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -85,7 +85,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::_Type.Property.ValueTypes.Models.DictionaryStringProperty,global::System.Threading.CancellationToken)">
+    <member name="Put(DictionaryStringProperty,CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -99,7 +99,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -128,7 +128,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

@@ -50,7 +50,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAsync(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
@@ -63,7 +63,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Json(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
@@ -88,7 +88,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> JsonAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -122,7 +122,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(RequestContent,RequestContext)']/*" />
         public virtual Response Json(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -144,7 +144,7 @@ namespace Projection.ProjectedName
         /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> ClientAsync(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
@@ -157,7 +157,7 @@ namespace Projection.ProjectedName
         /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Client(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
@@ -182,7 +182,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -216,7 +216,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -238,7 +238,7 @@ namespace Projection.ProjectedName
         /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
@@ -251,7 +251,7 @@ namespace Projection.ProjectedName
         /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Language(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
@@ -276,7 +276,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -310,7 +310,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -332,7 +332,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
@@ -345,7 +345,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response JsonAndClient(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
@@ -370,7 +370,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -404,7 +404,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(RequestContent,RequestContext)']/*" />
         public virtual Response JsonAndClient(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

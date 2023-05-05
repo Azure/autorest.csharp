@@ -61,7 +61,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
@@ -82,7 +82,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
         public virtual Response GetNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
@@ -104,7 +104,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutNullAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutNullAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutNullAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
@@ -126,7 +126,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutNull(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutNull(RequestContent,RequestContext)']/*" />
         public virtual Response PutNull(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
@@ -147,7 +147,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -168,7 +168,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -191,7 +191,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -216,7 +216,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -239,7 +239,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetMbcsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -260,7 +260,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcs(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcs(RequestContext)']/*" />
         public virtual Response GetMbcs(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -283,7 +283,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcsAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutMbcsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -308,7 +308,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcs(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcs(RequestContent,RequestContext)']/*" />
         public virtual Response PutMbcs(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -331,7 +331,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespaceAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespaceAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetWhitespaceAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -352,7 +352,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespace(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespace(RequestContext)']/*" />
         public virtual Response GetWhitespace(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -375,7 +375,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespaceAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespaceAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutWhitespaceAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -400,7 +400,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespace(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespace(RequestContent,RequestContext)']/*" />
         public virtual Response PutWhitespace(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -423,7 +423,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -444,7 +444,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvided(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
         public virtual Response GetNotProvided(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -465,7 +465,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64EncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64EncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -486,7 +486,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64Encoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64Encoded(RequestContext)']/*" />
         public virtual Response GetBase64Encoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -507,7 +507,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -528,7 +528,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncoded(RequestContext)']/*" />
         public virtual Response GetBase64UrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -551,7 +551,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncodedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncodedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -576,7 +576,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncoded(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncoded(RequestContent,RequestContext)']/*" />
         public virtual Response PutBase64UrlEncoded(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -599,7 +599,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
@@ -620,7 +620,7 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncoded(RequestContext)']/*" />
         public virtual Response GetNullBase64UrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="ValidKeyAsync(global::Azure.RequestContext)">
+    <member name="ValidKeyAsync(RequestContext)">
 <example>
 This sample shows how to call ValidKeyAsync.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ValidKey(global::Azure.RequestContext)">
+    <member name="ValidKey(RequestContext)">
 <example>
 This sample shows how to call ValidKey.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ValidTokenAsync(global::Azure.RequestContext)">
+    <member name="ValidTokenAsync(RequestContext)">
 <example>
 This sample shows how to call ValidTokenAsync.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ValidToken(global::Azure.RequestContext)">
+    <member name="ValidToken(RequestContext)">
 <example>
 This sample shows how to call ValidToken.
 <code><![CDATA[

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head200Async(global::Azure.RequestContext)">
+    <member name="Head200Async(RequestContext)">
 <example>
 This sample shows how to call Head200Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head200(global::Azure.RequestContext)">
+    <member name="Head200(RequestContext)">
 <example>
 This sample shows how to call Head200.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head204Async(global::Azure.RequestContext)">
+    <member name="Head204Async(RequestContext)">
 <example>
 This sample shows how to call Head204Async.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head204(global::Azure.RequestContext)">
+    <member name="Head204(RequestContext)">
 <example>
 This sample shows how to call Head204.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head404Async(global::Azure.RequestContext)">
+    <member name="Head404Async(RequestContext)">
 <example>
 This sample shows how to call Head404Async.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head404(global::Azure.RequestContext)">
+    <member name="Head404(RequestContext)">
 <example>
 This sample shows how to call Head404.
 <code><![CDATA[

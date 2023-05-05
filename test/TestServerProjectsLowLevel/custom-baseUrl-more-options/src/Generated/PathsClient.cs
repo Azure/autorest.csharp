@@ -74,7 +74,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));
@@ -105,7 +105,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(string,string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));

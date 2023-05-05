@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetValidAsync(global::Azure.RequestContext)">
+    <member name="GetValidAsync(RequestContext)">
 <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Schema for <c>ReadonlyObj</c>:
 
 </remarks>
     </member>
-    <member name="GetValid(global::Azure.RequestContext)">
+    <member name="GetValid(RequestContext)">
 <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Schema for <c>ReadonlyObj</c>:
 
 </remarks>
     </member>
-    <member name="PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
@@ -96,7 +96,7 @@ Schema for <c>ReadonlyObj</c>:
 
 </remarks>
     </member>
-    <member name="PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValid(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValid.
 <code><![CDATA[

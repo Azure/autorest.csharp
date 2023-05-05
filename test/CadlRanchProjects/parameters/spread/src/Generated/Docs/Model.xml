@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadAsRequestBodyAsync(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 <code><![CDATA[
@@ -12,7 +12,7 @@ var result = await client.SpreadAsRequestBodyAsync(bodyParameter, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestBody(global::Parameters.Spread.Models.BodyParameter,global::System.Threading.CancellationToken)">
+    <member name="SpreadAsRequestBody(BodyParameter,CancellationToken)">
 <example>
 This sample shows how to call SpreadAsRequestBody with required parameters.
 <code><![CDATA[
@@ -23,7 +23,7 @@ var result = client.SpreadAsRequestBody(bodyParameter, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
@@ -50,7 +50,7 @@ Schema for <c>BodyParameter</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[

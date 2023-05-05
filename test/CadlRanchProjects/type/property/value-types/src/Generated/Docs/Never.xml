@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNeverAsync(global::System.Threading.CancellationToken)">
+    <member name="GetNeverAsync(CancellationToken)">
 <example>
 This sample shows how to call GetNeverAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetNeverAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetNever(global::System.Threading.CancellationToken)">
+    <member name="GetNever(CancellationToken)">
 <example>
 This sample shows how to call GetNever.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetNever(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetNeverAsync(global::Azure.RequestContext)">
+    <member name="GetNeverAsync(RequestContext)">
 <example>
 This sample shows how to call GetNeverAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -44,7 +44,7 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetNever(global::Azure.RequestContext)">
+    <member name="GetNever(RequestContext)">
 <example>
 This sample shows how to call GetNever with required parameters and parse the result.
 <code><![CDATA[
@@ -67,7 +67,7 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.NeverProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAsync(NeverProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -78,7 +78,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::_Type.Property.ValueTypes.Models.NeverProperty,global::System.Threading.CancellationToken)">
+    <member name="Put(NeverProperty,CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -89,7 +89,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

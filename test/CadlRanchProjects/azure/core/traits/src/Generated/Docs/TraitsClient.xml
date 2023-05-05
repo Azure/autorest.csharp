@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SmokeTestAsync(int,string,global::Azure.RequestConditions,global::System.Threading.CancellationToken)">
+    <member name="SmokeTestAsync(int,string,RequestConditions,CancellationToken)">
 <example>
 This sample shows how to call SmokeTestAsync with required parameters.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.SmokeTestAsync(1234, "<foo>", null, default);
 ]]></code>
 </example>
     </member>
-    <member name="SmokeTest(int,string,global::Azure.RequestConditions,global::System.Threading.CancellationToken)">
+    <member name="SmokeTest(int,string,RequestConditions,CancellationToken)">
 <example>
 This sample shows how to call SmokeTest with required parameters.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.SmokeTest(1234, "<foo>", null, default);
 ]]></code>
 </example>
     </member>
-    <member name="SmokeTestAsync(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="SmokeTestAsync(int,string,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call SmokeTestAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +48,7 @@ Schema for <c>User</c>:
 
 </remarks>
     </member>
-    <member name="SmokeTest(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="SmokeTest(int,string,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call SmokeTest with required parameters and parse the result.
 <code><![CDATA[

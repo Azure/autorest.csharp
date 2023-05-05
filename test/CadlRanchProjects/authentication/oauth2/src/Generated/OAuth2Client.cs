@@ -63,7 +63,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
@@ -84,7 +84,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Valid(RequestContext)']/*" />
         public virtual Response Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
@@ -105,7 +105,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");
@@ -126,7 +126,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Invalid(RequestContext)']/*" />
         public virtual Response Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");

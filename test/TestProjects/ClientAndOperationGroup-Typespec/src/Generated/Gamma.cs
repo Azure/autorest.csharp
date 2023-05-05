@@ -49,7 +49,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FourAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FourAsync(RequestContext)']/*" />
         public virtual async Task<Response> FourAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Four");
@@ -70,7 +70,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Four(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Four(RequestContext)']/*" />
         public virtual Response Four(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Four");
@@ -91,7 +91,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FiveAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FiveAsync(RequestContext)']/*" />
         public virtual async Task<Response> FiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Five");
@@ -112,7 +112,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Five(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Five(RequestContext)']/*" />
         public virtual Response Five(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Five");

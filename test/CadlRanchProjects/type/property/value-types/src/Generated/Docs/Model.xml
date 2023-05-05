@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetModelAsync(global::System.Threading.CancellationToken)">
+    <member name="GetModelAsync(CancellationToken)">
 <example>
 This sample shows how to call GetModelAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetModelAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetModel(global::System.Threading.CancellationToken)">
+    <member name="GetModel(CancellationToken)">
 <example>
 This sample shows how to call GetModel.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetModel(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetModelAsync(global::Azure.RequestContext)">
+    <member name="GetModelAsync(RequestContext)">
 <example>
 This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +48,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetModel(global::Azure.RequestContext)">
+    <member name="GetModel(RequestContext)">
 <example>
 This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
@@ -75,7 +75,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.ModelProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAsync(ModelProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -86,7 +86,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::_Type.Property.ValueTypes.Models.ModelProperty,global::System.Threading.CancellationToken)">
+    <member name="Put(ModelProperty,CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -97,7 +97,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -128,7 +128,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

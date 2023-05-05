@@ -61,7 +61,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head400Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head400Async(RequestContext)']/*" />
         public virtual async Task<Response> Head400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head400(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head400(RequestContext)']/*" />
         public virtual Response Head400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get400Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get400Async(RequestContext)']/*" />
         public virtual async Task<Response> Get400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
@@ -124,7 +124,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get400(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get400(RequestContext)']/*" />
         public virtual Response Get400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
@@ -145,7 +145,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options400Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options400Async(RequestContext)']/*" />
         public virtual async Task<Response> Options400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
@@ -166,7 +166,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options400(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options400(RequestContext)']/*" />
         public virtual Response Options400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
@@ -188,7 +188,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
@@ -210,7 +210,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400(RequestContent,RequestContext)']/*" />
         public virtual Response Put400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
@@ -232,7 +232,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
@@ -254,7 +254,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400(RequestContent,RequestContext)']/*" />
         public virtual Response Patch400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
@@ -276,7 +276,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
@@ -298,7 +298,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400(RequestContent,RequestContext)']/*" />
         public virtual Response Post400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
@@ -320,7 +320,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
@@ -342,7 +342,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400(RequestContent,RequestContext)']/*" />
         public virtual Response Delete400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
@@ -363,7 +363,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head401Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head401Async(RequestContext)']/*" />
         public virtual async Task<Response> Head401Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
@@ -384,7 +384,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head401(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head401(RequestContext)']/*" />
         public virtual Response Head401(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
@@ -405,7 +405,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get402Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get402Async(RequestContext)']/*" />
         public virtual async Task<Response> Get402Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
@@ -426,7 +426,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get402(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get402(RequestContext)']/*" />
         public virtual Response Get402(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
@@ -447,7 +447,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options403Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options403Async(RequestContext)']/*" />
         public virtual async Task<Response> Options403Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
@@ -468,7 +468,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options403(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options403(RequestContext)']/*" />
         public virtual Response Options403(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
@@ -489,7 +489,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get403Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get403Async(RequestContext)']/*" />
         public virtual async Task<Response> Get403Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
@@ -510,7 +510,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get403(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get403(RequestContext)']/*" />
         public virtual Response Get403(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
@@ -532,7 +532,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
@@ -554,7 +554,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404(RequestContent,RequestContext)']/*" />
         public virtual Response Put404(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
@@ -576,7 +576,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
@@ -598,7 +598,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405(RequestContent,RequestContext)']/*" />
         public virtual Response Patch405(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
@@ -620,7 +620,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
@@ -642,7 +642,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406(RequestContent,RequestContext)']/*" />
         public virtual Response Post406(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
@@ -664,7 +664,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
@@ -686,7 +686,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407(RequestContent,RequestContext)']/*" />
         public virtual Response Delete407(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
@@ -708,7 +708,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
@@ -730,7 +730,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409(RequestContent,RequestContext)']/*" />
         public virtual Response Put409(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
@@ -751,7 +751,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head410Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head410Async(RequestContext)']/*" />
         public virtual async Task<Response> Head410Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
@@ -772,7 +772,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head410(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head410(RequestContext)']/*" />
         public virtual Response Head410(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
@@ -793,7 +793,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get411Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get411Async(RequestContext)']/*" />
         public virtual async Task<Response> Get411Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
@@ -814,7 +814,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get411(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get411(RequestContext)']/*" />
         public virtual Response Get411(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
@@ -835,7 +835,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options412Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options412Async(RequestContext)']/*" />
         public virtual async Task<Response> Options412Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
@@ -856,7 +856,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options412(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Options412(RequestContext)']/*" />
         public virtual Response Options412(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
@@ -877,7 +877,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get412Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get412Async(RequestContext)']/*" />
         public virtual async Task<Response> Get412Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
@@ -898,7 +898,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get412(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get412(RequestContext)']/*" />
         public virtual Response Get412(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
@@ -920,7 +920,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
@@ -942,7 +942,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413(RequestContent,RequestContext)']/*" />
         public virtual Response Put413(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
@@ -964,7 +964,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
@@ -986,7 +986,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414(RequestContent,RequestContext)']/*" />
         public virtual Response Patch414(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
@@ -1008,7 +1008,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
@@ -1030,7 +1030,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415(RequestContent,RequestContext)']/*" />
         public virtual Response Post415(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
@@ -1051,7 +1051,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get416Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get416Async(RequestContext)']/*" />
         public virtual async Task<Response> Get416Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
@@ -1072,7 +1072,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get416(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Get416(RequestContext)']/*" />
         public virtual Response Get416(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
@@ -1094,7 +1094,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
@@ -1116,7 +1116,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417(RequestContent,RequestContext)']/*" />
         public virtual Response Delete417(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
@@ -1137,7 +1137,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head429Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head429Async(RequestContext)']/*" />
         public virtual async Task<Response> Head429Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
@@ -1158,7 +1158,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head429(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Head429(RequestContext)']/*" />
         public virtual Response Head429(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");

@@ -49,7 +49,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='TwoAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='TwoAsync(RequestContext)']/*" />
         public virtual async Task<Response> TwoAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Two");
@@ -70,7 +70,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Two(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Two(RequestContext)']/*" />
         public virtual Response Two(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Two");
@@ -91,7 +91,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='ThreeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='ThreeAsync(RequestContext)']/*" />
         public virtual async Task<Response> ThreeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Three");
@@ -112,7 +112,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Three(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Three(RequestContext)']/*" />
         public virtual Response Three(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Three");

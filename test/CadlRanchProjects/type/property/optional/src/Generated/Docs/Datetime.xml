@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllAsync(global::System.Threading.CancellationToken)">
+    <member name="GetAllAsync(CancellationToken)">
 <example>
 This sample shows how to call GetAllAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetAllAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetAll(global::System.Threading.CancellationToken)">
+    <member name="GetAll(CancellationToken)">
 <example>
 This sample shows how to call GetAll.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetAll(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetAllAsync(global::Azure.RequestContext)">
+    <member name="GetAllAsync(RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -46,7 +46,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetAll(global::Azure.RequestContext)">
+    <member name="GetAll(RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefaultAsync(global::System.Threading.CancellationToken)">
+    <member name="GetDefaultAsync(CancellationToken)">
 <example>
 This sample shows how to call GetDefaultAsync.
 <code><![CDATA[
@@ -81,7 +81,7 @@ var result = await client.GetDefaultAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefault(global::System.Threading.CancellationToken)">
+    <member name="GetDefault(CancellationToken)">
 <example>
 This sample shows how to call GetDefault.
 <code><![CDATA[
@@ -91,7 +91,7 @@ var result = client.GetDefault(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetDefaultAsync(global::Azure.RequestContext)">
+    <member name="GetDefaultAsync(RequestContext)">
 <example>
 This sample shows how to call GetDefaultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -116,7 +116,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefault(global::Azure.RequestContext)">
+    <member name="GetDefault(RequestContext)">
 <example>
 This sample shows how to call GetDefault with required parameters and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAllAsync(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAllAsync(DatetimeProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
@@ -155,7 +155,7 @@ var result = await client.PutAllAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAll(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAll(DatetimeProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
@@ -169,7 +169,7 @@ var result = client.PutAll(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAllAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
@@ -205,7 +205,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAll(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAll.
 <code><![CDATA[
@@ -241,7 +241,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefaultAsync(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+    <member name="PutDefaultAsync(DatetimeProperty,CancellationToken)">
 <example>
 This sample shows how to call PutDefaultAsync with required parameters.
 <code><![CDATA[
@@ -255,7 +255,7 @@ var result = await client.PutDefaultAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutDefault(global::_Type.Property.Optional.Models.DatetimeProperty,global::System.Threading.CancellationToken)">
+    <member name="PutDefault(DatetimeProperty,CancellationToken)">
 <example>
 This sample shows how to call PutDefault with required parameters.
 <code><![CDATA[
@@ -269,7 +269,7 @@ var result = client.PutDefault(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutDefaultAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDefaultAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
@@ -305,7 +305,7 @@ Schema for <c>DatetimeProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefault(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutDefault(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutDefault.
 <code><![CDATA[

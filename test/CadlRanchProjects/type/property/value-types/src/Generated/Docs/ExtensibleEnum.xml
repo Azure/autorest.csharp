@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetExtensibleEnumAsync(global::System.Threading.CancellationToken)">
+    <member name="GetExtensibleEnumAsync(CancellationToken)">
 <example>
 This sample shows how to call GetExtensibleEnumAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetExtensibleEnumAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetExtensibleEnum(global::System.Threading.CancellationToken)">
+    <member name="GetExtensibleEnum(CancellationToken)">
 <example>
 This sample shows how to call GetExtensibleEnum.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetExtensibleEnum(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetExtensibleEnumAsync(global::Azure.RequestContext)">
+    <member name="GetExtensibleEnumAsync(RequestContext)">
 <example>
 This sample shows how to call GetExtensibleEnumAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -46,7 +46,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetExtensibleEnum(global::Azure.RequestContext)">
+    <member name="GetExtensibleEnum(RequestContext)">
 <example>
 This sample shows how to call GetExtensibleEnum with required parameters and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(global::_Type.Property.ValueTypes.Models.ExtensibleEnumProperty,global::System.Threading.CancellationToken)">
+    <member name="PutAsync(ExtensibleEnumProperty,CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -82,7 +82,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::_Type.Property.ValueTypes.Models.ExtensibleEnumProperty,global::System.Threading.CancellationToken)">
+    <member name="Put(ExtensibleEnumProperty,CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -93,7 +93,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -120,7 +120,7 @@ Schema for <c>ExtensibleEnumProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

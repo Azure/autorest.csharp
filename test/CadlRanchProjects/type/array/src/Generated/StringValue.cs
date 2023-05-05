@@ -49,7 +49,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<string>>> GetStringValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -66,7 +66,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<string>> GetStringValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -95,7 +95,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
@@ -125,7 +125,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(RequestContext)']/*" />
         public virtual Response GetStringValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
@@ -145,7 +145,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(object,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -158,7 +158,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(object,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
         public virtual Response Put(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -183,7 +183,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -217,7 +217,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

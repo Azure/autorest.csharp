@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetInt32ValueAsync(global::System.Threading.CancellationToken)">
+    <member name="GetInt32ValueAsync(CancellationToken)">
 <example>
 This sample shows how to call GetInt32ValueAsync.
 <code><![CDATA[
@@ -11,7 +11,7 @@ var result = await client.GetInt32ValueAsync(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetInt32Value(global::System.Threading.CancellationToken)">
+    <member name="GetInt32Value(CancellationToken)">
 <example>
 This sample shows how to call GetInt32Value.
 <code><![CDATA[
@@ -21,7 +21,7 @@ var result = client.GetInt32Value(default);
 ]]></code>
 </example>
     </member>
-    <member name="GetInt32ValueAsync(global::Azure.RequestContext)">
+    <member name="GetInt32ValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetInt32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetInt32Value(global::Azure.RequestContext)">
+    <member name="GetInt32Value(RequestContext)">
 <example>
 This sample shows how to call GetInt32Value with required parameters and parse the result.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::System.Collections.Generic.IDictionary{string, int},global::System.Threading.CancellationToken)">
+    <member name="PutAsync(IDictionary{string,int},CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
@@ -61,7 +61,7 @@ var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::System.Collections.Generic.IDictionary{string, int},global::System.Threading.CancellationToken)">
+    <member name="Put(IDictionary{string,int},CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
@@ -75,7 +75,7 @@ var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -90,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

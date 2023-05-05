@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="PutAsyncRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsyncRetrySucceededAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PutAsyncRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsyncRetrySucceeded with required parameters and parse the result.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Put201CreatingSucceeded200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
 <code><![CDATA[
@@ -241,7 +241,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Put201CreatingSucceeded200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
 <code><![CDATA[
@@ -321,7 +321,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Post202Retry200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post202Retry200Async(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post202Retry200Async with required parameters.
 <code><![CDATA[
@@ -375,7 +375,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Post202Retry200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post202Retry200(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post202Retry200 with required parameters.
 <code><![CDATA[
@@ -429,7 +429,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PostAsyncRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PostAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostAsyncRetrySucceededAsync with required parameters.
 <code><![CDATA[
@@ -483,7 +483,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PostAsyncRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PostAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostAsyncRetrySucceeded with required parameters.
 <code><![CDATA[

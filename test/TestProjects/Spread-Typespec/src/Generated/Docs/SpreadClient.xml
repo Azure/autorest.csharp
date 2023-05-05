@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadModelAsync(global::Spread.Models.Thing,global::System.Threading.CancellationToken)">
+    <member name="SpreadModelAsync(Thing,CancellationToken)">
 <example>
 This sample shows how to call SpreadModelAsync with required parameters.
 <code><![CDATA[
@@ -13,7 +13,7 @@ var result = await client.SpreadModelAsync(thing, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadModel(global::Spread.Models.Thing,global::System.Threading.CancellationToken)">
+    <member name="SpreadModel(Thing,CancellationToken)">
 <example>
 This sample shows how to call SpreadModel with required parameters.
 <code><![CDATA[
@@ -25,7 +25,7 @@ var result = client.SpreadModel(thing, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadModelAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadModelAsync with required request content.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadModel(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadModel with required request content.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasAsync(string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasAsync(string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasAsync with required parameters.
 <code><![CDATA[
@@ -96,7 +96,7 @@ var result = await client.SpreadAliasAsync("<name>", 1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAlias(string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadAlias(string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadAlias with required parameters.
 <code><![CDATA[
@@ -107,7 +107,7 @@ var result = client.SpreadAlias("<name>", 1234, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasAsync with required request content.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Schema for <c>SpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAlias(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAlias(RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAlias with required request content.
 <code><![CDATA[
@@ -167,7 +167,7 @@ Schema for <c>SpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAliasAsync(string,int,string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters.
 <code><![CDATA[
@@ -178,7 +178,7 @@ var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 12
 ]]></code>
 </example>
     </member>
-    <member name="SpreadMultiTargetAlias(string,int,string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadMultiTargetAlias(string,int,string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadMultiTargetAlias with required parameters.
 <code><![CDATA[
@@ -189,7 +189,7 @@ var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234, default
 ]]></code>
 </example>
     </member>
-    <member name="SpreadMultiTargetAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -219,7 +219,7 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
 <code><![CDATA[
@@ -249,7 +249,7 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModelAsync(string,int,global::Spread.Models.Thing,global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithModelAsync with required parameters.
 <code><![CDATA[
@@ -261,7 +261,7 @@ var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing, default
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithModel(string,int,global::Spread.Models.Thing,global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithModel(string,int,Thing,CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithModel with required parameters.
 <code><![CDATA[
@@ -273,7 +273,7 @@ var result = client.SpreadAliasWithModel("<id>", 1234, thing, default);
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithModelAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
 <code><![CDATA[
@@ -303,7 +303,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModel(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithModel(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithModel with required parameters and request content.
 <code><![CDATA[
@@ -333,7 +333,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAliasAsync(string,int,string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters.
 <code><![CDATA[
@@ -344,7 +344,7 @@ var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>"
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithSpreadAlias(string,int,string,int,global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters.
 <code><![CDATA[
@@ -355,7 +355,7 @@ var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234, def
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithSpreadAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -385,7 +385,7 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
 <code><![CDATA[
@@ -415,7 +415,7 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalPropsAsync(string,int,string,global::System.Collections.Generic.IEnumerable{int},string,int?,global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters.
 <code><![CDATA[
@@ -426,7 +426,7 @@ var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithOptionalProps(string,int,string,global::System.Collections.Generic.IEnumerable{int},string,int?,global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)">
+    <member name="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters.
 <code><![CDATA[
@@ -437,7 +437,7 @@ var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int
 ]]></code>
 </example>
     </member>
-    <member name="SpreadAliasWithOptionalPropsAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
 <code><![CDATA[
@@ -492,7 +492,7 @@ Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalProps(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
 <code><![CDATA[

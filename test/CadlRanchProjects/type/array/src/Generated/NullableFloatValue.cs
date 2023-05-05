@@ -49,7 +49,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<float?>>> GetNullableFloatValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -73,7 +73,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<float?>> GetNullableFloatValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -109,7 +109,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullableFloatValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
@@ -139,7 +139,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(RequestContext)']/*" />
         public virtual Response GetNullableFloatValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
@@ -159,7 +159,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(object,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -172,7 +172,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(object,global::System.Threading.CancellationToken)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
         public virtual Response Put(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -197,7 +197,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -231,7 +231,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

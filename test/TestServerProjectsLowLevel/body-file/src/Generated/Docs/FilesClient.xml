@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetFileAsync(global::Azure.RequestContext)">
+    <member name="GetFileAsync(RequestContext)">
 <example>
 This sample shows how to call GetFileAsync and parse the result.
 <code><![CDATA[
@@ -19,7 +19,7 @@ if (response.ContentStream != null)
 ]]></code>
 </example>
     </member>
-    <member name="GetFile(global::Azure.RequestContext)">
+    <member name="GetFile(RequestContext)">
 <example>
 This sample shows how to call GetFile and parse the result.
 <code><![CDATA[
@@ -37,7 +37,7 @@ if (response.ContentStream != null)
 ]]></code>
 </example>
     </member>
-    <member name="GetFileLargeAsync(global::Azure.RequestContext)">
+    <member name="GetFileLargeAsync(RequestContext)">
 <example>
 This sample shows how to call GetFileLargeAsync and parse the result.
 <code><![CDATA[
@@ -55,7 +55,7 @@ if (response.ContentStream != null)
 ]]></code>
 </example>
     </member>
-    <member name="GetFileLarge(global::Azure.RequestContext)">
+    <member name="GetFileLarge(RequestContext)">
 <example>
 This sample shows how to call GetFileLarge and parse the result.
 <code><![CDATA[
@@ -73,7 +73,7 @@ if (response.ContentStream != null)
 ]]></code>
 </example>
     </member>
-    <member name="GetEmptyFileAsync(global::Azure.RequestContext)">
+    <member name="GetEmptyFileAsync(RequestContext)">
 <example>
 This sample shows how to call GetEmptyFileAsync and parse the result.
 <code><![CDATA[
@@ -91,7 +91,7 @@ if (response.ContentStream != null)
 ]]></code>
 </example>
     </member>
-    <member name="GetEmptyFile(global::Azure.RequestContext)">
+    <member name="GetEmptyFile(RequestContext)">
 <example>
 This sample shows how to call GetEmptyFile and parse the result.
 <code><![CDATA[
