@@ -45,6 +45,7 @@ namespace SpecialWords
             _apiVersion = apiVersion;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="if"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
@@ -69,6 +70,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="if"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
@@ -93,6 +95,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
@@ -117,6 +120,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>

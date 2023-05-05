@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDatetimeValueAsync(RequestContext)">
+    <member name="GetDatetimeValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDatetimeValueAsync.
+<code><![CDATA[
+var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+
+var result = await client.GetDatetimeValueAsync(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetDatetimeValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetDatetimeValue.
+<code><![CDATA[
+var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+
+var result = client.GetDatetimeValue(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetDatetimeValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDatetimeValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +34,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDatetimeValue(RequestContext)">
+    <member name="GetDatetimeValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDatetimeValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +47,35 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::System.Collections.Generic.IDictionary{string, global::System.DateTimeOffset},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = DateTimeOffset.UtcNow,
+};
+var result = await client.PutAsync(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::System.Collections.Generic.IDictionary{string, global::System.DateTimeOffset},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = DateTimeOffset.UtcNow,
+};
+var result = client.Put(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

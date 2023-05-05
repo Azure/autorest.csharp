@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestBodyAsync("<name>");
+var result = await client.SpreadAsRequestBodyAsync("<name>", default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.SpreadAsRequestBodyAsync("<name>");
 <example>
 This sample shows how to call SpreadAsRequestBody with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadAsRequestBody("<name>");
+var result = client.SpreadAsRequestBody("<name>", default);
 ]]></code>
 </example>
     </member>
@@ -25,13 +25,13 @@ var result = client.SpreadAsRequestBody("<name>");
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
 };
 
-Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -52,13 +52,13 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
 };
 
-Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -79,9 +79,9 @@ Schema for <c>SpreadAsRequestBodyRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestParameterAsync with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>");
+var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>", default);
 ]]></code>
 </example>
     </member>
@@ -89,9 +89,9 @@ var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>
 <example>
 This sample shows how to call SpreadAsRequestParameter with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>");
+var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>", default);
 ]]></code>
 </example>
     </member>
@@ -99,13 +99,13 @@ var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>"
 <example>
 This sample shows how to call SpreadAsRequestParameterAsync with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
 };
 
-Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -126,13 +126,13 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 <example>
 This sample shows how to call SpreadAsRequestParameter with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     name = "<name>",
 };
 
-Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -153,9 +153,9 @@ Schema for <c>SpreadAsRequestParameterRequest</c>:
 <example>
 This sample shows how to call SpreadWithMultipleParametersAsync with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>", default);
 ]]></code>
 </example>
     </member>
@@ -163,9 +163,9 @@ var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHea
 <example>
 This sample shows how to call SpreadWithMultipleParameters with required parameters.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>", default);
 ]]></code>
 </example>
     </member>
@@ -173,7 +173,7 @@ var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<pr
 <example>
 This sample shows how to call SpreadWithMultipleParametersAsync with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     prop1 = "<prop1>",
@@ -184,7 +184,7 @@ var data = new {
     prop6 = "<prop6>",
 };
 
-Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -210,7 +210,7 @@ Schema for <c>SpreadWithMultipleParametersRequest</c>:
 <example>
 This sample shows how to call SpreadWithMultipleParameters with required parameters and request content.
 <code><![CDATA[
-var client = new SpreadClient().GetAliasClient(<1.0.0>);
+var client = new SpreadClient().GetAliasClient("1.0.0");
 
 var data = new {
     prop1 = "<prop1>",
@@ -221,7 +221,7 @@ var data = new {
     prop6 = "<prop6>",
 };
 
-Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

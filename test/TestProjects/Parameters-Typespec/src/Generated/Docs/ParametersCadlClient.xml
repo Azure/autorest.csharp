@@ -7,7 +7,7 @@ This sample shows how to call OperationAsync with required parameters.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-var result = await client.OperationAsync(1234, 1234);
+var result = await client.OperationAsync(1234, 1234, default);
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call Operation with required parameters.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-var result = client.Operation(1234, 1234);
+var result = client.Operation(1234, 1234, default);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call OperationAsync with required parameters and parse 
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = await client.OperationAsync(1234, 1234);
+Response response = await client.OperationAsync(1234, 1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -52,7 +52,7 @@ This sample shows how to call Operation with required parameters and parse the r
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = client.Operation(1234, 1234);
+Response response = client.Operation(1234, 1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -77,7 +77,7 @@ This sample shows how to call Operation2Async with required parameters.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-var result = await client.Operation2Async(1234, 1234);
+var result = await client.Operation2Async(1234, 1234, default);
 ]]></code>
 </example>
     </member>
@@ -87,7 +87,7 @@ This sample shows how to call Operation2 with required parameters.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-var result = client.Operation2(1234, 1234);
+var result = client.Operation2(1234, 1234, default);
 ]]></code>
 </example>
     </member>
@@ -97,7 +97,7 @@ This sample shows how to call Operation2Async with required parameters and parse
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = await client.Operation2Async(1234, 1234);
+Response response = await client.Operation2Async(1234, 1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -122,7 +122,7 @@ This sample shows how to call Operation2 with required parameters and parse the 
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = client.Operation2(1234, 1234);
+Response response = client.Operation2(1234, 1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

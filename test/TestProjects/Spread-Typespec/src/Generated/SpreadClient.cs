@@ -86,7 +86,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread a model as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread a model as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadModelAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -111,7 +120,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread a model as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread a model as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadModel(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -168,7 +186,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread an alias as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasAsync(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -193,7 +220,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread an alias as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAlias(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -258,7 +294,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread an alias which has multiple target property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias which has multiple target property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -287,7 +332,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread an alias which has multiple target property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias which has multiple target property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadMultiTargetAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -352,7 +406,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread an alias which contains a complex model property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -381,7 +444,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread an alias which contains a complex model property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithModel(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -450,7 +522,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias with contains another alias property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -479,7 +560,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias with contains another alias property as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -580,7 +670,16 @@ namespace Spread
             return response;
         }
 
-        /// <summary> spread an alias with contains optional properties as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias with contains optional properties as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -609,7 +708,16 @@ namespace Spread
             }
         }
 
-        /// <summary> spread an alias with contains optional properties as body. </summary>
+        /// <summary>
+        /// [Protocol Method] spread an alias with contains optional properties as body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>

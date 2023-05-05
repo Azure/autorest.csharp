@@ -8,7 +8,7 @@ This sample shows how to call DeleteAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = await client.DeleteAsync("<name>");
+Response response = await client.DeleteAsync("<name>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -23,7 +23,7 @@ This sample shows how to call Delete with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = client.Delete("<name>");
+Response response = client.Delete("<name>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -38,7 +38,7 @@ This sample shows how to call ReadAsync with required parameters and parse the r
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = await client.ReadAsync(1234);
+Response response = await client.ReadAsync(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -68,7 +68,7 @@ This sample shows how to call Read with required parameters and parse the result
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = client.Read(1234);
+Response response = client.Read(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -118,7 +118,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.CreateAsync(RequestContent.Create(data));
+Response response = await client.CreateAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -178,7 +178,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.Create(RequestContent.Create(data));
+Response response = client.Create(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -218,9 +218,9 @@ This sample shows how to call GetPetsAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-await foreach (var data in client.GetPetsAsync())
+await foreach (var item in client.GetPetsAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("petId").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
@@ -251,9 +251,9 @@ This sample shows how to call GetPets and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-foreach (var data in client.GetPets())
+foreach (var item in client.GetPets(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("petId").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());

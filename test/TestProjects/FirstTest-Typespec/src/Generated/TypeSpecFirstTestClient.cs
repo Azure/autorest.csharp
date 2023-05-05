@@ -120,7 +120,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary>
+        /// [Protocol Method] top level method
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopActionAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
@@ -146,7 +155,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary>
+        /// [Protocol Method] top level method
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
@@ -172,7 +190,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method2. </summary>
+        /// <summary> [Protocol Method] top level method2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -193,7 +211,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method2. </summary>
+        /// <summary> [Protocol Method] top level method2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -214,7 +232,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level patch. </summary>
+        /// <summary> [Protocol Method] top level patch. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -239,7 +257,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level patch. </summary>
+        /// <summary> [Protocol Method] top level patch. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -292,7 +310,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary>
+        /// [Protocol Method] body parameter without body decorator
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -317,7 +344,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary>
+        /// [Protocol Method] body parameter without body decorator
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -370,7 +406,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary>
+        /// [Protocol Method] Model can have its friendly name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -395,7 +440,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary>
+        /// [Protocol Method] Model can have its friendly name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -420,6 +474,7 @@ namespace TypeSpecFirstTest
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -441,6 +496,7 @@ namespace TypeSpecFirstTest
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -462,7 +518,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi. </summary>
+        /// <summary> [Protocol Method] Return hi. </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -490,7 +546,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi. </summary>
+        /// <summary> [Protocol Method] Return hi. </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -556,7 +612,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method] Return hi again
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -586,7 +651,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method] Return hi again
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -616,7 +690,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> [Protocol Method] Return hi again. </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -646,7 +720,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> [Protocol Method] Return hi again. </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -696,7 +770,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary>
+        /// [Protocol Method] Return hi in demo2
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -717,7 +800,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary>
+        /// [Protocol Method] Return hi in demo2
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -766,7 +858,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary>
+        /// [Protocol Method] Create with literal value
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteralAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -791,7 +892,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary>
+        /// [Protocol Method] Create with literal value
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -836,7 +946,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary>
+        /// [Protocol Method] Send literal parameters
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteralAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -857,7 +976,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary>
+        /// [Protocol Method] Send literal parameters
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -878,7 +1006,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> get extensible enum. </summary>
+        /// <summary> [Protocol Method] get extensible enum. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -899,7 +1027,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> get extensible enum. </summary>
+        /// <summary> [Protocol Method] get extensible enum. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -948,7 +1076,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary>
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocolAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -973,7 +1110,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary>
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -1018,7 +1164,16 @@ namespace TypeSpecFirstTest
             return response;
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary>
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenientAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1039,7 +1194,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary>
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

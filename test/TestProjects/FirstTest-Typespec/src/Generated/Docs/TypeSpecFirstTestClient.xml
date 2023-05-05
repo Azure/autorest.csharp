@@ -5,11 +5,10 @@
 <example>
 This sample shows how to call TopActionAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.TopActionAsync("<action>");
+var result = await client.TopActionAsync("<action>", default);
 ]]></code>
 </example>
     </member>
@@ -17,11 +16,10 @@ var result = await client.TopActionAsync("<action>");
 <example>
 This sample shows how to call TopAction with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.TopAction("<action>");
+var result = client.TopAction("<action>", default);
 ]]></code>
 </example>
     </member>
@@ -29,11 +27,10 @@ var result = client.TopAction("<action>");
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.TopActionAsync("<action>");
+Response response = await client.TopActionAsync("<action>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -76,11 +73,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.TopAction("<action>");
+Response response = client.TopAction("<action>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -123,11 +119,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.TopAction2Async();
+Response response = await client.TopAction2Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -170,11 +165,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.TopAction2();
+Response response = client.TopAction2(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -217,9 +211,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -244,9 +237,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -262,7 +254,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = await client.PatchActionAsync(RequestContent.Create(data));
+Response response = await client.PatchActionAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -323,9 +315,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call PatchAction with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -350,9 +341,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -368,7 +358,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = client.PatchAction(RequestContent.Create(data));
+Response response = client.PatchAction(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -429,12 +419,11 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call AnonymousBodyAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.AnonymousBodyAsync(thing);
+var result = await client.AnonymousBodyAsync(thing, default);
 ]]></code>
 </example>
     </member>
@@ -442,12 +431,11 @@ var result = await client.AnonymousBodyAsync(thing);
 <example>
 This sample shows how to call AnonymousBody with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.AnonymousBody(thing);
+var result = client.AnonymousBody(thing, default);
 ]]></code>
 </example>
     </member>
@@ -455,9 +443,8 @@ var result = client.AnonymousBody(thing);
 <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -482,9 +469,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -500,7 +486,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+Response response = await client.AnonymousBodyAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -561,9 +547,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call AnonymousBody with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -588,9 +573,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -606,7 +590,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = client.AnonymousBody(RequestContent.Create(data));
+Response response = client.AnonymousBody(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -667,12 +651,11 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call FriendlyModelAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var notFriend = new Friend("<name>");
-var result = await client.FriendlyModelAsync(notFriend);
+var result = await client.FriendlyModelAsync(notFriend, default);
 ]]></code>
 </example>
     </member>
@@ -680,12 +663,11 @@ var result = await client.FriendlyModelAsync(notFriend);
 <example>
 This sample shows how to call FriendlyModel with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var notFriend = new Friend("<name>");
-var result = client.FriendlyModel(notFriend);
+var result = client.FriendlyModel(notFriend, default);
 ]]></code>
 </example>
     </member>
@@ -693,15 +675,14 @@ var result = client.FriendlyModel(notFriend);
 <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
 };
 
-Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+Response response = await client.FriendlyModelAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -732,15 +713,14 @@ Schema for <c>Friend</c>:
 <example>
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
 };
 
-Response response = client.FriendlyModel(RequestContent.Create(data));
+Response response = client.FriendlyModel(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -771,20 +751,18 @@ Schema for <c>Friend</c>:
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AddTimeHeaderAsync with all parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
+Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -793,20 +771,18 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AddTimeHeader with all parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
+Response response = client.AddTimeHeader(DateTimeOffset.UtcNow, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -815,9 +791,8 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
 
@@ -832,11 +807,10 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -879,9 +853,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
@@ -896,11 +869,10 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
+Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -943,9 +915,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloAgainAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
 {
@@ -985,7 +956,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
         ["key"] = BinaryData.FromString("<your binary data content>"),
     },
 };
-var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
+var result = await client.HelloAgainAsync("<p2>", "<p1>", action, default);
 ]]></code>
 </example>
     </member>
@@ -993,9 +964,8 @@ var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
 <example>
 This sample shows how to call HelloAgain with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
 {
@@ -1035,7 +1005,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
         ["key"] = BinaryData.FromString("<your binary data content>"),
     },
 };
-var result = client.HelloAgain("<p2>", "<p1>", action);
+var result = client.HelloAgain("<p2>", "<p1>", action, default);
 ]]></code>
 </example>
     </member>
@@ -1043,9 +1013,8 @@ var result = client.HelloAgain("<p2>", "<p1>", action);
 <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1084,9 +1053,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call HelloAgainAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1137,7 +1105,7 @@ var data = new {
     },
 };
 
-Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1219,9 +1187,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1260,9 +1227,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call HelloAgain with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1313,7 +1279,7 @@ var data = new {
     },
 };
 
-Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
+Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1395,9 +1361,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1436,9 +1401,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call NoContentTypeAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1489,7 +1453,7 @@ var data = new {
     },
 };
 
-Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1571,9 +1535,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1612,9 +1575,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call NoContentType with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1665,7 +1627,7 @@ var data = new {
     },
 };
 
-Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1747,11 +1709,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloDemo2Async.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.HelloDemo2Async();
+var result = await client.HelloDemo2Async(default);
 ]]></code>
 </example>
     </member>
@@ -1759,11 +1720,10 @@ var result = await client.HelloDemo2Async();
 <example>
 This sample shows how to call HelloDemo2.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.HelloDemo2();
+var result = client.HelloDemo2(default);
 ]]></code>
 </example>
     </member>
@@ -1771,11 +1731,10 @@ var result = client.HelloDemo2();
 <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.HelloDemo2Async();
+Response response = await client.HelloDemo2Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1818,11 +1777,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.HelloDemo2();
+Response response = client.HelloDemo2(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1865,12 +1823,11 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call CreateLiteralAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.CreateLiteralAsync(body);
+var result = await client.CreateLiteralAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -1878,12 +1835,11 @@ var result = await client.CreateLiteralAsync(body);
 <example>
 This sample shows how to call CreateLiteral with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.CreateLiteral(body);
+var result = client.CreateLiteral(body, default);
 ]]></code>
 </example>
     </member>
@@ -1891,9 +1847,8 @@ var result = client.CreateLiteral(body);
 <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -1918,9 +1873,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -1936,7 +1890,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1997,9 +1951,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call CreateLiteral with required request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -2024,9 +1977,8 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call CreateLiteral with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -2042,7 +1994,7 @@ var data = new {
     requiredBadDescription = "<requiredBadDescription>",
 };
 
-Response response = client.CreateLiteral(RequestContent.Create(data));
+Response response = client.CreateLiteral(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -2103,11 +2055,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloLiteralAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.HelloLiteralAsync();
+var result = await client.HelloLiteralAsync(default);
 ]]></code>
 </example>
     </member>
@@ -2115,11 +2066,10 @@ var result = await client.HelloLiteralAsync();
 <example>
 This sample shows how to call HelloLiteral.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.HelloLiteral();
+var result = client.HelloLiteral(default);
 ]]></code>
 </example>
     </member>
@@ -2127,11 +2077,10 @@ var result = client.HelloLiteral();
 <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.HelloLiteralAsync();
+Response response = await client.HelloLiteralAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -2174,11 +2123,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.HelloLiteral();
+Response response = client.HelloLiteral(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -2221,11 +2169,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.GetUnknownValueAsync();
+Response response = await client.GetUnknownValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -2236,11 +2183,10 @@ Console.WriteLine(result.ToString());
 <example>
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.GetUnknownValue();
+Response response = client.GetUnknownValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -2251,12 +2197,11 @@ Console.WriteLine(result.ToString());
 <example>
 This sample shows how to call InternalProtocolAsync with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.InternalProtocolAsync(body);
+var result = await client.InternalProtocolAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -2264,80 +2209,15 @@ var result = await client.InternalProtocolAsync(body);
 <example>
 This sample shows how to call InternalProtocol with required parameters.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.InternalProtocol(body);
+var result = client.InternalProtocol(body, default);
 ]]></code>
 </example>
     </member>
     <member name="InternalProtocolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call InternalProtocolAsync with required request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
-    requiredLiteralBool = false,
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call InternalProtocolAsync with all request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
-    optionalLiteralBool = true,
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -2380,70 +2260,6 @@ Schema for <c>Thing</c>:
 </remarks>
     </member>
     <member name="InternalProtocol(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call InternalProtocol with required request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
-    requiredLiteralBool = false,
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = client.InternalProtocol(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call InternalProtocol with all request content, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-    requiredLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
-    optionalLiteralBool = true,
-    requiredBadDescription = "<requiredBadDescription>",
-};
-
-Response response = client.InternalProtocol(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -2489,11 +2305,10 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call StillConvenientAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.StillConvenientAsync();
+var result = await client.StillConvenientAsync(default);
 ]]></code>
 </example>
     </member>
@@ -2501,39 +2316,16 @@ var result = await client.StillConvenientAsync();
 <example>
 This sample shows how to call StillConvenient.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.StillConvenient();
+var result = client.StillConvenient(default);
 ]]></code>
 </example>
     </member>
     <member name="StillConvenientAsync(global::Azure.RequestContext)">
-<example>
-This sample shows how to call StillConvenientAsync with required parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-Response response = await client.StillConvenientAsync();
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
     <member name="StillConvenient(global::Azure.RequestContext)">
-<example>
-This sample shows how to call StillConvenient with required parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new TypeSpecFirstTestClient(endpoint, credential);
-
-Response response = client.StillConvenient();
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
   </members>
 </doc>

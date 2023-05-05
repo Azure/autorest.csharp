@@ -691,7 +691,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     return "1234";
                 }
 
-                if (type == typeof(float) || type == typeof(decimal) || type == typeof(double))
+                if (type == typeof(float))
+                {
+                    return "3.14f";
+                }
+
+                if (type == typeof(decimal) || type == typeof(double))
                 {
                     return "3.14";
                 }

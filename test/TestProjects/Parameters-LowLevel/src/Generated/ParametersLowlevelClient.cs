@@ -57,7 +57,7 @@ namespace Parameters_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> No RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -82,7 +82,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -107,7 +107,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -129,7 +129,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,7 +151,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Delete. </summary>
+        /// <summary> [Protocol Method] Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
@@ -176,7 +176,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Delete. </summary>
+        /// <summary> [Protocol Method] Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
@@ -201,7 +201,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -222,7 +222,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> No RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -243,7 +243,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -265,7 +265,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> RequestBody and No ResponseBody. </summary>
+        /// <summary> [Protocol Method] RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -287,7 +287,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional PathParameters. </summary>
+        /// <summary> [Protocol Method] Optional PathParameters. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="name"> Query parameter status. </param>
@@ -315,7 +315,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional PathParameters. </summary>
+        /// <summary> [Protocol Method] Optional PathParameters. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="name"> Query parameter status. </param>
@@ -343,7 +343,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path parameters with mixed sequence. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -371,7 +371,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path parameters with mixed sequence. </summary>
         /// <param name="id"> Query parameter Id. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
@@ -399,7 +399,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path/body parameters with mixed sequence. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -430,7 +430,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <summary> [Protocol Method] Optional path/body parameters with mixed sequence. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>

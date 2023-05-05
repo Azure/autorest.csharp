@@ -7,7 +7,7 @@ This sample shows how to call SmokeTestAsync with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
-var result = await client.SmokeTestAsync(1234, "<foo>", null);
+var result = await client.SmokeTestAsync(1234, "<foo>", null, default);
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call SmokeTest with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
-var result = client.SmokeTest(1234, "<foo>", null);
+var result = client.SmokeTest(1234, "<foo>", null, default);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call SmokeTestAsync with required parameters and parse 
 <code><![CDATA[
 var client = new TraitsClient();
 
-Response response = await client.SmokeTestAsync(1234, "<foo>", null);
+Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -54,7 +54,7 @@ This sample shows how to call SmokeTest with required parameters and parse the r
 <code><![CDATA[
 var client = new TraitsClient();
 
-Response response = client.SmokeTest(1234, "<foo>", null);
+Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetEnumAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetEnumClient("1.0.0");
 
-var result = await client.GetEnumAsync();
+var result = await client.GetEnumAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetEnumAsync();
 <example>
 This sample shows how to call GetEnum.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetEnumClient("1.0.0");
 
-var result = client.GetEnum();
+var result = client.GetEnum(default);
 ]]></code>
 </example>
     </member>
@@ -75,10 +75,10 @@ Schema for <c>EnumProperty</c>:
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetEnumClient("1.0.0");
 
 var body = new EnumProperty(FixedInnerEnum.ValueOne);
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -86,10 +86,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient(<1.0.0>);
+var client = new ValueTypesClient().GetEnumClient("1.0.0");
 
 var body = new EnumProperty(FixedInnerEnum.ValueOne);
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

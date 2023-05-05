@@ -48,6 +48,7 @@ namespace Projection.ProjectedName
             _apiVersion = options.Version;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -68,6 +69,7 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -88,6 +90,7 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="defaultName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>
@@ -112,6 +115,7 @@ namespace Projection.ProjectedName
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="defaultName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>

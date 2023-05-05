@@ -9,7 +9,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
-var result = await client.SpreadModelAsync(thing);
+var result = await client.SpreadModelAsync(thing, default);
 ]]></code>
 </example>
     </member>
@@ -21,7 +21,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
-var result = client.SpreadModel(thing);
+var result = client.SpreadModel(thing, default);
 ]]></code>
 </example>
     </member>
@@ -37,7 +37,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.SpreadModelAsync(RequestContent.Create(data));
+Response response = await client.SpreadModelAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -67,7 +67,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.SpreadModel(RequestContent.Create(data));
+Response response = client.SpreadModel(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -92,7 +92,7 @@ This sample shows how to call SpreadAliasAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = await client.SpreadAliasAsync("<name>", 1234);
+var result = await client.SpreadAliasAsync("<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -103,7 +103,7 @@ This sample shows how to call SpreadAlias with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = client.SpreadAlias("<name>", 1234);
+var result = client.SpreadAlias("<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -119,7 +119,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.SpreadAliasAsync(RequestContent.Create(data));
+Response response = await client.SpreadAliasAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -149,7 +149,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.SpreadAlias(RequestContent.Create(data));
+Response response = client.SpreadAlias(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -174,7 +174,7 @@ This sample shows how to call SpreadMultiTargetAliasAsync with required paramete
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
+var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -185,7 +185,7 @@ This sample shows how to call SpreadMultiTargetAlias with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
+var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -201,7 +201,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, RequestContent.Create(data));
+Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -231,7 +231,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.SpreadMultiTargetAlias("<id>", 1234, RequestContent.Create(data));
+Response response = client.SpreadMultiTargetAlias("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -257,7 +257,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
-var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing, default);
 ]]></code>
 </example>
     </member>
@@ -269,7 +269,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
-var result = client.SpreadAliasWithModel("<id>", 1234, thing);
+var result = client.SpreadAliasWithModel("<id>", 1234, thing, default);
 ]]></code>
 </example>
     </member>
@@ -285,7 +285,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, RequestContent.Create(data));
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -315,7 +315,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.SpreadAliasWithModel("<id>", 1234, RequestContent.Create(data));
+Response response = client.SpreadAliasWithModel("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -340,7 +340,7 @@ This sample shows how to call SpreadAliasWithSpreadAliasAsync with required para
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
+var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -351,7 +351,7 @@ This sample shows how to call SpreadAliasWithSpreadAlias with required parameter
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
+var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234, default);
 ]]></code>
 </example>
     </member>
@@ -367,7 +367,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data));
+Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -397,7 +397,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data));
+Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -422,7 +422,7 @@ This sample shows how to call SpreadAliasWithOptionalPropsAsync with required pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"}, default);
 ]]></code>
 </example>
     </member>
@@ -433,7 +433,7 @@ This sample shows how to call SpreadAliasWithOptionalProps with required paramet
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadClient(endpoint);
 
-var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"}, default);
 ]]></code>
 </example>
     </member>
@@ -471,7 +471,7 @@ var data = new {
     },
 };
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -526,7 +526,7 @@ var data = new {
     },
 };
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

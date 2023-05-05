@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBooleanValueAsync(RequestContext)">
+    <member name="GetBooleanValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetBooleanValueAsync.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var result = await client.GetBooleanValueAsync(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetBooleanValue.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var result = client.GetBooleanValue(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +34,7 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanValue(RequestContext)">
+    <member name="GetBooleanValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +47,35 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::System.Collections.Generic.IDictionary{string, bool},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = true,
+};
+var result = await client.PutAsync(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::System.Collections.Generic.IDictionary{string, bool},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = true,
+};
+var result = client.Put(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

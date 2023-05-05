@@ -13,7 +13,7 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -29,7 +29,7 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -44,7 +44,7 @@ var data = new {};
 
 var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call CreateProjectAsync with all parameters and request content.
 <code><![CDATA[
@@ -56,9 +56,9 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -87,7 +87,7 @@ var data = new {};
 
 var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call CreateProject with all parameters and request content.
 <code><![CDATA[
@@ -99,9 +99,9 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 </example>
 <remarks>
@@ -131,7 +131,7 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -147,7 +147,7 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -162,8 +162,8 @@ var data = new {};
 
 var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
@@ -176,10 +176,10 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -221,8 +221,8 @@ var data = new {};
 
 var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
@@ -235,10 +235,10 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -277,7 +277,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
 var thing = new Thing("<name>");
-var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -289,7 +289,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicCadlClient(endpoint);
 
 var thing = new Thing("<name>");
-var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data), default);
 ]]></code>
 </example>
     </member>
@@ -304,10 +304,10 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
@@ -343,10 +343,10 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>

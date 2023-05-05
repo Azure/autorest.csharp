@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetInt64ValueAsync.
 <code><![CDATA[
-var client = new ArrayClient().GetInt64ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
-var result = await client.GetInt64ValueAsync();
+var result = await client.GetInt64ValueAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetInt64ValueAsync();
 <example>
 This sample shows how to call GetInt64Value.
 <code><![CDATA[
-var client = new ArrayClient().GetInt64ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
-var result = client.GetInt64Value();
+var result = client.GetInt64Value(default);
 ]]></code>
 </example>
     </member>
@@ -51,10 +51,10 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ArrayClient().GetInt64ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
 var body = null;
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -62,10 +62,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ArrayClient().GetInt64ValueClient(<1.0.0>);
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
 var body = null;
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

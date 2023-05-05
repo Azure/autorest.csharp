@@ -57,7 +57,7 @@ namespace ParameterSequence_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get Item. </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -86,7 +86,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Get Item. </summary>
+        /// <summary> [Protocol Method] Get Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -115,7 +115,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Select Item. </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>
@@ -144,7 +144,7 @@ namespace ParameterSequence_LowLevel
             }
         }
 
-        /// <summary> Select Item. </summary>
+        /// <summary> [Protocol Method] Select Item. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="origin"> The String to use. </param>
         /// <param name="version"> version of the item. </param>

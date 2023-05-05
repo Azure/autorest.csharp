@@ -9,7 +9,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = BinaryData.FromString("<your binary data content>");
-var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.ApplicationOctetStream);
+var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.ApplicationOctetStream, default);
 ]]></code>
 </example>
     </member>
@@ -21,7 +21,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = BinaryData.FromString("<your binary data content>");
-var result = client.OneBinaryBodyTwoContentTypes(body, ContentType.ApplicationOctetStream);
+var result = client.OneBinaryBodyTwoContentTypes(body, ContentType.ApplicationOctetStream, default);
 ]]></code>
 </example>
     </member>
@@ -61,7 +61,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = "<null>";
-var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
+var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream, default);
 ]]></code>
 </example>
     </member>
@@ -73,7 +73,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = "<null>";
-var result = client.OneStringBodyThreeContentTypes(body, ContentType.ApplicationOctetStream);
+var result = client.OneStringBodyThreeContentTypes(body, ContentType.ApplicationOctetStream, default);
 ]]></code>
 </example>
     </member>
@@ -113,7 +113,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = new Body("<id>");
-var result = await client.OneModelBodyOneContentTypeAsync(body);
+var result = await client.OneModelBodyOneContentTypeAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -125,7 +125,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
 var body = new Body("<id>");
-var result = client.OneModelBodyOneContentType(body);
+var result = client.OneModelBodyOneContentType(body, default);
 ]]></code>
 </example>
     </member>

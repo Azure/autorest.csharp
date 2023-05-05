@@ -8,7 +8,7 @@ This sample shows how to call OperationAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-Response response = await client.OperationAsync();
+Response response = await client.OperationAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -22,7 +22,7 @@ This sample shows how to call Operation and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-Response response = client.Operation();
+Response response = client.Operation(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -36,9 +36,9 @@ This sample shows how to call GetAllAsync with required parameters and parse the
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-await foreach (var data in client.GetAllAsync("<filter>"))
+await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -51,9 +51,9 @@ This sample shows how to call GetAll with required parameters and parse the resu
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-foreach (var data in client.GetAll("<filter>"))
+foreach (var item in client.GetAll("<filter>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>

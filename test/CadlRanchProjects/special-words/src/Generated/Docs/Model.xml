@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var result = await client.GetModelValueAsync();
+var result = await client.GetModelValueAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetModelValueAsync();
 <example>
 This sample shows how to call GetModelValue.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var result = client.GetModelValue();
+var result = client.GetModelValue(default);
 ]]></code>
 </example>
     </member>
@@ -71,10 +71,10 @@ Schema for <c>BaseModel</c>:
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 var body = new BaseModel();
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -82,10 +82,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
+var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 var body = new BaseModel();
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

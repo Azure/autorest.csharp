@@ -8,7 +8,7 @@ This sample shows how to call JsonAsync with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var jsonProjectedNameModel = new JsonProjectedNameModel(true);
-var result = await client.JsonAsync(jsonProjectedNameModel);
+var result = await client.JsonAsync(jsonProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -19,7 +19,7 @@ This sample shows how to call Json with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var jsonProjectedNameModel = new JsonProjectedNameModel(true);
-var result = client.Json(jsonProjectedNameModel);
+var result = client.Json(jsonProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -84,7 +84,7 @@ This sample shows how to call ClientAsync with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var clientProjectedNameModel = new ClientProjectedNameModel(true);
-var result = await client.ClientAsync(clientProjectedNameModel);
+var result = await client.ClientAsync(clientProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -95,7 +95,7 @@ This sample shows how to call Client with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var clientProjectedNameModel = new ClientProjectedNameModel(true);
-var result = client.Client(clientProjectedNameModel);
+var result = client.Client(clientProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -160,7 +160,7 @@ This sample shows how to call LanguageAsync with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var languageProjectedNameModel = new LanguageProjectedNameModel(true);
-var result = await client.LanguageAsync(languageProjectedNameModel);
+var result = await client.LanguageAsync(languageProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -171,7 +171,7 @@ This sample shows how to call Language with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var languageProjectedNameModel = new LanguageProjectedNameModel(true);
-var result = client.Language(languageProjectedNameModel);
+var result = client.Language(languageProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -236,7 +236,7 @@ This sample shows how to call JsonAndClientAsync with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
-var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
+var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel, default);
 ]]></code>
 </example>
     </member>
@@ -247,7 +247,7 @@ This sample shows how to call JsonAndClient with required parameters.
 var client = new ProjectedNameClient().GetPropertyClient();
 
 var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
-var result = client.JsonAndClient(jsonAndClientProjectedNameModel);
+var result = client.JsonAndClient(jsonAndClientProjectedNameModel, default);
 ]]></code>
 </example>
     </member>

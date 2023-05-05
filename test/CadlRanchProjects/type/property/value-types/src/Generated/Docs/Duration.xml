@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetDurationAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-var result = await client.GetDurationAsync();
+var result = await client.GetDurationAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetDurationAsync();
 <example>
 This sample shows how to call GetDuration.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-var result = client.GetDuration();
+var result = client.GetDuration(default);
 ]]></code>
 </example>
     </member>
@@ -75,10 +75,10 @@ Schema for <c>DurationProperty</c>:
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 var body = new DurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -86,10 +86,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
 var body = new DurationProperty(new TimeSpan(1, 2, 3));
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

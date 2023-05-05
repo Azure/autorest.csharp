@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetStringValueAsync.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient(<1.0.0>);
+var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-var result = await client.GetStringValueAsync();
+var result = await client.GetStringValueAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetStringValueAsync();
 <example>
 This sample shows how to call GetStringValue.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient(<1.0.0>);
+var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-var result = client.GetStringValue();
+var result = client.GetStringValue(default);
 ]]></code>
 </example>
     </member>
@@ -51,10 +51,10 @@ Console.WriteLine(result[0].ToString());
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient(<1.0.0>);
+var client = new ArrayClient().GetStringValueClient("1.0.0");
 
 var body = null;
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -62,10 +62,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient(<1.0.0>);
+var client = new ArrayClient().GetStringValueClient("1.0.0");
 
 var body = null;
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

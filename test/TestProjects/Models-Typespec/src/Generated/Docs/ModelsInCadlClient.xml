@@ -22,12 +22,12 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = await client.InputToRoundTripAsync(input);
+var result = await client.InputToRoundTripAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -52,12 +52,12 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = client.InputToRoundTrip(input);
+var result = client.InputToRoundTrip(input, default);
 ]]></code>
 </example>
     </member>
@@ -81,20 +81,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -104,7 +96,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -184,20 +176,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -207,7 +191,7 @@ var data = new {
     },
 };
 
-Response response = client.InputToRoundTrip(RequestContent.Create(data));
+Response response = client.InputToRoundTrip(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -288,12 +272,12 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = await client.InputToRoundTripPrimitiveAsync(input);
+var result = await client.InputToRoundTripPrimitiveAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -318,12 +302,12 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = client.InputToRoundTripPrimitive(input);
+var result = client.InputToRoundTripPrimitive(input, default);
 ]]></code>
 </example>
     </member>
@@ -347,20 +331,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -370,7 +346,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -444,20 +420,12 @@ var data = new {
     requiredModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -467,7 +435,7 @@ var data = new {
     },
 };
 
-Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -570,7 +538,7 @@ var input = new RoundTripOptionalModel()
         1234
     },
 };
-var result = await client.InputToRoundTripOptionalAsync(input);
+var result = await client.InputToRoundTripOptionalAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -623,7 +591,7 @@ var input = new RoundTripOptionalModel()
         1234
     },
 };
-var result = client.InputToRoundTripOptional(input);
+var result = client.InputToRoundTripOptional(input, default);
 ]]></code>
 </example>
     </member>
@@ -658,33 +626,12 @@ var data = new {
     optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
-    optionalModel = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
+    optionalModel = new {},
     optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -696,22 +643,16 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     optionalPlainDate = "2022-05-10",
-    optionalPlainTime = 01:23:45,
+    optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new[] {
         1234
     },
 };
 
-Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -818,33 +759,12 @@ var data = new {
     optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
-    optionalModel = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
+    optionalModel = new {},
     optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -856,22 +776,16 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
     optionalPlainDate = "2022-05-10",
-    optionalPlainTime = 01:23:45,
+    optionalPlainTime = "01:23:45",
     optionalCollectionWithNullableIntElement = new[] {
         1234
     },
 };
 
-Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+Response response = client.InputToRoundTripOptional(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -968,12 +882,12 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = await client.InputToRoundTripReadOnlyAsync(input);
+var result = await client.InputToRoundTripReadOnlyAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -998,81 +912,16 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new Int32[
     })
 }, new Dictionary<string, RecordItem>(), new Single[] 
 {
-    3.14
+    3.14f
 }, new Boolean[] 
 {
     true
 });
-var result = client.InputToRoundTripReadOnly(input);
+var result = client.InputToRoundTripReadOnly(input, default);
 ]]></code>
 </example>
     </member>
     <member name="InputToRoundTripReadOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
-
-var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
-        "<String>"
-    },
-    requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
-            },
-        }
-    },
-    requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
-    },
-    requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-    requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
-};
-
-Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -1129,71 +978,6 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 </remarks>
     </member>
     <member name="InputToRoundTripReadOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
-
-var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
-        "<String>"
-    },
-    requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
-            },
-        }
-    },
-    requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
-    },
-    requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-    requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
-};
-
-Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
-]]></code>
-</example>
 <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -1272,7 +1056,7 @@ var input = new RoundTripModel("<requiredString>", 1234, new BaseModelWithDiscri
 {
     ["key"] = "<null>",
 }, new Dictionary<string, RecordItem>());
-var result = await client.RoundTripToOutputAsync(input);
+var result = await client.RoundTripToOutputAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -1299,7 +1083,7 @@ var input = new RoundTripModel("<requiredString>", 1234, new BaseModelWithDiscri
 {
     ["key"] = "<null>",
 }, new Dictionary<string, RecordItem>());
-var result = client.RoundTripToOutput(input);
+var result = client.RoundTripToOutput(input, default);
 ]]></code>
 </example>
     </member>
@@ -1322,9 +1106,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1335,13 +1117,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1369,9 +1145,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1382,17 +1156,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
-Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1465,9 +1233,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1478,13 +1244,7 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
@@ -1512,9 +1272,7 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
@@ -1525,17 +1283,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {
-            requiredCollection = new[] {
-                new {
-                    requiredModelRecord = new {},
-                }
-            },
-        },
+        key = new {},
     },
 };
 
-Response response = client.RoundTripToOutput(RequestContent.Create(data));
+Response response = client.RoundTripToOutput(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1597,7 +1349,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
 var input = new InputRecursiveModel("<message>");
-var result = await client.InputRecursiveAsync(input);
+var result = await client.InputRecursiveAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -1609,7 +1361,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
 var input = new InputRecursiveModel("<message>");
-var result = client.InputRecursive(input);
+var result = client.InputRecursive(input, default);
 ]]></code>
 </example>
     </member>
@@ -1636,7 +1388,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+Response response = await client.InputRecursiveAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1677,7 +1429,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = client.InputRecursive(RequestContent.Create(data));
+Response response = client.InputRecursive(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1703,7 +1455,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
 var input = new RoundTripRecursiveModel("<message>");
-var result = await client.RoundTripRecursiveAsync(input);
+var result = await client.RoundTripRecursiveAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -1715,7 +1467,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
 var input = new RoundTripRecursiveModel("<message>");
-var result = client.RoundTripRecursive(input);
+var result = client.RoundTripRecursive(input, default);
 ]]></code>
 </example>
     </member>
@@ -1744,7 +1496,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1799,7 +1551,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = client.RoundTripRecursive(RequestContent.Create(data));
+Response response = client.RoundTripRecursive(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1836,7 +1588,7 @@ This sample shows how to call SelfReferenceAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var result = await client.SelfReferenceAsync();
+var result = await client.SelfReferenceAsync(default);
 ]]></code>
 </example>
     </member>
@@ -1847,7 +1599,7 @@ This sample shows how to call SelfReference.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var result = client.SelfReference();
+var result = client.SelfReference(default);
 ]]></code>
 </example>
     </member>
@@ -1858,7 +1610,7 @@ This sample shows how to call SelfReferenceAsync with required parameters and pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-Response response = await client.SelfReferenceAsync();
+Response response = await client.SelfReferenceAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1886,7 +1638,7 @@ This sample shows how to call SelfReference with required parameters and parse t
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-Response response = client.SelfReference();
+Response response = client.SelfReference(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1921,7 +1673,7 @@ var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 });
-var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
+var result = await client.RoundTripToOutputWithNoUseBaseAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -1939,7 +1691,7 @@ var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
 });
-var result = client.RoundTripToOutputWithNoUseBase(input);
+var result = client.RoundTripToOutputWithNoUseBase(input, default);
 ]]></code>
 </example>
     </member>
@@ -1954,16 +1706,14 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     baseModelProp = "<baseModelProp>",
 };
 
-Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
+Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
@@ -2011,16 +1761,14 @@ var data = new {
     requiredCollection = new[] {
         new {
             requiredModelRecord = new {
-                key = new {
-                    requiredCollection = new[] {},
-                },
+                key = new {},
             },
         }
     },
     baseModelProp = "<baseModelProp>",
 };
 
-Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
+Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());

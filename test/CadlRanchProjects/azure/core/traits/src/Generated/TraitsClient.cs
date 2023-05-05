@@ -81,7 +81,16 @@ namespace _Specs_.Azure.Core.Traits
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a resource, sending and receiving headers.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SmokeTestAsync(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
@@ -108,7 +117,16 @@ namespace _Specs_.Azure.Core.Traits
             }
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
+        /// <summary>
+        /// [Protocol Method] Get a resource, sending and receiving headers.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SmokeTest(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>

@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetAllAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetAllAsync();
+var result = await client.GetAllAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetAllAsync();
 <example>
 This sample shows how to call GetAll.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = client.GetAll();
+var result = client.GetAll(default);
 ]]></code>
 </example>
     </member>
@@ -79,9 +79,9 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call GetRequiredOnlyAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetRequiredOnlyAsync();
+var result = await client.GetRequiredOnlyAsync(default);
 ]]></code>
 </example>
     </member>
@@ -89,9 +89,9 @@ var result = await client.GetRequiredOnlyAsync();
 <example>
 This sample shows how to call GetRequiredOnly.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = client.GetRequiredOnly();
+var result = client.GetRequiredOnly(default);
 ]]></code>
 </example>
     </member>
@@ -153,13 +153,13 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutAllAsync(body);
+var result = await client.PutAllAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -167,13 +167,13 @@ var result = await client.PutAllAsync(body);
 <example>
 This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = client.PutAll(body);
+var result = client.PutAll(body, default);
 ]]></code>
 </example>
     </member>
@@ -261,13 +261,13 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 <example>
 This sample shows how to call PutRequiredOnlyAsync with required parameters.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutRequiredOnlyAsync(body);
+var result = await client.PutRequiredOnlyAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -275,13 +275,13 @@ var result = await client.PutRequiredOnlyAsync(body);
 <example>
 This sample shows how to call PutRequiredOnly with required parameters.
 <code><![CDATA[
-var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
 var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = client.PutRequiredOnly(body);
+var result = client.PutRequiredOnly(body, default);
 ]]></code>
 </example>
     </member>

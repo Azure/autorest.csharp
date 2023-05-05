@@ -108,7 +108,24 @@ namespace AnomalyDetector
             return Response.FromValue(UnivariateEntireDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Detect anomalies for the entire series in batch. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This operation generates a model with an entire series, each point is detected
+        /// with the same model. With this method, points before and after a certain point
+        /// are used to determine whether it is an anomaly. The entire detection can give
+        /// user an overall status of the time series.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -133,7 +150,24 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Detect anomalies for the entire series in batch. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This operation generates a model with an entire series, each point is detected
+        /// with the same model. With this method, points before and after a certain point
+        /// are used to determine whether it is an anomaly. The entire detection can give
+        /// user an overall status of the time series.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateEntireSeries(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -194,7 +228,22 @@ namespace AnomalyDetector
             return Response.FromValue(UnivariateLastDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Detect anomaly status of the latest point in time series. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This operation generates a model using the points that you sent into the API,
+        /// and based on all data to determine whether the last point is anomalous.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -219,7 +268,22 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Detect anomaly status of the latest point in time series. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This operation generates a model using the points that you sent into the API,
+        /// and based on all data to determine whether the last point is anomalous.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateLastPoint(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -274,7 +338,21 @@ namespace AnomalyDetector
             return Response.FromValue(UnivariateChangePointDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Detect change point for the entire series. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect change point for the entire series
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Evaluate change point score of every series point
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -299,7 +377,21 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Detect change point for the entire series. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect change point for the entire series
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Evaluate change point score of every series point
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -362,7 +454,22 @@ namespace AnomalyDetector
             return Response.FromValue(MultivariateDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateBatchDetectionResultAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
@@ -388,7 +495,22 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateBatchDetectionResult(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
@@ -460,7 +582,27 @@ namespace AnomalyDetector
             return Response.FromValue(AnomalyDetectionModel.FromResponse(response), response);
         }
 
-        /// <summary> Train a Multivariate Anomaly Detection Model. </summary>
+        /// <summary>
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Create and train a multivariate anomaly detection model. The request must
+        /// include a source parameter to indicate an externally accessible Azure blob
+        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
+        /// storage folder which contains multiple CSV files, and each CSV file contains
+        /// two columns, timestamp and variable. Another type of input is an URI pointed to
+        /// a CSV file in Azure blob storage, which contains all the variables and a
+        /// timestamp column.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TrainMultivariateModelAsync(ModelInfo,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -485,7 +627,27 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Train a Multivariate Anomaly Detection Model. </summary>
+        /// <summary>
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Create and train a multivariate anomaly detection model. The request must
+        /// include a source parameter to indicate an externally accessible Azure blob
+        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
+        /// storage folder which contains multiple CSV files, and each CSV file contains
+        /// two columns, timestamp and variable. Another type of input is an URI pointed to
+        /// a CSV file in Azure blob storage, which contains all the variables and a
+        /// timestamp column.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TrainMultivariateModel(ModelInfo,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -510,7 +672,7 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Delete Multivariate Model. </summary>
+        /// <summary> [Protocol Method] Delete Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -536,7 +698,7 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Delete Multivariate Model. </summary>
+        /// <summary> [Protocol Method] Delete Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -600,7 +762,22 @@ namespace AnomalyDetector
             return Response.FromValue(AnomalyDetectionModel.FromResponse(response), response);
         }
 
-        /// <summary> Get Multivariate Model. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Get detailed information of multivariate model, including the training status
+        /// and variables used in the model.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -626,7 +803,22 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Get Multivariate Model. </summary>
+        /// <summary>
+        /// [Protocol Method] Get Multivariate Model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Get detailed information of multivariate model, including the training status
+        /// and variables used in the model.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
@@ -702,7 +894,26 @@ namespace AnomalyDetector
             return Response.FromValue(MultivariateDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Detect Multivariate Anomaly. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect Multivariate Anomaly
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, the input schema should be the same with the training
+        /// request. The request will complete asynchronously and return a resultId to
+        /// query the detection result.The request should be a source link to indicate an
+        /// externally accessible Azure storage Uri, either pointed to an Azure blob
+        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -730,7 +941,26 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Detect Multivariate Anomaly. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect Multivariate Anomaly
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, the input schema should be the same with the training
+        /// request. The request will complete asynchronously and return a resultId to
+        /// query the detection result.The request should be a source link to indicate an
+        /// externally accessible Azure storage Uri, either pointed to an Azure blob
+        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectMultivariateBatchAnomaly(string,MultivariateBatchDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -804,7 +1034,24 @@ namespace AnomalyDetector
             return Response.FromValue(MultivariateLastDetectionResult.FromResponse(response), response);
         }
 
-        /// <summary> Detect anomalies in the last point of the request body. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomalies in the last point of the request body
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, and the inference data should be put into request body in a
+        /// JSON format. The request will complete synchronously and return the detection
+        /// immediately in the response body.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -832,7 +1079,24 @@ namespace AnomalyDetector
             }
         }
 
-        /// <summary> Detect anomalies in the last point of the request body. </summary>
+        /// <summary>
+        /// [Protocol Method] Detect anomalies in the last point of the request body
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, and the inference data should be put into request body in a
+        /// JSON format. The request will complete synchronously and return the detection
+        /// immediately in the response body.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DetectMultivariateLastAnomaly(string,MultivariateLastDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -888,7 +1152,21 @@ namespace AnomalyDetector
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, AnomalyDetectionModel.DeserializeAnomalyDetectionModel, ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);
         }
 
-        /// <summary> List Multivariate Models. </summary>
+        /// <summary>
+        /// [Protocol Method] List Multivariate Models
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// List models of a resource.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateModelsAsync(int?,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="skip"> Skip indicates how many models will be skipped. </param>
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -902,7 +1180,21 @@ namespace AnomalyDetector
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);
         }
 
-        /// <summary> List Multivariate Models. </summary>
+        /// <summary>
+        /// [Protocol Method] List Multivariate Models
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// List models of a resource.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMultivariateModels(int?,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="skip"> Skip indicates how many models will be skipped. </param>
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

@@ -58,6 +58,7 @@ namespace PaginationParams_LowLevel
             _apiVersion = options.Version;
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -72,6 +73,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -86,6 +88,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
         /// <param name="offset"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -100,6 +103,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
         /// <param name="offset"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -114,6 +118,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -128,6 +133,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -142,6 +148,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxcount"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -156,6 +163,7 @@ namespace PaginationParams_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get4s", "value", "nextLink", context);
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
         /// <param name="skip"> Optional. Specified number of containers to skip. </param>
         /// <param name="maxcount"> Optional. Specified maximum number of containers that can be included in the list. </param>

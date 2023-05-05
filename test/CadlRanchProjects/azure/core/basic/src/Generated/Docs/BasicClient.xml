@@ -32,7 +32,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -115,7 +115,7 @@ var data = new {
     },
 };
 
-Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+Response response = client.CreateOrUpdate(1234, RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -180,7 +180,7 @@ var resource = new User("<name>")
         new UserOrder(1234, "<detail>")
     },
 };
-var result = await client.CreateOrReplaceAsync(1234, resource);
+var result = await client.CreateOrReplaceAsync(1234, resource, default);
 ]]></code>
 </example>
     </member>
@@ -197,7 +197,7 @@ var resource = new User("<name>")
         new UserOrder(1234, "<detail>")
     },
 };
-var result = client.CreateOrReplace(1234, resource);
+var result = client.CreateOrReplace(1234, resource, default);
 ]]></code>
 </example>
     </member>
@@ -232,7 +232,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -315,7 +315,7 @@ var data = new {
     },
 };
 
-Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+Response response = client.CreateOrReplace(1234, RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -373,7 +373,7 @@ This sample shows how to call GetUserAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = await client.GetUserAsync(1234);
+var result = await client.GetUserAsync(1234, default);
 ]]></code>
 </example>
     </member>
@@ -383,7 +383,7 @@ This sample shows how to call GetUser with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUser(1234);
+var result = client.GetUser(1234, default);
 ]]></code>
 </example>
     </member>
@@ -393,7 +393,7 @@ This sample shows how to call GetUserAsync with required parameters and parse th
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = await client.GetUserAsync(1234);
+Response response = await client.GetUserAsync(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -434,7 +434,7 @@ This sample shows how to call GetUser with required parameters and parse the res
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = client.GetUser(1234);
+Response response = client.GetUser(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -475,7 +475,7 @@ This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = await client.DeleteAsync(1234);
+Response response = await client.DeleteAsync(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -489,7 +489,7 @@ This sample shows how to call Delete with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = client.Delete(1234);
+Response response = client.Delete(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -503,7 +503,7 @@ This sample shows how to call ExportAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = await client.ExportAsync(1234, "<format>");
+var result = await client.ExportAsync(1234, "<format>", default);
 ]]></code>
 </example>
     </member>
@@ -513,7 +513,7 @@ This sample shows how to call Export with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.Export(1234, "<format>");
+var result = client.Export(1234, "<format>", default);
 ]]></code>
 </example>
     </member>
@@ -523,7 +523,7 @@ This sample shows how to call ExportAsync with required parameters and parse the
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = await client.ExportAsync(1234, "<format>");
+Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -564,7 +564,7 @@ This sample shows how to call Export with required parameters and parse the resu
 <code><![CDATA[
 var client = new BasicClient();
 
-Response response = client.Export(1234, "<format>");
+Response response = client.Export(1234, "<format>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -605,7 +605,7 @@ This sample shows how to call GetUsersAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"});]]></code>
+var result = client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, default);]]></code>
 </example>
     </member>
     <member name="GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)">
@@ -614,7 +614,7 @@ This sample shows how to call GetUsers with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"});]]></code>
+var result = client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, default);]]></code>
 </example>
     </member>
     <member name="GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
@@ -623,9 +623,9 @@ This sample shows how to call GetUsersAsync with required parameters and parse t
 <code><![CDATA[
 var client = new BasicClient();
 
-await foreach (var data in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -659,9 +659,9 @@ This sample shows how to call GetUsers with required parameters and parse the re
 <code><![CDATA[
 var client = new BasicClient();
 
-foreach (var data in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -695,7 +695,7 @@ This sample shows how to call GetWithPageAsync.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithPageAsync();]]></code>
+var result = client.GetWithPageAsync(default);]]></code>
 </example>
     </member>
     <member name="GetWithPage(global::System.Threading.CancellationToken)">
@@ -704,7 +704,7 @@ This sample shows how to call GetWithPage.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithPage();]]></code>
+var result = client.GetWithPage(default);]]></code>
 </example>
     </member>
     <member name="GetWithPageAsync(global::Azure.RequestContext)">
@@ -713,9 +713,9 @@ This sample shows how to call GetWithPageAsync with required parameters and pars
 <code><![CDATA[
 var client = new BasicClient();
 
-await foreach (var data in client.GetWithPageAsync())
+await foreach (var item in client.GetWithPageAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -747,9 +747,9 @@ This sample shows how to call GetWithPage with required parameters and parse the
 <code><![CDATA[
 var client = new BasicClient();
 
-foreach (var data in client.GetWithPage())
+foreach (var item in client.GetWithPage(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -781,7 +781,7 @@ This sample shows how to call GetWithCustomPageModelAsync.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithCustomPageModelAsync();]]></code>
+var result = client.GetWithCustomPageModelAsync(default);]]></code>
 </example>
     </member>
     <member name="GetWithCustomPageModel(global::System.Threading.CancellationToken)">
@@ -790,7 +790,7 @@ This sample shows how to call GetWithCustomPageModel.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithCustomPageModel();]]></code>
+var result = client.GetWithCustomPageModel(default);]]></code>
 </example>
     </member>
     <member name="GetWithCustomPageModelAsync(global::Azure.RequestContext)">
@@ -799,9 +799,9 @@ This sample shows how to call GetWithCustomPageModelAsync with required paramete
 <code><![CDATA[
 var client = new BasicClient();
 
-await foreach (var data in client.GetWithCustomPageModelAsync())
+await foreach (var item in client.GetWithCustomPageModelAsync(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -833,9 +833,9 @@ This sample shows how to call GetWithCustomPageModel with required parameters an
 <code><![CDATA[
 var client = new BasicClient();
 
-foreach (var data in client.GetWithCustomPageModel())
+foreach (var item in client.GetWithCustomPageModel(new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());

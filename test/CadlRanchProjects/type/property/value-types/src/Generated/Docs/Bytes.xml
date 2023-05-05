@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetByteAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
-var result = await client.GetByteAsync();
+var result = await client.GetByteAsync(default);
 ]]></code>
 </example>
     </member>
@@ -15,9 +15,9 @@ var result = await client.GetByteAsync();
 <example>
 This sample shows how to call GetByte.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
-var result = client.GetByte();
+var result = client.GetByte(default);
 ]]></code>
 </example>
     </member>
@@ -75,10 +75,10 @@ Schema for <c>BytesProperty</c>:
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 var body = new BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body, default);
 ]]></code>
 </example>
     </member>
@@ -86,10 +86,10 @@ var result = await client.PutAsync(body);
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient(<1.0.0>);
+var client = new ValueTypesClient().GetBytesClient("1.0.0");
 
 var body = new BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = client.Put(body);
+var result = client.Put(body, default);
 ]]></code>
 </example>
     </member>

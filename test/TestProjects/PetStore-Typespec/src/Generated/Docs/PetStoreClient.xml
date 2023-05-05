@@ -8,7 +8,7 @@ This sample shows how to call DeleteAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = await client.DeleteAsync(1234);
+Response response = await client.DeleteAsync(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -23,7 +23,7 @@ This sample shows how to call Delete with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = client.Delete(1234);
+Response response = client.Delete(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -38,7 +38,7 @@ This sample shows how to call ReadAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.ReadAsync(1234);
+var result = await client.ReadAsync(1234, default);
 ]]></code>
 </example>
     </member>
@@ -49,7 +49,7 @@ This sample shows how to call Read with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.Read(1234);
+var result = client.Read(1234, default);
 ]]></code>
 </example>
     </member>
@@ -60,7 +60,7 @@ This sample shows how to call ReadAsync with required parameters and parse the r
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = await client.ReadAsync(1234);
+Response response = await client.ReadAsync(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -90,7 +90,7 @@ This sample shows how to call Read with required parameters and parse the result
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = client.Read(1234);
+Response response = client.Read(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -124,7 +124,7 @@ var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };
-var result = await client.CreateAsync(pet);
+var result = await client.CreateAsync(pet, default);
 ]]></code>
 </example>
     </member>
@@ -139,7 +139,7 @@ var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };
-var result = client.Create(pet);
+var result = client.Create(pet, default);
 ]]></code>
 </example>
     </member>
@@ -172,7 +172,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.CreateAsync(RequestContent.Create(data));
+Response response = await client.CreateAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -234,7 +234,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = client.Create(RequestContent.Create(data));
+Response response = client.Create(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -274,7 +274,7 @@ This sample shows how to call GetPetByKindAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.GetPetByKindAsync(null);
+var result = await client.GetPetByKindAsync(null, default);
 ]]></code>
 </example>
     </member>
@@ -285,7 +285,7 @@ This sample shows how to call GetPetByKind with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.GetPetByKind(null);
+var result = client.GetPetByKind(null, default);
 ]]></code>
 </example>
     </member>
@@ -296,7 +296,7 @@ This sample shows how to call GetPetByKindAsync with required parameters and par
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = await client.GetPetByKindAsync("<kind>");
+Response response = await client.GetPetByKindAsync("<kind>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -326,7 +326,7 @@ This sample shows how to call GetPetByKind with required parameters and parse th
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = client.GetPetByKind("<kind>");
+Response response = client.GetPetByKind("<kind>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -356,7 +356,7 @@ This sample shows how to call GetFirstPetAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.GetFirstPetAsync(1234);
+var result = await client.GetFirstPetAsync(1234, default);
 ]]></code>
 </example>
     </member>
@@ -367,7 +367,7 @@ This sample shows how to call GetFirstPet with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.GetFirstPet(1234);
+var result = client.GetFirstPet(1234, default);
 ]]></code>
 </example>
     </member>
@@ -378,7 +378,7 @@ This sample shows how to call GetFirstPetAsync with required parameters and pars
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = await client.GetFirstPetAsync(1234);
+Response response = await client.GetFirstPetAsync(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -408,7 +408,7 @@ This sample shows how to call GetFirstPet with required parameters and parse the
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-Response response = client.GetFirstPet(1234);
+Response response = client.GetFirstPet(1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

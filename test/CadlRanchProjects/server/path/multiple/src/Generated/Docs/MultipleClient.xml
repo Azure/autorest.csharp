@@ -8,7 +8,7 @@ This sample shows how to call NoOperationParamsAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleClient(endpoint);
 
-Response response = await client.NoOperationParamsAsync();
+Response response = await client.NoOperationParamsAsync(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call NoOperationParams.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleClient(endpoint);
 
-Response response = client.NoOperationParams();
+Response response = client.NoOperationParams(new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call WithOperationPathParamAsync with required paramete
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleClient(endpoint);
 
-Response response = await client.WithOperationPathParamAsync("<keyword>");
+Response response = await client.WithOperationPathParamAsync("<keyword>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ This sample shows how to call WithOperationPathParam with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleClient(endpoint);
 
-Response response = client.WithOperationPathParam("<keyword>");
+Response response = client.WithOperationPathParam("<keyword>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

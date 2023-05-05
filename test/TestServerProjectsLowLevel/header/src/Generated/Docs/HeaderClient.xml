@@ -200,7 +200,7 @@ This sample shows how to call ParamFloatAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamFloatAsync("<scenario>", 3.14, new RequestContext());
+Response response = await client.ParamFloatAsync("<scenario>", 3.14f, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -212,7 +212,7 @@ This sample shows how to call ParamFloat with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamFloat("<scenario>", 3.14, new RequestContext());
+Response response = client.ParamFloat("<scenario>", 3.14f, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

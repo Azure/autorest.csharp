@@ -11,7 +11,7 @@ var input = new RootModel()
 {
     PropertyModelToRename = new RenamedModel(1234),
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
 {
         "<null>"
     }, new Dictionary<string, string>
@@ -34,7 +34,7 @@ var input = new RootModel()
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
 };
-var result = await client.RoundTripAsync(input);
+var result = await client.RoundTripAsync(input, default);
 ]]></code>
 </example>
     </member>
@@ -48,7 +48,7 @@ var input = new RootModel()
 {
     PropertyModelToRename = new RenamedModel(1234),
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new String[] 
 {
         "<null>"
     }, new Dictionary<string, string>
@@ -71,7 +71,7 @@ var input = new RootModel()
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
 };
-var result = client.RoundTrip(input);
+var result = client.RoundTrip(input, default);
 ]]></code>
 </example>
     </member>

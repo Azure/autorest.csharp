@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetModelValueAsync(RequestContext)">
+    <member name="GetModelValueAsync(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetModelValueAsync.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient("1.0.0");
+
+var result = await client.GetModelValueAsync(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetModelValue(global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call GetModelValue.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient("1.0.0");
+
+var result = client.GetModelValue(default);
+]]></code>
+</example>
+    </member>
+    <member name="GetModelValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModelValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +48,7 @@ Schema for <c>InnerModel</c>:
 
 </remarks>
     </member>
-    <member name="GetModelValue(RequestContext)">
+    <member name="GetModelValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModelValue with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +75,41 @@ Schema for <c>InnerModel</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::System.Collections.Generic.IDictionary{string, global::_Type._Dictionary.Models.InnerModel},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = new InnerModel("<property>")
+{
+        Children = {},
+    },
+};
+var result = await client.PutAsync(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="Put(global::System.Collections.Generic.IDictionary{string, global::_Type._Dictionary.Models.InnerModel},global::System.Threading.CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient("1.0.0");
+
+var body = 
+{
+    ["key"] = new InnerModel("<property>")
+{
+        Children = {},
+    },
+};
+var result = client.Put(body, default);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -85,7 +139,7 @@ Schema for <c>InnerModel</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
