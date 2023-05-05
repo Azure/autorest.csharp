@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -53,15 +52,7 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringValueAsync(context).ConfigureAwait(false);
-            IReadOnlyDictionary<string, string> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetString());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, string>>(), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -69,19 +60,11 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringValue(context);
-            IReadOnlyDictionary<string, string> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetString());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, string>>(), response);
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +94,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -165,7 +148,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -199,7 +182,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

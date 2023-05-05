@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -53,22 +52,7 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
-            IReadOnlyDictionary<string, BinaryData> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    dictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, BinaryData>>(), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -76,26 +60,11 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetUnknownValue(context);
-            IReadOnlyDictionary<string, BinaryData> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    dictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, BinaryData>>(), response);
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -125,7 +94,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -179,7 +148,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -213,7 +182,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
