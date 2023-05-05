@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration? request, ObjectSerialization bodySerialization, FormattableString value)
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
             switch (bodySerialization)
             {
@@ -240,11 +240,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
                         writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
-                        writer.Line($"{request}.Content = {content};");
-                        if (request != null)
-                        {
-                            writer.Line($"{request}.Content = {content};");
-                        }
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:
@@ -254,10 +249,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
                         writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
                         writer.Line($"{request}.Content = {content};");
-                        if (request != null)
-                        {
-                            writer.Line($"{request}.Content = {content};");
-                        }
                         break;
                     }
                 default:
