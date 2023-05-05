@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetValidAsync(RequestContext)">
+<example>
+This sample shows how to call GetValidAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = await client.GetValidAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetValid(RequestContext)">
+<example>
+This sample shows how to call GetValid and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = client.GetValid(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutValidAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValidAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+var data = new {};
+
+Response response = await client.PutValidAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutValidAsync with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+var data = new {
+    id = 1234,
+    name = "<name>",
+    color = "cyan",
+};
+
+Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutValid(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValid.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+var data = new {};
+
+Response response = client.PutValid(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutValid with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+var data = new {
+    id = 1234,
+    name = "<name>",
+    color = "cyan",
+};
+
+Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetInvalidAsync(RequestContext)">
+<example>
+This sample shows how to call GetInvalidAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = await client.GetInvalidAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetInvalid(RequestContext)">
+<example>
+This sample shows how to call GetInvalid and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = client.GetInvalid(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetEmptyAsync(RequestContext)">
+<example>
+This sample shows how to call GetEmptyAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = await client.GetEmptyAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetEmpty(RequestContext)">
+<example>
+This sample shows how to call GetEmpty and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = client.GetEmpty(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetNullAsync(RequestContext)">
+<example>
+This sample shows how to call GetNullAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = await client.GetNullAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetNull(RequestContext)">
+<example>
+This sample shows how to call GetNull and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = client.GetNull(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetNotProvidedAsync(RequestContext)">
+<example>
+This sample shows how to call GetNotProvidedAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = await client.GetNotProvidedAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetNotProvided(RequestContext)">
+<example>
+This sample shows how to call GetNotProvided and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BasicClient(credential);
+
+Response response = client.GetNotProvided(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Basic</c>:
+<code>{
+  id: number, # Optional. Basic Id
+  name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+  color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
