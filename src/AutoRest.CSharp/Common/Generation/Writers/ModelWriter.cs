@@ -117,9 +117,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("set;");
             }
             writer.AppendRaw("}");
-            if (property.DefaultValue != null)
+            if (property.InitializationValue != null)
             {
-                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
+                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
             }
 
             writer.Line();
@@ -343,23 +343,6 @@ Examples:
                         }
 
                         writer.Line($";");
-                    }
-
-                    //TODO make the proper initializer here instead
-                    if (schema is ModelTypeProvider modelTypeProvider)
-                    {
-                        foreach (var parameter in constructor.Signature.Parameters)
-                        {
-                            if (modelTypeProvider.Fields.TryGetFieldByParameter(parameter, out var field))
-                            {
-                                if (!field.IsField)
-                                    continue;
-                                writer
-                                    .Append($"{field.Name:I} = {parameter.Name:I}")
-                                    .WriteConversion(parameter.Type, field.Type)
-                                    .LineRaw(";");
-                            }
-                        }
                     }
                 }
                 writer.Line();

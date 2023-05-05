@@ -7,7 +7,7 @@
 
 using System;
 
-namespace CadlFirstTest.Models
+namespace TypeSpecFirstTest.Models
 {
     internal static partial class StringFixedEnumExtensions
     {

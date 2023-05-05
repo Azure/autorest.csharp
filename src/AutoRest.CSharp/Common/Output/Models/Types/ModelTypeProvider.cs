@@ -290,7 +290,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (parameterMap.TryGetValue(property.Declaration.Name.FirstCharToLowerCase(), out var parameter) || IsStruct)
+                if (parameterMap.TryGetValue(property.Declaration.Name.ToVariableName(), out var parameter) || IsStruct)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;

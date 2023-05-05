@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanNullAsync(Boolean,RequestContext)">
+    <member name="GetBooleanNullAsync(bool?,RequestContext)">
 <example>
 This sample shows how to call GetBooleanNullAsync.
 <code><![CDATA[
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetBooleanNull(Boolean,RequestContext)">
+    <member name="GetBooleanNull(bool?,RequestContext)">
 <example>
 This sample shows how to call GetBooleanNull.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNullAsync(Int32,RequestContext)">
+    <member name="GetIntNullAsync(int?,RequestContext)">
 <example>
 This sample shows how to call GetIntNullAsync.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetIntNull(Int32,RequestContext)">
+    <member name="GetIntNull(int?,RequestContext)">
 <example>
 This sample shows how to call GetIntNull.
 <code><![CDATA[
@@ -225,7 +225,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLongNullAsync(Int64,RequestContext)">
+    <member name="GetLongNullAsync(long?,RequestContext)">
 <example>
 This sample shows how to call GetLongNullAsync.
 <code><![CDATA[
@@ -245,7 +245,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetLongNull(Int64,RequestContext)">
+    <member name="GetLongNull(long?,RequestContext)">
 <example>
 This sample shows how to call GetLongNull.
 <code><![CDATA[
@@ -313,7 +313,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatNullAsync(Single,RequestContext)">
+    <member name="FloatNullAsync(float?,RequestContext)">
 <example>
 This sample shows how to call FloatNullAsync.
 <code><![CDATA[
@@ -333,7 +333,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="FloatNull(Single,RequestContext)">
+    <member name="FloatNull(float?,RequestContext)">
 <example>
 This sample shows how to call FloatNull.
 <code><![CDATA[
@@ -401,7 +401,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleNullAsync(Double,RequestContext)">
+    <member name="DoubleNullAsync(double?,RequestContext)">
 <example>
 This sample shows how to call DoubleNullAsync.
 <code><![CDATA[
@@ -421,7 +421,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DoubleNull(Double,RequestContext)">
+    <member name="DoubleNull(double?,RequestContext)">
 <example>
 This sample shows how to call DoubleNull.
 <code><![CDATA[
@@ -513,7 +513,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNullAsync(String,RequestContext)">
+    <member name="StringNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call StringNullAsync.
 <code><![CDATA[
@@ -533,7 +533,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StringNull(String,RequestContext)">
+    <member name="StringNull(string,RequestContext)">
 <example>
 This sample shows how to call StringNull.
 <code><![CDATA[
@@ -553,7 +553,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValidAsync(String,RequestContext)">
+    <member name="EnumValidAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumValidAsync.
 <code><![CDATA[
@@ -573,7 +573,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumValid(String,RequestContext)">
+    <member name="EnumValid(string,RequestContext)">
 <example>
 This sample shows how to call EnumValid.
 <code><![CDATA[
@@ -593,7 +593,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNullAsync(String,RequestContext)">
+    <member name="EnumNullAsync(string,RequestContext)">
 <example>
 This sample shows how to call EnumNullAsync.
 <code><![CDATA[
@@ -613,7 +613,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="EnumNull(String,RequestContext)">
+    <member name="EnumNull(string,RequestContext)">
 <example>
 This sample shows how to call EnumNull.
 <code><![CDATA[
@@ -761,7 +761,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateNullAsync(DateTimeOffset,RequestContext)">
+    <member name="DateNullAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateNullAsync.
 <code><![CDATA[
@@ -781,7 +781,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateNull(DateTimeOffset,RequestContext)">
+    <member name="DateNull(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateNull.
 <code><![CDATA[
@@ -825,7 +825,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeNullAsync(DateTimeOffset,RequestContext)">
+    <member name="DateTimeNullAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateTimeNullAsync.
 <code><![CDATA[
@@ -845,7 +845,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DateTimeNull(DateTimeOffset,RequestContext)">
+    <member name="DateTimeNull(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call DateTimeNull.
 <code><![CDATA[
@@ -865,7 +865,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvValidAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvValidAsync.
 <code><![CDATA[
@@ -885,7 +885,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvValid(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvValid.
 <code><![CDATA[
@@ -905,7 +905,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvNullAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvNullAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvNullAsync.
 <code><![CDATA[
@@ -925,7 +925,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvNull(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvNull(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvNull.
 <code><![CDATA[
@@ -945,7 +945,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvEmptyAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvEmptyAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvEmptyAsync.
 <code><![CDATA[
@@ -965,7 +965,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringCsvEmpty(IEnumerable,RequestContext)">
+    <member name="ArrayStringCsvEmpty(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringCsvEmpty.
 <code><![CDATA[
@@ -985,7 +985,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringNoCollectionFormatEmptyAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringNoCollectionFormatEmptyAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringNoCollectionFormatEmptyAsync.
 <code><![CDATA[
@@ -1005,7 +1005,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringNoCollectionFormatEmpty(IEnumerable,RequestContext)">
+    <member name="ArrayStringNoCollectionFormatEmpty(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringNoCollectionFormatEmpty.
 <code><![CDATA[
@@ -1025,7 +1025,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringSsvValidAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringSsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringSsvValidAsync.
 <code><![CDATA[
@@ -1045,7 +1045,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringSsvValid(IEnumerable,RequestContext)">
+    <member name="ArrayStringSsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringSsvValid.
 <code><![CDATA[
@@ -1065,7 +1065,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringTsvValidAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringTsvValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringTsvValidAsync.
 <code><![CDATA[
@@ -1085,7 +1085,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringTsvValid(IEnumerable,RequestContext)">
+    <member name="ArrayStringTsvValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringTsvValid.
 <code><![CDATA[
@@ -1105,7 +1105,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringPipesValidAsync(IEnumerable,RequestContext)">
+    <member name="ArrayStringPipesValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringPipesValidAsync.
 <code><![CDATA[
@@ -1125,7 +1125,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringPipesValid(IEnumerable,RequestContext)">
+    <member name="ArrayStringPipesValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringPipesValid.
 <code><![CDATA[

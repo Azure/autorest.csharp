@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     /// <summary> The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances. </summary>
     public partial class Salmon : Fish

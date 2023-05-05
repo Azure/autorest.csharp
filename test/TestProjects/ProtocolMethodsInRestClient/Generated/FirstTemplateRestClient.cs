@@ -73,7 +73,7 @@ namespace ProtocolMethodsInRestClient
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -94,7 +94,7 @@ namespace ProtocolMethodsInRestClient
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -113,7 +113,7 @@ namespace ProtocolMethodsInRestClient
             return message;
         }
 
-        /// <summary> Create or update resource. </summary>
+        /// <summary> [Protocol Method] Create or update resource. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -134,7 +134,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        /// <summary> Create or update resource. </summary>
+        /// <summary> [Protocol Method] Create or update resource. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -186,7 +186,7 @@ namespace ProtocolMethodsInRestClient
                 case 204:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -208,7 +208,7 @@ namespace ProtocolMethodsInRestClient
                 case 204:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -249,7 +249,7 @@ namespace ProtocolMethodsInRestClient
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -276,7 +276,7 @@ namespace ProtocolMethodsInRestClient
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -294,7 +294,7 @@ namespace ProtocolMethodsInRestClient
             return message;
         }
 
-        /// <summary> Retrieves information about the resource. </summary>
+        /// <summary> [Protocol Method] Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
@@ -319,7 +319,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        /// <summary> Retrieves information about the resource. </summary>
+        /// <summary> [Protocol Method] Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
