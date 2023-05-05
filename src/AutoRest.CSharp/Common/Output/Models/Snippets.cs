@@ -21,10 +21,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Default { get; } = new KeywordExpression("default", null);
         public static ValueExpression Null { get; } = new KeywordExpression("null", null);
         public static ValueExpression This { get; } = new KeywordExpression("this", null);
-        public static ValueExpression True { get; } = new KeywordExpression("true", null);
-        public static ValueExpression False { get; } = new KeywordExpression("false", null);
+        public static BoolExpression True { get; } = new(new KeywordExpression("true", null));
+        public static BoolExpression False { get; } = new(new KeywordExpression("false", null));
 
-        public static ValueExpression Bool(bool value) => value ? True : False;
+        public static BoolExpression Bool(bool value) => value ? True : False;
+        public static ValueExpression Int(int value) => new FormattableStringToExpression($"{value}");
 
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", expression);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);

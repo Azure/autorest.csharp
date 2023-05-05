@@ -277,8 +277,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (_operation.Paging is not null)
                     {
                         // in paging methods, every request parameter is used twice, so even conversions that can be inlined must be cached
-                        var argument = new CodeWriterDeclaration(protocolMethodParameter.Name);
-                        _conversions[protocolMethodParameter] = new DeclareVariableStatement(protocolMethodParameter.Type, argument, argumentConversion);
+                        _conversions[protocolMethodParameter] = new DeclareVariableStatement(protocolMethodParameter.Type, protocolMethodParameter.Name, argumentConversion, out var argument);
                         _arguments[protocolMethodParameter] = argument;
                     }
                     else

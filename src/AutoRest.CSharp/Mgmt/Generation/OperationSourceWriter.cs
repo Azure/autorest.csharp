@@ -154,14 +154,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 yield return UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document);
 
-                var dataVariable = new CodeWriterDeclaration("data");
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", deserializeExpression);
                 }
 
-                yield return new DeclareVariableStatement(null, dataVariable, deserializeExpression);
+                yield return new DeclareVariableStatement(null, "data", deserializeExpression, out var dataVariable);
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     yield return Assign(new MemberReference(dataVariable, "Id"), new MemberReference(_opSource.ArmClientField, "Id"));

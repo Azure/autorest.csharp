@@ -367,12 +367,6 @@ namespace AutoRest.CSharp.Output.Models
             return segments;
         }
 
-        private static string GetRequestParameterName(RequestParameter requestParameter)
-        {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
-        }
-
         // Merges operations without response types types together
         private static CSharpType? ReduceResponses(List<Response> responses)
         {

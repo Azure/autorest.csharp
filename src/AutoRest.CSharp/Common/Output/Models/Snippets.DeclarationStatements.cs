@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -26,6 +27,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static DeclarationStatement Declare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingVar(typeof(HttpMessage), name, value, d => new HttpMessageExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
+            => Var(typeof(StreamReader), name, value, d => new StreamReaderExpression(d), out variable);
 
         public static DeclarationStatement UsingVar(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
             => UsingVar(null, name, value, d => new JsonDocumentExpression(d), out variable);

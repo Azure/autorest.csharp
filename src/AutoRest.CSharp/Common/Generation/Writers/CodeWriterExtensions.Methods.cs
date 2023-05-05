@@ -115,14 +115,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             if (switchCase.Inline)
                             {
-                                writer.Append($"case {switchCase.Case:L}: ");
+                                writer.Append($"case {switchCase.Case}: ");
                             }
                             else
                             {
-                                writer.Line($"case {switchCase.Case:L}: ");
+                                writer.Line($"case {switchCase.Case}: ");
                             }
 
-                            writer.WriteMethodBodyStatement(switchCase.Statement);
+                            if (switchCase.AddScope)
+                            {
+                                using (writer.Scope())
+                                {
+                                    writer.WriteMethodBodyStatement(switchCase.Statement);
+                                }
+                            }
+                            else
+                            {
+                                writer.WriteMethodBodyStatement(switchCase.Statement);
+                            }
                         }
                         writer.LineRaw("}");
                     }

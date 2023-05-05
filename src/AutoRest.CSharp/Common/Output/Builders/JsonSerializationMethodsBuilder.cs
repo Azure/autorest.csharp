@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var implementation in discriminator.Implementations)
             {
-                yield return new SwitchCase(implementation.Key, Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)), true);
+                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)), true);
             }
         }
 

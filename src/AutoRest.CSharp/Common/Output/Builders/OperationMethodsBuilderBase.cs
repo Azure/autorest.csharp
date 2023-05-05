@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -25,9 +26,12 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using ConstantExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.ConstantExpression;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
+using Response = AutoRest.CSharp.Output.Models.Responses.Response;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -124,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models
             RestClientMethod? nextPage = createRequestMethods.Length == 2 ? BuildNextPageMethod(restClientMethod) : null;
 
             var protocolMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
-            var restClientConvenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
+            var restClientConvenienceMethods = new[] { BuildRestClientConvenienceMethod(headerModel?.Type, resourceDataType, true), BuildRestClientConvenienceMethod(headerModel?.Type, resourceDataType, false) };
             var convenienceMethods = new[] { BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) };
             return new LegacyMethods(Operation, convenienceMethods, createRequestMethods, null, restClientMethod, nextPage);
         }
@@ -558,9 +562,23 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
+        private Method BuildRestClientConvenienceMethod(CSharpType? headerModelType, CSharpType? resourceDataType, bool async)
+        {
+            var signature = CreateMethodSignature(ProtocolMethodName, _convenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var body = new[]
+            {
+                new ParameterValidationBlock(signature.Parameters),
+                Declare("message", InvokeCreateRequestMethod(), out var message),
+                PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
+                BuildStatusCodeSwitch(message, , headerModelType, resourceDataType, new ClientDiagnosticsExpression(ClientDiagnosticsDeclaration), async)
+            };
+            return new Method(signature.WithAsync(async), body);
+        }
+
         private Method BuildLegacyConvenienceMethod(bool async)
         {
             var signature = CreateMethodSignature(ProtocolMethodName, _convenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+
             var body = CreateLegacyConvenienceMethodBody(async);
             return new Method(signature.WithAsync(async), body);
         }
@@ -598,32 +616,62 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
-        protected static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
+        private MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
         {
-            ValueExpression fromExpression = NullConditional(fromParameter);
+            ValueExpression? headers = null;
 
-            return fromParameter.Type.IsFrameworkType
-                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toParameter.Type)
-                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toParameter.Type);
+            var declareHeaders = headerModelType is not null
+                ? new DeclareVariableStatement(null, "headers", New(headerModelType, httpMessage.Response), out headers)
+                : null;
+
+            var requestFailedException = clientDiagnostics is not null
+                ? clientDiagnostics.CreateRequestFailedException(httpMessage.Response, async)
+                : New(typeof(RequestFailedException), httpMessage.Response);
+
+            var cases = responses
+                .Select(r => BuildStatusCodeSwitchCases(r.StatusCodes, r.ResponseBody, httpMessage, headers, async))
+                .Append(new SwitchCase(Default, Throw(requestFailedException)))
+                .ToArray();
+
+            var switchStatement = new SwitchStatement(httpMessage.Response.Status, cases);
+            return declareHeaders is not null ? new MethodBodyStatement[] { declareHeaders, switchStatement } : switchStatement;
         }
 
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
+        private SwitchCase BuildStatusCodeSwitchCases(StatusCodes[] statusCodes, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, bool async)
         {
-            if ((fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return fromExpression;
-            }
+            var statusCode = statusCodes[0];
+            var match = statusCode.Code is {} code
+                ? Int(code)
+                : new FormattableStringToExpression($"int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}");
 
-            return RequestContentExpression.Create(fromExpression);
+            var statement = BuildStatusCodeSwitchCaseStatement(responseBody, httpMessage, headers, async);
+
+            return new SwitchCase(match, statement, AddScope: responseBody is not null);
         }
 
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, bool async)
         {
-            return fromTypeImplementation switch
+            ValueExpression? value;
+            return responseBody switch
             {
-                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
-                SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
-                _ => fromExpression
+                ObjectResponseBody objectResponseBody => new[]
+                {
+                    new DeclareVariableStatement(responseBody.Type, "value", Default, out value),
+                    objectResponseBody.Serialization switch
+                    {
+                        JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, responseBody.Type.Equals(typeof(BinaryData))),
+                        XmlElementSerialization xmlSerialization => throw new Exception(),
+                        _ => throw new NotImplementedException(objectResponseBody.Serialization.ToString())
+                    }
+                },
+                StreamResponseBody _ => new DeclareVariableStatement(null, "value", httpMessage.ExtractResponseContent(), out value),
+                ConstantResponseBody body => new DeclareVariableStatement(responseBody.Type, "value", new ConstantExpression(body.Value), out value),
+                StringResponseBody _ => new[]
+                {
+                    Declare("streamReader", StreamReaderExpression.New(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
+                    new DeclareVariableStatement(responseBody.Type, "value", streamReader.ReadToEnd(async), out value)
+                },
+                _ => new MethodBodyStatement()
             };
         }
 

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Models.Responses;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -33,6 +34,12 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
             var methodName = async ? nameof(HttpPipelineExtensions.ProcessMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessage);
             return new InvokeStaticMethodExpression(typeof(HttpPipelineExtensions), methodName, arguments, null, true, async);
+        }
+
+        public MethodBodyStatement Send(HttpMessageExpression message, CancellationTokenExpression cancellationToken, bool async)
+        {
+            var methodName = async ? nameof(HttpPipeline.SendAsync) : nameof(HttpPipeline.Send);
+            return new InvokeInstanceMethodStatement(Untyped, methodName, new ValueExpression[]{message, cancellationToken}, async);
         }
 
         public ValueExpression ProcessHeadAsBoolMessage(HttpMessageExpression message, CodeWriterDeclaration clientDiagnostics, RequestContextExpression? requestContext, bool async)

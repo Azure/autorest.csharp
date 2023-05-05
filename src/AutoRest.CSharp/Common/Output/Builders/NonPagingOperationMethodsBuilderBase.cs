@@ -57,13 +57,12 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(r => r.BodyType)
                 .WhereNotNull()
                 .Distinct()
-                .Select(t => TypeFactory.GetOutputType(typeFactory.CreateType(t)))
                 .ToList();
 
             return responseTypes.Count switch
             {
                 0 => null,
-                1 => responseTypes[0],
+                1 => TypeFactory.GetOutputType(typeFactory.CreateType(responseTypes[0])),
                 _ => typeof(object)
             };
         }
