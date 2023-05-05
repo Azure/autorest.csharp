@@ -94,11 +94,11 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -124,11 +124,11 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -174,8 +174,13 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]List upload detail for the discovery resource.
+        /// [Protocol Method] List upload detail for the discovery resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetLedgerEntriesAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -195,8 +200,13 @@ namespace Pagination
         }
 
         /// <summary>
-        /// [Protocol Method]List upload detail for the discovery resource.
+        /// [Protocol Method] List upload detail for the discovery resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetLedgerEntries(CancellationToken)"/> convenience overload with strongly typed models first.

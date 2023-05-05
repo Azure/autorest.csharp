@@ -119,8 +119,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method
+        /// [Protocol Method] top level method
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="TopActionAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -154,8 +159,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method
+        /// [Protocol Method] top level method
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -189,8 +199,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method2
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -214,8 +229,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level method2
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -239,8 +259,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level patch
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -268,8 +293,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]top level patch
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -323,8 +353,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]body parameter without body decorator
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -357,8 +392,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]body parameter without body decorator
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -417,8 +457,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Model can have its friendly name
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -451,8 +496,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Model can have its friendly name
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -485,8 +535,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
@@ -511,8 +566,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
@@ -537,8 +597,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="headParameter"> The String to use. </param>
@@ -569,8 +634,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="headParameter"> The String to use. </param>
@@ -637,8 +707,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -676,8 +751,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -715,8 +795,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="p2"> The String to use. </param>
@@ -749,8 +834,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi again
+        /// [Protocol Method] Return hi again
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="p2"> The String to use. </param>
@@ -801,8 +891,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi in demo2
+        /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -831,8 +926,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Return hi in demo2
+        /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -887,8 +987,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Create with literal value
+        /// [Protocol Method] Create with literal value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="CreateLiteralAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -921,8 +1026,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Create with literal value
+        /// [Protocol Method] Create with literal value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -973,8 +1083,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Send literal parameters
+        /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloLiteralAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1003,8 +1118,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]Send literal parameters
+        /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1033,8 +1153,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]get extensible enum
+        /// [Protocol Method] get extensible enum
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1058,8 +1183,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]get extensible enum
+        /// [Protocol Method] get extensible enum
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1109,8 +1239,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InternalProtocolAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1143,8 +1278,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1195,8 +1335,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="StillConvenientAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1225,8 +1370,13 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary>
-        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.

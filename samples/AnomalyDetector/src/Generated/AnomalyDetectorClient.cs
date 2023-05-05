@@ -107,14 +107,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies for the entire series in batch.
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This operation generates a model with an entire series, each point is detected
-        /// with the same model. With this method, points before and after a certain point
-        /// are used to determine whether it is an anomaly. The entire detection can give
-        /// user an overall status of the time series.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -149,14 +146,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies for the entire series in batch.
+        /// [Protocol Method] Detect anomalies for the entire series in batch.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This operation generates a model with an entire series, each point is detected
-        /// with the same model. With this method, points before and after a certain point
-        /// are used to determine whether it is an anomaly. The entire detection can give
-        /// user an overall status of the time series.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -225,12 +219,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomaly status of the latest point in time series.
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This operation generates a model using the points that you sent into the API,
-        /// and based on all data to determine whether the last point is anomalous.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -265,12 +258,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomaly status of the latest point in time series.
+        /// [Protocol Method] Detect anomaly status of the latest point in time series.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This operation generates a model using the points that you sent into the API,
-        /// and based on all data to determine whether the last point is anomalous.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -333,11 +325,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect change point for the entire series
+        /// [Protocol Method] Detect change point for the entire series
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Evaluate change point score of every series point
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -372,11 +364,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect change point for the entire series
+        /// [Protocol Method] Detect change point for the entire series
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Evaluate change point score of every series point
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -447,12 +439,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -488,12 +479,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -573,17 +563,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Train a Multivariate Anomaly Detection Model
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Create and train a multivariate anomaly detection model. The request must
-        /// include a source parameter to indicate an externally accessible Azure blob
-        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
-        /// storage folder which contains multiple CSV files, and each CSV file contains
-        /// two columns, timestamp and variable. Another type of input is an URI pointed to
-        /// a CSV file in Azure blob storage, which contains all the variables and a
-        /// timestamp column.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -618,17 +602,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Train a Multivariate Anomaly Detection Model
+        /// [Protocol Method] Train a Multivariate Anomaly Detection Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Create and train a multivariate anomaly detection model. The request must
-        /// include a source parameter to indicate an externally accessible Azure blob
-        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
-        /// storage folder which contains multiple CSV files, and each CSV file contains
-        /// two columns, timestamp and variable. Another type of input is an URI pointed to
-        /// a CSV file in Azure blob storage, which contains all the variables and a
-        /// timestamp column.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -663,11 +641,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Delete Multivariate Model
+        /// [Protocol Method] Delete Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Delete an existing multivariate model according to the modelId
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -698,11 +676,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Delete Multivariate Model
+        /// [Protocol Method] Delete Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Delete an existing multivariate model according to the modelId
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -769,12 +747,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Model
+        /// [Protocol Method] Get Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Get detailed information of multivariate model, including the training status
-        /// and variables used in the model.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -810,12 +787,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Model
+        /// [Protocol Method] Get Multivariate Model
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Get detailed information of multivariate model, including the training status
-        /// and variables used in the model.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -899,16 +875,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect Multivariate Anomaly
+        /// [Protocol Method] Detect Multivariate Anomaly
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Submit multivariate anomaly detection task with the modelId of trained model
-        /// and inference data, the input schema should be the same with the training
-        /// request. The request will complete asynchronously and return a resultId to
-        /// query the detection result.The request should be a source link to indicate an
-        /// externally accessible Azure storage Uri, either pointed to an Azure blob
-        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -946,16 +917,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect Multivariate Anomaly
+        /// [Protocol Method] Detect Multivariate Anomaly
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Submit multivariate anomaly detection task with the modelId of trained model
-        /// and inference data, the input schema should be the same with the training
-        /// request. The request will complete asynchronously and return a resultId to
-        /// query the detection result.The request should be a source link to indicate an
-        /// externally accessible Azure storage Uri, either pointed to an Azure blob
-        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1037,14 +1003,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies in the last point of the request body
+        /// [Protocol Method] Detect anomalies in the last point of the request body
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Submit multivariate anomaly detection task with the modelId of trained model
-        /// and inference data, and the inference data should be put into request body in a
-        /// JSON format. The request will complete synchronously and return the detection
-        /// immediately in the response body.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1082,14 +1045,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]Detect anomalies in the last point of the request body
+        /// [Protocol Method] Detect anomalies in the last point of the request body
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Submit multivariate anomaly detection task with the modelId of trained model
-        /// and inference data, and the inference data should be put into request body in a
-        /// JSON format. The request will complete synchronously and return the detection
-        /// immediately in the response body.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1153,11 +1113,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]List Multivariate Models
+        /// [Protocol Method] List Multivariate Models
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List models of a resource.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1181,11 +1141,11 @@ namespace AnomalyDetector
         }
 
         /// <summary>
-        /// [Protocol Method]List Multivariate Models
+        /// [Protocol Method] List Multivariate Models
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List models of a resource.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>

@@ -58,8 +58,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]No RequestBody and ResponseBody
+        /// [Protocol Method] No RequestBody and ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -87,8 +92,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]No RequestBody and ResponseBody
+        /// [Protocol Method] No RequestBody and ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -116,8 +126,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]RequestBody and ResponseBody
+        /// [Protocol Method] RequestBody and ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -142,8 +157,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]RequestBody and ResponseBody
+        /// [Protocol Method] RequestBody and ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -168,8 +188,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete
+        /// [Protocol Method] Delete
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resourceName"> name. </param>
@@ -197,8 +222,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete
+        /// [Protocol Method] Delete
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resourceName"> name. </param>
@@ -226,8 +256,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]No RequestBody and No ResponseBody
+        /// [Protocol Method] No RequestBody and No ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -251,8 +286,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]No RequestBody and No ResponseBody
+        /// [Protocol Method] No RequestBody and No ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -276,8 +316,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]RequestBody and No ResponseBody
+        /// [Protocol Method] RequestBody and No ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -302,8 +347,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]RequestBody and No ResponseBody
+        /// [Protocol Method] RequestBody and No ResponseBody
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -328,8 +378,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional PathParameters
+        /// [Protocol Method] Optional PathParameters
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -360,8 +415,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional PathParameters
+        /// [Protocol Method] Optional PathParameters
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -392,8 +452,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional path parameters with mixed sequence
+        /// [Protocol Method] Optional path parameters with mixed sequence
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -424,8 +489,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional path parameters with mixed sequence
+        /// [Protocol Method] Optional path parameters with mixed sequence
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
@@ -456,8 +526,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional path/body parameters with mixed sequence
+        /// [Protocol Method] Optional path/body parameters with mixed sequence
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Query parameter status. </param>
@@ -491,8 +566,13 @@ namespace Parameters_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Optional path/body parameters with mixed sequence
+        /// [Protocol Method] Optional path/body parameters with mixed sequence
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Query parameter status. </param>

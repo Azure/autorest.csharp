@@ -74,8 +74,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PostValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -108,8 +113,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PostValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -158,8 +168,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetValidAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -188,8 +203,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetValid(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -242,8 +262,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -276,8 +301,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -326,8 +356,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -356,8 +391,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetModel(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -410,8 +450,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -444,8 +489,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -494,8 +544,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetRecursiveModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -524,8 +579,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetRecursiveModel(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -578,8 +638,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutRecursiveModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -612,8 +677,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="PutRecursiveModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -662,8 +732,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetMissingDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -692,8 +767,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetMissingDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -738,8 +818,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWrongDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -768,8 +853,13 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWrongDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.

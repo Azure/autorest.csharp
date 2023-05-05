@@ -52,8 +52,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The String to use. </param>
@@ -81,8 +86,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The String to use. </param>

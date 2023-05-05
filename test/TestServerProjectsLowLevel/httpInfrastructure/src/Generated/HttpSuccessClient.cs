@@ -58,8 +58,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 200 status code if successful
+        /// [Protocol Method] Return 200 status code if successful
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -83,8 +88,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 200 status code if successful
+        /// [Protocol Method] Return 200 status code if successful
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -108,8 +118,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get 200 success
+        /// [Protocol Method] Get 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -133,8 +148,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get 200 success
+        /// [Protocol Method] Get 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -158,8 +178,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Options 200 success
+        /// [Protocol Method] Options 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -183,8 +208,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Options 200 success
+        /// [Protocol Method] Options 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -208,8 +238,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put boolean value true returning 200 success
+        /// [Protocol Method] Put boolean value true returning 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -234,8 +269,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put boolean value true returning 200 success
+        /// [Protocol Method] Put boolean value true returning 200 success
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -260,8 +300,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returning 200
+        /// [Protocol Method] Patch true Boolean value in request returning 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -286,8 +331,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returning 200
+        /// [Protocol Method] Patch true Boolean value in request returning 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -312,8 +362,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post bollean value true in request that returns a 200
+        /// [Protocol Method] Post bollean value true in request that returns a 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -338,8 +393,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post bollean value true in request that returns a 200
+        /// [Protocol Method] Post bollean value true in request that returns a 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -364,8 +424,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete simple boolean value true returns 200
+        /// [Protocol Method] Delete simple boolean value true returns 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -390,8 +455,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete simple boolean value true returns 200
+        /// [Protocol Method] Delete simple boolean value true returns 200
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -416,8 +486,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 201
+        /// [Protocol Method] Put true Boolean value in request returns 201
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -442,8 +517,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 201
+        /// [Protocol Method] Put true Boolean value in request returns 201
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -468,8 +548,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
+        /// [Protocol Method] Post true Boolean value in request returns 201 (Created)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -494,8 +579,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
+        /// [Protocol Method] Post true Boolean value in request returns 201 (Created)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -520,8 +610,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
+        /// [Protocol Method] Put true Boolean value in request returns 202 (Accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -546,8 +641,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
+        /// [Protocol Method] Put true Boolean value in request returns 202 (Accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -572,8 +672,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 202
+        /// [Protocol Method] Patch true Boolean value in request returns 202
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -598,8 +703,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 202
+        /// [Protocol Method] Patch true Boolean value in request returns 202
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -624,8 +734,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
+        /// [Protocol Method] Post true Boolean value in request returns 202 (Accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -650,8 +765,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
+        /// [Protocol Method] Post true Boolean value in request returns 202 (Accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -676,8 +796,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
+        /// [Protocol Method] Delete true Boolean value in request returns 202 (accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -702,8 +827,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
+        /// [Protocol Method] Delete true Boolean value in request returns 202 (accepted)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -728,8 +858,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 204 status code if successful
+        /// [Protocol Method] Return 204 status code if successful
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -753,8 +888,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 204 status code if successful
+        /// [Protocol Method] Return 204 status code if successful
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -778,8 +918,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Put true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -804,8 +949,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Put true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -830,8 +980,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Patch true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -856,8 +1011,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Patch true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -882,8 +1042,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Post true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -908,8 +1073,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Post true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -934,8 +1104,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Delete true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -960,8 +1135,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
+        /// [Protocol Method] Delete true Boolean value in request returns 204 (no content)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -986,8 +1166,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 404 status code
+        /// [Protocol Method] Return 404 status code
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1011,8 +1196,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 404 status code
+        /// [Protocol Method] Return 404 status code
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

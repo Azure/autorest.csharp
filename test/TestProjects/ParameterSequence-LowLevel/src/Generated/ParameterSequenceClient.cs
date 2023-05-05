@@ -58,11 +58,11 @@ namespace ParameterSequence_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get Item
+        /// [Protocol Method] Get Item
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Get item.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -96,11 +96,11 @@ namespace ParameterSequence_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get Item
+        /// [Protocol Method] Get Item
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Get item.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -134,11 +134,11 @@ namespace ParameterSequence_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Select Item
+        /// [Protocol Method] Select Item
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Select item.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -172,11 +172,11 @@ namespace ParameterSequence_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Select Item
+        /// [Protocol Method] Select Item
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Select item.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>

@@ -114,8 +114,13 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary>
-        /// [Protocol Method]Create or update resource.
+        /// [Protocol Method] Create or update resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -139,8 +144,13 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary>
-        /// [Protocol Method]Create or update resource.
+        /// [Protocol Method] Create or update resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -303,8 +313,13 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary>
-        /// [Protocol Method]Retrieves information about the resource.
+        /// [Protocol Method] Retrieves information about the resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>
@@ -332,8 +347,13 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary>
-        /// [Protocol Method]Retrieves information about the resource.
+        /// [Protocol Method] Retrieves information about the resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>

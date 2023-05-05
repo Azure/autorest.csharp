@@ -57,8 +57,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL and expect to concat after host
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL and expect to concat after host
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -77,8 +82,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL and expect to concat after host
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL and expect to concat after host
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -97,8 +107,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL with next operation
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL with next operation
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -117,8 +132,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL with next operation
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL with next operation
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -137,8 +157,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -159,8 +184,13 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that combines custom url, paging and partial URL
+        /// [Protocol Method] A paging operation that combines custom url, paging and partial URL
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="accountName"> Account Name. </param>

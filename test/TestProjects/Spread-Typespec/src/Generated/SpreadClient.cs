@@ -85,8 +85,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread a model as body.
+        /// [Protocol Method] spread a model as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadModelAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -119,8 +124,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread a model as body.
+        /// [Protocol Method] spread a model as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadModel(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -183,8 +193,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias as body.
+        /// [Protocol Method] spread an alias as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasAsync(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -217,8 +232,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias as body.
+        /// [Protocol Method] spread an alias as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAlias(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -289,8 +309,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which has multiple target property as body.
+        /// [Protocol Method] spread an alias which has multiple target property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -327,8 +352,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which has multiple target property as body.
+        /// [Protocol Method] spread an alias which has multiple target property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadMultiTargetAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -399,8 +429,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which contains a complex model property as body.
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -437,8 +472,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias which contains a complex model property as body.
+        /// [Protocol Method] spread an alias which contains a complex model property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithModel(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -513,8 +553,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains another alias property as body.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -551,8 +596,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains another alias property as body.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -659,8 +709,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains optional properties as body.
+        /// [Protocol Method] spread an alias with contains optional properties as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
@@ -697,8 +752,13 @@ namespace Spread
         }
 
         /// <summary>
-        /// [Protocol Method]spread an alias with contains optional properties as body.
+        /// [Protocol Method] spread an alias with contains optional properties as body.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.

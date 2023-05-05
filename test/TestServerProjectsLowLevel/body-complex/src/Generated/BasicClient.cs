@@ -60,8 +60,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -85,8 +90,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -110,8 +120,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -139,8 +154,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -168,8 +188,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// [Protocol Method] Get a basic complex type that is invalid for the local strong type
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -193,8 +218,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// [Protocol Method] Get a basic complex type that is invalid for the local strong type
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -218,8 +248,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type that is empty
+        /// [Protocol Method] Get a basic complex type that is empty
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -243,8 +278,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type that is empty
+        /// [Protocol Method] Get a basic complex type that is empty
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -268,8 +308,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// [Protocol Method] Get a basic complex type whose properties are null
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -293,8 +338,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// [Protocol Method] Get a basic complex type whose properties are null
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -318,8 +368,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -343,8 +398,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

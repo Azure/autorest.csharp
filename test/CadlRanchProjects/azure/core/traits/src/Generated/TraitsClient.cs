@@ -80,8 +80,13 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// [Protocol Method] Get a resource, sending and receiving headers.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SmokeTestAsync(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -116,8 +121,13 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// [Protocol Method] Get a resource, sending and receiving headers.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="SmokeTest(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.

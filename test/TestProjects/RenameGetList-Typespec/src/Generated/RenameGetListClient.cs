@@ -55,8 +55,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -85,8 +90,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -115,8 +125,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -147,8 +162,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -179,8 +199,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -195,8 +220,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -211,8 +241,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -232,8 +267,13 @@ namespace Azure.RenameGetList
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>

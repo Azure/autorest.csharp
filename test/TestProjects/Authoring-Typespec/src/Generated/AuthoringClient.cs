@@ -57,8 +57,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Creates a new project or updates an existing one.
+        /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -89,8 +94,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Creates a new project or updates an existing one.
+        /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -121,8 +131,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -151,8 +166,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -181,8 +201,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a project.
+        /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -211,8 +236,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a project.
+        /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -241,8 +271,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project&apos;s data.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -273,8 +308,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project&apos;s data.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -305,8 +345,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project&apos;s data.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -335,8 +380,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project&apos;s data.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -365,8 +415,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a training job for a project.
+        /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -397,8 +452,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Triggers a training job for a project.
+        /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -429,8 +489,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -461,8 +526,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the details of a deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -493,8 +563,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Creates a new deployment or replaces an existing one.
+        /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -527,8 +602,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Creates a new deployment or replaces an existing one.
+        /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -561,8 +641,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a project deployment.
+        /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -593,8 +678,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a project deployment.
+        /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -625,8 +715,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Swaps two existing deployments with each other.
+        /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -657,8 +752,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Swaps two existing deployments with each other.
+        /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -725,8 +825,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing deployment job.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetDeploymentStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -764,8 +869,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing deployment job.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetDeploymentStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -839,8 +949,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing swap deployment job.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetSwapDeploymentsStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -878,8 +993,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Gets the status of an existing swap deployment job.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetSwapDeploymentsStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -917,8 +1037,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -933,8 +1058,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -949,8 +1079,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -970,8 +1105,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]Lists the existing deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="projectName"> The String to use. </param>
@@ -991,8 +1131,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1010,8 +1155,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1029,8 +1179,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1048,8 +1203,13 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="maxCount"> The Int32 to use. </param>

@@ -52,8 +52,13 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
+        /// [Protocol Method] Get a group. Method should stay in `Group` subclient.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -77,8 +82,13 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
+        /// [Protocol Method] Get a group. Method should stay in `Group` subclient.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -102,8 +112,13 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
+        /// [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -118,8 +133,13 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
+        /// [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

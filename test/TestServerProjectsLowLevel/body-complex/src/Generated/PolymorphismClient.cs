@@ -58,8 +58,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic
+        /// [Protocol Method] Get complex types that are polymorphic
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -83,8 +88,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic
+        /// [Protocol Method] Get complex types that are polymorphic
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -108,8 +118,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic
+        /// [Protocol Method] Put complex types that are polymorphic
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -137,8 +152,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic
+        /// [Protocol Method] Put complex types that are polymorphic
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -166,8 +186,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
+        /// [Protocol Method] Get complex types that are polymorphic, JSON key contains a dot
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -191,8 +216,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
+        /// [Protocol Method] Get complex types that are polymorphic, JSON key contains a dot
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -216,8 +246,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+        /// [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -241,8 +276,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+        /// [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -266,8 +306,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+        /// [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -291,8 +336,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+        /// [Protocol Method] Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -316,8 +366,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// [Protocol Method] Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -341,8 +396,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// [Protocol Method] Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -366,8 +426,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// [Protocol Method] Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -395,8 +460,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// [Protocol Method] Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -424,8 +494,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
+        /// [Protocol Method] Put complex types that are polymorphic, omitting the discriminator
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -453,8 +528,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
+        /// [Protocol Method] Put complex types that are polymorphic, omitting the discriminator
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -482,8 +562,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -511,8 +596,13 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>

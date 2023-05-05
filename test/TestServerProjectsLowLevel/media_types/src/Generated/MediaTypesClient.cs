@@ -58,8 +58,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Analyze body, that could be different media types.
+        /// [Protocol Method] Analyze body, that could be different media types.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -85,8 +90,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Analyze body, that could be different media types.
+        /// [Protocol Method] Analyze body, that could be different media types.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -112,8 +122,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+        /// [Protocol Method] Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -139,8 +154,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+        /// [Protocol Method] Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -166,8 +186,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
+        /// [Protocol Method] Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -192,8 +217,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
+        /// [Protocol Method] Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -218,8 +248,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
+        /// [Protocol Method] Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -248,8 +283,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
+        /// [Protocol Method] Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -278,8 +318,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
+        /// [Protocol Method] Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -308,8 +353,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
+        /// [Protocol Method] Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -338,8 +388,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Body that&apos;s either text/plain or application/json
+        /// [Protocol Method] Body that&apos;s either text/plain or application/json
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -368,8 +423,13 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Body that&apos;s either text/plain or application/json
+        /// [Protocol Method] Body that&apos;s either text/plain or application/json
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>

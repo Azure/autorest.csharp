@@ -58,8 +58,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 408 status code, then 200 after retry
+        /// [Protocol Method] Return 408 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -83,8 +88,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 408 status code, then 200 after retry
+        /// [Protocol Method] Return 408 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -108,8 +118,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 500 status code, then 200 after retry
+        /// [Protocol Method] Return 500 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -134,8 +149,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 500 status code, then 200 after retry
+        /// [Protocol Method] Return 500 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -160,8 +180,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 500 status code, then 200 after retry
+        /// [Protocol Method] Return 500 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -186,8 +211,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 500 status code, then 200 after retry
+        /// [Protocol Method] Return 500 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -212,8 +242,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 502 status code, then 200 after retry
+        /// [Protocol Method] Return 502 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -237,8 +272,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 502 status code, then 200 after retry
+        /// [Protocol Method] Return 502 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -262,8 +302,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 502 status code, then 200 after retry
+        /// [Protocol Method] Return 502 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -287,8 +332,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 502 status code, then 200 after retry
+        /// [Protocol Method] Return 502 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -312,8 +362,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 503 status code, then 200 after retry
+        /// [Protocol Method] Return 503 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -338,8 +393,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 503 status code, then 200 after retry
+        /// [Protocol Method] Return 503 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -364,8 +424,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 503 status code, then 200 after retry
+        /// [Protocol Method] Return 503 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -390,8 +455,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 503 status code, then 200 after retry
+        /// [Protocol Method] Return 503 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -416,8 +486,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 504 status code, then 200 after retry
+        /// [Protocol Method] Return 504 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -442,8 +517,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 504 status code, then 200 after retry
+        /// [Protocol Method] Return 504 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -468,8 +548,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 504 status code, then 200 after retry
+        /// [Protocol Method] Return 504 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -494,8 +579,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Return 504 status code, then 200 after retry
+        /// [Protocol Method] Return 504 status code, then 200 after retry
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>

@@ -50,8 +50,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource set config service model.
+        /// [Protocol Method] Get a resource set config service model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -75,8 +80,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource set config service model.
+        /// [Protocol Method] Get a resource set config service model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -100,8 +110,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Creates or updates an resource set config.
+        /// [Protocol Method] Creates or updates an resource set config.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -129,8 +144,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Creates or updates an resource set config.
+        /// [Protocol Method] Creates or updates an resource set config.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -158,8 +178,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a ResourceSetRuleConfig resource.
+        /// [Protocol Method] Deletes a ResourceSetRuleConfig resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -183,8 +208,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a ResourceSetRuleConfig resource.
+        /// [Protocol Method] Deletes a ResourceSetRuleConfig resource.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

@@ -105,12 +105,11 @@ namespace ApiVersionInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -146,12 +145,11 @@ namespace ApiVersionInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Get Multivariate Anomaly Detection Result
+        /// [Protocol Method] Get Multivariate Anomaly Detection Result
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// For asynchronous inference, get multivariate anomaly detection result based on
-        /// resultId returned by the BatchDetectAnomaly api.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>

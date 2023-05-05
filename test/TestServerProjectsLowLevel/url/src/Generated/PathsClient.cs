@@ -59,8 +59,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path
+        /// [Protocol Method] Get true Boolean value on path
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -84,8 +89,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path
+        /// [Protocol Method] Get true Boolean value on path
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -109,8 +119,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get false Boolean value on path
+        /// [Protocol Method] Get false Boolean value on path
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -134,8 +149,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get false Boolean value on path
+        /// [Protocol Method] Get false Boolean value on path
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -159,8 +179,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get &apos;1000000&apos; integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -184,8 +209,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get &apos;1000000&apos; integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -209,8 +239,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get &apos;-1000000&apos; integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -234,8 +269,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get &apos;-1000000&apos; integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -259,8 +299,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -284,8 +329,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -309,8 +359,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -334,8 +389,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -359,8 +419,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -384,8 +449,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -409,8 +479,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -434,8 +509,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -459,8 +539,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -484,8 +569,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -509,8 +599,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -534,8 +629,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -559,8 +659,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -584,8 +689,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -609,8 +719,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -634,8 +749,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -659,11 +779,11 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;begin!*&apos;();:@&amp;=+$,end
+        /// [Protocol Method] Get &apos;begin!*&apos;();:@&amp;=+$,end
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -689,11 +809,11 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;begin!*&apos;();:@&amp;=+$,end
+        /// [Protocol Method] Get &apos;begin!*&apos;();:@&amp;=+$,end
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -719,8 +839,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;&apos;
+        /// [Protocol Method] Get &apos;&apos;
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -744,8 +869,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;&apos;
+        /// [Protocol Method] Get &apos;&apos;
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -769,8 +899,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null (should throw)
+        /// [Protocol Method] Get null (should throw)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="stringPath"> null string value. </param>
@@ -799,8 +934,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null (should throw)
+        /// [Protocol Method] Get null (should throw)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="stringPath"> null string value. </param>
@@ -829,8 +969,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get using uri with &apos;green color&apos; in path parameter
+        /// [Protocol Method] Get using uri with &apos;green color&apos; in path parameter
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
@@ -859,8 +1004,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get using uri with &apos;green color&apos; in path parameter
+        /// [Protocol Method] Get using uri with &apos;green color&apos; in path parameter
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
@@ -889,8 +1039,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null (should throw on the client before the request is sent on wire)
+        /// [Protocol Method] Get null (should throw on the client before the request is sent on wire)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
@@ -919,8 +1074,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null (should throw on the client before the request is sent on wire)
+        /// [Protocol Method] Get null (should throw on the client before the request is sent on wire)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
@@ -949,8 +1109,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
@@ -978,8 +1143,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
@@ -1007,8 +1177,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;&apos; as byte array
+        /// [Protocol Method] Get &apos;&apos; as byte array
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1032,8 +1207,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;&apos; as byte array
+        /// [Protocol Method] Get &apos;&apos; as byte array
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1057,8 +1237,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as byte array (should throw)
+        /// [Protocol Method] Get null as byte array (should throw)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
@@ -1086,8 +1271,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as byte array (should throw)
+        /// [Protocol Method] Get null as byte array (should throw)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
@@ -1115,8 +1305,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1140,8 +1335,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1165,8 +1365,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as date - this should throw or be unusable on the client side, depending on date representation
+        /// [Protocol Method] Get null as date - this should throw or be unusable on the client side, depending on date representation
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="datePath"> null as date (should throw). </param>
@@ -1191,8 +1396,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as date - this should throw or be unusable on the client side, depending on date representation
+        /// [Protocol Method] Get null as date - this should throw or be unusable on the client side, depending on date representation
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="datePath"> null as date (should throw). </param>
@@ -1217,8 +1427,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1242,8 +1457,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1267,8 +1487,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as date-time, should be disallowed or throw depending on representation of date-time
+        /// [Protocol Method] Get null as date-time, should be disallowed or throw depending on representation of date-time
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
@@ -1293,8 +1518,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get null as date-time, should be disallowed or throw depending on representation of date-time
+        /// [Protocol Method] Get null as date-time, should be disallowed or throw depending on representation of date-time
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
@@ -1319,8 +1549,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
+        /// [Protocol Method] Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
@@ -1348,8 +1583,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
+        /// [Protocol Method] Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
@@ -1377,8 +1617,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
@@ -1406,8 +1651,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
@@ -1435,8 +1685,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
+        /// [Protocol Method] Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
@@ -1461,8 +1716,13 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
+        /// [Protocol Method] Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>

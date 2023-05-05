@@ -58,8 +58,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -74,8 +79,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -90,8 +100,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -105,8 +120,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -120,8 +140,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that finishes on the first call without a nextlink
+        /// [Protocol Method] A paging operation that finishes on the first call without a nextlink
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -136,8 +161,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that finishes on the first call without a nextlink
+        /// [Protocol Method] A paging operation that finishes on the first call without a nextlink
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -152,8 +182,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -168,8 +203,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -184,8 +224,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
@@ -203,8 +248,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
@@ -222,8 +272,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
@@ -239,8 +294,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
@@ -256,8 +316,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
@@ -273,8 +338,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
@@ -290,8 +360,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -305,8 +380,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -320,8 +400,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink in odata format that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
@@ -339,8 +424,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink in odata format that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
@@ -358,8 +448,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="offset"> Offset of return value. </param>
@@ -378,8 +473,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="offset"> Offset of return value. </param>
@@ -398,8 +498,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -414,8 +519,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -430,8 +540,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -446,8 +561,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -462,8 +582,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives a 400 on the first call
+        /// [Protocol Method] A paging operation that receives a 400 on the first call
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -478,8 +603,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives a 400 on the first call
+        /// [Protocol Method] A paging operation that receives a 400 on the first call
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -494,8 +624,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives a 400 on the second call
+        /// [Protocol Method] A paging operation that receives a 400 on the second call
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -510,8 +645,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives a 400 on the second call
+        /// [Protocol Method] A paging operation that receives a 400 on the second call
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -526,8 +666,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives an invalid nextLink
+        /// [Protocol Method] A paging operation that receives an invalid nextLink
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -542,8 +687,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that receives an invalid nextLink
+        /// [Protocol Method] A paging operation that receives an invalid nextLink
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -558,8 +708,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -581,8 +736,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -604,8 +764,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -627,8 +792,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -650,8 +820,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -675,8 +850,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -700,8 +880,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -725,8 +910,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -750,8 +940,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -766,8 +961,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -782,8 +982,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A long-running paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -812,8 +1017,13 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]A long-running paging operation that includes a nextLink that has 10 pages
+        /// [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>

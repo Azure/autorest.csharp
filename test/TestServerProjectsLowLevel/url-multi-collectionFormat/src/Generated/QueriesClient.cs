@@ -59,8 +59,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a null array of string using the multi-array format
+        /// [Protocol Method] Get a null array of string using the multi-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
@@ -85,8 +90,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a null array of string using the multi-array format
+        /// [Protocol Method] Get a null array of string using the multi-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
@@ -111,8 +121,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an empty array [] of string using the multi-array format
+        /// [Protocol Method] Get an empty array [] of string using the multi-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
@@ -137,8 +152,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an empty array [] of string using the multi-array format
+        /// [Protocol Method] Get an empty array [] of string using the multi-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
@@ -163,8 +183,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format
+        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
@@ -189,8 +214,13 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format
+        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>

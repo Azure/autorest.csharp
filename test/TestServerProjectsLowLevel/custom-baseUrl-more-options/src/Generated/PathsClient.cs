@@ -65,8 +65,13 @@ namespace custom_baseUrl_more_options_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a 200 to test a valid base uri
+        /// [Protocol Method] Get a 200 to test a valid base uri
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
@@ -100,8 +105,13 @@ namespace custom_baseUrl_more_options_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get a 200 to test a valid base uri
+        /// [Protocol Method] Get a 200 to test a valid base uri
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>

@@ -58,8 +58,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -83,8 +88,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -108,8 +118,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -133,8 +148,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -158,8 +178,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
+        /// [Protocol Method] Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -183,8 +208,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
+        /// [Protocol Method] Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -208,8 +238,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with no payload:
+        /// [Protocol Method] Send a 202 response with no payload:
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -233,8 +268,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with no payload:
+        /// [Protocol Method] Send a 202 response with no payload:
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -258,8 +298,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -283,8 +328,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -308,8 +358,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -333,8 +388,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -358,8 +418,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
+        /// [Protocol Method] Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -383,8 +448,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
+        /// [Protocol Method] Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -408,8 +478,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -433,8 +508,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -458,8 +538,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -483,8 +568,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -508,8 +598,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -533,8 +628,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -558,8 +658,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -583,8 +688,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -608,8 +718,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -633,8 +748,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -658,8 +778,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with no payload
+        /// [Protocol Method] Send a 202 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -683,8 +808,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with no payload
+        /// [Protocol Method] Send a 202 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -708,8 +838,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -733,8 +868,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -758,8 +898,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -783,8 +928,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -808,8 +958,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// [Protocol Method] Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -833,8 +988,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// [Protocol Method] Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -858,8 +1018,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -883,8 +1048,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 204 response with no payload
+        /// [Protocol Method] Send a 204 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -908,8 +1078,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -933,8 +1108,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -958,8 +1138,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// [Protocol Method] Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -983,8 +1168,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
+        /// [Protocol Method] Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1008,8 +1198,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1033,8 +1228,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1058,8 +1258,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload
+        /// [Protocol Method] Send a 200 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1083,8 +1288,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload
+        /// [Protocol Method] Send a 200 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1108,8 +1318,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1133,8 +1348,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1158,8 +1378,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1183,8 +1408,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1208,8 +1438,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1233,8 +1468,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1258,8 +1498,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload
+        /// [Protocol Method] Send a 200 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1283,8 +1528,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload
+        /// [Protocol Method] Send a 200 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1308,8 +1558,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1333,8 +1588,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1358,8 +1618,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1383,8 +1648,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload
+        /// [Protocol Method] Send a 400 response with no payload
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1408,8 +1678,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
+        /// [Protocol Method] Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1433,8 +1708,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
+        /// [Protocol Method] Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1458,8 +1738,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1483,8 +1768,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1508,8 +1798,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1533,8 +1828,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1558,8 +1858,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload client should treat as an http error with no error model
+        /// [Protocol Method] Send a 400 response with no payload client should treat as an http error with no error model
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1583,8 +1888,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 400 response with no payload client should treat as an http error with no error model
+        /// [Protocol Method] Send a 400 response with no payload client should treat as an http error with no error model
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1608,8 +1918,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1633,8 +1948,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1658,8 +1978,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1683,8 +2008,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
+        /// [Protocol Method] Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1708,8 +2038,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
+        /// [Protocol Method] Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -1733,8 +2068,13 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
+        /// [Protocol Method] Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

@@ -63,8 +63,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="UpdateConvenienceAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -93,8 +98,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="UpdateConvenience(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -151,8 +161,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequiredAsync(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -186,8 +201,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -259,8 +279,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -289,8 +314,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolValue(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -357,8 +387,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceWithOptionalValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -387,8 +422,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceWithOptionalValue(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -435,8 +475,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceWithRequiredAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -465,8 +510,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceWithRequired(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -495,8 +545,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
+        /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -520,8 +575,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
+        /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -545,8 +605,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
+        /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -570,8 +635,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
+        /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -635,8 +705,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalQueryValueAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -666,8 +741,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalQueryValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -737,8 +817,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolRequiredQueryValueAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -768,8 +853,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolRequiredQueryValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -839,8 +929,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalModelValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -870,8 +965,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -927,8 +1027,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolRequiredModelAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -961,8 +1066,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolRequiredModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1035,8 +1145,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValueAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1066,8 +1181,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1137,8 +1257,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValueAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1168,8 +1293,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1219,8 +1349,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequiredAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1250,8 +1385,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequired(int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1301,8 +1441,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequiredAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1332,8 +1477,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequired(int,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1403,8 +1553,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1434,8 +1589,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1491,8 +1651,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1525,8 +1690,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1579,8 +1749,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequiredAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1610,8 +1785,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequired(Model,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1669,8 +1849,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
@@ -1704,8 +1889,13 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.

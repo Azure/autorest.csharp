@@ -59,11 +59,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create products
+        /// [Protocol Method] Create products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -96,11 +96,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create products
+        /// [Protocol Method] Create products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -133,11 +133,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create products
+        /// [Protocol Method] Create products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -172,11 +172,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create products
+        /// [Protocol Method] Create products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -211,11 +211,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create another product
+        /// [Protocol Method] Create another product
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -250,11 +250,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Create another product
+        /// [Protocol Method] Create another product
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Resets products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -289,11 +289,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]List
+        /// [Protocol Method] List
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List all.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -319,11 +319,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]List
+        /// [Protocol Method] List
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List all.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -349,11 +349,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]List products
+        /// [Protocol Method] List products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List all products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -379,11 +379,11 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]List products
+        /// [Protocol Method] List products
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// List all products.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -409,8 +409,13 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
@@ -448,8 +453,13 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>

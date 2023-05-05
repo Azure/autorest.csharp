@@ -62,8 +62,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get an account
+        /// [Protocol Method] Get an account
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -87,8 +92,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get an account
+        /// [Protocol Method] Get an account
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -112,8 +122,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Updates an account
+        /// [Protocol Method] Updates an account
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -141,8 +156,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Updates an account
+        /// [Protocol Method] Updates an account
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -170,8 +190,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]List the authorization keys associated with this account.
+        /// [Protocol Method] List the authorization keys associated with this account.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -195,8 +220,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]List the authorization keys associated with this account.
+        /// [Protocol Method] List the authorization keys associated with this account.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -220,8 +250,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Regenerate the authorization keys associated with this data catalog.
+        /// [Protocol Method] Regenerate the authorization keys associated with this data catalog.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -249,8 +284,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Regenerate the authorization keys associated with this data catalog.
+        /// [Protocol Method] Regenerate the authorization keys associated with this data catalog.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -278,8 +318,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource set config service model.
+        /// [Protocol Method] Get a resource set config service model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> The String to use. </param>
@@ -295,8 +340,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]Get a resource set config service model.
+        /// [Protocol Method] Get a resource set config service model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> The String to use. </param>
@@ -312,8 +362,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]List the collections in the account.
+        /// [Protocol Method] List the collections in the account.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> The String to use. </param>
@@ -329,8 +384,13 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method]List the collections in the account.
+        /// [Protocol Method] List the collections in the account.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> The String to use. </param>

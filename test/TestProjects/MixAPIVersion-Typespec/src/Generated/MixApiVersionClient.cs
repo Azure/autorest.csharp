@@ -55,11 +55,11 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]delete.
+        /// [Protocol Method] delete.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Delete a pet.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -90,11 +90,11 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]delete.
+        /// [Protocol Method] delete.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Delete a pet.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -125,8 +125,13 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="petId"> The id of pet. </param>
@@ -151,8 +156,13 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="petId"> The id of pet. </param>
@@ -177,8 +187,13 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -206,8 +221,13 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -235,11 +255,11 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -256,11 +276,11 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>

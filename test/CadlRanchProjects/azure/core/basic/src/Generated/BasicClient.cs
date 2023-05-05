@@ -51,11 +51,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
+        /// [Protocol Method] Adds a user or updates a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or updates a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -86,11 +86,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
+        /// [Protocol Method] Adds a user or updates a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or updates a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -151,11 +151,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or replaces a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -191,11 +191,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Creates or replaces a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -253,11 +253,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Gets a user.
+        /// [Protocol Method] Gets a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Gets a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -289,11 +289,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Gets a user.
+        /// [Protocol Method] Gets a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Gets a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -325,11 +325,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a user.
+        /// [Protocol Method] Deletes a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Deletes a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -356,11 +356,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Deletes a user.
+        /// [Protocol Method] Deletes a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Deletes a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -417,11 +417,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Exports a user.
+        /// [Protocol Method] Exports a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Exports a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -457,11 +457,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Exports a user.
+        /// [Protocol Method] Exports a user.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Exports a User
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -533,11 +533,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Lists all users.
+        /// [Protocol Method] Lists all users.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Lists all Users
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -566,11 +566,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]Lists all users.
+        /// [Protocol Method] Lists all users.
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Lists all Users
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -619,8 +619,13 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithPageAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -640,8 +645,13 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -681,8 +691,13 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithCustomPageModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
@@ -702,8 +717,13 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method]List with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// <item>
         /// <description>
         /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.

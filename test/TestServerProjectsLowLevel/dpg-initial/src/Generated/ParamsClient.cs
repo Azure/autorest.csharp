@@ -58,9 +58,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Head request, no params.
+        /// [Protocol Method] Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -84,9 +89,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Head request, no params.
+        /// [Protocol Method] Head request, no params.
         ///  Initially has no query parameters. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -110,9 +120,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
@@ -140,9 +155,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
@@ -170,8 +190,13 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
@@ -200,8 +225,13 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
@@ -230,8 +260,13 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]POST a JSON
+        /// [Protocol Method] POST a JSON
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -259,8 +294,13 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]POST a JSON
+        /// [Protocol Method] POST a JSON
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -288,9 +328,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
@@ -315,9 +360,14 @@ namespace dpg_initial_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
         /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
