@@ -536,6 +536,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, Array.Empty<FormattableString>(), false, false, false);
             }
         }
 
@@ -756,13 +757,10 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
         {
-            if (schemas.Count <= 0)
-            {
-                writeXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            if (clientMethod.RequestMethod.Operation.ExternalDocsUrl == null)
                 return;
-            }
 
             var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
                 ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
@@ -796,7 +794,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            if (!methodSignature.DescriptionText.IsNullOrEmpty())
+            if (addDescription && !methodSignature.DescriptionText.IsNullOrEmpty())
             {
                 schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
             }
