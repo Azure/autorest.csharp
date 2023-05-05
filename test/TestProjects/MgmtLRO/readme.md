@@ -12,4 +12,7 @@ namespace: MgmtLRO
 
 operations-to-skip-lro-api-version-override:
 - Fakes_CreateOrUpdate
+
+operations-to-lro-api-version-override:
+  Fakes_Update: "2021-06-01"
 ```

@@ -808,7 +808,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
                 {
-                    _writer.AppendRaw("true");
+                    _writer.AppendRaw("skipApiVersionOverride: true,");
+                }
+
+                if (Configuration.MgmtConfiguration.OperationsToLroApiVersionOverride.TryGetValue(operation.OperationId, out var apiVersionOverrideValue))
+                {
+                    _writer.Append($"apiVersionOverrideValue: {apiVersionOverrideValue:L}");
                 }
             }
             _writer.RemoveTrailingComma();

@@ -122,7 +122,8 @@ namespace AutoRest.CSharp.Input
             JsonElement? operationIdMappings = default,
             JsonElement? updateRequiredCopy = default,
             JsonElement? patchInitializerCustomization = default,
-            JsonElement? partialResources = default)
+            JsonElement? partialResources = default,
+            JsonElement? operationsToLroApiVersionOverride = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -178,6 +179,7 @@ namespace AutoRest.CSharp.Input
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
             UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
             PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
+            OperationsToLroApiVersionOverride = DeserializeDictionary<string, string>(operationsToLroApiVersionOverride);
         }
 
         private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
@@ -228,6 +230,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyList<string> OperationsToSkipLroApiVersionOverride { get; }
+        public IReadOnlyDictionary<string, string> OperationsToLroApiVersionOverride { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
@@ -276,7 +279,8 @@ namespace AutoRest.CSharp.Input
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
                 updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
                 patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
-                partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult());
+                partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult(),
+                operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -319,6 +323,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
             WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
             WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
+            WriteNonEmptySettings(writer, nameof(OperationsToLroApiVersionOverride), OperationsToLroApiVersionOverride);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -375,6 +380,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
             root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
             root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
+            root.TryGetProperty(nameof(OperationsToLroApiVersionOverride), out var operationsToLroApiVersionOverride);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupToOmit,
@@ -413,7 +419,8 @@ namespace AutoRest.CSharp.Input
                 operationIdMappings: operationIdMappings,
                 updateRequiredCopy: updateRequiredCopy,
                 patchInitializerCustomization: patchInitializerCustomization,
-                partialResources: virtualResources);
+                partialResources: virtualResources,
+                operationsToLroApiVersionOverride: operationsToLroApiVersionOverride);
         }
 
         private static void WriteNonEmptySettings(
