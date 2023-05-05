@@ -236,6 +236,42 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.Append("]]></code>");
         }
 
+        private void ComposeWrappedCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            builder.AppendLine("<code><![CDATA[");
+            ComposeGetClientCodes(builder);
+            builder.AppendLine();
+
+            // get input parameters -- only body parameter is not initialized inline in the invocation, therefore we take out all the body parameters.
+            var typeProviderTypedParameters = convenienceMethod.Signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body);
+            foreach (var parameter in typeProviderTypedParameters)
+            {
+                ComposeBodyParameter(allParameters, parameter, builder);
+            }
+
+            if (convenienceMethod.IsLongRunning)
+            {
+                if (convenienceMethod.IsPageable)
+                {
+                    // do nothing, this never happen right now
+                }
+                else
+                {
+                    ComposeHandleLongRunningResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+                }
+            }
+            else if (convenienceMethod.IsPageable)
+            {
+                ComposeHandlePageableResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+            }
+            else
+            {
+                ComposeHandleNormalResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+            }
+
+            builder.Append("]]></code>");
+        }
+
         internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             ComposeGetClientCodes(builder);
@@ -418,7 +454,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeHandlePageableResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             var methodSignature = convenienceMethod.Signature;
-            builder.Append($"var result = client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)});");
+            builder.Append($"var result = client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
         private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
@@ -475,7 +511,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // TODO -- need refactor to use CodeWriter and then reduce with Roslyn maybe?
             var methodSignature = convenienceMethod.Signature;
-            builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)});");
+            builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)

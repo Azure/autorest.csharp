@@ -566,11 +566,11 @@ namespace AutoRest.CSharp.Generation.Writers
         private static string EscapeXmlCSharpType(CSharpType type)
             => type.ToString().Trim().Replace('<', '{').Replace('>', '}');
 
-        private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod)
+        private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(isAsync);
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks, async);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks, isAsync);
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
         }
 
