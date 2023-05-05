@@ -396,5 +396,55 @@ namespace AutoRest.CSharp.Output.Models
 
             return false;
         }
+
+        internal bool HasMatchingCustomMethod(LowLevelClientMethod method)
+        {
+            if (ExistingType is not null)
+            {
+                // add custom ctors into the candidates
+                foreach (var member in ExistingType.GetMembers())
+                {
+                    if (member is not IMethodSymbol methodSymbol)
+                        continue;
+
+                    if (methodSymbol.Name != method.RequestMethod.Name)
+                        continue;
+
+                    if (methodSymbol.Parameters.Length != method.ProtocolMethodSignature.Parameters.Count - 1)
+                        continue;
+
+                    if (methodSymbol.Parameters.Last().Type.Name == "CancellationToken")
+                        continue;
+
+                    bool allEqual = true;
+                    for (int i = 0; i < methodSymbol.Parameters.Length; i++)
+                    {
+                        var methodParamType = (INamedTypeSymbol)methodSymbol.Parameters[i].Type;
+                        var csharpMethodParamType = methodParamType.GetCSharpType(_typeFactory);
+                        var protocolParamType = method.ProtocolMethodSignature.Parameters[i].Type;
+                        if (csharpMethodParamType == null)
+                        {
+                            if (methodParamType.Name != protocolParamType.Name)
+                            {
+                                allEqual = false;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (csharpMethodParamType.Name != protocolParamType.Name || (csharpMethodParamType.IsValueType && csharpMethodParamType.IsNullable != protocolParamType.IsNullable))
+                            {
+                                allEqual = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (allEqual)
+                        return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -60,14 +60,50 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
                             !_client.IsMethodSuppressed(method))
                         {
-                            WriteTestCompilation(method, false, false);
+                            bool writeShortVersion = ShouldGenerateShortVersion(method);
+
+                            if (writeShortVersion)
+                                WriteTestCompilation(method, false, false);
                             WriteTestCompilation(method, false, true);
-                            WriteTestCompilation(method, true, false);
+
+                            if (writeShortVersion)
+                                WriteTestCompilation(method, true, false);
                             WriteTestCompilation(method, true, true);
                         }
                     }
                 }
             }
+        }
+
+        private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
+        {
+            if (method.ConvenienceMethod is not null)
+            {
+                if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
+                    !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+                {
+                    bool allEqual = true;
+                    for (int i = 0; i < method.ConvenienceMethod.Signature.Parameters.Count; i++)
+                    {
+                        if (!method.ConvenienceMethod.Signature.Parameters[i].Type.Equals(method.ProtocolMethodSignature.Parameters[i].Type))
+                        {
+                            allEqual = false;
+                            break;
+                        }
+                    }
+                    if (allEqual)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (_client.HasMatchingCustomMethod(method))
+                    return false;
+            }
+
+            return true;
         }
 
         private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
