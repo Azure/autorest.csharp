@@ -58,7 +58,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
                         //TODO: we should make this more obvious to determine if something is convenience only
                         if ((method.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) > 0 &&
                             !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                            !_client.IsMethodSuppressed(method))
+                            !_client.IsMethodSuppressed(method) &&
+                            _client.GetEffectiveCtor() is not null)
                         {
                             bool writeShortVersion = ShouldGenerateShortVersion(method);
 

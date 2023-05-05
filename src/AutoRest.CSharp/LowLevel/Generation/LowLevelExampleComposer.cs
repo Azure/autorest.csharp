@@ -50,6 +50,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (_client.IsMethodSuppressed(clientMethod))
                 return $"";
 
+            //skip if there are no valid ctors
+            if (_client.GetEffectiveCtor() is null)
+                return $"";
+
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
             var requestBodyType = clientMethod.RequestBodyType;
             var builder = new StringBuilder();
@@ -871,7 +875,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 client = client.ParentClient;
             }
-            callChain.Push(client.GetEffectiveCtor());
+            callChain.Push(client.GetEffectiveCtor()!);
 
             return callChain.ToList();
         }

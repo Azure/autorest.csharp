@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
-        internal MethodSignatureBase GetEffectiveCtor()
+        internal MethodSignatureBase? GetEffectiveCtor()
         {
             //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
             //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (classTarget is null || !classTarget.Equals(DefaultName))
                         continue;
 
-                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values));
+                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc=> (INamedTypeSymbol)(tc.Value!)).ToArray()));
                 }
 
                 // add custom ctors into the candidates
@@ -290,6 +290,7 @@ namespace AutoRest.CSharp.Output.Models
                     //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
                     if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
                     {
+                        candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p=>(INamedTypeSymbol)p.Type).ToArray()));
                         continue;
                     }
                     var ctor = new ConstructorSignature(
@@ -309,7 +310,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return candidates.OrderBy(c => c.Parameters.Count).First();
+            return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
         }
 
         private string? GetSummaryPortion(string? xmlComment)
@@ -328,14 +329,14 @@ namespace AutoRest.CSharp.Output.Models
             return span.Slice(start, end - start).Trim().ToString();
         }
 
-        private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, ImmutableArray<TypedConstant> suppressionParameters)
+        private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, INamedTypeSymbol[] suppressionParameters)
         {
             if (methodParameters.Count != suppressionParameters.Length)
                 return false;
 
             for (int i = 0; i < methodParameters.Count; i++)
             {
-                var namedSymbol = ((INamedTypeSymbol)suppressionParameters[i].Value!);
+                var namedSymbol = suppressionParameters[i];
                 var suppressionParamType = namedSymbol.GetCSharpType(_typeFactory);
                 var methodParamType = methodParameters[i].Type;
                 if (suppressionParamType is null)
@@ -390,7 +391,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (methodTarget is null || !methodTarget.Equals(clientMethod.RequestMethod.Name))
                     continue;
 
-                if (IsParamMatch(clientMethod.ProtocolMethodSignature.Parameters, attribute.ConstructorArguments[1].Values))
+                if (IsParamMatch(clientMethod.ProtocolMethodSignature.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()))
                     return true;
             }
 
