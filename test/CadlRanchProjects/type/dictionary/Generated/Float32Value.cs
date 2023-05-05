@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -52,7 +53,15 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFloat32ValueAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, float>>(), response);
+            IReadOnlyDictionary<string, float> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                dictionary.Add(property.Name, property.Value.GetSingle());
+            }
+            value = dictionary;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -60,7 +69,15 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFloat32Value(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, float>>(), response);
+            IReadOnlyDictionary<string, float> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                dictionary.Add(property.Name, property.Value.GetSingle());
+            }
+            value = dictionary;
+            return Response.FromValue(value, response);
         }
 
         /// <summary>

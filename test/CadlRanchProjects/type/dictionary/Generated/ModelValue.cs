@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -53,7 +54,15 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetModelValueAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, InnerModel>>(), response);
+            IReadOnlyDictionary<string, InnerModel> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+            }
+            value = dictionary;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -61,7 +70,15 @@ namespace _Type._Dictionary
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetModelValue(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<IReadOnlyDictionary<string, InnerModel>>(), response);
+            IReadOnlyDictionary<string, InnerModel> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+            }
+            value = dictionary;
+            return Response.FromValue(value, response);
         }
 
         /// <summary>

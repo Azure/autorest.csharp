@@ -78,6 +78,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteProtocolMethod(_writer, clientMethod, _client.Fields, longRunning, pagingInfo, false);
                     }
 
+                    foreach (var clientMethod in _client.CustomMethods())
+                    {
+                        //TODO: Write example docs for custom methods
+                        //WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, true);
+                        //WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, false);
+                    }
+
                     WriteSubClientFactoryMethod();
 
                     foreach (var method in _client.RequestMethods)
@@ -285,7 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.Line($"return {responseVariable:I};");
                 }
-                else if (TypeFactory.IsReadOnlyList(responseType))
+                else if (TypeFactory.IsReadOnlyList(responseType) || TypeFactory.IsReadOnlyDictionary(responseType))
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }
@@ -664,6 +671,137 @@ namespace AutoRest.CSharp.Generation.Writers
             BuildSchemaFromDoc(builder, docs.First(), docDict, 2);
             builder.AppendLine("}");
             return builder.ToString();
+        }
+
+        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
+        private static IReadOnlyList<FormattableString> CreateSchemaDocumentationRemarks(LowLevelClientMethod clientMethod, out bool hasRequestSchema, out bool hasResponseSchema)
+        {
+            var schemas = new List<FormattableString>();
+
+            hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
+
+            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is InputModelType modelType)
+            {
+                var itemType = modelType.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
+                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemType, "Response Body");
+            }
+            else
+            {
+                hasResponseSchema = AddRequestOrResponseInputType(schemas, clientMethod.ResponseBodyType, "Response Body");
+            }
+            return schemas;
+            static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
+                bodyType switch
+                {
+                    InputListType listType => AddRequestOrResponseInputType(formattedSchemas, listType.ElementType, schemaName),
+                    InputDictionaryType dictionaryType => AddRequestOrResponseInputType(formattedSchemas, dictionaryType.ValueType, schemaName),
+                    _ => AddRequestOrResponseSchema(formattedSchemas, bodyType, schemaName),
+                };
+
+            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, InputType? type, string schemaName)
+            {
+                if (type is null)
+                {
+                    return false;
+                }
+
+                var schemasToAdd = new List<FormattableString>();
+                if (type is InputModelType { DerivedModels.Count: > 0 } modelType)
+                {
+                    var derivedModels = modelType.GetAllDerivedModels();
+                    if (derivedModels.Count > 1)
+                    {
+                        schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    }
+
+                    for (var index = 0; index < derivedModels.Count; index++)
+                    {
+                        var derivedModel = derivedModels[index];
+                        if (index == 1)
+                        {
+                            schemasToAdd.Add($"<details><summary>~+ {derivedModels.Count - 1} more JSON objects</summary>");
+                        }
+
+                        var docs = GetSchemaDocumentationsForSchema(derivedModel, $"{derivedModel.Name.ToCleanName()} {schemaName}");
+                        if (docs != null)
+                        {
+                            schemasToAdd.Add($"<details><summary>{derivedModel.Name.ToCleanName()}</summary>");
+                            schemasToAdd.Add($"Schema for <c>{derivedModel.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                            schemasToAdd.Add($"</details>{Environment.NewLine}");
+                        }
+                    }
+                    if (derivedModels.Count > 1)
+                    {
+                        schemasToAdd.Add($"</details>{Environment.NewLine}");
+                    }
+                }
+                else
+                {
+                    var docs = GetSchemaDocumentationsForSchema(type, schemaName);
+                    if (docs != null)
+                    {
+                        schemasToAdd.Add($"Schema for <c>{type.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                    }
+                }
+
+                if (schemasToAdd.Count > 0)
+                {
+                    formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}{Environment.NewLine}");
+                    formattedSchemas.AddRange(schemasToAdd);
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
+        {
+            if (schemas.Count <= 0)
+            {
+                writeXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+                return;
+            }
+
+            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
+                : (FormattableString)$"";
+
+            var schemaDesription = "";
+            if (hasRequestRemarks && hasResponseRemarks)
+            {
+                if (clientMethod.PagingInfo == null)
+                {
+                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                }
+                else
+                {
+                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                }
+            }
+            else if (hasRequestRemarks)
+            {
+                schemaDesription = "Below is the JSON schema for the request payload.";
+            }
+            else if (hasResponseRemarks)
+            {
+                if (clientMethod.PagingInfo == null)
+                {
+                    schemaDesription = "Below is the JSON schema for the response payload.";
+                }
+                else
+                {
+                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                }
+            }
+
+            if (!methodSignature.DescriptionText.IsNullOrEmpty())
+            {
+                schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
+            }
+
+            writeXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
         }
 
         private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, int indentation = 0)
