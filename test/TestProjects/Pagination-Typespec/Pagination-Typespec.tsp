@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
@@ -9,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using OpenAPI;
 using Azure.ClientGenerator.Core;
 
 //
@@ -23,7 +21,7 @@ using Azure.ClientGenerator.Core;
         version: "2022-05-13"
     }
 )
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
   "{pagnationUri}",
   "Pagination Service",

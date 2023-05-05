@@ -381,6 +381,9 @@ namespace AutoRest.CSharp.Common.Input
             DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
+            AnySchema when IsDPG => InputIntrinsicType.Unknown,
+            AnyObjectSchema when IsDPG => InputIntrinsicType.Unknown,
+
             _ => new CodeModelType(schema)
         };
 

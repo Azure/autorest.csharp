@@ -65,7 +65,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -94,7 +94,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -213,7 +213,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="GetModelAsync(RequestContext)">
 <example>
-This sample shows how to call GetModelAsync and parse the result.
+This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -238,7 +238,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetModel(RequestContext)">
 <example>
-This sample shows how to call GetModel and parse the result.
+This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -317,7 +317,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetRecursiveModelAsync(RequestContext)">
 <example>
-This sample shows how to call GetRecursiveModelAsync and parse the result.
+This sample shows how to call GetRecursiveModelAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -342,7 +342,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetRecursiveModel(RequestContext)">
 <example>
-This sample shows how to call GetRecursiveModel and parse the result.
+This sample shows how to call GetRecursiveModel with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -421,7 +421,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetMissingDiscriminatorAsync(RequestContext)">
 <example>
-This sample shows how to call GetMissingDiscriminatorAsync and parse the result.
+This sample shows how to call GetMissingDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -446,7 +446,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetMissingDiscriminator(RequestContext)">
 <example>
-This sample shows how to call GetMissingDiscriminator and parse the result.
+This sample shows how to call GetMissingDiscriminator with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -471,7 +471,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetWrongDiscriminatorAsync(RequestContext)">
 <example>
-This sample shows how to call GetWrongDiscriminatorAsync and parse the result.
+This sample shows how to call GetWrongDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -496,7 +496,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="GetWrongDiscriminator(RequestContext)">
 <example>
-This sample shows how to call GetWrongDiscriminator and parse the result.
+This sample shows how to call GetWrongDiscriminator with required parameters and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 

@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (!IsNullable)
                 return this;
 
-            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+            return IsFrameworkType ? new CSharpType(FrameworkType, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
@@ -191,6 +191,20 @@ namespace AutoRest.CSharp.Generation.Types
 
             provider = this.Implementation as T;
             return provider != null;
+        }
+
+        internal string ConvertParamNameForDocs()
+        {
+            var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
+            if (IsNullable && IsValueType)
+                name += "?";
+            if (Arguments is not null && Arguments.Count() > 0)
+            {
+                name += "{";
+                name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));
+                name += "}";
+            }
+            return name;
         }
     }
 }

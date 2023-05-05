@@ -1,0 +1,43 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.ResourceManager.Storage",
+  "LibraryName": "StorageManagementClient",
+  "SharedSourceFolders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "RequestPathToParent": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+  },
+  "OperationPositions": {
+    "DeletedAccounts_List": [
+      "collection"
+    ],
+    "StorageAccounts_CheckNameAvailability": [
+      "collection"
+    ]
+  },
+  "RequestPathToSingletonResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": "managementPolicies/default"
+  },
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "resourceType": "resource-type",
+    "etag": "etag",
+    "location": "azure-location",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "BlobServiceProperties": "BlobService",
+    "FileServiceProperties": "FileService"
+  },
+  "OverrideOperationName": {
+    "DeletedAccounts_List": "GetAll"
+  }
+}

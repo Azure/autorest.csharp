@@ -66,11 +66,12 @@ namespace AutoRest.CSharp.Output.Models
             if (spreadVariable == null || convenienceSpread == null)
                 return writer => WriteCancellationTokenToRequestContext(writer, contextVariable);
 
-            var ctor = convenienceSpread.BackingModel.SerializationConstructor;
+            // we need to get all the property initializers therefore here we use serialization constructor
+            var serializationCtor = convenienceSpread.BackingModel.SerializationConstructor;
             var initializers = new List<PropertyInitializer>();
             foreach (var parameter in convenienceSpread.SpreadedParameters)
             {
-                var property = ctor.FindPropertyInitializedByParameter(parameter);
+                var property = serializationCtor.FindPropertyInitializedByParameter(parameter);
                 if (property == null)
                     continue;
                 initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
@@ -79,7 +80,8 @@ namespace AutoRest.CSharp.Output.Models
             return writer =>
             {
                 WriteCancellationTokenToRequestContext(writer, contextVariable);
-                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, ctor, initializers);
+                // when writing the initialization of the model, since values of the parameters we have here might be null, and the serialization constructor will not have initializers in its implementation, we use initialization constructor to initialize the instance.
+                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, convenienceSpread.BackingModel.InitializationConstructor, initializers);
             };
         }
 

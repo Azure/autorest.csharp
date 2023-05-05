@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="DeleteAsync(Int32,RequestContext)">
+    <member name="DeleteAsync(int,RequestContext)">
 <example>
 This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="Delete(Int32,RequestContext)">
+    <member name="Delete(int,RequestContext)">
 <example>
 This sample shows how to call Delete with required parameters.
 <code><![CDATA[
@@ -31,7 +31,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="ReadAsync(Int32,RequestContext)">
+    <member name="ReadAsync(int,RequestContext)">
 <example>
 This sample shows how to call ReadAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="Read(Int32,RequestContext)">
+    <member name="Read(int,RequestContext)">
 <example>
 This sample shows how to call Read with required parameters and parse the result.
 <code><![CDATA[
@@ -215,7 +215,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetPetByKindAsync(String,RequestContext)">
+    <member name="GetPetByKindAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetPetByKindAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -245,7 +245,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetPetByKind(String,RequestContext)">
+    <member name="GetPetByKind(string,RequestContext)">
 <example>
 This sample shows how to call GetPetByKind with required parameters and parse the result.
 <code><![CDATA[
@@ -275,20 +275,9 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetFirstPetAsync(Int32,RequestContext)">
+    <member name="GetFirstPetAsync(int?,RequestContext)">
 <example>
-This sample shows how to call GetFirstPetAsync and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
-
-Response response = await client.GetFirstPetAsync();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-This sample shows how to call GetFirstPetAsync with all parameters, and how to parse the result.
+This sample shows how to call GetFirstPetAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
@@ -316,20 +305,9 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetFirstPet(Int32,RequestContext)">
+    <member name="GetFirstPet(int?,RequestContext)">
 <example>
-This sample shows how to call GetFirstPet and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
-
-Response response = client.GetFirstPet();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-This sample shows how to call GetFirstPet with all parameters, and how to parse the result.
+This sample shows how to call GetFirstPet with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);

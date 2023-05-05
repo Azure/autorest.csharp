@@ -34,7 +34,7 @@ namespace MgmtExpandResourceTypes
         internal MgmtExpandResourceTypesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "MgmtExpandResourceTypesArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtExpandResourceTypesArmOperation", fallbackStrategy: new SequentialDelayStrategy());
         }
 
         /// <inheritdoc />

@@ -121,7 +121,7 @@ Schema for <c>SpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAliasAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -151,7 +151,7 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAlias(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
 <code><![CDATA[
@@ -181,7 +181,7 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModelAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModel(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithModel(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithModel with required parameters and request content.
 <code><![CDATA[
@@ -241,7 +241,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAliasAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -271,7 +271,7 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAlias(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
 <code><![CDATA[
@@ -301,7 +301,7 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalPropsAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
 <code><![CDATA[
@@ -356,7 +356,7 @@ Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalProps(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
 <code><![CDATA[

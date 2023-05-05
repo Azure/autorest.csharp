@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
@@ -27,7 +26,12 @@ using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
+}
 
+@doc("Base model with properties")
+model BaseModelWithProperties {
+  @doc("Optional properties on base")
+  optionalPropertyOnBase?: string;
 }
 
 @doc("Derived model")
@@ -36,9 +40,21 @@ model DerivedModel extends BaseModel {
   requiredCollection: CollectionItem[];
 }
 
+@doc("Derived model with properties")
+model DerivedModelWithProperties extends BaseModelWithProperties {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
 @discriminator("discriminatorProperty")
 @doc("Base model with discriminator property.")
-model BaseModelWithDiscriminator {}
+model BaseModelWithDiscriminator {
+  @doc("Optional property on base")
+  optionalPropertyOnBase?: string;
+
+  @doc("Required property on base")
+  requiredPropertyOnBase: int32;
+}
 
 @doc("Deriver model with discriminator property.")
 model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
@@ -160,7 +176,7 @@ model RoundTripPrimitiveModel extends BaseModel {
   requiredBoolean: boolean;
 
   @doc("Required date time offset, illustrating a reference type property.")
-  requiredDateTimeOffset: zonedDateTime;
+  requiredDateTimeOffset: utcDateTime;
 
   @doc("Required time span, illustrating a value type property.")
   requiredTimeSpan: duration;
@@ -237,6 +253,9 @@ model RoundTripOptionalModel {
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
+
+  @doc("Optional model with properties on base")
+  optionalModelWithPropertiesOnBase?: DerivedModelWithProperties;
 
   @doc("Optional fixed string enum")
   optionalFixedStringEnum?: FixedStringEnum;

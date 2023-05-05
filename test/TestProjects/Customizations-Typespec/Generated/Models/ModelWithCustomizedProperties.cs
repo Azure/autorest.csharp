@@ -46,11 +46,11 @@ namespace CustomizationsInCadl.Models
             PropertyToMakeDuration = propertyToMakeDuration;
             PropertyToMakeString = propertyToMakeString;
             PropertyToMakeJsonElement = propertyToMakeJsonElement;
+            _propertyToField = propertyToField;
             GoodListName = goodListName.ToList();
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName.ToList();
             GoodListOfDictionaryName = goodListOfDictionaryName.ToList();
-            _propertyToField = propertyToField;
         }
 
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
@@ -75,11 +75,11 @@ namespace CustomizationsInCadl.Models
             PropertyToMakeDuration = propertyToMakeDuration;
             PropertyToMakeString = propertyToMakeString;
             PropertyToMakeJsonElement = propertyToMakeJsonElement;
-            GoodListName = goodListName.ToList();
-            GoodDictionaryName = goodDictionaryName;
-            GoodListOfListName = goodListOfListName.ToList();
-            GoodListOfDictionaryName = goodListOfDictionaryName.ToList();
             _propertyToField = propertyToField;
+            GoodListName = goodListName;
+            GoodDictionaryName = goodDictionaryName;
+            GoodListOfListName = goodListOfListName;
+            GoodListOfDictionaryName = goodListOfDictionaryName;
         }
     }
 }

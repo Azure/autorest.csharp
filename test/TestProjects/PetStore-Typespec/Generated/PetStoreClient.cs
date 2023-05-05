@@ -56,12 +56,12 @@ namespace PetStore
             _apiVersion = options.Version;
         }
 
-        /// <summary> delete. </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='DeleteAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='DeleteAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Delete");
@@ -78,12 +78,12 @@ namespace PetStore
             }
         }
 
-        /// <summary> delete. </summary>
+        /// <summary> [Protocol Method] delete. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Delete(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Delete(int,RequestContext)']/*" />
         public virtual Response Delete(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Delete");
@@ -103,50 +103,39 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> ReadAsync(int petId, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.ReadValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ReadAsync(petId, context).ConfigureAwait(false);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReadAsync(petId, context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> Read(int petId, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.ReadValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Read(petId, context);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Read(petId, context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary>
+        /// [Protocol Method] Returns a pet. Supports eTags.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ReadAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
-        public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(int,RequestContext)']/*" />
+        public virtual async Task<Response> ReadAsync(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
@@ -162,13 +151,22 @@ namespace PetStore
             }
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary>
+        /// [Protocol Method] Returns a pet. Supports eTags.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Read(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
-        public virtual Response Read(int petId, RequestContext context = null)
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(int,RequestContext)']/*" />
+        public virtual Response Read(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
@@ -208,6 +206,16 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateAsync(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -232,6 +240,16 @@ namespace PetStore
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Create(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -274,13 +292,23 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetPetByKindAsync(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetPetByKindAsync(string kind, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(kind, nameof(kind));
@@ -299,13 +327,23 @@ namespace PetStore
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetPetByKind(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(String,RequestContext)']/*" />
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(string,RequestContext)']/*" />
         public virtual Response GetPetByKind(string kind, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(kind, nameof(kind));
@@ -326,48 +364,38 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> GetFirstPetValueAsync(int? start = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> GetFirstPetValue(int? start = null, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetFirstPet(start, context);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFirstPet(start, context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFirstPetAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(Int32,RequestContext)']/*" />
-        public virtual async Task<Response> GetFirstPetAsync(int? start = null, RequestContext context = null)
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,RequestContext)']/*" />
+        public virtual async Task<Response> GetFirstPetAsync(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();
@@ -383,12 +411,22 @@ namespace PetStore
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFirstPet(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(Int32,RequestContext)']/*" />
-        public virtual Response GetFirstPet(int? start = null, RequestContext context = null)
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,RequestContext)']/*" />
+        public virtual Response GetFirstPet(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();

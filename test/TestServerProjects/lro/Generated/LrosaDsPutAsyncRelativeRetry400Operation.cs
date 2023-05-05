@@ -29,7 +29,7 @@ namespace lro
         internal LrosaDsPutAsyncRelativeRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LrosaDsPutAsyncRelativeRetry400Operation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LrosaDsPutAsyncRelativeRetry400Operation");
         }
 
         /// <inheritdoc />

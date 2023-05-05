@@ -28,7 +28,7 @@ namespace lro_parameterized_endpoints
         internal LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<string> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<string>(clientDiagnostics, nextLinkOperation, response, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
+            _operation = new OperationInternal<string>(nextLinkOperation, clientDiagnostics, response, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
         }
 
         /// <inheritdoc />

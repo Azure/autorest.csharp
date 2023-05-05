@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride);");
-                        _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
+                        _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, response, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                     }
                     _writer.Line();
 
