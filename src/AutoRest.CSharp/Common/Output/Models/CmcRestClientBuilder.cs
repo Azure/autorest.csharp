@@ -142,8 +142,9 @@ namespace AutoRest.CSharp.Output.Models
                     BufferResponse: operation.Extensions?.BufferResponse ?? true,
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
-                    true,
-                    false);
+                    GenerateProtocolMethod: true,
+                    GenerateConvenienceMethod: false,
+                    IsInternal: false);
             }
             return new InputOperation();
         }

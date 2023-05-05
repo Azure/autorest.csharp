@@ -63,7 +63,8 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType
+    getSdkSimpleType,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize } from "./utils.js";
 /**
@@ -396,6 +397,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
+                IsInternal: isInternal(context, m),
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 

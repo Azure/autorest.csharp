@@ -49,6 +49,7 @@ export interface InputModelType extends InputType {
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
+    IsInternal: boolean;
 }
 
 export interface InputEnumType extends InputType {

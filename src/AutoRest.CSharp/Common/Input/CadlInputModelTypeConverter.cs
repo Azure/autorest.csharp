@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Common.Input
             string? discriminatorValue = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
+            bool isInternal = false;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -51,7 +52,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyValue)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel)
+                    || reader.TryReadBoolean(nameof(InputModelType.IsInternal), ref isInternal);
 
                 if (isKnownProperty)
                 {
@@ -60,7 +62,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver, isInternal);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -74,10 +76,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver, isInternal);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver, bool isInternal)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -85,7 +87,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, isInternal);
             if (id != null)
             {
                 resolver.AddReference(id, model);

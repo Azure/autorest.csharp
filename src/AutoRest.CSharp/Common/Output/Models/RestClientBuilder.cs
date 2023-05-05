@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 null,
                 operation.BufferResponse,
-                accessibility: operation.Accessibility ?? "public",
+                accessibility: operation.Accessibility ?? (operation.IsInternal ? "internal" : "public"),
                 operation
             );
         }

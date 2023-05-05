@@ -64,7 +64,8 @@ namespace AutoRest.CSharp.Common.Input
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
         bool GenerateProtocolMethod,
-        bool GenerateConvenienceMethod)
+        bool GenerateConvenienceMethod,
+        bool IsInternal)
     {
         public InputOperation() : this(
             Name: string.Empty,
@@ -85,7 +86,8 @@ namespace AutoRest.CSharp.Common.Input
             LongRunning: null,
             Paging: null,
             GenerateProtocolMethod: true,
-            GenerateConvenienceMethod: false)
+            GenerateConvenienceMethod: false,
+            IsInternal: false)
         { }
 
         private string? _cleanName;

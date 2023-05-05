@@ -5,6 +5,7 @@ import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
+    isInternal,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext
@@ -214,7 +215,8 @@ export function loadOperation(
         ),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
-        GenerateConvenienceMethod: generateConvenience
+        GenerateConvenienceMethod: generateConvenience,
+        IsInternal: isInternal(sdkContext, op)
     } as InputOperation;
 
     function loadOperationParameter(

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetInternalAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetInternalAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new InternalClient();
+
+Response response = await client.GetInternalAsync("<name>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>InternalModel</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetInternal(string,RequestContext)">
+<example>
+This sample shows how to call GetInternal with required parameters and parse the result.
+<code><![CDATA[
+var client = new InternalClient();
+
+Response response = client.GetInternal("<name>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>InternalModel</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PostInternalAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostInternalAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new InternalClient();
+
+var data = new {
+    id = "<id>",
+    name = "<name>",
+};
+
+Response response = await client.PostInternalAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>ModelOnlyUsedByInternalOperation</c>:
+<code>{
+  id: string, # Required.
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>ModelOnlyUsedByInternalOperation</c>:
+<code>{
+  id: string, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PostInternal(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostInternal with required request content and parse the result.
+<code><![CDATA[
+var client = new InternalClient();
+
+var data = new {
+    id = "<id>",
+    name = "<name>",
+};
+
+Response response = client.PostInternal(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>ModelOnlyUsedByInternalOperation</c>:
+<code>{
+  id: string, # Required.
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>ModelOnlyUsedByInternalOperation</c>:
+<code>{
+  id: string, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

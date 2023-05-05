@@ -103,7 +103,8 @@ namespace AutoRest.CSharp.Common.Input
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
-                GenerateConvenienceMethod: false);
+                GenerateConvenienceMethod: false,
+                IsInternal: false);
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
@@ -243,7 +244,8 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
+                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName(),
+                IsInternal: false);
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
