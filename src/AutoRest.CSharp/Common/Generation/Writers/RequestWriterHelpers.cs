@@ -240,6 +240,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
                         writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
+                        writer.Line($"{request}.Content = {content};");
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:
