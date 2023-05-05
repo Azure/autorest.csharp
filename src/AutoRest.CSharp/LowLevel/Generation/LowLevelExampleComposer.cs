@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Threading;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -94,17 +95,22 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var builder = new StringBuilder();
 
-            if (HasNoCustomInput(methodSignature.Parameters)) // client.GetAllItems(CancellationToken cancellationToken = default)
+            ComposeConvenienceMethodExample(convenienceMethod, async, true, methodSignature.Name, builder);
+
+            return $"{builder.ToString()}";
+        }
+
+        internal void ComposeConvenienceMethodExample(ConvenienceMethod convenienceMethod, bool async, bool shouldWrap, string methodName, StringBuilder builder)
+        {
+            if (HasNoCustomInput(convenienceMethod.Signature.Parameters)) // client.GetAllItems(CancellationToken cancellationToken = default)
             {
-                ComposeExampleWithoutParameter(convenienceMethod, methodSignature.Name, async, true, builder);
+                ComposeExampleWithoutParameter(convenienceMethod, methodName, async, true, shouldWrap, builder);
             }
             else
             {
                 // client.GetAllItems(int a, RequestContext context = null)
-                ComposeExampleWithRequiredParameters(convenienceMethod, methodSignature.Name, async, builder);
+                ComposeExampleWithRequiredParameters(convenienceMethod, methodName, async, shouldWrap, builder);
             }
-
-            return $"{builder.ToString()}";
         }
 
         // `RequestContext = null` or `cancellationToken = default` is excluded
@@ -128,10 +134,11 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeWrappedCodeSnippet(clientMethod, methodName, async, true, builder);
         }
 
-        private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, StringBuilder builder)
+        private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, bool shouldWrap, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with required parameters.");
-            ComposeCodeSnippet(convenienceMethod, methodName, async, true, builder);
+            if (shouldWrap)
+                builder.AppendLine($"This sample shows how to call {methodName} with required parameters.");
+            ComposeCodeSnippet(convenienceMethod, methodName, async, true, shouldWrap, builder);
         }
 
         /// <summary>
@@ -223,10 +230,11 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
-        private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName}.");
-            ComposeWrappedCodeSnippet(convenienceMethod, methodName, async, allParameters, builder);
+            if (shouldWrap)
+                builder.AppendLine($"This sample shows how to call {methodName}.");
+            ComposeCodeSnippet(convenienceMethod, methodName, async, allParameters, shouldWrap, builder);
         }
 
         private void ComposeWrappedCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
@@ -236,9 +244,10 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.Append("]]></code>");
         }
 
-        private void ComposeWrappedCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
         {
-            builder.AppendLine("<code><![CDATA[");
+            if (shouldWrap)
+                builder.AppendLine("<code><![CDATA[");
             ComposeGetClientCodes(builder);
             builder.AppendLine();
 
@@ -269,7 +278,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 ComposeHandleNormalResponseCode(convenienceMethod, methodName, async, allParameters, builder);
             }
 
-            builder.Append("]]></code>");
+            if (shouldWrap)
+                builder.Append("]]></code>");
         }
 
         internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
@@ -301,42 +311,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
             }
-        }
-
-        private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            builder.AppendLine("<code><![CDATA[");
-            ComposeGetClientCodes(builder);
-            builder.AppendLine();
-
-            // get input parameters -- only body parameter is not initialized inline in the invocation, therefore we take out all the body parameters.
-            var typeProviderTypedParameters = convenienceMethod.Signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body);
-            foreach (var parameter in typeProviderTypedParameters)
-            {
-                ComposeBodyParameter(allParameters, parameter, builder);
-            }
-
-            if (convenienceMethod.IsLongRunning)
-            {
-                if (convenienceMethod.IsPageable)
-                {
-                    // do nothing, this never happen right now
-                }
-                else
-                {
-                    ComposeHandleLongRunningResponseCode(convenienceMethod, methodName, async, allParameters, builder);
-                }
-            }
-            else if (convenienceMethod.IsPageable)
-            {
-                ComposeHandlePageableResponseCode(convenienceMethod, methodName, async, allParameters, builder);
-            }
-            else
-            {
-                ComposeHandleNormalResponseCode(convenienceMethod, methodName, async, allParameters, builder);
-            }
-
-            builder.Append("]]></code>");
         }
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
@@ -454,7 +428,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeHandlePageableResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             var methodSignature = convenienceMethod.Signature;
-            builder.Append($"var result = client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
+            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)}))", 0, builder, true))
+            {
+            }
         }
 
         private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
@@ -634,6 +610,10 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameterValues = new List<string>(parameters.Count);
             for (int i = 0; i < parameters.Count; i++)
             {
+                //skip last param if its optional and cancellation token or request context
+                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContent))))
+                    continue;
+
                 if (allParameters || parameters[i].DefaultValue == null)
                 {
                     parameterValues.Add(parameterSelector(parameters[i]));

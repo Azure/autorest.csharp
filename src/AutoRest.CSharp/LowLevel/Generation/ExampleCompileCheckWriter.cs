@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
@@ -48,6 +49,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.UseNamespace("System");
             _writer.UseNamespace("System.IO");
             _writer.UseNamespace("System.Text.Json");
+            if (Configuration.ModelNamespace)
+                _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
@@ -70,10 +73,37 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             if (writeShortVersion)
                                 WriteTestCompilation(method, true, false);
                             WriteTestCompilation(method, true, true);
+
                         }
+
+                        if (method.ConvenienceMethod is not null)
+                            WriteConvenienceTestCompilation(method.ConvenienceMethod, method.RequestMethod.Name, true, false);
                     }
                 }
             }
+        }
+
+        private void WriteConvenienceTestCompilation(ConvenienceMethod method, string methodName, bool isAsync, bool useAllParameters)
+        {
+            StringBuilder builder = new StringBuilder();
+            var asyncKeyword = isAsync ? "Async" : "";
+            _exampleComposer.ComposeConvenienceMethodExample(method, isAsync, false, $"{methodName}{asyncKeyword}", builder);
+            var testMethodName = methodName;
+            if (useAllParameters)
+            {
+                testMethodName += "_AllParameters";
+            }
+            testMethodName += "_Convenience";
+            if (isAsync)
+            {
+                testMethodName += "_Async";
+            }
+            using (_writer.WriteMethodDeclaration(ExampleMethodSignature(testMethodName, isAsync)))
+            {
+                _writer.AppendRaw(builder.ToString());
+            }
+            _writer.Line();
+
         }
 
         private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
