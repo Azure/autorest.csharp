@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CreateAsync(string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateAsync with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="Create(string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call Create with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = client.Create("<itemName>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call CreateStreamAsync with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CreateStreamAsync with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call CreateStream with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CreateStream with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="CreateEnumAsync(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateEnumAsync with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="CreateEnum(string,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateEnum with required parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Resets products.
+</remarks>
+    </member>
+    <member name="GetBodyAndPathsAsync(RequestContext)">
+<example>
+This sample shows how to call GetBodyAndPathsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+Response response = await client.GetBodyAndPathsAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+<remarks>
+List all.
+</remarks>
+    </member>
+    <member name="GetBodyAndPaths(RequestContext)">
+<example>
+This sample shows how to call GetBodyAndPaths and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+Response response = client.GetBodyAndPaths(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+<remarks>
+List all.
+</remarks>
+    </member>
+    <member name="GetItemsAsync(RequestContext)">
+<example>
+This sample shows how to call GetItemsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+Response response = await client.GetItemsAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+<remarks>
+List all products.
+</remarks>
+    </member>
+    <member name="GetItems(RequestContext)">
+<example>
+This sample shows how to call GetItems and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+Response response = client.GetItems(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+<remarks>
+List all products.
+</remarks>
+    </member>
+    <member name="UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)">
+<example>
+This sample shows how to call UpdateAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UpdateAsync with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {
+    invalid_int_name = 1234,
+};
+
+Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  invalid-int-name: number, # Optional. Invalid int parameter.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Update(string,string,string,RequestContent,string,string,RequestContext)">
+<example>
+This sample shows how to call Update with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {};
+
+Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Update with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new BodyAndPathClient(credential);
+
+var data = new {
+    invalid_int_name = 1234,
+};
+
+Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  invalid-int-name: number, # Optional. Invalid int parameter.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

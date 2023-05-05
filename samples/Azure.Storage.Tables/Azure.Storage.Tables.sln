@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Tables", ".\Azure.Storage.Tables.csproj", "{E3E74C8E-3D08-4D86-A0E9-CF4864AE76CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Tables", "src\Azure.Storage.Tables.csproj", "{E3E74C8E-3D08-4D86-A0E9-CF4864AE76CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample", "sample\sample.csproj", "{3C945D3A-09AD-478E-8C4B-CDBAD3BD1461}"
 EndProject

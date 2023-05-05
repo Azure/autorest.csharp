@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="OperationAsync(int,int?,RequestContext)">
+<example>
+This sample shows how to call OperationAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+Response response = await client.OperationAsync(1234, 1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Result</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Operation(int,int?,RequestContext)">
+<example>
+This sample shows how to call Operation with required parameters and parse the result.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+Response response = client.Operation(1234, 1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Result</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Operation2Async(int,int?,RequestContext)">
+<example>
+This sample shows how to call Operation2Async with required parameters and parse the result.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+Response response = await client.Operation2Async(1234, 1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Result</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Operation2(int,int?,RequestContext)">
+<example>
+This sample shows how to call Operation2 with required parameters and parse the result.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+Response response = client.Operation2(1234, 1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Result</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

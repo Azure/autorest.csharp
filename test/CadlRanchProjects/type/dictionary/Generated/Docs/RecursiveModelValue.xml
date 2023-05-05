@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetRecursiveModelValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetRecursiveModelValueClient(<1.0.0>);
+var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
-Response response = await client.GetRecursiveModelValueAsync();
+Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
@@ -32,9 +32,9 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call GetRecursiveModelValue with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetRecursiveModelValueClient(<1.0.0>);
+var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
-Response response = client.GetRecursiveModelValue();
+Response response = client.GetRecursiveModelValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
@@ -59,16 +59,15 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetRecursiveModelValueClient(<1.0.0>);
+var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
 var data = new {
     key = new {
         property = "<property>",
-        children = new {},
     },
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -90,16 +89,15 @@ Schema for <c>InnerModel</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetRecursiveModelValueClient(<1.0.0>);
+var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
 var data = new {
     key = new {
         property = "<property>",
-        children = new {},
     },
 };
 
-Response response = client.Put(RequestContent.Create(data));
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

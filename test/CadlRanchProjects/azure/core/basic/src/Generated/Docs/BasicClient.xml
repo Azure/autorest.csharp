@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CreateOrUpdateAsync(int,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrUpdateAsync with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call CreateOrUpdateAsync with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+    orders = new[] {
+        new {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
+};
+
+Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data), new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Creates or updates a User
+
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateOrUpdate(int,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrUpdate with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call CreateOrUpdate with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+    orders = new[] {
+        new {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
+};
+
+Response response = client.CreateOrUpdate(1234, RequestContent.Create(data), new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Creates or updates a User
+
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateOrReplaceAsync(int,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrReplaceAsync with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call CreateOrReplaceAsync with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+    orders = new[] {
+        new {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
+};
+
+Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data), new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Creates or replaces a User
+
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateOrReplace(int,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrReplace with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call CreateOrReplace with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+var data = new {
+    name = "<name>",
+    orders = new[] {
+        new {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
+};
+
+Response response = client.CreateOrReplace(1234, RequestContent.Create(data), new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Creates or replaces a User
+
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetUserAsync(int,RequestContext)">
+<example>
+This sample shows how to call GetUserAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = await client.GetUserAsync(1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Gets a User
+
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetUser(int,RequestContext)">
+<example>
+This sample shows how to call GetUser with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = client.GetUser(1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Gets a User
+
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DeleteAsync(int,RequestContext)">
+<example>
+This sample shows how to call DeleteAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = await client.DeleteAsync(1234, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Deletes a User
+</remarks>
+    </member>
+    <member name="Delete(int,RequestContext)">
+<example>
+This sample shows how to call Delete with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = client.Delete(1234, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Deletes a User
+</remarks>
+    </member>
+    <member name="ExportAsync(int,string,RequestContext)">
+<example>
+This sample shows how to call ExportAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Exports a User
+
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Export(int,string,RequestContext)">
+<example>
+This sample shows how to call Export with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+Response response = client.Export(1234, "<format>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+<remarks>
+Exports a User
+
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>User</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [
+    {
+      id: number, # Required. The user&apos;s id.
+      userId: number, # Required. The user&apos;s id.
+      detail: string, # Required. The user&apos;s order detail
+    }
+  ], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call GetUsersAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Lists all Users
+
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call GetUsers with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Lists all Users
+
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWithPageAsync(RequestContext)">
+<example>
+This sample shows how to call GetWithPageAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetWithPageAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWithPage(RequestContext)">
+<example>
+This sample shows how to call GetWithPage with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetWithPage(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWithCustomPageModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetWithCustomPageModelAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetWithCustomPageModelAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWithCustomPageModel(RequestContext)">
+<example>
+This sample shows how to call GetWithCustomPageModel with required parameters and parse the result.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetWithCustomPageModel(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: number, # Required. The user&apos;s id.
+  name: string, # Required. The user&apos;s name.
+  orders: [UserOrder], # Optional. The user&apos;s order list
+  etag: string, # Required. The entity tag for this resource.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

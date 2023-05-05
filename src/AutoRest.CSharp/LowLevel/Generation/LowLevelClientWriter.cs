@@ -78,6 +78,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteProtocolMethod(_writer, clientMethod, _client.Fields, longRunning, pagingInfo, false);
                     }
 
+                    foreach (var clientMethod in _client.CustomMethods())
+                    {
+                        //TODO: Write example docs for custom methods
+                        //WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, true);
+                        //WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, false);
+                    }
+
                     WriteSubClientFactoryMethod();
 
                     foreach (var method in _client.RequestMethods)

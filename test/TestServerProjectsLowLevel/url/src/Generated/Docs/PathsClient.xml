@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetBooleanTrueAsync(RequestContext)">
+<example>
+This sample shows how to call GetBooleanTrueAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetBooleanTrueAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanTrue(RequestContext)">
+<example>
+This sample shows how to call GetBooleanTrue.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetBooleanTrue(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanFalseAsync(RequestContext)">
+<example>
+This sample shows how to call GetBooleanFalseAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetBooleanFalseAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanFalse(RequestContext)">
+<example>
+This sample shows how to call GetBooleanFalse.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetBooleanFalse(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetIntOneMillionAsync(RequestContext)">
+<example>
+This sample shows how to call GetIntOneMillionAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetIntOneMillionAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetIntOneMillion(RequestContext)">
+<example>
+This sample shows how to call GetIntOneMillion.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetIntOneMillion(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetIntNegativeOneMillionAsync(RequestContext)">
+<example>
+This sample shows how to call GetIntNegativeOneMillionAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetIntNegativeOneMillionAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetIntNegativeOneMillion(RequestContext)">
+<example>
+This sample shows how to call GetIntNegativeOneMillion.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetIntNegativeOneMillion(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetTenBillionAsync(RequestContext)">
+<example>
+This sample shows how to call GetTenBillionAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetTenBillionAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetTenBillion(RequestContext)">
+<example>
+This sample shows how to call GetTenBillion.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetTenBillion(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetNegativeTenBillionAsync(RequestContext)">
+<example>
+This sample shows how to call GetNegativeTenBillionAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.GetNegativeTenBillionAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetNegativeTenBillion(RequestContext)">
+<example>
+This sample shows how to call GetNegativeTenBillion.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.GetNegativeTenBillion(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatScientificPositiveAsync(RequestContext)">
+<example>
+This sample shows how to call FloatScientificPositiveAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.FloatScientificPositiveAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatScientificPositive(RequestContext)">
+<example>
+This sample shows how to call FloatScientificPositive.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.FloatScientificPositive(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatScientificNegativeAsync(RequestContext)">
+<example>
+This sample shows how to call FloatScientificNegativeAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.FloatScientificNegativeAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatScientificNegative(RequestContext)">
+<example>
+This sample shows how to call FloatScientificNegative.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.FloatScientificNegative(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DoubleDecimalPositiveAsync(RequestContext)">
+<example>
+This sample shows how to call DoubleDecimalPositiveAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DoubleDecimalPositiveAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DoubleDecimalPositive(RequestContext)">
+<example>
+This sample shows how to call DoubleDecimalPositive.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DoubleDecimalPositive(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DoubleDecimalNegativeAsync(RequestContext)">
+<example>
+This sample shows how to call DoubleDecimalNegativeAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DoubleDecimalNegativeAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DoubleDecimalNegative(RequestContext)">
+<example>
+This sample shows how to call DoubleDecimalNegative.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DoubleDecimalNegative(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringUnicodeAsync(RequestContext)">
+<example>
+This sample shows how to call StringUnicodeAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.StringUnicodeAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringUnicode(RequestContext)">
+<example>
+This sample shows how to call StringUnicode.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.StringUnicode(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringUrlEncodedAsync(RequestContext)">
+<example>
+This sample shows how to call StringUrlEncodedAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.StringUrlEncodedAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringUrlEncoded(RequestContext)">
+<example>
+This sample shows how to call StringUrlEncoded.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.StringUrlEncoded(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringUrlNonEncodedAsync(RequestContext)">
+<example>
+This sample shows how to call StringUrlNonEncodedAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.StringUrlNonEncodedAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
+</remarks>
+    </member>
+    <member name="StringUrlNonEncoded(RequestContext)">
+<example>
+This sample shows how to call StringUrlNonEncoded.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.StringUrlNonEncoded(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded
+</remarks>
+    </member>
+    <member name="StringEmptyAsync(RequestContext)">
+<example>
+This sample shows how to call StringEmptyAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.StringEmptyAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringEmpty(RequestContext)">
+<example>
+This sample shows how to call StringEmpty.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.StringEmpty(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringNullAsync(string,RequestContext)">
+<example>
+This sample shows how to call StringNullAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.StringNullAsync("<stringPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringNull(string,RequestContext)">
+<example>
+This sample shows how to call StringNull with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.StringNull("<stringPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="EnumValidAsync(string,RequestContext)">
+<example>
+This sample shows how to call EnumValidAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.EnumValidAsync("<enumPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="EnumValid(string,RequestContext)">
+<example>
+This sample shows how to call EnumValid with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.EnumValid("<enumPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="EnumNullAsync(string,RequestContext)">
+<example>
+This sample shows how to call EnumNullAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.EnumNullAsync("<enumPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="EnumNull(string,RequestContext)">
+<example>
+This sample shows how to call EnumNull with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.EnumNull("<enumPath>", new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteMultiByteAsync(Byte[],RequestContext)">
+<example>
+This sample shows how to call ByteMultiByteAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.ByteMultiByteAsync(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteMultiByte(Byte[],RequestContext)">
+<example>
+This sample shows how to call ByteMultiByte with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.ByteMultiByte(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteEmptyAsync(RequestContext)">
+<example>
+This sample shows how to call ByteEmptyAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.ByteEmptyAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteEmpty(RequestContext)">
+<example>
+This sample shows how to call ByteEmpty.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.ByteEmpty(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteNullAsync(Byte[],RequestContext)">
+<example>
+This sample shows how to call ByteNullAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.ByteNullAsync(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ByteNull(Byte[],RequestContext)">
+<example>
+This sample shows how to call ByteNull with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.ByteNull(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateValidAsync(RequestContext)">
+<example>
+This sample shows how to call DateValidAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DateValidAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateValid(RequestContext)">
+<example>
+This sample shows how to call DateValid.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DateValid(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateNullAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call DateNullAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DateNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateNull(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call DateNull with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DateNull(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateTimeValidAsync(RequestContext)">
+<example>
+This sample shows how to call DateTimeValidAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DateTimeValidAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateTimeValid(RequestContext)">
+<example>
+This sample shows how to call DateTimeValid.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DateTimeValid(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateTimeNullAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call DateTimeNullAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DateTimeNull(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call DateTimeNull with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.DateTimeNull(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Base64UrlAsync(Byte[],RequestContext)">
+<example>
+This sample shows how to call Base64UrlAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.Base64UrlAsync(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Base64Url(Byte[],RequestContext)">
+<example>
+This sample shows how to call Base64Url with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.Base64Url(null, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ArrayCsvInPathAsync(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call ArrayCsvInPathAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ArrayCsvInPath(IEnumerable{string},RequestContext)">
+<example>
+This sample shows how to call ArrayCsvInPath with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"}, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimeUrlAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call UnixTimeUrlAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimeUrl(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call UnixTimeUrl with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PathsClient(credential);
+
+Response response = client.UnixTimeUrl(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
