@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetModelValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient(<1.0.0>);
+
+Response response = await client.GetModelValueAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>InnerModel</c>:
+<code>{
+  property: string, # Required. Required string property
+  children: Dictionary&lt;string, InnerModel&gt;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModelValue(RequestContext)">
+<example>
+This sample shows how to call GetModelValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient(<1.0.0>);
+
+Response response = client.GetModelValue();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>InnerModel</c>:
+<code>{
+  property: string, # Required. Required string property
+  children: Dictionary&lt;string, InnerModel&gt;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient(<1.0.0>);
+
+var data = new {
+    key = new {
+        property = "<property>",
+        children = new {},
+    },
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InnerModel</c>:
+<code>{
+  property: string, # Required. Required string property
+  children: Dictionary&lt;string, InnerModel&gt;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetModelValueClient(<1.0.0>);
+
+var data = new {
+    key = new {
+        property = "<property>",
+        children = new {},
+    },
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InnerModel</c>:
+<code>{
+  property: string, # Required. Required string property
+  children: Dictionary&lt;string, InnerModel&gt;, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
