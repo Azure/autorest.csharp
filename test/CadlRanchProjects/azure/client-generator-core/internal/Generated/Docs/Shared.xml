@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="PublicOnlyAsync(string,RequestContext)">
+    <member name="PublicAsync(string,RequestContext)">
 <example>
-This sample shows how to call PublicOnlyAsync with required parameters and parse the result.
+This sample shows how to call PublicAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+var client = new InternalClient().GetSharedClient();
 
-Response response = await client.PublicOnlyAsync("<name>");
+Response response = await client.PublicAsync("<name>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -18,7 +18,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>PublicModel</c>:
+Schema for <c>SharedModel</c>:
 <code>{
   name: string, # Required.
 }
@@ -26,13 +26,13 @@ Schema for <c>PublicModel</c>:
 
 </remarks>
     </member>
-    <member name="PublicOnly(string,RequestContext)">
+    <member name="Public(string,RequestContext)">
 <example>
-This sample shows how to call PublicOnly with required parameters and parse the result.
+This sample shows how to call Public with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+var client = new InternalClient().GetSharedClient();
 
-Response response = client.PublicOnly("<name>");
+Response response = client.Public("<name>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -43,7 +43,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>PublicModel</c>:
+Schema for <c>SharedModel</c>:
 <code>{
   name: string, # Required.
 }
@@ -51,13 +51,13 @@ Schema for <c>PublicModel</c>:
 
 </remarks>
     </member>
-    <member name="InternalOnlyAsync(string,RequestContext)">
+    <member name="InternalAsync(string,RequestContext)">
 <example>
-This sample shows how to call InternalOnlyAsync with required parameters and parse the result.
+This sample shows how to call InternalAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+var client = new InternalClient().GetSharedClient();
 
-Response response = await client.InternalOnlyAsync("<name>");
+Response response = await client.InternalAsync("<name>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -68,7 +68,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>InternalModel</c>:
+Schema for <c>SharedModel</c>:
 <code>{
   name: string, # Required.
 }
@@ -76,13 +76,13 @@ Schema for <c>InternalModel</c>:
 
 </remarks>
     </member>
-    <member name="InternalOnly(string,RequestContext)">
+    <member name="Internal(string,RequestContext)">
 <example>
-This sample shows how to call InternalOnly with required parameters and parse the result.
+This sample shows how to call Internal with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+var client = new InternalClient().GetSharedClient();
 
-Response response = client.InternalOnly("<name>");
+Response response = client.Internal("<name>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -93,7 +93,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>InternalModel</c>:
+Schema for <c>SharedModel</c>:
 <code>{
   name: string, # Required.
 }

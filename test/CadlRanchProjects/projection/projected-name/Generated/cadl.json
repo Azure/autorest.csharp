@@ -13,6 +13,7 @@
    "Namespace": "Projection.ProjectedName.Property",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -37,6 +38,7 @@
    "Namespace": "Projection.ProjectedName.Property",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "6",
@@ -61,6 +63,7 @@
    "Namespace": "Projection.ProjectedName.Property",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "9",
@@ -85,6 +88,7 @@
    "Namespace": "Projection.ProjectedName.Property",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "12",
@@ -222,7 +226,8 @@
      "Path": "/projection/projected-name/operation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "28",
@@ -300,7 +305,8 @@
      "Path": "/projection/projected-name/parameter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {
@@ -416,7 +422,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "46",
@@ -521,7 +528,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "55",
@@ -626,7 +634,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "64",
@@ -731,7 +740,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

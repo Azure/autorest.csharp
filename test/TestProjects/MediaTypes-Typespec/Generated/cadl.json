@@ -13,6 +13,7 @@
    "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -208,7 +209,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "25",
@@ -348,7 +350,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "40",
@@ -459,7 +462,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

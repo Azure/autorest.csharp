@@ -90,6 +90,7 @@
    "Namespace": "Azure.Language.Authoring",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "15",
@@ -273,6 +274,7 @@
    "Description": "Paged collection of Project items",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "39",
@@ -315,6 +317,7 @@
    "Description": "Training job parameters.",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "44",
@@ -339,6 +342,7 @@
    "Namespace": "Azure.Language.Authoring",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "47",
@@ -363,6 +367,7 @@
    "Namespace": "Azure.Language.Authoring",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "50",
@@ -402,6 +407,7 @@
    "Namespace": "Azure.Language.Authoring",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "55",
@@ -490,6 +496,7 @@
        "Description": "Represents a warning that was encountered while executing the request.",
        "IsNullable": false,
        "Usage": "Output",
+       "IsInternal": false,
        "Properties": [
         {
          "$id": "67",
@@ -541,6 +548,7 @@
       "Description": "The error object.",
       "IsNullable": false,
       "Usage": "Output",
+      "IsInternal": false,
       "Properties": [
        {
         "$id": "73",
@@ -616,6 +624,7 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
          "Usage": "Output",
+         "IsInternal": false,
          "Properties": [
           {
            "$id": "83",
@@ -688,6 +697,7 @@
    "Namespace": "Azure.Language.Authoring",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "89",
@@ -814,6 +824,7 @@
    "Description": "Paged collection of SupportedLanguage items",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "104",
@@ -830,6 +841,7 @@
        "Description": "Represents a supported language.",
        "IsNullable": false,
        "Usage": "None",
+       "IsInternal": false,
        "Properties": [
         {
          "$id": "107",
@@ -896,6 +908,7 @@
    "Description": "Paged collection of TrainingConfigVersion items",
    "IsNullable": false,
    "Usage": "None",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "114",
@@ -912,6 +925,7 @@
        "Description": "Represents a training config version.",
        "IsNullable": false,
        "Usage": "None",
+       "IsInternal": false,
        "Properties": [
         {
          "$id": "117",
@@ -1196,7 +1210,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "147",
@@ -1278,7 +1293,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "154",
@@ -1373,7 +1389,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "163",
@@ -1440,7 +1457,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "169",
@@ -1552,7 +1570,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:export",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "180",
@@ -1644,7 +1663,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:importx",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "189",
@@ -1783,7 +1803,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "202",
@@ -1885,7 +1906,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "211",
@@ -2073,7 +2095,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "229",
@@ -2188,7 +2211,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "240",
@@ -2275,7 +2299,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "248",
@@ -2415,7 +2440,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "261",
@@ -2537,7 +2563,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "272",
@@ -2659,7 +2686,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "283",
@@ -2785,7 +2813,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     },
     {
      "$id": "295",
@@ -2911,7 +2940,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsInternal": false
     }
    ],
    "Protocol": {

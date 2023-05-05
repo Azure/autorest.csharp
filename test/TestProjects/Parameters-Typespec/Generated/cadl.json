@@ -12,6 +12,7 @@
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -161,7 +162,8 @@
      "Path": "/parameterOrders",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "19",
@@ -259,7 +261,8 @@
      "Path": "/parameterOrders",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

@@ -13,6 +13,7 @@
    "Description": "Type for input model body",
    "IsNullable": false,
    "Usage": "Input",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -53,6 +54,7 @@
    "Description": "Paginated ledger entries",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "8",
@@ -68,6 +70,7 @@
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
+       "IsInternal": false,
        "Properties": [
         {
          "$id": "11",
@@ -149,6 +152,7 @@
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "20",
@@ -350,7 +354,8 @@
       "ItemName": "entries"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "41",
@@ -417,7 +422,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

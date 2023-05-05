@@ -37,6 +37,7 @@
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "6",
@@ -186,7 +187,8 @@
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

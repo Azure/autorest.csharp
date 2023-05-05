@@ -15,9 +15,9 @@ using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal
 {
-    // Data plane generated client.
-    /// <summary> Test for internal decorator. </summary>
-    public partial class InternalClient
+    // Data plane generated sub-client.
+    /// <summary> The Shared sub-client. </summary>
+    public partial class Shared
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,226 +29,216 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of InternalClient. </summary>
-        public InternalClient() : this(new Uri("http://localhost:3000"), new InternalClientOptions())
+        /// <summary> Initializes a new instance of Shared for mocking. </summary>
+        protected Shared()
         {
         }
-
-        /// <summary> Initializes a new instance of InternalClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public InternalClient(Uri endpoint, InternalClientOptions options)
-        {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new InternalClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
-            _apiVersion = options.Version;
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<PublicModel>> PublicOnlyAsync(string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PublicOnlyAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(PublicModel.FromResponse(response), response);
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<PublicModel> PublicOnly(string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PublicOnly(name, context);
-            return Response.FromValue(PublicModel.FromResponse(response), response);
-        }
-
-        /// <summary>
-        /// [Protocol Method] 
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="PublicOnlyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnlyAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> PublicOnlyAsync(string name, RequestContext context)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            using var scope = ClientDiagnostics.CreateScope("InternalClient.PublicOnly");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePublicOnlyRequest(name, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] 
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="PublicOnly(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnly(string,RequestContext)']/*" />
-        public virtual Response PublicOnly(string name, RequestContext context)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            using var scope = ClientDiagnostics.CreateScope("InternalClient.PublicOnly");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePublicOnlyRequest(name, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal virtual async Task<Response<InternalModel>> InternalOnlyAsync(string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InternalOnlyAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(InternalModel.FromResponse(response), response);
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal virtual Response<InternalModel> InternalOnly(string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InternalOnly(name, context);
-            return Response.FromValue(InternalModel.FromResponse(response), response);
-        }
-
-        /// <summary>
-        /// [Protocol Method] 
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalOnlyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnlyAsync(string,RequestContext)']/*" />
-        internal virtual async Task<Response> InternalOnlyAsync(string name, RequestContext context)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            using var scope = ClientDiagnostics.CreateScope("InternalClient.InternalOnly");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateInternalOnlyRequest(name, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] 
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalOnly(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnly(string,RequestContext)']/*" />
-        internal virtual Response InternalOnly(string name, RequestContext context)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            using var scope = ClientDiagnostics.CreateScope("InternalClient.InternalOnly");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateInternalOnlyRequest(name, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private Shared _cachedShared;
 
         /// <summary> Initializes a new instance of Shared. </summary>
-        public virtual Shared GetSharedClient()
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="apiVersion"> The String to use. </param>
+        internal Shared(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
-            return Volatile.Read(ref _cachedShared) ?? Interlocked.CompareExchange(ref _cachedShared, new Shared(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedShared;
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _endpoint = endpoint;
+            _apiVersion = apiVersion;
         }
 
-        internal HttpMessage CreatePublicOnlyRequest(string name, RequestContext context)
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<SharedModel>> PublicAsync(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PublicAsync(name, context).ConfigureAwait(false);
+            return Response.FromValue(SharedModel.FromResponse(response), response);
+        }
+
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<SharedModel> Public(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Public(name, context);
+            return Response.FromValue(SharedModel.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PublicAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='PublicAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> PublicAsync(string name, RequestContext context)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("Shared.Public");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePublicRequest(name, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Public(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Public(string,RequestContext)']/*" />
+        public virtual Response Public(string name, RequestContext context)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("Shared.Public");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePublicRequest(name, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal virtual async Task<Response<SharedModel>> InternalAsync(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InternalAsync(name, context).ConfigureAwait(false);
+            return Response.FromValue(SharedModel.FromResponse(response), response);
+        }
+
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal virtual Response<SharedModel> Internal(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Internal(name, context);
+            return Response.FromValue(SharedModel.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='InternalAsync(string,RequestContext)']/*" />
+        internal virtual async Task<Response> InternalAsync(string name, RequestContext context)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("Shared.Internal");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInternalRequest(name, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Internal(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Internal(string,RequestContext)']/*" />
+        internal virtual Response Internal(string name, RequestContext context)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("Shared.Internal");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInternalRequest(name, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreatePublicRequest(string name, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/internal/public", false);
+            uri.AppendPath("/azure/client-generator-core/internal/shared/public", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -256,14 +246,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             return message;
         }
 
-        internal HttpMessage CreateInternalOnlyRequest(string name, RequestContext context)
+        internal HttpMessage CreateInternalRequest(string name, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/internal/internal", false);
+            uri.AppendPath("/azure/client-generator-core/internal/shared/internal", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

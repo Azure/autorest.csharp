@@ -15,6 +15,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "model.kind",
    "Usage": "RoundTrip",
+   "IsInternal": false,
    "Properties": []
   },
   {
@@ -28,6 +29,7 @@
     "$ref": "2"
    },
    "Usage": "RoundTrip",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "4",
@@ -190,7 +192,8 @@
      "Path": "/special-words/operation/for",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {
@@ -280,7 +283,8 @@
      "Path": "/special-words/parameter/if",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "33",
@@ -358,7 +362,8 @@
      "Path": "/special-words/parameter/filter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {
@@ -431,7 +436,8 @@
      "Path": "/special-words/model/get",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     },
     {
      "$id": "47",
@@ -536,7 +542,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

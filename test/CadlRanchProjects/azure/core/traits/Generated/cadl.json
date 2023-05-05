@@ -15,6 +15,7 @@
    "Description": "Sample Model",
    "IsNullable": false,
    "Usage": "Output",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -355,7 +356,8 @@
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

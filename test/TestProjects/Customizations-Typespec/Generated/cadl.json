@@ -96,6 +96,7 @@
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "15",
@@ -109,6 +110,7 @@
       "Description": "Public model made internal",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsInternal": false,
       "Properties": [
        {
         "$id": "17",
@@ -143,6 +145,7 @@
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsInternal": false,
       "Properties": [
        {
         "$id": "21",
@@ -177,6 +180,7 @@
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsInternal": false,
       "Properties": [
        {
         "$id": "25",
@@ -211,6 +215,7 @@
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsInternal": false,
       "Properties": [
        {
         "$id": "29",
@@ -629,7 +634,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
     }
    ],
    "Protocol": {

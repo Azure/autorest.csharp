@@ -9,12 +9,12 @@
  "Models": [
   {
    "$id": "2",
-   "Name": "InternalModel",
+   "Name": "PublicModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
-   "Description": "This is an internal model.",
+   "Description": "This is a model only used by public operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
-   "IsInternal": true,
+   "IsInternal": false,
    "Properties": [
     {
      "$id": "3",
@@ -35,17 +35,17 @@
   },
   {
    "$id": "5",
-   "Name": "ModelOnlyUsedByInternalOperation",
+   "Name": "InternalModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
-   "Description": "This is a non-internal model only used by internal operation.",
+   "Description": "This is a model only used by internal operation. It should be generated but not exported.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Output",
    "IsInternal": true,
    "Properties": [
     {
      "$id": "6",
-     "Name": "id",
-     "SerializedName": "id",
+     "Name": "name",
+     "SerializedName": "name",
      "Description": "",
      "Type": {
       "$id": "7",
@@ -56,14 +56,25 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
-    },
+    }
+   ]
+  },
+  {
+   "$id": "8",
+   "Name": "SharedModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
+   "Description": "This is a model used by both public and internal operation. It should be generated and exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "IsInternal": false,
+   "Properties": [
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "9",
+      "$id": "10",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -77,22 +88,22 @@
  ],
  "Clients": [
   {
-   "$id": "10",
+   "$id": "11",
    "Name": "InternalClient",
    "Description": "Test for internal decorator.",
    "Operations": [
     {
-     "$id": "11",
-     "Name": "getInternal",
+     "$id": "12",
+     "Name": "publicOnly",
      "ResourceName": "Internal",
      "Parameters": [
       {
-       "$id": "12",
+       "$id": "13",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "13",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -107,9 +118,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "15",
         "Type": {
-         "$id": "15",
+         "$id": "16",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -118,11 +129,11 @@
        }
       },
       {
-       "$id": "16",
+       "$id": "17",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "17",
+        "$id": "18",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -138,11 +149,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -157,20 +168,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$ref": "19"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "22",
+        "$id": "23",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -185,9 +196,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "24",
         "Type": {
-         "$id": "24",
+         "$id": "25",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -198,7 +209,7 @@
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -213,28 +224,31 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/azure/client-generator-core/internal/getInternal",
+     "Path": "/azure/client-generator-core/internal/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "IsInternal": true
+     "IsInternal": false
     },
     {
-     "$id": "26",
-     "Name": "postInternal",
+     "$id": "27",
+     "Name": "internalOnly",
      "ResourceName": "Internal",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "13"
       },
       {
-       "$id": "27",
-       "Name": "body",
-       "NameInRequest": "body",
+       "$id": "28",
+       "Name": "name",
+       "NameInRequest": "name",
        "Type": {
-        "$ref": "5"
+        "$id": "29",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
        },
-       "Location": "Body",
+       "Location": "Query",
        "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
@@ -245,38 +259,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "28",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "29",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "30",
-        "Type": {
-         "$ref": "29"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "31",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -291,20 +278,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "32",
         "Type": {
-         "$ref": "32"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "21"
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -316,13 +303,10 @@
        "IsErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/azure/client-generator-core/internal/postInternal",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
+     "Path": "/azure/client-generator-core/internal/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
@@ -330,9 +314,185 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "34"
    },
    "Creatable": true
+  },
+  {
+   "$id": "35",
+   "Name": "Shared",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "36",
+     "Name": "public",
+     "ResourceName": "Shared",
+     "Parameters": [
+      {
+       "$ref": "13"
+      },
+      {
+       "$id": "37",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "38",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "22"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "42",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/internal/shared/public",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "IsInternal": false
+    },
+    {
+     "$id": "43",
+     "Name": "internal",
+     "ResourceName": "Shared",
+     "Parameters": [
+      {
+       "$ref": "13"
+      },
+      {
+       "$id": "44",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "45",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "46",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "47",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "47"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "22"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "49",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/internal/shared/internal",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "IsInternal": true
+    }
+   ],
+   "Protocol": {
+    "$id": "50"
+   },
+   "Creatable": false,
+   "Parent": "InternalClient"
   }
  ]
 }
