@@ -558,7 +558,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => EscapeXmlCSharpType(p.Type))));
+            var paramList = signature.Parameters.Select(p => p.Type.ConvertParamNameForDocs());
+            builder.Append(string.Join(",", paramList));
             builder.Append(")");
             return builder.ToString();
         }
