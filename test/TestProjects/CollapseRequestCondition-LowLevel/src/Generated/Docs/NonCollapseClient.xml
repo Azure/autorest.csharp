@@ -20,7 +20,7 @@ var client = new NonCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.IfMatchPutAsync(RequestContent.Create(data), null);
+Response response = await client.IfMatchPutAsync(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ var client = new NonCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = client.IfMatchPut(RequestContent.Create(data), null);
+Response response = client.IfMatchPut(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -68,7 +68,7 @@ var client = new NonCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data), null);
+Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -92,7 +92,7 @@ var client = new NonCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = client.IfNoneMatchPut(RequestContent.Create(data), null);
+Response response = client.IfNoneMatchPut(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -64,7 +64,7 @@ namespace custom_baseUrl_more_options_LowLevel
             _dnsSuffix = dnsSuffix;
         }
 
-        /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <summary> [Protocol Method] Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
@@ -95,7 +95,7 @@ namespace custom_baseUrl_more_options_LowLevel
             }
         }
 
-        /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <summary> [Protocol Method] Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>

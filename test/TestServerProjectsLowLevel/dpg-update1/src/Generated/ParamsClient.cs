@@ -57,7 +57,7 @@ namespace dpg_update1_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
+        /// <summary> [Protocol Method] Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -79,7 +79,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
+        /// <summary> [Protocol Method] Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -102,7 +102,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
@@ -131,7 +131,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
@@ -159,7 +159,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary> [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -186,7 +186,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary> [Protocol Method] Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -213,7 +213,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <summary> [Protocol Method] POST a JSON or a JPEG. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -239,7 +239,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <summary> [Protocol Method] POST a JSON or a JPEG. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -266,7 +266,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Delete something.
+        /// [Protocol Method] Delete something.
         ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -290,7 +290,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Delete something.
+        /// [Protocol Method] Delete something.
         ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -314,7 +314,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
@@ -340,7 +340,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method] Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
@@ -366,7 +366,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// I&apos;m a new operation.
+        /// [Protocol Method] I&apos;m a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -390,7 +390,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// I&apos;m a new operation.
+        /// [Protocol Method] I&apos;m a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

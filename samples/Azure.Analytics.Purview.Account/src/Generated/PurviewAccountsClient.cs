@@ -61,7 +61,7 @@ namespace Azure.Analytics.Purview.Account
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get an account. </summary>
+        /// <summary> [Protocol Method] Get an account. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -82,7 +82,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Get an account. </summary>
+        /// <summary> [Protocol Method] Get an account. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -103,7 +103,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Updates an account. </summary>
+        /// <summary> [Protocol Method] Updates an account. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -128,7 +128,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Updates an account. </summary>
+        /// <summary> [Protocol Method] Updates an account. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -153,7 +153,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> List the authorization keys associated with this account. </summary>
+        /// <summary> [Protocol Method] List the authorization keys associated with this account. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -174,7 +174,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> List the authorization keys associated with this account. </summary>
+        /// <summary> [Protocol Method] List the authorization keys associated with this account. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -195,7 +195,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Regenerate the authorization keys associated with this data catalog. </summary>
+        /// <summary> [Protocol Method] Regenerate the authorization keys associated with this data catalog. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -220,7 +220,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Regenerate the authorization keys associated with this data catalog. </summary>
+        /// <summary> [Protocol Method] Regenerate the authorization keys associated with this data catalog. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -245,7 +245,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> Get a resource set config service model. </summary>
+        /// <summary> [Protocol Method] Get a resource set config service model. </summary>
         /// <param name="skipToken"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -258,7 +258,7 @@ namespace Azure.Analytics.Purview.Account
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
         }
 
-        /// <summary> Get a resource set config service model. </summary>
+        /// <summary> [Protocol Method] Get a resource set config service model. </summary>
         /// <param name="skipToken"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -271,7 +271,7 @@ namespace Azure.Analytics.Purview.Account
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
         }
 
-        /// <summary> List the collections in the account. </summary>
+        /// <summary> [Protocol Method] List the collections in the account. </summary>
         /// <param name="skipToken"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -284,7 +284,7 @@ namespace Azure.Analytics.Purview.Account
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetCollections", "value", "nextLink", context);
         }
 
-        /// <summary> List the collections in the account. </summary>
+        /// <summary> [Protocol Method] List the collections in the account. </summary>
         /// <param name="skipToken"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

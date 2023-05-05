@@ -58,7 +58,7 @@ namespace BodyAndPath_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -86,7 +86,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -114,7 +114,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
@@ -144,7 +144,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create products. </summary>
+        /// <summary> [Protocol Method] Create products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
@@ -174,7 +174,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create another product. </summary>
+        /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -204,7 +204,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create another product. </summary>
+        /// <summary> [Protocol Method] Create another product. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -234,7 +234,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List. </summary>
+        /// <summary> [Protocol Method] List. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -255,7 +255,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List. </summary>
+        /// <summary> [Protocol Method] List. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -276,7 +276,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List products. </summary>
+        /// <summary> [Protocol Method] List products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -297,7 +297,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List products. </summary>
+        /// <summary> [Protocol Method] List products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -318,6 +318,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
@@ -325,7 +326,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -335,6 +336,7 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
             Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
@@ -351,6 +353,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <summary> [Protocol Method]. </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
@@ -358,7 +361,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -368,6 +371,7 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
             Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
@@ -408,7 +412,7 @@ namespace BodyAndPath_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemNameStream, true);
-            if (excluded != null)
+            if (excluded != null && Optional.IsCollectionDefined(excluded))
             {
                 foreach (var param in excluded)
                 {

@@ -9,7 +9,7 @@ var client = new AccessibilityClient();
 
 var data = "<String>";
 
-Response response = await client.OperationAsync(RequestContent.Create(data));
+Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -22,36 +22,14 @@ var client = new AccessibilityClient();
 
 var data = "<String>";
 
-Response response = client.Operation(RequestContent.Create(data));
+Response response = client.Operation(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="OperationInternalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call OperationInternalAsync with required request content.
-<code><![CDATA[
-var client = new AccessibilityClient();
-
-var data = "<String>";
-
-Response response = await client.OperationInternalAsync(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
     <member name="OperationInternal(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
-<example>
-This sample shows how to call OperationInternal with required request content.
-<code><![CDATA[
-var client = new AccessibilityClient();
-
-var data = "<String>";
-
-Response response = client.OperationInternal(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-</example>
     </member>
   </members>
 </doc>

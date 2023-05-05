@@ -16,7 +16,7 @@ This sample shows how to call CollapseGetWithHeadAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new MatchConditionCollapseClient(credential);
 
-Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -36,7 +36,7 @@ This sample shows how to call CollapseGetWithHead with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new MatchConditionCollapseClient(credential);
 
-Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -60,7 +60,7 @@ var client = new MatchConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -84,7 +84,7 @@ var client = new MatchConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -104,7 +104,7 @@ This sample shows how to call CollapseGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new MatchConditionCollapseClient(credential);
 
-Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -124,7 +124,7 @@ This sample shows how to call CollapseGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new MatchConditionCollapseClient(credential);
 
-Response response = client.CollapseGet(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+Response response = client.CollapseGet(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

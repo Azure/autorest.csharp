@@ -8,7 +8,7 @@ This sample shows how to call GetEmptyAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetEmptyAsync("<accountName>");
+Response response = await client.GetEmptyAsync("<accountName>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call GetEmpty with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetEmpty("<accountName>");
+Response response = client.GetEmpty("<accountName>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

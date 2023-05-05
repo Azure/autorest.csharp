@@ -8,7 +8,7 @@ This sample shows how to call GetModelAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-Response response = await client.GetModelAsync("<mode>");
+Response response = await client.GetModelAsync("<mode>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -36,7 +36,7 @@ This sample shows how to call GetModel with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-Response response = client.GetModel("<mode>");
+Response response = client.GetModel("<mode>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -68,7 +68,7 @@ var data = new {
     hello = "<hello>",
 };
 
-Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -108,7 +108,7 @@ var data = new {
     hello = "<hello>",
 };
 
-Response response = client.PostModel("<mode>", RequestContent.Create(data));
+Response response = client.PostModel("<mode>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -144,9 +144,9 @@ This sample shows how to call GetPagesAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-await foreach (var data in client.GetPagesAsync("<mode>"))
+await foreach (var item in client.GetPagesAsync("<mode>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
 }
 ]]></code>
@@ -171,9 +171,9 @@ This sample shows how to call GetPages with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-foreach (var data in client.GetPages("<mode>"))
+foreach (var item in client.GetPages("<mode>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
 }
 ]]></code>
@@ -198,10 +198,10 @@ This sample shows how to call LroAsync with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
+var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
@@ -227,10 +227,10 @@ This sample shows how to call Lro with required parameters and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-var operation = client.Lro(WaitUntil.Completed, "<mode>");
+var operation = client.Lro(WaitUntil.Completed, "<mode>", new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
