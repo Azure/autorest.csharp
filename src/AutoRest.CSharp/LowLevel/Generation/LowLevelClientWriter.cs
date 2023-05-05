@@ -268,9 +268,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-
                 var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
@@ -285,7 +283,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.Line($"return {responseVariable:I};");
                 }
-                else if (TypeFactory.IsReadOnlyList(responseType))
+                else if (TypeFactory.IsReadOnlyList(responseType) || TypeFactory.IsReadOnlyDictionary(responseType))
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }

@@ -1,6 +1,7 @@
 {
     "CadlRanchProjects": [
         "type/array",
+        "type/dictionary",
         "type/enum/extensible",
         "type/enum/fixed",
         "type/model/usage",
