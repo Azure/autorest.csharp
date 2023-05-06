@@ -36,7 +36,7 @@ namespace HlcConstants
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateMixedRequest(RoundTripModel value, StringConstant? optionalStringQuery)
+        internal HttpMessage CreateMixedRequest(RoundTripModel value)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -46,10 +46,7 @@ namespace HlcConstants
             uri.AppendPath("/op", false);
             uri.AppendQuery("required-string-query", "default", true);
             uri.AppendQuery("required-boolean-query", true, true);
-            if (optionalStringQuery != null)
-            {
-                uri.AppendQuery("optional-string-query", optionalStringQuery.Value.ToString(), true);
-            }
+            uri.AppendQuery("optional-string-query", StringConstant.Default.ToString(), true);
             uri.AppendQuery("optional-boolean-query", true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -61,17 +58,16 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, StringConstant? optionalStringQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateMixedRequest(value, optionalStringQuery);
+            using var message = CreateMixedRequest(value);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -88,17 +84,16 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Response<RoundTripModel> Mixed(RoundTripModel value, StringConstant? optionalStringQuery = null, CancellationToken cancellationToken = default)
+        public Response<RoundTripModel> Mixed(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateMixedRequest(value, optionalStringQuery);
+            using var message = CreateMixedRequest(value);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -114,7 +109,7 @@ namespace HlcConstants
             }
         }
 
-        internal HttpMessage CreatePostSomethingRequest(RoundTripModel value, IntConstant? optionalIntQuery, FloatConstant? optionalFloatQuery)
+        internal HttpMessage CreatePostSomethingRequest(RoundTripModel value)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -124,14 +119,8 @@ namespace HlcConstants
             uri.AppendPath("/op2", false);
             uri.AppendQuery("required-int-query", 0, true);
             uri.AppendQuery("required-float-query", 3.14F, true);
-            if (optionalIntQuery != null)
-            {
-                uri.AppendQuery("optional-int-query", optionalIntQuery.Value.ToSerialInt32(), true);
-            }
-            if (optionalFloatQuery != null)
-            {
-                uri.AppendQuery("optional-float-query", optionalFloatQuery.Value.ToSerialSingle(), true);
-            }
+            uri.AppendQuery("optional-int-query", IntConstant._0.ToSerialInt32(), true);
+            uri.AppendQuery("optional-float-query", FloatConstant._314.ToSerialSingle(), true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -142,18 +131,16 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreatePostSomethingRequest(value, optionalIntQuery, optionalFloatQuery);
+            using var message = CreatePostSomethingRequest(value);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -170,18 +157,16 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Response<RoundTripModel> PostSomething(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
+        public Response<RoundTripModel> PostSomething(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreatePostSomethingRequest(value, optionalIntQuery, optionalFloatQuery);
+            using var message = CreatePostSomethingRequest(value);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

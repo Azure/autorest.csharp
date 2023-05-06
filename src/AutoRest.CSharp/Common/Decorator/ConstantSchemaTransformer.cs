@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Decorator
                         continue;
 
                     var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                    parameter.Schema = choiceSchema;
+                    constantSchema.ValueType = choiceSchema;
                     operation.SignatureParameters.Add(parameter);
                 }
 
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Decorator
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        parameter.Schema = choiceSchema;
+                        constantSchema.ValueType = choiceSchema;
                         request.SignatureParameters.Add(parameter);
                     }
                 }
@@ -53,14 +53,7 @@ namespace AutoRest.CSharp.Common.Decorator
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        if (!property.IsRequired)
-                        {
-                            property.Schema = choiceSchema;
-                        }
-                        else
-                        {
-                            constantSchema.ValueType = choiceSchema;
-                        }
+                        constantSchema.ValueType = choiceSchema;
                     }
                 }
             }

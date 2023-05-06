@@ -39,15 +39,14 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, StringConstant? optionalStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
             scope.Start();
             try
             {
-                return await RestClient.MixedAsync(value, optionalStringQuery, cancellationToken).ConfigureAwait(false);
+                return await RestClient.MixedAsync(value, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -57,15 +56,14 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RoundTripModel> Mixed(RoundTripModel value, StringConstant? optionalStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripModel> Mixed(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
             scope.Start();
             try
             {
-                return RestClient.Mixed(value, optionalStringQuery, cancellationToken);
+                return RestClient.Mixed(value, cancellationToken);
             }
             catch (Exception e)
             {
@@ -75,16 +73,14 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");
             scope.Start();
             try
             {
-                return await RestClient.PostSomethingAsync(value, optionalIntQuery, optionalFloatQuery, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PostSomethingAsync(value, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -94,16 +90,14 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RoundTripModel> PostSomething(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripModel> PostSomething(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");
             scope.Start();
             try
             {
-                return RestClient.PostSomething(value, optionalIntQuery, optionalFloatQuery, cancellationToken);
+                return RestClient.PostSomething(value, cancellationToken);
             }
             catch (Exception e)
             {
