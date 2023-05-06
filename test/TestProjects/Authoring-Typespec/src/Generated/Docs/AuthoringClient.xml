@@ -728,7 +728,7 @@ This sample shows how to call GetDeploymentStatusAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-var result = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>", default);
+var result = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 </example>
     </member>
@@ -739,7 +739,7 @@ This sample shows how to call GetDeploymentStatus with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-var result = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>", default);
+var result = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 </example>
     </member>
@@ -866,7 +866,7 @@ This sample shows how to call GetSwapDeploymentsStatusAsync with required parame
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-var result = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>", default);
+var result = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 </example>
     </member>
@@ -877,7 +877,7 @@ This sample shows how to call GetSwapDeploymentsStatus with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-var result = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>", default);
+var result = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 </example>
     </member>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using TypeSpecFirstTest.Models;
 
 namespace TypeSpecFirstTest.Samples
 {
@@ -100,6 +102,16 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var result = await client.TopActionAsync("<action>");
         }
 
         [Test]
@@ -460,6 +472,17 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var result = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_FriendlyModel()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -528,6 +551,17 @@ namespace TypeSpecFirstTest.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FriendlyModel_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var notFriend = new Friend("<name>");
+            var result = await client.FriendlyModelAsync(notFriend);
         }
 
         [Test]
@@ -908,6 +942,54 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
+            {
+    StringFixedEnum.One
+            }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One,
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromString("<your binary data content>"),
+            })
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection =
+{
+        IntExtensibleEnum.One
+    },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection =
+{
+        FloatExtensibleEnum.One
+    },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection =
+{
+        FloatFixedEnum.One
+    },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection =
+{
+        IntFixedEnum.One
+    },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+                OptionalRecordUnknown =
+{
+        ["key"] = BinaryData.FromString("<your binary data content>"),
+    },
+            };
+            var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1240,6 +1322,16 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var result = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1376,6 +1468,17 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var result = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1460,6 +1563,16 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var result = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1508,6 +1621,27 @@ namespace TypeSpecFirstTest.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InternalProtocol_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var result = await client.InternalProtocolAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StillConvenient_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var result = await client.StillConvenientAsync();
         }
     }
 }

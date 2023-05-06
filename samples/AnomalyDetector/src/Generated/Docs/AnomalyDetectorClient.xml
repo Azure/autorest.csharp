@@ -25,7 +25,7 @@ var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
     ImputeMode = ImputeMode.Auto,
     ImputeFixedValue = 3.14f,
 };
-var result = await client.DetectUnivariateEntireSeriesAsync(options, default);
+var result = await client.DetectUnivariateEntireSeriesAsync(options);
 ]]></code>
 </example>
     </member>
@@ -53,7 +53,7 @@ var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
     ImputeMode = ImputeMode.Auto,
     ImputeFixedValue = 3.14f,
 };
-var result = client.DetectUnivariateEntireSeries(options, default);
+var result = client.DetectUnivariateEntireSeries(options);
 ]]></code>
 </example>
     </member>
@@ -361,7 +361,7 @@ var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
     ImputeMode = ImputeMode.Auto,
     ImputeFixedValue = 3.14f,
 };
-var result = await client.DetectUnivariateLastPointAsync(options, default);
+var result = await client.DetectUnivariateLastPointAsync(options);
 ]]></code>
 </example>
     </member>
@@ -389,7 +389,7 @@ var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
     ImputeMode = ImputeMode.Auto,
     ImputeFixedValue = 3.14f,
 };
-var result = client.DetectUnivariateLastPoint(options, default);
+var result = client.DetectUnivariateLastPoint(options);
 ]]></code>
 </example>
     </member>
@@ -678,7 +678,7 @@ var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
     StableTrendWindow = 1234,
     Threshold = 3.14f,
 };
-var result = await client.DetectUnivariateChangePointAsync(options, default);
+var result = await client.DetectUnivariateChangePointAsync(options);
 ]]></code>
 </example>
     </member>
@@ -703,7 +703,7 @@ var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
     StableTrendWindow = 1234,
     Threshold = 3.14f,
 };
-var result = client.DetectUnivariateChangePoint(options, default);
+var result = client.DetectUnivariateChangePoint(options);
 ]]></code>
 </example>
     </member>
@@ -907,7 +907,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", default);
+var result = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
 ]]></code>
 </example>
     </member>
@@ -919,7 +919,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = client.GetMultivariateBatchDetectionResult("<resultId>", default);
+var result = client.GetMultivariateBatchDetectionResult("<resultId>");
 ]]></code>
 </example>
     </member>
@@ -1145,7 +1145,7 @@ var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOff
         },
     },
 };
-var result = await client.TrainMultivariateModelAsync(modelInfo, default);
+var result = await client.TrainMultivariateModelAsync(modelInfo);
 ]]></code>
 </example>
     </member>
@@ -1203,7 +1203,7 @@ var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOff
         },
     },
 };
-var result = client.TrainMultivariateModel(modelInfo, default);
+var result = client.TrainMultivariateModel(modelInfo);
 ]]></code>
 </example>
     </member>
@@ -1661,7 +1661,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = await client.GetMultivariateModelAsync("<modelId>", default);
+var result = await client.GetMultivariateModelAsync("<modelId>");
 ]]></code>
 </example>
     </member>
@@ -1673,7 +1673,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = client.GetMultivariateModel("<modelId>", default);
+var result = client.GetMultivariateModel("<modelId>");
 ]]></code>
 </example>
     </member>
@@ -1880,7 +1880,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
 var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
-var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options, default);
+var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
 ]]></code>
 </example>
     </member>
@@ -1893,7 +1893,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
 var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
-var result = client.DetectMultivariateBatchAnomaly("<modelId>", options, default);
+var result = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code>
 </example>
     </member>
@@ -2141,7 +2141,7 @@ var options = new MultivariateLastDetectionOptions(new VariableValues[]
         3.14f
     })
 }, 1234);
-var result = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options, default);
+var result = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code>
 </example>
     </member>
@@ -2163,7 +2163,7 @@ var options = new MultivariateLastDetectionOptions(new VariableValues[]
         3.14f
     })
 }, 1234);
-var result = client.DetectMultivariateLastAnomaly("<modelId>", options, default);
+var result = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code>
 </example>
     </member>
@@ -2349,7 +2349,10 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = client.GetMultivariateModelsAsync(1234, 1234, default);]]></code>
+await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetMultivariateModels(int?,int?,CancellationToken)">
@@ -2360,7 +2363,10 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-var result = client.GetMultivariateModels(1234, 1234, default);]]></code>
+foreach (var item in client.GetMultivariateModels(1234, 1234))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetMultivariateModelsAsync(int?,int?,RequestContext)">

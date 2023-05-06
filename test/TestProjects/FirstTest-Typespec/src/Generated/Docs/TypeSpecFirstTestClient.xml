@@ -8,7 +8,7 @@ This sample shows how to call TopActionAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.TopActionAsync("<action>", default);
+var result = await client.TopActionAsync("<action>");
 ]]></code>
 </example>
     </member>
@@ -19,7 +19,7 @@ This sample shows how to call TopAction with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.TopAction("<action>", default);
+var result = client.TopAction("<action>");
 ]]></code>
 </example>
     </member>
@@ -423,7 +423,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.AnonymousBodyAsync(thing, default);
+var result = await client.AnonymousBodyAsync(thing);
 ]]></code>
 </example>
     </member>
@@ -435,7 +435,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.AnonymousBody(thing, default);
+var result = client.AnonymousBody(thing);
 ]]></code>
 </example>
     </member>
@@ -655,7 +655,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var notFriend = new Friend("<name>");
-var result = await client.FriendlyModelAsync(notFriend, default);
+var result = await client.FriendlyModelAsync(notFriend);
 ]]></code>
 </example>
     </member>
@@ -667,7 +667,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var notFriend = new Friend("<name>");
-var result = client.FriendlyModel(notFriend, default);
+var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>
     </member>
@@ -956,7 +956,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
         ["key"] = BinaryData.FromString("<your binary data content>"),
     },
 };
-var result = await client.HelloAgainAsync("<p2>", "<p1>", action, default);
+var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
 ]]></code>
 </example>
     </member>
@@ -1005,7 +1005,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
         ["key"] = BinaryData.FromString("<your binary data content>"),
     },
 };
-var result = client.HelloAgain("<p2>", "<p1>", action, default);
+var result = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code>
 </example>
     </member>
@@ -1712,7 +1712,7 @@ This sample shows how to call HelloDemo2Async.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.HelloDemo2Async(default);
+var result = await client.HelloDemo2Async();
 ]]></code>
 </example>
     </member>
@@ -1723,7 +1723,7 @@ This sample shows how to call HelloDemo2.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.HelloDemo2(default);
+var result = client.HelloDemo2();
 ]]></code>
 </example>
     </member>
@@ -1827,7 +1827,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.CreateLiteralAsync(body, default);
+var result = await client.CreateLiteralAsync(body);
 ]]></code>
 </example>
     </member>
@@ -1839,7 +1839,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.CreateLiteral(body, default);
+var result = client.CreateLiteral(body);
 ]]></code>
 </example>
     </member>
@@ -2058,7 +2058,7 @@ This sample shows how to call HelloLiteralAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.HelloLiteralAsync(default);
+var result = await client.HelloLiteralAsync();
 ]]></code>
 </example>
     </member>
@@ -2069,7 +2069,7 @@ This sample shows how to call HelloLiteral.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.HelloLiteral(default);
+var result = client.HelloLiteral();
 ]]></code>
 </example>
     </member>
@@ -2201,7 +2201,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = await client.InternalProtocolAsync(body, default);
+var result = await client.InternalProtocolAsync(body);
 ]]></code>
 </example>
     </member>
@@ -2213,7 +2213,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
-var result = client.InternalProtocol(body, default);
+var result = client.InternalProtocol(body);
 ]]></code>
 </example>
     </member>
@@ -2308,7 +2308,7 @@ This sample shows how to call StillConvenientAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.StillConvenientAsync(default);
+var result = await client.StillConvenientAsync();
 ]]></code>
 </example>
     </member>
@@ -2319,7 +2319,7 @@ This sample shows how to call StillConvenient.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.StillConvenient(default);
+var result = client.StillConvenient();
 ]]></code>
 </example>
     </member>

@@ -34,7 +34,7 @@ var input = new RootModel()
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
 };
-var result = await client.RoundTripAsync(input, default);
+var result = await client.RoundTripAsync(input);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var input = new RootModel()
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
 };
-var result = client.RoundTrip(input, default);
+var result = client.RoundTrip(input);
 ]]></code>
 </example>
     </member>

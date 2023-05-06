@@ -9,7 +9,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-var result = await client.GetBatchDetectionResultAsync("<resultId>", default);
+var result = await client.GetBatchDetectionResultAsync("<resultId>");
 ]]></code>
 </example>
     </member>
@@ -21,7 +21,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-var result = client.GetBatchDetectionResult("<resultId>", default);
+var result = client.GetBatchDetectionResult("<resultId>");
 ]]></code>
 </example>
     </member>
