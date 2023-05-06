@@ -134,19 +134,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is null)
+                    if (property.InputModelProperty is not { } inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
+                    var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
                     var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
-                    var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
-                    //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
-                    //or not it indicates if we should serialize this or not which is different.  Lists are readonly
-                    //in the sense that the don't have setters but they aren't necessarily always readonly in the spec and therefore
-                    //should be serialized based on the spec not based on the presence of a setter
-                    bool shouldSkipSerialization = ShouldSkipSerialization(property);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false);
+                    var paramName = declaredName.ToVariableName();
+
                     result.Add(new JsonPropertySerialization(
                         paramName,
                         declaredName,
@@ -154,41 +150,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                         property.ValueType,
                         property.ValueType,
                         valueSerialization,
-                        property.IsRequired,
-                        shouldSkipSerialization,
-                        ShouldSkipDeserialization(property),
+                        inputModelProperty.IsRequired,
+                        inputModelProperty.IsReadOnly,
+                        false,
                         optionalViaNullability));
                 }
             }
             return result;
         }
-
-        private bool ShouldSkipSerialization(ObjectTypeProperty property)
-        {
-            if (property.InputModelProperty!.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty.Type is InputLiteralType)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty!.IsReadOnly)
-            {
-                return true;
-            }
-
-            if (property.Declaration.Type.IsCollectionType())
-            {
-                return _inputModel.Usage is InputModelTypeUsage.Output;
-            }
-
-            return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
-        }
-
-        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private ConstructorSignature CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {

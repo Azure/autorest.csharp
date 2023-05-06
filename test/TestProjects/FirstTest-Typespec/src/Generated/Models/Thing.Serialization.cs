@@ -82,6 +82,14 @@ namespace TypeSpecFirstTest.Models
             }
             string name = default;
             string requiredUnion = default;
+            string requiredLiteralString = default;
+            int requiredLiteralInt = default;
+            double requiredLiteralDouble = default;
+            bool requiredLiteralBool = default;
+            Optional<string> optionalLiteralString = default;
+            Optional<int?> optionalLiteralInt = default;
+            Optional<double?> optionalLiteralDouble = default;
+            Optional<bool?> optionalLiteralBool = default;
             string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -95,13 +103,68 @@ namespace TypeSpecFirstTest.Models
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("requiredLiteralString"u8))
+                {
+                    requiredLiteralString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralInt"u8))
+                {
+                    requiredLiteralInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralDouble"u8))
+                {
+                    requiredLiteralDouble = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralBool"u8))
+                {
+                    requiredLiteralBool = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralString"u8))
+                {
+                    optionalLiteralString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalLiteralInt = null;
+                        continue;
+                    }
+                    optionalLiteralInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralDouble"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalLiteralDouble = null;
+                        continue;
+                    }
+                    optionalLiteralDouble = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralBool"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalLiteralBool = null;
+                        continue;
+                    }
+                    optionalLiteralBool = property.Value.GetBoolean();
+                    continue;
+                }
                 if (property.NameEquals("requiredBadDescription"u8))
                 {
                     requiredBadDescription = property.Value.GetString();
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredBadDescription);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralDouble, requiredLiteralBool, optionalLiteralString, Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralDouble), Optional.ToNullable(optionalLiteralBool), requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

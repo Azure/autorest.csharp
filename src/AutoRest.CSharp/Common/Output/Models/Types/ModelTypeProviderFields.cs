@@ -63,14 +63,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                if (inputModelProperty.Type is InputLiteralType)
-                {
-                    continue; // literal property does not show up in the constructor parameter list
-                }
                 var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
-                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);
                 }

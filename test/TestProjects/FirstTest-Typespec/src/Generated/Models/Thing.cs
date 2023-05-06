@@ -29,6 +29,33 @@ namespace TypeSpecFirstTest.Models
             RequiredBadDescription = requiredBadDescription;
         }
 
+        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralDouble"> required literal double. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralDouble"> optional literal double. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        internal Thing(string name, string requiredUnion, string requiredLiteralString, int requiredLiteralInt, double requiredLiteralDouble, bool requiredLiteralBool, string optionalLiteralString, int? optionalLiteralInt, double? optionalLiteralDouble, bool? optionalLiteralBool, string requiredBadDescription)
+        {
+            Name = name;
+            RequiredUnion = requiredUnion;
+            RequiredLiteralString = requiredLiteralString;
+            RequiredLiteralInt = requiredLiteralInt;
+            RequiredLiteralDouble = requiredLiteralDouble;
+            RequiredLiteralBool = requiredLiteralBool;
+            OptionalLiteralString = optionalLiteralString;
+            OptionalLiteralInt = optionalLiteralInt;
+            OptionalLiteralDouble = optionalLiteralDouble;
+            OptionalLiteralBool = optionalLiteralBool;
+            RequiredBadDescription = requiredBadDescription;
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary> required Union. </summary>
