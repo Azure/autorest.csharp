@@ -18,18 +18,19 @@ namespace CadlRanchProjects.Tests
         public async Task LiteralModelProperties() => await Test(async (host) =>
         {
             Thing result = await new TypeSpecFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc"));
-            Assert.AreEqual(result.Name, "literal");
-            Assert.AreEqual(result.RequiredUnion, "union");
-            Assert.AreEqual(result.RequiredBadDescription, "def");
-            // the following are stick to literal value, despite the mock server returns different value
-            Assert.AreEqual(result.RequiredLiteralString, "accept");
-            Assert.AreEqual(result.RequiredLiteralInt, 123);
-            Assert.AreEqual(result.RequiredLiteralDouble, 1.23);
-            Assert.AreEqual(result.RequiredLiteralBool, false);
-            Assert.AreEqual(result.OptionalLiteralString, "reject");
-            Assert.AreEqual(result.OptionalLiteralInt, 456);
-            Assert.AreEqual(result.OptionalLiteralDouble, 4.56);
-            Assert.AreEqual(result.OptionalLiteralBool, true);
+            Assert.AreEqual("literal", result.Name);
+            Assert.AreEqual("union", result.RequiredUnion);
+            Assert.AreEqual("def", result.RequiredBadDescription);
+            // the type of the following properties are literal types, but if the server returns different value (for instance there is a service update but the SDK does not update, they are actually no longer literal types)
+            // but nevertheless, the SDK should still be able to get the new values
+            Assert.AreEqual("reject", result.RequiredLiteralString);
+            Assert.AreEqual(12345, result.RequiredLiteralInt);
+            Assert.AreEqual(123.45, result.RequiredLiteralDouble);
+            Assert.AreEqual(true, result.RequiredLiteralBool);
+            Assert.AreEqual("accept", result.OptionalLiteralString);
+            Assert.AreEqual(12345, result.OptionalLiteralInt);
+            Assert.AreEqual(123.45, result.OptionalLiteralDouble);
+            Assert.AreEqual(false, result.OptionalLiteralBool);
         });
 
     }
