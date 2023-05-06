@@ -5,9 +5,9 @@
 <example>
 This sample shows how to call GetFloat32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient(<1.0.0>);
+var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
-Response response = await client.GetFloat32ValueAsync();
+Response response = await client.GetFloat32ValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -18,9 +18,9 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 <example>
 This sample shows how to call GetFloat32Value with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient(<1.0.0>);
+var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
-Response response = client.GetFloat32Value();
+Response response = client.GetFloat32Value(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -31,13 +31,13 @@ Console.WriteLine(result.GetProperty("<test>").ToString());
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient(<1.0.0>);
+var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
 var data = new {
     key = 123.45f,
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -46,13 +46,13 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient(<1.0.0>);
+var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
 var data = new {
     key = 123.45f,
 };
 
-Response response = client.Put(RequestContent.Create(data));
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
