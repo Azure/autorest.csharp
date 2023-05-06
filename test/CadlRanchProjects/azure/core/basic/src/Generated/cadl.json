@@ -3,7 +3,6 @@
  "Name": "_Specs_.Azure.Core.Basic",
  "Description": "Illustrates bodies templated with Azure Core",
  "ApiVersions": [
-  "1.0.0",
   "2022-12-01-preview"
  ],
  "Enums": [],

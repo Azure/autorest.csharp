@@ -192,5 +192,45 @@ namespace _Type.Property.ValueTypes
 
             return new Never(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of UnknownString. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnknownString GetUnknownStringClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnknownString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnknownInt. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnknownInt GetUnknownIntClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnknownInt(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnknownDict. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnknownDict GetUnknownDictClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnknownDict(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnknownArray. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnknownArray GetUnknownArrayClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnknownArray(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }
