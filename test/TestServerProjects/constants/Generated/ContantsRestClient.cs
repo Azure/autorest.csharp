@@ -141,7 +141,7 @@ namespace constants
             }
         }
 
-        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
+        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -149,20 +149,16 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
-            if (input != null)
-            {
-                uri.AppendQuery("input", input.Value.ToString(), true);
-            }
+            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueNoDefaultOpEnum.Value1.ToString(), true);
             request.Uri = uri;
             return message;
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(input);
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -174,11 +170,10 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNoModelAsStringNoRequiredOneValueNoDefault(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
+        public Response PutNoModelAsStringNoRequiredOneValueNoDefault(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(input);
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -189,7 +184,7 @@ namespace constants
             }
         }
 
-        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input)
+        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -197,22 +192,16 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
-            if (input != null)
-            {
-                uri.AppendQuery("input", input.Value.ToString(), true);
-            }
+            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueDefaultOpEnum.Value1.ToString(), true);
             request.Uri = uri;
             return message;
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(CancellationToken cancellationToken = default)
         {
-            input ??= NoModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
-
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(input);
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -224,13 +213,10 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNoModelAsStringNoRequiredOneValueDefault(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
+        public Response PutNoModelAsStringNoRequiredOneValueDefault(CancellationToken cancellationToken = default)
         {
-            input ??= NoModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
-
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(input);
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
