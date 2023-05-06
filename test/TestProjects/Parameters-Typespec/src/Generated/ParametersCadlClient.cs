@@ -71,6 +71,11 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="OperationAsync(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -80,7 +85,7 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(int,int?,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(int start, int? end, RequestContext context)
         {
@@ -103,6 +108,11 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="Operation(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -112,7 +122,7 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(int,int?,RequestContext)']/*" />
         public virtual Response Operation(int start, int? end, RequestContext context)
         {
@@ -157,6 +167,11 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="Operation2Async(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -166,7 +181,7 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(int,int?,RequestContext)']/*" />
         public virtual async Task<Response> Operation2Async(int end, int? start, RequestContext context)
         {
@@ -189,6 +204,11 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="Operation2(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -198,7 +218,7 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(int,int?,RequestContext)']/*" />
         public virtual Response Operation2(int end, int? start, RequestContext context)
         {

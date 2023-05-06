@@ -58,7 +58,16 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> [Protocol Method]. </summary>
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -79,7 +88,16 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method]. </summary>
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -100,7 +118,16 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
+        /// <summary>
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
@@ -116,7 +143,16 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
+        /// <summary>
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>

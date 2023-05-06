@@ -32,17 +32,6 @@ Response response = await client.GetNeverAsync(new RequestContext());
 Console.WriteLine(response.ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>NeverProperty</c>:
-<code>{
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetNever(RequestContext)">
 <example>
@@ -55,17 +44,6 @@ Response response = client.GetNever(new RequestContext());
 Console.WriteLine(response.ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>NeverProperty</c>:
-<code>{
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutAsync(NeverProperty,CancellationToken)">
 <example>
@@ -101,17 +79,6 @@ Response response = await client.PutAsync(RequestContent.Create(data), new Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>NeverProperty</c>:
-<code>{
-}
-</code>
-
-</remarks>
     </member>
     <member name="Put(RequestContent,RequestContext)">
 <example>
@@ -125,17 +92,6 @@ Response response = client.Put(RequestContent.Create(data), new RequestContext()
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>NeverProperty</c>:
-<code>{
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

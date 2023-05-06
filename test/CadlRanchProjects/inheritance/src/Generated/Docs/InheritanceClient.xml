@@ -39,20 +39,6 @@ Response response = await client.PostValidAsync(RequestContent.Create(data), new
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PostValid(RequestContent,RequestContext)">
 <example>
@@ -70,20 +56,6 @@ Response response = client.PostValid(RequestContent.Create(data), new RequestCon
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetValidAsync(CancellationToken)">
 <example>
@@ -119,20 +91,6 @@ Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetValid(RequestContext)">
 <example>
@@ -148,20 +106,6 @@ Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValidAsync(Siamese,CancellationToken)">
 <example>
@@ -205,30 +149,6 @@ Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
@@ -250,30 +170,6 @@ Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Siamese</c>:
-<code>{
-  smart: boolean, # Required.
-  age: number, # Required.
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetModelAsync(CancellationToken)">
 <example>
@@ -307,18 +203,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetModel(RequestContext)">
 <example>
@@ -332,18 +216,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutModelAsync(Fish,CancellationToken)">
 <example>
@@ -381,18 +253,6 @@ Response response = await client.PutModelAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutModel(RequestContent,RequestContext)">
 <example>
@@ -408,18 +268,6 @@ Response response = client.PutModel(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetRecursiveModelAsync(CancellationToken)">
 <example>
@@ -453,18 +301,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetRecursiveModel(RequestContext)">
 <example>
@@ -478,18 +314,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutRecursiveModelAsync(Fish,CancellationToken)">
 <example>
@@ -527,18 +351,6 @@ Response response = await client.PutRecursiveModelAsync(RequestContent.Create(da
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutRecursiveModel(RequestContent,RequestContext)">
 <example>
@@ -554,18 +366,6 @@ Response response = client.PutRecursiveModel(RequestContent.Create(data), new Re
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMissingDiscriminatorAsync(CancellationToken)">
 <example>
@@ -599,18 +399,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetMissingDiscriminator(RequestContext)">
 <example>
@@ -624,18 +412,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWrongDiscriminatorAsync(CancellationToken)">
 <example>
@@ -669,18 +445,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetWrongDiscriminator(RequestContext)">
 <example>
@@ -694,18 +458,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Fish</c>:
-<code>{
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

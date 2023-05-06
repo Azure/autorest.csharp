@@ -12,9 +12,6 @@ Response response = await client.DeleteAsync(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Delete a pet.
-</remarks>
     </member>
     <member name="Delete(int,RequestContext)">
 <example>
@@ -27,9 +24,6 @@ Response response = client.Delete(1234, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Delete a pet.
-</remarks>
     </member>
     <member name="ReadAsync(int,CancellationToken)">
 <example>
@@ -68,20 +62,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Read(int,RequestContext)">
 <example>
@@ -98,20 +78,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="CreateAsync(Pet,CancellationToken)">
 <example>
@@ -180,30 +146,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Create(RequestContent,RequestContext)">
 <example>
@@ -242,30 +184,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPetByKindAsync(PetKind,CancellationToken)">
 <example>
@@ -304,20 +222,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPetByKind(string,RequestContext)">
 <example>
@@ -334,20 +238,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetFirstPetAsync(int?,CancellationToken)">
 <example>
@@ -386,20 +276,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetFirstPet(int?,RequestContext)">
 <example>
@@ -416,20 +292,6 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>Pet</c>:
-<code>{
-  name: string, # Required.
-  tag: string, # Optional.
-  age: number, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

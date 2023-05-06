@@ -14,9 +14,6 @@ Response response = await client.CreateAsync("<itemName>", RequestContent.Create
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="Create(string,RequestContent,RequestContext)">
 <example>
@@ -31,9 +28,6 @@ Response response = client.Create("<itemName>", RequestContent.Create(data), new
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
 <example>
@@ -58,9 +52,6 @@ Response response = await client.CreateStreamAsync("<itemNameStream>", RequestCo
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
 <example>
@@ -85,9 +76,6 @@ Response response = client.CreateStream("<itemNameStream>", RequestContent.Creat
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="CreateEnumAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -102,9 +90,6 @@ Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", R
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="CreateEnum(string,string,RequestContent,RequestContext)">
 <example>
@@ -119,9 +104,6 @@ Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestConte
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Resets products.
-</remarks>
     </member>
     <member name="GetBodyAndPathsAsync(RequestContext)">
 <example>
@@ -136,9 +118,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
-<remarks>
-List all.
-</remarks>
     </member>
     <member name="GetBodyAndPaths(RequestContext)">
 <example>
@@ -153,9 +132,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
-<remarks>
-List all.
-</remarks>
     </member>
     <member name="GetItemsAsync(RequestContext)">
 <example>
@@ -170,9 +146,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
-<remarks>
-List all products.
-</remarks>
     </member>
     <member name="GetItems(RequestContext)">
 <example>
@@ -187,9 +160,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
-<remarks>
-List all products.
-</remarks>
     </member>
     <member name="UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)">
 <example>
@@ -216,18 +186,6 @@ Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", Re
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BodyParam</c>:
-<code>{
-  invalid-int-name: number, # Optional. Invalid int parameter.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Update(string,string,string,RequestContent,string,string,RequestContext)">
 <example>
@@ -254,18 +212,6 @@ Response response = client.Update("<item3>", "<item2>", "<item4>", RequestConten
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>BodyParam</c>:
-<code>{
-  invalid-int-name: number, # Optional. Invalid int parameter.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

@@ -277,7 +277,9 @@ namespace AutoRest.CSharp.Generation.Writers
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+
                 var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
+
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
@@ -529,14 +531,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
-            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(_writer, methodSignature, clientMethod, hasResponseRemarks, async);
+            WriteMethodDocumentation(_writer, methodSignature, clientMethod, async);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, Array.Empty<FormattableString>(), false, false, false);
             }
         }
 
@@ -569,10 +570,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(isAsync);
-            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks, isAsync);
-            WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod, async);
         }
 
         private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
@@ -622,25 +621,19 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder();
             builder.AppendLine($"[Protocol Method] {methodSignature.SummaryText}");
+            builder.AppendLine($"<list type=\"bullet\">");
+            builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+
             if (clientMethod.ConvenienceMethod != null)
             {
-                builder.AppendLine($"<list type=\"bullet\">");
-                if (!methodSignature.DescriptionText.IsNullOrEmpty())
-                {
-                    builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
-                }
-
-                if (clientMethod.ConvenienceMethod != null)
-                {
-                    var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature.WithAsync(async));
-                    builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
-                }
-                builder.AppendLine($"</list>");
+                var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature.WithAsync(async));
+                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
             }
+            builder.AppendLine($"</list>");
             return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
         }
 
-        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool hasResponseRemarks, bool async)
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
             codeWriter.WriteMethodDocumentation(methodSignature, BuildProtocolMethodSummary(methodSignature, clientMethod, async));
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
@@ -669,15 +662,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (clientMethod.LongRunning != null)
             {
-                text = hasResponseRemarks
-                    ? $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{nameof(BinaryData)}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below."
-                    : (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
+                text = (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
             }
             else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
             {
-                text = hasResponseRemarks
-                    ? $"The response returned from the service. Details of the response body schema are in the Remarks section below."
-                    : (FormattableString)$"The response returned from the service.";
+                text = (FormattableString)$"The response returned from the service.";
             }
             else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
             {
@@ -691,7 +680,17 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
+        private static string BuildSchemaFromDocs(SchemaDocumentation[] docs)
+        {
+            var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
+            var builder = new StringBuilder();
+            builder.AppendLine("{");
+            BuildSchemaFromDoc(builder, docs.First(), docDict, 2);
+            builder.AppendLine("}");
+            return builder.ToString();
+        }
 
+        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
         private static IReadOnlyList<FormattableString> CreateSchemaDocumentationRemarks(LowLevelClientMethod clientMethod, out bool hasRequestSchema, out bool hasResponseSchema)
         {
             var schemas = new List<FormattableString>();
@@ -707,9 +706,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 hasResponseSchema = AddRequestOrResponseInputType(schemas, clientMethod.ResponseBodyType, "Response Body");
             }
-
             return schemas;
-
             static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
                 bodyType switch
                 {
@@ -774,13 +771,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 return false;
             }
         }
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
+
+        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
         {
-            if (schemas.Count <= 0)
-            {
-                writeXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            if (clientMethod.RequestMethod.Operation.ExternalDocsUrl == null)
                 return;
-            }
 
             var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
                 ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
@@ -814,22 +810,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            if (!methodSignature.DescriptionText.IsNullOrEmpty())
+            if (addDescription && !methodSignature.DescriptionText.IsNullOrEmpty())
             {
                 schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
             }
 
             writeXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
-        }
-
-        private static string BuildSchemaFromDocs(SchemaDocumentation[] docs)
-        {
-            var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
-            var builder = new StringBuilder();
-            builder.AppendLine("{");
-            BuildSchemaFromDoc(builder, docs.First(), docDict, 2);
-            builder.AppendLine("}");
-            return builder.ToString();
         }
 
         private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, int indentation = 0)

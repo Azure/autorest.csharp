@@ -19,127 +19,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
     <member name="GetValid(RequestContext)">
 <example>
@@ -159,127 +38,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
@@ -313,127 +71,6 @@ Response response = await client.PutValidAsync(RequestContent.Create(data), new 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
@@ -467,127 +104,6 @@ Response response = client.PutValid(RequestContent.Create(data), new RequestCont
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
     <member name="GetDotSyntaxAsync(RequestContext)">
 <example>
@@ -603,22 +119,6 @@ Console.WriteLine(result.GetProperty("fish.type").ToString());
 Console.WriteLine(result.GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fish.type: string, # Required.
-  species: string, # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="GetDotSyntax(RequestContext)">
 <example>
@@ -634,22 +134,6 @@ Console.WriteLine(result.GetProperty("fish.type").ToString());
 Console.WriteLine(result.GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fish.type: string, # Required.
-  species: string, # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="GetComposedWithDiscriminatorAsync(RequestContext)">
 <example>
@@ -675,29 +159,6 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToStr
 Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DotFishMarket</c>:
-<code>{
-  sampleSalmon: {
-    location: string, # Optional.
-    iswild: boolean, # Optional.
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  salmons: [DotSalmon], # Optional.
-  sampleFish: {
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  fishes: [DotFish], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComposedWithDiscriminator(RequestContext)">
 <example>
@@ -723,29 +184,6 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToStr
 Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DotFishMarket</c>:
-<code>{
-  sampleSalmon: {
-    location: string, # Optional.
-    iswild: boolean, # Optional.
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  salmons: [DotSalmon], # Optional.
-  sampleFish: {
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  fishes: [DotFish], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComposedWithoutDiscriminatorAsync(RequestContext)">
 <example>
@@ -771,29 +209,6 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToStr
 Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DotFishMarket</c>:
-<code>{
-  sampleSalmon: {
-    location: string, # Optional.
-    iswild: boolean, # Optional.
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  salmons: [DotSalmon], # Optional.
-  sampleFish: {
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  fishes: [DotFish], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComposedWithoutDiscriminator(RequestContext)">
 <example>
@@ -819,29 +234,6 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToStr
 Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>DotFishMarket</c>:
-<code>{
-  sampleSalmon: {
-    location: string, # Optional.
-    iswild: boolean, # Optional.
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  salmons: [DotSalmon], # Optional.
-  sampleFish: {
-    fish.type: string, # Required.
-    species: string, # Optional.
-  }, # Optional.
-  fishes: [DotFish], # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetComplicatedAsync(RequestContext)">
 <example>
@@ -863,32 +255,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="GetComplicated(RequestContext)">
 <example>
@@ -910,32 +276,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PutComplicatedAsync(RequestContent,RequestContext)">
 <example>
@@ -979,32 +319,6 @@ Response response = await client.PutComplicatedAsync(RequestContent.Create(data)
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PutComplicated(RequestContent,RequestContext)">
 <example>
@@ -1048,32 +362,6 @@ Response response = client.PutComplicated(RequestContent.Create(data), new Reque
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PutMissingDiscriminatorAsync(RequestContent,RequestContext)">
 <example>
@@ -1128,54 +416,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-Response Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PutMissingDiscriminator(RequestContent,RequestContext)">
 <example>
@@ -1230,54 +470,6 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToStr
 Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-Response Body:
-
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-
-</remarks>
     </member>
     <member name="PutValidMissingRequiredAsync(RequestContent,RequestContext)">
 <example>
@@ -1311,127 +503,6 @@ Response response = await client.PutValidMissingRequiredAsync(RequestContent.Cre
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
     <member name="PutValidMissingRequired(RequestContent,RequestContext)">
 <example>
@@ -1465,127 +536,6 @@ Response response = client.PutValidMissingRequired(RequestContent.Create(data), 
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
-<details><summary>Salmon</summary>Schema for <c>Salmon</c>:
-<code>{
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-<code>{
-  college_degree: string, # Optional.
-  location: string, # Optional.
-  iswild: boolean, # Optional.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
-<code>{
-  picture: Bytes, # Optional.
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
-<code>{
-  jawsize: number, # Optional.
-  color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-<details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
-<code>{
-  age: number, # Optional.
-  birthday: string (ISO 8601 Format), # Required.
-  fishtype: string, # Required.
-  species: string, # Optional.
-  length: number, # Required.
-  siblings: [
-    {
-      fishtype: string, # Required.
-      species: string, # Optional.
-      length: number, # Required.
-      siblings: [Fish], # Optional.
-    }
-  ], # Optional.
-}
-</code>
-</details>
-</details>
-
-</remarks>
     </member>
   </members>
 </doc>

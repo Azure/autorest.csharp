@@ -37,18 +37,6 @@ Response response = await client.InputAsync(RequestContent.Create(data), new Req
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>InputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Input(RequestContent,RequestContext)">
 <example>
@@ -64,18 +52,6 @@ Response response = client.Input(RequestContent.Create(data), new RequestContext
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>InputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="OutputAsync(CancellationToken)">
 <example>
@@ -109,18 +85,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>OutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Output(RequestContext)">
 <example>
@@ -134,18 +98,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>OutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputAndOutputAsync(InputOutputRecord,CancellationToken)">
 <example>
@@ -185,26 +137,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputOutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>InputOutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="InputAndOutput(RequestContent,RequestContext)">
 <example>
@@ -222,26 +154,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>InputOutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>InputOutputRecord</c>:
-<code>{
-  requiredProp: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

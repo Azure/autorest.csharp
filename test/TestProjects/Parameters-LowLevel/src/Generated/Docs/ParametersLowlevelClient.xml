@@ -80,28 +80,6 @@ Console.WriteLine(result.GetProperty("Code").ToString());
 Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-Response Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="RequestBodyResponseBody(RequestContent,RequestContext)">
 <example>
@@ -134,28 +112,6 @@ Console.WriteLine(result.GetProperty("Code").ToString());
 Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-Response Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)">
 <example>
@@ -343,19 +299,6 @@ Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsyn
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
     <member name="OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)">
 <example>
@@ -383,19 +326,6 @@ Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>",
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>TestModel</c>:
-<code>{
-  Code: string, # Optional.
-  Status: string, # Optional.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

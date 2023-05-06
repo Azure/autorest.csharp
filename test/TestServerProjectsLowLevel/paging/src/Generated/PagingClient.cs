@@ -57,7 +57,16 @@ namespace paging_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -69,7 +78,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -81,7 +99,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -92,7 +119,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -103,7 +139,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that finishes on the first call without a nextlink
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -115,7 +160,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that finishes on the first call without a nextlink
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -127,7 +181,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -139,7 +202,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -151,7 +223,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
@@ -166,7 +247,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
@@ -181,7 +271,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -194,7 +293,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -207,7 +315,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary>
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -220,7 +337,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary>
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -233,7 +359,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -244,7 +379,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
-        /// <summary> [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method] Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -255,7 +399,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
@@ -270,7 +423,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink in odata format that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
@@ -285,7 +447,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -301,7 +472,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -317,7 +497,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -329,7 +518,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -341,7 +539,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -353,7 +560,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -365,7 +581,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives a 400 on the first call. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives a 400 on the first call
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -377,7 +602,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives a 400 on the first call. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives a 400 on the first call
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -389,7 +623,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives a 400 on the second call. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives a 400 on the second call
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -401,7 +644,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives a 400 on the second call. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives a 400 on the second call
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -413,7 +665,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives an invalid nextLink. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives an invalid nextLink
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -425,7 +686,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that receives an invalid nextLink. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that receives an invalid nextLink
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -437,7 +707,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -456,7 +735,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -475,7 +763,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -494,7 +791,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -513,7 +819,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -534,7 +849,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -555,7 +879,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -576,7 +909,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -597,7 +939,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -609,7 +960,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary>
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -621,7 +981,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
-        /// <summary> [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -647,7 +1016,16 @@ namespace paging_LowLevel
             }
         }
 
-        /// <summary> [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method] A long-running paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>

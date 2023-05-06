@@ -28,20 +28,6 @@ await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234, new
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetPaginationParams(int?,int?,int?,RequestContext)">
 <example>
@@ -70,20 +56,6 @@ foreach (var item in client.GetPaginationParams(1234, 1234, 1234, new RequestCon
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get2sAsync(int?,int?,long?,RequestContext)">
 <example>
@@ -112,20 +84,6 @@ await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContex
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get2s(int?,int?,long?,RequestContext)">
 <example>
@@ -154,20 +112,6 @@ foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get3sAsync(int?,int?,int?,RequestContext)">
 <example>
@@ -196,20 +140,6 @@ await foreach (var item in client.Get3sAsync(1234, 1234, 1234, new RequestContex
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get3s(int?,int?,int?,RequestContext)">
 <example>
@@ -238,20 +168,6 @@ foreach (var item in client.Get3s(1234, 1234, 1234, new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get4sAsync(int?,int?,float?,RequestContext)">
 <example>
@@ -280,20 +196,6 @@ await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestConte
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
     <member name="Get4s(int?,int?,float?,RequestContext)">
 <example>
@@ -322,20 +224,6 @@ foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
 }
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>PageSizeIntegerModelListResultValue</c>:
-<code>{
-  id: string, # Optional. Resource ID.
-  name: string, # Optional. Resource name.
-  type: string, # Optional. Resource type.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>
