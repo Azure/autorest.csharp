@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetModelAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+Response response = await client.GetModelAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetModel(RequestContext)">
+<example>
+This sample shows how to call GetModel with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+Response response = client.GetModel(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+var data = new {
+    property = new {
+        property = "<property>",
+    },
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+var data = new {
+    property = new {
+        property = "<property>",
+    },
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
