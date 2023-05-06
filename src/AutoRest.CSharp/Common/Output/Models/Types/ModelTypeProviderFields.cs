@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+            var propertyShouldOmitSetter = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
             FieldModifiers fieldModifiers;
@@ -109,9 +109,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                fieldModifiers = propertyIsLiteralType ? Internal : Public;
+                fieldModifiers = Public;
             }
-            if (propertyIsReadOnly)
+            if (propertyShouldOmitSetter)
                 fieldModifiers |= ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
