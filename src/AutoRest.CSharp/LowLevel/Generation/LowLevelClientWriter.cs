@@ -570,8 +570,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, async);
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(isAsync);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod, isAsync);
         }
 
         private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
