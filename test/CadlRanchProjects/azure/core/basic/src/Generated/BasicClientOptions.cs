@@ -18,10 +18,8 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
-            /// <summary> Service version "1.0.0". </summary>
-            V1_0_0 = 1,
             /// <summary> Service version "2022-12-01-preview". </summary>
-            V2022_12_01_Preview = 2,
+            V2022_12_01_Preview = 1,
         }
 
         internal string Version { get; }
@@ -31,7 +29,6 @@ namespace _Specs_.Azure.Core.Basic
         {
             Version = version switch
             {
-                ServiceVersion.V1_0_0 => "1.0.0",
                 ServiceVersion.V2022_12_01_Preview => "2022-12-01-preview",
                 _ => throw new NotSupportedException()
             };
