@@ -1,0 +1,13 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtXmlDeserialization",
+  "LibraryName": "MgmtXmlDeserialization",
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true
+}

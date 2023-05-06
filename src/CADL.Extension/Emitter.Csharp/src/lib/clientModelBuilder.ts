@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    SdkClient,
     createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
-    SdkClient,
     SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -17,8 +17,7 @@ import {
     getDoc,
     getNamespaceFullName,
     Operation,
-    ignoreDiagnostics,
-    Program
+    ignoreDiagnostics
 } from "@typespec/compiler";
 import {
     getAuthentication,
@@ -77,7 +76,7 @@ export function createModelForService(
     service: Service
 ): CodeModel {
     const program = context.program;
-    const dpgContext = createSdkContext(context);
+    const sdkContext = createSdkContext(context);
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();
@@ -97,7 +96,7 @@ export function createModelForService(
         throw "No Api-Version Provided";
     }
     const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(dpgContext, serviceNamespaceType);
+    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const apiVersionParam: InputParameter = {
@@ -144,7 +143,7 @@ export function createModelForService(
     //create endpoint parameter from servers
     if (servers !== undefined) {
         const cadlServers = resolveServers(
-            dpgContext,
+            sdkContext,
             servers,
             modelMap,
             enumMap
@@ -162,12 +161,12 @@ export function createModelForService(
     }
     logger.info("routes:" + routes.length);
 
-    lroMonitorOperations = getAllLroMonitorOperations(routes, dpgContext);
+    lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
-    const dpgClients = listClients(dpgContext);
+    const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        const dpgOperationGroups = listOperationGroups(dpgContext, client);
+        const dpgOperationGroups = listOperationGroups(sdkContext, client);
         for (const dpgGroup of dpgOperationGroups) {
             clients.push(emitClient(dpgGroup, client));
         }
@@ -207,7 +206,7 @@ export function createModelForService(
         }
     }
 
-    const usages = getUsages(dpgContext, convenienceOperations);
+    const usages = getUsages(sdkContext, convenienceOperations);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
 
@@ -226,7 +225,7 @@ export function createModelForService(
         client: SdkClient | SdkOperationGroup,
         parent?: SdkClient
     ): InputClient {
-        const operations = listOperationsInOperationGroup(dpgContext, client);
+        const operations = listOperationsInOperationGroup(sdkContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
