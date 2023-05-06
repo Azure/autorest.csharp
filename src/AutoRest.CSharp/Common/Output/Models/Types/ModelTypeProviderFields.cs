@@ -65,7 +65,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
+                // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter);
+                // only required + not readonly + not literal property could get into the public ctor
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);

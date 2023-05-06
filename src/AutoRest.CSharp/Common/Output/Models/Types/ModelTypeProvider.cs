@@ -129,7 +129,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            List<JsonPropertySerialization> result = new List<JsonPropertySerialization>();
             foreach (var objType in EnumerateHierarchy())
             {
                 foreach (var property in objType.Properties)
@@ -143,7 +142,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false);
                     var paramName = declaredName.ToVariableName();
 
-                    result.Add(new JsonPropertySerialization(
+                    yield return new JsonPropertySerialization(
                         paramName,
                         declaredName,
                         serializedName,
@@ -153,10 +152,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         inputModelProperty.IsRequired,
                         inputModelProperty.IsReadOnly,
                         false,
-                        optionalViaNullability));
+                        optionalViaNullability);
                 }
             }
-            return result;
         }
 
         private ConstructorSignature CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
