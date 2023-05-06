@@ -92,6 +92,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public FormattableString Compose(ConvenienceMethod convenienceMethod, bool async)
         {
+            //skip when body param is obsolete
+            if (convenienceMethod.IsDeprecatedForExamples())
+                return $"";
+
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var builder = new StringBuilder();
 
@@ -753,6 +757,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return $"new RequestContext()";
                 }
+
+                if (type == typeof(JsonElement))
+                {
+                    return $"new JsonElement()";
+                }
+
+                if (type == typeof(object))
+                {
+                    return $"new object()";
+                }
             }
 
             return "null"; // some unknown found
@@ -855,14 +869,24 @@ namespace AutoRest.CSharp.Generation.Writers
              * Array.Empty<TypeName>()
              */
 
+            var elementName = elementType.ConvertParamNameForCode();
+            if (elementName == "IList")
+            {
+                elementName = $"{elementType.Arguments[0].Name}[]";
+            }
+            if (elementName == "IDictionary")
+            {
+                elementName = $"Dictionary<string,{elementType.Arguments[1].Name}>";
+            }
+
             var elementExpr = ComposeCSharpType(allProperties, elementType, null, indent + 4, includeCollectionInitialization, visitedModels);
             if (elementExpr == string.Empty)
             {
-                return includeCollectionInitialization ? $"Array.Empty<{elementType.Name}>()" : "{}";
+                return includeCollectionInitialization ? $"Array.Empty<{elementName}>()" : "{}";
             }
 
             var builder = new StringBuilder();
-            builder.AppendLine(includeCollectionInitialization ? $"new {elementType.Name}[] " : "");
+            builder.AppendLine(includeCollectionInitialization ? $"new {elementName}[] " : "");
             using (Scope("", indent, builder))
             {
                 builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
@@ -1007,6 +1031,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return string.Empty;
 
             visitedModels.Add(model);
+
+            if (model.Discriminator != null && model.Discriminator.Implementations.Length > 0)
+            {
+                model = model.Discriminator.Implementations.Where(i => !i.Type.IsFrameworkType && i.Type.Implementation is ObjectType).Select(i => (i.Type.Implementation as ObjectType)!).First();
+            }
 
             /* GENERATED CODE PATTERN
                      * new <ModelName>(parameterInCtor1, parameterInCtor2) {

@@ -68,9 +68,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (clientMethod.ConvenienceMethod is { } convenienceMethod)
                         {
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, true);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, clientMethod.RequestMethod, true);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, false);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, clientMethod.RequestMethod, false);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
                         }
 
@@ -537,11 +537,11 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, Array.Empty<FormattableString>(), false, false, false);
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod.RequestMethod, clientMethod.PagingInfo != null, methodSignature, Array.Empty<FormattableString>(), false, false, false);
             }
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, bool async)
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, RestClientMethod restMethod, bool async)
         {
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
 
@@ -552,6 +552,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(convenienceMethod, async));
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, restMethod, convenienceMethod.IsPageable, methodSignature, Array.Empty<FormattableString>(), false, false, false);
             }
         }
 
@@ -773,25 +774,25 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientMethod requestMethod, bool isPagingMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
         {
-            if (clientMethod.RequestMethod.Operation.ExternalDocsUrl == null)
+            if (requestMethod.Operation.ExternalDocsUrl == null)
                 return;
 
-            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
+            var docInfo = requestMethod.Operation.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{requestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
                 : (FormattableString)$"";
 
             var schemaDesription = "";
             if (hasRequestRemarks && hasResponseRemarks)
             {
-                if (clientMethod.PagingInfo == null)
+                if (isPagingMethod)
                 {
-                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
                 }
                 else
                 {
-                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
                 }
             }
             else if (hasRequestRemarks)
@@ -800,13 +801,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (hasResponseRemarks)
             {
-                if (clientMethod.PagingInfo == null)
+                if (isPagingMethod)
                 {
-                    schemaDesription = "Below is the JSON schema for the response payload.";
+                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
                 }
                 else
                 {
-                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                    schemaDesription = "Below is the JSON schema for the response payload.";
                 }
             }
 

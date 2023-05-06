@@ -77,7 +77,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
                         }
 
-                        if (method.ConvenienceMethod is not null)
+                        if (method.ConvenienceMethod is not null &&
+                            !method.ConvenienceMethod.IsDeprecatedForExamples())
                             WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
                 }
