@@ -76,6 +76,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="PublicAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -85,7 +90,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='PublicAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> PublicAsync(string name, RequestContext context)
         {
@@ -110,6 +115,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="Public(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -119,7 +129,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Public(string,RequestContext)']/*" />
         public virtual Response Public(string name, RequestContext context)
         {
@@ -168,6 +178,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="InternalAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -177,7 +192,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='InternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> InternalAsync(string name, RequestContext context)
         {
@@ -202,6 +217,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <list type="bullet">
         /// <item>
         /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
         /// Please try the simpler <see cref="Internal(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
@@ -211,7 +231,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Internal(string,RequestContext)']/*" />
         internal virtual Response Internal(string name, RequestContext context)
         {

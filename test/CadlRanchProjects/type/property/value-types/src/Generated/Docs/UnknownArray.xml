@@ -5,105 +5,57 @@
 <example>
 This sample shows how to call GetUnknownArrayAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownArrayClient(<1.0.0>);
+var client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
 
-Response response = await client.GetUnknownArrayAsync();
+Response response = await client.GetUnknownArrayAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>UnknownArrayProperty</c>:
-<code>{
-  property: any, # Required. Property
-}
-</code>
-
-</remarks>
     </member>
     <member name="GetUnknownArray(RequestContext)">
 <example>
 This sample shows how to call GetUnknownArray with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownArrayClient(<1.0.0>);
+var client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
 
-Response response = client.GetUnknownArray();
+Response response = client.GetUnknownArray(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>UnknownArrayProperty</c>:
-<code>{
-  property: any, # Required. Property
-}
-</code>
-
-</remarks>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownArrayClient(<1.0.0>);
+var client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
 
 var data = new {
     property = new {},
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>UnknownArrayProperty</c>:
-<code>{
-  property: any, # Required. Property
-}
-</code>
-
-</remarks>
     </member>
     <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownArrayClient(<1.0.0>);
+var client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
 
 var data = new {
     property = new {},
 };
 
-Response response = client.Put(RequestContent.Create(data));
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>UnknownArrayProperty</c>:
-<code>{
-  property: any, # Required. Property
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>

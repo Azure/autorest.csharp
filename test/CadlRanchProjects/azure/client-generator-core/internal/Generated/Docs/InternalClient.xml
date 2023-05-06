@@ -7,24 +7,12 @@ This sample shows how to call PublicOnlyAsync with required parameters and parse
 <code><![CDATA[
 var client = new InternalClient();
 
-Response response = await client.PublicOnlyAsync("<name>");
+Response response = await client.PublicOnlyAsync("<name>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>PublicModel</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="PublicOnly(string,RequestContext)">
 <example>
@@ -32,74 +20,16 @@ This sample shows how to call PublicOnly with required parameters and parse the 
 <code><![CDATA[
 var client = new InternalClient();
 
-Response response = client.PublicOnly("<name>");
+Response response = client.PublicOnly("<name>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>PublicModel</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="InternalOnlyAsync(string,RequestContext)">
-<example>
-This sample shows how to call InternalOnlyAsync with required parameters and parse the result.
-<code><![CDATA[
-var client = new InternalClient();
-
-Response response = await client.InternalOnlyAsync("<name>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>InternalModel</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
     <member name="InternalOnly(string,RequestContext)">
-<example>
-This sample shows how to call InternalOnly with required parameters and parse the result.
-<code><![CDATA[
-var client = new InternalClient();
-
-Response response = client.InternalOnly("<name>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
-<remarks>
-Below is the JSON schema for the response payload.
-
-Response Body:
-
-Schema for <c>InternalModel</c>:
-<code>{
-  name: string, # Required.
-}
-</code>
-
-</remarks>
     </member>
   </members>
 </doc>
