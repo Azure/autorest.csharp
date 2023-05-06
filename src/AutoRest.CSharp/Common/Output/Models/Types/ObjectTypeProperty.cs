@@ -160,6 +160,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
+                // unwrap constant schema if it is
+                if (identityTypeSchema is ConstantSchema constantIdentitySchema && constantIdentitySchema.ValueType is ChoiceSchema identityTypeChoiceSchema)
+                    identityTypeSchema = identityTypeChoiceSchema;
+
                 if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
                 {
                     supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();

@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Common.Decorator
 
         private static bool CheckPropertyExtension(Property property)
         {
-            if (property.Extensions?.TryGetValue("x-ms-contant", out var value) ?? false)
+            if (property.Extensions?.TryGetValue("x-ms-constant", out var value) ?? false)
             {
                 return "true".Equals(value.ToString());
             }
