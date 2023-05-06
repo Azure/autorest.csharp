@@ -45,7 +45,6 @@ namespace Azure.Core
                     JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(item.Value.ToString()).RootElement);
 #endif
                 }
-
             }
             content.JsonWriter.WriteEndObject();
 

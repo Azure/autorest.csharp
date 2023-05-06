@@ -60,6 +60,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
-        public override CSharpType? FindTypeByName(string originalName) => null;
+        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m=>m.Declaration.Name == originalName)?.Select(m=>m.Type).FirstOrDefault();
     }
 }
