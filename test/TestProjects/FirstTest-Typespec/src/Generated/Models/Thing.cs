@@ -61,28 +61,28 @@ namespace TypeSpecFirstTest.Models
         /// <summary> required Union. </summary>
         public string RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
-        public string RequiredLiteralString { get; } = "accept";
+        internal string RequiredLiteralString { get; } = "accept";
 
         /// <summary> required literal int. </summary>
-        public int RequiredLiteralInt { get; } = 123;
+        internal int RequiredLiteralInt { get; } = 123;
 
         /// <summary> required literal double. </summary>
-        public double RequiredLiteralDouble { get; } = 1.23;
+        internal double RequiredLiteralDouble { get; } = 1.23;
 
         /// <summary> required literal bool. </summary>
-        public bool RequiredLiteralBool { get; } = false;
+        internal bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        public string OptionalLiteralString { get; } = "reject";
+        internal string OptionalLiteralString { get; } = "reject";
 
         /// <summary> optional literal int. </summary>
-        public int? OptionalLiteralInt { get; } = 456;
+        internal int? OptionalLiteralInt { get; } = 456;
 
         /// <summary> optional literal double. </summary>
-        public double? OptionalLiteralDouble { get; } = 4.56;
+        internal double? OptionalLiteralDouble { get; } = 4.56;
 
         /// <summary> optional literal bool. </summary>
-        public bool? OptionalLiteralBool { get; } = true;
+        internal bool? OptionalLiteralBool { get; } = true;
 
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }

@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                fieldModifiers = Public;
+                fieldModifiers = propertyIsLiteralType ? Internal : Public;
             }
             if (propertyShouldOmitSetter)
                 fieldModifiers |= ReadOnly;
