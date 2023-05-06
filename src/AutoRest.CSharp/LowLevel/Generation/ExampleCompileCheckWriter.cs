@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.UseNamespace("Azure.Core");
             _writer.UseNamespace("Azure.Identity");
             _writer.UseNamespace("System");
+            _writer.UseNamespace("System.Collections.Generic");
             _writer.UseNamespace("System.IO");
             _writer.UseNamespace("System.Text.Json");
             if (Configuration.ModelNamespace && _client.HasConvenienceMethods)

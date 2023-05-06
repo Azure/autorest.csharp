@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Generation.Writers
             /* GENERATED CODE PATTERN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
