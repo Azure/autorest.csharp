@@ -7,7 +7,7 @@ This sample shows how to call GetDatetimeAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-var result = await client.GetDatetimeAsync(default);
+var result = await client.GetDatetimeAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetDatetime.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-var result = client.GetDatetime(default);
+var result = client.GetDatetime();
 ]]></code>
 </example>
     </member>
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var body = new DatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -65,7 +65,7 @@ This sample shows how to call Put with required parameters.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var body = new DatetimeProperty(DateTimeOffset.UtcNow);
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

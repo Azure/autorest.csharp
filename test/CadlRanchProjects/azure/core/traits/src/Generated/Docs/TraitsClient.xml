@@ -7,7 +7,7 @@ This sample shows how to call SmokeTestAsync with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
-var result = await client.SmokeTestAsync(1234, "<foo>", null, default);
+var result = await client.SmokeTestAsync(1234, "<foo>", null);
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call SmokeTest with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
-var result = client.SmokeTest(1234, "<foo>", null, default);
+var result = client.SmokeTest(1234, "<foo>", null);
 ]]></code>
 </example>
     </member>

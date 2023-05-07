@@ -7,7 +7,7 @@ This sample shows how to call GetNeverAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
-var result = await client.GetNeverAsync(default);
+var result = await client.GetNeverAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetNever.
 <code><![CDATA[
 var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
-var result = client.GetNever(default);
+var result = client.GetNever();
 ]]></code>
 </example>
     </member>
@@ -52,7 +52,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var body = new NeverProperty();
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -63,7 +63,7 @@ This sample shows how to call Put with required parameters.
 var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var body = new NeverProperty();
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

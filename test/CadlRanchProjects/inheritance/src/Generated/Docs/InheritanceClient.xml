@@ -223,7 +223,7 @@ This sample shows how to call PutModelAsync with required parameters.
 <code><![CDATA[
 var client = new InheritanceClient();
 
-var input = new Fish(1234);
+var input = new Shark(1234);
 var result = await client.PutModelAsync(input);
 ]]></code>
 </example>
@@ -234,7 +234,7 @@ This sample shows how to call PutModel with required parameters.
 <code><![CDATA[
 var client = new InheritanceClient();
 
-var input = new Fish(1234);
+var input = new Shark(1234);
 var result = client.PutModel(input);
 ]]></code>
 </example>
@@ -321,7 +321,7 @@ This sample shows how to call PutRecursiveModelAsync with required parameters.
 <code><![CDATA[
 var client = new InheritanceClient();
 
-var input = new Fish(1234);
+var input = new Shark(1234);
 var result = await client.PutRecursiveModelAsync(input);
 ]]></code>
 </example>
@@ -332,7 +332,7 @@ This sample shows how to call PutRecursiveModel with required parameters.
 <code><![CDATA[
 var client = new InheritanceClient();
 
-var input = new Fish(1234);
+var input = new Shark(1234);
 var result = client.PutRecursiveModel(input);
 ]]></code>
 </example>

@@ -10,7 +10,10 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
 var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
-var result = client.GetPaginationLedgerEntriesAsync(bodyInput, default);]]></code>
+await foreach (var item in client.GetPaginationLedgerEntriesAsync(bodyInput))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)">
@@ -22,7 +25,10 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
 var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
-var result = client.GetPaginationLedgerEntries(bodyInput, default);]]></code>
+foreach (var item in client.GetPaginationLedgerEntries(bodyInput))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)">
@@ -79,7 +85,10 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-var result = client.GetLedgerEntriesAsync(default);]]></code>
+await foreach (var item in client.GetLedgerEntriesAsync())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetLedgerEntries(CancellationToken)">
@@ -90,7 +99,10 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-var result = client.GetLedgerEntries(default);]]></code>
+foreach (var item in client.GetLedgerEntries())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetLedgerEntriesAsync(RequestContext)">

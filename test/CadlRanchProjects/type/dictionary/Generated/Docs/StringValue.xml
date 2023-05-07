@@ -7,7 +7,7 @@ This sample shows how to call GetStringValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-var result = await client.GetStringValueAsync(default);
+var result = await client.GetStringValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetStringValue.
 <code><![CDATA[
 var client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-var result = client.GetStringValue(default);
+var result = client.GetStringValue();
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ var body =
 {
     ["key"] = "<null>",
 };
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var body =
 {
     ["key"] = "<null>",
 };
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

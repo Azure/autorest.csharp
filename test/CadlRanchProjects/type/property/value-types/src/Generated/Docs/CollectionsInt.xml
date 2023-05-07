@@ -7,7 +7,7 @@ This sample shows how to call GetCollectionsIntAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
-var result = await client.GetCollectionsIntAsync(default);
+var result = await client.GetCollectionsIntAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetCollectionsInt.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
-var result = client.GetCollectionsInt(default);
+var result = client.GetCollectionsInt();
 ]]></code>
 </example>
     </member>
@@ -53,11 +53,11 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
-var body = new CollectionsIntProperty(new Int32[] 
+var body = new CollectionsIntProperty(new int[] 
 {
     1234
 });
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -67,11 +67,11 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
-var body = new CollectionsIntProperty(new Int32[] 
+var body = new CollectionsIntProperty(new int[] 
 {
     1234
 });
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

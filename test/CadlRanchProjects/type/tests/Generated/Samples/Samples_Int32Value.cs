@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
 {
@@ -64,6 +66,15 @@ namespace _Type._Dictionary.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<test>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt32Value_Convenience_Async()
+        {
+            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+
+            var result = await client.GetInt32ValueAsync();
         }
 
         [Test]
@@ -125,5 +136,18 @@ namespace _Type._Dictionary.Samples
             Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_Convenience_Async()
+        {
+            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+
+            var body =
+            {
+    ["key"] = 1234,
+};
+        var result = await client.PutAsync(body);
     }
+}
 }

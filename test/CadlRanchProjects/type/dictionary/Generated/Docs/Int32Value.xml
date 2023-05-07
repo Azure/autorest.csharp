@@ -7,7 +7,7 @@ This sample shows how to call GetInt32ValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
 
-var result = await client.GetInt32ValueAsync(default);
+var result = await client.GetInt32ValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetInt32Value.
 <code><![CDATA[
 var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
 
-var result = client.GetInt32Value(default);
+var result = client.GetInt32Value();
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ var body =
 {
     ["key"] = 1234,
 };
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var body =
 {
     ["key"] = 1234,
 };
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

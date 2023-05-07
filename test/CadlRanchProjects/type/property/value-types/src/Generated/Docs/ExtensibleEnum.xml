@@ -7,7 +7,7 @@ This sample shows how to call GetExtensibleEnumAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
-var result = await client.GetExtensibleEnumAsync(default);
+var result = await client.GetExtensibleEnumAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetExtensibleEnum.
 <code><![CDATA[
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
-var result = client.GetExtensibleEnum(default);
+var result = client.GetExtensibleEnum();
 ]]></code>
 </example>
     </member>
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 var body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -65,7 +65,7 @@ This sample shows how to call Put with required parameters.
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 var body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

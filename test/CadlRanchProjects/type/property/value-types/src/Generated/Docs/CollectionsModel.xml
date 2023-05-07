@@ -7,7 +7,7 @@ This sample shows how to call GetCollectionsModelAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var result = await client.GetCollectionsModelAsync(default);
+var result = await client.GetCollectionsModelAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetCollectionsModel.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var result = client.GetCollectionsModel(default);
+var result = client.GetCollectionsModel();
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

@@ -7,7 +7,7 @@ This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestBodyAsync("<name>", default);
+var result = await client.SpreadAsRequestBodyAsync("<name>");
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call SpreadAsRequestBody with required parameters.
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadAsRequestBody("<name>", default);
+var result = client.SpreadAsRequestBody("<name>");
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ This sample shows how to call SpreadAsRequestParameterAsync with required parame
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>", default);
+var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>");
 ]]></code>
 </example>
     </member>
@@ -67,7 +67,7 @@ This sample shows how to call SpreadAsRequestParameter with required parameters.
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>", default);
+var result = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", "<name>");
 ]]></code>
 </example>
     </member>
@@ -107,7 +107,7 @@ This sample shows how to call SpreadWithMultipleParametersAsync with required pa
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>", default);
+var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
 ]]></code>
 </example>
     </member>
@@ -117,7 +117,7 @@ This sample shows how to call SpreadWithMultipleParameters with required paramet
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>", default);
+var result = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
 ]]></code>
 </example>
     </member>

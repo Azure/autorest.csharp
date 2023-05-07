@@ -7,7 +7,7 @@ This sample shows how to call GetKnownValueAsync.
 <code><![CDATA[
 var client = new FixedClient();
 
-var result = await client.GetKnownValueAsync(default);
+var result = await client.GetKnownValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetKnownValue.
 <code><![CDATA[
 var client = new FixedClient();
 
-var result = client.GetKnownValue(default);
+var result = client.GetKnownValue();
 ]]></code>
 </example>
     </member>
@@ -54,7 +54,7 @@ This sample shows how to call PutKnownValueAsync with required parameters.
 var client = new FixedClient();
 
 var body = DaysOfWeekEnum.Monday;
-var result = await client.PutKnownValueAsync(body, default);
+var result = await client.PutKnownValueAsync(body);
 ]]></code>
 </example>
     </member>
@@ -65,7 +65,7 @@ This sample shows how to call PutKnownValue with required parameters.
 var client = new FixedClient();
 
 var body = DaysOfWeekEnum.Monday;
-var result = client.PutKnownValue(body, default);
+var result = client.PutKnownValue(body);
 ]]></code>
 </example>
     </member>
@@ -102,7 +102,7 @@ This sample shows how to call PutUnknownValueAsync with required parameters.
 var client = new FixedClient();
 
 var body = DaysOfWeekEnum.Monday;
-var result = await client.PutUnknownValueAsync(body, default);
+var result = await client.PutUnknownValueAsync(body);
 ]]></code>
 </example>
     </member>
@@ -113,7 +113,7 @@ This sample shows how to call PutUnknownValue with required parameters.
 var client = new FixedClient();
 
 var body = DaysOfWeekEnum.Monday;
-var result = client.PutUnknownValue(body, default);
+var result = client.PutUnknownValue(body);
 ]]></code>
 </example>
     </member>

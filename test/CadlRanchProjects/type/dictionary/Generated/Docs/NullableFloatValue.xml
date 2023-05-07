@@ -7,7 +7,7 @@ This sample shows how to call GetNullableFloatValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
-var result = await client.GetNullableFloatValueAsync(default);
+var result = await client.GetNullableFloatValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetNullableFloatValue.
 <code><![CDATA[
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
-var result = client.GetNullableFloatValue(default);
+var result = client.GetNullableFloatValue();
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ var body =
 {
     ["key"] = 3.14f,
 };
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var body =
 {
     ["key"] = 3.14f,
 };
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

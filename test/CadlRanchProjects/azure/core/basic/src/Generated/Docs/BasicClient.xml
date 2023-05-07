@@ -100,7 +100,7 @@ var resource = new User("<name>")
         new UserOrder(1234, "<detail>")
     },
 };
-var result = await client.CreateOrReplaceAsync(1234, resource, default);
+var result = await client.CreateOrReplaceAsync(1234, resource);
 ]]></code>
 </example>
     </member>
@@ -117,7 +117,7 @@ var resource = new User("<name>")
         new UserOrder(1234, "<detail>")
     },
 };
-var result = client.CreateOrReplace(1234, resource, default);
+var result = client.CreateOrReplace(1234, resource);
 ]]></code>
 </example>
     </member>
@@ -213,7 +213,7 @@ This sample shows how to call GetUserAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = await client.GetUserAsync(1234, default);
+var result = await client.GetUserAsync(1234);
 ]]></code>
 </example>
     </member>
@@ -223,7 +223,7 @@ This sample shows how to call GetUser with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUser(1234, default);
+var result = client.GetUser(1234);
 ]]></code>
 </example>
     </member>
@@ -291,7 +291,7 @@ This sample shows how to call ExportAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = await client.ExportAsync(1234, "<format>", default);
+var result = await client.ExportAsync(1234, "<format>");
 ]]></code>
 </example>
     </member>
@@ -301,7 +301,7 @@ This sample shows how to call Export with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.Export(1234, "<format>", default);
+var result = client.Export(1234, "<format>");
 ]]></code>
 </example>
     </member>
@@ -347,7 +347,10 @@ This sample shows how to call GetUsersAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, default);]]></code>
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
@@ -356,7 +359,10 @@ This sample shows how to call GetUsers with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, default);]]></code>
+foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)">
@@ -403,7 +409,10 @@ This sample shows how to call GetWithPageAsync.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithPageAsync(default);]]></code>
+await foreach (var item in client.GetWithPageAsync())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetWithPage(CancellationToken)">
@@ -412,7 +421,10 @@ This sample shows how to call GetWithPage.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithPage(default);]]></code>
+foreach (var item in client.GetWithPage())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetWithPageAsync(RequestContext)">
@@ -459,7 +471,10 @@ This sample shows how to call GetWithCustomPageModelAsync.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithCustomPageModelAsync(default);]]></code>
+await foreach (var item in client.GetWithCustomPageModelAsync())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetWithCustomPageModel(CancellationToken)">
@@ -468,7 +483,10 @@ This sample shows how to call GetWithCustomPageModel.
 <code><![CDATA[
 var client = new BasicClient();
 
-var result = client.GetWithCustomPageModel(default);]]></code>
+foreach (var item in client.GetWithCustomPageModel())
+{
+}
+]]></code>
 </example>
     </member>
     <member name="GetWithCustomPageModelAsync(RequestContext)">

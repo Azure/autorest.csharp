@@ -380,7 +380,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var input = new Fish(1234);
+            var input = new Shark(1234);
             var result = await client.PutModelAsync(input);
         }
 
@@ -507,7 +507,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var input = new Fish(1234);
+            var input = new Shark(1234);
             var result = await client.PutRecursiveModelAsync(input);
         }
 

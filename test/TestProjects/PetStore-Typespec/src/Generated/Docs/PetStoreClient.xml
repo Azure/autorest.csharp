@@ -32,7 +32,7 @@ This sample shows how to call ReadAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.ReadAsync(1234, default);
+var result = await client.ReadAsync(1234);
 ]]></code>
 </example>
     </member>
@@ -43,7 +43,7 @@ This sample shows how to call Read with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.Read(1234, default);
+var result = client.Read(1234);
 ]]></code>
 </example>
     </member>
@@ -90,7 +90,7 @@ var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };
-var result = await client.CreateAsync(pet, default);
+var result = await client.CreateAsync(pet);
 ]]></code>
 </example>
     </member>
@@ -105,7 +105,7 @@ var pet = new Pet("<name>", 1234)
 {
     Tag = "<Tag>",
 };
-var result = client.Create(pet, default);
+var result = client.Create(pet);
 ]]></code>
 </example>
     </member>
@@ -192,7 +192,7 @@ This sample shows how to call GetPetByKindAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.GetPetByKindAsync(null, default);
+var result = await client.GetPetByKindAsync(null);
 ]]></code>
 </example>
     </member>
@@ -203,7 +203,7 @@ This sample shows how to call GetPetByKind with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.GetPetByKind(null, default);
+var result = client.GetPetByKind(null);
 ]]></code>
 </example>
     </member>
@@ -246,7 +246,7 @@ This sample shows how to call GetFirstPetAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = await client.GetFirstPetAsync(1234, default);
+var result = await client.GetFirstPetAsync(1234);
 ]]></code>
 </example>
     </member>
@@ -257,7 +257,7 @@ This sample shows how to call GetFirstPet with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
 
-var result = client.GetFirstPet(1234, default);
+var result = client.GetFirstPet(1234);
 ]]></code>
 </example>
     </member>

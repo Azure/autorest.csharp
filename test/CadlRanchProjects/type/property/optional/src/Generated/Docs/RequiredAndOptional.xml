@@ -7,7 +7,7 @@ This sample shows how to call GetAllAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetAllAsync(default);
+var result = await client.GetAllAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetAll.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = client.GetAll(default);
+var result = client.GetAll();
 ]]></code>
 </example>
     </member>
@@ -55,7 +55,7 @@ This sample shows how to call GetRequiredOnlyAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetRequiredOnlyAsync(default);
+var result = await client.GetRequiredOnlyAsync();
 ]]></code>
 </example>
     </member>
@@ -65,7 +65,7 @@ This sample shows how to call GetRequiredOnly.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = client.GetRequiredOnly(default);
+var result = client.GetRequiredOnly();
 ]]></code>
 </example>
     </member>
@@ -107,7 +107,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutAllAsync(body, default);
+var result = await client.PutAllAsync(body);
 ]]></code>
 </example>
     </member>
@@ -121,7 +121,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = client.PutAll(body, default);
+var result = client.PutAll(body);
 ]]></code>
 </example>
     </member>
@@ -189,7 +189,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutRequiredOnlyAsync(body, default);
+var result = await client.PutRequiredOnlyAsync(body);
 ]]></code>
 </example>
     </member>
@@ -203,7 +203,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = client.PutRequiredOnly(body, default);
+var result = client.PutRequiredOnly(body);
 ]]></code>
 </example>
     </member>

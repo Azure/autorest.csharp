@@ -1175,10 +1175,10 @@ var client = new AnomalyDetectorClient(endpoint, credential);
 
 var options = new MultivariateLastDetectionOptions(new VariableValues[] 
 {
-    new VariableValues("<variable>", new String[] 
+    new VariableValues("<variable>", new string[] 
 {
         "<null>"
-    }, new Single[] 
+    }, new float[] 
 {
         3.14f
     })
@@ -1197,10 +1197,10 @@ var client = new AnomalyDetectorClient(endpoint, credential);
 
 var options = new MultivariateLastDetectionOptions(new VariableValues[] 
 {
-    new VariableValues("<variable>", new String[] 
+    new VariableValues("<variable>", new string[] 
 {
         "<null>"
-    }, new Single[] 
+    }, new float[] 
 {
         3.14f
     })

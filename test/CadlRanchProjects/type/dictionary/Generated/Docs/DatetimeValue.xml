@@ -7,7 +7,7 @@ This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
-var result = await client.GetDatetimeValueAsync(default);
+var result = await client.GetDatetimeValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
 var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
-var result = client.GetDatetimeValue(default);
+var result = client.GetDatetimeValue();
 ]]></code>
 </example>
     </member>
@@ -57,7 +57,7 @@ var body =
 {
     ["key"] = DateTimeOffset.UtcNow,
 };
-var result = await client.PutAsync(body, default);
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -71,7 +71,7 @@ var body =
 {
     ["key"] = DateTimeOffset.UtcNow,
 };
-var result = client.Put(body, default);
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

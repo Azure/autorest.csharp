@@ -7,7 +7,7 @@ This sample shows how to call GetAllAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var result = await client.GetAllAsync(default);
+var result = await client.GetAllAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetAll.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var result = client.GetAll(default);
+var result = client.GetAll();
 ]]></code>
 </example>
     </member>
@@ -53,7 +53,7 @@ This sample shows how to call GetDefaultAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var result = await client.GetDefaultAsync(default);
+var result = await client.GetDefaultAsync();
 ]]></code>
 </example>
     </member>
@@ -63,7 +63,7 @@ This sample shows how to call GetDefault.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var result = client.GetDefault(default);
+var result = client.GetDefault();
 ]]></code>
 </example>
     </member>
@@ -109,7 +109,7 @@ var body = new CollectionsModelProperty()
         }
     },
 };
-var result = await client.PutAllAsync(body, default);
+var result = await client.PutAllAsync(body);
 ]]></code>
 </example>
     </member>
@@ -129,7 +129,7 @@ var body = new CollectionsModelProperty()
         }
     },
 };
-var result = client.PutAll(body, default);
+var result = client.PutAll(body);
 ]]></code>
 </example>
     </member>
@@ -205,7 +205,7 @@ var body = new CollectionsModelProperty()
         }
     },
 };
-var result = await client.PutDefaultAsync(body, default);
+var result = await client.PutDefaultAsync(body);
 ]]></code>
 </example>
     </member>
@@ -225,7 +225,7 @@ var body = new CollectionsModelProperty()
         }
     },
 };
-var result = client.PutDefault(body, default);
+var result = client.PutDefault(body);
 ]]></code>
 </example>
     </member>

@@ -7,7 +7,7 @@ This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var result = await client.GetModelValueAsync(default);
+var result = await client.GetModelValueAsync();
 ]]></code>
 </example>
     </member>
@@ -17,7 +17,7 @@ This sample shows how to call GetModelValue.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var result = client.GetModelValue(default);
+var result = client.GetModelValue();
 ]]></code>
 </example>
     </member>
@@ -51,8 +51,8 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var body = new BaseModel();
-var result = await client.PutAsync(body, default);
+var body = new DerivedModel("<derivedName>", "<for>");
+var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
@@ -62,8 +62,8 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var body = new BaseModel();
-var result = client.Put(body, default);
+var body = new DerivedModel("<derivedName>", "<for>");
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

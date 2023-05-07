@@ -210,19 +210,19 @@ namespace CustomizationsInCadl.Samples
             {
                 PropertyModelToRename = new RenamedModel(1234),
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", null, "<propertyToField>", new string[]
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[]
             {
         "<null>"
                 }, new Dictionary<string, string>
                 {
                     ["key"] = "<null>",
-                }, new IList[]
+                }, new IList<string>[]
             {
         new string[]
 {
             "<null>"
         }
-                }, new IDictionary[]
+                }, new IDictionary<string, string>[]
             {
         new Dictionary<string, string>
 {
