@@ -3,7 +3,6 @@
  "Name": "_Specs_.Azure.Core.Traits",
  "Description": "Illustrates Azure Core operation customizations by traits",
  "ApiVersions": [
-  "1.0.0",
   "2022-12-01-preview"
  ],
  "Enums": [],
