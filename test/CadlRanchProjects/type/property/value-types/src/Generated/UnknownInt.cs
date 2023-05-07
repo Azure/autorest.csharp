@@ -49,6 +49,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnknownInt.xml" path="doc/members/member[@name='GetUnknownIntAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnknownIntProperty>> GetUnknownIntAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnknownInt.xml" path="doc/members/member[@name='GetUnknownInt(CancellationToken)']/*" />
         public virtual Response<UnknownIntProperty> GetUnknownInt(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -139,6 +141,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnknownInt.xml" path="doc/members/member[@name='PutAsync(UnknownIntProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnknownIntProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,6 +155,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnknownInt.xml" path="doc/members/member[@name='Put(UnknownIntProperty,CancellationToken)']/*" />
         public virtual Response Put(UnknownIntProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="PublicAsync(string,CancellationToken)">
+<example>
+This sample shows how to call PublicAsync with required parameters.
+<code><![CDATA[
+var client = new InternalClient().GetSharedClient();
+
+var result = await client.PublicAsync("<name>");
+]]></code>
+</example>
+    </member>
+    <member name="Public(string,CancellationToken)">
+<example>
+This sample shows how to call Public with required parameters.
+<code><![CDATA[
+var client = new InternalClient().GetSharedClient();
+
+var result = client.Public("<name>");
+]]></code>
+</example>
+    </member>
     <member name="PublicAsync(string,RequestContext)">
 <example>
 This sample shows how to call PublicAsync with required parameters and parse the result.
@@ -24,6 +44,26 @@ Response response = client.Public("<name>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="InternalAsync(string,CancellationToken)">
+<example>
+This sample shows how to call InternalAsync with required parameters.
+<code><![CDATA[
+var client = new InternalClient().GetSharedClient();
+
+var result = await client.InternalAsync("<name>");
+]]></code>
+</example>
+    </member>
+    <member name="Internal(string,CancellationToken)">
+<example>
+This sample shows how to call Internal with required parameters.
+<code><![CDATA[
+var client = new InternalClient().GetSharedClient();
+
+var result = client.Internal("<name>");
 ]]></code>
 </example>
     </member>

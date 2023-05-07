@@ -52,6 +52,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnlyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<PublicModel>> PublicOnlyAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -64,6 +65,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnly(string,CancellationToken)']/*" />
         public virtual Response<PublicModel> PublicOnly(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -154,6 +156,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnlyAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<InternalModel>> InternalOnlyAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -166,6 +169,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnly(string,CancellationToken)']/*" />
         internal virtual Response<InternalModel> InternalOnly(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
