@@ -96,6 +96,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (convenienceMethod.IsDeprecatedForExamples())
                 return $"";
 
+            //skip if not public
+            if (!convenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+                return $"";
+
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var builder = new StringBuilder();
 
@@ -784,7 +788,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // var <parameterName> = {value_expression};
             builder.Append($"var {bodyParameter.Name} = ");
-            builder.Append(ComposeCSharpType(composeAll, bodyParameter.Type, null, 0, false, new HashSet<ObjectType>()));
+            builder.Append(ComposeCSharpType(composeAll, bodyParameter.Type, null, 0, true, new HashSet<ObjectType>()));
             builder.AppendLine(";");
         }
 
@@ -929,22 +933,16 @@ namespace AutoRest.CSharp.Generation.Writers
             var valueExpr = ComposeCSharpType(allProperties, valueType, null, indent + 4, includeCollectionInitialization, visitedModels);
             if (valueExpr == string.Empty)
             {
-                return includeCollectionInitialization ? $"new Dictionary<{EscapeStringTypeName(keyType)}, {EscapeStringTypeName(valueType)}>()" : "{}";
+                return includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>()" : "{}";
             }
 
             var builder = new StringBuilder();
-            builder.AppendLine(includeCollectionInitialization ? $"new Dictionary<{EscapeStringTypeName(keyType)}, {EscapeStringTypeName(valueType)}>" : "");
+            builder.AppendLine(includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>" : "");
             using (Scope("", indent, builder))
             {
                 builder.Append(' ', indent + 4).AppendLine($"[\"key\"] = {valueExpr},");
             }
             return builder.ToString();
-
-            string EscapeStringTypeName(CSharpType type) => type switch
-            {
-                { IsFrameworkType: true } when type.FrameworkType == typeof(string) => "string",
-                _ => type.Name,
-            };
         }
 
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)

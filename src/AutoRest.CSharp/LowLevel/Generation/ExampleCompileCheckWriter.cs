@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                     foreach (var method in _client.ClientMethods)
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
-                        if ((method.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) > 0 &&
+                        if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                             !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
                             !_client.IsMethodSuppressed(method) &&
                             (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
@@ -78,7 +78,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
                         }
 
                         if (method.ConvenienceMethod is not null &&
-                            !method.ConvenienceMethod.IsDeprecatedForExamples())
+                            !method.ConvenienceMethod.IsDeprecatedForExamples() &&
+                            method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                             WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
                 }
