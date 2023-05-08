@@ -100,6 +100,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (!convenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                 return $"";
 
+            //skip if there are no valid ctors
+            if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
+                return $"";
+
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var builder = new StringBuilder();
 
