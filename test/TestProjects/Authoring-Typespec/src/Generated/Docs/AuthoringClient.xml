@@ -415,6 +415,28 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="GetDeploymentStatusAsync(string,string,string,CancellationToken)">
+<example>
+This sample shows how to call GetDeploymentStatusAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AuthoringClient(endpoint);
+
+var result = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+]]></code>
+</example>
+    </member>
+    <member name="GetDeploymentStatus(string,string,string,CancellationToken)">
+<example>
+This sample shows how to call GetDeploymentStatus with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AuthoringClient(endpoint);
+
+var result = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
+]]></code>
+</example>
+    </member>
     <member name="GetDeploymentStatusAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentStatusAsync with required parameters and parse the result.
@@ -462,6 +484,28 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetSwapDeploymentsStatusAsync(string,string,string,CancellationToken)">
+<example>
+This sample shows how to call GetSwapDeploymentsStatusAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AuthoringClient(endpoint);
+
+var result = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+]]></code>
+</example>
+    </member>
+    <member name="GetSwapDeploymentsStatus(string,string,string,CancellationToken)">
+<example>
+This sample shows how to call GetSwapDeploymentsStatus with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AuthoringClient(endpoint);
+
+var result = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 </example>
     </member>

@@ -49,6 +49,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Duration.xml" path="doc/members/member[@name='GetNonNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DurationProperty>> GetNonNullAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Duration.xml" path="doc/members/member[@name='GetNonNull(CancellationToken)']/*" />
         public virtual Response<DurationProperty> GetNonNull(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -137,6 +139,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Duration.xml" path="doc/members/member[@name='GetNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DurationProperty>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -146,6 +149,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Duration.xml" path="doc/members/member[@name='GetNull(CancellationToken)']/*" />
         public virtual Response<DurationProperty> GetNull(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

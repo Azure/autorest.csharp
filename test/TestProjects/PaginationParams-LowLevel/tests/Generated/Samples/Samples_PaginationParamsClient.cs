@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -219,7 +220,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get4s(1234, 1234, 1234, new RequestContext()))
+            foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -249,7 +250,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get4sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());

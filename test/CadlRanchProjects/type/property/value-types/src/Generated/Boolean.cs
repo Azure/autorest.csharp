@@ -49,6 +49,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBooleanAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BooleanProperty>> GetBooleanAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBoolean(CancellationToken)']/*" />
         public virtual Response<BooleanProperty> GetBoolean(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -139,6 +141,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(BooleanProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BooleanProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,6 +155,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(BooleanProperty,CancellationToken)']/*" />
         public virtual Response Put(BooleanProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

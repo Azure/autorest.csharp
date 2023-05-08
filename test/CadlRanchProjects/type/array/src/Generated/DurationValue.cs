@@ -49,6 +49,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -65,6 +66,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<TimeSpan>> GetDurationValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -153,6 +155,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -165,6 +168,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
         public virtual Response Put(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

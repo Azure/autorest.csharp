@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -520,7 +521,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.FloatNull(1234, new RequestContext());
+            Response response = client.FloatNull(3.14f, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -542,7 +543,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.FloatNullAsync(1234, new RequestContext());
+            Response response = await client.FloatNullAsync(3.14f, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -652,7 +653,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DoubleNull(1234, new RequestContext());
+            Response response = client.DoubleNull(3.14, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -674,7 +675,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DoubleNullAsync(1234, new RequestContext());
+            Response response = await client.DoubleNullAsync(3.14, new RequestContext());
             Console.WriteLine(response.Status);
         }
 

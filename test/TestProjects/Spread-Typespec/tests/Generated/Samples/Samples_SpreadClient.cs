@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Spread.Models;
 
 namespace Spread.Samples
 {
@@ -88,6 +90,17 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadModel_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var thing = new Thing("<name>", 1234);
+            var result = await client.SpreadModelAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAlias()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -152,6 +165,16 @@ namespace Spread.Samples
 
             Response response = await client.SpreadAliasAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAlias_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var result = await client.SpreadAliasAsync("<name>", 1234);
         }
 
         [Test]
@@ -224,6 +247,16 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadMultiTargetAlias_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAliasWithModel()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -292,6 +325,17 @@ namespace Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithModel_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var thing = new Thing("<name>", 1234);
+            var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAliasWithSpreadAlias()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -356,6 +400,16 @@ namespace Spread.Samples
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithSpreadAlias_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
         }
 
         [Test]
@@ -442,6 +496,16 @@ namespace Spread.Samples
 
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithOptionalProps_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadClient(endpoint);
+
+            var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples
 {
@@ -80,6 +82,16 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Json_Convenience_Async()
+        {
+            var client = new ProjectedNameClient().GetPropertyClient();
+
+            var jsonProjectedNameModel = new JsonProjectedNameModel(true);
+            var result = await client.JsonAsync(jsonProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Client()
         {
             var client = new ProjectedNameClient().GetPropertyClient();
@@ -136,6 +148,16 @@ namespace Projection.ProjectedName.Samples
 
             Response response = await client.ClientAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Client_Convenience_Async()
+        {
+            var client = new ProjectedNameClient().GetPropertyClient();
+
+            var clientProjectedNameModel = new ClientProjectedNameModel(true);
+            var result = await client.ClientAsync(clientProjectedNameModel);
         }
 
         [Test]
@@ -200,6 +222,16 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Language_Convenience_Async()
+        {
+            var client = new ProjectedNameClient().GetPropertyClient();
+
+            var languageProjectedNameModel = new LanguageProjectedNameModel(true);
+            var result = await client.LanguageAsync(languageProjectedNameModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_JsonAndClient()
         {
             var client = new ProjectedNameClient().GetPropertyClient();
@@ -256,6 +288,16 @@ namespace Projection.ProjectedName.Samples
 
             Response response = await client.JsonAndClientAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JsonAndClient_Convenience_Async()
+        {
+            var client = new ProjectedNameClient().GetPropertyClient();
+
+            var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+            var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
         }
     }
 }
