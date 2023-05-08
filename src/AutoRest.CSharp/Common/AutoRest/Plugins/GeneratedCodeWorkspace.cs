@@ -13,6 +13,7 @@ using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Input;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
             };
 
             var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
