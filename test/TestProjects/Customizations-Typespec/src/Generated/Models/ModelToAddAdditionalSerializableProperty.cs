@@ -25,8 +25,5 @@ namespace CustomizationsInCadl.Models
             RequiredInt = requiredInt;
             AdditionalSerializableProperty = additionalSerializableProperty;
         }
-
-        /// <summary> Required int. </summary>
-        public int RequiredInt { get; set; }
     }
 }

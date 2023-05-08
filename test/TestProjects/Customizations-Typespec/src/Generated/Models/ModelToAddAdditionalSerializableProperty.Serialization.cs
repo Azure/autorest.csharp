@@ -17,7 +17,7 @@ namespace CustomizationsInCadl.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
-            writer.WriteNumberValue(RequiredInt);
+            WriteRequiredInt(writer);
             if (Optional.IsDefined(AdditionalSerializableProperty))
             {
                 writer.WritePropertyName("additionalSerializableProperty"u8);
@@ -38,7 +38,7 @@ namespace CustomizationsInCadl.Models
             {
                 if (property.NameEquals("requiredInt"u8))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    DeserializeRequiredInt(property, ref requiredInt);
                     continue;
                 }
                 if (property.NameEquals("additionalSerializableProperty"u8))

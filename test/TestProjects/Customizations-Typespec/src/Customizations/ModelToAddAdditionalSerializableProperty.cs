@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.Text.Json;
 using Azure.Core;
 
 namespace CustomizationsInCadl.Models
@@ -13,5 +14,24 @@ namespace CustomizationsInCadl.Models
         /// <summary> New property to serialize. </summary>
         [CodeGenMemberSerialization("additionalSerializableProperty")]
         public int AdditionalSerializableProperty { get; set; }
+
+        /// <summary>
+        /// Required int.
+        /// This property is mocking this scenario:
+        /// In the SDK, this property is defined as int, but in the actual traffic, this property comes as a string.
+        /// We use this attribute to fix its serialization and deserialization using the following two methods
+        /// </summary>
+        [CodeGenMemberSerializationHooks(nameof(WriteRequiredInt), nameof(DeserializeRequiredInt))]
+        public int RequiredInt { get; set; }
+
+        private void WriteRequiredInt(Utf8JsonWriter writer)
+        {
+            writer.WriteStringValue(RequiredInt.ToString());
+        }
+
+        private static void DeserializeRequiredInt(JsonProperty property, ref int requiredInt)
+        {
+            requiredInt = int.Parse(property.Value.GetRawText());
+        }
     }
 }

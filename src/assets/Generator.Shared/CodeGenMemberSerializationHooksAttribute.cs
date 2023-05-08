@@ -18,7 +18,8 @@ namespace Azure.Core
         /// The signature of the serialization hook method must be or compatible with when invoking:
         /// private void SerializeHook(Utf8JsonWriter writer);
         /// The signature of the deserialization hook method must be or compatible with when invoking:
-        /// private void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue);
+        /// private static void DeserializationHook(JsonProperty property, ref TypeOfTheProperty propertyValue); // if the property is required
+        /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
         ///
         /// Leave null value on either serializationHookMethodName or deserializationHookMethodName to indicate that the generator will not change its corresponding behavior.
         /// </summary>

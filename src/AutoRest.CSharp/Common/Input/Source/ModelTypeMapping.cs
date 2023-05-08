@@ -81,18 +81,9 @@ namespace AutoRest.CSharp.Input.Source
             string? serializationHook = null;
             string? deserializationHook = null;
 
-            foreach (var namedArgument in attributeData.NamedArguments)
-            {
-                switch (namedArgument.Key)
-                {
-                    case nameof(CodeGenMemberSerializationHooksAttribute.SerializationHookMethodName):
-                        serializationHook = namedArgument.Value.Value as string;
-                        break;
-                    case nameof(CodeGenMemberSerializationHooksAttribute.DeserializationHookMethodName):
-                        deserializationHook = namedArgument.Value.Value as string;
-                        break;
-                }
-            }
+            var arguments = attributeData.ConstructorArguments;
+            serializationHook = arguments[0].Value as string;
+            deserializationHook = arguments[1].Value as string;
 
             hooks = (serializationHook, deserializationHook);
             return serializationHook != null || deserializationHook != null;
@@ -139,6 +130,17 @@ namespace AutoRest.CSharp.Input.Source
             {
                 return new SourceMemberMapping(name, memberSymbol);
             }
+
+            return null;
+        }
+
+        public SourcePropertySerailizationMapping? GetForMemberSerialization(ISymbol? symbol)
+        {
+            if (symbol == null)
+                return null;
+
+            if (_serializationMappings.TryGetValue(symbol, out var serialization))
+                return serialization;
 
             return null;
         }

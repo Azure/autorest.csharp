@@ -289,7 +289,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
-                        if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
+                        if (property.SerializationHook != null)
+                        {
+                            // write the serialization hook
+                            writer.Line($"{property.SerializationHook}({writerName});");
+                        }
+                        else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
                             writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
                         }
@@ -317,7 +322,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
-                    if (property.ValueType?.IsNullable == true)
+                    if (property.DeserializationHook != null)
+                    {
+                        // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
+                    }
+                    else if (property.ValueType?.IsNullable == true)
                     {
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
                         using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
@@ -350,7 +359,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (property.ValueSerialization is not null)
+                    if (property.DeserializationHook is not null)
+                    {
+                        // write the deserialization hook
+                        writer.Line($"{property.DeserializationHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
+                    }
+                    else if (property.ValueSerialization is not null)
                     {
                         // Reading a property value
                         var variableOrExpression = writer.DeserializeValue(property.ValueSerialization, $"{itemVariable}.Value");

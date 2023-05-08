@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using Azure.ResourceManager.Models;
 
@@ -22,7 +23,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                   isRequired: field.IsRequired,
                   inputModelProperty: inputModelProperty,
                   getterModifiers: field.GetterModifiers,
-                  setterModifiers: field.SetterModifiers)
+                  setterModifiers: field.SetterModifiers,
+                  serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.DefaultValue;
         }
@@ -32,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerailizationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -46,6 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
+            SerializationMapping = serializationMapping;
         }
 
         public ObjectTypeProperty MarkFlatten()
@@ -150,6 +153,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldModifiers? GetterModifiers { get; }
         public FieldModifiers? SetterModifiers { get; }
+
+        public SourcePropertySerailizationMapping? SerializationMapping { get; }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {

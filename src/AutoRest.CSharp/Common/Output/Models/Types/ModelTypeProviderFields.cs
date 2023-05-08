@@ -59,8 +59,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var originalFieldType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
+                var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModel, inputModelProperty, typeFactory)
+                    ? CreateFieldFromExisting(existingMember, serialization, originalFieldType, inputModel, inputModelProperty, typeFactory)
                     : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
 
                 if (existingMember is not null)
@@ -93,9 +94,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
                     // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, typeof(string), inputModel, inputModelProperty, typeFactory);
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(string), inputModel, inputModelProperty, typeFactory);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
                     serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
@@ -156,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerailizationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
             var existingMemberTypeSymbol = existingMember switch
             {
@@ -180,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, existingMember is IFieldSymbol, writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
