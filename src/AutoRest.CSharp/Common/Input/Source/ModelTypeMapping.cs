@@ -15,8 +15,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
-        private readonly Dictionary<ISymbol, string[]> _serializationMappings;
-        private readonly Dictionary<ISymbol, (string? SerializationHook, string? DeserializationHook)> _serializationHooksMappings;
+        private readonly Dictionary<ISymbol, SourcePropertySerailizationMapping> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -24,9 +23,8 @@ namespace AutoRest.CSharp.Input.Source
         public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol serializationAttribute, INamedTypeSymbol serializationHooksAttribute, INamedTypeSymbol? existingType)
         {
             _existingType = existingType;
-            _propertyMappings = new Dictionary<string, ISymbol>();
-            _serializationMappings = new Dictionary<ISymbol, string[]>(SymbolEqualityComparer.Default);
-            _serializationHooksMappings = new Dictionary<ISymbol, (string? SerializationHook, string? DeserializationHook)>(SymbolEqualityComparer.Default);
+            _propertyMappings = new();
+            _serializationMappings = new(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
@@ -38,13 +36,19 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         _propertyMappings.Add(schemaMemberName, member);
                     }
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var serializationPath))
+                    string[]? serializationPath = null;
+                    (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
                     {
-                        _serializationMappings.Add(member, serializationPath);
+                        serializationPath = pathResult;
                     }
                     if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationHooksAttribute) && TryGetSerializationHooks(member, attributeData, out var hooks))
                     {
-                        _serializationHooksMappings.Add(member, hooks);
+                        serializationHooks = hooks;
+                    }
+                    if (serializationPath != null || serializationHooks != null)
+                    {
+                        _serializationMappings.Add(member, new SourcePropertySerailizationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
                     }
                 }
             }
@@ -141,10 +145,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public IEnumerable<SourcePropertySerailizationMapping> GetSerializationMembers()
         {
-            foreach (var (symbol, serializations) in _serializationMappings)
-            {
-                yield return new SourcePropertySerailizationMapping(symbol, serializations);
-            }
+            return _serializationMappings.Values;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
