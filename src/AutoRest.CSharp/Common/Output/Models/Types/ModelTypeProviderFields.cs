@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
                     // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, typeof(string), inputModelProperty, typeFactory);
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, typeof(string), inputModel, inputModelProperty, typeFactory);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
                     serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
