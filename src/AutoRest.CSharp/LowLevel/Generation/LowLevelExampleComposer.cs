@@ -939,6 +939,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * new Dictionary<{keyType}, {valueType}>()
              */
             var valueExpr = ComposeCSharpType(allProperties, valueType, null, indent + 4, includeCollectionInitialization, visitedModels);
+            var keyExpr = keyType.Equals(typeof(int)) ? "0" : "\"key\""; //handle dictionary with int key
             if (valueExpr == string.Empty)
             {
                 return includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>()" : "{}";
@@ -948,7 +949,7 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine(includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>" : "");
             using (Scope("", indent, builder))
             {
-                builder.Append(' ', indent + 4).AppendLine($"[\"key\"] = {valueExpr},");
+                builder.Append(' ', indent + 4).AppendLine($"[{keyExpr}] = {valueExpr},");
             }
             return builder.ToString();
         }
