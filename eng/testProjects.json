@@ -5,6 +5,7 @@
         "type/enum/extensible",
         "type/enum/fixed",
         "type/model/usage",
+        "type/property/nullable",
         "type/property/optional",
         "type/property/value-types",
         "authentication/api-key",
