@@ -658,7 +658,7 @@
     },
     "typespec-type/property/nullable": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\nullable\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\nullable\\src\\Generated"
     },
     "typespec-type/property/optional": {
       "commandName": "Project",

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="GetNonNullAsync(CancellationToken)">
+<example>
+This sample shows how to call GetNonNullAsync.
+<code><![CDATA[
+var client = new NullableClient().GetStringClient("1.0.0");
+
+var result = await client.GetNonNullAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetNonNull(CancellationToken)">
+<example>
+This sample shows how to call GetNonNull.
+<code><![CDATA[
+var client = new NullableClient().GetStringClient("1.0.0");
+
+var result = client.GetNonNull();
+]]></code>
+</example>
+    </member>
     <member name="GetNonNullAsync(RequestContext)">
 <example>
 This sample shows how to call GetNonNullAsync with required parameters and parse the result.
@@ -26,6 +46,26 @@ Response response = client.GetNonNull(new RequestContext());
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 Console.WriteLine(result.GetProperty("nullableProperty").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNullAsync(CancellationToken)">
+<example>
+This sample shows how to call GetNullAsync.
+<code><![CDATA[
+var client = new NullableClient().GetStringClient("1.0.0");
+
+var result = await client.GetNullAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetNull(CancellationToken)">
+<example>
+This sample shows how to call GetNull.
+<code><![CDATA[
+var client = new NullableClient().GetStringClient("1.0.0");
+
+var result = client.GetNull();
 ]]></code>
 </example>
     </member>
