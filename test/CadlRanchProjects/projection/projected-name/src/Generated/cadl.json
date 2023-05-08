@@ -1,0 +1,744 @@
+{
+ "$id": "1",
+ "Name": "Projection.ProjectedName",
+ "Description": "Projection",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "JsonProjectedNameModel",
+   "Namespace": "Projection.ProjectedName.Property",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "defaultName",
+     "SerializedName": "wireName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "4",
+      "Name": "boolean",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Name": "ClientProjectedNameModel",
+   "Namespace": "Projection.ProjectedName.Property",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "clientName",
+     "SerializedName": "defaultName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "7",
+      "Name": "boolean",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "8",
+   "Name": "LanguageProjectedNameModel",
+   "Namespace": "Projection.ProjectedName.Property",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "9",
+     "Name": "CSName",
+     "SerializedName": "defaultName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "10",
+      "Name": "boolean",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "11",
+   "Name": "JsonAndClientProjectedNameModel",
+   "Namespace": "Projection.ProjectedName.Property",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "clientName",
+     "SerializedName": "wireName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "13",
+      "Name": "boolean",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "14",
+   "Name": "ProjectedNameClient",
+   "Description": "Projection",
+   "Operations": [
+    {
+     "$id": "15",
+     "Name": "operation",
+     "ResourceName": "ProjectedName",
+     "Parameters": [
+      {
+       "$id": "16",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "17",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "18",
+        "Type": {
+         "$id": "19",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "23",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "24",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "25",
+        "Type": {
+         "$id": "26",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "27",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/operation",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "28",
+     "Name": "parameter",
+     "ResourceName": "ProjectedName",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "29",
+       "Name": "default-name",
+       "NameInRequest": "default-name",
+       "Type": {
+        "$id": "30",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "31",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "32",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "33",
+        "Type": {
+         "$ref": "32"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "23"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "34",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/parameter",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "35"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "36",
+   "Name": "Property",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "37",
+     "Name": "json",
+     "ResourceName": "Property",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "38",
+       "Name": "JsonProjectedNameModel",
+       "NameInRequest": "JsonProjectedNameModel",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "39",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "42",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "43",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "23"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "45",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/property/json",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "46",
+     "Name": "client",
+     "ResourceName": "Property",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "47",
+       "Name": "ClientProjectedNameModel",
+       "NameInRequest": "ClientProjectedNameModel",
+       "Type": {
+        "$ref": "5"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "48",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "49",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "50",
+        "Type": {
+         "$ref": "49"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "51",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "52",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "53",
+        "Type": {
+         "$ref": "52"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "23"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "54",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/property/client",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "55",
+     "Name": "language",
+     "ResourceName": "Property",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "56",
+       "Name": "LanguageProjectedNameModel",
+       "NameInRequest": "LanguageProjectedNameModel",
+       "Type": {
+        "$ref": "8"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "57",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "58",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "59",
+        "Type": {
+         "$ref": "58"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "60",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "61",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "62",
+        "Type": {
+         "$ref": "61"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "23"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "63",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/property/language",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "64",
+     "Name": "jsonAndClient",
+     "ResourceName": "Property",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "65",
+       "Name": "JsonAndClientProjectedNameModel",
+       "NameInRequest": "JsonAndClientProjectedNameModel",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "66",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "67",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "68",
+        "Type": {
+         "$ref": "67"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "69",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "70",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "71",
+        "Type": {
+         "$ref": "70"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "23"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "72",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/projection/projected-name/property/json-and-client",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "73"
+   },
+   "Creatable": false,
+   "Parent": "ProjectedNameClient"
+  }
+ ]
+}

@@ -40,7 +40,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_112
+    - !StringSchema &ref_117
       type: string
       apiVersions:
         - !ApiVersion 
@@ -53,7 +53,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_109
+    - !StringSchema &ref_114
       type: string
       apiVersions:
         - !ApiVersion 
@@ -162,6 +162,26 @@ schemas: !Schemas
         default:
           name: ErrorAdditionalInfoType
           description: The additional info type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_89
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: DerivedModelRequiredCollectionItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_87
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: BaseModelOptionalString
+          description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_70
       type: string
@@ -1116,7 +1136,7 @@ schemas: !Schemas
           description: The kind of the pet
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_110
+    - !ConstantSchema &ref_115
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -1126,7 +1146,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_115
+    - !ConstantSchema &ref_120
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1136,7 +1156,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_121
+    - !ConstantSchema &ref_126
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1169,7 +1189,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_89
+                  schema: !ObjectSchema &ref_93
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1284,7 +1304,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_90
+                  schema: !ObjectSchema &ref_94
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1309,12 +1329,12 @@ schemas: !Schemas
                             description: Algorithm to use for URL signing
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_108
+                        schema: !ArraySchema &ref_113
                           type: array
                           apiVersions:
                             - !ApiVersion 
                               version: '2020-06-01'
-                          elementType: !ObjectSchema &ref_91
+                          elementType: !ObjectSchema &ref_95
                             type: object
                             apiVersions:
                               - !ApiVersion 
@@ -1411,7 +1431,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_92
+                  schema: !ObjectSchema &ref_96
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1505,7 +1525,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_93
+                  schema: !ObjectSchema &ref_97
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1711,7 +1731,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_94
+                  schema: !ObjectSchema &ref_98
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1811,7 +1831,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_95
+                  schema: !ObjectSchema &ref_99
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1889,7 +1909,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_96
+                  schema: !ObjectSchema &ref_100
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1905,7 +1925,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_97
+                        schema: !ObjectSchema &ref_101
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -2056,14 +2076,14 @@ schemas: !Schemas
   durations:
     - *ref_45
   objects:
-    - !ObjectSchema &ref_117
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_99
+          schema: !ArraySchema &ref_103
             type: array
             apiVersions:
               - !ApiVersion 
@@ -2142,7 +2162,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_86
+                                    schema: !ObjectSchema &ref_90
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2176,7 +2196,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_102
+                                          schema: !ArraySchema &ref_107
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2199,7 +2219,7 @@ schemas: !Schemas
                                                 match.
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_103
+                                          schema: !ArraySchema &ref_108
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2261,7 +2281,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_87
+                                    schema: !ObjectSchema &ref_91
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2295,7 +2315,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_104
+                                          schema: !ArraySchema &ref_109
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2314,7 +2334,7 @@ schemas: !Schemas
                                               description: List of transforms
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_105
+                                          schema: !ArraySchema &ref_110
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2376,7 +2396,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_88
+                                    schema: !ObjectSchema &ref_92
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2410,7 +2430,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_106
+                                          schema: !ArraySchema &ref_111
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2429,7 +2449,7 @@ schemas: !Schemas
                                               description: The match value for the condition of the delivery rule
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_107
+                                          schema: !ArraySchema &ref_112
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2531,7 +2551,7 @@ schemas: !Schemas
                             description: The condition that must be matched for the actions to be executed
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_98
+                        schema: !ArraySchema &ref_102
                           type: array
                           apiVersions:
                             - !ApiVersion 
@@ -2740,7 +2760,7 @@ schemas: !Schemas
     - *ref_50
     - *ref_1
     - *ref_69
-    - !ObjectSchema &ref_118
+    - !ObjectSchema &ref_123
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2781,7 +2801,7 @@ schemas: !Schemas
                     description: The error target.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_100
+                schema: !ArraySchema &ref_104
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -2808,7 +2828,7 @@ schemas: !Schemas
                     description: The error details.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_101
+                schema: !ArraySchema &ref_105
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -2893,39 +2913,106 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_82
     - *ref_85
+    - !ObjectSchema &ref_86
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_88
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_86
+              immediate:
+                - *ref_86
+            properties:
+              - !Property 
+                schema: *ref_87
+                serializedName: optionalString
+                language: !Languages 
+                  default:
+                    name: optionalString
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: BaseModel
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_88
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_106
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_89
+            language: !Languages 
+              default:
+                name: DerivedModelRequiredCollection
+                description: Array of DerivedModelRequiredCollectionItem
+            protocol: !Protocols {}
+          required: true
+          serializedName: requiredCollection
+          language: !Languages 
+            default:
+              name: requiredCollection
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: DerivedModel
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_88
     - *ref_72
     - *ref_73
     - *ref_62
-    - *ref_86
-    - *ref_63
-    - *ref_87
-    - *ref_64
-    - *ref_88
-    - *ref_33
-    - *ref_89
-    - *ref_34
     - *ref_90
+    - *ref_63
     - *ref_91
-    - *ref_35
+    - *ref_64
     - *ref_92
+    - *ref_33
+    - *ref_93
+    - *ref_34
+    - *ref_94
+    - *ref_95
+    - *ref_35
+    - *ref_96
     - *ref_31
     - *ref_36
-    - *ref_93
+    - *ref_97
     - *ref_37
     - *ref_23
     - *ref_38
     - *ref_39
-    - *ref_94
-    - *ref_40
-    - *ref_95
-    - *ref_41
-    - *ref_96
-    - *ref_97
-  arrays:
     - *ref_98
+    - *ref_40
     - *ref_99
+    - *ref_41
     - *ref_100
     - *ref_101
+  arrays:
     - *ref_102
     - *ref_103
     - *ref_104
@@ -2933,9 +3020,14 @@ schemas: !Schemas
     - *ref_106
     - *ref_107
     - *ref_108
+    - *ref_109
+    - *ref_110
+    - *ref_111
+    - *ref_112
+    - *ref_113
 globalParameters:
-  - !Parameter &ref_113
-    schema: *ref_109
+  - !Parameter &ref_118
+    schema: *ref_114
     implementation: Client
     required: true
     extensions:
@@ -2948,7 +3040,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_111
+  - !Parameter &ref_116
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -2964,8 +3056,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_114
-    schema: *ref_110
+  - !Parameter &ref_119
+    schema: *ref_115
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -2987,9 +3079,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_111
-          - !Parameter &ref_116
-            schema: *ref_112
+          - *ref_116
+          - !Parameter &ref_121
+            schema: *ref_117
             implementation: Method
             required: true
             language: !Languages 
@@ -3000,13 +3092,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_113
-          - *ref_114
+          - *ref_118
+          - *ref_119
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_115
+                schema: *ref_120
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3029,10 +3121,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_116
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -3046,7 +3138,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3069,9 +3161,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_111
-          - !Parameter &ref_119
-            schema: *ref_112
+          - *ref_116
+          - !Parameter &ref_124
+            schema: *ref_117
             implementation: Method
             required: true
             language: !Languages 
@@ -3082,8 +3174,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_120
-            schema: *ref_109
+          - !Parameter &ref_125
+            schema: *ref_114
             implementation: Method
             required: true
             language: !Languages 
@@ -3094,13 +3186,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_113
-          - *ref_114
+          - *ref_118
+          - *ref_119
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_115
+                schema: *ref_120
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3123,8 +3215,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_119
-          - *ref_120
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
             schema: *ref_77
@@ -3141,7 +3233,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3164,9 +3256,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_111
-          - !Parameter &ref_124
-            schema: *ref_112
+          - *ref_116
+          - !Parameter &ref_129
+            schema: *ref_117
             implementation: Method
             required: true
             language: !Languages 
@@ -3177,8 +3269,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_125
-            schema: *ref_109
+          - !Parameter &ref_130
+            schema: *ref_114
             implementation: Method
             required: true
             language: !Languages 
@@ -3189,13 +3281,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_113
-          - *ref_114
+          - *ref_118
+          - *ref_119
         requestMediaTypes:
-          application/json: !Request &ref_123
+          application/json: !Request &ref_128
             parameters:
               - !Parameter 
-                schema: *ref_121
+                schema: *ref_126
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -3207,7 +3299,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_122
+              - !Parameter &ref_127
                 schema: *ref_77
                 implementation: Method
                 required: true
@@ -3220,7 +3312,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_115
+                schema: *ref_120
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3233,7 +3325,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_122
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3247,10 +3339,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_123
+          - *ref_128
         signatureParameters:
-          - *ref_124
-          - *ref_125
+          - *ref_129
+          - *ref_130
         responses:
           - !SchemaResponse 
             schema: *ref_77
@@ -3293,7 +3385,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3318,9 +3410,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_111
-          - !Parameter &ref_126
-            schema: *ref_112
+          - *ref_116
+          - !Parameter &ref_131
+            schema: *ref_117
             implementation: Method
             required: true
             language: !Languages 
@@ -3331,8 +3423,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_127
-            schema: *ref_109
+          - !Parameter &ref_132
+            schema: *ref_114
             implementation: Method
             required: true
             language: !Languages 
@@ -3343,13 +3435,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_113
-          - *ref_114
+          - *ref_118
+          - *ref_119
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_115
+                schema: *ref_120
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3372,8 +3464,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_126
-          - *ref_127
+          - *ref_131
+          - *ref_132
         responses:
           - !Response 
             language: !Languages 
@@ -3404,7 +3496,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3422,6 +3514,132 @@ operationGroups:
           default:
             name: Delete
             description: Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: DeliveryRules_Post
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_116
+          - !Parameter &ref_135
+            schema: *ref_117
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the Resource group within the Azure subscription.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_136
+            schema: *ref_114
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the endpoint under the profile which is unique globally.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_118
+          - *ref_119
+        requestMediaTypes:
+          application/json: !Request &ref_134
+            parameters:
+              - !Parameter 
+                schema: *ref_126
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_133
+                schema: *ref_86
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_120
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_133
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}/post
+                method: get
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_134
+        signatureParameters:
+          - *ref_135
+          - *ref_136
+        responses:
+          - !SchemaResponse 
+            schema: *ref_86
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_123
+            language: !Languages 
+              default:
+                name: ''
+                description: CDN error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Post
+            description: Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
         protocol: !Protocols {}
     language: !Languages 
       default:

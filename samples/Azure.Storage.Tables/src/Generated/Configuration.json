@@ -1,0 +1,12 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.Storage.Tables",
+  "LibraryName": "AzureStorageTables",
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+  ],
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "generation1-convenience-client": true
+}

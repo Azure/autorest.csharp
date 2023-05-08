@@ -19,7 +19,7 @@ using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal sealed class ModelTypeProviderFields : IReadOnlyCollection<FieldDeclaration>
+    internal sealed class ModelTypeProviderFields : IObjectTypeFields<InputModelProperty>
     {
         private readonly IReadOnlyList<FieldDeclaration> _fields;
         private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
@@ -42,14 +42,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (discriminator is not null)
             {
                 var originalFieldName = discriminator.ToCleanName();
-                var inputModelProperty = new InputModelProperty(originalFieldName, discriminator, "Discriminator", InputPrimitiveType.String, true, true, true);
+                var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
                 var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
-                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type);
+                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
-                publicParameters.Add(parameter);
             }
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
@@ -61,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModelProperty, typeFactory)
+                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModel, inputModelProperty, typeFactory)
                     : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
 
                 if (existingMember is not null)
@@ -76,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     continue; // literal property does not show up in the constructor parameter list
                 }
-                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.FirstCharToLowerCase(), field.Type);
+                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
@@ -112,7 +111,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parameterNamesToFields[parameter.Name];
-        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)]out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
+        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
         public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
@@ -127,15 +126,37 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
             var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
-            var fieldModifiers = propertyIsReadOnly ? (propertyIsLiteralType ? Internal : Public ) | ReadOnly : Public;
+            FieldModifiers fieldModifiers;
+            FieldModifiers? setterModifiers = null;
+            if (inputModelProperty.IsDiscriminator)
+            {
+                fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
+                setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
+            }
+            else
+            {
+                fieldModifiers = propertyIsLiteralType ? Internal : Public;
+            }
+            if (propertyIsReadOnly)
+                fieldModifiers |= ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
-            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty), inputModelProperty.IsRequired, false, true);
+            return new FieldDeclaration(
+                $"{inputModelProperty.Description}",
+                fieldModifiers,
+                fieldType,
+                declaration,
+                GetPropertyDefaultValue(fieldType, inputModelProperty),
+                inputModelProperty.IsRequired,
+                IsField: false,
+                WriteAsProperty: true,
+                SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
             var existingMemberTypeSymbol = existingMember switch
             {
@@ -186,21 +207,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return inputModelProperty.DefaultValue;
             }
-            if (TypeFactory.IsCollectionType(propertyType))
-            {
-                if (TypeFactory.IsReadOnlyList(propertyType))
-                {
-                    return $"{typeof(Array)}.Empty<{propertyType.Arguments[0]}>()";
-                }
-                if (TypeFactory.IsReadOnlyDictionary(propertyType))
-                {
-                    return $"new {new CSharpType(typeof(ReadOnlyDictionary<,>), propertyType.Arguments)}(new {new CSharpType(typeof(Dictionary<,>), propertyType.Arguments)}(0))";
-                }
-                if (!inputModelProperty.IsRequired)
-                {
-                    return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
-                }
-            }
+
             return null;
         }
     }

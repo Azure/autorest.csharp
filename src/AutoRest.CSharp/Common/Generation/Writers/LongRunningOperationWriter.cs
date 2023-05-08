@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Append($"{GetNextLinkOperationType(operation)} {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
                     .AppendIf($"this, ", operation.ResultType != null)
                     .Line($"pipeline, request.Method, request.Uri.ToUri(), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
-                    .Line($"_operation = new {helperType}(clientDiagnostics, nextLinkOperation, response, { operation.Diagnostics.ScopeName:L});");
+                    .Line($"_operation = new {helperType}(nextLinkOperation, clientDiagnostics, response, { operation.Diagnostics.ScopeName:L});");
 
                 if (pagingResponse != null)
                 {

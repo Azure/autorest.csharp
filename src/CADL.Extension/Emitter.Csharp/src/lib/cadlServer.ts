@@ -15,7 +15,7 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType } from "./model.js";
-import { DpgContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
 
 export interface CadlServer {
     url: string;
@@ -39,7 +39,7 @@ function getDefaultValue(type: Type): any {
 }
 
 export function resolveServers(
-    context: DpgContext,
+    context: SdkContext,
     servers: HttpServer[],
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>

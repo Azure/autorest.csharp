@@ -24,7 +24,12 @@ function Invoke($command, $executePath=$repoRoot)
 
 function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
-    $outputPath = Join-Path $baseOutput "Generated"
+    $outputPath = $baseOutput
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = Join-Path $outputPath "src"
+    }
+
+    $outputPath = Join-Path $outputPath "Generated"
     if ($projectName -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
@@ -42,7 +47,11 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     }
 
     Invoke $command
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
 function AutoRest-Reset()
@@ -60,6 +69,10 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = $baseOutput
 
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = "$outputPath/src"
+    }
+
     if ($fast)
     {
         $outputPath = Join-Path $baseOutput "Generated"
@@ -68,12 +81,6 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     }
     else
     {
-        #clean up
-        if (Test-Path $outputPath/Generated/*) 
-        {
-            Remove-Item $outputPath/Generated/* -Recurse
-        }
-        
         # emit cadl json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
@@ -91,7 +98,11 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
         }        
     }
 
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
 function Invoke-TypespecSetup()

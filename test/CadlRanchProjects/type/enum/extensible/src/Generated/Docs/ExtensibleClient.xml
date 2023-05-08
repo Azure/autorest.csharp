@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetKnownValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetKnownValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+Response response = await client.GetKnownValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetKnownValue(RequestContext)">
+<example>
+This sample shows how to call GetKnownValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+Response response = client.GetKnownValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+Response response = await client.GetUnknownValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValue(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+Response response = client.GetUnknownValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutKnownValueAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutKnownValueAsync with required request content.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var data = "Monday";
+
+Response response = await client.PutKnownValueAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutKnownValue(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutKnownValue with required request content.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var data = "Monday";
+
+Response response = client.PutKnownValue(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValueAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutUnknownValueAsync with required request content.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var data = "Monday";
+
+Response response = await client.PutUnknownValueAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValue(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutUnknownValue with required request content.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var data = "Monday";
+
+Response response = client.PutUnknownValue(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "MgmtScopeResource",
-  "LibraryName": null,
+  "LibraryName": "ResourceManagementClient",
   "SharedSourceFolders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"

@@ -74,6 +74,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -354,6 +355,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
             => TryCreateType(symbol, NoTypeValidator, out type);
+
+        public CSharpType? GetLibraryTypeByName(string name) => _library.FindTypeByName(name);
 
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {

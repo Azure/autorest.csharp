@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Input.Source
     public class SourceInputModel
     {
         private readonly Compilation _compilation;
+        private readonly CompilationInput? _existingCompilation;
         private readonly INamedTypeSymbol _typeAttribute;
         private readonly INamedTypeSymbol _modelAttribute;
         private readonly INamedTypeSymbol _clientAttribute;
@@ -21,9 +22,11 @@ namespace AutoRest.CSharp.Input.Source
         private readonly INamedTypeSymbol _serializationAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
-        public SourceInputModel(Compilation compilation)
+        public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
         {
             _compilation = compilation;
+            _existingCompilation = existingCompilation;
+
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
             _serializationAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberSerializationAttribute).FullName!)!;
             _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
@@ -34,7 +37,7 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
-                foreach (var type in GetSymbols(module.GlobalNamespace))
+                foreach (var type in SourceInputHelper.GetSymbols(module.GlobalNamespace))
                 {
                     if (type is INamedTypeSymbol namedTypeSymbol && TryGetName(type, out var schemaName))
                     {
@@ -56,6 +59,11 @@ namespace AutoRest.CSharp.Input.Source
         public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
         {
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, _serializationAttribute, symbol);
+        }
+
+        internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
+        {
+            return _existingCompilation?.FindMethod(namespaceName, typeName, methodName, parameters);
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)
@@ -123,22 +131,6 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return name != null;
-        }
-
-        private IEnumerable<ITypeSymbol> GetSymbols(INamespaceSymbol namespaceSymbol)
-        {
-            foreach (var childNamespaceSymbol in namespaceSymbol.GetNamespaceMembers())
-            {
-                foreach (var symbol in GetSymbols(childNamespaceSymbol))
-                {
-                    yield return symbol;
-                }
-            }
-
-            foreach (INamedTypeSymbol symbol in namespaceSymbol.GetTypeMembers())
-            {
-                yield return symbol;
-            }
         }
     }
 }

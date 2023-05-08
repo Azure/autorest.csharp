@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected CodeWriterDeclaration WriteGetExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
         {
             _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, example, client),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException("The method that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException($"The method `{example.OperationId}` that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
 
