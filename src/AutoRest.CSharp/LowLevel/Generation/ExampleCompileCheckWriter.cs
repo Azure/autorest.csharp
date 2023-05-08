@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                         //TODO: we should make this more obvious to determine if something is convenience only
                         if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                             !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                            !_client.IsMethodSuppressed(method) &&
+                            !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
                             (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
                         {
                             bool writeShortVersion = ShouldGenerateShortVersion(method);
@@ -80,7 +80,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
                         if (method.ConvenienceMethod is not null &&
                             !method.ConvenienceMethod.IsDeprecatedForExamples() &&
                             method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
+                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
+                            !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
                             WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
                 }

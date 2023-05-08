@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"";
 
             //skip suppressed protocol methods
-            if (_client.IsMethodSuppressed(clientMethod))
+            if (_client.IsMethodSuppressed(clientMethod.ProtocolMethodSignature))
                 return $"";
 
             //skip if there are no valid ctors
@@ -102,6 +102,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             //skip if there are no valid ctors
             if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
+                return $"";
+
+            //skip suppressed convenience methods
+            if (_client.IsMethodSuppressed(convenienceMethod.Signature))
                 return $"";
 
             var methodSignature = convenienceMethod.Signature.WithAsync(async);

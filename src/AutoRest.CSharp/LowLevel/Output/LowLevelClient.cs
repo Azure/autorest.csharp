@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Output.Models
             _ => MethodSignatureModifiers.Private
         };
 
-        internal bool IsMethodSuppressed(LowLevelClientMethod clientMethod)
+        internal bool IsMethodSuppressed(MethodSignature signature)
         {
             if (ExistingType is null)
                 return false;
@@ -378,10 +378,10 @@ namespace AutoRest.CSharp.Output.Models
                 if (attribute.ConstructorArguments.Length != 2)
                     continue;
                 var methodTarget = attribute.ConstructorArguments[0].Value;
-                if (methodTarget is null || !methodTarget.Equals(clientMethod.RequestMethod.Name))
+                if (methodTarget is null || !methodTarget.Equals(signature.Name))
                     continue;
 
-                if (IsParamMatch(clientMethod.ProtocolMethodSignature.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()))
+                if (IsParamMatch(signature.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()))
                     return true;
             }
 
