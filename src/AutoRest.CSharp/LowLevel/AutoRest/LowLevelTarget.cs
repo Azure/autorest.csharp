@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Generation;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -40,6 +41,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
+
+                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
+                exampleCompileCheckWriter.Write();
+                project.AddGeneratedFile($"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs", exampleCompileCheckWriter.ToString());
             }
 
             var optionsWriter = new CodeWriter();

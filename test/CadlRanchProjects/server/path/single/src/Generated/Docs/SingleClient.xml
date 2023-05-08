@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="MyOpAsync(RequestContext)">
+<example>
+This sample shows how to call MyOpAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SingleClient(endpoint);
+
+Response response = await client.MyOpAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="MyOp(RequestContext)">
+<example>
+This sample shows how to call MyOp.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SingleClient(endpoint);
+
+Response response = client.MyOp(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -55,18 +55,23 @@ import {
     InputType,
     InputUnionType,
     InputNullType,
-    InputIntrinsicType
+    InputIntrinsicType,
+    InputUnknownType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
-import { DpgContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    getSdkSimpleType,
+    isInternal
+} from "@azure-tools/typespec-client-generator-core";
 import { capitalize } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapCadlTypeToCSharpInputTypeKind(
-    context: DpgContext,
+    context: SdkContext,
     cadlType: Type
 ): InputTypeKind {
     const format = getFormat(context.program, cadlType);
@@ -103,21 +108,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.BinaryData;
         case "int8":
             return InputTypeKind.Int32;
-        case "int16":
-            return InputTypeKind.Int32;
         case "int32":
             return InputTypeKind.Int32;
         case "int64":
-            return InputTypeKind.Int64;
-        case "safeint":
-            return InputTypeKind.Int64;
-        case "uint8":
-            return InputTypeKind.Int32;
-        case "uint16":
-            return InputTypeKind.Int32;
-        case "uint32":
-            return InputTypeKind.Int32;
-        case "uint64":
             return InputTypeKind.Int64;
         case "float32":
             return InputTypeKind.Float32;
@@ -125,17 +118,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float64;
         case "string":
             return InputTypeKind.String;
-        case "uri":
-            return InputTypeKind.String;
-        case "url":
-            return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
-        case "plainDate":
+        case "date":
             return InputTypeKind.Date;
-        case "zonedDateTime":
+        case "datetime":
             return InputTypeKind.DateTime;
-        case "plainTime":
+        case "time":
             return InputTypeKind.Time;
         case "duration":
             return InputTypeKind.Duration;
@@ -148,7 +137,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
  */
-export function getEffectiveSchemaType(context: DpgContext, type: Type): Type {
+export function getEffectiveSchemaType(context: SdkContext, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
         const effective = getEffectiveModelType(
@@ -174,7 +163,7 @@ export function getEffectiveSchemaType(context: DpgContext, type: Type): Type {
  * Headers, parameters, status codes are not schema properties even they are
  * represented as properties in Cadl.
  */
-function isSchemaProperty(context: DpgContext, property: ModelProperty) {
+function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const program = context.program;
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
@@ -202,7 +191,7 @@ export function isNeverType(type: Type): type is NeverType {
 }
 
 export function getInputType(
-    context: DpgContext,
+    context: SdkContext,
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
@@ -260,10 +249,11 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
+                const sdkType = getSdkSimpleType(context, type);
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                        intrinsicName
+                        sdkType.kind
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -365,7 +355,7 @@ export function getInputType(
 
         function enumMemberType(member: EnumMember): string {
             if (typeof member.value === "number") {
-                return "Int32";
+                return "Float32";
             }
             return "String";
         }
@@ -399,6 +389,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Accessibility: isInternal(context, m) ? "internal" : undefined,
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -522,12 +513,10 @@ export function getInputType(
         switch (type.name) {
             case "unknown":
                 return {
-                    Name: "unknown",
-                    Description: getDoc(program, type),
-                    IsNullable: false,
-                    Usage: Usage.None,
-                    Properties: []
-                } as InputModelType;
+                    Name: "Intrinsic",
+                    Kind: "unknown",
+                    IsNullable: false
+                } as InputUnknownType;
             case "null":
                 return {
                     Name: "Intrinsic",
@@ -579,7 +568,7 @@ export function getInputType(
 }
 
 export function getUsages(
-    context: DpgContext,
+    context: SdkContext,
     ops?: HttpOperation[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     const program = context.program;

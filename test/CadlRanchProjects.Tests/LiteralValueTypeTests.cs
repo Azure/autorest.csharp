@@ -3,8 +3,8 @@
 
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using CadlFirstTest.Models;
-using CadlFirstTest;
+using TypeSpecFirstTest.Models;
+using TypeSpecFirstTest;
 using System.Threading.Tasks;
 
 namespace CadlRanchProjects.Tests
@@ -17,7 +17,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public async Task LiteralModelProperties() => await Test(async (host) =>
         {
-            Thing result = await new CadlFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc"));
+            Thing result = await new TypeSpecFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc"));
             Assert.AreEqual(result.Name, "literal");
             Assert.AreEqual(result.RequiredUnion, "union");
             Assert.AreEqual(result.RequiredBadDescription, "def");

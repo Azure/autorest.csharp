@@ -14,6 +14,7 @@ input-file:
   - $(this-folder)/Links.json
   - $(this-folder)/vmInsightsOnboarding_API.json
   - $(this-folder)/guestconfiguration.json
+  - $(this-folder)/consumption.json
 namespace: MgmtScopeResource
 
 parameterized-scopes:

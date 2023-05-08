@@ -1,29 +1,47 @@
 # Generate SDK codes
 
 parameters:
-  name: ''
-  filter: ''
+  Name: ''
   AutorestCSharpVersion: ''
   CadlEmitterVersion: ''
   IsInternalFeed: false
+  Matrix: {}
+  DependsOn: []
 
 jobs:
-- job: ${{ parameters.name }}
+- job: ${{ parameters.Name }}
   timeoutInMinutes: 60
   pool:
     name: azsdk-pool-mms-ubuntu-2004-general
     vmImage: ubuntu-20.04
+  strategy:
+    matrix: ${{ parameters.Matrix }}
+  dependsOn: ${{ parameters.DependsOn }}
   steps:
   - checkout: self
     fetchDepth: 1
-  - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
+  - template: eng/common/pipelines/templates/steps/sparse-checkout.yml@azure-sdk-tools
+    parameters:
+      Paths:
+      - "/*"
+      - "!SessionRecords"
+      Repositories:
+      - Name: Azure/azure-sdk-for-net
+        WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      SkipCheckoutNone: true
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK'
     inputs:
       useGlobalJson: true
       performMultiLevelLookup: true
+  - task: DownloadPipelineArtifact@2
+    displayName: Download job matrix props files
+    inputs:
+      artifact: matrix-props
+      targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/artifacts/matrix-props
+
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
       displayName: "Generate Internal Npmrc"
@@ -33,7 +51,7 @@ jobs:
         workingFile: '$(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc'
       displayName: Setup Internal NPM Auth
   - task: Powershell@2
-    displayName: Update SDK codes ${{ parameters.filter }}
+    displayName: Update SDK codes
     inputs:
       pwsh: true
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkForNet.ps1
@@ -41,7 +59,7 @@ jobs:
         -AutorestCSharpVersion ${{ parameters.AutorestCSharpVersion }}
         -CadlEmitterVersion ${{ parameters.CadlEmitterVersion }}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-        -ServiceDirectoryFilters ${{ parameters.filter}}
+        -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
         -ShowSummary
         -UseInternalFeed $${{parameters.IsInternalFeed}}
       failOnStderr: false

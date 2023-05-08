@@ -161,7 +161,7 @@ describe("Test GetInputType for enum", () => {
                     Accessibility: undefined,
                     Deprecated: undefined,
                     Description: "Fixed int enum",
-                    EnumValueType: "Int32",
+                    EnumValueType: "Float32",
                     AllowedValues: [
                         { Name: "One", Value: 1, Description: undefined },
                         { Name: "Two", Value: 2, Description: undefined },

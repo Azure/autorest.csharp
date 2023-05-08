@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/roundtrip-basic/main.cadl#L15-L23
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
-                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, null, null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/input-basic/main.cadl
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Input Model", InputModelTypeUsage.Input,
-                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/output-basic/main.cadl#L15-L23
             var input = new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", null, "public", "Output Model", InputModelTypeUsage.Output,
-                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
