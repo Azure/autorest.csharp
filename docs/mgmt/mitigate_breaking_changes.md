@@ -49,7 +49,7 @@ If the property still works for old API versions, and it no longer works for new
 // in file `src/Customization/TheTypeContainingRemovedProperty.cs`
 public partial class TheTypeContainingRemovedProperty
 {
-    internal TheTypeContainingRemovedProperty(string propertyThatDefinedInOtherPartialClassFiles, string removedProperty) : base(propertyThatDefinedInOtherPartialClassFiles)
+    internal TheTypeContainingRemovedProperty(string propertyThatDefinedInOtherPartialClassFiles, string removedProperty) : this(propertyThatDefinedInOtherPartialClassFiles)
     {
         RemovedProperty = removedProperty;
     }
