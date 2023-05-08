@@ -64,7 +64,7 @@ jobs:
         -UseInternalFeed $${{parameters.IsInternalFeed}}
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-    retryCountOnTaskFailure: 3
+    retryCountOnTaskFailure: 1
   - pwsh: |
       git restore eng/Packages.Data.props
       git restore eng/emitter-package.json
