@@ -12,10 +12,10 @@ Write-Host 'Building Azure SDK projects in override file ' -ForegroundColor Gree
 Write-Host "$ProjectListOverrideFile" -ForegroundColor Yellow
 
 if ($ShowSummary) {
-    dotnet build /p:ProjectListOverrideFile=$ProjectListOverrideFile /v:n /ds "$SdkRepoRoot\eng\service.proj"
+    dotnet build /p:ProjectListOverrideFile=$ProjectListOverrideFile /p:EnableSourceLink=false /v:n /ds "$SdkRepoRoot\eng\service.proj"
 }
 else {
-    dotnet build /p:ProjectListOverrideFile=$ProjectListOverrideFile "$SdkRepoRoot\eng\service.proj"
+    dotnet build /p:ProjectListOverrideFile=$ProjectListOverrideFile /p:EnableSourceLink=false "$SdkRepoRoot\eng\service.proj"
 }
 
 if ($LastExitCode -ne 0) {

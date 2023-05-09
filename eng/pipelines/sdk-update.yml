@@ -86,7 +86,7 @@ stages:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
           IsInternalFeed: true
-          JobCount: 7
+          JobCount: 7      
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           Name: Update_Code
@@ -100,7 +100,9 @@ stages:
           Name: Build_Code
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           Matrix: $[dependencies.Update_Generator_Versions.outputs['generate_job_matrix.matrix']]
-          DependsOn: Update_Code
+          DependsOn:
+            - Update_Code
+            - Update_Generator_Versions
       - job: Create_PR
         dependsOn: 
           - Build_Code
