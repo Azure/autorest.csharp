@@ -12,9 +12,9 @@ param(
 
     [string]$ProjectListOverrideFile,
 
-    [switch]$ShowSummary,
+    [bool]$UseInternalFeed = $false,
 
-    [bool]$UseInternalFeed = $false)
+    [switch]$ShowSummary)
 
 $ErrorActionPreference = 'Stop'
 

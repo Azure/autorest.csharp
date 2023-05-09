@@ -4,6 +4,7 @@ parameters:
   AutorestCSharpVersion: ""
   CadlEmitterVersion: ""
   IsInternalFeed: false
+  JobCount: 0
 
 jobs:
 - job: Update_Generator_Versions
@@ -13,9 +14,17 @@ jobs:
   steps:
   - checkout: self
     fetchDepth: 1
-  - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
+  - template: eng/common/pipelines/templates/steps/sparse-checkout.yml@azure-sdk-tools
+    parameters:
+      Paths:
+      - "/*"
+      - "!SessionRecords"
+      Repositories:
+      - Name: Azure/azure-sdk-for-net
+        WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      SkipCheckoutNone: true
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
       displayName: "Generate Internal Npmrc"
@@ -46,3 +55,10 @@ jobs:
       TargetRepoName: azure-sdk-for-net
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
       ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+  - ${{ if ne(parameters.JobCount, 0) }}:
+    - pwsh: ./eng/GenerateSdkForNetCodeGenerationMatrix.ps1 -SdkForNetPath $(Build.SourcesDirectory)/azure-sdk-for-net -GroupCount ${{ parameters.JobCount }} -OutputFolder $(System.DefaultWorkingDirectory)/output
+      displayName: "Generate Matrix Files"
+      name: generate_job_matrix
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+    - publish: $(System.DefaultWorkingDirectory)/output
+      artifact: matrix-props
