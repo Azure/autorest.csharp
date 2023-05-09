@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optional.Models;
 
 namespace _Type.Property.Optional.Samples
 {
@@ -70,6 +72,15 @@ namespace _Type.Property.Optional.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAll_Convenience_Async()
+        {
+            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+            var result = await client.GetAllAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetRequiredOnly()
         {
             var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
@@ -116,6 +127,15 @@ namespace _Type.Property.Optional.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetRequiredOnly_Convenience_Async()
+        {
+            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+            var result = await client.GetRequiredOnlyAsync();
         }
 
         [Test]
@@ -182,6 +202,19 @@ namespace _Type.Property.Optional.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAll_Convenience_Async()
+        {
+            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+            var body = new RequiredAndOptionalProperty(1234)
+            {
+                OptionalProperty = "<OptionalProperty>",
+            };
+            var result = await client.PutAllAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutRequiredOnly()
         {
             var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
@@ -240,6 +273,19 @@ namespace _Type.Property.Optional.Samples
 
             Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutRequiredOnly_Convenience_Async()
+        {
+            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+            var body = new RequiredAndOptionalProperty(1234)
+            {
+                OptionalProperty = "<OptionalProperty>",
+            };
+            var result = await client.PutRequiredOnlyAsync(body);
         }
     }
 }

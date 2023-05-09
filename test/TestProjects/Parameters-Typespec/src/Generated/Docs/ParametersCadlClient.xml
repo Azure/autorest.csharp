@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="OperationAsync(int,int?,CancellationToken)">
+<example>
+This sample shows how to call OperationAsync with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = await client.OperationAsync(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="Operation(int,int?,CancellationToken)">
+<example>
+This sample shows how to call Operation with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = client.Operation(1234, 1234);
+]]></code>
+</example>
+    </member>
     <member name="OperationAsync(int,int?,RequestContext)">
 <example>
 This sample shows how to call OperationAsync with required parameters and parse the result.
@@ -24,6 +44,26 @@ Response response = client.Operation(1234, 1234, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Operation2Async(int,int?,CancellationToken)">
+<example>
+This sample shows how to call Operation2Async with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = await client.Operation2Async(1234, 1234);
+]]></code>
+</example>
+    </member>
+    <member name="Operation2(int,int?,CancellationToken)">
+<example>
+This sample shows how to call Operation2 with required parameters.
+<code><![CDATA[
+var client = new ParametersCadlClient();
+
+var result = client.Operation2(1234, 1234);
 ]]></code>
 </example>
     </member>

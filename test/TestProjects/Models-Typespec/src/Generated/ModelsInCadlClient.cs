@@ -60,6 +60,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -73,6 +74,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTrip(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -164,6 +166,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -177,6 +180,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -268,6 +272,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -281,6 +286,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -372,6 +378,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(InputModel,CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -386,6 +393,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(InputModel,CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -480,6 +488,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -493,6 +502,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutput(RoundTripModel,CancellationToken)']/*" />
         public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -584,6 +594,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursiveAsync(InputRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -597,6 +608,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursive(InputRecursiveModel,CancellationToken)']/*" />
         public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -688,6 +700,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -701,6 +714,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripRecursiveModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -790,6 +804,7 @@ namespace ModelsInCadl
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReferenceAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ErrorModel>> SelfReferenceAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -799,6 +814,7 @@ namespace ModelsInCadl
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='SelfReference(CancellationToken)']/*" />
         public virtual Response<ErrorModel> SelfReference(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -880,6 +896,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOnNoUse to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -893,6 +910,7 @@ namespace ModelsInCadl
         /// <param name="input"> The RoundTripOnNoUse to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));

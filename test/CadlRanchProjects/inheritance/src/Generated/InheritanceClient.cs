@@ -52,6 +52,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(Siamese,CancellationToken)']/*" />
         public virtual async Task<Response> PostValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -64,6 +65,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(Siamese,CancellationToken)']/*" />
         public virtual Response PostValid(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -152,6 +154,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -160,6 +163,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(CancellationToken)']/*" />
         public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -240,6 +244,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(Siamese,CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> PutValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -252,6 +257,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Siamese to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(Siamese,CancellationToken)']/*" />
         public virtual Response<Siamese> PutValid(Siamese input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -340,6 +346,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -348,6 +355,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(CancellationToken)']/*" />
         public virtual Response<Fish> GetModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -428,6 +436,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(Fish,CancellationToken)']/*" />
         public virtual async Task<Response> PutModelAsync(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -440,6 +449,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(Fish,CancellationToken)']/*" />
         public virtual Response PutModel(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -528,6 +538,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetRecursiveModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -536,6 +547,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(CancellationToken)']/*" />
         public virtual Response<Fish> GetRecursiveModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -616,6 +628,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(Fish,CancellationToken)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -628,6 +641,7 @@ namespace _Type.Model.Inheritance
         /// <param name="input"> The Fish to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(Fish,CancellationToken)']/*" />
         public virtual Response PutRecursiveModel(Fish input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -716,6 +730,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -724,6 +739,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(CancellationToken)']/*" />
         public virtual Response<Fish> GetMissingDiscriminator(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -802,6 +818,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -810,6 +827,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(CancellationToken)']/*" />
         public virtual Response<Fish> GetWrongDiscriminator(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

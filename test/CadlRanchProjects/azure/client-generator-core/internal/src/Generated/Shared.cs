@@ -50,6 +50,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='PublicAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<SharedModel>> PublicAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -62,6 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Public(string,CancellationToken)']/*" />
         public virtual Response<SharedModel> Public(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -152,6 +154,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='InternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<SharedModel>> InternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -164,6 +167,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Internal(string,CancellationToken)']/*" />
         internal virtual Response<SharedModel> Internal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));

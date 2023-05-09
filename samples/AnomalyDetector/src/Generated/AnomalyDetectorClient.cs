@@ -78,6 +78,7 @@ namespace AnomalyDetector
         /// are used to determine whether it is an anomaly. The entire detection can give
         /// user an overall status of the time series.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateEntireDetectionResult>> DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -97,6 +98,7 @@ namespace AnomalyDetector
         /// are used to determine whether it is an anomaly. The entire detection can give
         /// user an overall status of the time series.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateEntireSeries(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateEntireDetectionResult> DetectUnivariateEntireSeries(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -192,6 +194,7 @@ namespace AnomalyDetector
         /// This operation generates a model using the points that you sent into the API,
         /// and based on all data to determine whether the last point is anomalous.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateLastDetectionResult>> DetectUnivariateLastPointAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -209,6 +212,7 @@ namespace AnomalyDetector
         /// This operation generates a model using the points that you sent into the API,
         /// and based on all data to determine whether the last point is anomalous.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateLastPoint(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateLastDetectionResult> DetectUnivariateLastPoint(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -301,6 +305,7 @@ namespace AnomalyDetector
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <remarks> Evaluate change point score of every series point. </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateChangePointDetectionResult>> DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -315,6 +320,7 @@ namespace AnomalyDetector
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <remarks> Evaluate change point score of every series point. </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateChangePointDetectionResult> DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
@@ -411,6 +417,7 @@ namespace AnomalyDetector
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateBatchDetectionResultAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateDetectionResult>> GetMultivariateBatchDetectionResultAsync(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
@@ -429,6 +436,7 @@ namespace AnomalyDetector
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateBatchDetectionResult(string,CancellationToken)']/*" />
         public virtual Response<MultivariateDetectionResult> GetMultivariateBatchDetectionResult(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
@@ -531,6 +539,7 @@ namespace AnomalyDetector
         /// a CSV file in Azure blob storage, which contains all the variables and a
         /// timestamp column.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='TrainMultivariateModelAsync(ModelInfo,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> TrainMultivariateModelAsync(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(modelInfo, nameof(modelInfo));
@@ -553,6 +562,7 @@ namespace AnomalyDetector
         /// a CSV file in Azure blob storage, which contains all the variables and a
         /// timestamp column.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='TrainMultivariateModel(ModelInfo,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> TrainMultivariateModel(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(modelInfo, nameof(modelInfo));
@@ -719,6 +729,7 @@ namespace AnomalyDetector
         /// Get detailed information of multivariate model, including the training status
         /// and variables used in the model.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> GetMultivariateModelAsync(string modelId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -737,6 +748,7 @@ namespace AnomalyDetector
         /// Get detailed information of multivariate model, including the training status
         /// and variables used in the model.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModel(string,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> GetMultivariateModel(string modelId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -840,6 +852,7 @@ namespace AnomalyDetector
         /// externally accessible Azure storage Uri, either pointed to an Azure blob
         /// storage folder, or pointed to a CSV file in Azure blob storage.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateDetectionResult>> DetectMultivariateBatchAnomalyAsync(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -864,6 +877,7 @@ namespace AnomalyDetector
         /// externally accessible Azure storage Uri, either pointed to an Azure blob
         /// storage folder, or pointed to a CSV file in Azure blob storage.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomaly(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateDetectionResult> DetectMultivariateBatchAnomaly(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -970,6 +984,7 @@ namespace AnomalyDetector
         /// JSON format. The request will complete synchronously and return the detection
         /// immediately in the response body.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateLastDetectionResult>> DetectMultivariateLastAnomalyAsync(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -992,6 +1007,7 @@ namespace AnomalyDetector
         /// JSON format. The request will complete synchronously and return the detection
         /// immediately in the response body.
         /// </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='DetectMultivariateLastAnomaly(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateLastDetectionResult> DetectMultivariateLastAnomaly(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
@@ -1091,6 +1107,7 @@ namespace AnomalyDetector
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> List models of a resource. </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModelsAsync(int?,int?,CancellationToken)']/*" />
         public virtual AsyncPageable<AnomalyDetectionModel> GetMultivariateModelsAsync(int? skip = null, int? maxCount = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -1104,6 +1121,7 @@ namespace AnomalyDetector
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> List models of a resource. </remarks>
+        /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModels(int?,int?,CancellationToken)']/*" />
         public virtual Pageable<AnomalyDetectionModel> GetMultivariateModels(int? skip = null, int? maxCount = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;

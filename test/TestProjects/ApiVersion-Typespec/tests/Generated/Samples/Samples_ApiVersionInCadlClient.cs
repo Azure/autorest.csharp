@@ -6,9 +6,11 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApiVersionInCadl.Models;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -72,6 +74,17 @@ namespace ApiVersionInCadl.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetBatchDetectionResult_Convenience_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ApiVersionInCadlClient(endpoint, credential);
+
+            var result = await client.GetBatchDetectionResultAsync("<resultId>");
         }
     }
 }

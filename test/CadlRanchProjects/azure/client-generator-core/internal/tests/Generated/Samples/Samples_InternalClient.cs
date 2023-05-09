@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
@@ -64,6 +66,15 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PublicOnly_Convenience_Async()
+        {
+            var client = new InternalClient();
+
+            var result = await client.PublicOnlyAsync("<name>");
         }
     }
 }

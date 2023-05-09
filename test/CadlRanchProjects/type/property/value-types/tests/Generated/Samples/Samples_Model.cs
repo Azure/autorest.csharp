@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
@@ -64,6 +66,15 @@ namespace _Type.Property.ValueTypes.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModel_Convenience_Async()
+        {
+            var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+            var result = await client.GetModelAsync();
         }
 
         [Test]
@@ -136,6 +147,16 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_Convenience_Async()
+        {
+            var client = new ValueTypesClient().GetModelClient("1.0.0");
+
+            var body = new ModelProperty(new InnerModel("<property>"));
+            var result = await client.PutAsync(body);
         }
     }
 }

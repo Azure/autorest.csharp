@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="GetBatchDetectionResultAsync(string,CancellationToken)">
+<example>
+This sample shows how to call GetBatchDetectionResultAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ApiVersionInCadlClient(endpoint, credential);
+
+var result = await client.GetBatchDetectionResultAsync("<resultId>");
+]]></code>
+</example>
+    </member>
+    <member name="GetBatchDetectionResult(string,CancellationToken)">
+<example>
+This sample shows how to call GetBatchDetectionResult with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ApiVersionInCadlClient(endpoint, credential);
+
+var result = client.GetBatchDetectionResult("<resultId>");
+]]></code>
+</example>
+    </member>
     <member name="GetBatchDetectionResultAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
