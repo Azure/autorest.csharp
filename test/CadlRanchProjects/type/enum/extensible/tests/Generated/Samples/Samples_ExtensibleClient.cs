@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Enum.Extensible.Models;
 
 namespace _Type._Enum.Extensible.Samples
 {
@@ -68,6 +70,15 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetKnownValue_Convenience_Async()
+        {
+            var client = new ExtensibleClient();
+
+            var result = await client.GetKnownValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
             var client = new ExtensibleClient();
@@ -112,6 +123,15 @@ namespace _Type._Enum.Extensible.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUnknownValue_Convenience_Async()
+        {
+            var client = new ExtensibleClient();
+
+            var result = await client.GetUnknownValueAsync();
         }
 
         [Test]
@@ -164,6 +184,16 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutKnownValue_Convenience_Async()
+        {
+            var client = new ExtensibleClient();
+
+            var body = DaysOfWeekExtensibleEnum.Monday;
+            var result = await client.PutKnownValueAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutUnknownValue()
         {
             var client = new ExtensibleClient();
@@ -208,6 +238,16 @@ namespace _Type._Enum.Extensible.Samples
 
             Response response = await client.PutUnknownValueAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutUnknownValue_Convenience_Async()
+        {
+            var client = new ExtensibleClient();
+
+            var body = DaysOfWeekExtensibleEnum.Monday;
+            var result = await client.PutUnknownValueAsync(body);
         }
     }
 }

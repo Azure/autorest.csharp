@@ -87,6 +87,40 @@ Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="CreateOrReplaceAsync(int,User,CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplaceAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var resource = new User("<name>")
+{
+    Orders = 
+{
+        new UserOrder(1234, "<detail>")
+    },
+};
+var result = await client.CreateOrReplaceAsync(1234, resource);
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplace(int,User,CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplace with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var resource = new User("<name>")
+{
+    Orders = 
+{
+        new UserOrder(1234, "<detail>")
+    },
+};
+var result = client.CreateOrReplace(1234, resource);
+]]></code>
+</example>
+    </member>
     <member name="CreateOrReplaceAsync(int,RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateOrReplaceAsync with required parameters and request content, and how to parse the result.
@@ -173,6 +207,26 @@ Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="GetUserAsync(int,CancellationToken)">
+<example>
+This sample shows how to call GetUserAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = await client.GetUserAsync(1234);
+]]></code>
+</example>
+    </member>
+    <member name="GetUser(int,CancellationToken)">
+<example>
+This sample shows how to call GetUser with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.GetUser(1234);
+]]></code>
+</example>
+    </member>
     <member name="GetUserAsync(int,RequestContext)">
 <example>
 This sample shows how to call GetUserAsync with required parameters and parse the result.
@@ -231,6 +285,26 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="ExportAsync(int,string,CancellationToken)">
+<example>
+This sample shows how to call ExportAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = await client.ExportAsync(1234, "<format>");
+]]></code>
+</example>
+    </member>
+    <member name="Export(int,string,CancellationToken)">
+<example>
+This sample shows how to call Export with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+var result = client.Export(1234, "<format>");
+]]></code>
+</example>
+    </member>
     <member name="ExportAsync(int,string,RequestContext)">
 <example>
 This sample shows how to call ExportAsync with required parameters and parse the result.
@@ -264,6 +338,30 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
+<example>
+This sample shows how to call GetUsersAsync with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
+<example>
+This sample shows how to call GetUsers with required parameters.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+{
+}
 ]]></code>
 </example>
     </member>
@@ -305,6 +403,30 @@ foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}
 ]]></code>
 </example>
     </member>
+    <member name="GetWithPageAsync(CancellationToken)">
+<example>
+This sample shows how to call GetWithPageAsync.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetWithPageAsync())
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetWithPage(CancellationToken)">
+<example>
+This sample shows how to call GetWithPage.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetWithPage())
+{
+}
+]]></code>
+</example>
+    </member>
     <member name="GetWithPageAsync(RequestContext)">
 <example>
 This sample shows how to call GetWithPageAsync with required parameters and parse the result.
@@ -339,6 +461,30 @@ foreach (var item in client.GetWithPage(new RequestContext()))
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
     Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetWithCustomPageModelAsync(CancellationToken)">
+<example>
+This sample shows how to call GetWithCustomPageModelAsync.
+<code><![CDATA[
+var client = new BasicClient();
+
+await foreach (var item in client.GetWithCustomPageModelAsync())
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetWithCustomPageModel(CancellationToken)">
+<example>
+This sample shows how to call GetWithCustomPageModel.
+<code><![CDATA[
+var client = new BasicClient();
+
+foreach (var item in client.GetWithCustomPageModel())
+{
 }
 ]]></code>
 </example>

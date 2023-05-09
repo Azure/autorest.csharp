@@ -50,6 +50,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAsync(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
@@ -62,6 +63,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Json(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
@@ -152,6 +154,7 @@ namespace Projection.ProjectedName
         /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> ClientAsync(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
@@ -164,6 +167,7 @@ namespace Projection.ProjectedName
         /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Client(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
@@ -254,6 +258,7 @@ namespace Projection.ProjectedName
         /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
@@ -266,6 +271,7 @@ namespace Projection.ProjectedName
         /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Language(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
@@ -356,6 +362,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
@@ -368,6 +375,7 @@ namespace Projection.ProjectedName
         /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response JsonAndClient(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));

@@ -121,6 +121,7 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> ReadAsync(int petId, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -131,6 +132,7 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(int,CancellationToken)']/*" />
         public virtual Response<Pet> Read(int petId, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -213,6 +215,7 @@ namespace PetStore
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='CreateAsync(Pet,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
@@ -225,6 +228,7 @@ namespace PetStore
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Create(Pet,CancellationToken)']/*" />
         public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
@@ -314,6 +318,7 @@ namespace PetStore
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(PetKind,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetPetByKindAsync(PetKind kind, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -323,6 +328,7 @@ namespace PetStore
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(PetKind,CancellationToken)']/*" />
         public virtual Response<Pet> GetPetByKind(PetKind kind, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -412,6 +418,7 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -421,6 +428,7 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,CancellationToken)']/*" />
         public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

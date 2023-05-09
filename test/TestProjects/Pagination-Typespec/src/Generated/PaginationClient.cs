@@ -66,6 +66,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)']/*" />
         public virtual AsyncPageable<LedgerEntry> GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
@@ -82,6 +83,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)']/*" />
         public virtual Pageable<LedgerEntry> GetPaginationLedgerEntries(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
@@ -155,6 +157,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<LedgerEntry> GetLedgerEntriesAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -165,6 +168,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(CancellationToken)']/*" />
         public virtual Pageable<LedgerEntry> GetLedgerEntries(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;

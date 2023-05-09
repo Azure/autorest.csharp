@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
@@ -46,8 +47,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.UseNamespace("Azure.Core");
             _writer.UseNamespace("Azure.Identity");
             _writer.UseNamespace("System");
+            _writer.UseNamespace("System.Collections.Generic");
             _writer.UseNamespace("System.IO");
             _writer.UseNamespace("System.Text.Json");
+            if (Configuration.ModelNamespace && _client.HasConvenienceMethods)
+                _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
@@ -56,9 +60,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
                     foreach (var method in _client.ClientMethods)
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
-                        if ((method.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) > 0 &&
+                        if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                             !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                            !_client.IsMethodSuppressed(method) &&
+                            !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
                             (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
                         {
                             bool writeShortVersion = ShouldGenerateShortVersion(method);
@@ -70,10 +74,41 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             if (writeShortVersion)
                                 WriteTestCompilation(method, true, false);
                             WriteTestCompilation(method, true, true);
+
                         }
+
+                        if (method.ConvenienceMethod is not null &&
+                            !method.ConvenienceMethod.IsDeprecatedForExamples() &&
+                            method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
+                            !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
+                            WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
                 }
             }
+        }
+
+        private void WriteConvenienceTestCompilation(ConvenienceMethod method, string methodName, bool isAsync, bool useAllParameters)
+        {
+            StringBuilder builder = new StringBuilder();
+            var asyncKeyword = isAsync ? "Async" : "";
+            _exampleComposer.ComposeConvenienceMethodExample(method, isAsync, false, $"{methodName}{asyncKeyword}", builder);
+            var testMethodName = methodName;
+            if (useAllParameters)
+            {
+                testMethodName += "_AllParameters";
+            }
+            testMethodName += "_Convenience";
+            if (isAsync)
+            {
+                testMethodName += "_Async";
+            }
+            using (_writer.WriteMethodDeclaration(ExampleMethodSignature(testMethodName, isAsync)))
+            {
+                _writer.AppendRaw(builder.ToString());
+            }
+            _writer.Line();
+
         }
 
         private bool ShouldGenerateShortVersion(LowLevelClientMethod method)

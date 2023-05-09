@@ -6,12 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using MultipleMediaTypes.Models;
 using NUnit.Framework;
 
 namespace MultipleMediaTypes.Samples
@@ -72,6 +74,17 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_OneBinaryBodyTwoContentTypes_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new MultipleMediaTypesClient(endpoint);
+
+            var body = BinaryData.FromString("<your binary data content>");
+            var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.ApplicationOctetStream);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_OneStringBodyThreeContentTypes()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -120,6 +133,17 @@ namespace MultipleMediaTypes.Samples
 
             Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_OneStringBodyThreeContentTypes_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new MultipleMediaTypesClient(endpoint);
+
+            var body = "<null>";
+            var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
         }
 
         [Test]
@@ -184,6 +208,17 @@ namespace MultipleMediaTypes.Samples
 
             Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_OneModelBodyOneContentType_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new MultipleMediaTypesClient(endpoint);
+
+            var body = new Body("<id>");
+            var result = await client.OneModelBodyOneContentTypeAsync(body);
         }
     }
 }

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="GetKnownValueAsync(CancellationToken)">
+<example>
+This sample shows how to call GetKnownValueAsync.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = await client.GetKnownValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetKnownValue(CancellationToken)">
+<example>
+This sample shows how to call GetKnownValue.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = client.GetKnownValue();
+]]></code>
+</example>
+    </member>
     <member name="GetKnownValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetKnownValueAsync with required parameters and parse the result.
@@ -24,6 +44,26 @@ Response response = client.GetKnownValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValueAsync(CancellationToken)">
+<example>
+This sample shows how to call GetUnknownValueAsync.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = await client.GetUnknownValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValue(CancellationToken)">
+<example>
+This sample shows how to call GetUnknownValue.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var result = client.GetUnknownValue();
 ]]></code>
 </example>
     </member>
@@ -53,6 +93,28 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
+    <member name="PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)">
+<example>
+This sample shows how to call PutKnownValueAsync with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = await client.PutKnownValueAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)">
+<example>
+This sample shows how to call PutKnownValue with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = client.PutKnownValue(body);
+]]></code>
+</example>
+    </member>
     <member name="PutKnownValueAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutKnownValueAsync with required request content.
@@ -76,6 +138,28 @@ var data = "Monday";
 
 Response response = client.PutKnownValue(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)">
+<example>
+This sample shows how to call PutUnknownValueAsync with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = await client.PutUnknownValueAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)">
+<example>
+This sample shows how to call PutUnknownValue with required parameters.
+<code><![CDATA[
+var client = new ExtensibleClient();
+
+var body = DaysOfWeekExtensibleEnum.Monday;
+var result = client.PutUnknownValue(body);
 ]]></code>
 </example>
     </member>

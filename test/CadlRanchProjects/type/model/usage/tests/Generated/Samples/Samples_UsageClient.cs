@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Usage.Models;
 
 namespace _Type.Model.Usage.Samples
 {
@@ -80,6 +82,16 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Input_Convenience_Async()
+        {
+            var client = new UsageClient();
+
+            var input = new InputRecord("<requiredProp>");
+            var result = await client.InputAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Output()
         {
             var client = new UsageClient();
@@ -124,6 +136,15 @@ namespace _Type.Model.Usage.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Output_Convenience_Async()
+        {
+            var client = new UsageClient();
+
+            var result = await client.OutputAsync();
         }
 
         [Test]
@@ -192,6 +213,16 @@ namespace _Type.Model.Usage.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputAndOutput_Convenience_Async()
+        {
+            var client = new UsageClient();
+
+            var body = new InputOutputRecord("<requiredProp>");
+            var result = await client.InputAndOutputAsync(body);
         }
     }
 }

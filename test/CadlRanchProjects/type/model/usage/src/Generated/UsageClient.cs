@@ -52,6 +52,7 @@ namespace _Type.Model.Usage
         /// <param name="input"> The InputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(InputRecord,CancellationToken)']/*" />
         public virtual async Task<Response> InputAsync(InputRecord input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -64,6 +65,7 @@ namespace _Type.Model.Usage
         /// <param name="input"> The InputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(InputRecord,CancellationToken)']/*" />
         public virtual Response Input(InputRecord input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -152,6 +154,7 @@ namespace _Type.Model.Usage
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputRecord>> OutputAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -160,6 +163,7 @@ namespace _Type.Model.Usage
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(CancellationToken)']/*" />
         public virtual Response<OutputRecord> Output(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -240,6 +244,7 @@ namespace _Type.Model.Usage
         /// <param name="body"> The InputOutputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(InputOutputRecord,CancellationToken)']/*" />
         public virtual async Task<Response<InputOutputRecord>> InputAndOutputAsync(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -252,6 +257,7 @@ namespace _Type.Model.Usage
         /// <param name="body"> The InputOutputRecord to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(InputOutputRecord,CancellationToken)']/*" />
         public virtual Response<InputOutputRecord> InputAndOutput(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
