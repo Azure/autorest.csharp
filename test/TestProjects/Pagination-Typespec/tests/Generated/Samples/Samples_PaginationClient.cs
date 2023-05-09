@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Pagination.Models;
 
 namespace Pagination.Samples
 {
@@ -112,6 +114,20 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPaginationLedgerEntries_Convenience_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            var bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
+            await foreach (var item in client.GetPaginationLedgerEntriesAsync(bodyInput))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetLedgerEntries()
         {
             var credential = new DefaultAzureCredential();
@@ -175,6 +191,19 @@ namespace Pagination.Samples
                 Console.WriteLine(result.GetProperty("contents").ToString());
                 Console.WriteLine(result.GetProperty("collectionId").ToString());
                 Console.WriteLine(result.GetProperty("transactionId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetLedgerEntries_Convenience_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetLedgerEntriesAsync())
+            {
             }
         }
     }

@@ -50,6 +50,7 @@ namespace Parameters.Spread
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
@@ -62,6 +63,7 @@ namespace Parameters.Spread
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(BodyParameter,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestBody(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));

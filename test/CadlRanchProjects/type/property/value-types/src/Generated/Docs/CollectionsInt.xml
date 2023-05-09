@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="GetCollectionsIntAsync(CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsIntAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
+
+var result = await client.GetCollectionsIntAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetCollectionsInt(CancellationToken)">
+<example>
+This sample shows how to call GetCollectionsInt.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
+
+var result = client.GetCollectionsInt();
+]]></code>
+</example>
+    </member>
     <member name="GetCollectionsIntAsync(RequestContext)">
 <example>
 This sample shows how to call GetCollectionsIntAsync with required parameters and parse the result.
@@ -24,6 +44,34 @@ Response response = client.GetCollectionsInt(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(CollectionsIntProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
+
+var body = new CollectionsIntProperty(new int[] 
+{
+    1234
+});
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(CollectionsIntProperty,CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
+
+var body = new CollectionsIntProperty(new int[] 
+{
+    1234
+});
+var result = client.Put(body);
 ]]></code>
 </example>
     </member>

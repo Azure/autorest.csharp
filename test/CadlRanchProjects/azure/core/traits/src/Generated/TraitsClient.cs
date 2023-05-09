@@ -55,6 +55,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual async Task<Response<User>> SmokeTestAsync(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(foo, nameof(foo));
@@ -70,6 +71,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual Response<User> SmokeTest(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(foo, nameof(foo));

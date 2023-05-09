@@ -48,6 +48,7 @@ namespace CustomizationsInCadl
         /// <param name="input"> The RootModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
         public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -61,6 +62,7 @@ namespace CustomizationsInCadl
         /// <param name="input"> The RootModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />
         public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));

@@ -49,6 +49,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -72,6 +73,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -167,6 +169,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -179,6 +182,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
         public virtual Response Put(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

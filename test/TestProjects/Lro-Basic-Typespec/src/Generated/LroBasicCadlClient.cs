@@ -60,6 +60,7 @@ namespace LroBasicCadl
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,Project,CancellationToken)']/*" />
         public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -72,6 +73,7 @@ namespace LroBasicCadl
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,Project,CancellationToken)']/*" />
         public virtual Operation CreateProject(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -166,6 +168,7 @@ namespace LroBasicCadl
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,string,Project,CancellationToken)']/*" />
         public virtual async Task<Operation<Project>> UpdateProjectAsync(WaitUntil waitUntil, string id, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -182,6 +185,7 @@ namespace LroBasicCadl
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,string,Project,CancellationToken)']/*" />
         public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -283,6 +287,7 @@ namespace LroBasicCadl
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThingAsync(WaitUntil,Thing,CancellationToken)']/*" />
         public virtual async Task<Operation<Thing>> CreateThingAsync(WaitUntil waitUntil, Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -297,6 +302,7 @@ namespace LroBasicCadl
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThing(WaitUntil,Thing,CancellationToken)']/*" />
         public virtual Operation<Thing> CreateThing(WaitUntil waitUntil, Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));

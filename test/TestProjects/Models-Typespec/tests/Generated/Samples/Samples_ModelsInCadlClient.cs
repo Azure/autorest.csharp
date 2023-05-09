@@ -6,12 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using ModelsInCadl.Models;
 using NUnit.Framework;
 
 namespace ModelsInCadl.Samples
@@ -222,6 +224,35 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTrip_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<null>"
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+            }, new Dictionary<string, RecordItem>(), new float?[]
+            {
+    3.14f
+            }, new bool?[]
+            {
+    true
+            });
+            var result = await client.InputToRoundTripAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTripPrimitive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -426,6 +457,35 @@ namespace ModelsInCadl.Samples
             Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
             Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
             Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTripPrimitive_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<null>"
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+            }, new Dictionary<string, RecordItem>(), new float?[]
+            {
+    3.14f
+            }, new bool?[]
+            {
+    true
+            });
+            var result = await client.InputToRoundTripPrimitiveAsync(input);
         }
 
         [Test]
@@ -844,6 +904,17 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputRecursive_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var input = new InputRecursiveModel("<message>");
+            var result = await client.InputRecursiveAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripRecursive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -918,6 +989,17 @@ namespace ModelsInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTripRecursive_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var input = new RoundTripRecursiveModel("<message>");
+            var result = await client.RoundTripRecursiveAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SelfReference()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -968,6 +1050,16 @@ namespace ModelsInCadl.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SelfReference_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var result = await client.SelfReferenceAsync();
         }
 
         [Test]
@@ -1068,6 +1160,23 @@ namespace ModelsInCadl.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTripToOutputWithNoUseBase_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+            });
+            var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
         }
     }
 }

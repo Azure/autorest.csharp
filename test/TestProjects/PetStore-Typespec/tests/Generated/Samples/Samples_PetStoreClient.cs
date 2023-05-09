@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using PetStore.Models;
 
 namespace PetStore.Samples
 {
@@ -122,6 +124,16 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Read_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var result = await client.ReadAsync(1234);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Create()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -206,6 +218,20 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Create_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var pet = new Pet("<name>", 1234)
+            {
+                Tag = "<Tag>",
+            };
+            var result = await client.CreateAsync(pet);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetPetByKind()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -264,6 +290,16 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetPetByKind_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var result = await client.GetPetByKindAsync(null);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetFirstPet()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -318,6 +354,16 @@ namespace PetStore.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("tag").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFirstPet_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var result = await client.GetFirstPetAsync(1234);
         }
     }
 }
