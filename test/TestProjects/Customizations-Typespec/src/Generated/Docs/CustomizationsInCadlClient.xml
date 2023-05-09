@@ -33,6 +33,10 @@ var input = new RootModel()
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
+{
+        AdditionalSerializableProperty = 1234,
+    },
 };
 var result = await client.RoundTripAsync(input);
 ]]></code>
@@ -70,6 +74,10 @@ var input = new RootModel()
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
+{
+        AdditionalSerializableProperty = 1234,
+    },
 };
 var result = client.RoundTrip(input);
 ]]></code>

@@ -242,6 +242,10 @@ namespace CustomizationsInCadl.Samples
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
+                {
+                    AdditionalSerializableProperty = 1234,
+                },
             };
             var result = await client.RoundTripAsync(input);
         }
