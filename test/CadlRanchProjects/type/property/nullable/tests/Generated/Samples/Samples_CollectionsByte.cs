@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
@@ -72,6 +74,15 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNonNull_Convenience_Async()
+        {
+            var client = new NullableClient().GetCollectionsByteClient("1.0.0");
+
+            var result = await client.GetNonNullAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetNull()
         {
             var client = new NullableClient().GetCollectionsByteClient("1.0.0");
@@ -120,6 +131,15 @@ namespace _Type.Property.Nullable.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
             Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNull_Convenience_Async()
+        {
+            var client = new NullableClient().GetCollectionsByteClient("1.0.0");
+
+            var result = await client.GetNullAsync();
         }
 
         [Test]

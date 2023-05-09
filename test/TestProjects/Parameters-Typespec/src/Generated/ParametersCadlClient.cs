@@ -47,6 +47,7 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<Result>> OperationAsync(int start, int? end = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -57,6 +58,7 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(int,int?,CancellationToken)']/*" />
         public virtual Response<Result> Operation(int start, int? end = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -141,6 +143,7 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<Result>> Operation2Async(int end, int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -151,6 +154,7 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(int,int?,CancellationToken)']/*" />
         public virtual Response<Result> Operation2(int end, int? start = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

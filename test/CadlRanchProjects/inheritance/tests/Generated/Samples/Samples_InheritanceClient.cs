@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Inheritance.Models;
 
 namespace _Type.Model.Inheritance.Samples
 {
@@ -88,6 +90,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostValid_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var input = new Siamese("<name>", 1234, true);
+            var result = await client.PostValidAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
         {
             var client = new InheritanceClient();
@@ -140,6 +152,15 @@ namespace _Type.Model.Inheritance.Samples
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetValidAsync();
         }
 
         [Test]
@@ -228,6 +249,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var input = new Siamese("<name>", 1234, true);
+            var result = await client.PutValidAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
             var client = new InheritanceClient();
@@ -272,6 +303,15 @@ namespace _Type.Model.Inheritance.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModel_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetModelAsync();
         }
 
         [Test]
@@ -336,6 +376,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutModel_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var input = new Shark(1234);
+            var result = await client.PutModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModel()
         {
             var client = new InheritanceClient();
@@ -380,6 +430,15 @@ namespace _Type.Model.Inheritance.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetRecursiveModel_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetRecursiveModelAsync();
         }
 
         [Test]
@@ -444,6 +503,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutRecursiveModel_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var input = new Shark(1234);
+            var result = await client.PutRecursiveModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetMissingDiscriminator()
         {
             var client = new InheritanceClient();
@@ -492,6 +561,15 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMissingDiscriminator_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetMissingDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetWrongDiscriminator()
         {
             var client = new InheritanceClient();
@@ -536,6 +614,15 @@ namespace _Type.Model.Inheritance.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWrongDiscriminator_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetWrongDiscriminatorAsync();
         }
     }
 }

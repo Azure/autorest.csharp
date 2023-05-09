@@ -6,12 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using CustomizationsInCadl.Models;
 using NUnit.Framework;
 
 namespace CustomizationsInCadl.Samples
@@ -206,6 +208,42 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTrip_Convenience_Async()
+        {
+            var client = new CustomizationsInCadlClient();
+
+            var input = new RootModel()
+            {
+                PropertyModelToRename = new RenamedModel(1234),
+                PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[]
+            {
+        "<null>"
+                }, new Dictionary<string, string>
+                {
+                    ["key"] = "<null>",
+                }, new IList<string>[]
+            {
+        new string[]
+{
+            "<null>"
+        }
+                }, new IDictionary<string, string>[]
+            {
+        new Dictionary<string, string>
+{
+            ["key"] = "<null>",
+        }
+                }),
+                PropertyEnumToRename = RenamedEnum.One,
+                PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+                PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+            };
+            var result = await client.RoundTripAsync(input);
         }
     }
 }
