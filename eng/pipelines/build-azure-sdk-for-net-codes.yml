@@ -2,6 +2,7 @@
 
 parameters:
   Name: ''
+  AutorestCSharpVersion: ''
   IsInternalFeed: false
   Matrix: {}
   DependsOn: []
@@ -26,7 +27,8 @@ jobs:
       - "/*"
       - "!SessionRecords"
       Repositories:
-      - Name: Azure/azure-sdk-for-net
+      - Name: azure-sdk/azure-sdk-for-net
+        Commitish: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
       SkipCheckoutNone: true
   - task: UseDotNet@2

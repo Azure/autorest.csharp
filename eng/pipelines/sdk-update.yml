@@ -98,6 +98,7 @@ stages:
       - template: build-azure-sdk-for-net-codes.yml
         parameters:
           Name: Build_Code
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
           Matrix: $[dependencies.Update_Generator_Versions.outputs['generate_job_matrix.matrix']]
           DependsOn: Update_Code
       - job: Create_PR
