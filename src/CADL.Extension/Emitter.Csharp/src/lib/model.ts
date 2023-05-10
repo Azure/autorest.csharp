@@ -63,7 +63,8 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType
+    getSdkSimpleType,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize } from "./utils.js";
 /**
@@ -388,6 +389,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Accessibility: isInternal(context, m) ? "internal" : undefined,
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,

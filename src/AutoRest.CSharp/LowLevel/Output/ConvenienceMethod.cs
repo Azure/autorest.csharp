@@ -17,7 +17,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic)
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic, bool IsPageable, bool IsLongRunning, string? Deprecated)
     {
         public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
         {
@@ -89,6 +89,27 @@ namespace AutoRest.CSharp.Output.Models
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+        }
+
+        public bool IsDeprecatedForExamples()
+        {
+            if (Deprecated is not null)
+                return true;
+
+            var bodyParam = Signature.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
+            if (bodyParam is not null && !bodyParam.Type.IsFrameworkType && bodyParam.Type.Implementation is ModelTypeProvider mtp)
+            {
+                if (mtp.Deprecated is not null)
+                    return true;
+
+                foreach (var property in mtp.Properties)
+                {
+                    if (!property.ValueType.IsFrameworkType && property.ValueType.Implementation.Deprecated is not null)
+                        return true;
+                }
+            }
+
+            return false;
         }
     }
 
