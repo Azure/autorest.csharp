@@ -3,9 +3,11 @@
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "devDependencies": {
-    "@azure-tools/typespec-csharp": "src/CADL.Extension/Emitter.Csharp",
-    "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
     "@microsoft.azure/autorest.testserver": "3.3.24",
     "autorest": "3.6.1"
-  }
+  },
+  "workspaces": [
+    "src/CADL.Extension/Emitter.Csharp",
+    "test/CadlRanchMockApis"
+  ]
 }
