@@ -384,7 +384,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var baseName = MgmtContext.Context.DefaultNamespace.Split('.').Last();
             if (Configuration.MgmtConfiguration.IsArmCore)
-                return baseName;
+                return "ResourceManager";
 
             return $"Arm{baseName}";
         }
