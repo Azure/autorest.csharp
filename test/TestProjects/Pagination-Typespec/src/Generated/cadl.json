@@ -186,7 +186,7 @@
   },
   {
    "$id": "24",
-   "Name": "PagedTextBlocklist",
+   "Name": "CustomPageTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
@@ -268,7 +268,7 @@
   },
   {
    "$id": "34",
-   "Name": "PagedTextBlockItem",
+   "Name": "CustomPageTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
