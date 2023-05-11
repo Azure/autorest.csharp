@@ -8,11 +8,11 @@
  "Models": [
   {
    "$id": "2",
-   "Name": "CustomPage",
+   "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
