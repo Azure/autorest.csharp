@@ -28,7 +28,8 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames
+    getProjectedNames,
+    $format
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -101,7 +102,8 @@ export function mapCadlTypeToCSharpInputTypeKind(
 }
 
 function getCSharpInputTypeKindByIntrinsicModelName(
-    name: string
+    name: string,
+    format?: string
 ): InputTypeKind {
     switch (name) {
         case "bytes":
@@ -117,7 +119,21 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "float64":
             return InputTypeKind.Float64;
         case "string":
-            return InputTypeKind.String;
+            switch (format?.toLowerCase()) {
+                case "date":
+                    return InputTypeKind.DateTime;
+                case "uri":
+                case "url":
+                    return InputTypeKind.Uri;
+                case "uuid":
+                    return InputTypeKind.Guid;
+                default:
+                    return InputTypeKind.String;
+            }
+            // if (format?.toLowerCase() === "date") return InputTypeKind.DateTime;
+            // if (format?.toLowerCase() === "uri" || format === "url") return InputTypeKind.Uri;
+            // if (format?.toLowerCase() === "uuid") return InputTypeKind.Guid
+            // return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
         case "date":
@@ -127,9 +143,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "time":
             return InputTypeKind.Time;
         case "duration":
-            return InputTypeKind.Duration;
+            return InputTypeKind.DurationISO8601;
         default:
-            return InputTypeKind.Model;
+            return InputTypeKind.Object;
     }
 }
 
@@ -253,7 +269,8 @@ export function getInputType(
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                        sdkType.kind
+                        sdkType.kind,
+                        sdkType.format
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -463,11 +480,16 @@ export function getInputType(
                     value.name;
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                const format = getFormat(program, value);
+                const inputType = getInputType(context, value.type, models, enums);
+                if (format && inputType as InputPrimitiveType) {
+                    applyFormat(inputType as InputPrimitiveType, format);
+                }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
-                    Type: getInputType(context, value.type, models, enums),
+                    Type: inputType,
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
@@ -477,6 +499,11 @@ export function getInputType(
         });
     }
 
+    // function applyFormat(type: InputPrimitiveType, format: string) {
+    //     if(type.Kind === InputTypeKind.String) {
+    //         type.Kind = getCSharpInputTypeKindByIntrinsicModelName(type.Name, format);
+    //     }
+    // }
     function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {
             return undefined;
@@ -567,6 +594,11 @@ export function getInputType(
     }
 }
 
+export function applyFormat(type: InputPrimitiveType, format: string) {
+    if(type.Kind === InputTypeKind.String) {
+        type.Kind = getCSharpInputTypeKindByIntrinsicModelName(type.Name, format);
+    }
+}
 export function getUsages(
     context: SdkContext,
     ops?: HttpOperation[]

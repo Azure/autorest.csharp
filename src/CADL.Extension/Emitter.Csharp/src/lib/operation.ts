@@ -14,6 +14,7 @@ import {
     EmitContext,
     getDeprecated,
     getDoc,
+    getFormat,
     getSummary,
     isErrorModel,
     Model,
@@ -40,6 +41,7 @@ import {
     InputEnumType,
     InputListType,
     InputModelType,
+    InputPrimitiveType,
     InputType,
     isInputLiteralType,
     isInputUnionType
@@ -59,6 +61,7 @@ import {
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
 import { logger } from "./logger.js";
 import {
+    applyFormat,
     getDefaultValue,
     getEffectiveSchemaType,
     getInputType
@@ -225,6 +228,7 @@ export function loadOperation(
     ): InputParameter {
         const { type: location, name, param } = parameter;
         const format = parameter.type === "path" ? undefined : parameter.format;
+        const typeFormat = getFormat(program, param);
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             context,
@@ -232,6 +236,9 @@ export function loadOperation(
             models,
             enums
         );
+        if (typeFormat) {
+            applyFormat(inputType as InputPrimitiveType, typeFormat);
+        }
         let defaultValue = undefined;
         const value = getDefaultValue(cadlType);
         if (value) {
