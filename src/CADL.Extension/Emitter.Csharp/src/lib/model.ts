@@ -130,10 +130,6 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                 default:
                     return InputTypeKind.String;
             }
-            // if (format?.toLowerCase() === "date") return InputTypeKind.DateTime;
-            // if (format?.toLowerCase() === "uri" || format === "url") return InputTypeKind.Uri;
-            // if (format?.toLowerCase() === "uuid") return InputTypeKind.Guid
-            // return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
         case "date":
@@ -498,12 +494,6 @@ export function getInputType(
             }
         });
     }
-
-    // function applyFormat(type: InputPrimitiveType, format: string) {
-    //     if(type.Kind === InputTypeKind.String) {
-    //         type.Kind = getCSharpInputTypeKindByIntrinsicModelName(type.Name, format);
-    //     }
-    // }
     function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {
             return undefined;
