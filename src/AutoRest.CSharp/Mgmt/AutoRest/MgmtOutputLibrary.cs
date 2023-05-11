@@ -378,7 +378,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), GetModelFactoryNamespace(), AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
 
         private static string GetModelFactoryName()
         {
@@ -387,6 +387,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return "ResourceManager";
 
             return $"Arm{baseName}";
+        }
+
+        private static string GetModelFactoryNamespace()
+        {
+            if (Configuration.MgmtConfiguration.IsArmCore)
+                return "Azure.ResourceManager.Models";
+            return MgmtContext.Context.DefaultNamespace;
         }
 
         private bool ShouldIncludeModel(TypeProvider model)
