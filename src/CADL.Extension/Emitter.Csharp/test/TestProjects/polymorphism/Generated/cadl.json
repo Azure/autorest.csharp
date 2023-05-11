@@ -13,7 +13,7 @@
    "Description": "This is base model for polymorphic multiple levels inheritance with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -43,7 +43,7 @@
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -56,7 +56,7 @@
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -69,7 +69,7 @@
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -82,7 +82,7 @@
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "9",
@@ -148,6 +148,7 @@
     {
      "$id": "16",
      "Name": "putModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and receive polymorphic model in multiple levels inheritance with 2 discriminators.",
      "Parameters": [
       {
@@ -292,11 +293,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
      "Name": "getRecursiveModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and receive polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
@@ -348,15 +351,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}",
      "Path": "/discriminated/recursivemodel",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
      "Name": "putRecursiveModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and send polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
@@ -456,11 +461,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "45",
      "Name": "getMissingDiscriminator",
+     "ResourceName": "Discriminated",
      "Description": "Get a model omitting the discriminator.",
      "Parameters": [
       {
@@ -512,15 +519,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}",
      "Path": "/discriminated/missingdiscriminator",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "50",
      "Name": "getWrongDiscriminator",
+     "ResourceName": "Discriminated",
      "Description": "Get a model containing discriminator value never defined.",
      "Parameters": [
       {
@@ -572,11 +581,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}",
      "Path": "/discriminated/wrongdiscriminator",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

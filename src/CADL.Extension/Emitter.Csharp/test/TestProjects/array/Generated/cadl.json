@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.TestServer.ArrayBasic",
+ "Name": "TypeSpec.TestServer.ArrayBasic",
  "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -10,9 +10,9 @@
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "Cadl.TestServer.ArrayBasic",
+   "Namespace": "TypeSpec.TestServer.ArrayBasic",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -71,6 +71,7 @@
     {
      "$id": "10",
      "Name": "list",
+     "ResourceName": "ArrayBasic",
      "Summary": "Manage your pets.",
      "Description": "Manage your pets. You can delete or get the Pet from pet store.",
      "Parameters": [
@@ -204,11 +205,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

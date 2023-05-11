@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.HeadClient",
+ "Name": "TypeSpec.HeadClient",
  "Description": "Illustrates clients generated from a Cadl with head parameter.",
  "ApiVersions": [
   "1.0.0"
@@ -10,15 +10,15 @@
   {
    "$id": "2",
    "Name": "Thing",
-   "Namespace": "Cadl.HeadClient",
+   "Namespace": "TypeSpec.HeadClient",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -41,6 +41,7 @@
     {
      "$id": "6",
      "Name": "opWithHead",
+     "ResourceName": "HeadClient",
      "Parameters": [
       {
        "$id": "7",
@@ -215,11 +216,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "25",
      "Name": "opWithContentTypeHead",
+     "ResourceName": "HeadClient",
      "Parameters": [
       {
        "$ref": "7"
@@ -230,13 +233,19 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "27",
-        "Name": "String",
-        "Kind": "String",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "28",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "text/plain",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "29",
         "Type": {
          "$ref": "27"
         },
@@ -252,7 +261,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "29",
+       "$id": "30",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -269,11 +278,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "30",
+       "$id": "31",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "32",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -288,9 +297,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "33",
         "Type": {
-         "$ref": "31"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
@@ -301,7 +310,7 @@
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -318,11 +327,12 @@
       "text/plain"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "35"
    },
    "Creatable": true
   }

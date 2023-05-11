@@ -313,21 +313,49 @@
         }
     },
     "definitions": {
-        "PassNameSchema": {
+        "ConstantSchema": {
             "type": "string",
-            "description": "The pass name. Currently, the only allowable value is OobeSystem.",
+            "description": "A constant based on string, the only allowable value is default.",
             "enum": [
-                "OobeSystem"
+                "default"
             ],
             "x-ms-enum": {
-                "name": "PassNames",
+                "name": "StringConstant",
+                "modelAsString": false
+            }
+        },
+        "IntConstantSchema": {
+            "type": "integer",
+            "description": "A constant based on integer",
+            "enum": [
+                0
+            ],
+            "x-ms-enum": {
+                "name": "IntConstant",
+                "modelAsString": false
+            }
+        },
+        "FloatConstantSchema": {
+            "type": "number",
+            "description": "A constant based on float",
+            "enum": [
+                3.14
+            ],
+            "x-ms-enum": {
+                "name": "FloatConstant",
                 "modelAsString": false
             }
         },
         "ModelWithOptionalConstant": {
             "properties": {
-                "passName": {
-                    "$ref": "#/definitions/PassNameSchema"
+                "optionalStringConstant": {
+                    "$ref": "#/definitions/ConstantSchema"
+                },
+                "optionalIntConstant": {
+                    "$ref": "#/definitions/IntConstantSchema"
+                },
+                "optionalFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
                 },
                 "settingName": {
                     "type": "string",
@@ -346,8 +374,14 @@
         },
         "ModelWithRequiredConstant": {
             "properties": {
-                "passName": {
-                    "$ref": "#/definitions/PassNameSchema"
+                "requiredStringConstant": {
+                    "$ref": "#/definitions/ConstantSchema"
+                },
+                "requiredIntConstant": {
+                    "$ref": "#/definitions/IntConstantSchema"
+                },
+                "requiredFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
                 },
                 "protocol": {
                     "type": "string",
@@ -364,7 +398,7 @@
             },
             "description": "Describes Protocol and thumbprint of Windows Remote Management listener",
             "required": [
-                "passName"
+                "requiredStringConstant", "requiredIntConstant", "requiredFloatConstant"
             ]
         },
         "OptionalMachineProperties": {

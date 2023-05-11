@@ -3,14 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -18,16 +15,24 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class ObjectTypeProperty
     {
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
-            : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
+            : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
+                  parameterDescription: field.Description?.ToString() ?? string.Empty,
+                  isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
+                  schemaProperty: null,
+                  isRequired: field.IsRequired,
+                  inputModelProperty: inputModelProperty,
+                  getterModifiers: field.GetterModifiers,
+                  setterModifiers: field.SetterModifiers)
         {
+            InitializationValue = field.DefaultValue;
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            :this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType, optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -37,7 +42,73 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
-            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
+            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, isReadOnly).ToString() : parameterDescription;
+            IsFlattenedProperty = isFlattenedProperty;
+            GetterModifiers = getterModifiers;
+            SetterModifiers = setterModifiers;
+        }
+
+        public ObjectTypeProperty MarkFlatten()
+        {
+            var newDeclaration = new MemberDeclarationOptions("internal", Declaration.Name, Declaration.Type);
+
+            return new ObjectTypeProperty(
+                newDeclaration,
+                _baseParameterDescription,
+                IsReadOnly,
+                SchemaProperty,
+                IsRequired,
+                valueType: ValueType,
+                optionalViaNullability: OptionalViaNullability,
+                inputModelProperty: InputModelProperty,
+                isFlattenedProperty: true);
+        }
+
+        public FormattableString? InitializationValue { get; }
+
+        private bool IsFlattenedProperty { get; }
+
+        private FlattenedObjectTypeProperty? _flattenedProperty;
+        public FlattenedObjectTypeProperty? FlattenedProperty => EnsureFlattenedProperty();
+
+        private FlattenedObjectTypeProperty? EnsureFlattenedProperty()
+        {
+            if (IsFlattenedProperty && _flattenedProperty == null)
+            {
+                var hierarchyStack = FlattenedObjectTypeProperty.GetHierarchyStack(this);
+                // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
+                var innerProperty = hierarchyStack.Pop();
+                var immediateParentProperty = hierarchyStack.Pop();
+
+                var myPropertyName = FlattenedObjectTypeProperty.GetCombinedPropertyName(innerProperty, immediateParentProperty);
+                var childPropertyName = this.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+
+                var propertyType = innerProperty.Declaration.Type;
+
+                var isOverriddenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                if (isOverriddenValueType)
+                    propertyType = propertyType.WithNullable(isOverriddenValueType);
+
+                var declaration = new MemberDeclarationOptions(innerProperty.Declaration.Accessibility, myPropertyName, propertyType);
+
+                // determines whether this property should has a setter
+                var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = FlattenedObjectTypeProperty.GetFlags(this, innerProperty);
+
+                _flattenedProperty = new FlattenedObjectTypeProperty(declaration, innerProperty._baseParameterDescription, this, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
+            }
+
+            return _flattenedProperty;
+        }
+
+        public virtual Stack<ObjectTypeProperty> BuildHierarchyStack()
+        {
+            if (FlattenedProperty != null)
+                return FlattenedProperty.BuildHierarchyStack();
+
+            var stack = new Stack<ObjectTypeProperty>();
+            stack.Push(this);
+
+            return stack;
         }
 
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
@@ -61,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
-        private string _baseParameterDescription;
+        private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
         public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
 
         /// <summary>
@@ -77,102 +148,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
-
-        public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-
-            if (this.ValueType.IsFrameworkType)
-                return false;
-
-            if (this.ValueType.Implementation is not ObjectType objType)
-                return false;
-
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
-            bool isSingleProperty = properties.Count() == 1 && !properties.First().IsDiscriminator();
-
-            if (isSingleProperty)
-                innerProperty = properties.First();
-
-            return isSingleProperty;
-        }
-
-        internal string GetCombinedPropertyName(ObjectTypeProperty immediateParentProperty)
-        {
-            var immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
-
-            if (Declaration.Type.Equals(typeof(bool)) || Declaration.Type.Equals(typeof(bool?)))
-            {
-                return Declaration.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{immediateParentPropertyName}{Declaration.Name}" : Declaration.Name;
-            }
-
-            if (Declaration.Name.Equals("Id", StringComparison.Ordinal))
-                return $"{immediateParentPropertyName}{Declaration.Name}";
-
-            if (immediateParentPropertyName.EndsWith(Declaration.Name, StringComparison.Ordinal))
-                return immediateParentPropertyName;
-
-            var parentWords = immediateParentPropertyName.SplitByCamelCase();
-            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
-            {
-                parentWords = parentWords.Take(parentWords.Count() - 1);
-            }
-
-            var parentWordArray = parentWords.ToArray();
-            var parentWordsHash = new HashSet<string>(parentWordArray);
-            var nameWords = Declaration.Name.SplitByCamelCase().ToArray();
-            var lastWord = string.Empty;
-            for (int i = 0; i < nameWords.Length; i++)
-            {
-                var word = nameWords[i];
-                lastWord = word;
-                if (parentWordsHash.Contains(word))
-                {
-                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
-                    {
-                        parentWords = parentWords.Take(parentWords.Count() - 2);
-                        break;
-                    }
-                    {
-                        return Declaration.Name;
-                    }
-                }
-
-                //need to depluralize the last word and check
-                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
-                    return Declaration.Name;
-            }
-
-            immediateParentPropertyName = string.Join("", parentWords);
-
-            return $"{immediateParentPropertyName}{Declaration.Name}";
-        }
-
-        internal static string GetPropertyName(MemberDeclarationOptions property)
-        {
-            const string properties = "Properties";
-            if (property.Name.Equals(properties, StringComparison.Ordinal))
-            {
-                string typeName = property.Type.Name;
-                int index = typeName.IndexOf(properties);
-                if (index > -1 && index + properties.Length == typeName.Length)
-                    return typeName.Substring(0, index);
-
-                return typeName;
-            }
-            return property.Name;
-        }
+        public FieldModifiers? GetterModifiers { get; }
+        public FieldModifiers? SetterModifiers { get; }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
             var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties().FirstOrDefault(p => p.SerializedName == "type").Schema;
+            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
             if (identityTypeSchema != null)
             {
                 var supportedTypesToShow = new List<string>();
@@ -191,24 +174,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return extraDescription;
-        }
-
-        public Stack<ObjectTypeProperty> GetHeirarchyStack()
-        {
-            var heirarchyStack = new Stack<ObjectTypeProperty>();
-            heirarchyStack.Push(this);
-            BuildHeirarchy(this, heirarchyStack);
-            return heirarchyStack;
-        }
-
-        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            //if we get back the same property exit early since this means we have a single property type which references itself
-            if (property.IsSinglePropertyObject(out var childProp) && !property.Equals(childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
-            }
         }
 
         private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)

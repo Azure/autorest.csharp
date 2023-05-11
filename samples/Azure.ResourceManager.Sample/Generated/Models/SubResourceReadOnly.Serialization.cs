@@ -20,10 +20,14 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SubResourceReadOnly DeserializeSubResourceReadOnly(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;

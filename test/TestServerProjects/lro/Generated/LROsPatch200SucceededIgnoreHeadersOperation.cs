@@ -29,7 +29,7 @@ namespace lro
         internal LROsPatch200SucceededIgnoreHeadersOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPatch200SucceededIgnoreHeadersOperation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LROsPatch200SucceededIgnoreHeadersOperation");
         }
 
         /// <inheritdoc />

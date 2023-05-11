@@ -24,7 +24,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20221212.1
+      ref: refs/tags/azure-sdk-build-tools_20230307.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -32,8 +32,8 @@ stages:
       - job: MockTest
         timeoutInMinutes: 240
         pool:
-          name: azsdk-pool-mms-win-2019-general
-          vmImage: MMS2019
+          name: azsdk-pool-mms-win-2022-general
+          vmImage: windows-2022
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
@@ -44,10 +44,9 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 16.x"
+            displayName: "Install Node 18.x"
             inputs:
-              # https://github.com/nodejs/node/issues/40468
-              versionSpec: '16.6.2'
+              versionSpec: '18.x'
           - script: |
               npm ci
             displayName: "Install packages"

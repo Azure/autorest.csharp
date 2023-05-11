@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -46,7 +47,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOperation(
         string Name,
+        string? ResourceName,
         string? Summary,
+        string? Deprecated,
         string Description,
         string? Accessibility,
         IReadOnlyList<InputParameter> Parameters,
@@ -60,11 +63,14 @@ namespace AutoRest.CSharp.Common.Input
         bool BufferResponse,
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
+        bool GenerateProtocolMethod,
         bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
             Name: string.Empty,
+            ResourceName: null,
             Summary: null,
+            Deprecated: null,
             Description: string.Empty,
             Accessibility: null,
             Parameters: Array.Empty<InputParameter>(),
@@ -78,8 +84,23 @@ namespace AutoRest.CSharp.Common.Input
             BufferResponse: false,
             LongRunning: null,
             Paging: null,
+            GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
+
+        private string? _cleanName;
+        public string CleanName
+        {
+            get
+            {
+                if (_cleanName == null)
+                {
+                    _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+                }
+
+                return _cleanName;
+            }
+        }
     }
 
     internal record InputParameter(
@@ -170,6 +191,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Guid { get; }               = new(InputTypeKind.Guid);
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
+        public static InputPrimitiveType IPAddress { get; }          = new(InputTypeKind.IPAddress);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
         public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
@@ -182,21 +204,36 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
 
+    internal record InputLiteralType(string Name, InputType LiteralValueType, object Value, bool IsNullable = false) : InputType(Name, IsNullable);
+
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
     {
     }
 
-    internal record InputConstant(object Value, InputType Type);
+    internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable = false) : InputType(Name, IsNullable);
+
+    internal record InputConstant(object? Value, InputType Type);
 
     internal record InputEnumTypeValue(string Name, object Value, string? Description)
     {
         public virtual string GetJsonValueString() => GetValueString();
         public string GetValueString() => (Value.ToString() ?? string.Empty);
     }
+
+    internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(InputIntrinsicTypeName, false)
+    {
+        public const string InputIntrinsicTypeName = "Intrinsic";
+
+        public static InputIntrinsicType ErrorType { get; } = new(InputIntrinsicTypeKind.ErrorType);
+        public static InputIntrinsicType Void { get; } = new(InputIntrinsicTypeKind.Void);
+        public static InputIntrinsicType Never { get; } = new(InputIntrinsicTypeKind.Never);
+        public static InputIntrinsicType Unknown { get; } = new(InputIntrinsicTypeKind.Unknown);
+        public static InputIntrinsicType Null { get; } = new(InputIntrinsicTypeKind.Null);
+    };
 
     internal record InputEnumTypeStringValue(string Name, string StringValue, string? Description) : InputEnumTypeValue(Name, StringValue, Description);
     internal record InputEnumTypeIntegerValue(string Name, Int32 IntegerValue, string? Description) : InputEnumTypeValue(Name, IntegerValue, Description);
@@ -208,7 +245,8 @@ namespace AutoRest.CSharp.Common.Input
         Client = 1,
         Constant = 2,
         Flattened = 3,
-        Grouped = 4,
+        Spread = 4,
+        Grouped = 5,
     }
 
     internal enum BodyMediaType
@@ -244,6 +282,7 @@ namespace AutoRest.CSharp.Common.Input
         Guid,
         Int32,
         Int64,
+        IPAddress,
         Object,
         RequestMethod,
         ResourceIdentifier,
@@ -260,5 +299,14 @@ namespace AutoRest.CSharp.Common.Input
         Input = 1,
         Output = 2,
         RoundTrip = Input | Output
+    }
+
+    internal enum InputIntrinsicTypeKind
+    {
+        ErrorType,
+        Void,
+        Never,
+        Unknown,
+        Null,
     }
 }

@@ -17,7 +17,7 @@ namespace xml_service.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
             writer.WriteEndObject();

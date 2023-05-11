@@ -17,7 +17,7 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Ptrdname))
             {
-                writer.WritePropertyName("ptrdname");
+                writer.WritePropertyName("ptrdname"u8);
                 writer.WriteStringValue(Ptrdname);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static PtrRecord DeserializePtrRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ptrdname = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ptrdname"))
+                if (property.NameEquals("ptrdname"u8))
                 {
                     ptrdname = property.Value.GetString();
                     continue;

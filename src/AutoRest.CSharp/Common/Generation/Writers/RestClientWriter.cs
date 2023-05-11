@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -24,12 +25,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
-            var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
-
             using (writer.Namespace(restClient.Type.Namespace))
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
+                    var responseClassifierTypes = new List<ResponseClassifierType>();
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
                     foreach (var method in restClient.Methods)
@@ -40,34 +40,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
                         if (protocolMethod != null)
                         {
-                            WriteProtocolMethods(writer, restClient, protocolMethod, responseClassifierTypes);
+                            LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
+                            responseClassifierTypes.Add(protocolMethod.RequestMethod.ResponseClassifierType);
                         }
                     }
 
                     LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
-            }
-        }
-
-        private static void WriteProtocolMethods(CodeWriter writer, DataPlaneRestClient restClient, LowLevelClientMethod protocolMethod, List<LowLevelClientWriter.ResponseClassifierType> responseClassifierTypes)
-        {
-            LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
-
-            var longRunning = protocolMethod.LongRunning;
-            if (longRunning != null)
-            {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
-            }
-            else if (protocolMethod.PagingInfo != null)
-            {
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
-            }
-            else
-            {
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
             }
         }
 

@@ -11,13 +11,14 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
-        public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask)
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel)
         {
             ValidateConfiguration();
 
@@ -25,15 +26,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var codeModel = await codeModelTask;
-
             if (Configuration.Generation1ConvenienceClient)
             {
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
             }
             else if (Configuration.AzureArm)
             {
-                if (Configuration.MgmtConfiguration.TestGen is not null)
+                if (Configuration.MgmtTestConfiguration is not null)
                 {
                     // we currently do not need this sourceInputModel when generating the test code because it only has information about the "non-generated" test code.
                     await MgmtTestTarget.ExecuteAsync(project, codeModel);
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
             await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
             return project;
         }
@@ -72,14 +71,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             Console.SetOut(Console.Error); //if you send anything to stdout there is an autorest error so this protects us against that happening
-            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 
-            Configuration.Initialize(autoRest);
-
             string codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-            Task<CodeModel> codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(codeModelYaml));
+            CodeModel codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+
+            Configuration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
             if (!Path.IsPathRooted(Configuration.OutputFolder))
             {
@@ -93,7 +92,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             try
             {
-                var project = await ExecuteAsync(codeModelTask);
+                var project = await ExecuteAsync(codeModel);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {
                     await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");

@@ -17,51 +17,51 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Filter))
             {
-                writer.WritePropertyName("filter");
+                writer.WritePropertyName("filter"u8);
                 writer.WriteStringValue(Filter);
             }
             if (Optional.IsDefined(UseFuzzyMatching))
             {
-                writer.WritePropertyName("fuzzy");
+                writer.WritePropertyName("fuzzy"u8);
                 writer.WriteBooleanValue(UseFuzzyMatching.Value);
             }
             if (Optional.IsDefined(HighlightPostTag))
             {
-                writer.WritePropertyName("highlightPostTag");
+                writer.WritePropertyName("highlightPostTag"u8);
                 writer.WriteStringValue(HighlightPostTag);
             }
             if (Optional.IsDefined(HighlightPreTag))
             {
-                writer.WritePropertyName("highlightPreTag");
+                writer.WritePropertyName("highlightPreTag"u8);
                 writer.WriteStringValue(HighlightPreTag);
             }
             if (Optional.IsDefined(MinimumCoverage))
             {
-                writer.WritePropertyName("minimumCoverage");
+                writer.WritePropertyName("minimumCoverage"u8);
                 writer.WriteNumberValue(MinimumCoverage.Value);
             }
             if (Optional.IsDefined(OrderBy))
             {
-                writer.WritePropertyName("orderby");
+                writer.WritePropertyName("orderby"u8);
                 writer.WriteStringValue(OrderBy);
             }
-            writer.WritePropertyName("search");
+            writer.WritePropertyName("search"u8);
             writer.WriteStringValue(SearchText);
             if (Optional.IsDefined(SearchFields))
             {
-                writer.WritePropertyName("searchFields");
+                writer.WritePropertyName("searchFields"u8);
                 writer.WriteStringValue(SearchFields);
             }
             if (Optional.IsDefined(Select))
             {
-                writer.WritePropertyName("select");
+                writer.WritePropertyName("select"u8);
                 writer.WriteStringValue(Select);
             }
-            writer.WritePropertyName("suggesterName");
+            writer.WritePropertyName("suggesterName"u8);
             writer.WriteStringValue(SuggesterName);
             if (Optional.IsDefined(Top))
             {
-                writer.WritePropertyName("top");
+                writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);
             }
             writer.WriteEndObject();

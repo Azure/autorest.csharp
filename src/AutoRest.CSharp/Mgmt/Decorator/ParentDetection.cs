@@ -9,6 +9,9 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure.ResourceManager;
+using Azure.ResourceManager.ManagementGroups;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -26,18 +29,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="resource"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
+        public static IEnumerable<MgmtTypeProvider> GetParents(this Resource resource)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
 
-            parentList = resource.GetParent();
+            parentList = resource.DoGetParents();
             _resourceParentCache.TryAdd(resource, parentList);
             return parentList;
         }
 
-        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
+        private static IEnumerable<MgmtTypeProvider> DoGetParents(this Resource resource)
         {
+            var scope = resource.RequestPath.GetScopePath();
             var resourceOperationSet = resource.OperationSet;
             var parentRequestPath = resourceOperationSet.ParentRequestPath(resource.ResourceType);
 
@@ -46,20 +50,28 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // my parent is myself? Only tenant has this attribute, return empty
                 return Enumerable.Empty<MgmtTypeProvider>();
             }
+            // if the scope of this request path is parameterized, and the direct parent path we get from the resource list is parent of the scope, we return the scope as its parent since the scope here is a child
+            // if the request path is a "by id" path, its scope is the same as itself, therefore this condition here is nullified and should be skipped
+            if (!resource.RequestPath.IsById && scope.IsParameterizedScope() && (parentRequestPath.IsAncestorOf(scope) || parentRequestPath == scope))
+            {
+                // we already verified that the scope is parameterized, therefore we assert the type can never be null
+                var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
+                return FindScopeParents(types).Distinct();
+            }
+
             if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
-                return MgmtContext.Library.ManagementGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
-                return MgmtContext.Library.ResourceGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
-                return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
-            var scope = parentRequestPath.GetScopePath();
-            // if the scope of this request path is parameterized, we return the scope as its parent
+            scope = parentRequestPath.GetScopePath(); // we do this because some request path its scope is the same as itself
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
@@ -67,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
-            return MgmtContext.Library.TenantExtensions.AsIEnumerable();
+            return MgmtContext.Library.GetExtension(typeof(TenantResource)).AsIEnumerable();
         }
 
         // TODO -- enhence this to support the new arm-id format
@@ -75,22 +87,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                yield return MgmtContext.Library.ArmResourceExtensions;
+                yield return MgmtContext.Library.GetExtension(typeof(ArmResource));
                 yield break;
             }
 
             foreach (var type in parameterizedScopeTypes)
             {
                 if (type == ResourceTypeSegment.ManagementGroup)
-                    yield return MgmtContext.Library.ManagementGroupExtensions;
+                    yield return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource));
                 else if (type == ResourceTypeSegment.ResourceGroup)
-                    yield return MgmtContext.Library.ResourceGroupExtensions;
+                    yield return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource));
                 else if (type == ResourceTypeSegment.Subscription)
-                    yield return MgmtContext.Library.SubscriptionExtensions;
+                    yield return MgmtContext.Library.GetExtension(typeof(SubscriptionResource));
                 else if (type == ResourceTypeSegment.Tenant)
-                    yield return MgmtContext.Library.TenantExtensions;
+                    yield return MgmtContext.Library.GetExtension(typeof(TenantResource));
                 else
-                    yield return MgmtContext.Library.ArmResourceExtensions; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
+                    yield return MgmtContext.Library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtension
             }
         }
 
@@ -116,7 +128,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// 3. If neither of above meets, return the parent request path of an existing resource
         /// </summary>
         /// <param name="operation"></param>
-        /// <param name="context"></param>
         /// <returns></returns>
         public static RequestPath ParentRequestPath(this Operation operation)
         {
@@ -171,6 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var scope = requestPath.GetScopePath();
             var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
                 .Concat(new List<RequestPath> { RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup }) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Concat(Configuration.MgmtConfiguration.ParameterizedScopes)
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())
             {

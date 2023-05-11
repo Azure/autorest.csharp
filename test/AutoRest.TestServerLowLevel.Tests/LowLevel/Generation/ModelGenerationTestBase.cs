@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         internal static TypeFactory CadlTypeFactory => new TypeFactory(null);
 
-        internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+        internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
             null, new List<InputModelType>(), null, null);
@@ -33,7 +34,34 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [OneTimeSetUp]
         public void init()
         {
-            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize, ".", new string[] { }, new List<string>(), null);
+            Configuration.Initialize(
+                outputFolder: "Generated",
+                ns: "",
+                libraryName: "",
+                sharedSourceFolders: Array.Empty<string>(),
+                saveInputs: false,
+                azureArm: false,
+                publicClients: true,
+                modelNamespace: false,
+                headAsBoolean: false,
+                skipCSProjPackageReference: false,
+                generation1ConvenienceClient: false,
+                singleTopLevelClient: false,
+                skipSerializationFormatXml: false,
+                disablePaginationTopRenaming: false,
+                generateModelFactory: true,
+                publicDiscriminatorProperty: false,
+                modelFactoryForHlc: Array.Empty<string>(),
+                unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                useOverloadsBetweenProtocolAndConvenience: true,
+                projectFolder: ".",
+                existingProjectFolder: null,
+                protocolMethodList: Array.Empty<string>(),
+                suppressAbstractBaseClasses: Array.Empty<string>(),
+                modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
+                mgmtConfiguration: null,
+                mgmtTestConfiguration: null);
         }
 
 

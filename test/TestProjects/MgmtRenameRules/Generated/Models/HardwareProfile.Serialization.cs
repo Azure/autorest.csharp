@@ -17,7 +17,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(VmSize))
             {
-                writer.WritePropertyName("vmSize");
+                writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize.Value.ToString());
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtRenameRules.Models
 
         internal static HardwareProfile DeserializeHardwareProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<VirtualMachineSizeType> vmSize = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("vmSize"))
+                if (property.NameEquals("vmSize"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     vmSize = new VirtualMachineSizeType(property.Value.GetString());

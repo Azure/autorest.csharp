@@ -1,9 +1,10 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.EnumPropertiesBasic",
-  "LibraryName": null,
+  "Namespace": "TypeSpec.EnumPropertiesBasic",
+  "LibraryName": "TypeSpec.EnumPropertiesBasic",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
-  ]
+  ],
+  "use-overloads-between-protocol-and-convenience": true
 }

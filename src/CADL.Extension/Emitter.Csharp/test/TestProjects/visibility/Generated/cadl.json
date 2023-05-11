@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.visibility",
+ "Name": "TypeSpec.visibility",
  "Description": "Illustrates read, write and read/write properties.",
  "ApiVersions": [
   "1.0.0"
@@ -10,9 +10,9 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "Cadl.visibility",
+   "Namespace": "TypeSpec.visibility",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -71,6 +71,7 @@
     {
      "$id": "10",
      "Name": "sendVisibilityPropertyModel",
+     "ResourceName": "visibility",
      "Parameters": [
       {
        "$id": "11",
@@ -225,7 +226,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

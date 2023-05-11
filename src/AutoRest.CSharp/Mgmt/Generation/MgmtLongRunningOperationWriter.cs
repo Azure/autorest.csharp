@@ -73,11 +73,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
-                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);");
-                        _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                        _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, response, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                     }
                     _writer.Line();
 

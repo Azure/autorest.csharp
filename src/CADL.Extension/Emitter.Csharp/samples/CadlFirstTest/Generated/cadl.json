@@ -30,13 +30,13 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
    "Namespace": "Demo.HelloWorld",
-   "Description": "Extensible enum",
+   "Description": "Extensible enum Values",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -57,7 +57,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -66,13 +66,13 @@
    "Name": "Thing",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "11",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "12",
       "Name": "string",
@@ -90,13 +90,13 @@
    "Name": "RoundTripModel",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "14",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "15",
       "Name": "string",
@@ -111,7 +111,7 @@
      "$id": "16",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "17",
       "Name": "int32",
@@ -126,7 +126,7 @@
      "$id": "18",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection of enums",
      "Type": {
       "$id": "19",
       "Name": "Array",
@@ -143,7 +143,7 @@
      "$id": "20",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
-     "Description": "",
+     "Description": "Required dictionary of enums",
      "Type": {
       "$id": "21",
       "Name": "Dictionary",
@@ -174,6 +174,7 @@
     {
      "$id": "24",
      "Name": "topAction",
+     "ResourceName": "HelloWorld",
      "Description": "top level method",
      "Parameters": [
       {
@@ -270,15 +271,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/top/{action}",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "35",
      "Name": "topAction2",
+     "ResourceName": "HelloWorld",
      "Description": "top level method2",
      "Parameters": [
       {
@@ -327,15 +330,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/top2",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "40",
      "Name": "anonymousBody",
+     "ResourceName": "HelloWorld",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
@@ -435,11 +440,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "49",
      "Name": "sayHi",
+     "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
@@ -488,15 +495,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/hello",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "54",
      "Name": "helloAgain",
+     "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
@@ -596,11 +605,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "63",
      "Name": "helloDemo2",
+     "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
@@ -649,11 +660,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/demoHi",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

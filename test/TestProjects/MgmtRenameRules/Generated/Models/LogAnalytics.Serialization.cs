@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<LogAnalyticsOutput> properties = default;
             Optional<ContentType> contentType = default;
             Optional<BinaryData> content = default;
@@ -22,51 +26,46 @@ namespace MgmtRenameRules.Models
             Optional<Uri> basePath = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                if (property.NameEquals("contentType"))
+                if (property.NameEquals("contentType"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     contentType = new ContentType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("content"))
+                if (property.NameEquals("content"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     content = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("method"))
+                if (property.NameEquals("method"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     method = new RequestMethod(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("basePath"))
+                if (property.NameEquals("basePath"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        basePath = null;
                         continue;
                     }
                     basePath = new Uri(property.Value.GetString());

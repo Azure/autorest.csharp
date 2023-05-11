@@ -71,7 +71,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -96,7 +96,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -134,7 +134,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -159,7 +159,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -197,7 +197,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -222,7 +222,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -266,7 +266,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -288,7 +288,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -326,7 +326,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -351,7 +351,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -395,7 +395,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -417,7 +417,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -455,7 +455,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -480,7 +480,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -518,7 +518,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -543,7 +543,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -581,7 +581,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -606,7 +606,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -650,7 +650,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -672,7 +672,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -710,7 +710,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -735,7 +735,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -773,7 +773,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -798,7 +798,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -836,7 +836,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -861,7 +861,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -905,7 +905,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -927,7 +927,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -965,7 +965,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -990,7 +990,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1028,7 +1028,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1053,7 +1053,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1091,7 +1091,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1116,7 +1116,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1160,7 +1160,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1182,7 +1182,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1220,7 +1220,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1245,7 +1245,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1283,7 +1283,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1308,7 +1308,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1346,7 +1346,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1371,7 +1371,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1415,7 +1415,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1437,7 +1437,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1475,7 +1475,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1500,7 +1500,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1538,7 +1538,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1563,7 +1563,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1601,7 +1601,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1626,7 +1626,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1670,7 +1670,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1692,7 +1692,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1730,7 +1730,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1755,7 +1755,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1799,7 +1799,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1821,7 +1821,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1859,7 +1859,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1884,7 +1884,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1928,7 +1928,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1950,7 +1950,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1982,20 +1982,13 @@ namespace body_array
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(item.GetString());
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2014,20 +2007,13 @@ namespace body_array
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(item.GetString());
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2065,7 +2051,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2090,7 +2076,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2128,7 +2114,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2153,7 +2139,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2197,7 +2183,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2219,7 +2205,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2257,7 +2243,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2282,7 +2268,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2320,7 +2306,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2345,7 +2331,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2389,7 +2375,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2411,7 +2397,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2449,7 +2435,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2474,7 +2460,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2512,7 +2498,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2537,7 +2523,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2575,7 +2561,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2600,7 +2586,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2644,7 +2630,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2666,7 +2652,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2704,7 +2690,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2729,7 +2715,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2767,7 +2753,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2792,7 +2778,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2830,7 +2816,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2855,7 +2841,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2899,7 +2885,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2921,7 +2907,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2959,7 +2945,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -2984,7 +2970,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3028,7 +3014,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3050,7 +3036,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3088,7 +3074,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3113,7 +3099,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3157,7 +3143,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3179,7 +3165,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3217,7 +3203,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3242,7 +3228,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3280,7 +3266,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3305,7 +3291,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3337,20 +3323,13 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3369,20 +3348,13 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3420,7 +3392,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3445,7 +3417,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3477,20 +3449,13 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3509,20 +3474,13 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3560,7 +3518,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3585,7 +3543,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3623,7 +3581,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3648,7 +3606,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3692,7 +3650,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3714,7 +3672,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3746,18 +3704,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3776,18 +3741,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3819,18 +3791,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3849,18 +3828,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3910,7 +3896,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3947,7 +3933,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -3979,18 +3965,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4009,18 +4002,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4052,18 +4052,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4082,18 +4089,25 @@ namespace body_array
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            List<string> array0 = new List<string>();
-                            foreach (var item0 in item.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                array0.Add(item0.GetString());
+                                array.Add(null);
                             }
-                            array.Add(array0);
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4112,6 +4126,11 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
+                if (item == null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                    continue;
+                }
                 content.JsonWriter.WriteStartArray();
                 foreach (var item0 in item)
                 {
@@ -4142,7 +4161,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4164,7 +4183,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4214,7 +4233,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4251,7 +4270,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4283,18 +4302,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4313,18 +4339,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4374,7 +4407,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4411,7 +4444,7 @@ namespace body_array
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4443,18 +4476,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4473,18 +4513,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4516,18 +4563,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4546,18 +4600,25 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4576,6 +4637,11 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
+                if (item == null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                    continue;
+                }
                 content.JsonWriter.WriteStartObject();
                 foreach (var item0 in item)
                 {
@@ -4607,7 +4673,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -4629,7 +4695,7 @@ namespace body_array
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

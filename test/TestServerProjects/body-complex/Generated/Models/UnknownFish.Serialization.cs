@@ -16,18 +16,18 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("fishtype");
+            writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
             if (Optional.IsDefined(Species))
             {
-                writer.WritePropertyName("species");
+                writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
-            writer.WritePropertyName("length");
+            writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
             if (Optional.IsCollectionDefined(Siblings))
             {
-                writer.WritePropertyName("siblings");
+                writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
@@ -40,32 +40,35 @@ namespace body_complex.Models
 
         internal static UnknownFish DeserializeUnknownFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string fishtype = "Unknown";
             Optional<string> species = default;
             float length = default;
             Optional<IList<Fish>> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("fishtype"))
+                if (property.NameEquals("fishtype"u8))
                 {
                     fishtype = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("species"))
+                if (property.NameEquals("species"u8))
                 {
                     species = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("length"))
+                if (property.NameEquals("length"u8))
                 {
                     length = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("siblings"))
+                if (property.NameEquals("siblings"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Fish> array = new List<Fish>();

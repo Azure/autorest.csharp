@@ -7,12 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -37,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
-            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath));
+            LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
             var cadlInputFile = Path.Combine(outputPath, "cadl.json");
@@ -51,18 +49,17 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 if (options.IsNewProject)
                 {
                     // TODO - add support for DataFactoryExpression lookup
-                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, outputPath, false);
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
             else if (File.Exists(codeModelInputPath))
             {
                 var yaml = await File.ReadAllTextAsync(codeModelInputPath);
-                var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(yaml));
-                workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+                var codeModel = CodeModelSerialization.DeserializeCodeModel(yaml);
+                workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    var codeModel = await codeModelTask;
-                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
                 }
             }
             else
@@ -70,6 +67,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
             }
 
+            if (options.ClearOutputFolder)
+            {
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "cadl.json" };
+                DeleteDirectory(outputPath, keepFiles);
+            }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
             {
@@ -79,8 +81,31 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 }
                 var filename = Path.Combine(outputPath, file.Name);
                 Console.WriteLine($"Writing {filename}");
-                Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
                 await File.WriteAllTextAsync(filename, file.Text);
+            }
+        }
+
+        private static void DeleteDirectory(string path, string[] keepFiles)
+        {
+            var directoryInfo = new DirectoryInfo(path);
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                if (keepFiles.Contains(file.Name))
+                {
+                    continue;
+                }
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+            {
+                DeleteDirectory(directory.FullName, keepFiles);
+            }
+
+            if (!directoryInfo.EnumerateFileSystemInfos().Any())
+            {
+                directoryInfo.Delete();
             }
         }
 
@@ -146,12 +171,25 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
+                    WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), Configuration.ModelsToTreatEmptyStringAsNull.ToList<string>());
+                    if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
+                    {
+                        Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList<string>());
+                    }
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
+
+                    if (Configuration.MgmtTestConfiguration != null)
+                    {
+                        Configuration.MgmtTestConfiguration.SaveConfiguration(writer);
+                    }
 
                     writer.WriteEndObject();
                 }
@@ -191,7 +229,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return null;
         }
 
-        internal static void LoadConfiguration(string? projectPath, string outputPath, string json)
+        internal static void LoadConfiguration(string? projectPath, string outputPath, string? existingProjectFolder, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -203,16 +241,20 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
 
             root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
-            var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
-                ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
+            var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
             root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
+            root.TryGetProperty(nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), out var modelsToTreatEmptyStringAsNullElement);
+            var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), out var intrinsicTypesToTreatEmptyStringAsNullElement);
+            var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
+            var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
-                root.GetProperty(nameof(Configuration.Namespace)).GetString(),
-                root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
+                root.GetProperty(nameof(Configuration.Namespace)).GetString()!,
+                root.GetProperty(nameof(Configuration.LibraryName)).GetString()!,
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
                 ReadOption(root, Configuration.Options.AzureArm),
@@ -224,11 +266,19 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
+                ReadOption(root, Configuration.Options.GenerateModelFactory),
+                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
+                oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
+                ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
+                existingProjectFolder,
                 protocolMethods,
                 suppressAbstractBaseClasses,
-                MgmtConfiguration.LoadConfiguration(root)
+                modelsToTreatEmptyStringAsNull,
+                intrinsicTypesToTreatEmptyStringAsNull,
+                MgmtConfiguration.LoadConfiguration(root),
+                MgmtTestConfiguration.LoadConfiguration(root)
             );
         }
     }

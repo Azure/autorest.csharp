@@ -17,31 +17,34 @@ namespace multiple_inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(IsAShowHorse))
             {
-                writer.WritePropertyName("isAShowHorse");
+                writer.WritePropertyName("isAShowHorse"u8);
                 writer.WriteBooleanValue(IsAShowHorse.Value);
             }
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
         internal static Horse DeserializeHorse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> isAShowHorse = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("isAShowHorse"))
+                if (property.NameEquals("isAShowHorse"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     isAShowHorse = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

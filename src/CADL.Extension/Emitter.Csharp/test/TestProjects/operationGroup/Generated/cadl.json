@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "zero",
+     "ResourceName": "OperationGroupService",
      "Parameters": [
       {
        "$id": "4",
@@ -113,15 +114,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/top",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "15",
      "Name": "one",
+     "ResourceName": "Alpha",
      "Parameters": [
       {
        "$ref": "4"
@@ -175,11 +178,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Alpha",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -195,6 +199,7 @@
     {
      "$id": "23",
      "Name": "two",
+     "ResourceName": "Beta",
      "Parameters": [
       {
        "$ref": "4"
@@ -248,15 +253,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Beta",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "29",
      "Name": "three",
+     "ResourceName": "SubBeta",
      "Parameters": [
       {
        "$ref": "4"
@@ -310,11 +317,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/SubBeta",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -331,6 +339,7 @@
     {
      "$id": "37",
      "Name": "four",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -384,15 +393,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
      "Name": "five",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -446,11 +457,12 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

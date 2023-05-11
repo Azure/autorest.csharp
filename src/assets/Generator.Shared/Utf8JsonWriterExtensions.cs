@@ -42,6 +42,12 @@ namespace Azure.Core
 
         public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)
         {
+            if (value == null)
+            {
+                writer.WriteNullValue();
+                return;
+            }
+
             switch (format)
             {
                 case "U":
@@ -134,6 +140,9 @@ namespace Azure.Core
                         writer.WriteObjectValue(item);
                     }
                     writer.WriteEndArray();
+                    break;
+                case TimeSpan timeSpan:
+                    writer.WriteStringValue(timeSpan, "P");
                     break;
 
                 default:

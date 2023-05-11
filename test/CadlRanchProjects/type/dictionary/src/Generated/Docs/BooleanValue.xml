@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetBooleanValueAsync(CancellationToken)">
+<example>
+This sample shows how to call GetBooleanValueAsync.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var result = await client.GetBooleanValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanValue(CancellationToken)">
+<example>
+This sample shows how to call GetBooleanValue.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var result = client.GetBooleanValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetBooleanValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+Response response = await client.GetBooleanValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetBooleanValue(RequestContext)">
+<example>
+This sample shows how to call GetBooleanValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+Response response = client.GetBooleanValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(IDictionary{string,bool},CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var body = new Dictionary<string, bool>
+{
+    ["key"] = true,
+};
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(IDictionary{string,bool},CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var body = new Dictionary<string, bool>
+{
+    ["key"] = true,
+};
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var data = new {
+    key = true,
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+
+var data = new {
+    key = true,
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

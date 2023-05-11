@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -36,7 +37,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputModelProperty.Name), ref name)
-                    || reader.TryReadString(nameof(InputModelProperty.SerializedName), ref name)
+                    || reader.TryReadString(nameof(InputModelProperty.SerializedName), ref serializedName)
                     || reader.TryReadString(nameof(InputModelProperty.Description), ref description)
                     || reader.TryReadWithConverter(nameof(InputModelProperty.Type), options, ref propertyType)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsReadOnly), ref isReadOnly)
@@ -51,15 +52,38 @@ namespace AutoRest.CSharp.Common.Input
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
             description = description ?? throw new JsonException($"{nameof(InputModelProperty)} must have a description.");
+            description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetDefaultValue(propertyType));
             if (id != null)
             {
                 resolver.AddReference(id, property);
             }
 
             return property;
+        }
+
+        private static FormattableString? GetDefaultValue(InputType propertyType)
+        {
+            if (propertyType is not InputLiteralType literalType)
+            {
+                return null;
+            }
+
+            return literalType.LiteralValueType switch
+            {
+                InputPrimitiveType primitiveType => primitiveType.Kind switch
+                {
+                    InputTypeKind.Boolean => $"{literalType.Value.ToString()!.ToLower()}",
+                    InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128
+                        or InputTypeKind.Int32 or InputTypeKind.Int64 => $"{literalType.Value.ToString()}",
+                    InputTypeKind.String => $"\"{(literalType.Value).ToString()}\"",
+                    _ => throw new Exception($"Unsupported literal value type: {primitiveType}"),
+
+                },
+                _ => throw new Exception($"Unsupported literal value type: {literalType.LiteralValueType}"),
+            };
         }
     }
 }

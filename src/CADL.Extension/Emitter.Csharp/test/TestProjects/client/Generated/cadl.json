@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "one",
+     "ResourceName": "Alpha",
      "Parameters": [
       {
        "$id": "4",
@@ -113,11 +114,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Alpha",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -133,6 +135,7 @@
     {
      "$id": "17",
      "Name": "two",
+     "ResourceName": "Beta",
      "Parameters": [
       {
        "$ref": "4"
@@ -186,11 +189,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Beta",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -206,6 +210,7 @@
     {
      "$id": "25",
      "Name": "four",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -259,15 +264,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
      "Name": "five",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -321,11 +328,12 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

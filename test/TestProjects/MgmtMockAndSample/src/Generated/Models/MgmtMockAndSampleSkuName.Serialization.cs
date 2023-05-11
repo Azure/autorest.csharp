@@ -20,8 +20,8 @@ namespace MgmtMockAndSample.Models
 
         public static MgmtMockAndSampleSkuName ToMgmtMockAndSampleSkuName(this string value)
         {
-            if (string.Equals(value, "standard", StringComparison.InvariantCultureIgnoreCase)) return MgmtMockAndSampleSkuName.Standard;
-            if (string.Equals(value, "premium", StringComparison.InvariantCultureIgnoreCase)) return MgmtMockAndSampleSkuName.Premium;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "standard")) return MgmtMockAndSampleSkuName.Standard;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "premium")) return MgmtMockAndSampleSkuName.Premium;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MgmtMockAndSampleSkuName value.");
         }
     }

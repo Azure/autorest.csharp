@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [TestCaseSource(nameof(RoundTripDictionaryPropertiesCase))]
         public void RoundTripDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
-            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", "Round-trip model with dictionary properties", InputModelTypeUsage.RoundTrip,
+            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.RoundTrip,
                 DictionaryProperties, null, new List<InputModelType>(), null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [TestCaseSource(nameof(InputDictionaryPropertiesCase))]
         public void InputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
-            var model = new InputModelType("InputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", "Input model with dictionary properties", InputModelTypeUsage.Input,
+            var model = new InputModelType("InputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Input model with dictionary properties", InputModelTypeUsage.Input,
                 DictionaryProperties, null, new List<InputModelType>(), null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [TestCaseSource(nameof(OutputDictionaryPropertiesCase))]
         public void OutputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
-            var model = new InputModelType("OutputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", "Output model with dictionary properties", InputModelTypeUsage.Output,
+            var model = new InputModelType("OutputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Output model with dictionary properties", InputModelTypeUsage.Output,
                 DictionaryProperties, null, new List<InputModelType>(), null, null);
 
 

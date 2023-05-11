@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
+                operation.CleanName,
                 operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
+                operation.CleanName,
                 operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }

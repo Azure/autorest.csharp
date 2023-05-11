@@ -1,9 +1,10 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.TestServer.ArrayBasic",
-  "LibraryName": null,
+  "Namespace": "TypeSpec.TestServer.ArrayBasic",
+  "LibraryName": "TypeSpec.TestServer.ArrayBasic",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
-  ]
+  ],
+  "use-overloads-between-protocol-and-convenience": true
 }

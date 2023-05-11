@@ -15,9 +15,9 @@ function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Azure.Core.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
 $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs',
-    'OperationInternalBase.cs', 'OperationInternal.cs', 'VoidValue.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
+    'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
-    'ConstantDelayStrategy.cs', 'DelayStrategy.cs', 'ExponentialDelayStrategy.cs', 'OperationPoller.cs', 'RetryAfterDelayStrategy.cs',
+    'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
     'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/core/Azure.Core/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath

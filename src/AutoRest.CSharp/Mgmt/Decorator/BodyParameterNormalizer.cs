@@ -68,11 +68,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
         {
-            if (MethodsRequiredBodyParameter.Contains(method))
+            if (ShouldMarkRequired(method))
             {
                 bodyParameter.Required = true;
             }
         }
+
+        internal static bool ShouldMarkRequired(HttpMethod method) => MethodsRequiredBodyParameter.Contains(method);
 
         private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
     }

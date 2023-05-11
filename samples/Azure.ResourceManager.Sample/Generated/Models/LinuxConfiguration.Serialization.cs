@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(DisablePasswordAuthentication))
             {
-                writer.WritePropertyName("disablePasswordAuthentication");
+                writer.WritePropertyName("disablePasswordAuthentication"u8);
                 writer.WriteBooleanValue(DisablePasswordAuthentication.Value);
             }
             if (Optional.IsDefined(Ssh))
             {
-                writer.WritePropertyName("ssh");
+                writer.WritePropertyName("ssh"u8);
                 writer.WriteObjectValue(Ssh);
             }
             if (Optional.IsDefined(ProvisionVMAgent))
             {
-                writer.WritePropertyName("provisionVMAgent");
+                writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVMAgent.Value);
             }
             writer.WriteEndObject();
@@ -35,36 +35,37 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static LinuxConfiguration DeserializeLinuxConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> disablePasswordAuthentication = default;
             Optional<SshConfiguration> ssh = default;
             Optional<bool> provisionVMAgent = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("disablePasswordAuthentication"))
+                if (property.NameEquals("disablePasswordAuthentication"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     disablePasswordAuthentication = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("ssh"))
+                if (property.NameEquals("ssh"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     ssh = SshConfiguration.DeserializeSshConfiguration(property.Value);
                     continue;
                 }
-                if (property.NameEquals("provisionVMAgent"))
+                if (property.NameEquals("provisionVMAgent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     provisionVMAgent = property.Value.GetBoolean();

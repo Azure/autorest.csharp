@@ -11,7 +11,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the DeletedVault data model. </summary>
+    /// <summary>
+    /// A class representing the DeletedVault data model.
+    /// Deleted vault information with extended details.
+    /// </summary>
     public partial class DeletedVaultData : ResourceData
     {
         /// <summary> Initializes a new instance of DeletedVaultData. </summary>

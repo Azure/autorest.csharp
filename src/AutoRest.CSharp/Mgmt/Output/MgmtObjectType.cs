@@ -3,15 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -61,16 +61,52 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            List<ObjectTypeProperty> objTypeProperties = new List<ObjectTypeProperty>();
             var parentProperties = GetParentPropertyNames();
             foreach (var property in base.BuildProperties())
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
                     var propertyType = CreatePropertyType(property);
+                    // check if the type of this property is "single property type"
+                    if (IsSinglePropertyObject(propertyType))
+                    {
+                        propertyType = propertyType.MarkFlatten();
+                    }
                     yield return propertyType;
                 }
             }
+        }
+
+        private static bool IsSinglePropertyObject(ObjectTypeProperty property)
+        {
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            return objType switch
+            {
+                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
+                SchemaObjectType schemaObjectType => HandleMgmtObjectType(schemaObjectType),
+                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
+            };
+        }
+
+        private static bool HandleMgmtObjectType(SchemaObjectType objType)
+        {
+            if (objType.Discriminator != null)
+                return false;
+
+            if (objType.AdditionalPropertiesProperty != null)
+                return false;
+
+            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
+            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
+        }
+
+        private static bool HandleSystemObjectType(SystemObjectType objType)
+        {
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
@@ -91,8 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
                 {
                     var argType = objectTypeProperty.ValueType.Arguments[i];
-                    var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
-                    if (typeToReplace != null)
+                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
@@ -103,8 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty propertyType = objectTypeProperty;
-                var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
-                if (typeToReplace != null)
+                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
@@ -179,8 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    var baseTypeProvider = inheritedType.Implementation;
-                    if (baseTypeProvider is SchemaObjectType schemaObjectType && IsDescendantOf(schemaObjectType))
+                    if (inheritedType.TryCast<SchemaObjectType>(out var schemaObjectType) && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;

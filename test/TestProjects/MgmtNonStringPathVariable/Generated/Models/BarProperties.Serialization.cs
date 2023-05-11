@@ -18,7 +18,7 @@ namespace MgmtNonStringPathVariable.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Buzz))
             {
-                writer.WritePropertyName("buzz");
+                writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);
             }
             writer.WriteEndObject();
@@ -26,14 +26,17 @@ namespace MgmtNonStringPathVariable.Models
 
         internal static BarProperties DeserializeBarProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Guid> buzz = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("buzz"))
+                if (property.NameEquals("buzz"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     buzz = property.Value.GetGuid();

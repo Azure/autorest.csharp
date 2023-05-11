@@ -16,6 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineAssessPatchesResult DeserializeVirtualMachineAssessPatchesResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<PatchOperationStatus> status = default;
             Optional<string> assessmentActivityId = default;
             Optional<bool> rebootPending = default;
@@ -26,66 +30,60 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<ApiError> error = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = new PatchOperationStatus(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("assessmentActivityId"))
+                if (property.NameEquals("assessmentActivityId"u8))
                 {
                     assessmentActivityId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("rebootPending"))
+                if (property.NameEquals("rebootPending"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     rebootPending = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("criticalAndSecurityPatchCount"))
+                if (property.NameEquals("criticalAndSecurityPatchCount"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     criticalAndSecurityPatchCount = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("otherPatchCount"))
+                if (property.NameEquals("otherPatchCount"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     otherPatchCount = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("startDateTime"))
+                if (property.NameEquals("startDateTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     startDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("patches"))
+                if (property.NameEquals("patches"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VirtualMachineSoftwarePatchProperties> array = new List<VirtualMachineSoftwarePatchProperties>();
@@ -96,11 +94,10 @@ namespace Azure.ResourceManager.Sample.Models
                     patches = array;
                     continue;
                 }
-                if (property.NameEquals("error"))
+                if (property.NameEquals("error"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     error = ApiError.DeserializeApiError(property.Value);

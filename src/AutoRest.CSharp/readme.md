@@ -36,7 +36,7 @@ pipeline:
 
 ```yaml $(testgen)
 use-extension:
-  "@autorest/testmodeler": "2.3.2"
+  "@autorest/testmodeler": "2.4.0"
 
 pipeline:
   test-modeler:

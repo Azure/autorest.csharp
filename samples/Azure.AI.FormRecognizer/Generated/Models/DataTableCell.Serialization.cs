@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DataTableCell DeserializeDataTableCell(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int rowIndex = default;
             int columnIndex = default;
             Optional<int> rowSpan = default;
@@ -27,42 +31,40 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<bool> isFooter = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("rowIndex"))
+                if (property.NameEquals("rowIndex"u8))
                 {
                     rowIndex = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("columnIndex"))
+                if (property.NameEquals("columnIndex"u8))
                 {
                     columnIndex = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("rowSpan"))
+                if (property.NameEquals("rowSpan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     rowSpan = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("columnSpan"))
+                if (property.NameEquals("columnSpan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     columnSpan = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("text"))
+                if (property.NameEquals("text"u8))
                 {
                     text = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("boundingBox"))
+                if (property.NameEquals("boundingBox"u8))
                 {
                     List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -72,16 +74,15 @@ namespace Azure.AI.FormRecognizer.Models
                     boundingBox = array;
                     continue;
                 }
-                if (property.NameEquals("confidence"))
+                if (property.NameEquals("confidence"u8))
                 {
                     confidence = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("elements"))
+                if (property.NameEquals("elements"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -92,21 +93,19 @@ namespace Azure.AI.FormRecognizer.Models
                     elements = array;
                     continue;
                 }
-                if (property.NameEquals("isHeader"))
+                if (property.NameEquals("isHeader"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     isHeader = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("isFooter"))
+                if (property.NameEquals("isFooter"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     isFooter = property.Value.GetBoolean();

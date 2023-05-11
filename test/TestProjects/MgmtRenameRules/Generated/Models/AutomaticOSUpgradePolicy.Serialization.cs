@@ -17,12 +17,12 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(EnableAutomaticOSUpgrade))
             {
-                writer.WritePropertyName("enableAutomaticOSUpgrade");
+                writer.WritePropertyName("enableAutomaticOSUpgrade"u8);
                 writer.WriteBooleanValue(EnableAutomaticOSUpgrade.Value);
             }
             if (Optional.IsDefined(DisableAutomaticRollback))
             {
-                writer.WritePropertyName("disableAutomaticRollback");
+                writer.WritePropertyName("disableAutomaticRollback"u8);
                 writer.WriteBooleanValue(DisableAutomaticRollback.Value);
             }
             writer.WriteEndObject();
@@ -30,25 +30,27 @@ namespace MgmtRenameRules.Models
 
         internal static AutomaticOSUpgradePolicy DeserializeAutomaticOSUpgradePolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enableAutomaticOSUpgrade = default;
             Optional<bool> disableAutomaticRollback = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("enableAutomaticOSUpgrade"))
+                if (property.NameEquals("enableAutomaticOSUpgrade"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     enableAutomaticOSUpgrade = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("disableAutomaticRollback"))
+                if (property.NameEquals("disableAutomaticRollback"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     disableAutomaticRollback = property.Value.GetBoolean();

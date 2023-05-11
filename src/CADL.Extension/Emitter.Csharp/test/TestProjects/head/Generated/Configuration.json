@@ -1,9 +1,10 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.HeadClient",
-  "LibraryName": null,
+  "Namespace": "TypeSpec.HeadClient",
+  "LibraryName": "TypeSpec.HeadClient",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
-  ]
+  ],
+  "use-overloads-between-protocol-and-convenience": true
 }

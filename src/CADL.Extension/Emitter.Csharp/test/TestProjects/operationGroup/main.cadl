@@ -1,8 +1,13 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
-@serviceTitle("operationGroupService")
-@serviceVersion("2015-06-18")
+@service(
+    {
+        title: "operationGroupService",
+        version: "2015-06-18"
+    }
+)
 @server(
     "{operationGroupServiceUrl}",
     "OperationGroup Service",
@@ -12,8 +17,8 @@ import "@azure-tools/cadl-dpg";
 )
 namespace Azure.OperationGroupService;
 
-using Cadl.Http;
-using Azure.DPG;
+using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 enum Clients { ServiceClient };
 

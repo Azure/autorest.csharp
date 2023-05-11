@@ -1,0 +1,129 @@
+trigger: none
+
+variables:
+  NugetSecurityAnalysisWarningLevel: 'none'
+
+resources:
+  repositories:
+    - repository: azure-sdk-for-net
+      type: github
+      name: Azure/azure-sdk-for-net
+      endpoint: azure
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: azure
+      ref: refs/tags/azure-sdk-tools_20230428.1
+
+stages:
+  - stage: 'Build_and_Publish'
+    jobs:
+    - job: Build_and_Publish
+      timeoutInMinutes: 120
+      pool:
+        name: azsdk-pool-mms-win-2022-general
+        vmImage: windows-2022
+      steps:
+        - checkout: self
+          fetchDepth: 1
+        - task: UseDotNet@2
+          displayName: 'Use .NET Core SDK'
+          retryCountOnTaskFailure: 3
+          inputs:
+            useGlobalJson: true
+            performMultiLevelLookup: true
+        - task: NodeTool@0
+          displayName: "Install Node 18.13.0"
+          inputs:
+            versionSpec: '18.13.0'
+        - script: |
+            npm ci
+          displayName: "Install packages"
+          workingDirectory: $(Build.SourcesDirectory)
+        - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)
+          name: Package
+          displayName: "Pack Artifacts"
+          workingDirectory: $(Build.SourcesDirectory)
+        - task: NuGetCommand@2
+          displayName: 'Publish NugetPackage'
+          inputs:
+            command: 'push'
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+        - task: Npm@1
+          displayName: 'Publish @autorest/csharp'
+          inputs:
+            command: 'publish'
+            workingDir: '$(Build.SourcesDirectory)/artifacts/bin/AutoRest.CSharp/Release/net6.0'
+            publishRegistry: 'useFeed'
+            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
+        - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
+          name: PackEmitter
+          displayName: "Pack Emitter"
+          workingDirectory: $(Build.SourcesDirectory)
+        - task: Npm@1
+          displayName: 'Publish @azure-tools/typespec-csharp'
+          inputs:
+            command: 'publish'
+            workingDir: '$(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp'
+            publishRegistry: 'useFeed'
+            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
+        - task: PublishBuildArtifacts@1
+          condition: succeededOrFailed()
+          displayName: 'Publish Artifacts'
+          inputs:
+            ArtifactName: packages
+  - stage: 'Update_azure_sdk_for_net'
+    dependsOn:
+      - Build_and_Publish
+    variables:
+      AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['PackEmitter.emitterVersion']]
+    jobs:
+      - template: update-generator-versions.yml
+        parameters:
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: generate-sdk-job-matrix-files.yml
+        parameters:
+          Name: Generate_Job_Matrix
+          JobCount: 7
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          Name: Update_Code
+          Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+          DependsOn: Generate_Job_Matrix
+      - job: Create_PR
+        dependsOn: 
+          - Update_Generator_Versions
+          - Update_Code
+        steps:
+          - checkout: self
+            fetchDepth: 1
+          - checkout: azure-sdk-tools
+            fetchDepth: 1
+          - pwsh: ./eng/BuildPRUrl.ps1 -SourceBranch $(Build.SourceBranch)
+            name: PRUrl
+            displayName: "Build PR Url"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: PowerShell@2
+            displayName: Create pull request
+            inputs:
+              pwsh: true
+              filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+              arguments: >
+                -RepoOwner "Azure"
+                -RepoName "azure-sdk-for-net"
+                -BaseBranch "main"
+                -PROwner "azure-sdk"
+                -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
+                -AuthToken "$(azuresdk-github-pat)"
+                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.QueuedBy) from $(Build.SourceBranch)"
+                -PRBody "Triggered from $(PRUrl.PRUrl)"
+                -OpenAsDraft $true
+                -PRLabels "Do Not Merge"

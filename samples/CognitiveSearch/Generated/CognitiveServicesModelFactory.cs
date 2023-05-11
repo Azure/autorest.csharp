@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesModelFactory
     {
         /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>

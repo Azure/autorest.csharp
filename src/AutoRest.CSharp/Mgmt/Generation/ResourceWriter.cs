@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -23,12 +22,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
+        public static ResourceWriter GetWriter(Resource resource) => resource switch
+        {
+            PartialResource partialResource => new PartialResourceWriter(partialResource),
+            _ => new ResourceWriter(resource)
+        };
+
         private Resource This { get; }
 
-        public ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
+        protected ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
         { }
 
-        public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        protected ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);
@@ -105,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -122,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -144,7 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -198,7 +203,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
             {
                 bodyParamName = "patch";
-                if (bodyParamType.Implementation is ObjectType objectType)
+                if (bodyParamType.TryCast<ObjectType>(out var objectType))
                 {
                     Configuration.MgmtConfiguration.PatchInitializerCustomization.TryGetValue(bodyParamType.Name, out var customizations);
                     customizations ??= new Dictionary<string, string>();

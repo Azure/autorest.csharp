@@ -13,6 +13,9 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
+using Azure.ResourceManager.ManagementGroups;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Models;
 
@@ -72,7 +75,32 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         new Segment(new Reference("managementGroupId", typeof(string)), true, false)
     });
 
+    private static Dictionary<Type, RequestPath>? _extensionChoices;
+    public static Dictionary<Type, RequestPath> ExtensionChoices => _extensionChoices ??= new()
+    {
+        [typeof(TenantResource)] = RequestPath.Tenant,
+        [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
+        [typeof(SubscriptionResource)] = RequestPath.Subscription,
+        [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
+    };
+
+    public static RequestPath GetContextualPath(Type armCoreType)
+    {
+        return ExtensionChoices[armCoreType];
+    }
+
     private readonly IReadOnlyList<Segment> _segments;
+
+    public static RequestPath FromString(string rawPath)
+    {
+        var rawSegments = rawPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+        var segments = rawSegments.Select(raw => GetSegmentFromString(raw));
+
+        return new RequestPath(segments);
+    }
+
+    public static RequestPath FromSegments(IEnumerable<Segment> segments) => new RequestPath(segments);
 
     public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
     {
@@ -93,6 +121,15 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
         throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
     }
+
+    private static Segment GetSegmentFromString(string str)
+    {
+        var trimmed = TrimRawSegment(str);
+        var isScope = trimmed == "scope";
+        return new Segment(trimmed, escape: !isScope, isConstant: !isScope && !str.Contains('{'));
+    }
+
+    private static string TrimRawSegment(string segment) => segment.TrimStart('{').TrimEnd('}');
 
     public int IndexOfLastProviders { get; }
 
@@ -131,7 +168,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     /// This is used for the request path that does not come from the swagger document, or an incomplete request path
     /// </summary>
     /// <param name="segments"></param>
-    public RequestPath(IEnumerable<Segment> segments) : this(segments.ToArray(), Segment.BuildSerializedSegments(segments))
+    private RequestPath(IEnumerable<Segment> segments) : this(segments.ToArray(), Segment.BuildSerializedSegments(segments))
     {
     }
 

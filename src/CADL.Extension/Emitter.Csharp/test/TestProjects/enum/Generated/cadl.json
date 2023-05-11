@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.EnumPropertiesBasic",
+ "Name": "TypeSpec.EnumPropertiesBasic",
  "Description": "Illustrates input models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "DayOfTheWeek",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -50,37 +50,85 @@
      "Value": "Sunday"
     }
    ],
-   "IsExtensible": false,
+   "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "10",
-   "Name": "TranslationLanguage",
-   "Namespace": "Cadl.EnumPropertiesBasic",
-   "Description": "The language to translate the input text into.",
+   "Name": "FixedDayOfTheWeek",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "11",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "12",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "13",
+     "Name": "Wednesday",
+     "Value": "Wednesday",
+     "Description": "Wednesday is documented to test this case."
+    },
+    {
+     "$id": "14",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "15",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "16",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "17",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "18",
+   "Name": "TranslationLanguage",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "The language to translate the input text into.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "19",
      "Name": "English",
      "Value": "English",
      "Description": "Translate to English"
     },
     {
-     "$id": "12",
+     "$id": "20",
      "Name": "Spanish",
      "Value": "Spanish",
      "Description": "Translate to Spanish"
     },
     {
-     "$id": "13",
+     "$id": "21",
      "Name": "Mandarin",
      "Value": "Mandarin",
      "Description": "Translate to Mandarin"
     },
     {
-     "$id": "14",
+     "$id": "22",
      "Name": "Undocumented",
      "Value": "Undocumented"
     }
@@ -90,47 +138,47 @@
    "Usage": "None"
   },
   {
-   "$id": "15",
+   "$id": "23",
    "Name": "EnumWithStringValue",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Represents the simple enum with enum string value.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "16",
+     "$id": "24",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "17",
+     "$id": "25",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "18",
+     "$id": "26",
      "Name": "Three",
      "Value": "3"
     }
    ],
-   "IsExtensible": false,
+   "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [
   {
-   "$id": "19",
+   "$id": "27",
    "Name": "InputModel",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Input model with enum properties.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
-     "$id": "20",
+     "$id": "28",
      "Name": "Day",
      "SerializedName": "Day",
-     "Description": "",
+     "Description": "Required standard enum value.",
      "Type": {
       "$ref": "2"
      },
@@ -139,10 +187,10 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "21",
-     "Name": "Language",
-     "SerializedName": "Language",
-     "Description": "",
+     "$id": "29",
+     "Name": "FixedDay",
+     "SerializedName": "FixedDay",
+     "Description": "Required fixed enum value.",
      "Type": {
       "$ref": "10"
      },
@@ -151,12 +199,24 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "22",
+     "$id": "30",
+     "Name": "Language",
+     "SerializedName": "Language",
+     "Description": "",
+     "Type": {
+      "$ref": "18"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "31",
      "Name": "Title",
      "SerializedName": "Title",
      "Description": "",
      "Type": {
-      "$ref": "15"
+      "$ref": "23"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -167,21 +227,22 @@
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "32",
    "Name": "EnumPropertiesBasicClient",
    "Description": "Illustrates input models with required enum type properties.",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "33",
      "Name": "sendEnumPropertyModel",
+     "ResourceName": "EnumPropertiesBasic",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "34",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "26",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -196,9 +257,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "36",
         "Type": {
-         "$id": "28",
+         "$id": "37",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -207,11 +268,11 @@
        }
       },
       {
-       "$id": "29",
+       "$id": "38",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "19"
+        "$ref": "27"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -224,11 +285,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "30",
+       "$id": "39",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "31",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -243,19 +304,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "41",
         "Type": {
-         "$ref": "31"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "33",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "43",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -270,20 +331,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "44",
         "Type": {
-         "$ref": "34"
+         "$ref": "43"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "45",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "37",
+        "$id": "46",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -298,9 +359,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "47",
         "Type": {
-         "$id": "39",
+         "$id": "48",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -311,7 +372,7 @@
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
@@ -328,11 +389,12 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "41"
+    "$id": "50"
    },
    "Creatable": true
   }

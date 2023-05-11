@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -45,6 +46,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             Debug.Assert(type.IsGenericTypeDefinition || arguments.Length == 0, "arguments can be added only to the generic type definition.");
+
             _type = type;
 
             Namespace = type.Namespace;
@@ -178,7 +180,36 @@ namespace AutoRest.CSharp.Generation.Types
             if (!IsNullable)
                 return this;
 
-            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+            return IsFrameworkType ? new CSharpType(FrameworkType, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
+
+        public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
+        {
+            provider = null;
+            if (this.IsFrameworkType)
+                return false;
+
+            provider = this.Implementation as T;
+            return provider != null;
+        }
+
+        internal string ConvertParamNameForCode() => ConvertParamName(false);
+
+        internal string ConvertParamNameForDocs() => ConvertParamName(true);
+
+        private string ConvertParamName(bool useSquiggles)
+        {
+            var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
+            if (IsNullable && IsValueType)
+                name += "?";
+            if (Arguments is not null && Arguments.Count() > 0)
+            {
+                name += useSquiggles ? "{" : "<";
+                name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));
+                name += useSquiggles ? "}" : ">";
+            }
+            return name;
+        }
+
     }
 }

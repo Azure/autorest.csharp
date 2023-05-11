@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.TestServer.MultiInterfaceClient",
+ "Name": "TypeSpec.TestServer.MultiInterfaceClient",
  "Description": "Illustrates clients generated from a Cadl with multiple interfaces.",
  "ApiVersions": [
   "1.0.0"
@@ -10,16 +10,16 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+   "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -35,16 +35,16 @@
   {
    "$id": "5",
    "Name": "Cat",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+   "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "6",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "7",
       "Name": "string",
@@ -67,6 +67,7 @@
     {
      "$id": "9",
      "Name": "getDogsConvenient",
+     "ResourceName": "dogs",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -174,15 +175,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "22",
      "Name": "setDogs",
+     "ResourceName": "dogs",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -285,11 +288,13 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
      "Name": "getCats",
+     "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -341,15 +346,17 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
      "Name": "setCats",
+     "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -452,7 +459,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
