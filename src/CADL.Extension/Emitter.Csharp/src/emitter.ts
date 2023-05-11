@@ -6,7 +6,10 @@ import {
     Program,
     resolvePath,
     Service,
-    EmitContext
+    EmitContext,
+    createTypeSpecLibrary,
+    paramMessage,
+    logDiagnostics
 } from "@typespec/compiler";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
@@ -23,10 +26,24 @@ import {
 import { createModel } from "./lib/clientModelBuilder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
+import { DiagnosticCategory } from "typescript";
 
-export const $lib = createCadlLibrary({
+export const { reportDiagnostic, createDiagnostic, createStateSymbol } = createTypeSpecLibrary({
     name: "typespec-csharp",
-    diagnostics: {},
+    diagnostics: {
+        "No-APIVersion": {
+            severity: "error",
+            messages: {
+              default: paramMessage`No APIVersion Provider for service ${"service"}`,
+            },
+          },
+          "No-Route": {
+            severity: "error",
+            messages: {
+              default: paramMessage`No Route for service for service ${"service"}`,
+            },
+          },
+    },
     emitter: {
         options: NetEmitterOptionsSchema
     }
@@ -45,6 +62,10 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const root = createModel(context);
+        if (context.program.diagnostics.length > 0 && context.program.diagnostics.filter(digs => digs.severity === "error").length > 0) {
+            logDiagnostics(context.program.diagnostics, context.program.host.logSink);
+            process.exit(1);
+        }
         const namespace = root.Name;
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
