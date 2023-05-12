@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GenSecurityAsync(RequestContext)">
+<example>
+This sample shows how to call GenSecurityAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new SecurityClientClient(credential);
+
+Response response = await client.GenSecurityAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GenSecurity(RequestContext)">
+<example>
+This sample shows how to call GenSecurity.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new SecurityClientClient(credential);
+
+Response response = client.GenSecurity();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

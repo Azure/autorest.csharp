@@ -91,30 +91,22 @@ namespace TypeSpecFirstTest
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The String to use. </param>
+        /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(string,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> TopActionAsync(string action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await TopActionAsync(action, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The String to use. </param>
+        /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(string,CancellationToken)']/*" />
-        public virtual Response<Thing> TopAction(string action, CancellationToken cancellationToken = default)
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
+        public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = TopAction(action, context);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -130,22 +122,18 @@ namespace TypeSpecFirstTest
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopActionAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The String to use. </param>
+        /// <param name="action"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> TopActionAsync(string action, RequestContext context)
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> TopActionAsync(DateTimeOffset action, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
             scope.Start();
             try
@@ -170,22 +158,18 @@ namespace TypeSpecFirstTest
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopAction(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The String to use. </param>
+        /// <param name="action"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(string,RequestContext)']/*" />
-        public virtual Response TopAction(string action, RequestContext context)
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response TopAction(DateTimeOffset action, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
             scope.Start();
             try
@@ -1422,7 +1406,7 @@ namespace TypeSpecFirstTest
             }
         }
 
-        internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1430,7 +1414,7 @@ namespace TypeSpecFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action, true);
+            uri.AppendPath(action, "O", true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

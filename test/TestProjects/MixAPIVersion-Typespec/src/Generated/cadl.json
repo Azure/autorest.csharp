@@ -146,7 +146,7 @@
      "Type": {
       "$id": "20",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,

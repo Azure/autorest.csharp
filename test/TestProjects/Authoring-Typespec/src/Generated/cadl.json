@@ -299,7 +299,7 @@
      "Type": {
       "$id": "42",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -877,7 +877,7 @@
      "Type": {
       "$id": "112",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -959,7 +959,7 @@
      "Type": {
       "$id": "122",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1154,7 +1154,7 @@
          "Type": {
           "$id": "143",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -1179,7 +1179,7 @@
          "Type": {
           "$id": "146",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -1359,7 +1359,7 @@
          "Type": {
           "$id": "162",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -1538,7 +1538,7 @@
          "Type": {
           "$id": "179",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -1630,7 +1630,7 @@
          "Type": {
           "$id": "188",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -1766,7 +1766,7 @@
          "Type": {
           "$id": "201",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -2031,7 +2031,7 @@
          "Type": {
           "$id": "225",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -2056,7 +2056,7 @@
          "Type": {
           "$id": "228",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -2174,7 +2174,7 @@
          "Type": {
           "$id": "239",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -2398,7 +2398,7 @@
          "Type": {
           "$id": "260",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }

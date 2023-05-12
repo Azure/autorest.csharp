@@ -3,7 +3,14 @@ import { RestTestLibrary } from "@typespec/rest/testing";
 import { HttpTestLibrary } from "@typespec/http/testing";
 import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
-import { EmitContext, isGlobalNamespace, Namespace, navigateTypesInNamespace, Program, Type } from "@typespec/compiler";
+import {
+    EmitContext,
+    isGlobalNamespace,
+    Namespace,
+    navigateTypesInNamespace,
+    Program,
+    Type
+} from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 import { getInputType } from "../../../src/lib/model.js";

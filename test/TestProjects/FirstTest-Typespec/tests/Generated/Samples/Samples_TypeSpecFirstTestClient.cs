@@ -27,7 +27,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = client.TopAction("<action>", new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -46,7 +46,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = client.TopAction("<action>", new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -69,7 +69,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = await client.TopActionAsync("<action>", new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -88,7 +88,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = await client.TopActionAsync("<action>", new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -111,7 +111,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var result = await client.TopActionAsync("<action>");
+            var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
         }
 
         [Test]

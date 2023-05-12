@@ -99,9 +99,9 @@ export function createModelForService(
     if (apiVersions.size === 0) {
         reportDiagnostic(program, {
             code: "No-APIVersion",
-            format: {service: service.type.name},
+            format: { service: service.type.name },
             target: NoTarget
-          });
+        });
     }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
@@ -167,9 +167,9 @@ export function createModelForService(
     if (routes.length === 0) {
         reportDiagnostic(program, {
             code: "No-Route",
-            format: {service: services[0].namespace.name},
+            format: { service: services[0].namespace.name },
             target: NoTarget
-          });
+        });
     }
     logger.info("routes:" + routes.length);
 

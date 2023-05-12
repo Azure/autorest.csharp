@@ -883,7 +883,7 @@
        "Type": {
         "$id": "121",
         "Name": "string",
-        "Kind": "String",
+        "Kind": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",

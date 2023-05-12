@@ -167,7 +167,7 @@
      "Type": {
       "$id": "22",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -209,7 +209,7 @@
      "Type": {
       "$id": "27",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,

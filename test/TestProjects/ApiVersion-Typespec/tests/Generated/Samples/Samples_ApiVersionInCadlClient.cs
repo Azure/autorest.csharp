@@ -28,7 +28,7 @@ namespace ApiVersionInCadl.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInCadlClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -42,7 +42,7 @@ namespace ApiVersionInCadl.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInCadlClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -56,7 +56,7 @@ namespace ApiVersionInCadl.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInCadlClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -70,7 +70,7 @@ namespace ApiVersionInCadl.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInCadlClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -84,7 +84,7 @@ namespace ApiVersionInCadl.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInCadlClient(endpoint, credential);
 
-            var result = await client.GetBatchDetectionResultAsync("<resultId>");
+            var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid());
         }
     }
 }

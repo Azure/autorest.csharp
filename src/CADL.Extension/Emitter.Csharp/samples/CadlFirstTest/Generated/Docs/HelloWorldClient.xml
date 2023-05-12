@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="TopActionAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call TopActionAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = await client.TopActionAsync(DateTimeOffset.UtcNow);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="TopAction(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call TopAction with required parameters and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = client.TopAction(DateTimeOffset.UtcNow);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="TopAction2Async(RequestContext)">
+<example>
+This sample shows how to call TopAction2Async and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = await client.TopAction2Async();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="TopAction2(RequestContext)">
+<example>
+This sample shows how to call TopAction2 and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = client.TopAction2();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call AnonymousBodyAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="AnonymousBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call AnonymousBody with required request content and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.AnonymousBody(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SayHiAsync(RequestContext)">
+<example>
+This sample shows how to call SayHiAsync and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = await client.SayHiAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SayHi(RequestContext)">
+<example>
+This sample shows how to call SayHi and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = client.SayHi();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloAgainAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call HelloAgainAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+};
+
+Response response = await client.HelloAgainAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloAgain(RequestContent,RequestContext)">
+<example>
+This sample shows how to call HelloAgain with required request content and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+};
+
+Response response = client.HelloAgain(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloDemo2Async(RequestContext)">
+<example>
+This sample shows how to call HelloDemo2Async and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = await client.HelloDemo2Async();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloDemo2(RequestContext)">
+<example>
+This sample shows how to call HelloDemo2 and parse the result.
+<code><![CDATA[
+var client = new HelloWorldClient();
+
+Response response = client.HelloDemo2();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

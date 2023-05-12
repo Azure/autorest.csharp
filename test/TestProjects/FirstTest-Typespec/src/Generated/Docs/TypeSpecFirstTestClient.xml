@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(string,CancellationToken)">
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
 <example>
 This sample shows how to call TopActionAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.TopActionAsync("<action>");
+var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
 ]]></code>
 </example>
     </member>
-    <member name="TopAction(string,CancellationToken)">
+    <member name="TopAction(DateTimeOffset,CancellationToken)">
 <example>
 This sample shows how to call TopAction with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.TopAction("<action>");
+var result = client.TopAction(DateTimeOffset.UtcNow);
 ]]></code>
 </example>
     </member>
-    <member name="TopActionAsync(string,RequestContext)">
+    <member name="TopActionAsync(DateTimeOffset,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.TopActionAsync("<action>", new RequestContext());
+Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -47,14 +47,14 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="TopAction(string,RequestContext)">
+    <member name="TopAction(DateTimeOffset,RequestContext)">
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.TopAction("<action>", new RequestContext());
+Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="FourAsync(RequestContext)">
+<example>
+This sample shows how to call FourAsync and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ServiceClient3Client(endpoint);
+
+Response response = await client.FourAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Four(RequestContext)">
+<example>
+This sample shows how to call Four and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ServiceClient3Client(endpoint);
+
+Response response = client.Four();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="FiveAsync(RequestContext)">
+<example>
+This sample shows how to call FiveAsync and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ServiceClient3Client(endpoint);
+
+Response response = await client.FiveAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Five(RequestContext)">
+<example>
+This sample shows how to call Five and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ServiceClient3Client(endpoint);
+
+Response response = client.Five();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -477,8 +477,13 @@ export function getInputType(
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
                 const format = getFormat(program, value);
-                const inputType = getInputType(context, value.type, models, enums);
-                if (format && inputType as InputPrimitiveType) {
+                const inputType = getInputType(
+                    context,
+                    value.type,
+                    models,
+                    enums
+                );
+                if (format && (inputType as InputPrimitiveType)) {
                     applyFormat(inputType as InputPrimitiveType, format);
                 }
                 const inputProp = {
@@ -585,8 +590,11 @@ export function getInputType(
 }
 
 export function applyFormat(type: InputPrimitiveType, format: string) {
-    if(type.Kind === InputTypeKind.String) {
-        type.Kind = getCSharpInputTypeKindByIntrinsicModelName(type.Name, format);
+    if (type.Kind === InputTypeKind.String) {
+        type.Kind = getCSharpInputTypeKindByIntrinsicModelName(
+            type.Name,
+            format
+        );
     }
 }
 export function getUsages(
