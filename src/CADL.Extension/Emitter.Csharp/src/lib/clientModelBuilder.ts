@@ -54,8 +54,7 @@ import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
-import { reportDiagnostic } from "../emitter.js";
-import { Console } from "console";
+import { $lib } from "../emitter.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -97,7 +96,7 @@ export function createModelForService(
     }
 
     if (apiVersions.size === 0) {
-        reportDiagnostic(program, {
+        $lib.reportDiagnostic(program, {
             code: "No-APIVersion",
             format: { service: service.type.name },
             target: NoTarget
@@ -165,7 +164,7 @@ export function createModelForService(
     const [services] = getAllHttpServices(program);
     const routes = services[0].operations;
     if (routes.length === 0) {
-        reportDiagnostic(program, {
+        $lib.reportDiagnostic(program, {
             code: "No-Route",
             format: { service: services[0].namespace.name },
             target: NoTarget

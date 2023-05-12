@@ -26,9 +26,8 @@ import {
 import { createModel } from "./lib/clientModelBuilder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
-import { DiagnosticCategory } from "typescript";
 
-export const { reportDiagnostic, createDiagnostic, createStateSymbol } =
+export const $lib =
     createTypeSpecLibrary({
         name: "typespec-csharp",
         diagnostics: {
