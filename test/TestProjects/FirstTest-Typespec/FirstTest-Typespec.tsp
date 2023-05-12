@@ -195,6 +195,16 @@ enum DaysOfWeekExtensibleEnum {
     Sunday,
 }
 
+model ModelWithFormat {
+    @doc("url format")
+    @format("Uri")
+    sourceUrl: string;
+
+    @doc("uuid format")
+    @format("Uri")
+    guid: string;
+}
+
 @doc("Hello world service")
 @route("/hello")
 namespace Hello.Demo {
@@ -281,6 +291,12 @@ op friendlyModel(...NotFriend): NotFriend;
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
+
+@route("/stringFormat")
+@doc("paramete has string format.")
+@post
+@convenientAPI(true)
+op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
 namespace EnumTest {
     @get

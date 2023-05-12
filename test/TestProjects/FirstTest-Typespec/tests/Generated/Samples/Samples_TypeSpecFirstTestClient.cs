@@ -610,6 +610,85 @@ namespace TypeSpecFirstTest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = new { },
+                guid = new { },
+            };
+
+            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = new { },
+                guid = new { },
+            };
+
+            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = new { },
+                guid = new { },
+            };
+
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = new { },
+                guid = new { },
+            };
+
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var body = new ModelWithFormat(null, null);
+            var result = await client.StringFormatAsync(Guid.NewGuid(), body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SayHi()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
