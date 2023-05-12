@@ -6,9 +6,15 @@ function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
 {
     foreach ($file in $files)
     {
-        Write-Host "Downloading" $file
-        $text = (Invoke-WebRequest -Uri "$baseUrl/$file").Content
-        $text.Trim() | Out-File (Join-Path $downloadPath $file)
+        try {
+            Write-Host "Downloading" $file
+            $text = (Invoke-WebRequest -Uri "$baseUrl/$file").Content
+            $text.Trim() | Out-File (Join-Path $downloadPath $file)
+        }
+        catch {
+            Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
+            Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
+        }
     }
 }
 
