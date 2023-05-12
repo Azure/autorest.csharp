@@ -7,6 +7,7 @@ function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
     foreach ($file in $files)
     {
         try {
+            Start-Sleep -Seconds 1
             Write-Host "Downloading" $file
             $text = (Invoke-WebRequest -Uri "$baseUrl/$file").Content
             $text.Trim() | Out-File (Join-Path $downloadPath $file)
