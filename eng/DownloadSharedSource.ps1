@@ -2,29 +2,86 @@
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 
-function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
-{
-    foreach ($file in $files)
-    {
-        Write-Host "Downloading" $file
-        $text = (Invoke-WebRequest -Uri "$baseUrl/$file").Content
-        $text.Trim() | Out-File (Join-Path $downloadPath $file)
+$sparseCheckoutFile = ".git/info/sparse-checkout"
+$gitRemoteUrl = "https://github.com/Azure/azure-sdk-for-net.git"
+$gitRemoteBranchName = "main"
+$azCoreSharedPath = "sdk/core/Azure.Core/src/Shared/"
+$armCoreSharedPath = "sdk/resourcemanager/Azure.ResourceManager/src/Shared/"
+
+function InitializeSparseGitClone([string]$repo) {
+    git clone --no-checkout --filter=tree:0 $repo .
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+    git sparse-checkout init
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+    Remove-Item $sparseCheckoutFile -Force
+}
+
+function AddSparseCheckoutPath([string]$subDirectory) {
+    if (!(Test-Path $sparseCheckoutFile) -or !((Get-Content $sparseCheckoutFile).Contains($subDirectory))) {
+        Write-Output $subDirectory >> $sparseCheckoutFile
     }
 }
 
-$downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Azure.Core.Shared')
-Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-$files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs',
-    'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
-    'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
-    'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/core/Azure.Core/src/Shared/'
-DownloadAll $files $baseUrl $downloadPath
+function GetSDKCloneDir() {
+    $root = git rev-parse --show-toplevel
 
-#Download management Shared
-$files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
-$downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
-Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/resourcemanager/Azure.ResourceManager/src/Shared/'
-DownloadAll $files $baseUrl $downloadPath
+    $sparseSpecCloneDir = "$root/sdk"
+    New-Item $sparseSpecCloneDir -Type Directory -Force | Out-Null
+    $createResult = Resolve-Path $sparseSpecCloneDir
+    return $createResult
+}
+
+$sdkCloneDir = GetSDKCloneDir
+Write-Host "Setting up sparse clone for $gitRemoteUrl at $sdkCloneDir"
+
+Push-Location $sdkCloneDir.Path
+try {
+    if (!(Test-Path ".git")) {
+        Write-Host "Initializing sparse clone for $gitRemoteUrl"
+        InitializeSparseGitClone $gitRemoteUrl
+        AddSparseCheckoutPath $azCoreSharedPath
+        AddSparseCheckoutPath $armCoreSharedPath
+        $commitHash = git rev-parse $gitRemoteBranchName
+        git checkout $commitHash
+    }
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+}
+finally {
+    Pop-Location
+}
+
+function CopyFilesToDestination([string]$sdkCloneRoot, [string]$dirName, [string]$dest, [string[]]$files) {
+    $source = "$sdkCloneRoot/$dirName"
+    foreach ($file in $files) {
+        $sourceFile = "$source/$file"
+        $destFile = "$dest/$file"
+        Write-Host "Copying $sourceFile to $destFile"
+        Copy-Item -Path $sourceFile -Destination $destFile -Force
+    }
+}
+
+try {
+    Write-Host "Downloading Azure.Core.Shared"
+    $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Azure.Core.Shared')
+    Write-Host "Removing the existing files in " $downloadPath
+    Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
+    $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs',
+        'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
+        'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
+        'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
+        'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
+    
+    CopyFilesToDestination $sdkCloneDir $azCoreSharedPath $downloadPath $files
+    
+    Write-Host "Downloading management Shared"
+    $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
+    Write-Host "Removing the existing files in " $downloadPath
+    Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
+    $files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
+    
+    CopyFilesToDestination $sdkCloneDir $armCoreSharedPath $downloadPath $files
+}
+finally {
+    Write-Host "Removing the sparse checkout files in" $sdkCloneDir
+    Remove-Item $sdkCloneDir -Force -Recurse
+}
