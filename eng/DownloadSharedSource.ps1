@@ -12,8 +12,7 @@ function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
             $text.Trim() | Out-File (Join-Path $downloadPath $file)
         }
         catch {
-            Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
-            Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
+            Write-Host "Description:" $_.Exception.Response
         }
     }
 }
