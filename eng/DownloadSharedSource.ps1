@@ -51,12 +51,15 @@ finally {
 }
 
 function CopyFilesToDestination([string]$sdkCloneRoot, [string]$dirName, [string]$dest, [string[]]$files) {
-    $source = "$sdkCloneRoot/$dirName"
+    $source = Join-Path $sdkCloneRoot $dirName
     foreach ($file in $files) {
-        $sourceFile = "$source/$file"
-        $destFile = "$dest/$file"
-        Write-Host "Copying $sourceFile to $destFile"
-        Copy-Item -Path $sourceFile -Destination $destFile -Force
+        $sourceFile = Join-Path $source $file
+        $destFile = Join-Path $dest $file
+        # to avoid the format issues (the file is required to end by a newline)
+        # here we read all the content in the source file, and then output it into the destination file
+        Write-Host "Copying $file"
+        $text = Get-Content -Path $sourceFile
+        $text | Out-File -FilePath $destFile
     }
 }
 
