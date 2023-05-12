@@ -28,8 +28,7 @@ function CopyAll([string[]]$files, [string]$source, [string]$destination)
     foreach ($file in $files)
     {
         Write-Host "Copying $file to $destination"
-        $text = Get-Content (Join-Path $source $file) -Raw
-        $text.Trim() | Out-File (Join-Path $destination $file)
+        Copy-Item (Join-Path $source $file) (Join-Path $destination $file)
     }
 }
 
@@ -52,4 +51,5 @@ $destinationPath = "$repoRoot/src/assets/Management.Shared"
 Get-ChildItem $destinationPath -Filter *.cs | Remove-Item;
 CopyAll $files $sourcePath $destinationPath
 
-Remove-Item $clonedPath -Recurse -Force
+Start-Sleep -Seconds 1
+Remove-Item $clonedPath -Recurse -Force -ErrorAction SilentlyContinue
