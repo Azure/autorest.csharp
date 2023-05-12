@@ -28,7 +28,8 @@ function CopyAll([string[]]$files, [string]$source, [string]$destination)
     foreach ($file in $files)
     {
         Write-Host "Copying $file to $destination"
-        Copy-Item (Join-Path $source $file) (Join-Path $destination $file)
+        $text = Get-Content (Join-Path $source $file) -Raw
+        $text.Trim() | Out-File (Join-Path $destination $file)
     }
 }
 
