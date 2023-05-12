@@ -27,27 +27,26 @@ import { createModel } from "./lib/clientModelBuilder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
-export const $lib =
-    createTypeSpecLibrary({
-        name: "typespec-csharp",
-        diagnostics: {
-            "No-APIVersion": {
-                severity: "error",
-                messages: {
-                    default: paramMessage`No APIVersion Provider for service ${"service"}`
-                }
-            },
-            "No-Route": {
-                severity: "error",
-                messages: {
-                    default: paramMessage`No Route for service for service ${"service"}`
-                }
+export const $lib = createTypeSpecLibrary({
+    name: "typespec-csharp",
+    diagnostics: {
+        "No-APIVersion": {
+            severity: "error",
+            messages: {
+                default: paramMessage`No APIVersion Provider for service ${"service"}`
             }
         },
-        emitter: {
-            options: NetEmitterOptionsSchema
+        "No-Route": {
+            severity: "error",
+            messages: {
+                default: paramMessage`No Route for service for service ${"service"}`
+            }
         }
-    });
+    },
+    emitter: {
+        options: NetEmitterOptionsSchema
+    }
+});
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
