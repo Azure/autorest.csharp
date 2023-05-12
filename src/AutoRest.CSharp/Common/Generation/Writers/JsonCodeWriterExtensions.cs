@@ -164,12 +164,26 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(BinaryData))
                         {
-                            writer.Line($"#if NET6_0_OR_GREATER");
-                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
-                            writer.Line($"#else");
-                            writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
-                            writer.Line($"#endif");
-                            return;
+                            switch (valueSerialization.Format)
+                            {
+                                case SerializationFormat.Bytes_Base64:
+                                    writer.Append($"{writerName}.");
+                                    writer.AppendRaw("WriteBase64StringValue");
+                                    writeFormat = true;
+                                    break;
+                                case SerializationFormat.Bytes_Base64Url:
+                                    writer.Append($"{writerName}.");
+                                    writer.AppendRaw("WriteBase64StringValue");
+                                    writeFormat = true;
+                                    break;
+                                default:
+                                    writer.Line($"#if NET6_0_OR_GREATER");
+                                    writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
+                                    writer.Line($"#else");
+                                    writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
+                                    writer.Line($"#endif");
+                                    return;
+                            }
                         }
                         else if (IsCustomJsonConverterAdded(frameworkType))
                         {
@@ -179,6 +193,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Append($"({name:I}")
                             .AppendNullableValue(valueSerialization.Type);
+
+                        if (frameworkType == typeof(BinaryData))
+                            writer.Append($".ToArray()");
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                         {
@@ -646,9 +663,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{frameworkType}.Parse({element}.GetString())";
             }
 
+            var methodName = string.Empty;
             if (frameworkType == typeof(BinaryData))
             {
-                return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
+                switch (format)
+                {
+                    case SerializationFormat.Bytes_Base64: //intentional fall through
+                    case SerializationFormat.Bytes_Base64Url:
+                        return $"{typeof(BinaryData)}.FromBytes({element}.GetBytesFromBase64(\"{format.ToFormatSpecifier()}\"))";
+                    default:
+                        return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
+                }
             }
 
             if (IsCustomJsonConverterAdded(frameworkType))
@@ -656,7 +681,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{serializationType}>({element}.GetRawText())";
             }
 
-            var methodName = string.Empty;
             if (frameworkType == typeof(JsonElement))
                 methodName = "Clone";
             if (frameworkType == typeof(object))

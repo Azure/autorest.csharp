@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -210,7 +211,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null, SerializationFormat SerializationFormat = SerializationFormat.Default)
     {
     }
 
