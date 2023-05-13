@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -60,6 +61,62 @@ namespace ModelsInCadl.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("requiredBytes"u8);
+            writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
+            if (Optional.IsDefined(OptionalBytes))
+            {
+                writer.WritePropertyName("optionalBytes"u8);
+                writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
+            }
+            writer.WritePropertyName("requiredUint8Array"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredUint8Array)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(OptionalUint8Array))
+            {
+                writer.WritePropertyName("optionalUint8Array"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalUint8Array)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("requiredUnknown"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(RequiredUnknown);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+#endif
+            if (Optional.IsDefined(OptionalUnknown))
+            {
+                writer.WritePropertyName("optionalUnknown"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(OptionalUnknown);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+#endif
+            }
+            writer.WritePropertyName("requiredInt8Array"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredInt8Array)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(OptionalInt8Array))
+            {
+                writer.WritePropertyName("optionalInt8Array"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalInt8Array)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -79,6 +136,14 @@ namespace ModelsInCadl.Models
             IDictionary<string, int> requiredIntRecord = default;
             IDictionary<string, string> requiredStringRecord = default;
             IDictionary<string, RecordItem> requiredModelRecord = default;
+            BinaryData requiredBytes = default;
+            Optional<BinaryData> optionalBytes = default;
+            IList<int> requiredUint8Array = default;
+            Optional<IList<int>> optionalUint8Array = default;
+            BinaryData requiredUnknown = default;
+            Optional<BinaryData> optionalUnknown = default;
+            IList<int> requiredInt8Array = default;
+            Optional<IList<int>> optionalInt8Array = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -151,8 +216,84 @@ namespace ModelsInCadl.Models
                     requiredModelRecord = dictionary;
                     continue;
                 }
+                if (property.NameEquals("requiredBytes"u8))
+                {
+                    requiredBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    continue;
+                }
+                if (property.NameEquals("optionalBytes"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    continue;
+                }
+                if (property.NameEquals("requiredUint8Array"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredUint8Array = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalUint8Array"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    optionalUint8Array = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredUnknown"u8))
+                {
+                    requiredUnknown = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("optionalUnknown"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalUnknown = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("requiredInt8Array"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredInt8Array = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalInt8Array"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    optionalInt8Array = array;
+                    continue;
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord);
+            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown, requiredInt8Array, Optional.ToList(optionalInt8Array));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

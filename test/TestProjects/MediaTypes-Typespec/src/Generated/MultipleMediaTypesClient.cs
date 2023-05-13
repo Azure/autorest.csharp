@@ -56,7 +56,7 @@ namespace MultipleMediaTypes
             _apiVersion = options.Version;
         }
 
-        /// <param name="body"> The BinaryData to use. </param>
+        /// <param name="body"> The Bytes to use. </param>
         /// <param name="contentType"> The Union to use. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -70,7 +70,7 @@ namespace MultipleMediaTypes
             return response;
         }
 
-        /// <param name="body"> The BinaryData to use. </param>
+        /// <param name="body"> The Bytes to use. </param>
         /// <param name="contentType"> The Union to use. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
