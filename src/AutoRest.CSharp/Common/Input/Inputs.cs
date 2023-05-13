@@ -122,7 +122,8 @@ namespace AutoRest.CSharp.Common.Input
         bool SkipUrlEncoding,
         bool Explode,
         string? ArraySerializationDelimiter,
-        string? HeaderCollectionPrefix)
+        string? HeaderCollectionPrefix,
+        SerializationFormat SerializationFormat)
     {
         public InputParameter() : this(
             Name: string.Empty,
@@ -142,7 +143,8 @@ namespace AutoRest.CSharp.Common.Input
             SkipUrlEncoding: false,
             Explode: false,
             ArraySerializationDelimiter: null,
-            HeaderCollectionPrefix: null)
+            HeaderCollectionPrefix: null,
+            SerializationFormat: SerializationFormat.Default)
         { }
     }
 

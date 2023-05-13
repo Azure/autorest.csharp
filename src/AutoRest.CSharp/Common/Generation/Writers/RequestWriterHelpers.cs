@@ -335,6 +335,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{constantOrReference.Reference.Name:I}.Value";
             }
 
+            if (constantOrReference.Type.Equals(typeof(BinaryData)))
+            {
+                return $"{constantOrReference.Reference.Name:I}.ToArray()";
+            }
+
             return $"{constantOrReference.Reference.Name:I}";
         }
 
