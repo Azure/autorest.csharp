@@ -921,9 +921,9 @@ namespace MgmtScopeResource
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
 #if NET6_0_OR_GREATER
-				content.JsonWriter.WriteRawValue(template.ToArray());
+				content.JsonWriter.WriteRawValue(template);
 #else
-            JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(template.ToArray().ToString()).RootElement);
+            JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(template.ToString()).RootElement);
 #endif
             request.Content = content;
             _userAgent.Apply(message);
