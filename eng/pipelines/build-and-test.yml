@@ -13,7 +13,7 @@ stages:
         steps:
           - checkout: self
             fetchDepth: 1
-            path: $(Build.SourcesDirectory)/autorest.csharp
+            path: autorest.csharp
           - task: UseDotNet@2
             displayName: 'Use .NET Core SDK'
             retryCountOnTaskFailure: 3
