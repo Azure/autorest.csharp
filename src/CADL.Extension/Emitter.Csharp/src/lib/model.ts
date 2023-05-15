@@ -79,7 +79,10 @@ export function mapCadlTypeToCSharpInputTypeKind(
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name, format);
+            return getCSharpInputTypeKindByIntrinsicModelName(
+                cadlType.name,
+                format
+            );
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -205,7 +208,7 @@ export function isNeverType(type: Type): type is NeverType {
 export function getInputType(
     context: SdkContext,
     type: Type,
-    format: string |undefined,
+    format: string | undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
@@ -379,7 +382,13 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
-            ElementType: getInputType(context, elementType, getFormat(program, elementType), models, enums),
+            ElementType: getInputType(
+                context,
+                elementType,
+                getFormat(program, elementType),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputListType;
     }
@@ -387,8 +396,20 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
-            KeyType: getInputType(context, key, getFormat(program, key), models, enums),
-            ValueType: getInputType(context, value, getFormat(program, value), models, enums),
+            KeyType: getInputType(
+                context,
+                key,
+                getFormat(program, key),
+                models,
+                enums
+            ),
+            ValueType: getInputType(
+                context,
+                value,
+                getFormat(program, value),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputDictionaryType;
     }
@@ -429,7 +450,13 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(context, dm, getFormat(program, dm), models, enums);
+                    getInputType(
+                        context,
+                        dm,
+                        getFormat(program, dm),
+                        models,
+                        enums
+                    );
                 }
             }
         }

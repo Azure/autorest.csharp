@@ -91,7 +91,13 @@ export function navigateModels(
     enums: Map<string, InputEnumType>
 ) {
     const computeModel = (x: Type) =>
-        getInputType(context, x, getFormat(context.program, x ), models, enums) as any;
+        getInputType(
+            context,
+            x,
+            getFormat(context.program, x),
+            models,
+            enums
+        ) as any;
     const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
     navigateTypesInNamespace(
         namespace,

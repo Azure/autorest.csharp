@@ -285,7 +285,13 @@ export function loadOperation(
         body: ModelProperty | Model
     ): InputParameter {
         const type = body.kind === "Model" ? body : body.type;
-        const inputType: InputType = getInputType(context, type, getFormat(program, body), models, enums);
+        const inputType: InputType = getInputType(
+            context,
+            type,
+            getFormat(program, body),
+            models,
+            enums
+        );
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
