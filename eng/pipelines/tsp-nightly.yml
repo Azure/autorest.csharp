@@ -1,0 +1,6 @@
+trigger: none
+
+stages:
+  - template: build.yml
+    parameters:
+      IsTspDevVersionTest: true
