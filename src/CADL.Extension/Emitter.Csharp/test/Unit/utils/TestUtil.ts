@@ -5,6 +5,7 @@ import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
 import {
     EmitContext,
+    getFormat,
     isGlobalNamespace,
     Namespace,
     navigateTypesInNamespace,
@@ -90,7 +91,7 @@ export function navigateModels(
     enums: Map<string, InputEnumType>
 ) {
     const computeModel = (x: Type) =>
-        getInputType(context, x, models, enums) as any;
+        getInputType(context, x, getFormat(context.program, x ), models, enums) as any;
     const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
     navigateTypesInNamespace(
         namespace,

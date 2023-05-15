@@ -61,7 +61,6 @@ import {
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
 import { logger } from "./logger.js";
 import {
-    applyFormat,
     getDefaultValue,
     getEffectiveSchemaType,
     getInputType
@@ -228,17 +227,14 @@ export function loadOperation(
     ): InputParameter {
         const { type: location, name, param } = parameter;
         const format = parameter.type === "path" ? undefined : parameter.format;
-        const typeFormat = getFormat(program, param);
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             context,
             cadlType,
+            getFormat(program, param),
             models,
             enums
         );
-        if (typeFormat) {
-            applyFormat(inputType as InputPrimitiveType, typeFormat);
-        }
         let defaultValue = undefined;
         const value = getDefaultValue(cadlType);
         if (value) {
@@ -289,7 +285,7 @@ export function loadOperation(
         body: ModelProperty | Model
     ): InputParameter {
         const type = body.kind === "Model" ? body : body.type;
-        const inputType: InputType = getInputType(context, type, models, enums);
+        const inputType: InputType = getInputType(context, type, getFormat(program, body), models, enums);
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
@@ -329,6 +325,7 @@ export function loadOperation(
                 type = getInputType(
                     context,
                     resourceOperation.resourceType,
+                    getFormat(program, resourceOperation.resourceType),
                     models,
                     enums
                 );
@@ -337,6 +334,7 @@ export function loadOperation(
                 const inputType: InputType = getInputType(
                     context,
                     cadlType,
+                    getFormat(program, cadlType),
                     models,
                     enums
                 );
@@ -355,6 +353,7 @@ export function loadOperation(
                     Type: getInputType(
                         context,
                         headers[key].type,
+                        getFormat(program, headers[key].type),
                         models,
                         enums
                     )

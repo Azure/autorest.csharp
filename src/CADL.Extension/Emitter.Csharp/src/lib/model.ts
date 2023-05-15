@@ -73,13 +73,13 @@ import { capitalize } from "./utils.js";
  */
 export function mapCadlTypeToCSharpInputTypeKind(
     context: SdkContext,
-    cadlType: Type
+    cadlType: Type,
+    format?: string
 ): InputTypeKind {
-    const format = getFormat(context.program, cadlType);
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
+            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name, format);
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -205,6 +205,7 @@ export function isNeverType(type: Type): type is NeverType {
 export function getInputType(
     context: SdkContext,
     type: Type,
+    format: string |undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
@@ -220,7 +221,8 @@ export function getInputType(
         // For literal types, we just want to emit them directly as well.
         const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
             context,
-            type
+            type,
+            format
         );
         const valueType = {
             Name: type.kind,
@@ -266,7 +268,7 @@ export function getInputType(
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format
+                        sdkType.format ?? format
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -377,7 +379,7 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
-            ElementType: getInputType(context, elementType, models, enums),
+            ElementType: getInputType(context, elementType, getFormat(program, elementType), models, enums),
             IsNullable: false
         } as InputListType;
     }
@@ -385,8 +387,8 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
-            KeyType: getInputType(context, key, models, enums),
-            ValueType: getInputType(context, value, models, enums),
+            KeyType: getInputType(context, key, getFormat(program, key), models, enums),
+            ValueType: getInputType(context, value, getFormat(program, value), models, enums),
             IsNullable: false
         } as InputDictionaryType;
     }
@@ -427,7 +429,7 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(context, dm, models, enums);
+                    getInputType(context, dm, getFormat(program, dm), models, enums);
                 }
             }
         }
@@ -476,16 +478,16 @@ export function getInputType(
                     value.name;
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
-                const format = getFormat(program, value);
                 const inputType = getInputType(
                     context,
                     value.type,
+                    getFormat(program, value),
                     models,
                     enums
                 );
-                if (format && (inputType as InputPrimitiveType)) {
-                    applyFormat(inputType as InputPrimitiveType, format);
-                }
+                // if (format && (inputType as InputPrimitiveType)) {
+                //     applyFormat(inputType as InputPrimitiveType, format);
+                // }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
@@ -559,6 +561,7 @@ export function getInputType(
             const inputType = getInputType(
                 context,
                 variant.type,
+                getFormat(program, variant.type),
                 models,
                 enums
             );
@@ -589,14 +592,6 @@ export function getInputType(
     }
 }
 
-export function applyFormat(type: InputPrimitiveType, format: string) {
-    if (type.Kind === InputTypeKind.String) {
-        type.Kind = getCSharpInputTypeKindByIntrinsicModelName(
-            type.Name,
-            format
-        );
-    }
-}
 export function getUsages(
     context: SdkContext,
     ops?: HttpOperation[]
