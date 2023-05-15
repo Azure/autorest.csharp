@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, body.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true));
+                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false));
                         }
 
                         break;
@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false)
+        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool convertBinaryDataToArray = true)
         {
             if (constantOrReference.IsConstant)
             {
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{constantOrReference.Reference.Name:I}.Value";
             }
 
-            if (constantOrReference.Type.Equals(typeof(BinaryData)))
+            if (constantOrReference.Type.Equals(typeof(BinaryData)) && convertBinaryDataToArray)
             {
                 return $"{constantOrReference.Reference.Name:I}.ToArray()";
             }
