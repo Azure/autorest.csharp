@@ -39,6 +39,9 @@ stages:
             - pwsh: rm package-lock.json
               displayName: "Remove package-lock.json"
               workingDirectory: $(Build.SourcesDirectory)
+            - pwsh: Remove-Item 'npm_modules' -Recurse
+              displayName: "Remove npm_modules"
+              workingDirectory: $(Build.SourcesDirectory)
             - script: |
                 npm install --force
               displayName: "Install packages"
