@@ -77,6 +77,7 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
@@ -95,6 +96,7 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,CancellationToken)']/*" />
         public virtual Response<DetectionResult> GetBatchDetectionResult(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));

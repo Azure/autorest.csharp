@@ -193,18 +193,23 @@ namespace AutoRest.CSharp.Generation.Types
             return provider != null;
         }
 
-        internal string ConvertParamNameForDocs()
+        internal string ConvertParamNameForCode() => ConvertParamName(false);
+
+        internal string ConvertParamNameForDocs() => ConvertParamName(true);
+
+        private string ConvertParamName(bool useSquiggles)
         {
             var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
             if (IsNullable && IsValueType)
                 name += "?";
             if (Arguments is not null && Arguments.Count() > 0)
             {
-                name += "{";
+                name += useSquiggles ? "{" : "<";
                 name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));
-                name += "}";
+                name += useSquiggles ? "}" : ">";
             }
             return name;
         }
+
     }
 }

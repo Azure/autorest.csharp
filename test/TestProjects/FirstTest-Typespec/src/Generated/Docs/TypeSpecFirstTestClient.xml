@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="TopActionAsync(string,CancellationToken)">
+<example>
+This sample shows how to call TopActionAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = await client.TopActionAsync("<action>");
+]]></code>
+</example>
+    </member>
+    <member name="TopAction(string,CancellationToken)">
+<example>
+This sample shows how to call TopAction with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = client.TopAction("<action>");
+]]></code>
+</example>
+    </member>
     <member name="TopActionAsync(string,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
@@ -107,10 +129,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -133,14 +155,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -171,10 +193,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -197,14 +219,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -225,6 +247,30 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
+<example>
+This sample shows how to call AnonymousBodyAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.AnonymousBodyAsync(thing);
+]]></code>
+</example>
+    </member>
+    <member name="AnonymousBody(Thing,CancellationToken)">
+<example>
+This sample shows how to call AnonymousBody with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.AnonymousBody(thing);
+]]></code>
+</example>
+    </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
@@ -235,10 +281,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -261,14 +307,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -299,10 +345,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -325,14 +371,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -350,6 +396,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="FriendlyModelAsync(Friend,CancellationToken)">
+<example>
+This sample shows how to call FriendlyModelAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var notFriend = new Friend("<name>");
+var result = await client.FriendlyModelAsync(notFriend);
+]]></code>
+</example>
+    </member>
+    <member name="FriendlyModel(Friend,CancellationToken)">
+<example>
+This sample shows how to call FriendlyModel with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var notFriend = new Friend("<name>");
+var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>
     </member>
@@ -509,6 +579,104 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
+<example>
+This sample shows how to call HelloAgainAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
+{
+    StringFixedEnum.One
+}, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One,
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromString("<your binary data content>"),
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = 
+{
+        IntExtensibleEnum.One
+    },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = 
+{
+        FloatExtensibleEnum.One
+    },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = 
+{
+        FloatFixedEnum.One
+    },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = 
+{
+        IntFixedEnum.One
+    },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+    OptionalRecordUnknown = 
+{
+        ["key"] = BinaryData.FromString("<your binary data content>"),
+    },
+};
+var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
+]]></code>
+</example>
+    </member>
+    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
+<example>
+This sample shows how to call HelloAgain with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] 
+{
+    StringFixedEnum.One
+}, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One,
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromString("<your binary data content>"),
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = 
+{
+        IntExtensibleEnum.One
+    },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = 
+{
+        FloatExtensibleEnum.One
+    },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = 
+{
+        FloatFixedEnum.One
+    },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = 
+{
+        IntFixedEnum.One
+    },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+    OptionalRecordUnknown = 
+{
+        ["key"] = BinaryData.FromString("<your binary data content>"),
+    },
+};
+var result = client.HelloAgain("<p2>", "<p1>", action);
+]]></code>
+</example>
+    </member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
@@ -528,10 +696,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
     requiredUnknown = new {},
@@ -568,14 +736,14 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
-        optionalLiteralString = new {},
-        optionalLiteralInt = new {},
-        optionalLiteralDouble = new {},
-        optionalLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
+        optionalLiteralString = "reject",
+        optionalLiteralInt = 456,
+        optionalLiteralDouble = 4.56,
+        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
@@ -641,10 +809,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
     requiredUnknown = new {},
@@ -681,14 +849,14 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
-        optionalLiteralString = new {},
-        optionalLiteralInt = new {},
-        optionalLiteralDouble = new {},
-        optionalLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
+        optionalLiteralString = "reject",
+        optionalLiteralInt = 456,
+        optionalLiteralDouble = 4.56,
+        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
@@ -754,10 +922,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
     requiredUnknown = new {},
@@ -794,14 +962,14 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
-        optionalLiteralString = new {},
-        optionalLiteralInt = new {},
-        optionalLiteralDouble = new {},
-        optionalLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
+        optionalLiteralString = "reject",
+        optionalLiteralInt = 456,
+        optionalLiteralDouble = 4.56,
+        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
@@ -867,10 +1035,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
     requiredUnknown = new {},
@@ -907,14 +1075,14 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteralString = new {},
-        requiredLiteralInt = new {},
-        requiredLiteralDouble = new {},
-        requiredLiteralBool = new {},
-        optionalLiteralString = new {},
-        optionalLiteralInt = new {},
-        optionalLiteralDouble = new {},
-        optionalLiteralBool = new {},
+        requiredLiteralString = "accept",
+        requiredLiteralInt = 123,
+        requiredLiteralDouble = 1.23,
+        requiredLiteralBool = false,
+        optionalLiteralString = "reject",
+        optionalLiteralInt = 456,
+        optionalLiteralDouble = 4.56,
+        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
@@ -958,6 +1126,28 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="HelloDemo2Async(CancellationToken)">
+<example>
+This sample shows how to call HelloDemo2Async.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = await client.HelloDemo2Async();
+]]></code>
+</example>
+    </member>
+    <member name="HelloDemo2(CancellationToken)">
+<example>
+This sample shows how to call HelloDemo2.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = client.HelloDemo2();
 ]]></code>
 </example>
     </member>
@@ -1009,6 +1199,30 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="CreateLiteralAsync(Thing,CancellationToken)">
+<example>
+This sample shows how to call CreateLiteralAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.CreateLiteralAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="CreateLiteral(Thing,CancellationToken)">
+<example>
+This sample shows how to call CreateLiteral with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.CreateLiteral(body);
+]]></code>
+</example>
+    </member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
@@ -1019,10 +1233,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -1045,14 +1259,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -1083,10 +1297,10 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -1109,14 +1323,14 @@ var client = new TypeSpecFirstTestClient(endpoint);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteralString = new {},
-    requiredLiteralInt = new {},
-    requiredLiteralDouble = new {},
-    requiredLiteralBool = new {},
-    optionalLiteralString = new {},
-    optionalLiteralInt = new {},
-    optionalLiteralDouble = new {},
-    optionalLiteralBool = new {},
+    requiredLiteralString = "accept",
+    requiredLiteralInt = 123,
+    requiredLiteralDouble = 1.23,
+    requiredLiteralBool = false,
+    optionalLiteralString = "reject",
+    optionalLiteralInt = 456,
+    optionalLiteralDouble = 4.56,
+    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -1134,6 +1348,28 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="HelloLiteralAsync(CancellationToken)">
+<example>
+This sample shows how to call HelloLiteralAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = await client.HelloLiteralAsync();
+]]></code>
+</example>
+    </member>
+    <member name="HelloLiteral(CancellationToken)">
+<example>
+This sample shows how to call HelloLiteral.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = client.HelloLiteral();
 ]]></code>
 </example>
     </member>
@@ -1213,9 +1449,55 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
+    <member name="InternalProtocolAsync(Thing,CancellationToken)">
+<example>
+This sample shows how to call InternalProtocolAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = await client.InternalProtocolAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="InternalProtocol(Thing,CancellationToken)">
+<example>
+This sample shows how to call InternalProtocol with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+var result = client.InternalProtocol(body);
+]]></code>
+</example>
+    </member>
     <member name="InternalProtocolAsync(RequestContent,RequestContext)">
     </member>
     <member name="InternalProtocol(RequestContent,RequestContext)">
+    </member>
+    <member name="StillConvenientAsync(CancellationToken)">
+<example>
+This sample shows how to call StillConvenientAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = await client.StillConvenientAsync();
+]]></code>
+</example>
+    </member>
+    <member name="StillConvenient(CancellationToken)">
+<example>
+This sample shows how to call StillConvenient.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var result = client.StillConvenient();
+]]></code>
+</example>
     </member>
     <member name="StillConvenientAsync(RequestContext)">
     </member>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optional.Models;
 
 namespace _Type.Property.Optional.Samples
 {
@@ -68,6 +70,15 @@ namespace _Type.Property.Optional.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAll_Convenience_Async()
+        {
+            var client = new OptionalClient().GetStringClient("1.0.0");
+
+            var result = await client.GetAllAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault()
         {
             var client = new OptionalClient().GetStringClient("1.0.0");
@@ -112,6 +123,15 @@ namespace _Type.Property.Optional.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDefault_Convenience_Async()
+        {
+            var client = new OptionalClient().GetStringClient("1.0.0");
+
+            var result = await client.GetDefaultAsync();
         }
 
         [Test]
@@ -170,6 +190,19 @@ namespace _Type.Property.Optional.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAll_Convenience_Async()
+        {
+            var client = new OptionalClient().GetStringClient("1.0.0");
+
+            var body = new StringProperty()
+            {
+                Property = "<Property>",
+            };
+            var result = await client.PutAllAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault()
         {
             var client = new OptionalClient().GetStringClient("1.0.0");
@@ -220,6 +253,19 @@ namespace _Type.Property.Optional.Samples
 
             Response response = await client.PutDefaultAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutDefault_Convenience_Async()
+        {
+            var client = new OptionalClient().GetStringClient("1.0.0");
+
+            var body = new StringProperty()
+            {
+                Property = "<Property>",
+            };
+            var result = await client.PutDefaultAsync(body);
         }
     }
 }

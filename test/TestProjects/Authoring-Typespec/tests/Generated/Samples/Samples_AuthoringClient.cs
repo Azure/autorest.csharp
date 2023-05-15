@@ -6,12 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Azure.Language.Authoring.Models;
 using NUnit.Framework;
 
 namespace Azure.Language.Authoring.Samples
@@ -794,6 +796,16 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDeploymentStatus_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var result = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetSwapDeploymentsStatus()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -882,6 +894,16 @@ namespace Azure.Language.Authoring.Samples
             Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
             Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSwapDeploymentsStatus_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var result = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
         }
 
         [Test]
@@ -984,14 +1006,7 @@ namespace Azure.Language.Authoring.Samples
             foreach (var item in client.GetDeployments("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -1005,17 +1020,7 @@ namespace Azure.Language.Authoring.Samples
             foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-                Console.WriteLine(result.GetProperty("multilingual").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -1029,14 +1034,7 @@ namespace Azure.Language.Authoring.Samples
             await foreach (var item in client.GetDeploymentsAsync("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -1050,17 +1048,7 @@ namespace Azure.Language.Authoring.Samples
             await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-                Console.WriteLine(result.GetProperty("multilingual").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 

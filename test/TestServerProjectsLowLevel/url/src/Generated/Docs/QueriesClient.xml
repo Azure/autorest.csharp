@@ -328,7 +328,7 @@ This sample shows how to call FloatNullAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.FloatNullAsync(1234, new RequestContext());
+Response response = await client.FloatNullAsync(3.14f, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -348,7 +348,7 @@ This sample shows how to call FloatNull with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.FloatNull(1234, new RequestContext());
+Response response = client.FloatNull(3.14f, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -416,7 +416,7 @@ This sample shows how to call DoubleNullAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.DoubleNullAsync(1234, new RequestContext());
+Response response = await client.DoubleNullAsync(3.14, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -436,7 +436,7 @@ This sample shows how to call DoubleNull with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.DoubleNull(1234, new RequestContext());
+Response response = client.DoubleNull(3.14, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

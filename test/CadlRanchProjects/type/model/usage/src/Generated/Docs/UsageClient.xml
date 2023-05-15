@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="InputAsync(InputRecord,CancellationToken)">
+<example>
+This sample shows how to call InputAsync with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var input = new InputRecord("<requiredProp>");
+var result = await client.InputAsync(input);
+]]></code>
+</example>
+    </member>
+    <member name="Input(InputRecord,CancellationToken)">
+<example>
+This sample shows how to call Input with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var input = new InputRecord("<requiredProp>");
+var result = client.Input(input);
+]]></code>
+</example>
+    </member>
     <member name="InputAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InputAsync with required request content.
@@ -31,6 +53,26 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="OutputAsync(CancellationToken)">
+<example>
+This sample shows how to call OutputAsync.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = await client.OutputAsync();
+]]></code>
+</example>
+    </member>
+    <member name="Output(CancellationToken)">
+<example>
+This sample shows how to call Output.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = client.Output();
+]]></code>
+</example>
+    </member>
     <member name="OutputAsync(RequestContext)">
 <example>
 This sample shows how to call OutputAsync with required parameters and parse the result.
@@ -54,6 +96,28 @@ Response response = client.Output(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="InputAndOutputAsync(InputOutputRecord,CancellationToken)">
+<example>
+This sample shows how to call InputAndOutputAsync with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputOutputRecord("<requiredProp>");
+var result = await client.InputAndOutputAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="InputAndOutput(InputOutputRecord,CancellationToken)">
+<example>
+This sample shows how to call InputAndOutput with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputOutputRecord("<requiredProp>");
+var result = client.InputAndOutput(body);
 ]]></code>
 </example>
     </member>

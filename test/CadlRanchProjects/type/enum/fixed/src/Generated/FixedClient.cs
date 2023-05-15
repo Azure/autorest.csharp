@@ -51,6 +51,7 @@ namespace _Type._Enum.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='GetKnownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -60,6 +61,7 @@ namespace _Type._Enum.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='GetKnownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekEnum> GetKnownValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -140,6 +142,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -150,6 +153,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -238,6 +242,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -248,6 +253,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

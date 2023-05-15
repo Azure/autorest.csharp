@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
 {
@@ -208,6 +210,22 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            var resource = new User("<name>")
+            {
+                Orders =
+{
+        new UserOrder(1234, "<detail>")
+    },
+            };
+            var result = await client.CreateOrReplaceAsync(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetUser()
         {
             var client = new BasicClient();
@@ -266,6 +284,15 @@ namespace _Specs_.Azure.Core.Basic.Samples
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUser_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            var result = await client.GetUserAsync(1234);
         }
 
         [Test]
@@ -372,6 +399,15 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            var result = await client.ExportAsync(1234, "<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetUsers()
         {
             var client = new BasicClient();
@@ -433,6 +469,17 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUsers_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }))
+            {
             }
         }
 
@@ -504,6 +551,17 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWithPage_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            await foreach (var item in client.GetWithPageAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetWithCustomPageModel()
         {
             var client = new BasicClient();
@@ -565,6 +623,17 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWithCustomPageModel_Convenience_Async()
+        {
+            var client = new BasicClient();
+
+            await foreach (var item in client.GetWithCustomPageModelAsync())
+            {
             }
         }
     }

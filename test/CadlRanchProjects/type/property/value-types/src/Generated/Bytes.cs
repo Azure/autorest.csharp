@@ -49,6 +49,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetByteAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BytesProperty>> GetByteAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetByte(CancellationToken)']/*" />
         public virtual Response<BytesProperty> GetByte(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -139,6 +141,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='PutAsync(BytesProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BytesProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,6 +155,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='Put(BytesProperty,CancellationToken)']/*" />
         public virtual Response Put(BytesProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

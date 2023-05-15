@@ -48,6 +48,7 @@ namespace SpecialWords
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='GetModelValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BaseModel>> GetModelValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("Model.GetModelValue");
@@ -66,6 +67,7 @@ namespace SpecialWords
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='GetModelValue(CancellationToken)']/*" />
         public virtual Response<BaseModel> GetModelValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("Model.GetModelValue");
@@ -156,6 +158,7 @@ namespace SpecialWords
         /// <param name="body"> The BaseModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='PutAsync(BaseModel,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BaseModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -168,6 +171,7 @@ namespace SpecialWords
         /// <param name="body"> The BaseModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='Put(BaseModel,CancellationToken)']/*" />
         public virtual Response Put(BaseModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

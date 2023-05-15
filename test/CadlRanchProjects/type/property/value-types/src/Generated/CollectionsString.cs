@@ -49,6 +49,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='GetCollectionsStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<CollectionsStringProperty>> GetCollectionsStringAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -58,6 +59,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='GetCollectionsString(CancellationToken)']/*" />
         public virtual Response<CollectionsStringProperty> GetCollectionsString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -139,6 +141,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='PutAsync(CollectionsStringProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(CollectionsStringProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,6 +155,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='Put(CollectionsStringProperty,CancellationToken)']/*" />
         public virtual Response Put(CollectionsStringProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));

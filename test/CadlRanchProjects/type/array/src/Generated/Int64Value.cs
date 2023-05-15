@@ -49,6 +49,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<long>>> GetInt64ValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -65,6 +66,7 @@ namespace _Type._Array
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<long>> GetInt64Value(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -153,6 +155,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -165,6 +168,7 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
         public virtual Response Put(object body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
