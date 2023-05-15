@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="ValidAsync(RequestContext)">
+<example>
+This sample shows how to call ValidAsync.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var client = new OAuth2Client(credential);
+
+Response response = await client.ValidAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Valid(RequestContext)">
+<example>
+This sample shows how to call Valid.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var client = new OAuth2Client(credential);
+
+Response response = client.Valid(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="InvalidAsync(RequestContext)">
+<example>
+This sample shows how to call InvalidAsync.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var client = new OAuth2Client(credential);
+
+Response response = await client.InvalidAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Invalid(RequestContext)">
+<example>
+This sample shows how to call Invalid.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var client = new OAuth2Client(credential);
+
+Response response = client.Invalid(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

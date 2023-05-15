@@ -29,6 +29,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 generateArmResourceExtensions: Array.Empty<string>(),
                 parameterizedScopes: Array.Empty<string>(),
                 mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
+                operationsToSkipLroApiVersionOverride: default,
                 requestPathToParent: default,
                 requestPathToResourceName: default,
                 requestPathToResourceData: default,

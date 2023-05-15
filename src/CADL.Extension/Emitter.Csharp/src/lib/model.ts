@@ -63,9 +63,10 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType
+    getSdkSimpleType,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize } from "./utils.js";
+import { capitalize, getNameForTemplate } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -379,7 +380,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getFriendlyName(program, m) ?? m.name;
+        const name = getFriendlyName(program, m) ?? getNameForTemplate(m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -388,6 +389,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Accessibility: isInternal(context, m) ? "internal" : undefined,
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetUnknownDictAsync(CancellationToken)">
+<example>
+This sample shows how to call GetUnknownDictAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var result = await client.GetUnknownDictAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownDict(CancellationToken)">
+<example>
+This sample shows how to call GetUnknownDict.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var result = client.GetUnknownDict();
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownDictAsync(RequestContext)">
+<example>
+This sample shows how to call GetUnknownDictAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+Response response = await client.GetUnknownDictAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownDict(RequestContext)">
+<example>
+This sample shows how to call GetUnknownDict with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+Response response = client.GetUnknownDict(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(UnknownDictProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var body = new UnknownDictProperty(BinaryData.FromString("<your binary data content>"));
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(UnknownDictProperty,CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var body = new UnknownDictProperty(BinaryData.FromString("<your binary data content>"));
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var data = new {
+    property = new {},
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetUnknownDictClient("1.0.0");
+
+var data = new {
+    property = new {},
+};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

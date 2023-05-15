@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="JsonAsync(JsonProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call JsonAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonProjectedNameModel = new JsonProjectedNameModel(true);
+var result = await client.JsonAsync(jsonProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Json(JsonProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call Json with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonProjectedNameModel = new JsonProjectedNameModel(true);
+var result = client.Json(jsonProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = await client.JsonAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Json(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Json with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = client.Json(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ClientAsync(ClientProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call ClientAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var clientProjectedNameModel = new ClientProjectedNameModel(true);
+var result = await client.ClientAsync(clientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Client(ClientProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call Client with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var clientProjectedNameModel = new ClientProjectedNameModel(true);
+var result = client.Client(clientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="ClientAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ClientAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = await client.ClientAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Client(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Client with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = client.Client(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="LanguageAsync(LanguageProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call LanguageAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var languageProjectedNameModel = new LanguageProjectedNameModel(true);
+var result = await client.LanguageAsync(languageProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="Language(LanguageProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call Language with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var languageProjectedNameModel = new LanguageProjectedNameModel(true);
+var result = client.Language(languageProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="LanguageAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call LanguageAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = await client.LanguageAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Language(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Language with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = client.Language(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call JsonAndClientAsync with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+var result = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)">
+<example>
+This sample shows how to call JsonAndClient with required parameters.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
+var result = client.JsonAndClient(jsonAndClientProjectedNameModel);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClientAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAndClientAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = await client.JsonAndClientAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="JsonAndClient(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAndClient with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = client.JsonAndClient(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
