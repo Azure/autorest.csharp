@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Input;
+using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
@@ -23,6 +25,26 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static readonly string SharedFolder = "shared";
         public static readonly string GeneratedFolder = "Generated";
+
+        private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
+
+        static GeneratedCodeWorkspace()
+        {
+            var references = new List<MetadataReference>
+            {
+                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
+            };
+
+            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
+            foreach (var tpl in trustedAssemblies)
+            {
+                references.Add(MetadataReference.CreateFromFile(tpl));
+            }
+
+            AssemblyMetadataReferences = references;
+        }
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
@@ -178,25 +200,34 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(generatedCodeProject);
         }
 
+        // TODO: Currently the outputDirectory is expected to be generated folder. We will handle the customization folder if there is a case.
+        public static GeneratedCodeWorkspace CreateExistingCodeProject(string outputDirectory)
+        {
+            var workspace = new AdhocWorkspace();
+            Project project = workspace.AddProject("ExistingCode", LanguageNames.CSharp);
+
+            if (Path.IsPathRooted(outputDirectory))
+            {
+                outputDirectory = Path.GetFullPath(outputDirectory);
+                project = AddDirectory(project, outputDirectory, null);
+            }
+
+            project = project
+                .AddMetadataReferences(AssemblyMetadataReferences)
+                .WithCompilationOptions(new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+
+            return new GeneratedCodeWorkspace(project);
+        }
+
         private static Project CreateGeneratedCodeProject()
         {
             var workspace = new AdhocWorkspace();
             // TODO: This is not the right way to construct the workspace but it works
             Project generatedCodeProject = workspace.AddProject("GeneratedCode", LanguageNames.CSharp);
 
-            var corlibLocation = typeof(object).Assembly.Location;
-            var references = new List<MetadataReference>();
-
-            references.Add(MetadataReference.CreateFromFile(corlibLocation));
-
-            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
-            foreach (var tpl in trustedAssemblies)
-            {
-                references.Add(MetadataReference.CreateFromFile(tpl));
-            }
-
             generatedCodeProject = generatedCodeProject
-                .AddMetadataReferences(references)
+                .AddMetadataReferences(AssemblyMetadataReferences)
                 .WithCompilationOptions(new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
             return generatedCodeProject;

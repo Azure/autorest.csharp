@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetNeverAsync(CancellationToken)">
+<example>
+This sample shows how to call GetNeverAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var result = await client.GetNeverAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetNever(CancellationToken)">
+<example>
+This sample shows how to call GetNever.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var result = client.GetNever();
+]]></code>
+</example>
+    </member>
+    <member name="GetNeverAsync(RequestContext)">
+<example>
+This sample shows how to call GetNeverAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+Response response = await client.GetNeverAsync(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNever(RequestContext)">
+<example>
+This sample shows how to call GetNever with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+Response response = client.GetNever(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(NeverProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var body = new NeverProperty();
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(NeverProperty,CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var body = new NeverProperty();
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var data = new {};
+
+Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetNeverClient("1.0.0");
+
+var data = new {};
+
+Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

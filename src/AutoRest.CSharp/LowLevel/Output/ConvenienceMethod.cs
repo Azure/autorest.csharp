@@ -17,7 +17,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic)
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic, bool IsPageable, bool IsLongRunning, string? Deprecated)
     {
         public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
         {
@@ -66,11 +66,12 @@ namespace AutoRest.CSharp.Output.Models
             if (spreadVariable == null || convenienceSpread == null)
                 return writer => WriteCancellationTokenToRequestContext(writer, contextVariable);
 
-            var ctor = convenienceSpread.BackingModel.SerializationConstructor;
+            // we need to get all the property initializers therefore here we use serialization constructor
+            var serializationCtor = convenienceSpread.BackingModel.SerializationConstructor;
             var initializers = new List<PropertyInitializer>();
             foreach (var parameter in convenienceSpread.SpreadedParameters)
             {
-                var property = ctor.FindPropertyInitializedByParameter(parameter);
+                var property = serializationCtor.FindPropertyInitializedByParameter(parameter);
                 if (property == null)
                     continue;
                 initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
@@ -79,7 +80,8 @@ namespace AutoRest.CSharp.Output.Models
             return writer =>
             {
                 WriteCancellationTokenToRequestContext(writer, contextVariable);
-                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, ctor, initializers);
+                // when writing the initialization of the model, since values of the parameters we have here might be null, and the serialization constructor will not have initializers in its implementation, we use initialization constructor to initialize the instance.
+                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, convenienceSpread.BackingModel.InitializationConstructor, initializers);
             };
         }
 
@@ -87,6 +89,27 @@ namespace AutoRest.CSharp.Output.Models
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+        }
+
+        public bool IsDeprecatedForExamples()
+        {
+            if (Deprecated is not null)
+                return true;
+
+            var bodyParam = Signature.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
+            if (bodyParam is not null && !bodyParam.Type.IsFrameworkType && bodyParam.Type.Implementation is ModelTypeProvider mtp)
+            {
+                if (mtp.Deprecated is not null)
+                    return true;
+
+                foreach (var property in mtp.Properties)
+                {
+                    if (!property.ValueType.IsFrameworkType && property.ValueType.Implementation.Deprecated is not null)
+                        return true;
+                }
+            }
+
+            return false;
         }
     }
 

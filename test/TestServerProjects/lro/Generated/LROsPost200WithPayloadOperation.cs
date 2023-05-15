@@ -29,7 +29,7 @@ namespace lro
         internal LROsPost200WithPayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Sku> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Sku>(clientDiagnostics, nextLinkOperation, response, "LROsPost200WithPayloadOperation");
+            _operation = new OperationInternal<Sku>(nextLinkOperation, clientDiagnostics, response, "LROsPost200WithPayloadOperation");
         }
 
         /// <inheritdoc />
