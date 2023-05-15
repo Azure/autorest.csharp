@@ -33,7 +33,7 @@ stages:
               displayName: "(Temp) Install dependencies"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json --add-npm-overrides && npx ts-node .\typespec-bump-deps.ts .\package.json --add-npm-overrides
+                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json && npx ts-node .\typespec-bump-deps.ts .\package.json --add-npm-overrides
               displayName: "Bump tsp versions"
               workingDirectory: $(Build.SourcesDirectory)
             - pwsh: |
