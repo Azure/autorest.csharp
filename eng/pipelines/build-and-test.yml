@@ -36,18 +36,11 @@ stages:
                 npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json && npx ts-node .\typespec-bump-deps.ts .\package.json --add-npm-overrides
               displayName: "Bump tsp versions"
               workingDirectory: $(Build.SourcesDirectory)
-            - pwsh: |
-                rm package-lock.json
-                if (Test-Path "npm_modules") {
-                  Remove-Item "npm_modules" -Recurse
-                }
-                if (Test-Path "src/CADL.Extension/Emitter.Csharp/node_modules") {
-                  Remove-Item "src/CADL.Extension/Emitter.Csharp/node_modules" -Recurse
-                }
+            - pwsh: ./eng/RemoveInstalledPackages.ps1
               displayName: "Remove existing packages"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npm install --force
+                npm install
               displayName: "Install packages"
               workingDirectory: $(Build.SourcesDirectory)
             - pwsh: node -p -e "require('./node_modules/@typespec/compiler/package.json').version"
