@@ -40,8 +40,11 @@ stages:
               displayName: "Remove package-lock.json"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npm install
+                npm install --force
               displayName: "Install packages"
+              workingDirectory: $(Build.SourcesDirectory)
+            - pwsh: node -p -e "require('./node_modules/@typespec/compiler/package.json').version"
+              displayName: "Check tsp version"
               workingDirectory: $(Build.SourcesDirectory)
             - pwsh: ./eng/Generate.ps1
               displayName: "Generate codes"
