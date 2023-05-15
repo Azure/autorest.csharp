@@ -136,11 +136,11 @@
   },
   {
    "$id": "18",
-   "Name": "CustomPage",
+   "Name": "CustomPageUser",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "19",
