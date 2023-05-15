@@ -31,7 +31,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "6",
@@ -58,7 +58,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "10",
@@ -85,7 +85,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "14",
@@ -112,7 +112,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "18",
@@ -139,7 +139,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "22",
@@ -166,7 +166,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "26",
@@ -495,7 +495,7 @@
    "Namespace": "TypeSpecFirstTest",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "73",
@@ -1705,7 +1705,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1854,7 +1854,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [],

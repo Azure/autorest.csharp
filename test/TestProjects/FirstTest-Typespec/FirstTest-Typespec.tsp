@@ -217,7 +217,7 @@ namespace Hello.Demo2 {
         @body action: RoundTripModel,
         @header contentType: "text/plain",
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/noContentType")
     @doc("Return hi again")
@@ -227,7 +227,7 @@ namespace Hello.Demo2 {
         @header p1: string,
         @body action: RoundTripModel,
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/demoHi")
     @doc("Return hi in demo2")

@@ -730,13 +730,20 @@ namespace TypeSpecFirstTest.Samples
             Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -803,17 +810,36 @@ namespace TypeSpecFirstTest.Samples
             Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -854,13 +880,20 @@ namespace TypeSpecFirstTest.Samples
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -927,17 +960,36 @@ namespace TypeSpecFirstTest.Samples
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -1026,13 +1078,20 @@ namespace TypeSpecFirstTest.Samples
             Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -1099,17 +1158,36 @@ namespace TypeSpecFirstTest.Samples
             Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -1150,13 +1228,20 @@ namespace TypeSpecFirstTest.Samples
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
@@ -1223,17 +1308,36 @@ namespace TypeSpecFirstTest.Samples
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
         }
 
         [Test]
