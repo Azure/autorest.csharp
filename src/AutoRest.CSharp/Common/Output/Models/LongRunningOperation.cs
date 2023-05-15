@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             if (finalResponseType != null)
             {
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseType with {IsNullable = false}));
-                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType);
+                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType, null);
 
                 var paging = operation.Paging;
                 if (paging != null)

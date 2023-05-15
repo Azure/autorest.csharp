@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable.Models
                         nullableProperty = null;
                         continue;
                     }
-                    nullableProperty = BinaryData.FromString(property.Value.GetRawText());
+                    nullableProperty = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
             }
