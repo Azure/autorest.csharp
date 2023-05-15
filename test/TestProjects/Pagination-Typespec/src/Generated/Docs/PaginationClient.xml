@@ -141,5 +141,131 @@ foreach (var item in client.GetLedgerEntries(new RequestContext()))
 ]]></code>
 </example>
     </member>
+    <member name="GetTextBlocklistsAsync(CancellationToken)">
+<example>
+This sample shows how to call GetTextBlocklistsAsync.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+await foreach (var item in client.GetTextBlocklistsAsync())
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklists(CancellationToken)">
+<example>
+This sample shows how to call GetTextBlocklists.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+foreach (var item in client.GetTextBlocklists())
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklistsAsync(RequestContext)">
+<example>
+This sample shows how to call GetTextBlocklistsAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+await foreach (var item in client.GetTextBlocklistsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklists(RequestContext)">
+<example>
+This sample shows how to call GetTextBlocklists with required parameters and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+foreach (var item in client.GetTextBlocklists(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklistItemsAsync(string,int?,int?,int?,CancellationToken)">
+<example>
+This sample shows how to call GetTextBlocklistItemsAsync with required parameters.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+await foreach (var item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234))
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklistItems(string,int?,int?,int?,CancellationToken)">
+<example>
+This sample shows how to call GetTextBlocklistItems with required parameters.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+foreach (var item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234))
+{
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklistItemsAsync(string,int?,int?,int?,RequestContext)">
+<example>
+This sample shows how to call GetTextBlocklistItemsAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+await foreach (var item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetTextBlocklistItems(string,int?,int?,int?,RequestContext)">
+<example>
+This sample shows how to call GetTextBlocklistItems with required parameters and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+foreach (var item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
+}
+]]></code>
+</example>
+    </member>
   </members>
 </doc>
