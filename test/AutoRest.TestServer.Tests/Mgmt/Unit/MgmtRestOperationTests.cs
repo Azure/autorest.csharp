@@ -76,6 +76,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
+                shouldTreatBase64AsBinaryData: true,
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null);
         }
