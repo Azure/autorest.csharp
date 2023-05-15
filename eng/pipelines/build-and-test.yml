@@ -33,12 +33,18 @@ stages:
               displayName: "(Temp) Install dependencies"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json && npx ts-node .\typespec-bump-deps.ts .\package-lock.json --add-npm-overrides
+                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json --add-npm-overrides && npx ts-node .\typespec-bump-deps.ts .\package.json --add-npm-overrides
               displayName: "Bump tsp versions"
+              workingDirectory: $(Build.SourcesDirectory)
+            - pwsh: rm package-lock.json
+              displayName: "Remove package-lock.json"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
                 npm install
               displayName: "Install packages"
+              workingDirectory: $(Build.SourcesDirectory)
+            - pwsh: ./eng/Generate.ps1
+              displayName: "Generate codes"
               workingDirectory: $(Build.SourcesDirectory)
           - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
             - script: |
@@ -129,20 +135,4 @@ stages:
                   scriptLocation: "inlineScript"
                   inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
                   workingDirectory: $(Build.SourcesDirectory)
-      - template: check-code-generation.yml
-        parameters:
-          name: Check_Code_Generation_A_C
-          filter: "^[a-b]"
-      - template: check-code-generation.yml
-        parameters:
-          name: Check_Code_Generation_C_I
-          filter: "^[c-i]"
-      - template: check-code-generation.yml
-        parameters:
-          name: Check_Code_Generation_J_R
-          filter: "^[j-r]"
-      - template: check-code-generation.yml
-        parameters:
-          name: Check_Code_Generation_S_Z
-          filter: "^[s-z]"
   
