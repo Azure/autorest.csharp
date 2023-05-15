@@ -101,6 +101,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
                         }
                         bool writeFormat = false;
+                        bool addToArrayForBinaryData = false;
 
                         if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryExpression<>))
                             writer.Append($"{writerName}.");
@@ -166,15 +167,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             switch (valueSerialization.Format)
                             {
-                                case SerializationFormat.Bytes_Base64:
-                                    writer.Append($"{writerName}.");
-                                    writer.AppendRaw("WriteBase64StringValue");
-                                    writeFormat = true;
-                                    break;
+                                case SerializationFormat.Bytes_Base64: //intentional fall through
                                 case SerializationFormat.Bytes_Base64Url:
                                     writer.Append($"{writerName}.");
                                     writer.AppendRaw("WriteBase64StringValue");
                                     writeFormat = true;
+                                    addToArrayForBinaryData = true;
                                     break;
                                 default:
                                     writer.Line($"#if NET6_0_OR_GREATER");
@@ -194,7 +192,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"({name:I}")
                             .AppendNullableValue(valueSerialization.Type);
 
-                        if (frameworkType == typeof(BinaryData))
+                        if (frameworkType == typeof(BinaryData) && addToArrayForBinaryData)
                             writer.Append($".ToArray()");
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
