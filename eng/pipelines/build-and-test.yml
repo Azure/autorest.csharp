@@ -29,13 +29,11 @@ stages:
               displayName: "Install latest tsp compiler globally"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npm install pacote@15.1.3
-                npm install @types/pacote@11.1.5
+                npm install pacote@15.1.3 && npm install @types/pacote@11.1.5
               displayName: "(Temp) Install dependencies"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
-                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json
-                npx ts-node .\typespec-bump-deps.ts .\package-lock.json --add-npm-overrides
+                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json && npx ts-node .\typespec-bump-deps.ts .\package-lock.json --add-npm-overrides
               displayName: "Bump tsp versions"
               workingDirectory: $(Build.SourcesDirectory)
             - script: |
