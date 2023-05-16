@@ -3,7 +3,7 @@ trigger: none
 variables:
   NugetSecurityAnalysisWarningLevel: 'none'
 
-stages:
+jobs:
   - template: build-and-test.yml
     parameters:
       IsTspDevVersionTest: true

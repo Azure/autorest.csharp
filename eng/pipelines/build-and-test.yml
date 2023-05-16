@@ -2,140 +2,133 @@
 parameters:
   IsTspDevVersionTest: false
 
-stages:
-  - stage: 'Build_and_Test'
-    jobs:
-      - job: Build
-        timeoutInMinutes: 120
-        pool:
-          name: azsdk-pool-mms-win-2022-general
-          vmImage: windows-2022
-        steps:
-          - checkout: self
-            fetchDepth: 1
-          - task: UseDotNet@2
-            displayName: 'Use .NET Core SDK'
-            retryCountOnTaskFailure: 3
+jobs:
+  - job: Build_and_Test
+    timeoutInMinutes: 120
+    pool:
+      name: azsdk-pool-mms-win-2022-general
+      vmImage: windows-2022
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - task: UseDotNet@2
+        displayName: 'Use .NET Core SDK'
+        retryCountOnTaskFailure: 3
+        inputs:
+          useGlobalJson: true
+          performMultiLevelLookup: true
+      - task: NodeTool@0
+        displayName: "Install Node 18.x"
+        inputs:
+          versionSpec: '18.x'
+      - ${{ if eq(parameters.IsTspDevVersionTest, true) }}:
+        - script: |
+            npm install -g @typespec/compiler@next
+          displayName: "Install latest tsp compiler globally"
+          workingDirectory: $(Build.SourcesDirectory)
+        - script: |
+            npx @azure-tools/typespec-bump-deps .\src\CADL.Extension\Emitter.Csharp\package.json && npx @azure-tools/typespec-bump-deps .\package.json --add-npm-overrides
+          displayName: "Bump tsp versions"
+          workingDirectory: $(Build.SourcesDirectory)
+        - pwsh: ./eng/RemoveInstalledPackages.ps1
+          displayName: "Remove existing packages"
+          workingDirectory: $(Build.SourcesDirectory)
+        - script: |
+            npm install
+          displayName: "Install packages"
+          workingDirectory: $(Build.SourcesDirectory)
+        - pwsh: node -p -e "require('./node_modules/@typespec/compiler/package.json').version"
+          displayName: "Check tsp version"
+          workingDirectory: $(Build.SourcesDirectory)
+        - pwsh: ./eng/Generate.ps1
+          displayName: "Generate codes"
+          workingDirectory: $(Build.SourcesDirectory)
+      - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
+        - script: |
+            npm ci
+          displayName: "Install packages"
+          workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npm run prettier
+        displayName: "Emitter format check"
+        workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+      - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
+        name: Package
+        displayName: 'Package'
+        workingDirectory: $(Build.SourcesDirectory)
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+      - pwsh: ./eng/SharedCodeCheck.ps1
+        displayName: "Check if shared source code is up-to-date"
+        workingDirectory: $(Build.SourcesDirectory)
+      - task: Npm@1
+        displayName: 'Build CADL Ranch Mock Api project'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: $(Build.SourcesDirectory)/test/CadlRanchMockApis
+      - script: |
+          dotnet test AutoRest.CSharp.sln
+        displayName: "Test"
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          dotnet test AutoRest.CSharp.sln -c Release
+        displayName: "Test Release Configuration"
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+        workingDirectory: $(Build.SourcesDirectory)
+      - task: Npm@1
+        displayName: 'Build CADL csharp emitter'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+      - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+        displayName: 'E2E Test for CADL emitter'
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npm run test --prefix src/CADL.Extension/Emitter.Csharp
+        displayName: 'Unit Test'
+        workingDirectory: $(Build.SourcesDirectory)
+      - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
+        - task: PublishBuildArtifacts@1
+          condition: succeededOrFailed()
+          displayName: 'Publish Artifacts'
+          inputs:
+            ArtifactName: packages
+        - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+          - pwsh: >
+              ./eng/PublishRelease.ps1
+              -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net6.0/
+              -CoverageDirectory ./artifacts/coverage
+              -CadlEmitterDirectory ./src/CADL.Extension/Emitter.Csharp
+              -GitHubToken $(azuresdk-github-pat)
+              -NpmToken $(azure-sdk-npm-token)
+              -BuildNumber $(Build.BuildNumber)
+              -Sha $(Build.SourceVersion)
+              -CoverageUser $(storage-coverage-user)
+              -CoveragePass $(storage-coverage-pass)
+            name: Publish
+            failOnStderr: false
+            displayName: 'Publish to GitHub, npm and coverage report'
+            workingDirectory: $(Build.SourcesDirectory)
+        - publish: $(Build.SourcesDirectory)/artifacts/coverage/cadl-ranch-coverage-csharp.json
+          artifact: CoverageReport
+        - ${{if eq(variables['System.TeamProject'], 'internal')}}:
+          - task: AzureCLI@2
+            displayName: 'Upload to Cadl Ranch Coverage Report'
+            condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
             inputs:
-              useGlobalJson: true
-              performMultiLevelLookup: true
-          - task: NodeTool@0
-            displayName: "Install Node 18.x"
-            inputs:
-              versionSpec: '18.x'
-          - ${{ if eq(parameters.IsTspDevVersionTest, true) }}:
-            - script: |
-                npm install -g @typespec/compiler@next
-              displayName: "Install latest tsp compiler globally"
+              azureSubscription: "Cadl Ranch Storage"
+              scriptType: "bash"
+              scriptLocation: "inlineScript"
+              inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
               workingDirectory: $(Build.SourcesDirectory)
-            - script: |
-                npm install pacote@15.1.3 && npm install @types/pacote@11.1.5
-              displayName: "(Temp) Install dependencies"
-              workingDirectory: $(Build.SourcesDirectory)
-            - script: |
-                npx ts-node .\typespec-bump-deps.ts .\src\CADL.Extension\Emitter.Csharp\package.json && npx ts-node .\typespec-bump-deps.ts .\package.json --add-npm-overrides
-              displayName: "Bump tsp versions"
-              workingDirectory: $(Build.SourcesDirectory)
-            - pwsh: ./eng/RemoveInstalledPackages.ps1
-              displayName: "Remove existing packages"
-              workingDirectory: $(Build.SourcesDirectory)
-            - script: |
-                npm install
-              displayName: "Install packages"
-              workingDirectory: $(Build.SourcesDirectory)
-            - pwsh: node -p -e "require('./node_modules/@typespec/compiler/package.json').version"
-              displayName: "Check tsp version"
-              workingDirectory: $(Build.SourcesDirectory)
-            - pwsh: ./eng/Generate.ps1
-              displayName: "Generate codes"
-              workingDirectory: $(Build.SourcesDirectory)
-          - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
-            - script: |
-                npm ci
-              displayName: "Install packages"
-              workingDirectory: $(Build.SourcesDirectory)
-          - script: |
-              npm run prettier
-            displayName: "Emitter format check"
-            workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
-          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
-            name: Package
-            displayName: 'Package'
-            workingDirectory: $(Build.SourcesDirectory)
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-          - pwsh: ./eng/SharedCodeCheck.ps1
-            displayName: "Check if shared source code is up-to-date"
-            workingDirectory: $(Build.SourcesDirectory)
-          - task: Npm@1
-            displayName: 'Build CADL Ranch Mock Api project'
-            inputs:
-              command: custom
-              customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/test/CadlRanchMockApis
-          - script: |
-              dotnet test AutoRest.CSharp.sln
-            displayName: "Test"
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-            workingDirectory: $(Build.SourcesDirectory)
-          - script: |
-              dotnet test AutoRest.CSharp.sln -c Release
-            displayName: "Test Release Configuration"
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-            workingDirectory: $(Build.SourcesDirectory)
-          - task: Npm@1
-            displayName: 'Build CADL csharp emitter'
-            inputs:
-              command: custom
-              customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-            displayName: 'E2E Test for CADL emitter'
-            workingDirectory: $(Build.SourcesDirectory)
-          - script: |
-              npm run test --prefix src/CADL.Extension/Emitter.Csharp
-            displayName: 'Unit Test'
-            workingDirectory: $(Build.SourcesDirectory)
-          - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
-            - task: PublishBuildArtifacts@1
-              condition: succeededOrFailed()
-              displayName: 'Publish Artifacts'
-              inputs:
-                ArtifactName: packages
-            - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-              - pwsh: >
-                  ./eng/PublishRelease.ps1
-                  -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net6.0/
-                  -CoverageDirectory ./artifacts/coverage
-                  -CadlEmitterDirectory ./src/CADL.Extension/Emitter.Csharp
-                  -GitHubToken $(azuresdk-github-pat)
-                  -NpmToken $(azure-sdk-npm-token)
-                  -BuildNumber $(Build.BuildNumber)
-                  -Sha $(Build.SourceVersion)
-                  -CoverageUser $(storage-coverage-user)
-                  -CoveragePass $(storage-coverage-pass)
-                name: Publish
-                failOnStderr: false
-                displayName: 'Publish to GitHub, npm and coverage report'
-                workingDirectory: $(Build.SourcesDirectory)
-            - publish: $(Build.SourcesDirectory)/artifacts/coverage/cadl-ranch-coverage-csharp.json
-              artifact: CoverageReport
-            - ${{if eq(variables['System.TeamProject'], 'internal')}}:
-              - task: AzureCLI@2
-                displayName: 'Upload to Cadl Ranch Coverage Report'
-                condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
-                inputs:
-                  azureSubscription: "Cadl Ranch Storage"
-                  scriptType: "bash"
-                  scriptLocation: "inlineScript"
-                  inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
-                  workingDirectory: $(Build.SourcesDirectory)
-  
