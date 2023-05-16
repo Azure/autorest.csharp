@@ -574,7 +574,7 @@
      "Type": {
       "$id": "74",
       "Name": "bytes",
-      "Kind": "bytes",
+      "Kind": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -589,7 +589,7 @@
      "Type": {
       "$id": "76",
       "Name": "bytes",
-      "Kind": "bytes",
+      "Kind": "Bytes",
       "IsNullable": false
      },
      "IsRequired": false,

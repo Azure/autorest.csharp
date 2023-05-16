@@ -1181,7 +1181,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new MultivariateBatchDetectionOptions(null, 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+            var options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
             var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
         }
 
