@@ -137,7 +137,8 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
+            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
+            SerializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(

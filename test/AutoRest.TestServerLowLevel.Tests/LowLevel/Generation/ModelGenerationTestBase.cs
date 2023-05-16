@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
+                shouldTreatBase64AsBinaryData: true,
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null);
         }

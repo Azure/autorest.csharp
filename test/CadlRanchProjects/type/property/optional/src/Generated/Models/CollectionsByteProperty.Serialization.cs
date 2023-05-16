@@ -29,11 +29,7 @@ namespace _Type.Property.Optional.Models
                         writer.WriteNullValue();
                         continue;
                     }
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item);
-#else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.ToString()).RootElement);
-#endif
+                    writer.WriteBase64StringValue(item.ToArray(), "D");
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +60,7 @@ namespace _Type.Property.Optional.Models
                         }
                         else
                         {
-                            array.Add(BinaryData.FromString(item.GetRawText()));
+                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
                         }
                     }
                     property = array;

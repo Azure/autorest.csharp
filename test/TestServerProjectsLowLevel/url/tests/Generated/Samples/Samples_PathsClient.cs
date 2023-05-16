@@ -774,7 +774,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.ByteMultiByte(null);
+            Response response = client.ByteMultiByte(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -785,7 +785,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.ByteMultiByte(null, new RequestContext());
+            Response response = client.ByteMultiByte(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -796,7 +796,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(null);
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -807,7 +807,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(null, new RequestContext());
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -862,7 +862,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.ByteNull(null);
+            Response response = client.ByteNull(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -873,7 +873,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.ByteNull(null, new RequestContext());
+            Response response = client.ByteNull(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -884,7 +884,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(null);
+            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -895,7 +895,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(null, new RequestContext());
+            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -1082,7 +1082,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.Base64Url(null);
+            Response response = client.Base64Url(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1093,7 +1093,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.Base64Url(null, new RequestContext());
+            Response response = client.Base64Url(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -1104,7 +1104,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(null);
+            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1115,7 +1115,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(null, new RequestContext());
+            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 

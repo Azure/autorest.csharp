@@ -49,6 +49,8 @@ namespace AutoRest.CSharp.Output.Builders
 
             if (frameworkType == typeof(byte[]) && value is string base64String)
                 normalizedValue = Convert.FromBase64String(base64String);
+            else if (frameworkType == typeof(BinaryData) && value is string base64String2)
+                normalizedValue = BinaryData.FromBytes(Convert.FromBase64String(base64String2));
             else if (frameworkType == typeof(DateTimeOffset) && value is string dateTimeString)
                 normalizedValue = DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal);
             else if (frameworkType == typeof(ResourceType) && value is string resourceTypeString)
