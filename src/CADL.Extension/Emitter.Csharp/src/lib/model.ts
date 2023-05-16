@@ -512,9 +512,6 @@ export function getInputType(
                     models,
                     enums
                 );
-                // if (format && (inputType as InputPrimitiveType)) {
-                //     applyFormat(inputType as InputPrimitiveType, format);
-                // }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
