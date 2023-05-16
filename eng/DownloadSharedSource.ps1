@@ -51,5 +51,6 @@ $destinationPath = "$repoRoot/src/assets/Management.Shared"
 Get-ChildItem $destinationPath -Filter *.cs | Remove-Item;
 CopyAll $files $sourcePath $destinationPath
 
+# Waiting before deleting the cloned repo to avoid file locking issues
 Start-Sleep -Seconds 1
 Remove-Item $clonedPath -Recurse -Force -ErrorAction SilentlyContinue
