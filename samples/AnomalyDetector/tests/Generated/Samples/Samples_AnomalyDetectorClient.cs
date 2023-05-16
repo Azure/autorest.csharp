@@ -1041,7 +1041,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = new { },
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1069,7 +1069,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = new { },
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1112,7 +1112,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = new { },
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1140,7 +1140,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = new { },
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",

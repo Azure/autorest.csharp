@@ -824,6 +824,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.DurationISO8601 => "\"PT1H23M45S\"",
                 InputTypeKind.DurationConstant => "\"01:23:45\"",
                 InputTypeKind.Time => "\"01:23:45\"",
+                InputTypeKind.Uri => "\"http://localhost:3000\"",
                 _ => "new {}"
             },
             InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
