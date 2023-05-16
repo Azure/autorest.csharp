@@ -519,7 +519,7 @@
      "Type": {
       "$id": "76",
       "Name": "string",
-      "Kind": "Uri",
+      "Kind": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,

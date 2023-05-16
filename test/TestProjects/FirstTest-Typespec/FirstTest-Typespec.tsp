@@ -201,7 +201,7 @@ model ModelWithFormat {
     sourceUrl: string;
 
     @doc("uuid format")
-    @format("Uri")
+    @format("uuid")
     guid: string;
 }
 

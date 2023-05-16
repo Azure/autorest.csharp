@@ -617,8 +617,8 @@ namespace TypeSpecFirstTest.Samples
 
             var data = new
             {
-                sourceUrl = new { },
-                guid = new { },
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
             Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
@@ -634,8 +634,8 @@ namespace TypeSpecFirstTest.Samples
 
             var data = new
             {
-                sourceUrl = new { },
-                guid = new { },
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
             Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
@@ -651,8 +651,8 @@ namespace TypeSpecFirstTest.Samples
 
             var data = new
             {
-                sourceUrl = new { },
-                guid = new { },
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
             Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
@@ -668,8 +668,8 @@ namespace TypeSpecFirstTest.Samples
 
             var data = new
             {
-                sourceUrl = new { },
-                guid = new { },
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
             Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
@@ -683,7 +683,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var body = new ModelWithFormat(null, null);
+            var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
             var result = await client.StringFormatAsync(Guid.NewGuid(), body);
         }
 

@@ -18,7 +18,7 @@ namespace TypeSpecFirstTest.Models
             writer.WritePropertyName("sourceUrl"u8);
             writer.WriteStringValue(SourceUrl.AbsoluteUri);
             writer.WritePropertyName("guid"u8);
-            writer.WriteStringValue(Guid.AbsoluteUri);
+            writer.WriteStringValue(Guid);
             writer.WriteEndObject();
         }
 

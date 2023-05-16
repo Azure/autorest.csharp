@@ -732,6 +732,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     return "Guid.NewGuid()";
                 }
 
+                if (type == typeof(Uri))
+                {
+                    return "new Uri(\"http://localhost:3000\")";
+                }
+
                 if (type == typeof(WaitUntil))
                 {
                     // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
