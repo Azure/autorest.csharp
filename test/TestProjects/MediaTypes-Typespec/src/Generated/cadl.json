@@ -115,7 +115,7 @@
        "Type": {
         "$id": "16",
         "Name": "bytes",
-        "Kind": "BinaryData",
+        "Kind": "bytes",
         "IsNullable": false
        },
        "Location": "Body",

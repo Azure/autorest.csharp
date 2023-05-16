@@ -150,6 +150,30 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required Model Record")
   requiredModelRecord: Record<RecordItem>;
+
+  @doc("Required bytes")
+  requiredBytes: bytes;
+
+  @doc("Optional bytes")
+  optionalBytes?: bytes;
+
+  @doc("Required uint8[]")
+  requiredUint8Array: uint8[];
+
+  @doc("Optional uint8[]")
+  optionalUint8Array?: uint8[];
+  
+  @doc("Required unknown")
+  requiredUnknown: unknown;
+
+  @doc("Optional unknown")
+  optionalUnknown?: unknown;
+
+  @doc("Required int8[]")
+  requiredInt8Array: int8[];
+
+  @doc("Optional int8[]")
+  optionalInt8Array?: int8[];
 }
 
 @doc("Model used both as input and output with primitive types")
