@@ -1123,8 +1123,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> ByteMultiByteAsync(BinaryData bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1157,8 +1157,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByte(Byte[],RequestContext)']/*" />
-        public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByte(BinaryData,RequestContext)']/*" />
+        public virtual Response ByteMultiByte(BinaryData bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1251,8 +1251,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNullAsync(Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNullAsync(BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> ByteNullAsync(BinaryData bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1285,8 +1285,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNull(Byte[],RequestContext)']/*" />
-        public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNull(BinaryData,RequestContext)']/*" />
+        public virtual Response ByteNull(BinaryData bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1563,8 +1563,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64UrlAsync(Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64UrlAsync(BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> Base64UrlAsync(BinaryData base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
@@ -1597,8 +1597,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64Url(Byte[],RequestContext)']/*" />
-        public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64Url(BinaryData,RequestContext)']/*" />
+        public virtual Response Base64Url(BinaryData base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
@@ -1984,7 +1984,7 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath, RequestContext context)
+        internal HttpMessage CreateByteMultiByteRequest(BinaryData bytePath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1992,7 +1992,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/multibyte/", false);
-            uri.AppendPath(bytePath, "D", true);
+            uri.AppendPath(bytePath.ToArray(), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2012,7 +2012,7 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteNullRequest(byte[] bytePath, RequestContext context)
+        internal HttpMessage CreateByteNullRequest(BinaryData bytePath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
@@ -2020,7 +2020,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/null/", false);
-            uri.AppendPath(bytePath, "D", true);
+            uri.AppendPath(bytePath.ToArray(), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2082,7 +2082,7 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath, RequestContext context)
+        internal HttpMessage CreateBase64UrlRequest(BinaryData base64UrlPath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -2090,7 +2090,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/bG9yZW0/", false);
-            uri.AppendPath(base64UrlPath, "U", true);
+            uri.AppendPath(base64UrlPath.ToArray(), "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

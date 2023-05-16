@@ -53,7 +53,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new NullableClient(host, null).GetBytesClient().GetNonNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), response.Value.NullableProperty.ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.ToString());
         });
 
         [Test]
@@ -161,8 +161,8 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNonNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), response.Value.NullableProperty.First().ToString());
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), response.Value.NullableProperty.Last().ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.First().ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.Last().ToString());
         });
 
         [Test]

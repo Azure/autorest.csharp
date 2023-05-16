@@ -110,9 +110,11 @@ function getCSharpInputTypeKindByIntrinsicModelName(
 ): InputTypeKind {
     switch (name) {
         case "bytes":
-            return InputTypeKind.BinaryData;
+            return InputTypeKind.Bytes;
         case "int8":
-            return InputTypeKind.Int32;
+            return InputTypeKind.SByte;
+        case "unit8":
+            return InputTypeKind.Byte;
         case "int32":
             return InputTypeKind.Int32;
         case "int64":
