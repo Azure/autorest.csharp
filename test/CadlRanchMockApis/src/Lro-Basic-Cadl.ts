@@ -29,7 +29,7 @@ Scenarios.LroBasic_CreateProject = passOnSuccess([
   mockapi.post("/projects", (req) => {
     req.expect.bodyEquals(projectCreationRequest);
     return {
-      status: 201,
+      status: 202,
       headers: { "operation-location": `${req.baseUrl}/lro/post/polling`},
       body: json("On going...")
     };
