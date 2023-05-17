@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -55,13 +56,32 @@ namespace AutoRest.CSharp.Common.Input
             description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetDefaultValue(propertyType));
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetDefaultValue(propertyType), GetSerializationFormat(propertyType));
             if (id != null)
             {
                 resolver.AddReference(id, property);
             }
 
             return property;
+        }
+
+        private static SerializationFormat GetSerializationFormat(InputType propertyType)
+        {
+            InputTypeKind? typeKind = propertyType switch
+            {
+                InputPrimitiveType primitiveType => primitiveType.Kind,
+                _ => null
+            };
+
+            if (typeKind is null)
+                return SerializationFormat.Default;
+
+            return typeKind switch
+            {
+                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
+                _ => SerializationFormat.Default
+            };
         }
 
         private static FormattableString? GetDefaultValue(InputType propertyType)

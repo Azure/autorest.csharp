@@ -13,14 +13,14 @@ namespace azure_special_properties.Models
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()
         {
-            ConstantId = 1;
+            ConstantId = ErrorConstantId._1;
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
         /// <param name="status"></param>
         /// <param name="constantId"></param>
         /// <param name="message"></param>
-        internal Error(int? status, int constantId, string message)
+        internal Error(int? status, ErrorConstantId constantId, string message)
         {
             Status = status;
             ConstantId = constantId;
@@ -30,7 +30,7 @@ namespace azure_special_properties.Models
         /// <summary> Gets the status. </summary>
         public int? Status { get; }
         /// <summary> Gets the constant id. </summary>
-        public int ConstantId { get; }
+        public ErrorConstantId ConstantId { get; }
         /// <summary> Gets the message. </summary>
         public string Message { get; }
     }

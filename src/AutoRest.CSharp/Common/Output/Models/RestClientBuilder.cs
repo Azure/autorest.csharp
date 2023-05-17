@@ -315,7 +315,8 @@ namespace AutoRest.CSharp.Output.Models
                         var serialization = SerializationBuilder.Build(
                             bodyMediaType,
                             bodyRequestParameter.Type,
-                            bodyParameterValue.Type);
+                            bodyParameterValue.Type,
+                            null);
 
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
@@ -387,7 +388,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType);
+            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);
         }

@@ -13,20 +13,20 @@ namespace body_string.Models
         /// <summary> Initializes a new instance of RefColorConstant. </summary>
         public RefColorConstant()
         {
-            ColorConstant = "green-color";
+            ColorConstant = ColorConstant.GreenColor;
         }
 
         /// <summary> Initializes a new instance of RefColorConstant. </summary>
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
-        internal RefColorConstant(string colorConstant, string field1)
+        internal RefColorConstant(ColorConstant colorConstant, string field1)
         {
             ColorConstant = colorConstant;
             Field1 = field1;
         }
 
         /// <summary> Referenced Color Constant Description. </summary>
-        public string ColorConstant { get; set; }
+        public ColorConstant ColorConstant { get; }
         /// <summary> Sample string. </summary>
         public string Field1 { get; set; }
     }

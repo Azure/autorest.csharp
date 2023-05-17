@@ -47,8 +47,8 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
                 InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
                 InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
-            ConstantSchema constantSchema => ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),

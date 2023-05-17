@@ -26,5 +26,8 @@ export enum InputTypeKind {
     String = "String",
     Time = "Time",
     Uri = "Uri",
-    UnKnownKind = "UnknownKind"
+    UnKnownKind = "UnknownKind",
+    SByte = "int8",
+    Byte = "uint8",
+    Bytes = "bytes"
 }

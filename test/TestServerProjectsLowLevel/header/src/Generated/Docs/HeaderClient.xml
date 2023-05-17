@@ -609,26 +609,26 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ParamByteAsync(string,Byte[],RequestContext)">
+    <member name="ParamByteAsync(string,BinaryData,RequestContext)">
 <example>
 This sample shows how to call ParamByteAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamByteAsync("<scenario>", null, new RequestContext());
+Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ParamByte(string,Byte[],RequestContext)">
+    <member name="ParamByte(string,BinaryData,RequestContext)">
 <example>
 This sample shows how to call ParamByte with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamByte("<scenario>", null, new RequestContext());
+Response response = client.ParamByte("<scenario>", BinaryData.FromString("<your binary data content>"), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
