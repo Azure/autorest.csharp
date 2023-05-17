@@ -251,9 +251,9 @@
     },
     {
      "$id": "26",
-     "Name": "protocol",
+     "Name": "noConvenience",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
+     "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
      "Parameters": [
       {
        "$id": "27",
@@ -303,23 +303,67 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "",
-     "Path": "/protocol",
+     "Path": "/noConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "31",
-     "Name": "convenienceWithOptional",
+     "Name": "noConvenienceRequiredBody",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation has protocol method with optional RequestContext and convenience method.",
+     "Description": "No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.",
      "Parameters": [
       {
        "$id": "32",
+       "Name": "required",
+       "NameInRequest": "required",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "33",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "34",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "35",
+        "Type": {
+         "$ref": "34"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -334,9 +378,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "38",
         "Type": {
-         "$ref": "33"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
@@ -347,7 +391,346 @@
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "39",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/noConvenienceRequiredBody",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "40",
+     "Name": "noConvenienceOptionalBody",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "Parameters": [
+      {
+       "$id": "41",
+       "Name": "optional",
+       "NameInRequest": "optional",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "42",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "43",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "45",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "46",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "47",
+        "Type": {
+         "$ref": "46"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "48",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/noConvenienceOptionalBody",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "49",
+     "Name": "noConvenienceInFlag",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "No convenience method, and if we add the convenientAPI decorator, there will be ambiguity. But this method is in keep-non-overloadable-protocol-signature.",
+     "Parameters": [
+      {
+       "$id": "50",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "51",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "52",
+        "Type": {
+         "$ref": "51"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "53",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/noConvenienceInFlag",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "54",
+     "Name": "convenienceInFlag",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Has convenience method and protocol method. But this method is in keep-non-overloadable-protocol-signature.",
+     "Parameters": [
+      {
+       "$id": "55",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "56",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "57",
+        "Type": {
+         "$ref": "56"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "58",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/convenienceInFlag",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "59",
+     "Name": "protocol",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
+     "Parameters": [
+      {
+       "$id": "60",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "61",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "62",
+        "Type": {
+         "$ref": "61"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "63",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/protocol",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "64",
+     "Name": "convenienceWithOptional",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Operation has protocol method with optional RequestContext and convenience method.",
+     "Parameters": [
+      {
+       "$id": "65",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "66",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "67",
+        "Type": {
+         "$ref": "66"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "68",
        "StatusCodes": [
         200
        ],
@@ -368,384 +751,11 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "36",
+     "$id": "69",
      "Name": "convenienceWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required RequestContext and convenience method.",
      "Parameters": [
-      {
-       "$id": "37",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "38",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "39",
-        "Type": {
-         "$ref": "38"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "40",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "",
-     "Path": "/convenienceWithRequired",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "41",
-     "Name": "convenienceShouldNotGenerate",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
-     "Parameters": [
-      {
-       "$id": "42",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "43",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "44",
-        "Type": {
-         "$ref": "43"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "45",
-       "StatusCodes": [
-        200
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "",
-     "Path": "/convenienceShouldNotGenerate",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "46",
-     "Name": "protocolShouldNotGenerateConvenience",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
-     "Parameters": [
-      {
-       "$id": "47",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "48",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "49",
-        "Type": {
-         "$ref": "48"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "50",
-       "StatusCodes": [
-        200
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "",
-     "Path": "/protocolShouldNotGenerateConvenience",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "51",
-     "Name": "protocolOptionalQuery",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
-     "Parameters": [
-      {
-       "$id": "52",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
-        "$id": "53",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "54",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "55",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "56",
-        "Type": {
-         "$ref": "55"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "57",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "",
-     "Path": "/protocolOptionalQuery",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "58",
-     "Name": "protocolRequiredQuery",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
-     "Parameters": [
-      {
-       "$id": "59",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
-        "$id": "60",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "61",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "62",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "63",
-        "Type": {
-         "$ref": "62"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "64",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "",
-     "Path": "/protocolRequiredQuery",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "65",
-     "Name": "protocolOptionalModel",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
-     "Parameters": [
-      {
-       "$id": "66",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Body",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "67",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "68",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "69",
-        "Type": {
-         "$ref": "68"
-        },
-        "Value": "application/json"
-       }
-      },
       {
        "$id": "70",
        "Name": "accept",
@@ -783,6 +793,379 @@
        "StatusCodes": [
         200
        ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/convenienceWithRequired",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "74",
+     "Name": "convenienceShouldNotGenerate",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
+     "Parameters": [
+      {
+       "$id": "75",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "76",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "77",
+        "Type": {
+         "$ref": "76"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "78",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/convenienceShouldNotGenerate",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "79",
+     "Name": "protocolShouldNotGenerateConvenience",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
+     "Parameters": [
+      {
+       "$id": "80",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "81",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "82",
+        "Type": {
+         "$ref": "81"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "83",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/protocolShouldNotGenerateConvenience",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "84",
+     "Name": "protocolOptionalQuery",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
+     "Parameters": [
+      {
+       "$id": "85",
+       "Name": "optional",
+       "NameInRequest": "optional",
+       "Type": {
+        "$id": "86",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "87",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "88",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "89",
+        "Type": {
+         "$ref": "88"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "90",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/protocolOptionalQuery",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "91",
+     "Name": "protocolRequiredQuery",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
+     "Parameters": [
+      {
+       "$id": "92",
+       "Name": "required",
+       "NameInRequest": "required",
+       "Type": {
+        "$id": "93",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "94",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "95",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "96",
+        "Type": {
+         "$ref": "95"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "97",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/protocolRequiredQuery",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "98",
+     "Name": "protocolOptionalModel",
+     "ResourceName": "ConvenienceInCadl",
+     "Description": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
+     "Parameters": [
+      {
+       "$id": "99",
+       "Name": "optional",
+       "NameInRequest": "optional",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "100",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "101",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "102",
+        "Type": {
+         "$ref": "101"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "103",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "104",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "105",
+        "Type": {
+         "$ref": "104"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "106",
+       "StatusCodes": [
+        200
+       ],
        "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
@@ -800,13 +1183,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "74",
+     "$id": "107",
      "Name": "protocolRequiredModel",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
-       "$id": "75",
+       "$id": "108",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
@@ -823,11 +1206,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "109",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "77",
+        "$id": "110",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -842,19 +1225,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "111",
         "Type": {
-         "$ref": "77"
+         "$ref": "110"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "79",
+       "$id": "112",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
+        "$id": "113",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -869,9 +1252,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "114",
         "Type": {
-         "$ref": "80"
+         "$ref": "113"
         },
         "Value": "application/json"
        }
@@ -882,7 +1265,7 @@
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "115",
        "StatusCodes": [
         200
        ],
@@ -903,17 +1286,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "83",
+     "$id": "116",
      "Name": "convenienceOptionalQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and optional RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "84",
+       "$id": "117",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
-        "$id": "85",
+        "$id": "118",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -929,11 +1312,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "119",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
+        "$id": "120",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -948,9 +1331,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "121",
         "Type": {
-         "$ref": "87"
+         "$ref": "120"
         },
         "Value": "application/json"
        }
@@ -961,7 +1344,7 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "122",
        "StatusCodes": [
         200
        ],
@@ -982,17 +1365,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "90",
+     "$id": "123",
      "Name": "convenienceRequiredQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and optional RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "91",
+       "$id": "124",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
-        "$id": "92",
+        "$id": "125",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1008,11 +1391,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "93",
+       "$id": "126",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "127",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1027,9 +1410,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "128",
         "Type": {
-         "$ref": "94"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
@@ -1040,7 +1423,7 @@
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
@@ -1061,17 +1444,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "97",
+     "$id": "130",
      "Name": "convenienceOptionalQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and required RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "98",
+       "$id": "131",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
-        "$id": "99",
+        "$id": "132",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1087,11 +1470,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "100",
+       "$id": "133",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "101",
+        "$id": "134",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1106,9 +1489,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "102",
+        "$id": "135",
         "Type": {
-         "$ref": "101"
+         "$ref": "134"
         },
         "Value": "application/json"
        }
@@ -1119,7 +1502,7 @@
      ],
      "Responses": [
       {
-       "$id": "103",
+       "$id": "136",
        "StatusCodes": [
         200
        ],
@@ -1140,17 +1523,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "104",
+     "$id": "137",
      "Name": "convenienceRequiredQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and required RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "105",
+       "$id": "138",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
-        "$id": "106",
+        "$id": "139",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1166,11 +1549,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "107",
+       "$id": "140",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "108",
+        "$id": "141",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1185,9 +1568,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "109",
+        "$id": "142",
         "Type": {
-         "$ref": "108"
+         "$ref": "141"
         },
         "Value": "application/json"
        }
@@ -1198,7 +1581,7 @@
      ],
      "Responses": [
       {
-       "$id": "110",
+       "$id": "143",
        "StatusCodes": [
         200
        ],
@@ -1219,13 +1602,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "111",
+     "$id": "144",
      "Name": "convenienceOptionalModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and optional RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "112",
+       "$id": "145",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
@@ -1242,11 +1625,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "113",
+       "$id": "146",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "114",
+        "$id": "147",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1261,19 +1644,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "115",
+        "$id": "148",
         "Type": {
-         "$ref": "114"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "116",
+       "$id": "149",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "117",
+        "$id": "150",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1288,9 +1671,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "118",
+        "$id": "151",
         "Type": {
-         "$ref": "117"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
@@ -1301,7 +1684,7 @@
      ],
      "Responses": [
       {
-       "$id": "119",
+       "$id": "152",
        "StatusCodes": [
         200
        ],
@@ -1322,13 +1705,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "120",
+     "$id": "153",
      "Name": "convenienceRequiredModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required body parameter and optional RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "121",
+       "$id": "154",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
@@ -1345,11 +1728,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "122",
+       "$id": "155",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "123",
+        "$id": "156",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1364,19 +1747,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "124",
+        "$id": "157",
         "Type": {
-         "$ref": "123"
+         "$ref": "156"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "125",
+       "$id": "158",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "126",
+        "$id": "159",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1391,9 +1774,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "127",
+        "$id": "160",
         "Type": {
-         "$ref": "126"
+         "$ref": "159"
         },
         "Value": "application/json"
        }
@@ -1404,7 +1787,7 @@
      ],
      "Responses": [
       {
-       "$id": "128",
+       "$id": "161",
        "StatusCodes": [
         200
        ],
@@ -1425,13 +1808,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "129",
+     "$id": "162",
      "Name": "convenienceOptionalModelWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and required RequestContext and convenience method.",
      "Parameters": [
       {
-       "$id": "130",
+       "$id": "163",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
@@ -1448,11 +1831,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "131",
+       "$id": "164",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "132",
+        "$id": "165",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1467,19 +1850,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "133",
+        "$id": "166",
         "Type": {
-         "$ref": "132"
+         "$ref": "165"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "134",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "135",
+        "$id": "168",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1494,9 +1877,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "136",
+        "$id": "169",
         "Type": {
-         "$ref": "135"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
@@ -1507,7 +1890,7 @@
      ],
      "Responses": [
       {
-       "$id": "137",
+       "$id": "170",
        "StatusCodes": [
         200
        ],
@@ -1528,17 +1911,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "138",
+     "$id": "171",
      "Name": "protocolOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
-       "$id": "139",
+       "$id": "172",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
-        "$id": "140",
+        "$id": "173",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1554,7 +1937,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "141",
+       "$id": "174",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
@@ -1571,11 +1954,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "142",
+       "$id": "175",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "143",
+        "$id": "176",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1590,19 +1973,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "144",
+        "$id": "177",
         "Type": {
-         "$ref": "143"
+         "$ref": "176"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "145",
+       "$id": "178",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "179",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1617,9 +2000,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "180",
         "Type": {
-         "$ref": "146"
+         "$ref": "179"
         },
         "Value": "application/json"
        }
@@ -1630,7 +2013,7 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "181",
        "StatusCodes": [
         200
        ],
@@ -1652,7 +2035,7 @@
     }
    ],
    "Protocol": {
-    "$id": "149"
+    "$id": "182"
    },
    "Creatable": true
   }

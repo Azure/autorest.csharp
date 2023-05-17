@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool ShouldRequestContextOptional()
         {
-            if (!ShouldGenerateConvenienceMethod())
+            if (Configuration.KeepNonOverloadableProtocolSignature.Contains($"{_namespaceName}.{_clientName}.{Operation.Name}"))
             {
                 return true;
             }

@@ -4,3 +4,7 @@ emit: [
 options:
   "@azure-tools/typespec-csharp":
     existing-project-folder: ../../ConvenienceInitial-Typespec/src/Generated
+    keep-non-overloadable-protocol-signature: [
+      "ConvenienceInCadl.ConvenienceInCadlClient.NoConvenienceInFlag",
+      "ConvenienceInCadl.ConvenienceInCadlClient.ConvenienceInFlag"
+    ]

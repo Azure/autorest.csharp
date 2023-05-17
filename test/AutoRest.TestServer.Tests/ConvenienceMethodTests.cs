@@ -212,5 +212,42 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
             Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
         }
+
+        [Test]
+        public void NoConvenienceScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenience");
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceRequiredBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceRequiredBody");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceOptionalBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceOptionalBody");
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceInFlagScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceInFlag");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceInFlagScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceInFlag");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceInFlagValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().Last().IsOptional);
+        }
     }
 }

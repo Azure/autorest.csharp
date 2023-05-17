@@ -121,6 +121,164 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="NoConvenienceAsync(RequestContext)">
+<example>
+This sample shows how to call NoConvenienceAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.NoConvenienceAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenience(RequestContext)">
+<example>
+This sample shows how to call NoConvenience with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.NoConvenience(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceRequiredBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call NoConvenienceRequiredBodyAsync with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.NoConvenienceRequiredBodyAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceRequiredBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call NoConvenienceRequiredBody with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.NoConvenienceRequiredBody(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceOptionalBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call NoConvenienceOptionalBodyAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceOptionalBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call NoConvenienceOptionalBody with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceInFlagAsync(RequestContext)">
+<example>
+This sample shows how to call NoConvenienceInFlagAsync and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.NoConvenienceInFlagAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="NoConvenienceInFlag(RequestContext)">
+<example>
+This sample shows how to call NoConvenienceInFlag and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.NoConvenienceInFlag(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceInFlagValueAsync(CancellationToken)">
+<example>
+This sample shows how to call ConvenienceInFlagValueAsync.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = await client.ConvenienceInFlagValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceInFlagValue(CancellationToken)">
+<example>
+This sample shows how to call ConvenienceInFlagValue.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var result = client.ConvenienceInFlagValue();
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceInFlagAsync(RequestContext)">
+<example>
+This sample shows how to call ConvenienceInFlagAsync and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceInFlagAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ConvenienceInFlag(RequestContext)">
+<example>
+This sample shows how to call ConvenienceInFlag and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceInFlag(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+    </member>
     <member name="ProtocolValueAsync(CancellationToken)">
 <example>
 This sample shows how to call ProtocolValueAsync.

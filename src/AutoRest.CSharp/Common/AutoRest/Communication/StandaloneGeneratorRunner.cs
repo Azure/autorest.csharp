@@ -250,6 +250,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
             root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
+            root.TryGetProperty(Configuration.Options.KeepNonOverloadableProtocolSignature, out var keepNonOverloadableProtocolSignature);
+            var nonOverloadableProtocols = Configuration.DeserializeArray(keepNonOverloadableProtocolSignature);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
@@ -271,6 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
+                nonOverloadableProtocols,
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,
