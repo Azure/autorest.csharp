@@ -37,11 +37,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -61,11 +61,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -85,11 +85,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -109,11 +109,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -131,7 +131,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -143,7 +143,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -157,11 +157,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -173,11 +173,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -195,7 +195,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -207,7 +207,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -221,11 +221,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -237,11 +237,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -258,7 +258,7 @@ var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = await client.AnonymousBodyAsync(thing);
@@ -276,7 +276,7 @@ var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = client.AnonymousBody(thing);
@@ -295,7 +295,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -307,7 +307,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -321,11 +321,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -337,11 +337,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -359,7 +359,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -371,7 +371,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -385,11 +385,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -401,11 +401,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -525,7 +525,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -541,11 +541,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -565,7 +565,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -581,11 +581,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -608,7 +608,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
@@ -663,7 +663,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
@@ -722,7 +722,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -743,7 +743,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -769,11 +769,11 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralDouble = 4.56,
+        optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -815,11 +815,11 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
@@ -861,7 +861,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -882,7 +882,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -908,11 +908,11 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralDouble = 4.56,
+        optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -954,11 +954,11 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
@@ -1000,7 +1000,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -1021,7 +1021,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1047,11 +1047,11 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralDouble = 4.56,
+        optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -1093,11 +1093,11 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
@@ -1139,7 +1139,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -1160,7 +1160,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1186,11 +1186,11 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralDouble = 1.23,
+        requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralDouble = 4.56,
+        optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
     },
@@ -1232,11 +1232,11 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToStri
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
@@ -1293,11 +1293,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1317,11 +1317,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1338,7 +1338,7 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = await client.CreateLiteralAsync(body);
@@ -1356,7 +1356,7 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = client.CreateLiteral(body);
@@ -1375,7 +1375,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -1387,7 +1387,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1401,11 +1401,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -1417,11 +1417,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1439,7 +1439,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -1451,7 +1451,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1465,11 +1465,11 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralDouble = 1.23,
+    requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralDouble = 4.56,
+    optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
 };
@@ -1481,11 +1481,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1527,11 +1527,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1551,11 +1551,11 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
@@ -1600,7 +1600,7 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = await client.InternalProtocolAsync(body);
@@ -1618,7 +1618,7 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 };
 var result = client.InternalProtocol(body);

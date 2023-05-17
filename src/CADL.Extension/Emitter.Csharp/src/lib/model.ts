@@ -345,7 +345,7 @@ export function getInputType(
             // we use the model name followed by the property name as the enum name to ensure it is unique
             const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
             const enumValueType =
-                rawValueType.Kind === "String" ? "String" : "Float64";
+                rawValueType.Kind === "String" ? "String" : "Float32";
             const allowValues: InputEnumTypeValue[] = [
                 {
                     Name: literalValue.toString(),

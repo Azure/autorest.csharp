@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
             });
             Assert.AreEqual("literal", result.Name);
@@ -31,11 +31,11 @@ namespace CadlRanchProjects.Tests
             // but nevertheless, the SDK should still be able to get the new values
             Assert.AreEqual(new ThingRequiredLiteralString("reject"), result.RequiredLiteralString);
             Assert.AreEqual(new ThingRequiredLiteralInt(12345), result.RequiredLiteralInt);
-            Assert.AreEqual(new ThingRequiredLiteralDouble(123.45f), result.RequiredLiteralDouble);
+            Assert.AreEqual(new ThingRequiredLiteralFloat(123.45f), result.RequiredLiteralFloat);
             Assert.AreEqual(true, result.RequiredLiteralBool);
             Assert.AreEqual(new ThingOptionalLiteralString("accept"), result.OptionalLiteralString);
             Assert.AreEqual(new ThingOptionalLiteralInt(12345), result.OptionalLiteralInt);
-            Assert.AreEqual(new ThingOptionalLiteralDouble(123.45f), result.OptionalLiteralDouble);
+            Assert.AreEqual(new ThingOptionalLiteralFloat(123.45f), result.OptionalLiteralFloat);
             Assert.AreEqual(false, result.OptionalLiteralBool);
         });
     }

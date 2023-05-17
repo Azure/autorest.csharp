@@ -29,7 +29,7 @@
    "Name": "Thing_requiredLiteralInt",
    "Namespace": "TypeSpecFirstTest",
    "Description": "The Thing_requiredLiteralInt",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "5",
@@ -44,10 +44,10 @@
   },
   {
    "$id": "6",
-   "Name": "Thing_requiredLiteralDouble",
+   "Name": "Thing_requiredLiteralFloat",
    "Namespace": "TypeSpecFirstTest",
-   "Description": "The Thing_requiredLiteralDouble",
-   "EnumValueType": "Float64",
+   "Description": "The Thing_requiredLiteralFloat",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "7",
@@ -83,7 +83,7 @@
    "Name": "Thing_optionalLiteralInt",
    "Namespace": "TypeSpecFirstTest",
    "Description": "The Thing_optionalLiteralInt",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "11",
@@ -98,10 +98,10 @@
   },
   {
    "$id": "12",
-   "Name": "Thing_optionalLiteralDouble",
+   "Name": "Thing_optionalLiteralFloat",
    "Namespace": "TypeSpecFirstTest",
-   "Description": "The Thing_optionalLiteralDouble",
-   "EnumValueType": "Float64",
+   "Description": "The Thing_optionalLiteralFloat",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "13",
@@ -425,9 +425,9 @@
     },
     {
      "$id": "59",
-     "Name": "requiredLiteralDouble",
-     "SerializedName": "requiredLiteralDouble",
-     "Description": "required literal double",
+     "Name": "requiredLiteralFloat",
+     "SerializedName": "requiredLiteralFloat",
+     "Description": "required literal float",
      "Type": {
       "$id": "60",
       "Name": "Literal",
@@ -500,9 +500,9 @@
     },
     {
      "$id": "68",
-     "Name": "optionalLiteralDouble",
-     "SerializedName": "optionalLiteralDouble",
-     "Description": "optional literal double",
+     "Name": "optionalLiteralFloat",
+     "SerializedName": "optionalLiteralFloat",
+     "Description": "optional literal float",
      "Type": {
       "$id": "69",
       "Name": "Literal",

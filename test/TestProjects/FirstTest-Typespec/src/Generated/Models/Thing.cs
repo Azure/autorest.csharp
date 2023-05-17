@@ -34,24 +34,24 @@ namespace TypeSpecFirstTest.Models
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>
         /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralDouble"> required literal double. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
         /// <param name="requiredLiteralBool"> required literal bool. </param>
         /// <param name="optionalLiteralString"> optional literal string. </param>
         /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralDouble"> optional literal double. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralDouble requiredLiteralDouble, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralDouble? optionalLiteralDouble, bool? optionalLiteralBool, string requiredBadDescription)
+        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription)
         {
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredLiteralString = requiredLiteralString;
             RequiredLiteralInt = requiredLiteralInt;
-            RequiredLiteralDouble = requiredLiteralDouble;
+            RequiredLiteralFloat = requiredLiteralFloat;
             RequiredLiteralBool = requiredLiteralBool;
             OptionalLiteralString = optionalLiteralString;
             OptionalLiteralInt = optionalLiteralInt;
-            OptionalLiteralDouble = optionalLiteralDouble;
+            OptionalLiteralFloat = optionalLiteralFloat;
             OptionalLiteralBool = optionalLiteralBool;
             RequiredBadDescription = requiredBadDescription;
         }
@@ -66,8 +66,8 @@ namespace TypeSpecFirstTest.Models
         /// <summary> required literal int. </summary>
         public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
 
-        /// <summary> required literal double. </summary>
-        public ThingRequiredLiteralDouble RequiredLiteralDouble { get; } = ThingRequiredLiteralDouble._123;
+        /// <summary> required literal float. </summary>
+        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = ThingRequiredLiteralFloat._123;
 
         /// <summary> required literal bool. </summary>
         public bool RequiredLiteralBool { get; } = false;
@@ -76,8 +76,8 @@ namespace TypeSpecFirstTest.Models
         public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
         /// <summary> optional literal int. </summary>
         public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
-        /// <summary> optional literal double. </summary>
-        public ThingOptionalLiteralDouble? OptionalLiteralDouble { get; set; }
+        /// <summary> optional literal float. </summary>
+        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
         /// <summary> optional literal bool. </summary>
         public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
