@@ -14,7 +14,7 @@ import {
 } from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
-import { getInputType } from "../../../src/lib/model.js";
+import { getFormattedType, getInputType } from "../../../src/lib/model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { FormattedType } from "../../../src/type/formattedType.js";
 
@@ -95,7 +95,7 @@ export function navigateModels(
     const computeModel = (x: Type) =>
         getInputType(
             context,
-            { type: x, format: getFormat(context.program, x) } as FormattedType,
+            getFormattedType(context.program, x),
             models,
             enums
         ) as any;

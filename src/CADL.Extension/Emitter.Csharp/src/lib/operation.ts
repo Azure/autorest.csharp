@@ -63,6 +63,7 @@ import { logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
+    getFormattedType,
     getInputType
 } from "./model.js";
 import { capitalize } from "./utils.js";
@@ -231,10 +232,7 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            {
-                type: typespecType,
-                format: getFormat(program, param)
-            } as FormattedType,
+            getFormattedType(program, param),
             models,
             enums
         );
@@ -290,7 +288,7 @@ export function loadOperation(
         const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(
             context,
-            { type: type, format: getFormat(program, body) } as FormattedType,
+            getFormattedType(program, body),
             models,
             enums
         );
@@ -332,13 +330,7 @@ export function loadOperation(
             if (resourceOperation && resourceOperation.operation !== "list") {
                 type = getInputType(
                     context,
-                    {
-                        type: resourceOperation.resourceType,
-                        format: getFormat(
-                            program,
-                            resourceOperation.resourceType
-                        )
-                    } as FormattedType,
+                    getFormattedType(program, resourceOperation.resourceType),
                     models,
                     enums
                 );
@@ -346,10 +338,7 @@ export function loadOperation(
                 const typespecType = getEffectiveSchemaType(context, body.type);
                 const inputType: InputType = getInputType(
                     context,
-                    {
-                        type: typespecType,
-                        format: getFormat(program, typespecType)
-                    } as FormattedType,
+                    getFormattedType(program, typespecType),
                     models,
                     enums
                 );
@@ -367,10 +356,7 @@ export function loadOperation(
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        {
-                            type: headers[key].type,
-                            format: getFormat(program, headers[key].type)
-                        } as FormattedType,
+                        getFormattedType(program, headers[key].type),
                         models,
                         enums
                     )

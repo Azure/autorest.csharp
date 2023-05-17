@@ -390,10 +390,7 @@ export function getInputType(
             Name: "Array",
             ElementType: getInputType(
                 context,
-                {
-                    type: elementType,
-                    format: getFormat(program, elementType)
-                } as FormattedType,
+                getFormattedType(program, elementType),
                 models,
                 enums
             ),
@@ -406,16 +403,13 @@ export function getInputType(
             Name: "Dictionary",
             KeyType: getInputType(
                 context,
-                { type: key, format: getFormat(program, key) } as FormattedType,
+                getFormattedType(program, key),
                 models,
                 enums
             ),
             ValueType: getInputType(
                 context,
-                {
-                    type: value,
-                    format: getFormat(program, value)
-                } as FormattedType,
+                getFormattedType(program, value),
                 models,
                 enums
             ),
@@ -461,10 +455,7 @@ export function getInputType(
                 for (const dm of m.derivedModels) {
                     getInputType(
                         context,
-                        {
-                            type: dm,
-                            format: getFormat(program, dm)
-                        } as FormattedType,
+                        getFormattedType(program, dm),
                         models,
                         enums
                     );
@@ -762,4 +753,17 @@ export function getUsages(
         else value = value | flag;
         usagesMap.set(name, value);
     }
+}
+
+export function getFormattedType(program: Program, type: Type): FormattedType {
+    let targetType = type;
+    let format = getFormat(program, type);
+    if (type.kind === "ModelProperty") {
+        targetType = type.type;
+    }
+
+    return {
+        type: targetType,
+        format: format
+    } as FormattedType;
 }
