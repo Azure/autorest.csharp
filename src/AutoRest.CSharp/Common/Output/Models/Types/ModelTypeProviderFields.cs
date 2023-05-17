@@ -152,12 +152,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 declaration,
                 GetPropertyDefaultValue(fieldType, inputModelProperty),
                 inputModelProperty.IsRequired,
+                inputModelProperty.SerializationFormat,
                 IsField: false,
                 WriteAsProperty: true,
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerailizationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
             var existingMemberTypeSymbol = existingMember switch
             {
@@ -181,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)

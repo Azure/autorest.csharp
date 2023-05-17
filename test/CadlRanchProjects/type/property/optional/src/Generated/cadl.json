@@ -48,7 +48,7 @@
      "Type": {
       "$id": "7",
       "Name": "bytes",
-      "Kind": "BinaryData",
+      "Kind": "bytes",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -126,7 +126,7 @@
       "ElementType": {
        "$id": "17",
        "Name": "bytes",
-       "Kind": "BinaryData",
+       "Kind": "bytes",
        "IsNullable": false
       },
       "IsNullable": false

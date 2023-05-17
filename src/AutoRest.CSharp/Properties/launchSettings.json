@@ -272,6 +272,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\Generated"
     },
+    "HlcConstants": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HlcConstants\\Generated"
+    },
     "httpInfrastructure": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\Generated"
@@ -323,6 +327,10 @@
     "MgmtCustomizations": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCustomizations\\Generated"
+    },
+    "MgmtConstants": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtConstants\\Generated"
     },
     "MgmtDiscriminator": {
       "commandName": "Project",
@@ -387,10 +395,6 @@
     "MgmtOperations": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOperations\\Generated"
-    },
-    "MgmtOptionalConstant": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOptionalConstant\\Generated"
     },
     "MgmtPagination": {
       "commandName": "Project",

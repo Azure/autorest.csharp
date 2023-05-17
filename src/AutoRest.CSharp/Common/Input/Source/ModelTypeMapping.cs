@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
-        private readonly Dictionary<ISymbol, SourcePropertySerailizationMapping> _serializationMappings;
+        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Input.Source
                     }
                     if (serializationPath != null || serializationHooks != null)
                     {
-                        _serializationMappings.Add(member, new SourcePropertySerailizationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
+                        _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
                     }
                 }
             }
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Input.Source
             return null;
         }
 
-        public SourcePropertySerailizationMapping? GetForMemberSerialization(ISymbol? symbol)
+        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
         {
             if (symbol == null)
                 return null;
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Input.Source
             return null;
         }
 
-        public IEnumerable<SourcePropertySerailizationMapping> GetSerializationMembers()
+        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
         {
             return _serializationMappings.Values;
         }

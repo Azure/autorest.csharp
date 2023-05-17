@@ -9,13 +9,14 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType, SerializationFormat serializationFormat)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   inputModelProperty: inputModelProperty,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
+                  serializationFormat: serializationFormat,
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.DefaultValue;
@@ -34,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerailizationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -48,6 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
+            SerializationFormat = serializationFormat;
             SerializationMapping = serializationMapping;
         }
 
@@ -66,6 +69,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
+
+        public SerializationFormat SerializationFormat { get; }
 
         public FormattableString? InitializationValue { get; }
 
@@ -154,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FieldModifiers? GetterModifiers { get; }
         public FieldModifiers? SetterModifiers { get; }
 
-        public SourcePropertySerailizationMapping? SerializationMapping { get; }
+        public SourcePropertySerializationMapping? SerializationMapping { get; }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
@@ -165,6 +170,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
+                // unwrap constant schema if it is
+                if (identityTypeSchema is ConstantSchema constantIdentitySchema && constantIdentitySchema.ValueType is ChoiceSchema identityTypeChoiceSchema)
+                    identityTypeSchema = identityTypeChoiceSchema;
+
                 if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
                 {
                     supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
