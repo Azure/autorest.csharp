@@ -13,20 +13,20 @@ namespace validation.Models
         /// <summary> Initializes a new instance of ChildProduct. </summary>
         public ChildProduct()
         {
-            ConstProperty = "constant";
+            ConstProperty = ChildProductConstProperty.Constant;
         }
 
         /// <summary> Initializes a new instance of ChildProduct. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
-        internal ChildProduct(string constProperty, int? count)
+        internal ChildProduct(ChildProductConstProperty constProperty, int? count)
         {
             ConstProperty = constProperty;
             Count = count;
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; }
+        public ChildProductConstProperty ConstProperty { get; }
         /// <summary> Count. </summary>
         public int? Count { get; set; }
     }

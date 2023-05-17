@@ -16,9 +16,9 @@ namespace validation.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
-            writer.WriteStringValue(ConstProperty);
+            writer.WriteStringValue(ConstProperty.ToString());
             writer.WritePropertyName("constProperty2"u8);
-            writer.WriteStringValue(ConstProperty2);
+            writer.WriteStringValue(ConstProperty2.ToString());
             writer.WriteEndObject();
         }
 
@@ -28,18 +28,18 @@ namespace validation.Models
             {
                 return null;
             }
-            string constProperty = default;
-            string constProperty2 = default;
+            ConstantProductConstProperty constProperty = default;
+            ConstantProductConstProperty2 constProperty2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"u8))
                 {
-                    constProperty = property.Value.GetString();
+                    constProperty = new ConstantProductConstProperty(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("constProperty2"u8))
                 {
-                    constProperty2 = property.Value.GetString();
+                    constProperty2 = new ConstantProductConstProperty2(property.Value.GetString());
                     continue;
                 }
             }
