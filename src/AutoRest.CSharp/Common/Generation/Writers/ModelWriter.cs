@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
@@ -232,7 +233,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type, property.SerializationFormat);
             if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
             {
                 return $"{property.PropertyDescription}{binaryDataExtraDescription}";
@@ -240,33 +241,53 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
         }
 
-        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
         {
             if (type.IsFrameworkType)
             {
                 if (type.FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("this property");
+                    return ConstructBinaryDataDescription("this property", serializationFormat);
                 }
                 if (TypeFactory.IsList(type) &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the element of this property");
+                    return ConstructBinaryDataDescription("the element of this property", serializationFormat);
                 }
                 if (TypeFactory.IsDictionary(type) &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the value of this property");
+                    return ConstructBinaryDataDescription("the value of this property", serializationFormat);
                 }
             }
             return $"";
         }
 
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
         {
-            return $@"
+            switch (serializationFormat)
+            {
+                case SerializationFormat.Bytes_Base64Url: //intentional fall through
+                case SerializationFormat.Bytes_Base64:
+                    return $@"
+<para>
+To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
+The byte[] will be serialized to a Base64 encoded string.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
+<description>Creates a payload of ""AQID"".</description>
+</item>
+</list>
+</para>";
+
+                default:
+                    return $@"
 <para>
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
@@ -294,6 +315,7 @@ Examples:
 </item>
 </list>
 </para>";
+            }
         }
         private string GetAbstract(ObjectType schema)
         {

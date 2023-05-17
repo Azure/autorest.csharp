@@ -68,6 +68,10 @@ namespace ModelsInCadl.Samples
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
         }
 
         [Test]
@@ -119,6 +123,14 @@ namespace ModelsInCadl.Samples
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
+            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
         }
 
         [Test]
@@ -169,6 +181,10 @@ namespace ModelsInCadl.Samples
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
         }
 
         [Test]
@@ -220,6 +236,14 @@ namespace ModelsInCadl.Samples
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
+            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
         }
 
         [Test]
@@ -689,6 +713,14 @@ namespace ModelsInCadl.Samples
                 {
                     key = new { },
                 },
+                requiredBytes = new { },
+                requiredUint8Array = new[] {
+        1234
+    },
+                requiredUnknown = new { },
+                requiredInt8Array = new[] {
+        1234
+    },
             };
 
             Response response = client.RoundTripToOutput(RequestContent.Create(data));
@@ -736,6 +768,22 @@ namespace ModelsInCadl.Samples
                 {
                     key = new { },
                 },
+                requiredBytes = new { },
+                optionalBytes = new { },
+                requiredUint8Array = new[] {
+        1234
+    },
+                optionalUint8Array = new[] {
+        1234
+    },
+                requiredUnknown = new { },
+                optionalUnknown = new { },
+                requiredInt8Array = new[] {
+        1234
+    },
+                optionalInt8Array = new[] {
+        1234
+    },
             };
 
             Response response = client.RoundTripToOutput(RequestContent.Create(data), new RequestContext());
@@ -782,6 +830,14 @@ namespace ModelsInCadl.Samples
                 {
                     key = new { },
                 },
+                requiredBytes = new { },
+                requiredUint8Array = new[] {
+        1234
+    },
+                requiredUnknown = new { },
+                requiredInt8Array = new[] {
+        1234
+    },
             };
 
             Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -829,6 +885,22 @@ namespace ModelsInCadl.Samples
                 {
                     key = new { },
                 },
+                requiredBytes = new { },
+                optionalBytes = new { },
+                requiredUint8Array = new[] {
+        1234
+    },
+                optionalUint8Array = new[] {
+        1234
+    },
+                requiredUnknown = new { },
+                optionalUnknown = new { },
+                requiredInt8Array = new[] {
+        1234
+    },
+                optionalInt8Array = new[] {
+        1234
+    },
             };
 
             Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data), new RequestContext());

@@ -48,13 +48,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_Bytes_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetBytesClient().GetByteAsync();
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), response.Value.Property.ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.Property.ToString());
         });
 
         [Test]
         public Task Type_Property_ValueTypes_Bytes_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("hello, world!")).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 

@@ -41,7 +41,7 @@ namespace _Type.Property.Nullable.Models
                         }
                         else
                         {
-                            array.Add(BinaryData.FromString(item.GetRawText()));
+                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
                         }
                     }
                     nullableProperty = array;
