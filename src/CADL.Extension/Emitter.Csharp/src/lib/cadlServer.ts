@@ -16,6 +16,7 @@ import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
+import { FormattedType } from "../type/formattedType.js";
 
 export interface CadlServer {
     url: string;
@@ -63,8 +64,10 @@ export function resolveServers(
                   } as InputPrimitiveType)
                 : getInputType(
                       context,
-                      prop.type,
-                      getFormat(context.program, prop),
+                      {
+                          type: prop.type,
+                          format: getFormat(context.program, prop)
+                      } as FormattedType,
                       models,
                       enums
                   );

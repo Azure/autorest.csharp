@@ -16,6 +16,7 @@ import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 import { getInputType } from "../../../src/lib/model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import { FormattedType } from "../../../src/type/formattedType.js";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
@@ -94,8 +95,7 @@ export function navigateModels(
     const computeModel = (x: Type) =>
         getInputType(
             context,
-            x,
-            getFormat(context.program, x),
+            { type: x, format: getFormat(context.program, x) } as FormattedType,
             models,
             enums
         ) as any;

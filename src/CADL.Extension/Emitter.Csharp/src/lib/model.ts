@@ -68,6 +68,7 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
+import { FormattedType } from "../type/formattedType.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -133,6 +134,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                 case "uuid":
                     return InputTypeKind.Guid;
                 default:
+                    if (format) {
+                        logger.warn(`invalid format ${format}`);
+                    }
                     return InputTypeKind.String;
             }
         case "boolean":
@@ -209,11 +213,11 @@ export function isNeverType(type: Type): type is NeverType {
 
 export function getInputType(
     context: SdkContext,
-    type: Type,
-    format: string | undefined,
+    formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
+    const type = formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
     if (type.kind === "Model") {
@@ -227,7 +231,7 @@ export function getInputType(
         const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
             context,
             type,
-            format
+            formattedType.format
         );
         const valueType = {
             Name: type.kind,
@@ -273,7 +277,7 @@ export function getInputType(
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format ?? format
+                        sdkType.format ?? formattedType.format
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -386,8 +390,10 @@ export function getInputType(
             Name: "Array",
             ElementType: getInputType(
                 context,
-                elementType,
-                getFormat(program, elementType),
+                {
+                    type: elementType,
+                    format: getFormat(program, elementType)
+                } as FormattedType,
                 models,
                 enums
             ),
@@ -400,15 +406,16 @@ export function getInputType(
             Name: "Dictionary",
             KeyType: getInputType(
                 context,
-                key,
-                getFormat(program, key),
+                { type: key, format: getFormat(program, key) } as FormattedType,
                 models,
                 enums
             ),
             ValueType: getInputType(
                 context,
-                value,
-                getFormat(program, value),
+                {
+                    type: value,
+                    format: getFormat(program, value)
+                } as FormattedType,
                 models,
                 enums
             ),
@@ -454,8 +461,10 @@ export function getInputType(
                 for (const dm of m.derivedModels) {
                     getInputType(
                         context,
-                        dm,
-                        getFormat(program, dm),
+                        {
+                            type: dm,
+                            format: getFormat(program, dm)
+                        } as FormattedType,
                         models,
                         enums
                     );
@@ -509,8 +518,10 @@ export function getInputType(
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
                 const inputType = getInputType(
                     context,
-                    value.type,
-                    getFormat(program, value),
+                    {
+                        type: value.type,
+                        format: getFormat(program, value)
+                    } as FormattedType,
                     models,
                     enums
                 );
@@ -586,8 +597,10 @@ export function getInputType(
         for (const variant of variants) {
             const inputType = getInputType(
                 context,
-                variant.type,
-                getFormat(program, variant.type),
+                {
+                    type: variant.type,
+                    format: getFormat(program, variant.type)
+                } as FormattedType,
                 models,
                 enums
             );
