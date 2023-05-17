@@ -28,6 +28,7 @@ export async function typeSpecCompile(
       title: "Azure Csharp emitter Testing",
       version: "2023-01-01-preview",
     })
+    ${needAzureCore ? "@useDependency(Azure.Core.Versions.v1_0_Preview_1)" : ""}
     namespace Azure.Csharp.Testing;
     `;
     host.addTypeSpecFile(

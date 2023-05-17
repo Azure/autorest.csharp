@@ -16,7 +16,7 @@ namespace validation.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
-            writer.WriteStringValue(ConstProperty);
+            writer.WriteStringValue(ConstProperty.ToString());
             if (Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count"u8);
@@ -31,13 +31,13 @@ namespace validation.Models
             {
                 return null;
             }
-            string constProperty = default;
+            ChildProductConstProperty constProperty = default;
             Optional<int> count = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"u8))
                 {
-                    constProperty = property.Value.GetString();
+                    constProperty = new ChildProductConstProperty(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("count"u8))

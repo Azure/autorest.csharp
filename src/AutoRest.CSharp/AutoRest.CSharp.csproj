@@ -18,10 +18,10 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.31.0" />
+    <PackageReference Include="Azure.Core" Version="1.32.0" />
     <PackageReference Include="Azure.Core.Expressions.DataFactory" Version="1.0.0-alpha.20221110.1" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.5.0" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.6.0" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Humanizer.Core" Version="2.13.14" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
