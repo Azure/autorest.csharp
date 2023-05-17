@@ -41,8 +41,10 @@ namespace AutoRest.CSharp.Output.Builders
             return SerializationFormat.Default;
         }
 
-        public static SerializationFormat GetSerializationFormat(InputType type)
-            => type is not InputPrimitiveType primitiveType ? SerializationFormat.Default : primitiveType.Kind switch
+        public static SerializationFormat GetSerializationFormat(InputType type) => type switch
+        {
+            InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
                 InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
@@ -55,7 +57,9 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
-            };
+            },
+            _ => SerializationFormat.Default
+        };
 
         private static SerializationFormat GetSerializationFormat(InputType inputType, CSharpType valueType)
         {
