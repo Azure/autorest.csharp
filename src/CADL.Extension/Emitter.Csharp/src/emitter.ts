@@ -25,7 +25,7 @@ import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
 export const $lib = createCadlLibrary({
-    name: "typespec-csharp",
+    name: "@azure-tools/typespec-csharp",
     diagnostics: {},
     emitter: {
         options: NetEmitterOptionsSchema
