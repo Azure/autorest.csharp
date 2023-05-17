@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? ParseConstant(RequestParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.Schema is ConstantSchema constantSchema)
+            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
             {
                 return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
             }

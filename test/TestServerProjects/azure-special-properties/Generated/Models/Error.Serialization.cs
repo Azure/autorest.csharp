@@ -19,7 +19,7 @@ namespace azure_special_properties.Models
                 return null;
             }
             Optional<int> status = default;
-            int constantId = default;
+            ErrorConstantId constantId = default;
             Optional<string> message = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,7 +34,7 @@ namespace azure_special_properties.Models
                 }
                 if (property.NameEquals("constantId"u8))
                 {
-                    constantId = property.Value.GetInt32();
+                    constantId = new ErrorConstantId(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("message"u8))
