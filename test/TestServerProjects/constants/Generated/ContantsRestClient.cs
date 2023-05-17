@@ -149,7 +149,7 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
-            uri.AppendQuery("input", "value1", true);
+            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueNoDefaultOpEnum.Value1.ToString(), true);
             request.Uri = uri;
             return message;
         }
@@ -192,7 +192,7 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
-            uri.AppendQuery("input", "value1", true);
+            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueDefaultOpEnum.Value1.ToString(), true);
             request.Uri = uri;
             return message;
         }
