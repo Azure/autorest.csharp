@@ -32,6 +32,7 @@
     <UseDefaultNamespaceAndOutputFolder Condition="'$(UseDefaultNamespaceAndOutputFolder)' == ''">true</UseDefaultNamespaceAndOutputFolder>
     <_AutoRestCommand>node $(AutoRestEntryPoint) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net6.0/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
+    <_SaveInputs Condition="'$(SaveInputs)' != ''">-SaveInputs</_SaveInputs>
   </PropertyGroup>
 
   <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec"/>
@@ -52,8 +53,8 @@
   </Target>
 
   <Target Name="_GenerateCodeForTypeSpec" Condition="'$(_GenerateCode)' == 'true' AND '$(TypeSpecInput)' != ''" >
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(typespecAdditionalOptions)"/>
+    <Exec Condition="'$(SkipSync)' == ''" Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(typespecAdditionalOptions) $(_SaveInputs)"/>
   </Target>
 
   <Target Name="GenerateTests" Condition="'$(AutoRestTestsInput)' != ''">
