@@ -92,7 +92,7 @@ This sample shows how to call PutEmptyAsync with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "";
 
 Response response = await client.PutEmptyAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
@@ -106,7 +106,7 @@ This sample shows how to call PutEmpty with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "";
 
 Response response = client.PutEmpty(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
@@ -148,7 +148,7 @@ This sample shows how to call PutMbcsAsync with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
 
 Response response = await client.PutMbcsAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
@@ -162,7 +162,7 @@ This sample shows how to call PutMbcs with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
 
 Response response = client.PutMbcs(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
@@ -204,7 +204,7 @@ This sample shows how to call PutWhitespaceAsync with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "    Now is the time for all good men to come to the aid of their country    ";
 
 Response response = await client.PutWhitespaceAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
@@ -218,7 +218,7 @@ This sample shows how to call PutWhitespace with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "    Now is the time for all good men to come to the aid of their country    ";
 
 Response response = client.PutWhitespace(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);

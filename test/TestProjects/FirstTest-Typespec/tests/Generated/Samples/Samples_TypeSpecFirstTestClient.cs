@@ -209,9 +209,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -239,13 +239,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -277,9 +277,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -307,13 +307,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -345,9 +345,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -375,13 +375,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -413,9 +413,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -443,13 +443,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -477,7 +477,13 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+                OptionalLiteralBool = true,
+            };
             var result = await client.AnonymousBodyAsync(thing);
         }
 
@@ -714,9 +720,9 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -768,13 +774,13 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralDouble = 4.56,
+                    optionalLiteralString = new { },
+                    optionalLiteralInt = new { },
+                    optionalLiteralDouble = new { },
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -864,9 +870,9 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -918,13 +924,13 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralDouble = 4.56,
+                    optionalLiteralString = new { },
+                    optionalLiteralInt = new { },
+                    optionalLiteralDouble = new { },
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -1005,7 +1011,13 @@ namespace TypeSpecFirstTest.Samples
             }, new Dictionary<string, StringExtensibleEnum>
             {
                 ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>"), BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+                OptionalLiteralBool = true,
+            }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
             {
                 ["key"] = BinaryData.FromString("<your binary data content>"),
             })
@@ -1062,9 +1074,9 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -1116,13 +1128,13 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralDouble = 4.56,
+                    optionalLiteralString = new { },
+                    optionalLiteralInt = new { },
+                    optionalLiteralDouble = new { },
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -1212,9 +1224,9 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -1266,13 +1278,13 @@ namespace TypeSpecFirstTest.Samples
                 {
                     name = "<name>",
                     requiredUnion = new { },
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralDouble = 1.23,
+                    requiredLiteralString = new { },
+                    requiredLiteralInt = new { },
+                    requiredLiteralDouble = new { },
                     requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralDouble = 4.56,
+                    optionalLiteralString = new { },
+                    optionalLiteralInt = new { },
+                    optionalLiteralDouble = new { },
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
@@ -1445,9 +1457,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -1475,13 +1487,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -1513,9 +1525,9 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -1543,13 +1555,13 @@ namespace TypeSpecFirstTest.Samples
             {
                 name = "<name>",
                 requiredUnion = new { },
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralDouble = 1.23,
+                requiredLiteralString = new { },
+                requiredLiteralInt = new { },
+                requiredLiteralDouble = new { },
                 requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralDouble = 4.56,
+                optionalLiteralString = new { },
+                optionalLiteralInt = new { },
+                optionalLiteralDouble = new { },
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
             };
@@ -1577,7 +1589,13 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+                OptionalLiteralBool = true,
+            };
             var result = await client.CreateLiteralAsync(body);
         }
 
@@ -1734,7 +1752,13 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>");
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralDouble = ThingOptionalLiteralDouble._456,
+                OptionalLiteralBool = true,
+            };
             var result = await client.InternalProtocolAsync(body);
         }
 

@@ -151,7 +151,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
 var data = new {
-    ColorConstant = "<ColorConstant>",
+    ColorConstant = "green-color",
 };
 
 Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -163,7 +163,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
 var data = new {
-    ColorConstant = "<ColorConstant>",
+    ColorConstant = "green-color",
     field1 = "<field1>",
 };
 
@@ -180,7 +180,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
 var data = new {
-    ColorConstant = "<ColorConstant>",
+    ColorConstant = "green-color",
 };
 
 Response response = client.PutReferencedConstant(RequestContent.Create(data));
@@ -192,7 +192,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
 var data = new {
-    ColorConstant = "<ColorConstant>",
+    ColorConstant = "green-color",
     field1 = "<field1>",
 };
 

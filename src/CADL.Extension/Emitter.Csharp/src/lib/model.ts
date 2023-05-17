@@ -188,15 +188,32 @@ export function getDefaultValue(type: Type): any {
             return undefined;
     }
 }
+
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
+}
+
+function isInputEnumType(x: any): x is InputEnumType {
+    return x.AllowedValues !== undefined;
+}
+
+function isInputLiteralType(x: any): x is InputLiteralType {
+    return x.Name === "Literal";
+}
+
+// TODO -- put this here temparaorily
+export interface LiteralTypeContext {
+    ModelName: string;
+    PropertyName: string;
+    Namespace?: string;
 }
 
 export function getInputType(
     context: SdkContext,
     type: Type,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
 ): InputType {
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
@@ -207,23 +224,7 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        // For literal types, we just want to emit them directly as well.
-        const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
-            context,
-            type
-        );
-        const valueType = {
-            Name: type.kind,
-            Kind: builtInKind,
-            IsNullable: false
-        } as InputPrimitiveType;
-
-        return {
-            Name: "Literal",
-            LiteralValueType: valueType,
-            Value: getDefaultValue(type),
-            IsNullable: false
-        } as InputLiteralType;
+        return getInputLiteralType(type, literalTypeContext);
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -304,6 +305,67 @@ export function getInputType(
             enums.set(m.name, extensibleEnum);
         }
         return extensibleEnum;
+    }
+
+    function getInputLiteralType(
+        type: Type,
+        literalContext?: LiteralTypeContext
+    ) : InputLiteralType {
+        // For literal types, we just want to emit them directly as well.
+        const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
+            context,
+            type
+        );
+        const rawValueType = {
+            Name: type.kind,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
+        const literalValue = getDefaultValue(type);
+        const newValueType = getLiteralValueType();
+
+        if (isInputEnumType(newValueType)) {
+            enums.set(newValueType.Name, newValueType);
+        }
+
+        return {
+            Name: "Literal",
+            LiteralValueType: newValueType,
+            Value: literalValue,
+            IsNullable: false
+        } as InputLiteralType;
+
+        function getLiteralValueType() : InputPrimitiveType | InputEnumType {
+            // we will not wrap it if it comes from outside a model or it is a boolean
+            // TODO -- we need to wrap it into extensible enum when it comes from an operation
+            if (literalContext === undefined || rawValueType.Kind === "Boolean")
+                return rawValueType;
+            
+            // otherwise we need to wrap this into an extensible enum
+            // we use the model name followed by the property name as the enum name to ensure it is unique
+            const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
+            const enumValueType = rawValueType.Kind === "String" ? "String" : "Float64";
+            const allowValues: InputEnumTypeValue[] = [
+                {
+                    Name: literalValue.toString(),
+                    Value: literalValue,
+                    Description: literalValue.toString()
+                } as InputEnumTypeValue
+            ];
+            // TODO -- we need to make it low confident if the enum is not string
+            const enumType = {
+                Name: enumName,
+                Namespace: literalContext.Namespace,
+                Accessibility: undefined,
+                Deprecated: undefined,
+                Description: `The ${enumName}`, // TODO -- what should we put here?
+                EnumValueType: enumValueType,
+                AllowedValues: allowValues,
+                IsExtensible: true,
+                IsNullable: false
+            } as InputEnumType;
+            return enumType;
+        }
     }
 
     function getInputTypeForEnum(
@@ -407,6 +469,7 @@ export function getInputType(
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(
+                model,
                 m.properties,
                 properties,
                 baseModel?.DiscriminatorPropertyName
@@ -443,6 +506,7 @@ export function getInputType(
     }
 
     function addModelProperties(
+        model: InputModelType,
         inputProperties: Map<string, ModelProperty>,
         outputProperties: InputModelProperty[],
         discriminatorPropertyName?: string
@@ -465,11 +529,16 @@ export function getInputType(
                     value.name;
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                const modelPropertyContext = {
+                    ModelName: model.Name,
+                    PropertyName: name,
+                    Namespace: model.Namespace
+                } as LiteralTypeContext;
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
-                    Type: getInputType(context, value.type, models, enums),
+                    Type: getInputType(context, value.type, models, enums, modelPropertyContext),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
@@ -571,7 +640,8 @@ export function getInputType(
 
 export function getUsages(
     context: SdkContext,
-    ops?: HttpOperation[]
+    ops?: HttpOperation[],
+    modelMap?: Map<string, InputModelType>
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     const program = context.program;
     const result: {
@@ -679,6 +749,28 @@ export function getUsages(
                     }
                 }
                 appendUsage(returnType, UsageFlags.Output);
+            }
+        }
+    }
+
+    // handle the types introduces by us
+    if (modelMap) {
+        // iterate all models to find if it contains literal type properties
+        for (const [name, model] of modelMap) {
+            // get the usage of this model
+            let usage = usagesMap.get(name);
+            for (const prop of model.Properties) {
+                const type = prop.Type;
+                if (!isInputLiteralType(type))
+                    continue;
+                // now type should be a literal type
+                // find its corresponding enum type
+                const literalValueType = type.LiteralValueType;
+                if (!isInputEnumType(literalValueType))
+                    continue;
+                // now literalValueType should be an enum type
+                // apply the usage on this model to the usagesMap
+                appendUsage(literalValueType.Name, usage!);
             }
         }
     }

@@ -41,7 +41,7 @@ namespace TypeSpecFirstTest.Models
         /// <param name="optionalLiteralDouble"> optional literal double. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        internal Thing(string name, string requiredUnion, string requiredLiteralString, int requiredLiteralInt, double requiredLiteralDouble, bool requiredLiteralBool, string optionalLiteralString, int? optionalLiteralInt, double? optionalLiteralDouble, bool? optionalLiteralBool, string requiredBadDescription)
+        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralDouble requiredLiteralDouble, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralDouble? optionalLiteralDouble, bool? optionalLiteralBool, string requiredBadDescription)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -61,29 +61,25 @@ namespace TypeSpecFirstTest.Models
         /// <summary> required Union. </summary>
         public string RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
-        public string RequiredLiteralString { get; } = "accept";
+        public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
         /// <summary> required literal int. </summary>
-        public int RequiredLiteralInt { get; } = 123;
+        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
 
         /// <summary> required literal double. </summary>
-        public double RequiredLiteralDouble { get; } = 1.23;
+        public ThingRequiredLiteralDouble RequiredLiteralDouble { get; } = ThingRequiredLiteralDouble._123;
 
         /// <summary> required literal bool. </summary>
         public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        public string OptionalLiteralString { get; } = "reject";
-
+        public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
         /// <summary> optional literal int. </summary>
-        public int? OptionalLiteralInt { get; } = 456;
-
+        public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
         /// <summary> optional literal double. </summary>
-        public double? OptionalLiteralDouble { get; } = 4.56;
-
+        public ThingOptionalLiteralDouble? OptionalLiteralDouble { get; set; }
         /// <summary> optional literal bool. </summary>
-        public bool? OptionalLiteralBool { get; } = true;
-
+        public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }
     }

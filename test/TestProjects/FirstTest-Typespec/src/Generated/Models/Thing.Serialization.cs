@@ -21,24 +21,31 @@ namespace TypeSpecFirstTest.Models
             writer.WritePropertyName("requiredUnion"u8);
             writer.WriteStringValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteralString"u8);
-            writer.WriteStringValue(RequiredLiteralString);
+            writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
-            writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
             writer.WritePropertyName("requiredLiteralDouble"u8);
-            writer.WriteNumberValue(RequiredLiteralDouble);
+            writer.WriteNumberValue(RequiredLiteralDouble.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
             if (Optional.IsDefined(OptionalLiteralString))
             {
-                writer.WritePropertyName("optionalLiteralString"u8);
-                writer.WriteStringValue(OptionalLiteralString);
+                if (OptionalLiteralString != null)
+                {
+                    writer.WritePropertyName("optionalLiteralString"u8);
+                    writer.WriteStringValue(OptionalLiteralString.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralString");
+                }
             }
             if (Optional.IsDefined(OptionalLiteralInt))
             {
                 if (OptionalLiteralInt != null)
                 {
                     writer.WritePropertyName("optionalLiteralInt"u8);
-                    writer.WriteNumberValue(OptionalLiteralInt.Value);
+                    writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
                 }
                 else
                 {
@@ -50,7 +57,7 @@ namespace TypeSpecFirstTest.Models
                 if (OptionalLiteralDouble != null)
                 {
                     writer.WritePropertyName("optionalLiteralDouble"u8);
-                    writer.WriteNumberValue(OptionalLiteralDouble.Value);
+                    writer.WriteNumberValue(OptionalLiteralDouble.Value.ToSerialSingle());
                 }
                 else
                 {
@@ -82,13 +89,13 @@ namespace TypeSpecFirstTest.Models
             }
             string name = default;
             string requiredUnion = default;
-            string requiredLiteralString = default;
-            int requiredLiteralInt = default;
-            double requiredLiteralDouble = default;
+            ThingRequiredLiteralString requiredLiteralString = default;
+            ThingRequiredLiteralInt requiredLiteralInt = default;
+            ThingRequiredLiteralDouble requiredLiteralDouble = default;
             bool requiredLiteralBool = default;
-            Optional<string> optionalLiteralString = default;
-            Optional<int?> optionalLiteralInt = default;
-            Optional<double?> optionalLiteralDouble = default;
+            Optional<ThingOptionalLiteralString?> optionalLiteralString = default;
+            Optional<ThingOptionalLiteralInt?> optionalLiteralInt = default;
+            Optional<ThingOptionalLiteralDouble?> optionalLiteralDouble = default;
             Optional<bool?> optionalLiteralBool = default;
             string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
@@ -105,17 +112,17 @@ namespace TypeSpecFirstTest.Models
                 }
                 if (property.NameEquals("requiredLiteralString"u8))
                 {
-                    requiredLiteralString = property.Value.GetString();
+                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralInt"u8))
                 {
-                    requiredLiteralInt = property.Value.GetInt32();
+                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralDouble"u8))
                 {
-                    requiredLiteralDouble = property.Value.GetDouble();
+                    requiredLiteralDouble = new ThingRequiredLiteralDouble(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralBool"u8))
@@ -125,7 +132,12 @@ namespace TypeSpecFirstTest.Models
                 }
                 if (property.NameEquals("optionalLiteralString"u8))
                 {
-                    optionalLiteralString = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalLiteralString = null;
+                        continue;
+                    }
+                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralInt"u8))
@@ -135,7 +147,7 @@ namespace TypeSpecFirstTest.Models
                         optionalLiteralInt = null;
                         continue;
                     }
-                    optionalLiteralInt = property.Value.GetInt32();
+                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralDouble"u8))
@@ -145,7 +157,7 @@ namespace TypeSpecFirstTest.Models
                         optionalLiteralDouble = null;
                         continue;
                     }
-                    optionalLiteralDouble = property.Value.GetDouble();
+                    optionalLiteralDouble = new ThingOptionalLiteralDouble(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralBool"u8))
@@ -164,7 +176,7 @@ namespace TypeSpecFirstTest.Models
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralDouble, requiredLiteralBool, optionalLiteralString, Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralDouble), Optional.ToNullable(optionalLiteralBool), requiredBadDescription);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralDouble, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralDouble), Optional.ToNullable(optionalLiteralBool), requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

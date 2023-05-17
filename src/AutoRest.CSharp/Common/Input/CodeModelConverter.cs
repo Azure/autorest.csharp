@@ -367,7 +367,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
+            ConstantSchema constantSchema => new InputLiteralType("Literal", CreateType(constantSchema.ValueType, format, modelsCache), constantSchema.Value.Value), //CreateType(constantSchema.ValueType, format, modelsCache),
 
             CredentialSchema => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
