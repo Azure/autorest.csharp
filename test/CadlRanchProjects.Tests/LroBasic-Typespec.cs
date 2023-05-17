@@ -31,7 +31,7 @@ namespace CadlRanchProjects.Tests
             Project project = new(null, "foo", "bar");
             var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Started, project);
             Assert.IsFalse(operation.HasCompleted);
-            Assert.AreEqual(((int)HttpStatusCode.Created), operation.GetRawResponse().Status);
+            Assert.AreEqual(((int)HttpStatusCode.Accepted), operation.GetRawResponse().Status);
 
             await operation.WaitForCompletionResponseAsync();
             Assert.IsTrue(operation.HasCompleted);

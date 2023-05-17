@@ -28,7 +28,7 @@ import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
 export const $lib = createTypeSpecLibrary({
-    name: "typespec-csharp",
+    name: "@azure-tools/typespec-csharp",
     diagnostics: {
         "No-APIVersion": {
             severity: "error",
