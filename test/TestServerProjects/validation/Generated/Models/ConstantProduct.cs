@@ -13,22 +13,22 @@ namespace validation.Models
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
         public ConstantProduct()
         {
-            ConstProperty = "constant";
-            ConstProperty2 = "constant2";
+            ConstProperty = ConstantProductConstProperty.Constant;
+            ConstProperty2 = ConstantProductConstProperty2.Constant2;
         }
 
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
-        internal ConstantProduct(string constProperty, string constProperty2)
+        internal ConstantProduct(ConstantProductConstProperty constProperty, ConstantProductConstProperty2 constProperty2)
         {
             ConstProperty = constProperty;
             ConstProperty2 = constProperty2;
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; }
+        public ConstantProductConstProperty ConstProperty { get; }
         /// <summary> Constant string2. </summary>
-        public string ConstProperty2 { get; set; }
+        public ConstantProductConstProperty2 ConstProperty2 { get; }
     }
 }
