@@ -830,7 +830,7 @@ namespace AutoRest.CSharp.Generation.Writers
             InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
             {
                 InputTypeKind.String => $"\"{literalType.Value}\"",
-                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false", // we have this workaround because the constant converted from swagger always has a type of string
+                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
                 _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
             },
             InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
