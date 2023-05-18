@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var originalFieldName = discriminator.ToCleanName();
                 var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
-                var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
+                var field = CreateField(originalFieldName, typeof(string), typeof(string), inputModel, inputModelProperty);
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
                 var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
@@ -54,12 +54,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
-                var originalFieldType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                var (originalFieldType, fieldValueType) = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, originalFieldType, inputModel, inputModelProperty, typeFactory)
-                    : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
+                    : CreateField(originalFieldName, originalFieldType, fieldValueType, inputModel, inputModelProperty);
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, InputModelType inputModel, InputModelProperty inputModelProperty)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, CSharpType fieldValueType, InputModelType inputModel, InputModelProperty inputModelProperty)
         {
             var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
                 // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
@@ -125,6 +125,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 $"{inputModelProperty.Description}",
                 fieldModifiers,
                 fieldType,
+                fieldValueType,
                 declaration,
                 GetPropertyDefaultValue(fieldType, inputModelProperty),
                 inputModelProperty.IsRequired,
@@ -158,25 +159,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty);
         }
 
-        private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
+        private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
         {
-            var valueType = typeFactory.CreateType(property.Type);
+            var propertyType = typeFactory.CreateType(property.Type);
 
             if (modelUsage == InputModelTypeUsage.Output ||
                 property.IsReadOnly)
             {
-                valueType = TypeFactory.GetOutputType(valueType);
+                propertyType = TypeFactory.GetOutputType(propertyType);
             }
 
-            if (valueType.IsValueType && !property.IsRequired)
+            var valueType = propertyType;
+            if (propertyType.IsValueType && !property.IsRequired)
             {
-                valueType = valueType.WithNullable(true);
+                propertyType = propertyType.WithNullable(true);
             }
 
-            return valueType;
+            return (propertyType, valueType);
         }
 
         private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, InputModelProperty inputModelProperty)
