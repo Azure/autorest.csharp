@@ -82,33 +82,22 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             reader.Read();
-            Object? value = null;
+            // get the kind of the primitive type or the underlying type of the enum
             var kind = type switch
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
                 InputEnumType enumType => enumType.EnumValueType.Kind,
                 _ => throw new JsonException($"Not supported literal type {type.Name}.")
             };
-            switch (kind)
+            object value = kind switch
             {
-                case InputTypeKind.String:
-                    value = reader.GetString() ?? throw new JsonException();
-                    break;
-                case InputTypeKind.Int32:
-                    value = reader.GetInt32();
-                    break;
-                case InputTypeKind.Float32:
-                    value = reader.GetSingle();
-                    break;
-                case InputTypeKind.Float64:
-                    value = reader.GetDouble();
-                    break;
-                case InputTypeKind.Boolean:
-                    value = reader.GetBoolean();
-                    break;
-                default:
-                    throw new JsonException($"Not supported literal type {kind}.");
-            }
+                InputTypeKind.String => reader.GetString() ?? throw new JsonException(),
+                InputTypeKind.Int32 => reader.GetInt32(),
+                InputTypeKind.Float32 => reader.GetSingle(),
+                InputTypeKind.Float64 => reader.GetDouble(),
+                InputTypeKind.Boolean => reader.GetBoolean(),
+                _ => throw new JsonException($"Not supported literal type {kind}.")
+            };
             reader.Read();
             return value;
         }
