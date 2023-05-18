@@ -16,7 +16,7 @@ namespace body_string.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant"u8);
-            writer.WriteStringValue(ColorConstant);
+            writer.WriteStringValue(ColorConstant.ToString());
             if (Optional.IsDefined(Field1))
             {
                 writer.WritePropertyName("field1"u8);
@@ -31,13 +31,13 @@ namespace body_string.Models
             {
                 return null;
             }
-            string colorConstant = default;
+            ColorConstant colorConstant = default;
             Optional<string> field1 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ColorConstant"u8))
                 {
-                    colorConstant = property.Value.GetString();
+                    colorConstant = new ColorConstant(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("field1"u8))

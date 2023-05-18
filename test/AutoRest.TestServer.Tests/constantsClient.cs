@@ -61,16 +61,28 @@ namespace AutoRest.TestServer.Tests
         public void PutNoModelAsStringNoRequiredOneValueNoDefault_HasNoRequiredDefaultParam()
         {
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(ContantsClient), "PutNoModelAsStringNoRequiredOneValueNoDefaultAsync");
+            // TODO -- change to 2 when the optional constant change is consolidated on HLC
             Assert.AreEqual(1, method.GetParameters().Length);
+
             TypeAsserts.HasParameter(method, "cancellationToken");
+            // TODO -- uncomment the following when the optional constant change is consolidated on HLC
+            //var paramInfo = TypeAsserts.HasParameter(method, "input");
+            //Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum?), paramInfo.ParameterType);
+            //Assert.True(paramInfo.HasDefaultValue);
         }
 
         [Test]
         public void PutNoModelAsStringNoRequiredOneValueDefault_HasNoRequiredDefaultParam()
         {
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(ContantsClient), "PutNoModelAsStringNoRequiredOneValueDefaultAsync");
+            // TODO -- change to 2 when the optional constant change is consolidated on HLC
             Assert.AreEqual(1, method.GetParameters().Length);
+
             TypeAsserts.HasParameter(method, "cancellationToken");
+            // TODO -- uncomment the following when the optional constant change is consolidated on HLC
+            //var paramInfo = TypeAsserts.HasParameter(method, "input");
+            //Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueDefaultOpEnum?), paramInfo.ParameterType);
+            //Assert.True(paramInfo.HasDefaultValue);
         }
 
         [Test]
