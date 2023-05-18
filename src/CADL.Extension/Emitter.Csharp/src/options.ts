@@ -21,7 +21,7 @@ export type NetEmitterOptions = {
     "model-namespace"?: boolean;
     "existing-project-folder"?: string;
     "use-overloads-between-protocol-and-convenience"?: boolean;
-    "keep-non-overloadable-protocol-signature"?: string[];
+    "keep-non-overloadable-protocol-signature"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
@@ -62,9 +62,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true
         },
         "keep-non-overloadable-protocol-signature": {
-            type: "array",
-            nullable: true,
-            items: { type: "string" }
+            type: "boolean",
+            nullable: true
         },
         debug: { type: "boolean", nullable: true },
         "models-to-treat-empty-string-as-null": {

@@ -106,8 +106,13 @@ namespace AutoRest.CSharp.Output.Models
         {
             return Operation.GenerateConvenienceMethod
                 && (!Operation.GenerateProtocolMethod
-                ||_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
-                || !_returnType.Convenience.Equals(_returnType.Protocol));
+                || IsConvenienceMethodMeaningful());
+        }
+
+        private bool IsConvenienceMethodMeaningful()
+        {
+            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                || !_returnType.Convenience.Equals(_returnType.Protocol);
         }
 
         private bool HasAmbiguityBetweenProtocolAndConvenience()
@@ -117,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool ShouldRequestContextOptional()
         {
-            if (Configuration.KeepNonOverloadableProtocolSignature.Contains($"{_namespaceName}.{_clientName}.{Operation.Name}"))
+            if (Configuration.KeepNonOverloadableProtocolSignature || !IsConvenienceMethodMeaningful())
             {
                 return true;
             }

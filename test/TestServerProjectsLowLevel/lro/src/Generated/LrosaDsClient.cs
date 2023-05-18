@@ -73,7 +73,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
@@ -105,7 +105,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
@@ -137,7 +137,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
@@ -169,7 +169,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutNonRetry201Creating400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutNonRetry201Creating400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
@@ -201,7 +201,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJsonAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
@@ -233,7 +233,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJson(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
@@ -265,7 +265,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
@@ -297,7 +297,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
@@ -515,7 +515,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
@@ -547,7 +547,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
@@ -579,7 +579,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> Post202NonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> Post202NonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
@@ -611,7 +611,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation Post202NonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation Post202NonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
@@ -643,7 +643,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
@@ -675,7 +675,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
@@ -707,7 +707,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
@@ -739,7 +739,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayload(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
@@ -771,7 +771,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
@@ -803,7 +803,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatus(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
@@ -835,7 +835,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
@@ -867,7 +867,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayload(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
@@ -1023,7 +1023,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocationAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> Post202NoLocationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> Post202NoLocationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
@@ -1055,7 +1055,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocation(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation Post202NoLocation(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation Post202NoLocation(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
@@ -1087,7 +1087,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostAsyncRelativeRetryNoPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRelativeRetryNoPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
@@ -1119,7 +1119,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayload(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostAsyncRelativeRetryNoPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRelativeRetryNoPayload(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
@@ -1151,7 +1151,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJsonAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
@@ -1183,7 +1183,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJson(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Put200InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> Put200InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
@@ -1215,7 +1215,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1247,7 +1247,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1279,7 +1279,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1311,7 +1311,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1529,7 +1529,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> Post202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> Post202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
@@ -1561,7 +1561,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation Post202RetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation Post202RetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
@@ -1593,7 +1593,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1625,7 +1625,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1657,7 +1657,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1689,7 +1689,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();

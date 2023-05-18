@@ -3,7 +3,7 @@
   <members>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ReadonlypropertyClient(credential);
@@ -18,7 +18,7 @@ Console.WriteLine(result.GetProperty("size").ToString());
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ReadonlypropertyClient(credential);

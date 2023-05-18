@@ -3,7 +3,7 @@
   <members>
     <member name="GetFileAsync(RequestContext)">
 <example>
-This sample shows how to call GetFileAsync and parse the result.
+This sample shows how to call GetFileAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
@@ -21,7 +21,7 @@ if (response.ContentStream != null)
     </member>
     <member name="GetFile(RequestContext)">
 <example>
-This sample shows how to call GetFile and parse the result.
+This sample shows how to call GetFile with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
@@ -39,7 +39,7 @@ if (response.ContentStream != null)
     </member>
     <member name="GetFileLargeAsync(RequestContext)">
 <example>
-This sample shows how to call GetFileLargeAsync and parse the result.
+This sample shows how to call GetFileLargeAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
@@ -57,7 +57,7 @@ if (response.ContentStream != null)
     </member>
     <member name="GetFileLarge(RequestContext)">
 <example>
-This sample shows how to call GetFileLarge and parse the result.
+This sample shows how to call GetFileLarge with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
@@ -75,7 +75,7 @@ if (response.ContentStream != null)
     </member>
     <member name="GetEmptyFileAsync(RequestContext)">
 <example>
-This sample shows how to call GetEmptyFileAsync and parse the result.
+This sample shows how to call GetEmptyFileAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
@@ -93,7 +93,7 @@ if (response.ContentStream != null)
     </member>
     <member name="GetEmptyFile(RequestContext)">
 <example>
-This sample shows how to call GetEmptyFile and parse the result.
+This sample shows how to call GetEmptyFile with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);

@@ -3,7 +3,7 @@
   <members>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -17,7 +17,7 @@ Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToS
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -87,7 +87,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetEmptyAsync and parse the result.
+This sample shows how to call GetEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToS
     </member>
     <member name="GetEmpty(RequestContext)">
 <example>
-This sample shows how to call GetEmpty and parse the result.
+This sample shows how to call GetEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -171,7 +171,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetNullAsync and parse the result.
+This sample shows how to call GetNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -185,7 +185,7 @@ Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToS
     </member>
     <member name="GetNull(RequestContext)">
 <example>
-This sample shows how to call GetNull and parse the result.
+This sample shows how to call GetNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -199,7 +199,7 @@ Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToS
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
 <example>
-This sample shows how to call GetNotProvidedAsync and parse the result.
+This sample shows how to call GetNotProvidedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);
@@ -213,7 +213,7 @@ Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToS
     </member>
     <member name="GetNotProvided(RequestContext)">
 <example>
-This sample shows how to call GetNotProvided and parse the result.
+This sample shows how to call GetNotProvided with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DictionaryClient(credential);

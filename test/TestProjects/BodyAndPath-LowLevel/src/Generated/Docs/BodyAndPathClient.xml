@@ -107,7 +107,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetBodyAndPathsAsync(RequestContext)">
 <example>
-This sample shows how to call GetBodyAndPathsAsync and parse the result.
+This sample shows how to call GetBodyAndPathsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
@@ -121,7 +121,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBodyAndPaths(RequestContext)">
 <example>
-This sample shows how to call GetBodyAndPaths and parse the result.
+This sample shows how to call GetBodyAndPaths with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
@@ -135,7 +135,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetItemsAsync(RequestContext)">
 <example>
-This sample shows how to call GetItemsAsync and parse the result.
+This sample shows how to call GetItemsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
@@ -149,7 +149,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetItems(RequestContext)">
 <example>
-This sample shows how to call GetItems and parse the result.
+This sample shows how to call GetItems with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);

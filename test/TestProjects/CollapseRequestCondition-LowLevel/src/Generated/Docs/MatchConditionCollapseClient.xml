@@ -50,16 +50,6 @@ var client = new MatchConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.CollapsePutAsync(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call CollapsePutAsync with all parameters and request content.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new MatchConditionCollapseClient(credential);
-
-var data = "<String>";
-
 Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
@@ -68,16 +58,6 @@ Console.WriteLine(response.Status);
     <member name="CollapsePut(RequestContent,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapsePut with required parameters and request content.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new MatchConditionCollapseClient(credential);
-
-var data = "<String>";
-
-Response response = client.CollapsePut(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call CollapsePut with all parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new MatchConditionCollapseClient(credential);

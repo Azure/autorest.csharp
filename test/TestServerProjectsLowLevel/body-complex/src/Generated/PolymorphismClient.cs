@@ -71,7 +71,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
-        public virtual Response GetValid(RequestContext context = null)
+        public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
             scope.Start();
@@ -199,7 +199,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntaxAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
             scope.Start();
@@ -229,7 +229,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntax(RequestContext)']/*" />
-        public virtual Response GetDotSyntax(RequestContext context = null)
+        public virtual Response GetDotSyntax(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
             scope.Start();
@@ -259,7 +259,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
             scope.Start();
@@ -289,7 +289,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminator(RequestContext)']/*" />
-        public virtual Response GetComposedWithDiscriminator(RequestContext context = null)
+        public virtual Response GetComposedWithDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
             scope.Start();
@@ -319,7 +319,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
             scope.Start();
@@ -349,7 +349,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminator(RequestContext)']/*" />
-        public virtual Response GetComposedWithoutDiscriminator(RequestContext context = null)
+        public virtual Response GetComposedWithoutDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
             scope.Start();
@@ -379,7 +379,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicatedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplicatedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplicatedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
             scope.Start();
@@ -409,7 +409,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicated(RequestContext)']/*" />
-        public virtual Response GetComplicated(RequestContext context = null)
+        public virtual Response GetComplicated(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
             scope.Start();

@@ -3,7 +3,7 @@
   <members>
     <member name="TwoAsync(RequestContext)">
 <example>
-This sample shows how to call TwoAsync and parse the result.
+This sample shows how to call TwoAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Two(RequestContext)">
 <example>
-This sample shows how to call Two and parse the result.
+This sample shows how to call Two with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
@@ -31,7 +31,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="ThreeAsync(RequestContext)">
 <example>
-This sample shows how to call ThreeAsync and parse the result.
+This sample shows how to call ThreeAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
@@ -45,7 +45,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Three(RequestContext)">
 <example>
-This sample shows how to call Three and parse the result.
+This sample shows how to call Three with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();

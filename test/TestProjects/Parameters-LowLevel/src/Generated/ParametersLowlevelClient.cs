@@ -75,7 +75,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int?,int,string,RequestContext)']/*" />
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top, int skip, string status, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
@@ -109,7 +109,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int?,int,string,RequestContext)']/*" />
-        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
+        public virtual Response NoRequestBodyResponseBody(int id, int? top, int skip, string status, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
@@ -140,7 +140,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
@@ -171,7 +171,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBody(RequestContent,RequestContext)']/*" />
-        public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
+        public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
@@ -203,7 +203,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
+        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
@@ -237,7 +237,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,RequestContext)']/*" />
-        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
+        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
@@ -330,7 +330,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
@@ -361,7 +361,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBody(RequestContent,RequestContext)']/*" />
-        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
+        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
@@ -547,7 +547,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
-        public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -587,7 +587,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
-        public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 

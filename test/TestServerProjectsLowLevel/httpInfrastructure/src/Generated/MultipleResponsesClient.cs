@@ -71,7 +71,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -101,7 +101,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200Valid(RequestContext)']/*" />
-        public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
+        public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -131,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -161,7 +161,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204Valid(RequestContext)']/*" />
-        public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
+        public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -191,7 +191,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201InvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -221,7 +221,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201Invalid(RequestContext)']/*" />
-        public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
+        public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -251,7 +251,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202NoneAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -281,7 +281,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202None(RequestContext)']/*" />
-        public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
+        public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -311,7 +311,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -341,7 +341,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400Valid(RequestContext)']/*" />
-        public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
+        public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -371,7 +371,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -401,7 +401,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200Valid(RequestContext)']/*" />
-        public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
+        public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -431,7 +431,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -461,7 +461,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201Valid(RequestContext)']/*" />
-        public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
+        public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -491,7 +491,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -521,7 +521,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400Valid(RequestContext)']/*" />
-        public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
+        public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -551,7 +551,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -581,7 +581,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -611,7 +611,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -641,7 +641,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -671,7 +671,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -701,7 +701,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -731,7 +731,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -761,7 +761,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -1211,7 +1211,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
@@ -1241,7 +1241,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200Valid(RequestContext)']/*" />
-        public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
+        public virtual Response GetDefaultModelA200Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
@@ -1271,7 +1271,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200NoneAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
@@ -1301,7 +1301,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200None(RequestContext)']/*" />
-        public virtual Response GetDefaultModelA200None(RequestContext context = null)
+        public virtual Response GetDefaultModelA200None(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
@@ -1691,7 +1691,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200NoneAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
@@ -1721,7 +1721,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200None(RequestContext)']/*" />
-        public virtual Response Get200ModelA200None(RequestContext context = null)
+        public virtual Response Get200ModelA200None(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
@@ -1751,7 +1751,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
@@ -1781,7 +1781,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA200Valid(RequestContext context = null)
+        public virtual Response Get200ModelA200Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
@@ -1811,7 +1811,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200InvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
@@ -1841,7 +1841,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Invalid(RequestContext)']/*" />
-        public virtual Response Get200ModelA200Invalid(RequestContext context = null)
+        public virtual Response Get200ModelA200Invalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
@@ -1871,7 +1871,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400NoneAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
@@ -1901,7 +1901,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400None(RequestContext)']/*" />
-        public virtual Response Get200ModelA400None(RequestContext context = null)
+        public virtual Response Get200ModelA400None(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
@@ -1931,7 +1931,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
@@ -1961,7 +1961,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA400Valid(RequestContext context = null)
+        public virtual Response Get200ModelA400Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
@@ -1991,7 +1991,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400InvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
@@ -2021,7 +2021,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Invalid(RequestContext)']/*" />
-        public virtual Response Get200ModelA400Invalid(RequestContext context = null)
+        public virtual Response Get200ModelA400Invalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
@@ -2051,7 +2051,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
@@ -2081,7 +2081,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202Valid(RequestContext)']/*" />
-        public virtual Response Get200ModelA202Valid(RequestContext context = null)
+        public virtual Response Get200ModelA202Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();

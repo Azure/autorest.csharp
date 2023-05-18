@@ -71,7 +71,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
-        public virtual Response GetValid(RequestContext context = null)
+        public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
@@ -199,7 +199,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -229,7 +229,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
-        public virtual Response GetEmpty(RequestContext context = null)
+        public virtual Response GetEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -327,7 +327,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();
@@ -357,7 +357,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
-        public virtual Response GetNotProvided(RequestContext context = null)
+        public virtual Response GetNotProvided(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();

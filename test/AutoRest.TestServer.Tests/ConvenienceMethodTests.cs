@@ -7,6 +7,7 @@ using Azure;
 using Azure.Core;
 using ConvenienceInCadl;
 using ConvenienceInCadl.Models;
+using MixApiVersion;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -235,19 +236,13 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoConvenienceInFlagScenario()
+        public void SetKeepNonOverloadableProtocolSignature()
         {
-            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceInFlag");
-            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
-        }
+            var method = typeof(MixApiVersionClient).GetMethod("Delete");
+            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
 
-        [Test]
-        public void ConvenienceInFlagScenario()
-        {
-            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceInFlag");
-            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceInFlagValue");
-            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
-            Assert.AreEqual(true, convenienceInUpdate.GetParameters().Last().IsOptional);
+            method = typeof(MixApiVersionClient).GetMethod("Read");
+            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
         }
     }
 }

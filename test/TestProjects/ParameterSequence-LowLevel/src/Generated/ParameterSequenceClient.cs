@@ -76,7 +76,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
+        public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(origin, nameof(origin));
@@ -114,7 +114,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(string,string,string,RequestContext)']/*" />
-        public virtual Response GetItem(string itemName, string origin, string version = null, RequestContext context = null)
+        public virtual Response GetItem(string itemName, string origin, string version, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(origin, nameof(origin));
@@ -152,7 +152,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
+        public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(origin, nameof(origin));
@@ -190,7 +190,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(string,string,string,RequestContext)']/*" />
-        public virtual Response SelectItem(string itemName, string origin, string version = null, RequestContext context = null)
+        public virtual Response SelectItem(string itemName, string origin, string version, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(origin, nameof(origin));

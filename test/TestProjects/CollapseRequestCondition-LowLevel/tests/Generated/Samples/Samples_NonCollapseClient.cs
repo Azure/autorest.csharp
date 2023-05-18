@@ -28,7 +28,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.IfMatchPut(RequestContent.Create(data));
+            Response response = client.IfMatchPut(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -54,7 +54,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.IfMatchPutAsync(RequestContent.Create(data));
+            Response response = await client.IfMatchPutAsync(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -80,7 +80,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.IfNoneMatchPut(RequestContent.Create(data));
+            Response response = client.IfNoneMatchPut(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -106,7 +106,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data));
+            Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 

@@ -69,7 +69,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='ZeroAsync(RequestContext)']/*" />
-        public virtual async Task<Response> ZeroAsync(RequestContext context = null)
+        public virtual async Task<Response> ZeroAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.Zero");
             scope.Start();
@@ -99,7 +99,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='Zero(RequestContext)']/*" />
-        public virtual Response Zero(RequestContext context = null)
+        public virtual Response Zero(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.Zero");
             scope.Start();
@@ -129,7 +129,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='OneAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OneAsync(RequestContext context = null)
+        public virtual async Task<Response> OneAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.One");
             scope.Start();
@@ -159,7 +159,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ClientAndOperationGroupServiceClient.xml" path="doc/members/member[@name='One(RequestContext)']/*" />
-        public virtual Response One(RequestContext context = null)
+        public virtual Response One(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ClientAndOperationGroupServiceClient.One");
             scope.Start();

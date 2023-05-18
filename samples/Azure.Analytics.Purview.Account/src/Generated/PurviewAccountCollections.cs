@@ -68,7 +68,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -98,7 +98,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollection(RequestContext)']/*" />
-        public virtual Response GetCollection(RequestContext context = null)
+        public virtual Response GetCollection(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -256,7 +256,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPathAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionPathAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionPathAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -286,7 +286,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPath(RequestContext)']/*" />
-        public virtual Response GetCollectionPath(RequestContext context = null)
+        public virtual Response GetCollectionPath(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -317,7 +317,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNamesAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
@@ -339,7 +339,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNames(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);

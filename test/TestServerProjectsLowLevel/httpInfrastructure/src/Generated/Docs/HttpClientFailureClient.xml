@@ -75,7 +75,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put400Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put400Async with required request content.
+This sample shows how to call Put400Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put400(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put400 with required request content.
+This sample shows how to call Put400 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -103,7 +103,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch400Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch400Async with required request content.
+This sample shows how to call Patch400Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -117,7 +117,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch400(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch400 with required request content.
+This sample shows how to call Patch400 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -131,7 +131,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post400Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post400Async with required request content.
+This sample shows how to call Post400Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -145,7 +145,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post400(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post400 with required request content.
+This sample shows how to call Post400 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -159,7 +159,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete400Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete400Async with required request content.
+This sample shows how to call Delete400Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -173,7 +173,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete400(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete400 with required request content.
+This sample shows how to call Delete400 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -283,7 +283,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put404Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put404Async with required request content.
+This sample shows how to call Put404Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -297,7 +297,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put404(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put404 with required request content.
+This sample shows how to call Put404 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -311,7 +311,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch405Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch405Async with required request content.
+This sample shows how to call Patch405Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -325,7 +325,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch405(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch405 with required request content.
+This sample shows how to call Patch405 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -339,7 +339,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post406Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post406Async with required request content.
+This sample shows how to call Post406Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -353,7 +353,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post406(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post406 with required request content.
+This sample shows how to call Post406 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -367,7 +367,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete407Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete407Async with required request content.
+This sample shows how to call Delete407Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -381,7 +381,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete407(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete407 with required request content.
+This sample shows how to call Delete407 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -395,7 +395,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put409Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put409Async with required request content.
+This sample shows how to call Put409Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -409,7 +409,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put409(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put409 with required request content.
+This sample shows how to call Put409 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -519,7 +519,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put413Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put413Async with required request content.
+This sample shows how to call Put413Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -533,7 +533,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put413(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put413 with required request content.
+This sample shows how to call Put413 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -547,7 +547,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch414Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch414Async with required request content.
+This sample shows how to call Patch414Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -561,7 +561,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch414(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch414 with required request content.
+This sample shows how to call Patch414 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -575,7 +575,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post415Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post415Async with required request content.
+This sample shows how to call Post415Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -589,7 +589,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post415(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post415 with required request content.
+This sample shows how to call Post415 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -627,7 +627,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete417Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete417Async with required request content.
+This sample shows how to call Delete417Async with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);
@@ -641,7 +641,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete417(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete417 with required request content.
+This sample shows how to call Delete417 with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpClientFailureClient(credential);

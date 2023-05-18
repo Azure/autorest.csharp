@@ -3,7 +3,7 @@
   <members>
     <member name="ZeroAsync(RequestContext)">
 <example>
-This sample shows how to call ZeroAsync and parse the result.
+This sample shows how to call ZeroAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Zero(RequestContext)">
 <example>
-This sample shows how to call Zero and parse the result.
+This sample shows how to call Zero with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
@@ -31,7 +31,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="OneAsync(RequestContext)">
 <example>
-This sample shows how to call OneAsync and parse the result.
+This sample shows how to call OneAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
@@ -45,7 +45,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="One(RequestContext)">
 <example>
-This sample shows how to call One and parse the result.
+This sample shows how to call One with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);

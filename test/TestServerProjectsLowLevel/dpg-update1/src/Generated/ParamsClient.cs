@@ -72,7 +72,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> HeadNoParamsAsync(string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> HeadNoParamsAsync(string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
@@ -103,7 +103,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(string,RequestContext)']/*" />
-        public virtual Response HeadNoParams(string newParameter = null, RequestContext context = null)
+        public virtual Response HeadNoParams(string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
@@ -137,7 +137,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
@@ -173,7 +173,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,string,RequestContext)']/*" />
-        public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
+        public virtual Response GetRequired(string parameter, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
@@ -209,7 +209,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
@@ -245,7 +245,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,string,RequestContext)']/*" />
-        public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual Response PutRequiredOptional(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
@@ -412,7 +412,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> GetOptionalAsync(string optionalParam, string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
@@ -445,7 +445,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,string,RequestContext)']/*" />
-        public virtual Response GetOptional(string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual Response GetOptional(string optionalParam, string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
@@ -476,7 +476,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNewOperationAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();
@@ -507,7 +507,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperation(RequestContext)']/*" />
-        public virtual Response GetNewOperation(RequestContext context = null)
+        public virtual Response GetNewOperation(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();

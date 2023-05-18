@@ -73,7 +73,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -103,7 +103,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
-        public virtual Response GetValid(RequestContext context = null)
+        public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -201,7 +201,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetInvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -231,7 +231,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
-        public virtual Response GetInvalid(RequestContext context = null)
+        public virtual Response GetInvalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -261,7 +261,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -291,7 +291,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
-        public virtual Response GetEmpty(RequestContext context = null)
+        public virtual Response GetEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -321,7 +321,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -351,7 +351,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
-        public virtual Response GetNull(RequestContext context = null)
+        public virtual Response GetNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -381,7 +381,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
@@ -411,7 +411,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
-        public virtual Response GetNotProvided(RequestContext context = null)
+        public virtual Response GetNotProvided(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();

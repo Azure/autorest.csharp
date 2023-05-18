@@ -71,7 +71,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandableAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNotExpandableAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNotExpandableAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetNotExpandable(RequestContext)']/*" />
-        public virtual Response GetNotExpandable(RequestContext context = null)
+        public virtual Response GetNotExpandable(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -199,7 +199,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetReferencedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetReferencedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -229,7 +229,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferenced(RequestContext)']/*" />
-        public virtual Response GetReferenced(RequestContext context = null)
+        public virtual Response GetReferenced(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -327,7 +327,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstantAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetReferencedConstantAsync(RequestContext context = null)
+        public virtual async Task<Response> GetReferencedConstantAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
@@ -357,7 +357,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='GetReferencedConstant(RequestContext)']/*" />
-        public virtual Response GetReferencedConstant(RequestContext context = null)
+        public virtual Response GetReferencedConstant(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();

@@ -116,7 +116,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post505(RequestContent.Create(data));
+            Response response = client.Post505(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -142,7 +142,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post505Async(RequestContent.Create(data));
+            Response response = await client.Post505Async(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -168,7 +168,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Delete505(RequestContent.Create(data));
+            Response response = client.Delete505(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -194,7 +194,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete505Async(RequestContent.Create(data));
+            Response response = await client.Delete505Async(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 

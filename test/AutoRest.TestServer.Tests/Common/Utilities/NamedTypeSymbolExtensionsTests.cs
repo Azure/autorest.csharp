@@ -95,7 +95,7 @@ namespace NamedTypeSymbolExtensionsTests
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
-                keepNonOverloadableProtocolSignature: Array.Empty<string>(),
+                keepNonOverloadableProtocolSignature: false,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),

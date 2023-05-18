@@ -60,7 +60,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -91,7 +91,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
-        public virtual Response Operation(RequestContent content, RequestContext context = null)
+        public virtual Response Operation(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -122,7 +122,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternalAsync(RequestContent,RequestContext)']/*" />
-        internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
+        internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
@@ -153,7 +153,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternal(RequestContent,RequestContext)']/*" />
-        internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
+        internal virtual Response OperationInternal(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();

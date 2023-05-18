@@ -50,15 +50,3 @@ op noConvenienceRequiredBody(@body required: Model): Response<200>;
 @get
 @convenientAPI(false)
 op noConvenienceOptionalBody(@body optional?: Model): Response<200>;
-
-@route("/noConvenienceInFlag")
-@doc("No convenience method, and if we add the convenientAPI decorator, there will be ambiguity. But this method is in keep-non-overloadable-protocol-signature.")
-@get
-@convenientAPI(false)
-op noConvenienceInFlag(): Model;
-
-@route("/convenienceInFlag")
-@doc("Has convenience method and protocol method. But this method is in keep-non-overloadable-protocol-signature.")
-@get
-@convenientAPI(true)
-op convenienceInFlag(): Model;

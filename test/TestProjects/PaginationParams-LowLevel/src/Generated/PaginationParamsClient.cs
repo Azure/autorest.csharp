@@ -75,7 +75,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParamsAsync(int?,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPaginationParamsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPaginationParamsAsync(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
@@ -99,7 +99,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParams(int?,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPaginationParams(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPaginationParams(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
@@ -123,7 +123,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(int?,int?,long?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit, int? offset, long? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
@@ -147,7 +147,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(int?,int?,long?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> Get2s(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> Get2s(int? limit, int? offset, long? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
@@ -171,7 +171,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3sAsync(int?,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> Get3sAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> Get3sAsync(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
@@ -195,7 +195,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3s(int?,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> Get3s(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> Get3s(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
@@ -219,7 +219,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4sAsync(int?,int?,float?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> Get4sAsync(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> Get4sAsync(int? top, int? skip, float? maxcount, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);
@@ -243,7 +243,7 @@ namespace PaginationParams_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4s(int?,int?,float?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> Get4s(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> Get4s(int? top, int? skip, float? maxcount, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);

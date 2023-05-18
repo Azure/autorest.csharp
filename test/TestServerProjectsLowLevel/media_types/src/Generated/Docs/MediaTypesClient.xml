@@ -63,7 +63,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="ContentTypeWithEncodingAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ContentTypeWithEncodingAsync with required request content and parse the result.
+This sample shows how to call ContentTypeWithEncodingAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new MediaTypesClient(credential);
@@ -79,7 +79,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="ContentTypeWithEncoding(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ContentTypeWithEncoding with required request content and parse the result.
+This sample shows how to call ContentTypeWithEncoding with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new MediaTypesClient(credential);

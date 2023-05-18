@@ -192,7 +192,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -223,7 +223,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505(RequestContent,RequestContext)']/*" />
-        public virtual Response Post505(RequestContent content, RequestContext context = null)
+        public virtual Response Post505(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -254,7 +254,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
@@ -285,7 +285,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete505(RequestContent content, RequestContext context = null)
+        public virtual Response Delete505(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();

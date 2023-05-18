@@ -3,7 +3,7 @@
   <members>
     <member name="GetNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetNullAsync and parse the result.
+This sample shows how to call GetNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetNull(RequestContext)">
 <example>
-This sample shows how to call GetNull and parse the result.
+This sample shows how to call GetNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -31,7 +31,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="PutNullAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutNullAsync with required request content.
+This sample shows how to call PutNullAsync with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -45,7 +45,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutNull(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutNull with required request content.
+This sample shows how to call PutNull with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -59,7 +59,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetEmptyAsync and parse the result.
+This sample shows how to call GetEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -73,7 +73,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetEmpty(RequestContext)">
 <example>
-This sample shows how to call GetEmpty and parse the result.
+This sample shows how to call GetEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -115,7 +115,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetMbcsAsync(RequestContext)">
 <example>
-This sample shows how to call GetMbcsAsync and parse the result.
+This sample shows how to call GetMbcsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -129,7 +129,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetMbcs(RequestContext)">
 <example>
-This sample shows how to call GetMbcs and parse the result.
+This sample shows how to call GetMbcs with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -171,7 +171,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetWhitespaceAsync(RequestContext)">
 <example>
-This sample shows how to call GetWhitespaceAsync and parse the result.
+This sample shows how to call GetWhitespaceAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -185,7 +185,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetWhitespace(RequestContext)">
 <example>
-This sample shows how to call GetWhitespace and parse the result.
+This sample shows how to call GetWhitespace with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -227,7 +227,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
 <example>
-This sample shows how to call GetNotProvidedAsync and parse the result.
+This sample shows how to call GetNotProvidedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -241,7 +241,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetNotProvided(RequestContext)">
 <example>
-This sample shows how to call GetNotProvided and parse the result.
+This sample shows how to call GetNotProvided with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -255,7 +255,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetBase64EncodedAsync(RequestContext)">
 <example>
-This sample shows how to call GetBase64EncodedAsync and parse the result.
+This sample shows how to call GetBase64EncodedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -269,7 +269,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetBase64Encoded(RequestContext)">
 <example>
-This sample shows how to call GetBase64Encoded and parse the result.
+This sample shows how to call GetBase64Encoded with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -283,7 +283,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetBase64UrlEncodedAsync(RequestContext)">
 <example>
-This sample shows how to call GetBase64UrlEncodedAsync and parse the result.
+This sample shows how to call GetBase64UrlEncodedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -297,7 +297,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetBase64UrlEncoded(RequestContext)">
 <example>
-This sample shows how to call GetBase64UrlEncoded and parse the result.
+This sample shows how to call GetBase64UrlEncoded with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -339,7 +339,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetNullBase64UrlEncodedAsync(RequestContext)">
 <example>
-This sample shows how to call GetNullBase64UrlEncodedAsync and parse the result.
+This sample shows how to call GetNullBase64UrlEncodedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
@@ -353,7 +353,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetNullBase64UrlEncoded(RequestContext)">
 <example>
-This sample shows how to call GetNullBase64UrlEncoded and parse the result.
+This sample shows how to call GetNullBase64UrlEncoded with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);

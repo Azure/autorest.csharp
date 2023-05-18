@@ -72,7 +72,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data));
+            Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -98,7 +98,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data));
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
             Console.WriteLine(response.Status);
         }
 

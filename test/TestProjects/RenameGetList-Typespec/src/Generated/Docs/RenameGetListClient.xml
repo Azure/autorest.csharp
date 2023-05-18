@@ -79,7 +79,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="GetProjectsAsync(RequestContext)">
 <example>
-This sample shows how to call GetProjectsAsync and parse the result.
+This sample shows how to call GetProjectsAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
@@ -104,7 +104,7 @@ await foreach (var item in client.GetProjectsAsync(new RequestContext()))
     </member>
     <member name="GetProjects(RequestContext)">
 <example>
-This sample shows how to call GetProjects and parse the result.
+This sample shows how to call GetProjects with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);

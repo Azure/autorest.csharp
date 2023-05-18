@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             bool useOverloadsBetweenProtocolAndConvenience,
-            IReadOnlyList<string> keepNonOverloadableProtocolSignature,
+            bool keepNonOverloadableProtocolSignature,
             string? projectFolder,
             string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Input
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
-            _keepNonOverloadableProtocolSignature = new HashSet<string>(keepNonOverloadableProtocolSignature);
+            KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
             ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
@@ -228,8 +228,7 @@ namespace AutoRest.CSharp.Input
         /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
         public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
-        private static HashSet<string>? _keepNonOverloadableProtocolSignature;
-        public static HashSet<string> KeepNonOverloadableProtocolSignature => _keepNonOverloadableProtocolSignature ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static bool KeepNonOverloadableProtocolSignature { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         /// <summary>
@@ -281,7 +280,7 @@ namespace AutoRest.CSharp.Input
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
-                keepNonOverloadableProtocolSignature: autoRest.GetValue<string[]?>(Options.KeepNonOverloadableProtocolSignature).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -351,6 +350,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.UseOverloadsBetweenProtocolAndConvenience:
                     return true;
+                case Options.KeepNonOverloadableProtocolSignature:
+                    return false;
                 case Options.ShouldTreatBase64AsBinaryData:
                     return true;
                 default:
