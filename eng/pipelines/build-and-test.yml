@@ -27,7 +27,7 @@ jobs:
           displayName: "Install latest tsp compiler globally"
           workingDirectory: $(Build.SourcesDirectory)
         - script: |
-            npx @azure-tools/typespec-bump-deps .\src\CADL.Extension\Emitter.Csharp\package.json && npx @azure-tools/typespec-bump-deps .\package.json --add-npm-overrides
+            npx @azure-tools/typespec-bump-deps@latest .\src\CADL.Extension\Emitter.Csharp\package.json && npx @azure-tools/typespec-bump-deps@latest .\package.json --add-npm-overrides
           displayName: "Bump tsp versions"
           workingDirectory: $(Build.SourcesDirectory)
         - pwsh: ./eng/RemoveInstalledPackages.ps1
