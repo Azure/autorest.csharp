@@ -42,7 +42,7 @@ namespace TypeSpecFirstTest.Models
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
-                writer.WriteNumberValue(IntExtensibleEnum.ToSerialInt32());
+                writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
             if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
             {
@@ -57,7 +57,7 @@ namespace TypeSpecFirstTest.Models
             if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
-                writer.WriteNumberValue(FloatExtensibleEnum.ToSerialInt32());
+                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
             if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
@@ -72,7 +72,7 @@ namespace TypeSpecFirstTest.Models
             if (Optional.IsDefined(FloatFixedEnum))
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
-                writer.WriteNumberValue(FloatFixedEnum.ToSerialSingle());
+                writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
             if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
             {
@@ -87,7 +87,7 @@ namespace TypeSpecFirstTest.Models
             if (Optional.IsDefined(IntFixedEnum))
             {
                 writer.WritePropertyName("intFixedEnum"u8);
-                writer.WriteNumberValue((int)IntFixedEnum);
+                writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
             if (Optional.IsCollectionDefined(IntFixedEnumCollection))
             {
@@ -102,7 +102,7 @@ namespace TypeSpecFirstTest.Models
             if (Optional.IsDefined(StringFixedEnum))
             {
                 writer.WritePropertyName("stringFixedEnum"u8);
-                writer.WriteStringValue(StringFixedEnum.ToSerialString());
+                writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
             }
             writer.WritePropertyName("requiredUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -414,7 +414,7 @@ namespace TypeSpecFirstTest.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, intExtensibleEnum, Optional.ToList(intExtensibleEnumCollection), floatExtensibleEnum, Optional.ToList(floatExtensibleEnumCollection), floatFixedEnum, Optional.ToList(floatFixedEnumCollection), intFixedEnum, Optional.ToList(intFixedEnumCollection), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown));
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -38,39 +38,18 @@ namespace CustomizationsInCadl.Models
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
-                if (PropertyEnumToRename != null)
-                {
-                    writer.WritePropertyName("propertyEnumToRename"u8);
-                    writer.WriteStringValue(PropertyEnumToRename.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("propertyEnumToRename");
-                }
+                writer.WritePropertyName("propertyEnumToRename"u8);
+                writer.WriteStringValue(PropertyEnumToRename.Value.ToSerialString());
             }
             if (Optional.IsDefined(PropertyEnumWithValueToRename))
             {
-                if (PropertyEnumWithValueToRename != null)
-                {
-                    writer.WritePropertyName("propertyEnumWithValueToRename"u8);
-                    writer.WriteStringValue(PropertyEnumWithValueToRename.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("propertyEnumWithValueToRename");
-                }
+                writer.WritePropertyName("propertyEnumWithValueToRename"u8);
+                writer.WriteStringValue(PropertyEnumWithValueToRename.Value.ToSerialString());
             }
             if (Optional.IsDefined(PropertyEnumToBeMadeExtensible))
             {
-                if (PropertyEnumToBeMadeExtensible != null)
-                {
-                    writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
-                    writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("propertyEnumToBeMadeExtensible");
-                }
+                writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
+                writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -85,9 +64,9 @@ namespace CustomizationsInCadl.Models
             Optional<RenamedModel> propertyModelToRename = default;
             Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
             Optional<ModelWithCustomizedProperties> propertyModelWithCustomizedProperties = default;
-            Optional<RenamedEnum?> propertyEnumToRename = default;
-            Optional<EnumWithValueToRename?> propertyEnumWithValueToRename = default;
-            Optional<EnumToBeMadeExtensible?> propertyEnumToBeMadeExtensible = default;
+            Optional<RenamedEnum> propertyEnumToRename = default;
+            Optional<EnumWithValueToRename> propertyEnumWithValueToRename = default;
+            Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyModelToMakeInternal"u8))
@@ -130,7 +109,6 @@ namespace CustomizationsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        propertyEnumToRename = null;
                         continue;
                     }
                     propertyEnumToRename = property.Value.GetString().ToRenamedEnum();
@@ -140,7 +118,6 @@ namespace CustomizationsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        propertyEnumWithValueToRename = null;
                         continue;
                     }
                     propertyEnumWithValueToRename = property.Value.GetString().ToEnumWithValueToRename();
@@ -150,7 +127,6 @@ namespace CustomizationsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        propertyEnumToBeMadeExtensible = null;
                         continue;
                     }
                     propertyEnumToBeMadeExtensible = new EnumToBeMadeExtensible(property.Value.GetString());

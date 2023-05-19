@@ -20,7 +20,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<int?> period = default;
+            Optional<int> period = default;
             Optional<IReadOnlyList<bool>> isChangePoint = default;
             Optional<IReadOnlyList<float>> confidenceScores = default;
             foreach (var property in element.EnumerateObject())
@@ -29,7 +29,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        period = null;
                         continue;
                     }
                     period = property.Value.GetInt32();
