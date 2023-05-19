@@ -48,7 +48,7 @@
      "Type": {
       "$id": "7",
       "Name": "bytes",
-      "Kind": "bytes",
+      "Kind": "Bytes",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -126,7 +126,7 @@
       "ElementType": {
        "$id": "17",
        "Name": "bytes",
-       "Kind": "bytes",
+       "Kind": "Bytes",
        "IsNullable": false
       },
       "IsNullable": false

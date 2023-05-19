@@ -294,6 +294,8 @@ namespace AutoRest.CSharp.Common.Input
         String,
         Time,
         Uri,
+        SByte,
+        Byte
     }
 
     internal enum InputModelTypeUsage
