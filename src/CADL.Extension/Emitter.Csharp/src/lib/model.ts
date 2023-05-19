@@ -69,6 +69,7 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -218,13 +219,6 @@ function isInputEnumType(x: any): x is InputEnumType {
 
 function isInputLiteralType(x: any): x is InputLiteralType {
     return x.Name === "Literal";
-}
-
-// TODO -- put this here temparaorily
-export interface LiteralTypeContext {
-    ModelName: string;
-    PropertyName: string;
-    Namespace?: string;
 }
 
 export function getInputType(
