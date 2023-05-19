@@ -488,7 +488,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -508,7 +508,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -543,7 +543,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -563,7 +563,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -598,7 +598,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            var result = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+            var result = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid());
         }
 
         [Test]
@@ -1041,7 +1041,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1069,7 +1069,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1112,7 +1112,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1140,7 +1140,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1181,7 +1181,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+            var options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
             var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
         }
 

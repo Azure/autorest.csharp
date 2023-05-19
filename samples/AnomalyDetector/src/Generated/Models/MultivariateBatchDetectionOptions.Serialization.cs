@@ -18,7 +18,7 @@ namespace AnomalyDetector.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
-            writer.WriteStringValue(DataSource);
+            writer.WriteStringValue(DataSource.AbsoluteUri);
             writer.WritePropertyName("topContributorCount"u8);
             writer.WriteNumberValue(TopContributorCount);
             writer.WritePropertyName("startTime"u8);
@@ -34,7 +34,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            string dataSource = default;
+            Uri dataSource = default;
             int topContributorCount = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
@@ -42,7 +42,7 @@ namespace AnomalyDetector.Models
             {
                 if (property.NameEquals("dataSource"u8))
                 {
-                    dataSource = property.Value.GetString();
+                    dataSource = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("topContributorCount"u8))

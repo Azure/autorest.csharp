@@ -28,7 +28,8 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames
+    getProjectedNames,
+    $format
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -67,18 +68,22 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
+import { FormattedType } from "../type/formattedType.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapCadlTypeToCSharpInputTypeKind(
     context: SdkContext,
-    cadlType: Type
+    cadlType: Type,
+    format?: string
 ): InputTypeKind {
-    const format = getFormat(context.program, cadlType);
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
+            return getCSharpInputTypeKindByIntrinsicModelName(
+                cadlType.name,
+                format
+            );
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -101,7 +106,8 @@ export function mapCadlTypeToCSharpInputTypeKind(
 }
 
 function getCSharpInputTypeKindByIntrinsicModelName(
-    name: string
+    name: string,
+    format?: string
 ): InputTypeKind {
     switch (name) {
         case "bytes":
@@ -119,7 +125,20 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "float64":
             return InputTypeKind.Float64;
         case "string":
-            return InputTypeKind.String;
+            switch (format?.toLowerCase()) {
+                case "date":
+                    return InputTypeKind.DateTime;
+                case "uri":
+                case "url":
+                    return InputTypeKind.Uri;
+                case "uuid":
+                    return InputTypeKind.Guid;
+                default:
+                    if (format) {
+                        logger.warn(`invalid format ${format}`);
+                    }
+                    return InputTypeKind.String;
+            }
         case "boolean":
             return InputTypeKind.Boolean;
         case "date":
@@ -129,9 +148,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "time":
             return InputTypeKind.Time;
         case "duration":
-            return InputTypeKind.Duration;
+            return InputTypeKind.DurationISO8601;
         default:
-            return InputTypeKind.Model;
+            return InputTypeKind.Object;
     }
 }
 
@@ -210,11 +229,12 @@ export interface LiteralTypeContext {
 
 export function getInputType(
     context: SdkContext,
-    type: Type,
+    formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
+    const type = formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
     if (type.kind === "Model") {
@@ -224,7 +244,7 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        return getInputLiteralType(type, literalTypeContext);
+        return getInputLiteralType(formattedType, literalTypeContext);
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -256,7 +276,8 @@ export function getInputType(
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                        sdkType.kind
+                        sdkType.kind,
+                        sdkType.format ?? formattedType.format
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -308,13 +329,15 @@ export function getInputType(
     }
 
     function getInputLiteralType(
-        type: Type,
+        formattedType: FormattedType,
         literalContext?: LiteralTypeContext
     ): InputLiteralType {
         // For literal types, we just want to emit them directly as well.
+        const type = formattedType.type;
         const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
             context,
-            type
+            type,
+            formattedType.format
         );
         const rawValueType = {
             Name: type.kind,
@@ -429,7 +452,12 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
-            ElementType: getInputType(context, elementType, models, enums),
+            ElementType: getInputType(
+                context,
+                getFormattedType(program, elementType),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputListType;
     }
@@ -437,8 +465,18 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
-            KeyType: getInputType(context, key, models, enums),
-            ValueType: getInputType(context, value, models, enums),
+            KeyType: getInputType(
+                context,
+                getFormattedType(program, key),
+                models,
+                enums
+            ),
+            ValueType: getInputType(
+                context,
+                getFormattedType(program, value),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputDictionaryType;
     }
@@ -480,7 +518,12 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(context, dm, models, enums);
+                    getInputType(
+                        context,
+                        getFormattedType(program, dm),
+                        models,
+                        enums
+                    );
                 }
             }
         }
@@ -535,17 +578,17 @@ export function getInputType(
                     PropertyName: name,
                     Namespace: model.Namespace
                 } as LiteralTypeContext;
+                const inputType = getInputType(
+                    context,
+                    getFormattedType(program, value),
+                    models,
+                    enums
+                );
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
-                    Type: getInputType(
-                        context,
-                        value.type,
-                        models,
-                        enums,
-                        modelPropertyContext
-                    ),
+                    Type: inputType,
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
@@ -554,7 +597,6 @@ export function getInputType(
             }
         });
     }
-
     function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {
             return undefined;
@@ -614,7 +656,7 @@ export function getInputType(
         for (const variant of variants) {
             const inputType = getInputType(
                 context,
-                variant.type,
+                getFormattedType(program, variant.type),
                 models,
                 enums
             );
@@ -797,4 +839,17 @@ export function getUsages(
         else value = value | flag;
         usagesMap.set(name, value);
     }
+}
+
+export function getFormattedType(program: Program, type: Type): FormattedType {
+    let targetType = type;
+    let format = getFormat(program, type);
+    if (type.kind === "ModelProperty") {
+        targetType = type.type;
+    }
+
+    return {
+        type: targetType,
+        format: format
+    } as FormattedType;
 }
