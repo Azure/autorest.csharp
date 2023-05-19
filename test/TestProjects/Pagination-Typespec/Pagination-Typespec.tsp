@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
@@ -9,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using OpenAPI;
+using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 //
@@ -180,6 +179,39 @@ model ListLedgerEntryInput {
   @body bodyInput: ListLedgerEntryInputBody;
 }
 
+@doc("Text Blocklist.")
+@resource("text/blocklists")
+model TextBlocklist {
+  @doc("Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~")
+  @key("blocklistName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  blocklistName: string;
+
+  @doc("Text blocklist description.")
+  @maxLength(1024)
+  description?: string;
+}
+
+@doc("Item in TextBlocklist.")
+@resource("blockItems")
+@parentResource(TextBlocklist)
+model TextBlockItem {
+  @doc("Block Item Id. It will be uuid.")
+  @key("blockItemId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  blockItemId: string;
+
+  @doc("Block item description.")
+  @maxLength(1024)
+  description?: string;
+
+  @doc("Block item content.")
+  @maxLength(128)
+  text: string;
+}
+
 //
 // ** Operations **
 //
@@ -189,13 +221,24 @@ namespace Pagination {
 
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
-  @convenientAPI(true)
   op ListPaginationLedgerEntries is Azure.Core.Foundations.ResourceList<LedgerEntry, ListLedgerEntryInput, PagedLedgerEntries>;
 }
 
 @route("/adp")
 interface UseFoundationsResourceList {
   @doc("List upload detail for the discovery resource.")
-  @convenientAPI(true)
   list is CustomResourceList<LedgerEntry>;  
+}
+
+interface TwoTypesItem {
+  @summary("Get All Text Blocklists")
+  @doc("Get all text blocklists details.")
+  listTextBlocklists is Azure.Core.ResourceList<TextBlocklist>;
+
+  @summary("Get All BlockItems By blocklistName")
+  @doc("Get all blockItems in a text blocklist")
+  listTextBlocklistItems is Azure.Core.ResourceList<
+    TextBlockItem,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }

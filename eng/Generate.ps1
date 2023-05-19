@@ -38,7 +38,12 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Typespec([string]$name, [string]$output, [string]$mainFile = "", [string]$arguments = "") {
+function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+    if($output.EndsWith("tests")) { return }
+
+    if ($mainFile -eq "") {
+        $mainFile = Get-TypeSpec-Entry $output
+    }
     $cadlDefinitions[$name] = @{
         'projectName' = $name;
         'output'      = $output;
@@ -49,6 +54,9 @@ function Add-Typespec([string]$name, [string]$output, [string]$mainFile = "", [s
 
 function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs = "") {
     $projectDirectory = Join-Path $testServerDirectory $testName
+    if(Test-Path "$projectDirectory/*.sln") {
+        $projectDirectory = Join-path $projectDirectory "src"
+    }
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
@@ -56,8 +64,35 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    if (Test-Path "$projectDirectory/*.sln") {
+        $projectDirectory = Join-Path $projectDirectory "src"
+    }
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
     Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
+}
+
+function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
+    $tspDirectory = $directory
+    if($tspDirectory.FullName.EndsWith("src")) {
+        $tspDirectory = $directory.Parent
+    }
+
+    $clientPath = Join-Path $tspDirectory "client.tsp"
+    if (Test-Path $clientPath) {
+        return $clientPath
+    }
+
+    $mainPath = Join-Path $tspDirectory "main.tsp"
+    if (Test-Path $mainPath) {
+        return $mainPath
+    }
+
+    $projectNamePath = Join-Path $tspDirectory "$($tspDirectory.Name).tsp"
+    if (Test-Path $projectNamePath) {
+        return $projectNamePath
+    }
+    
+    throw "There is no client.tsp or main.tsp or other tsp file named after project name" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
@@ -97,7 +132,9 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 
     if ($forTest) {
-        Add-Swagger-Test $testName $directory $testArguments
+        if(Test-Path "$directory/readme.md") {
+            Add-Swagger-Test $testName $directory $testArguments
+        }
     }
     else {
         if ($testName.EndsWith("Typespec")) {
@@ -115,6 +152,9 @@ if (!($Exclude -contains "TestProjects")) {
 
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
+        if ($testName -eq "ConvenienceInitial-Typespec") {
+            continue;
+        }
         $readmeConfigurationPath = Join-Path $directory "readme.md"
         $tspConfigConfigurationPath = Join-Path $directory "tspconfig.yaml"
         $possibleInputJsonFilePath = Join-Path $directory "$testName.json"
@@ -141,7 +181,7 @@ if (!($Exclude -contains "TestProjects")) {
             Add-Swagger $testName $directory $testArguments
         }
         else {
-            throw "There is no tspconfig.yaml file or autorest.md file or swagger json file $testName.json found in test project $testName"
+            throw "There is no tspconfig.yaml file or readme.md file or swagger json file $testName.json found in test project $testName"
         }
     }
 }
@@ -153,6 +193,9 @@ if (!($Exclude -contains "Samples")) {
     foreach ($directory in Get-ChildItem $sampleProjectsRoot -Directory) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
+        if (Test-Path "$projectDirectory/*.sln") {
+            $projectDirectory = Join-Path $projectDirectory "src"
+        }
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
         $tspConfigPath = Join-Path $directory "tspconfig.yaml"
 
@@ -162,13 +205,13 @@ if (!($Exclude -contains "Samples")) {
         }
         elseif (Test-Path $tspConfigPath) {
             # for typespec projects
-            $tspMain = Join-Path $projectDirectory "main.tsp"
-            $tspClient = Join-Path $projectDirectory "client.tsp"
+            $tspMain = Join-Path $projectDirectory ".." "main.tsp"
+            $tspClient = Join-Path $projectDirectory ".."  "client.tsp"
             $mainTspFile = if (Test-Path $tspClient) { Resolve-Path $tspClient } else { Resolve-Path $tspMain }
             Add-Typespec $sampleName $projectDirectory $mainTspFile
         }
         else {
-            throw "There is no tspconfig.yaml file or autorest.md file found in sample project $sampleName"
+            throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"
         }
     }
 }
@@ -243,6 +286,10 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping") {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
+    }
+    elseif ($key -eq "ConvenienceUpdate-Typespec" -or $key -eq "ConvenienceInitial-Typespec")
+    {
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." ".." "ConvenienceInitial-Typespec" "src" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 

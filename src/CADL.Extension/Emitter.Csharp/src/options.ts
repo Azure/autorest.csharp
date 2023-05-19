@@ -6,8 +6,8 @@ import { LoggerLevel } from "./lib/logger.js";
 export type NetEmitterOptions = {
     outputFile?: string;
     logFile?: string;
-    namespace?: string;
-    "library-name"?: string;
+    namespace: string;
+    "library-name": string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
     "unreferenced-types-handling"?:
@@ -19,6 +19,8 @@ export type NetEmitterOptions = {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    "existing-project-folder"?: string;
+    "use-overloads-between-protocol-and-convenience"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
@@ -31,8 +33,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     properties: {
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
-        namespace: { type: "string", nullable: true },
-        "library-name": { type: "string", nullable: true },
+        namespace: { type: "string" },
+        "library-name": { type: "string" },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false, nullable: true },
         "unreferenced-types-handling": {
@@ -51,7 +53,13 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "model-namespace": { type: "boolean", nullable: true },
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
+        "filter-out-core-models": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
+        "existing-project-folder": { type: "string", nullable: true },
+        "use-overloads-between-protocol-and-convenience": {
+            type: "boolean",
+            nullable: true
+        },
         debug: { type: "boolean", nullable: true },
         "models-to-treat-empty-string-as-null": {
             type: "array",
@@ -88,6 +96,7 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
+    "use-overloads-between-protocol-and-convenience": true,
     "package-name": undefined,
     debug: undefined,
     "models-to-treat-empty-string-as-null": undefined,

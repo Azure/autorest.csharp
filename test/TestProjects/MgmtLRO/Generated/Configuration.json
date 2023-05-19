@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "MgmtLRO",
-  "LibraryName": null,
+  "LibraryName": "ManagementOperations",
   "SharedSourceFolders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
@@ -9,5 +9,8 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "OperationsToLroApiVersionOverride": {
+    "Fakes_Update": "2021-06-01"
+  }
 }

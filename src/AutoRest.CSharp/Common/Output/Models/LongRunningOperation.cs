@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
-        public LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo) : this(operation, context, lroInfo, lroInfo.ClientPrefix + operation.Name.ToCleanName() + "Operation")
+        public LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo) : this(operation, context, lroInfo, lroInfo.ClientPrefix + operation.CleanName + "Operation")
         {
         }
 

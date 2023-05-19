@@ -622,19 +622,22 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$maxpagesize",
-                        "in": "query",
-                        "type": "string",
-                        "required": false,
-                        "description": "Optional. Specified maximum number of containers that can be included in the list."
-                    },
-                    {
                         "name": "$skip",
                         "in": "query",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
                         "description": "Optional. Number of records to skip."
+                    },
+                    {
+                        "name": "items",
+                        "in": "query",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The items to query on the bar resource."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"

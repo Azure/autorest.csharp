@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="HeadNoParamsAsync(string,RequestContext)">
+<example>
+This sample shows how to call HeadNoParamsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.HeadNoParamsAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call HeadNoParamsAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.HeadNoParamsAsync("<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="HeadNoParams(string,RequestContext)">
+<example>
+This sample shows how to call HeadNoParams and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.HeadNoParams();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call HeadNoParams with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.HeadNoParams("<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredAsync(string,string,RequestContext)">
+<example>
+This sample shows how to call GetRequiredAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.GetRequiredAsync("<parameter>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetRequiredAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetRequired(string,string,RequestContext)">
+<example>
+This sample shows how to call GetRequired with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.GetRequired("<parameter>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetRequired with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.GetRequired("<parameter>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOptionalAsync(string,string,string,RequestContext)">
+<example>
+This sample shows how to call PutRequiredOptionalAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call PutRequiredOptionalAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOptional(string,string,string,RequestContext)">
+<example>
+This sample shows how to call PutRequiredOptional with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.PutRequiredOptional("<requiredParam>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call PutRequiredOptional with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostParametersAsync(RequestContent,ContentType,RequestContext)">
+<example>
+This sample shows how to call PostParametersAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+var data = new {
+    url = "<url>",
+};
+
+Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostParameters(RequestContent,ContentType,RequestContext)">
+<example>
+This sample shows how to call PostParameters with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+var data = new {
+    url = "<url>",
+};
+
+Response response = client.PostParameters(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="DeleteParametersAsync(RequestContext)">
+<example>
+This sample shows how to call DeleteParametersAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.DeleteParametersAsync(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="DeleteParameters(RequestContext)">
+<example>
+This sample shows how to call DeleteParameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.DeleteParameters(new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetOptionalAsync(string,string,RequestContext)">
+<example>
+This sample shows how to call GetOptionalAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.GetOptionalAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetOptionalAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetOptional(string,string,RequestContext)">
+<example>
+This sample shows how to call GetOptional and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.GetOptional();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetOptional with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.GetOptional("<optionalParam>", "<newParameter>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNewOperationAsync(RequestContext)">
+<example>
+This sample shows how to call GetNewOperationAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = await client.GetNewOperationAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNewOperation(RequestContext)">
+<example>
+This sample shows how to call GetNewOperation and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParamsClient(credential);
+
+Response response = client.GetNewOperation(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

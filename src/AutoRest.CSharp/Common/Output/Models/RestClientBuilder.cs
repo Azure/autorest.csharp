@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
+                operation.CleanName,
                 operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
+                operation.CleanName,
                 operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,

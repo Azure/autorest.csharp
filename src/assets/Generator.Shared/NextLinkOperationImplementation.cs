@@ -38,9 +38,18 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
-            string? apiVersionOverride = null)
+            bool skipApiVersionOverride = false,
+            string? apiVersionOverrideValue = null)
         {
-            string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
+            string? apiVersionStr = null;
+            if (apiVersionOverrideValue is not null)
+            {
+                apiVersionStr = apiVersionOverrideValue;
+            }
+            else
+            {
+                apiVersionStr = !skipApiVersionOverride && TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null;
+            }
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState, out _))
             {
@@ -58,9 +67,10 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
-            string? apiVersionOverride = null)
+            bool skipApiVersionOverride = false,
+            string? apiVersionOverrideValue = null)
         {
-            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, apiVersionOverride);
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
