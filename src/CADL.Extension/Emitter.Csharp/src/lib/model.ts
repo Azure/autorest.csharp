@@ -3,11 +3,13 @@
 
 import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
+    EncodeData,
     Enum,
     EnumMember,
     getDoc,
     getDeprecated,
     getEffectiveModelType,
+    getEncode,
     getFormat,
     getFriendlyName,
     getKnownValues,
@@ -72,24 +74,26 @@ import { FormattedType } from "../type/formattedType.js";
 /**
  * Map calType to csharp InputTypeKind
  */
-export function mapCadlTypeToCSharpInputTypeKind(
+export function mapTypeSpecTypeToCSharpInputTypeKind(
     context: SdkContext,
-    cadlType: Type,
-    format?: string
+    TypeSpecType: Type,
+    format?: string,
+    encode?: EncodeData,
 ): InputTypeKind {
-    const kind = cadlType.kind;
+    const kind = TypeSpecType.kind;
     switch (kind) {
         case "Model":
             return getCSharpInputTypeKindByIntrinsicModelName(
-                cadlType.name,
-                format
+                TypeSpecType.name,
+                format,
+                encode
             );
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let numberValue = cadlType.value;
+            let numberValue = TypeSpecType.value;
             if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
@@ -107,11 +111,22 @@ export function mapCadlTypeToCSharpInputTypeKind(
 
 function getCSharpInputTypeKindByIntrinsicModelName(
     name: string,
-    format?: string
+    format?: string,
+    encode?: EncodeData
 ): InputTypeKind {
     switch (name) {
         case "bytes":
-            return InputTypeKind.Bytes;
+            switch(encode?.encoding) {
+                case undefined:
+                case "base64":
+                    return InputTypeKind.Bytes;
+                case "base64":
+                    return InputTypeKind.BytesBase64Url;
+                default: 
+                    logger.warn(`invalid encode ${encode?.encoding} for bytes.`);
+                    return InputTypeKind.Bytes;
+            }
+            // return InputTypeKind.Bytes;
         case "int8":
             return InputTypeKind.SByte;
         case "unit8":
@@ -144,11 +159,50 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "date":
             return InputTypeKind.Date;
         case "datetime":
-            return InputTypeKind.DateTime;
+            switch(encode?.encoding) {
+                case undefined:
+                case "rfc3339":
+                    return InputTypeKind.DateTimeRFC3339;
+                case "rfc7231":
+                    return InputTypeKind.DateTimeRFC7231;
+                case "unixTimeStamp":
+                    return InputTypeKind.DateTimeUnix;
+                default:
+                    logger.warn(`invalid encode ${encode?.encoding} for date time.`);
+                    return InputTypeKind.DateTimeRFC3339;
+            }
+            // return InputTypeKind.DateTime;
         case "time":
             return InputTypeKind.Time;
         case "duration":
-            return InputTypeKind.DurationISO8601;
+            switch (encode?.encoding) {
+                case undefined:
+                case "ISO8601":
+                    return InputTypeKind.DurationISO8601;
+                case "seconds":
+                    if (encode.type?.name === "float") {
+                        return InputTypeKind.DurationSecondsFloat;
+                    } else {
+                        return InputTypeKind.DurationSeconds;
+                    }
+                default:
+                    logger.warn(`invalid encode ${encode?.encoding} for duration.`);
+                    return InputTypeKind.DurationISO8601;
+
+            }
+            // switch(format?.toLocaleLowerCase()) {
+            //     case undefined:
+            //     case "duration-ISO8601":
+            //         return InputTypeKind.DurationISO8601;
+            //     case "duration-seconds":
+            //         return InputTypeKind.DurationSeconds;
+            //     case "duration-seconds-float":
+            //         return InputTypeKind.DurationSeconds;
+            //     default:
+            //         logger.warn(`invalid encode ${format} for duration.`);
+            //         return InputTypeKind.DurationISO8601;
+            // }
+            // return InputTypeKind.DurationISO8601;
         default:
             return InputTypeKind.Object;
     }
@@ -228,10 +282,11 @@ export function getInputType(
         type.kind === "Boolean"
     ) {
         // For literal types, we just want to emit them directly as well.
-        const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
+        const builtInKind: InputTypeKind = mapTypeSpecTypeToCSharpInputTypeKind(
             context,
             type,
-            formattedType.format
+            formattedType.format,
+            formattedType.encode
         );
         const valueType = {
             Name: type.kind,
@@ -277,8 +332,8 @@ export function getInputType(
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format ?? formattedType.format
-                    ),
+                        sdkType.format ?? formattedType.format,
+                        formattedType.encode),
                     IsNullable: false
                 } as InputPrimitiveType;
         }
@@ -755,9 +810,58 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
     if (type.kind === "ModelProperty") {
         targetType = type.type;
     }
+    let encodeData = undefined;
+    if (type.kind === "Scalar" || type.kind === "ModelProperty") {
+        encodeData = getEncode(program, type);
+    }
 
+    // format = mergeFormatAndEncoding(format, encodeData);
     return {
         type: targetType,
-        format: format
+        format: format,
+        encode: encodeData
     } as FormattedType;
+}
+
+export function mergeFormatAndEncoding(format?: string, encodeData?:EncodeData): string | undefined {
+    const encoding = encodeData?.encoding;
+    switch (format) {
+        case undefined:
+            return encoding;
+        case "date-time":
+            switch(encoding) {
+                case "rfc3339":
+                    return "dateTime-rfc3339";
+                case "rfc7231":
+                    return "dateTime-rfc7231";
+                case "unixTimeStamp":
+                    return "dateTime-unixTimeStamp";
+                default:
+                    if (encoding) logger.warn(`invalid encoding ${encoding} for date-time`);
+                    return format;
+            }
+        case "duration":
+            switch(encoding) {
+                case "ISO8601":
+                    return "duration-ISO8601"
+                case "seconds":
+                    switch(encodeData?.type.name) {
+                        case undefined:
+                            return "duration-seconds";
+                        case "float":
+                            return "duration-seconds-float";
+                        case "int32":
+                            return "duration-seconds-int32";
+                        default:
+                            return "duration-seconds";
+                    }
+                    // return "duration-seconds"
+                default:
+                    if (encoding) logger.warn(`invalid encoding ${encoding} for duration`);
+                    return format;
+            }
+        default:
+            return encoding;
+
+    }
 }
