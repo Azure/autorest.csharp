@@ -141,7 +141,9 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(DateTime) ||
                                  frameworkType == typeof(TimeSpan))
                         {
-                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
                             {
                                 writer.AppendRaw("WriteNumberValue");
                             }
@@ -187,6 +189,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I});");
                             return;
+                        }
+
+                        if (frameworkType == typeof(TimeSpan))
+                        {
+                            if (valueSerialization.Format == SerializationFormat.Duration_Seconds)
+                            {
+                                writer.Append($"(Convert.ToInt32({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
+                            else if (valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
+                            {
+                                writer.Append($"(Convert.ToDouble({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
                         }
 
                         writer.Append($"({name:I}")
@@ -671,6 +689,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         return $"{typeof(BinaryData)}.FromBytes({element}.GetBytesFromBase64(\"{format.ToFormatSpecifier()}\"))";
                     default:
                         return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
+                }
+            }
+
+            if (frameworkType == typeof(TimeSpan))
+            {
+                if (format == SerializationFormat.Duration_Seconds)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
+                } else if (format == SerializationFormat.Duration_Seconds_Float)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }
             }
 

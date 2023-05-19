@@ -18,7 +18,7 @@ namespace Encode.Duration.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteStringValue(Value, "%s");
+            writer.WriteNumberValue(Convert.ToInt32(Value.ToString("%s")));
             writer.WriteEndObject();
         }
 
@@ -33,7 +33,7 @@ namespace Encode.Duration.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = property.Value.GetTimeSpan("%s");
+                    value = TimeSpan.FromSeconds(property.Value.GetInt32());
                     continue;
                 }
             }

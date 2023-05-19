@@ -72,5 +72,37 @@ namespace CadlRanchProjects.Tests
             Response<FloatSecondsDurationProperty> response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsAsync(body);
             Assert.AreEqual(body.Value, response.Value.Value);
         });
+
+        [Test]
+        public Task Encode_Duration_Query_Default() => Test(async (host) =>
+        {
+            var input = new TimeSpan(40, 0, 0, 0);
+            Response response = await new DurationClient(host, null).GetQueryClient().DefaultAsync(input);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Encode_Duration_Query_ISO8601() => Test(async (host) =>
+        {
+            var input = new TimeSpan(40, 0, 0, 0);
+            var response = await new DurationClient(host, null).GetQueryClient().Iso8601Async(input);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Encode_Duration_Query_Int32Seconds() => Test(async (host) =>
+        {
+            var input = TimeSpan.FromSeconds(36);
+            var response = await new DurationClient(host, null).GetQueryClient().Int32SecondsAsync(input);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Encode_Duration_Query_FloatSeconds() => Test(async (host) =>
+        {
+            var input = TimeSpan.FromSeconds(35.621);
+            var response = await new DurationClient(host, null).GetQueryClient().FloatSecondsAsync(input);
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
