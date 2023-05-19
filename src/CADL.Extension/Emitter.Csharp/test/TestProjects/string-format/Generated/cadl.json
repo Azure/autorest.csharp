@@ -25,7 +25,7 @@
        "Type": {
         "$id": "5",
         "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Path",

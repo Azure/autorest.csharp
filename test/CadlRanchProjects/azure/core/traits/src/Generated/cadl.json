@@ -214,7 +214,7 @@
        "Type": {
         "$id": "26",
         "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Header",
@@ -235,7 +235,7 @@
        "Type": {
         "$id": "28",
         "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Header",

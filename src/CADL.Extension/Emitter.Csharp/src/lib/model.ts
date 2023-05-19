@@ -30,8 +30,7 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames,
-    $format
+    getProjectedNames
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -78,7 +77,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
     context: SdkContext,
     TypeSpecType: Type,
     format?: string,
-    encode?: EncodeData,
+    encode?: EncodeData
 ): InputTypeKind {
     const kind = TypeSpecType.kind;
     switch (kind) {
@@ -116,17 +115,18 @@ function getCSharpInputTypeKindByIntrinsicModelName(
 ): InputTypeKind {
     switch (name) {
         case "bytes":
-            switch(encode?.encoding) {
+            switch (encode?.encoding) {
                 case undefined:
                 case "base64":
                     return InputTypeKind.Bytes;
                 case "base64":
                     return InputTypeKind.BytesBase64Url;
-                default: 
-                    logger.warn(`invalid encode ${encode?.encoding} for bytes.`);
+                default:
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for bytes.`
+                    );
                     return InputTypeKind.Bytes;
             }
-            // return InputTypeKind.Bytes;
         case "int8":
             return InputTypeKind.SByte;
         case "unit8":
@@ -159,7 +159,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "date":
             return InputTypeKind.Date;
         case "datetime":
-            switch(encode?.encoding) {
+            switch (encode?.encoding) {
                 case undefined:
                 case "rfc3339":
                     return InputTypeKind.DateTimeRFC3339;
@@ -168,10 +168,11 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                 case "unixTimeStamp":
                     return InputTypeKind.DateTimeUnix;
                 default:
-                    logger.warn(`invalid encode ${encode?.encoding} for date time.`);
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for date time.`
+                    );
                     return InputTypeKind.DateTimeRFC3339;
             }
-            // return InputTypeKind.DateTime;
         case "time":
             return InputTypeKind.Time;
         case "duration":
@@ -186,23 +187,11 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                         return InputTypeKind.DurationSeconds;
                     }
                 default:
-                    logger.warn(`invalid encode ${encode?.encoding} for duration.`);
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for duration.`
+                    );
                     return InputTypeKind.DurationISO8601;
-
             }
-            // switch(format?.toLocaleLowerCase()) {
-            //     case undefined:
-            //     case "duration-ISO8601":
-            //         return InputTypeKind.DurationISO8601;
-            //     case "duration-seconds":
-            //         return InputTypeKind.DurationSeconds;
-            //     case "duration-seconds-float":
-            //         return InputTypeKind.DurationSeconds;
-            //     default:
-            //         logger.warn(`invalid encode ${format} for duration.`);
-            //         return InputTypeKind.DurationISO8601;
-            // }
-            // return InputTypeKind.DurationISO8601;
         default:
             return InputTypeKind.Object;
     }
@@ -333,7 +322,8 @@ export function getInputType(
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
                         sdkType.format ?? formattedType.format,
-                        formattedType.encode),
+                        formattedType.encode
+                    ),
                     IsNullable: false
                 } as InputPrimitiveType;
         }
@@ -815,53 +805,9 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         encodeData = getEncode(program, type);
     }
 
-    // format = mergeFormatAndEncoding(format, encodeData);
     return {
         type: targetType,
         format: format,
         encode: encodeData
     } as FormattedType;
-}
-
-export function mergeFormatAndEncoding(format?: string, encodeData?:EncodeData): string | undefined {
-    const encoding = encodeData?.encoding;
-    switch (format) {
-        case undefined:
-            return encoding;
-        case "date-time":
-            switch(encoding) {
-                case "rfc3339":
-                    return "dateTime-rfc3339";
-                case "rfc7231":
-                    return "dateTime-rfc7231";
-                case "unixTimeStamp":
-                    return "dateTime-unixTimeStamp";
-                default:
-                    if (encoding) logger.warn(`invalid encoding ${encoding} for date-time`);
-                    return format;
-            }
-        case "duration":
-            switch(encoding) {
-                case "ISO8601":
-                    return "duration-ISO8601"
-                case "seconds":
-                    switch(encodeData?.type.name) {
-                        case undefined:
-                            return "duration-seconds";
-                        case "float":
-                            return "duration-seconds-float";
-                        case "int32":
-                            return "duration-seconds-int32";
-                        default:
-                            return "duration-seconds";
-                    }
-                    // return "duration-seconds"
-                default:
-                    if (encoding) logger.warn(`invalid encoding ${encoding} for duration`);
-                    return format;
-            }
-        default:
-            return encoding;
-
-    }
 }

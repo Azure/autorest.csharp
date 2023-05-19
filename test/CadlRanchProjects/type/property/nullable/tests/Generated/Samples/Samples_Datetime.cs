@@ -151,7 +151,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -167,7 +167,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data), new RequestContext());
@@ -183,7 +183,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
@@ -199,7 +199,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PatchNonNullAsync(RequestContent.Create(data), new RequestContext());
@@ -215,7 +215,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.PatchNull(RequestContent.Create(data));
@@ -231,7 +231,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.PatchNull(RequestContent.Create(data), new RequestContext());
@@ -247,7 +247,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PatchNullAsync(RequestContent.Create(data));
@@ -263,7 +263,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+                nullableProperty = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PatchNullAsync(RequestContent.Create(data), new RequestContext());

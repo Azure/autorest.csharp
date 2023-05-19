@@ -61,7 +61,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -128,7 +128,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -223,7 +223,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -292,7 +292,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -382,7 +382,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -437,7 +437,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45f,
         }
     },
@@ -612,8 +612,8 @@ namespace AnomalyDetector.Samples
             var data = new
             {
                 dataSource = "<dataSource>",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.TrainMultivariateModel(RequestContent.Create(data));
@@ -636,8 +636,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
                 displayName = "<displayName>",
                 slidingWindow = 1234,
                 alignPolicy = new
@@ -669,8 +669,8 @@ namespace AnomalyDetector.Samples
                 variable = "<variable>",
                 filledNARatio = 123.45f,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T18:57:31.2311892Z",
+                lastTimestamp = "2022-05-10T18:57:31.2311892Z",
             }
         },
                 },
@@ -716,8 +716,8 @@ namespace AnomalyDetector.Samples
             var data = new
             {
                 dataSource = "<dataSource>",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
@@ -740,8 +740,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
                 displayName = "<displayName>",
                 slidingWindow = 1234,
                 alignPolicy = new
@@ -773,8 +773,8 @@ namespace AnomalyDetector.Samples
                 variable = "<variable>",
                 filledNARatio = 123.45f,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T18:57:31.2311892Z",
+                lastTimestamp = "2022-05-10T18:57:31.2311892Z",
             }
         },
                 },
@@ -1043,8 +1043,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
@@ -1071,8 +1071,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
@@ -1114,8 +1114,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
@@ -1142,8 +1142,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+                endTime = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data), new RequestContext());

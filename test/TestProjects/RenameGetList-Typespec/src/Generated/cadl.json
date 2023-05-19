@@ -165,7 +165,7 @@
      "Type": {
       "$id": "23",
       "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -180,7 +180,7 @@
      "Type": {
       "$id": "25",
       "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -195,7 +195,7 @@
      "Type": {
       "$id": "27",
       "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -210,7 +210,7 @@
      "Type": {
       "$id": "29",
       "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,

@@ -85,7 +85,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +100,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = client.Put(RequestContent.Create(data), new RequestContext());
@@ -115,7 +115,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +130,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());

@@ -1215,7 +1215,7 @@
         "ValueType": {
          "$id": "136",
          "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1257,7 +1257,7 @@
         "ValueType": {
          "$id": "141",
          "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false

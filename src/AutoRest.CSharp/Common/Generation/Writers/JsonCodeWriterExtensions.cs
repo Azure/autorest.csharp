@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -801,6 +802,8 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTime_RFC1123 => "R",
+            SerializationFormat.DateTime_RFC3339 => "O",
+            SerializationFormat.DateTime_RFC7231 => "R",
             SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
