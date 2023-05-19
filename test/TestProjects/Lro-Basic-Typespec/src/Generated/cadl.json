@@ -224,7 +224,7 @@
       {
        "$id": "27",
        "StatusCodes": [
-        201
+        202
        ],
        "BodyMediaType": "Json",
        "Headers": [
@@ -258,7 +258,7 @@
       "FinalResponse": {
        "$id": "31",
        "StatusCodes": [
-        201
+        202
        ],
        "BodyMediaType": "Json",
        "Headers": [
