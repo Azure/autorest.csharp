@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         paramName,
                         declaredName,
                         serializedName,
-                        property.ValueType,
+                        property.Declaration.Type,
                         property.ValueType,
                         valueSerialization,
                         inputModelProperty.IsRequired,
