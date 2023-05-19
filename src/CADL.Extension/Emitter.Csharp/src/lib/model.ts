@@ -573,7 +573,7 @@ export function getInputType(
                     value.name;
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
-                const modelPropertyContext = {
+                const literalTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
                     Namespace: model.Namespace
@@ -582,7 +582,8 @@ export function getInputType(
                     context,
                     getFormattedType(program, value),
                     models,
-                    enums
+                    enums,
+                    literalTypeContext
                 );
                 const inputProp = {
                     Name: name,

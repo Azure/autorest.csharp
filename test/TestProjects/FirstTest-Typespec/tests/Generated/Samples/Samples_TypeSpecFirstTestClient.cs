@@ -479,9 +479,9 @@ namespace TypeSpecFirstTest.Samples
 
             var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
             {
-                OptionalLiteralString = "<OptionalLiteralString>",
-                OptionalLiteralInt = 1234,
-                OptionalLiteralFloat = 3.14,
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
             };
             var result = await client.AnonymousBodyAsync(thing);
@@ -1092,9 +1092,9 @@ namespace TypeSpecFirstTest.Samples
                 ["key"] = StringExtensibleEnum.One,
             }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
             {
-                OptionalLiteralString = "<OptionalLiteralString>",
-                OptionalLiteralInt = 1234,
-                OptionalLiteralFloat = 3.14,
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
             }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
             {
@@ -1670,9 +1670,9 @@ namespace TypeSpecFirstTest.Samples
 
             var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
             {
-                OptionalLiteralString = "<OptionalLiteralString>",
-                OptionalLiteralInt = 1234,
-                OptionalLiteralFloat = 3.14,
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
             };
             var result = await client.CreateLiteralAsync(body);
@@ -1833,9 +1833,9 @@ namespace TypeSpecFirstTest.Samples
 
             var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
             {
-                OptionalLiteralString = "<OptionalLiteralString>",
-                OptionalLiteralInt = 1234,
-                OptionalLiteralFloat = 3.14,
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
             };
             var result = await client.InternalProtocolAsync(body);
