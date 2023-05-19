@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(string,CancellationToken)">
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
 <example>
 This sample shows how to call TopActionAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = await client.TopActionAsync("<action>");
+var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
 ]]></code>
 </example>
     </member>
-    <member name="TopAction(string,CancellationToken)">
+    <member name="TopAction(DateTimeOffset,CancellationToken)">
 <example>
 This sample shows how to call TopAction with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-var result = client.TopAction("<action>");
+var result = client.TopAction(DateTimeOffset.UtcNow);
 ]]></code>
 </example>
     </member>
-    <member name="TopActionAsync(string,RequestContext)">
+    <member name="TopActionAsync(DateTimeOffset,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = await client.TopActionAsync("<action>", new RequestContext());
+Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -47,14 +47,14 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="TopAction(string,RequestContext)">
+    <member name="TopAction(DateTimeOffset,RequestContext)">
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
-Response response = client.TopAction("<action>", new RequestContext());
+Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -495,6 +495,64 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new TypeSpecFirstTestClient(endpoint);
 
 Response response = client.AddTimeHeader(DateTimeOffset.UtcNow, new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
+<example>
+This sample shows how to call StringFormatAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
+var result = await client.StringFormatAsync(Guid.NewGuid(), body);
+]]></code>
+</example>
+    </member>
+    <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
+<example>
+This sample shows how to call StringFormat with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
+var result = client.StringFormat(Guid.NewGuid(), body);
+]]></code>
+</example>
+    </member>
+    <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
+<example>
+This sample shows how to call StringFormatAsync with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var data = new {
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+};
+
+Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringFormat(Guid,RequestContent,RequestContext)">
+<example>
+This sample shows how to call StringFormat with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new TypeSpecFirstTestClient(endpoint);
+
+var data = new {
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+};
+
+Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

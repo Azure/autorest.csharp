@@ -277,6 +277,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 suppressAbstractBaseClasses,
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
+                ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
             );

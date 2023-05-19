@@ -1082,7 +1082,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamByte("<scenario>", null);
+            Response response = client.ParamByte("<scenario>", BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1093,7 +1093,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamByte("<scenario>", null, new RequestContext());
+            Response response = client.ParamByte("<scenario>", BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -1104,7 +1104,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", null);
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1115,7 +1115,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", null, new RequestContext());
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"), new RequestContext());
             Console.WriteLine(response.Status);
         }
 

@@ -224,7 +224,7 @@
       {
        "$id": "27",
        "StatusCodes": [
-        201
+        202
        ],
        "BodyMediaType": "Json",
        "Headers": [
@@ -236,7 +236,7 @@
          "Type": {
           "$id": "29",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -258,7 +258,7 @@
       "FinalResponse": {
        "$id": "31",
        "StatusCodes": [
-        201
+        202
        ],
        "BodyMediaType": "Json",
        "Headers": [
@@ -270,7 +270,7 @@
          "Type": {
           "$id": "33",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -404,7 +404,7 @@
          "Type": {
           "$id": "46",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -429,7 +429,7 @@
          "Type": {
           "$id": "49",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -466,7 +466,7 @@
          "Type": {
           "$id": "53",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -580,7 +580,7 @@
          "Type": {
           "$id": "64",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }
@@ -617,7 +617,7 @@
          "Type": {
           "$id": "68",
           "Name": "ResourceLocation",
-          "Kind": "String",
+          "Kind": "Uri",
           "IsNullable": false
          }
         }

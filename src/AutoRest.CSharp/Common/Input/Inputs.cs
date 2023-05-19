@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -121,7 +122,8 @@ namespace AutoRest.CSharp.Common.Input
         bool SkipUrlEncoding,
         bool Explode,
         string? ArraySerializationDelimiter,
-        string? HeaderCollectionPrefix)
+        string? HeaderCollectionPrefix,
+        SerializationFormat SerializationFormat)
     {
         public InputParameter() : this(
             Name: string.Empty,
@@ -141,7 +143,8 @@ namespace AutoRest.CSharp.Common.Input
             SkipUrlEncoding: false,
             Explode: false,
             ArraySerializationDelimiter: null,
-            HeaderCollectionPrefix: null)
+            HeaderCollectionPrefix: null,
+            SerializationFormat: SerializationFormat.Default)
         { }
     }
 
@@ -210,7 +213,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null, SerializationFormat SerializationFormat = SerializationFormat.Default)
     {
     }
 
@@ -291,6 +294,8 @@ namespace AutoRest.CSharp.Common.Input
         String,
         Time,
         Uri,
+        SByte,
+        Byte
     }
 
     internal enum InputModelTypeUsage

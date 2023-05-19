@@ -122,7 +122,7 @@
      "Type": {
       "$id": "16",
       "Name": "bytes",
-      "Kind": "BinaryData",
+      "Kind": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,

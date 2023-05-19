@@ -1348,8 +1348,8 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestContext context = null)
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> ByteMultiByteAsync(BinaryData byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1379,8 +1379,8 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByte(Byte[],RequestContext)']/*" />
-        public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestContext context = null)
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByte(BinaryData,RequestContext)']/*" />
+        public virtual Response ByteMultiByte(BinaryData byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1470,8 +1470,8 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNullAsync(Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestContext context = null)
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNullAsync(BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> ByteNullAsync(BinaryData byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -1501,8 +1501,8 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNull(Byte[],RequestContext)']/*" />
-        public virtual Response ByteNull(byte[] byteQuery = null, RequestContext context = null)
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNull(BinaryData,RequestContext)']/*" />
+        public virtual Response ByteNull(BinaryData byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -2514,7 +2514,7 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery, RequestContext context)
+        internal HttpMessage CreateByteMultiByteRequest(BinaryData byteQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -2524,7 +2524,7 @@ namespace url_LowLevel
             uri.AppendPath("/queries/byte/multibyte", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2545,7 +2545,7 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteNullRequest(byte[] byteQuery, RequestContext context)
+        internal HttpMessage CreateByteNullRequest(BinaryData byteQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -2555,7 +2555,7 @@ namespace url_LowLevel
             uri.AppendPath("/queries/byte/null", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

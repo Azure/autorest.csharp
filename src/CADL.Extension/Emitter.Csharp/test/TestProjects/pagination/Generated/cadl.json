@@ -90,7 +90,7 @@
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,

@@ -130,7 +130,7 @@
      "Type": {
       "$id": "18",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -175,7 +175,7 @@
      "Type": {
       "$id": "23",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -254,7 +254,7 @@
      "Type": {
       "$id": "33",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -351,7 +351,7 @@
      "Type": {
       "$id": "45",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,

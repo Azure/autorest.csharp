@@ -19,6 +19,7 @@ using Azure.Core;
         petStoreUrl: string,
     }
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace MixApiVersion;
 
 // Model types
