@@ -509,10 +509,7 @@ export function getInputType(
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
                 const inputType = getInputType(
                     context,
-                    {
-                        type: value.type,
-                        format: getFormat(program, value)
-                    } as FormattedType,
+                    getFormattedType(program, value),
                     models,
                     enums
                 );
@@ -588,10 +585,7 @@ export function getInputType(
         for (const variant of variants) {
             const inputType = getInputType(
                 context,
-                {
-                    type: variant.type,
-                    format: getFormat(program, variant.type)
-                } as FormattedType,
+                getFormattedType(program, variant.type),
                 models,
                 enums
             );
