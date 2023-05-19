@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Response = Azure.Response;
@@ -29,15 +29,25 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(legacyMethod.CreateMessageMethods[0]);
+                        writer.WriteMethod(legacyMethod.CreateRequest);
 
-                        WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, true);
-                        WriteOperation(writer, legacyMethod.RestClientMethod, restClient.Fields, false);
+                        foreach (var method in legacyMethod.RestClientConvenience)
+                        {
+                            writer
+                                .WriteMethodDocumentation(method.Signature)
+                                .WriteMethod(method);
+                        }
+
                         if (legacyMethod.ProtocolMethod is {} protocolMethod)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.ResponseClassifier);
                         }
+                    }
+
+                    foreach (var nextPageMethod in restClient.Methods.Select(m => m.CreateNextPageRequest).WhereNotNull())
+                    {
+                        writer.WriteMethod(nextPageMethod);
                     }
 
                     LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());

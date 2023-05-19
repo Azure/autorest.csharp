@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -293,11 +294,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
-            var responseExpression = new ResponseExpression<ArmResourceExpression>(m => new ArmResourceExpression(m), originalResponse);
-
+            var armResource = new ArmResourceExpression(new MemberReference(originalResponse, nameof(Response<object>.Value)));
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, responseExpression)));
+                _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, armResource)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);

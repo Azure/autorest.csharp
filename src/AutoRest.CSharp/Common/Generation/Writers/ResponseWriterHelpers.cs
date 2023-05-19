@@ -20,25 +20,6 @@ namespace AutoRest.CSharp.Generation.Writers
             var returnType = operation.ReturnType;
             var headersModelType = operation.HeaderModel?.Type;
 
-            ReturnKind kind;
-
-            if (returnType != null && headersModelType != null)
-            {
-                kind = ReturnKind.HeadersAndValue;
-            }
-            else if (headersModelType != null)
-            {
-                kind = ReturnKind.Headers;
-            }
-            else if (returnType != null)
-            {
-                kind = ReturnKind.Value;
-            }
-            else
-            {
-                kind = ReturnKind.Response;
-            }
-
             var responseBody = response.ResponseBody;
             ReferenceOrConstant value = default;
 
@@ -85,36 +66,35 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
             }
 
-            switch (kind)
+            if (returnType != null && headersModelType != null)
             {
-                case ReturnKind.Response:
-                    writer.Append($"return {responseVariable};");
-                    break;
-                case ReturnKind.Headers:
-                    writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
-                    break;
-                case ReturnKind.HeadersAndValue:
-                    writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue");
-                    if (!Equals(responseBody?.Type, operation.ReturnType))
-                    {
-                        writer.Append($"<{operation.ReturnType}, {headersModelType}>");
-                    }
-                    writer.Append($"(");
-                    writer.WriteReferenceOrConstant(value);
-                    writer.Append($", headers, {responseVariable});");
-                    break;
-                case ReturnKind.Value:
-                    writer.Append($"return {typeof(Azure.Response)}.FromValue");
-                    if (!Equals(responseBody?.Type, operation.ReturnType))
-                    {
-                        writer.Append($"<{operation.ReturnType}>");
-                    }
-                    writer.Append($"(");
-                    writer.WriteReferenceOrConstant(value);
-                    writer.Append($", {responseVariable});");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue");
+                if (!Equals(responseBody?.Type, operation.ReturnType))
+                {
+                    writer.Append($"<{operation.ReturnType}, {headersModelType}>");
+                }
+                writer.Append($"(");
+                writer.WriteReferenceOrConstant(value);
+                writer.Append($", headers, {responseVariable});");
+            }
+            else if (returnType != null)
+            {
+                writer.Append($"return {typeof(Azure.Response)}.FromValue");
+                if (!Equals(responseBody?.Type, operation.ReturnType))
+                {
+                    writer.Append($"<{operation.ReturnType}>");
+                }
+                writer.Append($"(");
+                writer.WriteReferenceOrConstant(value);
+                writer.Append($", {responseVariable});");
+            }
+            else if (headersModelType != null)
+            {
+                writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
+            }
+            else
+            {
+                writer.Append($"return {responseVariable};");
             }
         }
 

@@ -196,8 +196,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                             continue;
                         }
 
-                        var createNextPageMessageName = methods.RestClientNextPageMethod is not null
-                            ? methods.CreateMessageMethods[1].Signature.Name
+                        var createNextPageMessageName = methods.CreateNextPageRequest is { } nextPage
+                            ? nextPage.Signature.Name
                             : null;
 
                         var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessageName);
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var inputClient in _input.Clients)
                 {
-                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], this, _defaultName, _defaultNamespace, _sourceInputModel));
+                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], _defaultName, _defaultNamespace, _sourceInputModel));
                 }
             }
 
@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var restClientParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline }.Union(clientParameters).ToList();
                 var clientName = GetClientName(inputClient);
                 var clientMethodsBuilder = new ClientMethodsBuilder(inputClient.Operations, _typeFactory, true, true);
-                restClients.Add(inputClient, new RestClient(inputClient, clientMethodsBuilder, clientParameters, restClientParameters, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
+                restClients.Add(inputClient, new RestClient(clientMethodsBuilder, clientParameters, restClientParameters, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
             }
 
             return restClients;

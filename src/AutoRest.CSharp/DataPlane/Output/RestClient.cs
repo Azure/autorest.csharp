@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -29,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "internal";
 
-        public RestClient(InputClient inputClient, ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, TypeFactory typeFactory, OutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public RestClient(ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, TypeFactory typeFactory, OutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             _clientName = clientName;
@@ -43,12 +42,11 @@ namespace AutoRest.CSharp.Output.Models
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
             var restClient = new MemberReference(null, "RestClient");
-            var methods = clientMethodsBuilder
+            Methods = clientMethodsBuilder
                 .Build(restClient, Fields, clientPrefix + GetClientSuffix())
-                .Select(b => (Order: b is LroOperationMethodsBuilder ? 2 : b is PagingOperationMethodsBuilderBase ? 1 : 0, Methods: BuildMethods(library, b)))
+                .Select(b => BuildMethods(library, b))
+                .OrderBy(m => m.Order)
                 .ToList();
-
-            Methods = methods.Select(m => m.Methods).ToList();
         }
 
         protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)

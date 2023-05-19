@@ -11,5 +11,17 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record LowLevelClientMethod(IReadOnlyList<Method> Convenience, IReadOnlyList<Method> Protocol, IReadOnlyList<Method> CreateRequest, ResponseClassifierType ResponseClassifier, string? ExternalDocsUrl, InputType? RequestBodyType, InputType? ResponseBodyType, bool IsPaging, bool IsLongRunning, string PagingItemName);
 
-    internal record LegacyMethods(InputOperation Operation, IReadOnlyList<Method> ConvenienceMethods, IReadOnlyList<Method> CreateMessageMethods, LowLevelClientMethod? ProtocolMethod, RestClientMethod RestClientMethod, RestClientMethod? RestClientNextPageMethod);
+    internal record LegacyMethods
+    (
+        Method CreateRequest,
+        Method? CreateNextPageRequest,
+        IReadOnlyList<Method> RestClientConvenience,
+        IReadOnlyList<Method> Convenience,
+
+        int Order,
+        InputOperation Operation,
+        LowLevelClientMethod? ProtocolMethod,
+        RestClientMethod RestClientMethod,
+        RestClientMethod? RestClientNextPageMethod
+    );
 }

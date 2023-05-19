@@ -31,6 +31,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Var(typeof(StreamReader), name, value, d => new StreamReaderExpression(d), out variable);
 
+        public static DeclarationStatement UsingVar(string name, HttpMessageExpression value, out HttpMessageExpression variable)
+            => UsingVar(null, name, value, d => new HttpMessageExpression(d), out variable);
+
         public static DeclarationStatement UsingVar(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
             => UsingVar(null, name, value, d => new JsonDocumentExpression(d), out variable);
 

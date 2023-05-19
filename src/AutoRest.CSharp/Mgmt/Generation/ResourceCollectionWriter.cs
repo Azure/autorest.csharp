@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -95,14 +96,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            var responseExpression = new ResponseExpression<ArmResourceExpression>(m => new ArmResourceExpression(m), response);
+            var armResource = new ArmResourceExpression(new MemberReference(response, nameof(Response<object>.Value)));
 
             writer.Line($"if ({response}.Value == null)");
             writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, responseExpression)));
+                writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, armResource)));
             }
 
             writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");

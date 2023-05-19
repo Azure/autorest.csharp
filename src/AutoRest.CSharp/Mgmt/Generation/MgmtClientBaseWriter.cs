@@ -625,7 +625,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteMethodBodyStatement(Return(CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
-        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ResponseExpression<ArmResourceExpression> response)
+        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ArmResourceExpression armResource)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
@@ -642,7 +642,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    parameterInvocations.Add(new MemberReference(response.Value, "Name"));
+                    parameterInvocations.Add(armResource.Name);
                 }
                 else
                 {
@@ -682,7 +682,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                var responseExpression = new ResponseExpression<ArmResourceExpression>(m => new ArmResourceExpression(m), response);
+                var armResource = new ArmResourceExpression(new MemberReference(response, nameof(Response<object>.Value)));
 
                 if (operation.ThrowIfNull)
                 {
@@ -693,7 +693,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, responseExpression)));
+                    _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, armResource)));
                 }
 
                 // the case that we did not need to wrap the result

@@ -1,27 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -45,9 +37,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     //    WriteClientMethod(writer, clientMethod, false);
                     //}
 
-                    foreach (var pagingMethod in client.PagingMethods)
+                    foreach (var pagingMethod in client.RestClient.Methods.SelectMany(m => m.Convenience))
                     {
-                        WritePagingOperation(writer, pagingMethod);
+                        WriteMethod(writer, pagingMethod);
                     }
                 }
             }
@@ -196,7 +188,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, Method method)
+        private void WriteMethod(CodeWriter writer, Method method)
         {
             writer.WriteXmlDocumentationSummary($"{method.Signature.SummaryText}");
 

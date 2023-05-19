@@ -14,13 +14,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public BinaryDataExpression Content => new(new MemberReference(Untyped, nameof(Response.Content)));
         public ValueExpression ContentStream => new MemberReference(Untyped, nameof(Response.ContentStream));
 
-        public static ResponseExpression<SerializableObjectTypeExpression> FromValue(SerializableObjectTypeExpression value, ResponseExpression response)
-            => FromValue(m => new SerializableObjectTypeExpression(value.ObjectType, m), value, response);
-
-        public static ResponseExpression<FrameworkTypeExpression> FromValue(FrameworkTypeExpression value, ResponseExpression response)
-            => FromValue(m => new FrameworkTypeExpression(value.ReturnType, m), value, response);
-
-        private static ResponseExpression<T> FromValue<T>(Func<MemberReference, T> valueExpressionFactory, T value, ResponseExpression response) where T : TypedValueExpression
-            => new(valueExpressionFactory, new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new ValueExpression[]{ value, response }));
+        public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
+            => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));
     }
 }

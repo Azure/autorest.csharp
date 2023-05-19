@@ -113,13 +113,20 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.LineRaw("{");
                         foreach (var switchCase in cases)
                         {
-                            if (switchCase.Inline)
+                            if (switchCase.Case is not null)
                             {
-                                writer.Append($"case {switchCase.Case}: ");
+                                writer.AppendRaw("case ");
+                                writer.WriteValueExpression(switchCase.Case);
                             }
                             else
                             {
-                                writer.Line($"case {switchCase.Case}: ");
+                                writer.AppendRaw("default");
+                            }
+
+                            writer.AppendRaw(": ");
+                            if (!switchCase.Inline)
+                            {
+                                writer.Line();
                             }
 
                             if (switchCase.AddScope)

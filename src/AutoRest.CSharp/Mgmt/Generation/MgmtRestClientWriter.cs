@@ -8,6 +8,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 
@@ -27,11 +28,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientFields(writer, restClient);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var method in restClient.Methods)
+                    foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(method.CreateMessageMethods[0]);
-                        WriteOperation(writer, restClient, method.RestClientMethod, true);
-                        WriteOperation(writer, restClient, method.RestClientMethod, false);
+                        writer.WriteMethod(legacyMethod.CreateRequest);
+                        foreach (var method in legacyMethod.RestClientConvenience)
+                        {
+                            writer.WriteMethod(method);
+                        }
+                    }
+
+                    foreach (var nextPageMethod in restClient.Methods.Select(m => m.CreateNextPageRequest).WhereNotNull())
+                    {
+                        writer.WriteMethod(nextPageMethod);
                     }
                 }
             }

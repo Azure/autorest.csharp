@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Key { get; }
 
         public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations, string clientName, MgmtOutputLibrary library)
-            : base(inputClient, new ClientMethodsBuilder(inputClient.Operations, library.TypeFactory, false, true), clientParameters, restClientParameters, library.TypeFactory, library, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
+            : base(new ClientMethodsBuilder(inputClient.Operations, library.TypeFactory, false, true), clientParameters, restClientParameters, library.TypeFactory, library, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
         {
             Key = inputClient.Key;
             _operations = operations;

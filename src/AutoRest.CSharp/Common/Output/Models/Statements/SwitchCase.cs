@@ -5,5 +5,5 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.Statements
 {
-    internal record SwitchCase(ValueExpression Case, MethodBodyStatement Statement, bool Inline = false, bool AddScope = false);
+    internal record SwitchCase(ValueExpression? Case, MethodBodyStatement Statement, bool Inline = false, bool AddScope = false);
 }
