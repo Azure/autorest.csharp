@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getDoc, Program, Type } from "@typespec/compiler";
+import { getDoc, getFormat, Program, Type } from "@typespec/compiler";
 import { HttpServer } from "@typespec/http";
 import { InputConstant } from "../type/inputConstant.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
@@ -14,7 +14,7 @@ import {
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
-import { getInputType } from "./model.js";
+import { getInputType, getFormattedType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
 
 export interface CadlServer {
@@ -61,7 +61,12 @@ export function resolveServers(
                       Kind: InputTypeKind.Uri,
                       IsNullable: false
                   } as InputPrimitiveType)
-                : getInputType(context, prop.type, models, enums);
+                : getInputType(
+                      context,
+                      getFormattedType(context.program, prop),
+                      models,
+                      enums
+                  );
 
             if (value) {
                 defaultValue = {

@@ -926,7 +926,7 @@
      "Type": {
       "$id": "129",
       "Name": "string",
-      "Kind": "String",
+      "Kind": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1131,8 +1131,8 @@
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "156",
-            "Name": "string",
-            "Kind": "String",
+            "Name": "url",
+            "Kind": "Uri",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1779,7 +1779,7 @@
      "Type": {
       "$id": "231",
       "Name": "string",
-      "Kind": "String",
+      "Kind": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2457,7 +2457,7 @@
        "Type": {
         "$id": "300",
         "Name": "string",
-        "Kind": "String",
+        "Kind": "Guid",
         "IsNullable": false
        },
        "Location": "Path",

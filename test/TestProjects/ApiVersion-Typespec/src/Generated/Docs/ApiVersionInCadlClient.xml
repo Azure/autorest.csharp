@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBatchDetectionResultAsync(string,CancellationToken)">
+    <member name="GetBatchDetectionResultAsync(Guid,CancellationToken)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters.
 <code><![CDATA[
@@ -9,11 +9,11 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-var result = await client.GetBatchDetectionResultAsync("<resultId>");
+var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid());
 ]]></code>
 </example>
     </member>
-    <member name="GetBatchDetectionResult(string,CancellationToken)">
+    <member name="GetBatchDetectionResult(Guid,CancellationToken)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters.
 <code><![CDATA[
@@ -21,11 +21,11 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-var result = client.GetBatchDetectionResult("<resultId>");
+var result = client.GetBatchDetectionResult(Guid.NewGuid());
 ]]></code>
 </example>
     </member>
-    <member name="GetBatchDetectionResultAsync(string,RequestContext)">
+    <member name="GetBatchDetectionResultAsync(Guid,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -33,14 +33,14 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-Response response = await client.GetBatchDetectionResultAsync("<resultId>", new RequestContext());
+Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBatchDetectionResult(string,RequestContext)">
+    <member name="GetBatchDetectionResult(Guid,RequestContext)">
 <example>
 This sample shows how to call GetBatchDetectionResult with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +48,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInCadlClient(endpoint, credential);
 
-Response response = client.GetBatchDetectionResult("<resultId>", new RequestContext());
+Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace ApiVersionInCadl.Models
 {
@@ -15,15 +14,12 @@ namespace ApiVersionInCadl.Models
     {
         /// <summary> Initializes a new instance of DetectionResult. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
-        internal DetectionResult(string resultId)
+        internal DetectionResult(Guid resultId)
         {
-            Argument.AssertNotNull(resultId, nameof(resultId));
-
             ResultId = resultId;
         }
 
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
-        public string ResultId { get; }
+        public Guid ResultId { get; }
     }
 }
