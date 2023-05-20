@@ -210,6 +210,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
+            if (IsPropertyBag)
+                return InitializationConstructor;
+
             // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
             if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructor;
