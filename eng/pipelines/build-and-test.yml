@@ -92,12 +92,17 @@ jobs:
           command: custom
           customCommand: run build
           workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
-      - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-        displayName: 'E2E Test for CADL emitter'
-        workingDirectory: $(Build.SourcesDirectory)
+      - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
+        - pwsh: ./eng/EmitterGenerationCheck.ps1 -DiffCheck $true
+          displayName: 'Generate Emitter Codes'
+          workingDirectory: $(Build.SourcesDirectory)
+      - ${{ if eq(parameters.IsTspDevVersionTest, true) }}:
+        - pwsh: ./eng/EmitterGenerationCheck.ps1 -DiffCheck $false
+          displayName: 'Generate Emitter Codes'
+          workingDirectory: $(Build.SourcesDirectory)
       - script: |
           npm run test --prefix src/CADL.Extension/Emitter.Csharp
-        displayName: 'Unit Test'
+        displayName: 'Emitter Unit Test'
         workingDirectory: $(Build.SourcesDirectory)
       - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
         - task: PublishBuildArtifacts@1
