@@ -45,7 +45,6 @@ namespace AutoRest.CSharp.Output.Models
             Methods = clientMethodsBuilder
                 .Build(restClient, Fields, clientPrefix + GetClientSuffix())
                 .Select(b => BuildMethods(library, b))
-                .OrderBy(m => m.Order)
                 .ToList();
         }
 

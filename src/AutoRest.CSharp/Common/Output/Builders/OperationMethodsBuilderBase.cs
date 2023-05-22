@@ -125,17 +125,37 @@ namespace AutoRest.CSharp.Output.Models
         {
             var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
             var createRequestMethods = BuildCreateRequestMethods(restClientMethod.ResponseClassifierType).ToArray();
-            RestClientMethod? nextPage = createRequestMethods.Length == 2 ? BuildNextPageMethod(restClientMethod) : null;
 
             var restClientMethods = new[]
             {
-                BuildRestClientConvenienceMethod(restClientMethod.Responses, headerModel?.Type, resourceDataType, true),
-                BuildRestClientConvenienceMethod(restClientMethod.Responses, headerModel?.Type, resourceDataType, false)
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, true),
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, false)
             };
+
+            RestClientMethod? nextPage;
+            Method? createNextPageRequest;
+            IReadOnlyList<Method> restClientNextPageMethods;
 
             if (createRequestMethods.Length == 2)
             {
-                restClientMethods = restClientMethods.Append(createRequestMethods[1]).ToArray();
+                nextPage = BuildNextPageMethod(restClientMethod);
+                createNextPageRequest = createRequestMethods[1];
+
+                var methodName = ProtocolMethodName + "NextPage";
+                var parameters = ConvenienceMethodParameters.Prepend(nextPage.Parameters.First()).ToList();
+                var invokeCreateRequestMethod = InvokeCreateRequestMethod(createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
+
+                restClientNextPageMethods = new[]
+                {
+                    BuildRestClientConvenienceMethod(methodName, parameters, invokeCreateRequestMethod, nextPage.Responses, nextPage.ReturnType, headerModel?.Type, resourceDataType, true),
+                    BuildRestClientConvenienceMethod(methodName, parameters, invokeCreateRequestMethod, nextPage.Responses, nextPage.ReturnType, headerModel?.Type, resourceDataType, false)
+                };
+            }
+            else
+            {
+                nextPage = null;
+                createNextPageRequest = null;
+                restClientNextPageMethods = Array.Empty<Method>();
             }
 
             var convenienceMethods = new[]
@@ -147,8 +167,9 @@ namespace AutoRest.CSharp.Output.Models
             return new LegacyMethods
             (
                 createRequestMethods[0],
-                createRequestMethods.Length == 2 ? createRequestMethods[1] : null,
+                createNextPageRequest,
                 restClientMethods,
+                restClientNextPageMethods,
                 convenienceMethods,
 
                 this is LroOperationMethodsBuilder ? 2 : this is PagingOperationMethodsBuilderBase ? 1 : 0,
@@ -588,13 +609,21 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildRestClientConvenienceMethod(Response[] responses, CSharpType? headerModelType, CSharpType? resourceDataType, bool async)
+        private Method BuildRestClientConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, Response[] responses, CSharpType? responseType, CSharpType? headerModelType, CSharpType? resourceDataType, bool async)
         {
-            var signature = new MethodSignature(ProtocolMethodName, _summary, _description, _convenienceAccessibility, ConvenienceMethodReturnType, null, ConvenienceMethodParameters);
+            var returnType = (responseType, headerModelType) switch
+            {
+                (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), responseType, headerModelType),
+                (not null, null) => new CSharpType(typeof(Response<>), responseType),
+                (null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
+                _ => new CSharpType(typeof(Response)),
+            };
+
+            var signature = new MethodSignature(methodName, _summary, _description, _convenienceAccessibility, returnType, null, parameters);
             var body = new[]
             {
-                new ParameterValidationBlock(signature.Parameters),
-                UsingVar("message", InvokeCreateRequestMethod(), out var message),
+                new ParameterValidationBlock(signature.Parameters, IsLegacy: true),
+                UsingVar("message", invokeCreateRequestMethod, out var message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                 BuildStatusCodeSwitch(message, responses, headerModelType, resourceDataType, new ClientDiagnosticsExpression(ClientDiagnosticsDeclaration), async)
             };
@@ -632,7 +661,10 @@ namespace AutoRest.CSharp.Output.Models
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type), statements);
 
         protected HttpMessageExpression InvokeCreateRequestMethod()
-            => new(new InvokeInstanceMethodExpression(null, CreateMessageMethodName, CreateMessageMethodParameters.Select(p => new ParameterReference(p)).ToList(), null, false));
+            => InvokeCreateRequestMethod(CreateMessageMethodName, CreateMessageMethodParameters);
+
+        protected HttpMessageExpression InvokeCreateRequestMethod(string methodName, IReadOnlyList<Parameter> parameters)
+            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));
@@ -643,7 +675,7 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
-        private MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
+        private static MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
         {
             ValueExpression? headers = null;
 
@@ -664,7 +696,7 @@ namespace AutoRest.CSharp.Output.Models
             return declareHeaders is not null ? new MethodBodyStatement[] { declareHeaders, switchStatement } : switchStatement;
         }
 
-        private SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
+        private static SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
             var statusCode = statusCodes[0];
             var match = statusCode.Code is {} code
@@ -676,7 +708,7 @@ namespace AutoRest.CSharp.Output.Models
             return new SwitchCase(match, statement, AddScope: responseBody is not null);
         }
 
-        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
+        private static MethodBodyStatement BuildStatusCodeSwitchCaseStatement(ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
             if (responseBody is null)
             {

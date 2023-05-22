@@ -26,8 +26,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(new InvokeStaticMethodExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
                     writer.LineRaw(";");
                     break;
-                case ParameterValidationBlock parameterValidation:
-                    writer.WriteParametersValidation(parameterValidation.Parameters);
+                case ParameterValidationBlock(var parameters, var isLegacy):
+                    if (isLegacy)
+                    {
+                        writer.WriteParameterNullChecks(parameters);
+                    }
+                    else
+                    {
+                        writer.WriteParametersValidation(parameters);
+                    }
                     break;
                 case DiagnosticScopeMethodBodyBlock diagnosticScope:
                     using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))

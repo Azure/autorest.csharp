@@ -4,14 +4,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Responses;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using Response = Azure.Response;
+using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -33,9 +28,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         foreach (var method in legacyMethod.RestClientConvenience)
                         {
-                            writer
-                                .WriteMethodDocumentation(method.Signature)
-                                .WriteMethod(method);
+                            WriteSignature(writer, method.Signature);
+                            writer.WriteMethod(method);
                         }
 
                         if (legacyMethod.ProtocolMethod is {} protocolMethod)
@@ -45,9 +39,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    foreach (var nextPageMethod in restClient.Methods.Select(m => m.CreateNextPageRequest).WhereNotNull())
+                    foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(nextPageMethod);
+                        if (legacyMethod.CreateNextPageRequest is {} nextPageMethod)
+                        {
+                            writer.WriteMethod(nextPageMethod);
+
+                            foreach (var method in legacyMethod.RestClientNextPageConvenience)
+                            {
+                                WriteSignature(writer, method.Signature);
+                                writer.WriteMethod(method);
+                            }
+                        }
                     }
 
                     LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());
@@ -73,54 +76,17 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteOperation(CodeWriter writer, RestClientMethod operation, ClientFields fields, bool async)
+        private static void WriteSignature(CodeWriter writer, MethodSignatureBase signature)
         {
-            using var methodScope = writer.AmbientScope();
+            writer.WriteXmlDocumentationSummary($"{signature.SummaryText}")
+                .WriteXmlDocumentationParameters(signature.Parameters)
+                .WriteXmlDocumentationRequiredParametersException(signature.Parameters)
+                .WriteXmlDocumentation("remarks", $"{signature.DescriptionText}");
 
-            CSharpType? bodyType = operation.ReturnType;
-            CSharpType? headerModelType = operation.HeaderModel?.Type;
-            CSharpType returnType = bodyType switch
+            if (signature is MethodSignature { ReturnDescription: { } returnDescription })
             {
-                null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
-                { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
-                _ => new CSharpType(typeof(Response)),
-            };
-
-            var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
-
-            writer.WriteXmlDocumentationSummary($"{method.SummaryText}")
-                .WriteXmlDocumentationParameters(method.Parameters)
-                .WriteXmlDocumentationRequiredParametersException(method.Parameters)
-                .WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
-
-            if (method.ReturnDescription != null)
-            {
-                writer.WriteXmlDocumentationReturns(method.ReturnDescription);
+                writer.WriteXmlDocumentationReturns(returnDescription);
             }
-            using (writer.WriteMethodDeclaration(method))
-            {
-                writer.WriteParameterNullChecks(parameters);
-                var messageVariable = new CodeWriterDeclaration("message");
-                WriteFuncBodyWithSend(writer, messageVariable, operation, fields.PipelineField.Name, async);
-                WriteStatusCodeSwitch(writer, messageVariable, operation, async, fields.ClientDiagnosticsProperty);
-            }
-            writer.Line();
-        }
-
-        private static void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
-        {
-            var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
-
-            writer
-                .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                .WriteMethodCall(async, $"{pipelineName}.SendAsync", $"{pipelineName}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
-        }
-
-        private static void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration clientDiagnosticsField)
-        {
-            ResponseWriterHelpers.WriteStatusCodeSwitch(writer, $"{messageVariable.ActualName}", operation, async, clientDiagnosticsField);
         }
     }
 }

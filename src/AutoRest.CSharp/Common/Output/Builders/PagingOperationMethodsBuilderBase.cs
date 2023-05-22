@@ -45,6 +45,7 @@ namespace AutoRest.CSharp.Output.Models
             CreateNextPageMessageMethodName = paging is { NextLinkOperation: { } nextLinkOperation }
                 ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
                 : paging is { NextLinkName: { }} ? $"Create{ProtocolMethodName}NextPageRequest" : null;
+
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
         }
 

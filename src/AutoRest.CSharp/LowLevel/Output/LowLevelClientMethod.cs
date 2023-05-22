@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Output.Models
         Method CreateRequest,
         Method? CreateNextPageRequest,
         IReadOnlyList<Method> RestClientConvenience,
+        IReadOnlyList<Method> RestClientNextPageConvenience,
         IReadOnlyList<Method> Convenience,
 
         int Order,

@@ -7,5 +7,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks
 {
-    internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters) : MethodBodyStatement;
+    internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters, bool IsLegacy = false) : MethodBodyStatement;
 }

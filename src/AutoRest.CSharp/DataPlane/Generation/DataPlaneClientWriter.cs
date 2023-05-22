@@ -31,13 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client.RestClient, true);
                     WriteClientCtors(writer, client, library);
 
-                    //foreach (var clientMethod in client.Methods)
-                    //{
-                    //    WriteClientMethod(writer, clientMethod, true);
-                    //    WriteClientMethod(writer, clientMethod, false);
-                    //}
-
-                    foreach (var pagingMethod in client.RestClient.Methods.SelectMany(m => m.Convenience))
+                    foreach (var pagingMethod in client.RestClient.Methods.OrderBy(m => m.Order).SelectMany(m => m.Convenience))
                     {
                         WriteMethod(writer, pagingMethod);
                     }
