@@ -60,9 +60,10 @@ jobs:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
-      - pwsh: ./eng/SharedCodeCheck.ps1
-        displayName: "Check if shared source code is up-to-date"
-        workingDirectory: $(Build.SourcesDirectory)
+      - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
+        - pwsh: ./eng/SharedCodeCheck.ps1
+          displayName: "Check if shared source code is up-to-date"
+          workingDirectory: $(Build.SourcesDirectory)
       - task: Npm@1
         displayName: 'Build CADL Ranch Mock Api project'
         inputs:
