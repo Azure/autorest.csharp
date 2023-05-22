@@ -35,6 +35,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberReference(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberReference(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
 
+        public static ValueExpression RemoveAllNullConditional(ValueExpression expression)
+            => expression is MemberReference { Inner: NullConditionalExpression { Inner: {} inner }, MemberName: {} memberName }
+                ? new MemberReference(RemoveAllNullConditional(inner), memberName)
+                : expression;
+
         public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
         public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
 

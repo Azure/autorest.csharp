@@ -331,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models
         private MethodBodyStatement AddToQuery(RawRequestUriBuilderExpression uriBuilder, InputParameter inputParameter, Parameter outputParameter, string nameInRequest, SerializationFormat format)
         {
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(value, outputParameter.Type);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
             var escape = !inputParameter.SkipUrlEncoding;
 
             MethodBodyStatement addToQuery;
@@ -394,7 +394,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(value, outputParameter.Type);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
 
             var addToHeader = inputParameter.ArraySerializationDelimiter is {} delimiter
                 ? request.Headers.AddDelimited(headerName, convertedValue, delimiter)
@@ -429,28 +429,31 @@ namespace AutoRest.CSharp.Output.Models
                         break;
 
                     case BodyMediaType.Binary:
-                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        var binaryValue = GetValueForRequestPart(inputParameter, outputParameter);
+                        return NullCheckRequestPartValue(binaryValue, outputParameter.Type, new[]
                         {
                             AddHeaders(request, true).AsStatement(),
-                            Assign(request.Content, RequestContentExpression.Create(outputParameter))
+                            Assign(request.Content, RequestContentExpression.Create(RemoveAllNullConditional(binaryValue)))
                         });
 
                     case BodyMediaType.Text:
-                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        var stringValue = GetValueForRequestPart(inputParameter, outputParameter);
+                        return NullCheckRequestPartValue(stringValue, outputParameter.Type, new[]
                         {
                             AddHeaders(request, true).AsStatement(),
-                            Assign(request.Content, New(typeof(StringRequestContent), outputParameter))
+                            Assign(request.Content, New(typeof(StringRequestContent), RemoveAllNullConditional(stringValue)))
                         });
 
                     case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
                         return AddFlattenedBody(request, outputParameter);
 
                     default:
+                        var value = GetValueForRequestPart(inputParameter, outputParameter);
                         var serialization = SerializationBuilder.Build(Operation.RequestBodyMediaType, inputParameter.Type, outputParameter.Type);
-                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        return NullCheckRequestPartValue(value, outputParameter.Type, new[]
                         {
                             AddHeaders(request, true).AsStatement(),
-                            SerializeContentIntoRequest(request, serialization, outputParameter)
+                            SerializeContentIntoRequest(request, serialization, RemoveAllNullConditional(value))
                         });
                 }
             }
