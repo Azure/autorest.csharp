@@ -330,8 +330,6 @@ if (!$noBuild) {
 
     #build the emitter
     Invoke-TypespecSetup
-    # $emitterDir = "$PSScriptRoot/../src/CADL.Extension/Emitter.Csharp"
-    # Invoke "npm --prefix $emitterDir run build"
 }
 
 

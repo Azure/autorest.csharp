@@ -75,15 +75,15 @@ import { FormattedType } from "../type/formattedType.js";
  */
 export function mapTypeSpecTypeToCSharpInputTypeKind(
     context: SdkContext,
-    TypeSpecType: Type,
+    typespecType: Type,
     format?: string,
     encode?: EncodeData
 ): InputTypeKind {
-    const kind = TypeSpecType.kind;
+    const kind = typespecType.kind;
     switch (kind) {
         case "Model":
             return getCSharpInputTypeKindByIntrinsicModelName(
-                TypeSpecType.name,
+                typespecType.name,
                 format,
                 encode
             );
@@ -92,7 +92,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let numberValue = TypeSpecType.value;
+            let numberValue = typespecType.value;
             if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
@@ -119,7 +119,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                 case undefined:
                 case "base64":
                     return InputTypeKind.Bytes;
-                case "base64":
+                case "base64url":
                     return InputTypeKind.BytesBase64Url;
                 default:
                     logger.warn(
