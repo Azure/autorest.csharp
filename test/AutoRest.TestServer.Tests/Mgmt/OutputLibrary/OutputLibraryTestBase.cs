@@ -39,11 +39,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (_subFolder is null)
             {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "Generated");
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("artifacts")), "test", "TestProjects", _projectName, "Generated");
             }
             else
             {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, _subFolder, "Generated");
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("artifacts")), "test", "TestProjects", _projectName, _subFolder, "Generated");
             }
 
             StandaloneGeneratorRunner.LoadConfiguration(null, basePath, null, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
