@@ -32,7 +32,7 @@ namespace AnomalyDetector.Models
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
-        internal MultivariateDetectionResult(string resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results)
+        internal MultivariateDetectionResult(Guid resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results)
         {
             ResultId = resultId;
             Summary = summary;
@@ -40,7 +40,7 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
-        public string ResultId { get; }
+        public Guid ResultId { get; }
         /// <summary> Multivariate anomaly detection status. </summary>
         public MultivariateBatchDetectionResultSummary Summary { get; }
         /// <summary> Detection result for each timestamp. </summary>

@@ -184,7 +184,7 @@
        "Type": {
         "$id": "26",
         "Name": "string",
-        "Kind": "String",
+        "Kind": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",

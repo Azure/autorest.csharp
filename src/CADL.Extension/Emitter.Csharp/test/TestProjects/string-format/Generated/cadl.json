@@ -129,7 +129,7 @@
        "Type": {
         "$id": "16",
         "Name": "string",
-        "Kind": "String",
+        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Path",
