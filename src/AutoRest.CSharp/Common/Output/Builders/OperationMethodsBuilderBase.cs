@@ -616,10 +616,10 @@ namespace AutoRest.CSharp.Output.Models
                 (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), responseType, headerModelType),
                 (not null, null) => new CSharpType(typeof(Response<>), responseType),
                 (null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                _ => new CSharpType(typeof(Response)),
+                _ => new CSharpType(typeof(Azure.Response))
             };
 
-            var signature = new MethodSignature(methodName, _summary, _description, _convenienceAccessibility, returnType, null, parameters);
+            var signature = new MethodSignature(methodName, _summary, _description, MethodSignatureModifiers.Public, returnType, null, parameters);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: true),
