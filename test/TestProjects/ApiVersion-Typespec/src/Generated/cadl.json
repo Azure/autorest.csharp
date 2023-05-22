@@ -46,7 +46,7 @@
      "Type": {
       "$id": "7",
       "Name": "string",
-      "Kind": "String",
+      "Kind": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -125,7 +125,7 @@
        "Type": {
         "$id": "16",
         "Name": "string",
-        "Kind": "String",
+        "Kind": "Guid",
         "IsNullable": false
        },
        "Location": "Path",
