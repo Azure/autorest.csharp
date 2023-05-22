@@ -302,7 +302,7 @@
          "Type": {
           "$id": "48",
           "Name": "utcDateTime",
-          "Kind": "DateTimeRFC3339",
+          "Kind": "DateTime",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -1081,7 +1081,7 @@
             "Type": {
              "$id": "150",
              "Name": "utcDateTime",
-             "Kind": "DateTimeRFC3339",
+             "Kind": "DateTime",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1096,7 +1096,7 @@
             "Type": {
              "$id": "152",
              "Name": "utcDateTime",
-             "Kind": "DateTimeRFC3339",
+             "Kind": "DateTime",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1162,7 +1162,7 @@
            "Type": {
             "$id": "160",
             "Name": "utcDateTime",
-            "Kind": "DateTimeRFC3339",
+            "Kind": "DateTime",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1177,7 +1177,7 @@
            "Type": {
             "$id": "162",
             "Name": "utcDateTime",
-            "Kind": "DateTimeRFC3339",
+            "Kind": "DateTime",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1220,7 +1220,7 @@
          "Type": {
           "$id": "167",
           "Name": "utcDateTime",
-          "Kind": "DateTimeRFC3339",
+          "Kind": "DateTime",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1478,7 +1478,7 @@
      "Type": {
       "$id": "195",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1493,7 +1493,7 @@
      "Type": {
       "$id": "197",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1794,7 +1794,7 @@
      "Type": {
       "$id": "233",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1809,7 +1809,7 @@
      "Type": {
       "$id": "235",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,

@@ -154,7 +154,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new
             {
-                property = "2022-05-10T18:57:31.2311892Z",
+                property = "2022-05-10T14:57:31.2311892-04:00",
             };
 
             Response response = client.PutAll(RequestContent.Create(data), new RequestContext());
@@ -181,7 +181,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new
             {
-                property = "2022-05-10T18:57:31.2311892Z",
+                property = "2022-05-10T14:57:31.2311892-04:00",
             };
 
             Response response = await client.PutAllAsync(RequestContent.Create(data), new RequestContext());
@@ -221,7 +221,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new
             {
-                property = "2022-05-10T18:57:31.2311892Z",
+                property = "2022-05-10T14:57:31.2311892-04:00",
             };
 
             Response response = client.PutDefault(RequestContent.Create(data), new RequestContext());
@@ -248,7 +248,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new
             {
-                property = "2022-05-10T18:57:31.2311892Z",
+                property = "2022-05-10T14:57:31.2311892-04:00",
             };
 
             Response response = await client.PutDefaultAsync(RequestContent.Create(data), new RequestContext());

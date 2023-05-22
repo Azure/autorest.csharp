@@ -161,6 +161,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
+                    return InputTypeKind.DateTime;
                 case "rfc3339":
                     return InputTypeKind.DateTimeRFC3339;
                 case "rfc7231":
@@ -171,7 +172,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     logger.warn(
                         `invalid encode ${encode?.encoding} for date time.`
                     );
-                    return InputTypeKind.DateTimeRFC3339;
+                    return InputTypeKind.DateTime;
             }
         case "time":
             return InputTypeKind.Time;

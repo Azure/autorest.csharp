@@ -82,7 +82,7 @@ This sample shows how to call PutAsync with required request content.
 var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 var data = new {
-    key = "2022-05-10T18:57:31.2311892Z",
+    key = "2022-05-10T14:57:31.2311892-04:00",
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
@@ -97,7 +97,7 @@ This sample shows how to call Put with required request content.
 var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 var data = new {
-    key = "2022-05-10T18:57:31.2311892Z",
+    key = "2022-05-10T14:57:31.2311892-04:00",
 };
 
 Response response = client.Put(RequestContent.Create(data), new RequestContext());

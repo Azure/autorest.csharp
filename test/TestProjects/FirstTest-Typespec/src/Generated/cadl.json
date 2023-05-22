@@ -1422,7 +1422,7 @@
        "Type": {
         "$id": "169",
         "Name": "utcDateTime",
-        "Kind": "DateTimeRFC3339",
+        "Kind": "DateTime",
         "IsNullable": false
        },
        "Location": "Header",

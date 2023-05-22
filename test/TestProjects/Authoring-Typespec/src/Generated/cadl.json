@@ -212,7 +212,7 @@
      "Type": {
       "$id": "31",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -227,7 +227,7 @@
      "Type": {
       "$id": "33",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -242,7 +242,7 @@
      "Type": {
       "$id": "35",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -257,7 +257,7 @@
      "Type": {
       "$id": "37",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -468,7 +468,7 @@
      "Type": {
       "$id": "63",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -483,7 +483,7 @@
      "Type": {
       "$id": "65",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -498,7 +498,7 @@
      "Type": {
       "$id": "67",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -754,7 +754,7 @@
      "Type": {
       "$id": "97",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -769,7 +769,7 @@
      "Type": {
       "$id": "99",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -784,7 +784,7 @@
      "Type": {
       "$id": "101",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,

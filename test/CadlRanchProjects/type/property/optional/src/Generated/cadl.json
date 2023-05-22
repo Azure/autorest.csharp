@@ -73,7 +73,7 @@
      "Type": {
       "$id": "10",
       "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "DateTime",
       "IsNullable": false
      },
      "IsRequired": false,

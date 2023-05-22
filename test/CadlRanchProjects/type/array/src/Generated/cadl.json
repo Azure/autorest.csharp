@@ -1143,7 +1143,7 @@
         "ElementType": {
          "$id": "124",
          "Name": "utcDateTime",
-         "Kind": "DateTimeRFC3339",
+         "Kind": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1179,7 +1179,7 @@
         "ElementType": {
          "$id": "128",
          "Name": "utcDateTime",
-         "Kind": "DateTimeRFC3339",
+         "Kind": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
