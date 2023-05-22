@@ -625,7 +625,7 @@ namespace AutoRest.CSharp.Output.Models
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: true),
                 UsingVar("message", invokeCreateRequestMethod, out var message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
-                BuildStatusCodeSwitch(message, responses, headerModelType, resourceDataType, new ClientDiagnosticsExpression(ClientDiagnosticsDeclaration), async)
+                BuildStatusCodeSwitch(message, responses, responseType, headerModelType, resourceDataType, new ClientDiagnosticsExpression(ClientDiagnosticsDeclaration), async)
             };
 
             return new Method(signature.WithAsync(async), body);
@@ -675,7 +675,7 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
+        private static MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? responseType, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
         {
             ValueExpression? headers = null;
 
@@ -688,7 +688,7 @@ namespace AutoRest.CSharp.Output.Models
                 : New(typeof(RequestFailedException), httpMessage.Response);
 
             var cases = responses
-                .Select(r => BuildStatusCodeSwitchCases(r.StatusCodes, r.ResponseBody, httpMessage, headers, headerModelType, async))
+                .Select(r => BuildStatusCodeSwitchCases(r.StatusCodes, responseType, r.ResponseBody, httpMessage, headers, headerModelType, async))
                 .Append(new SwitchCase(null, Throw(requestFailedException)))
                 .ToArray();
 
@@ -696,25 +696,28 @@ namespace AutoRest.CSharp.Output.Models
             return declareHeaders is not null ? new MethodBodyStatement[] { declareHeaders, switchStatement } : switchStatement;
         }
 
-        private static SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
+        private static SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, CSharpType? responseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
             var statusCode = statusCodes[0];
             var match = statusCode.Code is {} code
                 ? Int(code)
                 : new FormattableStringToExpression($"int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}");
 
-            var statement = BuildStatusCodeSwitchCaseStatement(responseBody, httpMessage, headers, headerModelType, async);
-
+            var statement = BuildStatusCodeSwitchCaseStatement(responseType, responseBody, httpMessage, headers, headerModelType, async);
             return new SwitchCase(match, statement, AddScope: responseBody is not null);
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitchCaseStatement(ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
+        private static MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? commonResponseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
             if (responseBody is null)
             {
-                return headers is not null
-                    ? Return(ResponseWithHeadersExpression.FromValue(headers, httpMessage.Response))
-                    : Return(httpMessage.Response);
+                return (commonResponseType, headers) switch
+                {
+                    (not null, not null) => Return(ResponseWithHeadersExpression.FromValue(new CastExpression(Null, commonResponseType), headers, httpMessage.Response)),
+                    (not null, null) => Return(ResponseExpression.FromValue(new CastExpression(Null, commonResponseType), httpMessage.Response)),
+                    (null, not null) => Return(ResponseWithHeadersExpression.FromValue(headers, httpMessage.Response)),
+                    _ => Return(httpMessage.Response)
+                };
             }
 
             ValueExpression value;
