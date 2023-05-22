@@ -29,7 +29,7 @@ namespace AnomalyDetector.Models
         /// Training result of a model including its status, errors and diagnostics
         /// information.
         /// </param>
-        internal AnomalyDetectionModel(string modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo)
+        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo)
         {
             ModelId = modelId;
             CreatedTime = createdTime;
@@ -38,7 +38,7 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Model identifier. </summary>
-        public string ModelId { get; }
+        public Guid ModelId { get; }
         /// <summary> Date and time (UTC) when the model was created. </summary>
         public DateTimeOffset CreatedTime { get; }
         /// <summary> Date and time (UTC) when the model was last updated. </summary>

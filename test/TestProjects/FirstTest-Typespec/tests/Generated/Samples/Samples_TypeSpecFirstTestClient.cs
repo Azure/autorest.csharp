@@ -27,7 +27,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = client.TopAction("<action>", new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -46,7 +46,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = client.TopAction("<action>", new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -69,7 +69,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = await client.TopActionAsync("<action>", new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -88,7 +88,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            Response response = await client.TopActionAsync("<action>", new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -111,7 +111,7 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var result = await client.TopActionAsync("<action>");
+            var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
         }
 
         [Test]
@@ -606,6 +606,85 @@ namespace TypeSpecFirstTest.Samples
 
             Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow, new RequestContext());
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+            };
+
+            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+            };
+
+            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+            };
+
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var data = new
+            {
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+            };
+
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new TypeSpecFirstTestClient(endpoint);
+
+            var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
+            var result = await client.StringFormatAsync(Guid.NewGuid(), body);
         }
 
         [Test]

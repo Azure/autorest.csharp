@@ -3,8 +3,20 @@ import { RestTestLibrary } from "@typespec/rest/testing";
 import { HttpTestLibrary } from "@typespec/http/testing";
 import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
-import { EmitContext, Program } from "@typespec/compiler";
-import { NetEmitterOptions } from "../../../src/options";
+import {
+    EmitContext,
+    getFormat,
+    isGlobalNamespace,
+    Namespace,
+    navigateTypesInNamespace,
+    Program,
+    Type
+} from "@typespec/compiler";
+import { NetEmitterOptions } from "../../../src/options.js";
+import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
+import { getFormattedType, getInputType } from "../../../src/lib/model.js";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import { FormattedType } from "../../../src/type/formattedType.js";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
@@ -71,4 +83,32 @@ export function createEmitterContext(
             "package-name": undefined
         } as NetEmitterOptions
     } as EmitContext<NetEmitterOptions>;
+}
+
+/* Navigate all the models in the whole namespace. */
+export function navigateModels(
+    context: SdkContext,
+    namespace: Namespace,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+) {
+    const computeModel = (x: Type) =>
+        getInputType(
+            context,
+            getFormattedType(context.program, x),
+            models,
+            enums
+        ) as any;
+    const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
+    navigateTypesInNamespace(
+        namespace,
+        {
+            model: (x) =>
+                x.name !== "" && x.kind === "Model" && computeModel(x),
+            scalar: computeModel,
+            enum: computeModel,
+            union: (x) => x.name !== undefined && computeModel(x)
+        },
+        { skipSubNamespaces }
+    );
 }
