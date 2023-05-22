@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -181,28 +182,29 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputOperation, LongRunningOperation> EnsureLongRunningOperations()
         {
             var operations = new Dictionary<InputOperation, LongRunningOperation>();
-
-            if (Configuration.PublicClients)
+            if (!Configuration.PublicClients)
             {
-                foreach (var inputClient in _input.Clients)
+                return operations;
+            }
+
+            foreach (var inputClient in _input.Clients)
+            {
+                var clientName = GetClientName(inputClient);
+                var clientPrefix = ClientBuilder.GetClientPrefix(inputClient.Name, _defaultName);
+
+                foreach (var operation in inputClient.Operations)
                 {
-                    var client = FindClient(inputClient);
-                    Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disabled.");
-
-                    foreach (var methods in client.RestClient.Methods)
+                    if (operation.LongRunning is null)
                     {
-                        if (methods is not { Operation: { LongRunning: {}} operation })
-                        {
-                            continue;
-                        }
-
-                        var createNextPageMessageName = methods.CreateNextPageRequest is { } nextPage
-                            ? nextPage.Signature.Name
-                            : null;
-
-                        var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessageName);
-                        operations.Add(operation, new LongRunningOperation(operation, _typeFactory, info, _defaultNamespace, _sourceInputModel));
+                        continue;
                     }
+
+                    var existingType = _sourceInputModel?.FindForType(_defaultNamespace, clientName);
+                    var accessibility = existingType is not null
+                        ? SyntaxFacts.GetText(existingType.DeclaredAccessibility)
+                        : "public";
+
+                    operations.Add(operation, new LongRunningOperation(operation, _typeFactory, accessibility, clientPrefix, _defaultNamespace, _sourceInputModel));
                 }
             }
 

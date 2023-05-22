@@ -49,7 +49,14 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
-            => methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
+        {
+            if (library is DataPlaneOutputLibrary dpl)
+            {
+                return methodBuilder.BuildLegacy(dpl.FindHeaderModel(methodBuilder.Operation), methodBuilder.Operation.LongRunning is null ? null : dpl.FindLongRunningOperation(methodBuilder.Operation).Type, null);
+            }
+
+            return methodBuilder.BuildLegacy(null, null, null);
+        }
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)
         {

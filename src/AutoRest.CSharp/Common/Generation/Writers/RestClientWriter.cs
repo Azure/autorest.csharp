@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         foreach (var method in legacyMethod.RestClientConvenience)
                         {
-                            WriteSignature(writer, method.Signature);
+                            WriteDocumentation(writer, method.Signature);
                             writer.WriteMethod(method);
                         }
 
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                             foreach (var method in legacyMethod.RestClientNextPageConvenience)
                             {
-                                WriteSignature(writer, method.Signature);
+                                WriteDocumentation(writer, method.Signature);
                                 writer.WriteMethod(method);
                             }
                         }
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteSignature(CodeWriter writer, MethodSignatureBase signature)
+        private static void WriteDocumentation(CodeWriter writer, MethodSignatureBase signature)
         {
             writer.WriteXmlDocumentationSummary($"{signature.SummaryText}")
                 .WriteXmlDocumentationParameters(signature.Parameters)

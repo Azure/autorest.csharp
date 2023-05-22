@@ -45,13 +45,14 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string? _summary;
         private readonly string? _description;
         private readonly MethodSignatureModifiers _protocolAccessibility;
-        private readonly MethodSignatureModifiers _convenienceAccessibility;
 
         public InputOperation Operation { get; }
 
         protected CodeWriterDeclaration ClientDiagnosticsDeclaration { get; }
         protected HttpPipelineExpression PipelineField { get; }
         protected ValueExpression? RestClient { get; }
+
+        protected MethodSignatureModifiers ConvenienceAccessibility { get; }
 
         protected string CreateMessageMethodName { get; }
         protected string ProtocolMethodName { get; }
@@ -95,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models
             _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
             _protocolAccessibility = operation.GenerateProtocolMethod ? GetAccessibility(operation.Accessibility) : MethodSignatureModifiers.Internal;
-            _convenienceAccessibility = GetAccessibility(operation.Accessibility);
+            ConvenienceAccessibility = GetAccessibility(operation.Accessibility);
         }
 
         public LowLevelClientMethod BuildDpg()
@@ -121,15 +122,15 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, responseClassifier, Operation.ExternalDocsUrl, requestBodyType, responseBodyType, isPaging, isLongRunning, Operation.Paging?.ItemName ?? "value");
         }
 
-        public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? lroType, CSharpType? resourceDataType)
         {
             var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
             var createRequestMethods = BuildCreateRequestMethods(restClientMethod.ResponseClassifierType).ToArray();
 
             var restClientMethods = new[]
             {
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, true),
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, false)
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, true),
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, false)
             };
 
             RestClientMethod? nextPage;
@@ -143,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 var methodName = ProtocolMethodName + "NextPage";
                 var parameters = ConvenienceMethodParameters.Prepend(nextPage.Parameters.First()).ToList();
-                var invokeCreateRequestMethod = InvokeCreateRequestMethod(createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
+                var invokeCreateRequestMethod = InvokeCreateRequestMethod(null, createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
 
                 restClientNextPageMethods = new[]
                 {
@@ -160,8 +161,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var convenienceMethods = new[]
             {
-                BuildLegacyConvenienceMethod(true),
-                BuildLegacyConvenienceMethod(false)
+                BuildLegacyConvenienceMethod(lroType, true),
+                BuildLegacyConvenienceMethod(lroType, false)
             };
 
             return new LegacyMethods
@@ -603,7 +604,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Method BuildConvenienceMethod(string methodName, bool async)
         {
-            var signature = CreateMethodSignature(methodName, _convenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var signature = CreateMethodSignature(methodName, ConvenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
@@ -634,15 +635,9 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildLegacyConvenienceMethod(bool async)
-        {
-            var signature = CreateMethodSignature(ProtocolMethodName, _convenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+        protected abstract Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async);
 
-            var body = CreateLegacyConvenienceMethodBody(async);
-            return new Method(signature.WithAsync(async), body);
-        }
-
-        private MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
+        protected MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
@@ -655,19 +650,17 @@ namespace AutoRest.CSharp.Output.Models
 
         protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async);
 
-        protected abstract MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async);
-
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);
 
         protected MethodBodyStatement WrapInDiagnosticScopeLegacy(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type), statements);
 
-        protected HttpMessageExpression InvokeCreateRequestMethod()
-            => InvokeCreateRequestMethod(CreateMessageMethodName, CreateMessageMethodParameters);
+        protected HttpMessageExpression InvokeCreateRequestMethod(ValueExpression? instance)
+            => InvokeCreateRequestMethod(instance, CreateMessageMethodName, CreateMessageMethodParameters);
 
-        protected HttpMessageExpression InvokeCreateRequestMethod(string methodName, IReadOnlyList<Parameter> parameters)
-            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
+        protected HttpMessageExpression InvokeCreateRequestMethod(ValueExpression? instance, string methodName, IReadOnlyList<Parameter> parameters)
+            => new(new InvokeInstanceMethodExpression(instance, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));

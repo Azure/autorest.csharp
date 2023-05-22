@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
-        public LongRunningOperation(InputOperation operation, TypeFactory typeFactory, LongRunningOperationInfo lroInfo, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public LongRunningOperation(InputOperation operation, TypeFactory typeFactory, string accessibility, string clientPrefix, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Debug.Assert(operation.LongRunning != null);
 
@@ -37,15 +37,15 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 var paging = operation.Paging;
                 if (paging != null)
                 {
-                    NextPageMethodName = lroInfo.NextPageMethodName;
+                    NextPageMethodName = null;
                     PagingResponse = new PagingResponseInfo(paging.NextLinkName, paging.ItemName, ResultType);
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
 
-            DefaultName = lroInfo.ClientPrefix + operation.Name.ToCleanName() + "Operation";
+            DefaultName = clientPrefix + operation.Name.ToCleanName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Description);
-            DefaultAccessibility = lroInfo.Accessibility;
+            DefaultAccessibility = accessibility;
         }
 
         public CSharpType? ResultType { get; }

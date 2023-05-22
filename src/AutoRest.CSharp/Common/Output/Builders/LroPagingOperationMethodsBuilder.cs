@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
             }
 
-            MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(), out var message);
+            MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(null), out var message);
             MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
 
             var body = nextPageRequestLine is not null
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
 
-        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
     }
 }

@@ -72,7 +72,15 @@ namespace AutoRest.CSharp.Output.Models
                 : new[]{parameterConversions, firstPageRequestLine, returnLine};
         }
 
-        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
+        {
+            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var body = CreateLegacyConvenienceMethodBody(async);
+
+            return new Method(signature.WithAsync(async), body);
+        }
+
+        private MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
         {
             var createRequestArguments = new List<ValueExpression>();
             var parameterValidations = new ParameterValidationBlock(ConvenienceMethodParameters);

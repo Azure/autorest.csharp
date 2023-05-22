@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -36,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
             => WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(), out var message),
+                Declare("message", InvokeCreateRequestMethod(null), out var message),
                 Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async))
             );
 
@@ -67,9 +68,18 @@ namespace AutoRest.CSharp.Output.Models
                 : CreateConvenienceMethodLogic(methodName, async).AsStatement();
         }
 
-        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
         {
-            throw new NotImplementedException();
+            var methodName = $"Start{ProtocolMethodName}";
+            var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
+
+            var signature = CreateMethodSignature(methodName, ConvenienceAccessibility, ConvenienceMethodParameters, lroType!);
+            var body = WrapInDiagnosticScopeLegacy(methodName,
+                Var("originalResponse", InvokeProtocolMethod(RestClient, arguments, async), out var response),
+                Return(New(lroType!, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response))
+            );
+
+            return new Method(signature.WithAsync(async), body);
         }
 
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, bool async)

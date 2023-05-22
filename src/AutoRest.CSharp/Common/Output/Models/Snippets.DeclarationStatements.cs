@@ -37,6 +37,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingVar(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
             => UsingVar(null, name, value, d => new JsonDocumentExpression(d), out variable);
 
+        public static DeclarationStatement Var(string name, ResponseExpression value, out ResponseExpression variable)
+            => Var(null, name, value, d => new ResponseExpression(d), out variable);
+
         public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
             => Var(null, name, value, d => new XmlWriterContentExpression(d), out variable);
 
