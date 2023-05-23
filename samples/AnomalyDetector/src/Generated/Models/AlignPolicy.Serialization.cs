@@ -18,39 +18,18 @@ namespace AnomalyDetector.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(AlignMode))
             {
-                if (AlignMode != null)
-                {
-                    writer.WritePropertyName("alignMode"u8);
-                    writer.WriteStringValue(AlignMode.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("alignMode");
-                }
+                writer.WritePropertyName("alignMode"u8);
+                writer.WriteStringValue(AlignMode.Value.ToSerialString());
             }
             if (Optional.IsDefined(FillNAMethod))
             {
-                if (FillNAMethod != null)
-                {
-                    writer.WritePropertyName("fillNAMethod"u8);
-                    writer.WriteStringValue(FillNAMethod.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("fillNAMethod");
-                }
+                writer.WritePropertyName("fillNAMethod"u8);
+                writer.WriteStringValue(FillNAMethod.Value.ToString());
             }
             if (Optional.IsDefined(PaddingValue))
             {
-                if (PaddingValue != null)
-                {
-                    writer.WritePropertyName("paddingValue"u8);
-                    writer.WriteNumberValue(PaddingValue.Value);
-                }
-                else
-                {
-                    writer.WriteNull("paddingValue");
-                }
+                writer.WritePropertyName("paddingValue"u8);
+                writer.WriteNumberValue(PaddingValue.Value);
             }
             writer.WriteEndObject();
         }
@@ -61,16 +40,15 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<AlignMode?> alignMode = default;
-            Optional<FillNAMethod?> fillNAMethod = default;
-            Optional<float?> paddingValue = default;
+            Optional<AlignMode> alignMode = default;
+            Optional<FillNAMethod> fillNAMethod = default;
+            Optional<float> paddingValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("alignMode"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        alignMode = null;
                         continue;
                     }
                     alignMode = property.Value.GetString().ToAlignMode();
@@ -80,7 +58,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        fillNAMethod = null;
                         continue;
                     }
                     fillNAMethod = new FillNAMethod(property.Value.GetString());
@@ -90,7 +67,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        paddingValue = null;
                         continue;
                     }
                     paddingValue = property.Value.GetSingle();

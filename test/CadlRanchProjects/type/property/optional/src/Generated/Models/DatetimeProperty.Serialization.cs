@@ -19,15 +19,8 @@ namespace _Type.Property.Optional.Models
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsDefined(Property))
             {
-                if (Property != null)
-                {
-                    writer.WritePropertyName("property"u8);
-                    writer.WriteStringValue(Property.Value, "O");
-                }
-                else
-                {
-                    writer.WriteNull("property");
-                }
+                writer.WritePropertyName("property"u8);
+                writer.WriteStringValue(Property.Value, "O");
             }
             writer.WriteEndObject();
         }
@@ -38,14 +31,13 @@ namespace _Type.Property.Optional.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset?> property = default;
+            Optional<DateTimeOffset> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null || property0.Value.ValueKind == JsonValueKind.String && property0.Value.GetString().Length == 0)
                     {
-                        property = null;
                         continue;
                     }
                     property = property0.Value.GetDateTimeOffset("O");
