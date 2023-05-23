@@ -329,8 +329,7 @@ if (!$noBuild) {
     Invoke "dotnet build $autoRestPluginProject"
 
     #build the emitter
-    $emitterDir = "$PSScriptRoot/../src/CADL.Extension/Emitter.Csharp"
-    Invoke "npm --prefix $emitterDir run build"
+    Invoke-TypespecSetup
 }
 
 
