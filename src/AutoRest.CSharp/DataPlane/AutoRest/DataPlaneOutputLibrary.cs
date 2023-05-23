@@ -138,18 +138,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public LongRunningOperation FindLongRunningOperation(InputOperation operation)
-        {
-            Debug.Assert(operation.LongRunning != null);
-
-            return _operations[operation];
-        }
-
-        public DataPlaneClient? FindClient(InputClient inputClient)
-        {
-            _clients.TryGetValue(inputClient, out var client);
-            return client;
-        }
+        public LongRunningOperation? FindLongRunningOperation(InputOperation operation)
+            => operation.LongRunning is not null && Configuration.PublicClients ? _operations[operation] : null;
 
         public DataPlaneResponseHeaderGroupType? FindHeaderModel(InputOperation operation)
         {

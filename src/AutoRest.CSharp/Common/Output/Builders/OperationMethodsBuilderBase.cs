@@ -685,7 +685,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var cases = responses
                 .Select(r => BuildStatusCodeSwitchCases(r.StatusCodes, responseType, r.ResponseBody, httpMessage, headers, headerModelType, async))
-                .Append(new SwitchCase(null, Throw(requestFailedException)))
+                .Append(SwitchCase.Default(Throw(requestFailedException)))
                 .ToArray();
 
             var switchStatement = new SwitchStatement(httpMessage.Response.Status, cases);
@@ -694,10 +694,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private static SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, CSharpType? responseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
-            var statusCode = statusCodes[0];
-            var match = statusCode.Code is {} code
-                ? Int(code)
-                : new FormattableStringToExpression($"int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}");
+            var match = statusCodes
+                .Select(sc => sc.Code is {} code ? Int(code) : new FormattableStringToExpression($"int s when s >= {sc.Family * 100:L} && s < {sc.Family * 100 + 100:L}"))
+                .ToList();
 
             var statement = BuildStatusCodeSwitchCaseStatement(responseType, responseBody, httpMessage, headers, headerModelType, async);
             return new SwitchCase(match, statement, AddScope: responseBody is not null);

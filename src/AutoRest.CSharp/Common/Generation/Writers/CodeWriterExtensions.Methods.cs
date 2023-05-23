@@ -120,10 +120,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.LineRaw("{");
                         foreach (var switchCase in cases)
                         {
-                            if (switchCase.Case is not null)
+                            if (switchCase.Match.Any())
                             {
-                                writer.AppendRaw("case ");
-                                writer.WriteValueExpression(switchCase.Case);
+                                for (var i = 0; i < switchCase.Match.Count; i++)
+                                {
+                                    ValueExpression? match = switchCase.Match[i];
+                                    writer.AppendRaw("case ");
+                                    writer.WriteValueExpression(match);
+                                    if (i < switchCase.Match.Count - 1)
+                                    {
+                                        writer.LineRaw(":");
+                                    }
+                                }
                             }
                             else
                             {
