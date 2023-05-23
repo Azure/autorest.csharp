@@ -100,11 +100,11 @@ jobs:
         - pwsh: ./eng/EmitterGenerationCheck.ps1 -DiffCheck $false
           displayName: 'Generate Emitter Codes'
           workingDirectory: $(Build.SourcesDirectory)
-      - script: |
-          npm run test --prefix src/CADL.Extension/Emitter.Csharp
-        displayName: 'Emitter Unit Test'
-        workingDirectory: $(Build.SourcesDirectory)
       - ${{ if eq(parameters.IsTspDevVersionTest, false) }}:
+        - script: |
+            npm run test --prefix src/CADL.Extension/Emitter.Csharp
+          displayName: 'Emitter Unit Test'
+          workingDirectory: $(Build.SourcesDirectory)
         - task: PublishBuildArtifacts@1
           condition: succeededOrFailed()
           displayName: 'Publish Artifacts'

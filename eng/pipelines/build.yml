@@ -35,7 +35,7 @@ stages:
     jobs:
       - template: build-and-test.yml
         parameters:
-        IsTspDevVersionTest: true
+          IsTspDevVersionTest: false
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_C
