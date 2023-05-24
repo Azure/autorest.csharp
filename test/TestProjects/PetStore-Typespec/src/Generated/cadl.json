@@ -739,7 +739,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
-     "Path": "/pets/pets/getFish",
+     "Path": "/pets/getFish",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

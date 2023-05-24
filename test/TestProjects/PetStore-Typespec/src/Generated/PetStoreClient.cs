@@ -686,7 +686,7 @@ namespace PetStore
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/pets/pets/getFish", false);
+            uri.AppendPath("/pets/getFish", false);
             if (kind != null)
             {
                 uri.AppendQuery("kind", kind, true);
