@@ -17,6 +17,12 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
+@doc("Model to add additional serializable property")
+model ModelToAddAdditionalSerializableProperty {
+    @doc("Required int")
+    requiredInt: int32; 
+}
+
 @doc("Public model made internal")
 model ModelToMakeInternal {
   @doc("Required int")
@@ -118,7 +124,10 @@ model RootModel {
   propertyEnumWithValueToRename?: EnumWithValueToRename; 
 
   @doc("EnumToBeMadeExtensible")
-  propertyEnumToBeMadeExtensible?: EnumToBeMadeExtensible; 
+  propertyEnumToBeMadeExtensible?: EnumToBeMadeExtensible;
+
+  @doc("ModelToAddAdditionalSerializableProperty")
+  propertyModelToAddAdditionalSerializableProperty?: ModelToAddAdditionalSerializableProperty;
 }
 
 @route("/inputToRoundTrip")

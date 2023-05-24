@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -51,15 +52,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationParameters.Add(parameter);
             }
 
+            var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
+
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
                 var (originalFieldType, fieldValueType) = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
+                var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModel, inputModelProperty, typeFactory)
+                    ? CreateFieldFromExisting(existingMember, serialization, originalFieldType, inputModel, inputModelProperty, typeFactory)
                     : CreateField(originalFieldName, originalFieldType, fieldValueType, inputModel, inputModelProperty);
+
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                }
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
@@ -72,6 +81,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);
+                }
+            }
+
+            // adding the leftover members from the source type
+            if (sourceTypeMapping is not null)
+            {
+                foreach (var serializationMapping in sourceTypeMapping.GetSerializationMembers())
+                {
+                    if (visitedMembers.Contains(serializationMapping.ExistingMember))
+                    {
+                        continue;
+                    }
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
+                    // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(string), inputModel, inputModelProperty, typeFactory);
+                    fields.Add(field);
+                    fieldsToInputs[field] = inputModelProperty;
+                    serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
                 }
             }
 
@@ -135,7 +162,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
             var existingMemberTypeSymbol = existingMember switch
             {
@@ -164,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // for 2 reasons:
             // 1. it works
             // 2. we do not really have an efficiant way to get the value type of a property because we really cannot relying on the information in the schema when you have to do a customization, and from the csharp code, there is a lot of information we cannot get.
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
         private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)

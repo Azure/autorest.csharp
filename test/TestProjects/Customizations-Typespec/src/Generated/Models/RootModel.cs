@@ -23,7 +23,8 @@ namespace CustomizationsInCadl.Models
         /// <param name="propertyEnumToRename"> EnumToRename. </param>
         /// <param name="propertyEnumWithValueToRename"> EnumWithValueToRename. </param>
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
-        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible)
+        /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
+        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty)
         {
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
             PropertyModelToRename = propertyModelToRename;
@@ -32,6 +33,7 @@ namespace CustomizationsInCadl.Models
             PropertyEnumToRename = propertyEnumToRename;
             PropertyEnumWithValueToRename = propertyEnumWithValueToRename;
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
+            PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
         }
         /// <summary> ModelToRename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }
@@ -45,5 +47,7 @@ namespace CustomizationsInCadl.Models
         public EnumWithValueToRename? PropertyEnumWithValueToRename { get; set; }
         /// <summary> EnumToBeMadeExtensible. </summary>
         public EnumToBeMadeExtensible? PropertyEnumToBeMadeExtensible { get; set; }
+        /// <summary> ModelToAddAdditionalSerializableProperty. </summary>
+        public ModelToAddAdditionalSerializableProperty PropertyModelToAddAdditionalSerializableProperty { get; set; }
     }
 }
