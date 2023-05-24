@@ -69,9 +69,9 @@ namespace CustomizationsInCadl.Models
             Optional<RenamedModel> propertyModelToRename = default;
             Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
             Optional<ModelWithCustomizedProperties> propertyModelWithCustomizedProperties = default;
-            Optional<RenamedEnum?> propertyEnumToRename = default;
-            Optional<EnumWithValueToRename?> propertyEnumWithValueToRename = default;
-            Optional<EnumToBeMadeExtensible?> propertyEnumToBeMadeExtensible = default;
+            Optional<RenamedEnum> propertyEnumToRename = default;
+            Optional<EnumWithValueToRename> propertyEnumWithValueToRename = default;
+            Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
             Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
