@@ -14,7 +14,14 @@ namespace AutoRest.CSharp.Output.Models
         public string Accessibility => (Modifiers & FieldModifiers.Public) > 0 ? "public" : "internal";
 
         public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, bool writeAsProperty = false)
-            : this(null, modifiers, type, name, SerializationFormat.Default, writeAsProperty: writeAsProperty) { }
+            : this(description: null,
+                  modifiers: modifiers,
+                  type: type,
+                  name: name,
+                  serializationFormat: SerializationFormat.Default,
+                  writeAsProperty: writeAsProperty)
+        { }
+
         public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, FormattableString? defaultValue, SerializationFormat serializationFormat, bool writeAsProperty = false)
             : this(Description: null,
                   Modifiers: modifiers,
@@ -29,6 +36,7 @@ namespace AutoRest.CSharp.Output.Models
                   GetterModifiers: null,
                   SetterModifiers: null)
         { }
+
         public FieldDeclaration(FormattableString? description, FieldModifiers modifiers, CSharpType type, string name, SerializationFormat serializationFormat, bool writeAsProperty = false)
             : this(Description: description,
                   Modifiers: modifiers,
