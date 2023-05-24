@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -14,20 +15,41 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
+        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
+        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol serializationAttribute, INamedTypeSymbol serializationHooksAttribute, INamedTypeSymbol? existingType)
         {
             _existingType = existingType;
-            _propertyMappings = new Dictionary<string, ISymbol>();
+            _propertyMappings = new();
+            _serializationMappings = new(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
-                if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
+                foreach (var attributeData in member.GetAttributes())
                 {
-                    _propertyMappings.Add(schemaMemberName, member);
+                    var attributeTypeSymbol = attributeData.AttributeClass;
+                    // handle CodeGenMember attribute
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, memberAttribute) && TryGetCodeGenMemberAttributeValue(member, attributeData, out var schemaMemberName))
+                    {
+                        _propertyMappings.Add(schemaMemberName, member);
+                    }
+                    string[]? serializationPath = null;
+                    (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
+                    {
+                        serializationPath = pathResult;
+                    }
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationHooksAttribute) && TryGetSerializationHooks(member, attributeData, out var hooks))
+                    {
+                        serializationHooks = hooks;
+                    }
+                    if (serializationPath != null || serializationHooks != null)
+                    {
+                        _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
+                    }
                 }
             }
 
@@ -54,7 +76,37 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        private string[]? ToStringArray(ImmutableArray<TypedConstant> values)
+        private static bool TryGetSerializationHooks(ISymbol symbol, AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        {
+            string? serializationHook = null;
+            string? deserializationHook = null;
+
+            var arguments = attributeData.ConstructorArguments;
+            serializationHook = arguments[0].Value as string;
+            deserializationHook = arguments[1].Value as string;
+
+            hooks = (serializationHook, deserializationHook);
+            return serializationHook != null || deserializationHook != null;
+        }
+
+        private static bool TryGetCodeGenMemberAttributeValue(ISymbol symbol, AttributeData attributeData, [MaybeNullWhen(false)] out string name)
+        {
+            name = attributeData.ConstructorArguments.FirstOrDefault().Value as string;
+            return name != null;
+        }
+
+        private static bool TryGetSerializationAttributeValue(ISymbol symbol, AttributeData attributeData, [MaybeNullWhen(false)] out string[] propertyNames)
+        {
+            propertyNames = null;
+            if (attributeData.ConstructorArguments.Length > 0)
+            {
+                propertyNames = ToStringArray(attributeData.ConstructorArguments[0].Values);
+            }
+
+            return propertyNames != null;
+        }
+
+        private static string[]? ToStringArray(ImmutableArray<TypedConstant> values)
         {
             if (values.IsDefaultOrEmpty)
             {
@@ -62,7 +114,7 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return values
-                .Select(v => (string?) v.Value)
+                .Select(v => (string?)v.Value)
                 .OfType<string>()
                 .ToArray();
         }
@@ -80,6 +132,22 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return null;
+        }
+
+        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
+        {
+            if (symbol == null)
+                return null;
+
+            if (_serializationMappings.TryGetValue(symbol, out var serialization))
+                return serialization;
+
+            return null;
+        }
+
+        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
+        {
+            return _serializationMappings.Values;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

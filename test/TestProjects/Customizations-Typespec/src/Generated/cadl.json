@@ -475,6 +475,40 @@
      "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "64",
+     "Name": "propertyModelToAddAdditionalSerializableProperty",
+     "SerializedName": "propertyModelToAddAdditionalSerializableProperty",
+     "Description": "ModelToAddAdditionalSerializableProperty",
+     "Type": {
+      "$id": "65",
+      "Name": "ModelToAddAdditionalSerializableProperty",
+      "Namespace": "CustomizationsInCadl",
+      "Description": "Model to add additional serializable property",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "66",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
+         "$id": "67",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -489,22 +523,25 @@
   },
   {
    "$ref": "28"
+  },
+  {
+   "$ref": "65"
   }
  ],
  "Clients": [
   {
-   "$id": "64",
+   "$id": "68",
    "Name": "CustomizationsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "65",
+     "$id": "69",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "66",
+       "$id": "70",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -521,11 +558,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "67",
+       "$id": "71",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "68",
+        "$id": "72",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -540,19 +577,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "73",
         "Type": {
-         "$ref": "68"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "70",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "71",
+        "$id": "75",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -567,20 +604,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "76",
         "Type": {
-         "$ref": "71"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "73",
+       "$id": "77",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "74",
+        "$id": "78",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -595,9 +632,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "79",
         "Type": {
-         "$id": "76",
+         "$id": "80",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -608,7 +645,7 @@
      ],
      "Responses": [
       {
-       "$id": "77",
+       "$id": "81",
        "StatusCodes": [
         200
        ],
@@ -633,7 +670,7 @@
     }
    ],
    "Protocol": {
-    "$id": "78"
+    "$id": "82"
    },
    "Creatable": true
   }

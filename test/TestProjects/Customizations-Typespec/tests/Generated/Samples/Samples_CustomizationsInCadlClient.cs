@@ -85,6 +85,10 @@ namespace CustomizationsInCadl.Samples
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
                 propertyEnumToBeMadeExtensible = "1",
+                propertyModelToAddAdditionalSerializableProperty = new
+                {
+                    requiredInt = 1234,
+                },
             };
 
             Response response = client.RoundTrip(RequestContent.Create(data), new RequestContext());
@@ -108,6 +112,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -175,6 +180,10 @@ namespace CustomizationsInCadl.Samples
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
                 propertyEnumToBeMadeExtensible = "1",
+                propertyModelToAddAdditionalSerializableProperty = new
+                {
+                    requiredInt = 1234,
+                },
             };
 
             Response response = await client.RoundTripAsync(RequestContent.Create(data), new RequestContext());
@@ -198,6 +207,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -232,6 +242,10 @@ namespace CustomizationsInCadl.Samples
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
+                {
+                    AdditionalSerializableProperty = 1234,
+                },
             };
             var result = await client.RoundTripAsync(input);
         }

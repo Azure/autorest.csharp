@@ -173,14 +173,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                     result.Add(new JsonPropertySerialization(
                         paramName,
                         declaredName,
-                        serializedName,
+                        property.SerializationMapping?.SerializationPath?.Last() ?? serializedName,
                         property.Declaration.Type,
                         property.ValueType,
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
                         ShouldSkipDeserialization(property),
-                        optionalViaNullability));
+                        optionalViaNullability,
+                        serializationHook: property.SerializationMapping?.SerializationHook,
+                        deserializationHook: property.SerializationMapping?.DeserializationHook));
                 }
             }
             return result;
