@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Language.Authoring.Models
 {
     public partial class DeploymentJob
     {
-        internal static DeploymentJob DeserializeDeploymentJob(JsonElement element)
+        internal static DeploymentJob DeserializeDeploymentJob(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

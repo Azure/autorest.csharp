@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
     public partial class LogAnalytics
     {
-        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
+        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

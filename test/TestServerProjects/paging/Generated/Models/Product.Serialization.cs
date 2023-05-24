@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace paging.Models
 {
     public partial class Product
     {
-        internal static Product DeserializeProduct(JsonElement element)
+        internal static Product DeserializeProduct(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace HlcConstants.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(RequiredConstantModel))
@@ -28,7 +31,7 @@ namespace HlcConstants.Models
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

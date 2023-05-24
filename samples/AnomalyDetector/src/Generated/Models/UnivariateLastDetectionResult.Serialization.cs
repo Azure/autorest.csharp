@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
     public partial class UnivariateLastDetectionResult
     {
-        internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element)
+        internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

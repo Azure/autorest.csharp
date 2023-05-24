@@ -9,13 +9,14 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtScopeResource.Models
 {
     public partial class Marketplace
     {
-        internal static Marketplace DeserializeMarketplace(JsonElement element)
+        internal static Marketplace DeserializeMarketplace(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

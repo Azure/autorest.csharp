@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
 {
     internal partial class PolicyDefinitionListResult
     {
-        internal static PolicyDefinitionListResult DeserializePolicyDefinitionListResult(JsonElement element)
+        internal static PolicyDefinitionListResult DeserializePolicyDefinitionListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
     internal partial class FirewallPolicyRuleCollectionGroupListResult
     {
-        internal static FirewallPolicyRuleCollectionGroupListResult DeserializeFirewallPolicyRuleCollectionGroupListResult(JsonElement element)
+        internal static FirewallPolicyRuleCollectionGroupListResult DeserializeFirewallPolicyRuleCollectionGroupListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -148,7 +148,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

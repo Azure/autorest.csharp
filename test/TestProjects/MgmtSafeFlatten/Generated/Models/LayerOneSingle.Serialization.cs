@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSafeFlatten.Models
 {
     internal partial class LayerOneSingle : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(LayerTwo))
@@ -23,7 +26,7 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element)
+        internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

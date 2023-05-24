@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class ServiceCounters
     {
-        internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
+        internal static ServiceCounters DeserializeServiceCounters(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

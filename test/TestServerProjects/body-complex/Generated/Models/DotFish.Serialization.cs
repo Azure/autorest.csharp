@@ -6,12 +6,13 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class DotFish
     {
-        internal static DotFish DeserializeDotFish(JsonElement element)
+        internal static DotFish DeserializeDotFish(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

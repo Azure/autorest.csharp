@@ -7,13 +7,14 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample
 {
     public partial class RoleAssignmentData
     {
-        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element)
+        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

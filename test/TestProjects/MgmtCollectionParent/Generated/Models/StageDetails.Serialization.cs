@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtCollectionParent.Models
 {
     public partial class StageDetails
     {
-        internal static StageDetails DeserializeStageDetails(JsonElement element)
+        internal static StageDetails DeserializeStageDetails(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

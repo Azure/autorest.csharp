@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class RequestStatistics
     {
-        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element)
+        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

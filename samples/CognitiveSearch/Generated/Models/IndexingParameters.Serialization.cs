@@ -8,12 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class IndexingParameters : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(BatchSize))
@@ -50,7 +53,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
+        internal static IndexingParameters DeserializeIndexingParameters(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

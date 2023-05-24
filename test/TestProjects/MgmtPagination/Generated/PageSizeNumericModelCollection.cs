@@ -224,7 +224,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeNumericModelResource(Client, PageSizeNumericModelData.DeserializePageSizeNumericModelData(e)), _pageSizeNumericModelClientDiagnostics, Pipeline, "PageSizeNumericModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

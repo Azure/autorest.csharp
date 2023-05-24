@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtOperations.Models
 {
     public partial class TestAvailabilitySet
     {
-        internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element)
+        internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

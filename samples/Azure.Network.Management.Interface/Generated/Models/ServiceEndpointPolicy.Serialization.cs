@@ -8,12 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
     public partial class ServiceEndpointPolicy : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -53,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        internal static ServiceEndpointPolicy DeserializeServiceEndpointPolicy(JsonElement element)
+        internal static ServiceEndpointPolicy DeserializeServiceEndpointPolicy(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

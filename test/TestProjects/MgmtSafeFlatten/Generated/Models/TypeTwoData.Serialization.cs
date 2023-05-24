@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtSafeFlatten.Models;
 
@@ -15,7 +16,9 @@ namespace MgmtSafeFlatten
 {
     public partial class TypeTwoData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MyType))
@@ -44,7 +47,7 @@ namespace MgmtSafeFlatten
             writer.WriteEndObject();
         }
 
-        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element)
+        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

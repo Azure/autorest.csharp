@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Authentication.ApiKey.Models
 {
     public partial class InvalidAuth
     {
-        internal static InvalidAuth DeserializeInvalidAuth(JsonElement element)
+        internal static InvalidAuth DeserializeInvalidAuth(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

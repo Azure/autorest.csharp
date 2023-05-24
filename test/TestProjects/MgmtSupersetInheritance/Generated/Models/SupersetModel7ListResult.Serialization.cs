@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {
     internal partial class SupersetModel7ListResult
     {
-        internal static SupersetModel7ListResult DeserializeSupersetModel7ListResult(JsonElement element)
+        internal static SupersetModel7ListResult DeserializeSupersetModel7ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

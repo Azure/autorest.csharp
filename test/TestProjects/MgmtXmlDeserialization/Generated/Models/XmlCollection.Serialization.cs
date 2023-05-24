@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
@@ -37,7 +38,7 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(value, count, nextLink);
         }
 
-        internal static XmlCollection DeserializeXmlCollection(JsonElement element)
+        internal static XmlCollection DeserializeXmlCollection(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

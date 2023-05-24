@@ -8,12 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
     public partial class SecurityRule : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -137,7 +140,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        internal static SecurityRule DeserializeSecurityRule(JsonElement element)
+        internal static SecurityRule DeserializeSecurityRule(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

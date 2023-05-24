@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
     internal partial class AnimalNotFound
     {
-        internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element)
+        internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

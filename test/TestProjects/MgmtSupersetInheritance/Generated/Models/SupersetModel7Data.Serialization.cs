@@ -7,13 +7,16 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance
 {
     public partial class SupersetModel7Data : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -24,7 +27,7 @@ namespace MgmtSupersetInheritance
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel7Data DeserializeSupersetModel7Data(JsonElement element)
+        internal static SupersetModel7Data DeserializeSupersetModel7Data(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -9,13 +9,14 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(OutputModelConverter))]
     public partial class OutputModel
     {
-        internal static OutputModel DeserializeOutputModel(JsonElement element)
+        internal static OutputModel DeserializeOutputModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

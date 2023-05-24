@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
     internal partial class UnknownNotFoundErrorBase
     {
-        internal static UnknownNotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element)
+        internal static UnknownNotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -9,12 +9,13 @@ using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
     public partial class DurationProperty
     {
-        internal static DurationProperty DeserializeDurationProperty(JsonElement element)
+        internal static DurationProperty DeserializeDurationProperty(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

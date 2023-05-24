@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtDiscriminator.Models;
 
@@ -14,7 +15,9 @@ namespace MgmtDiscriminator
 {
     public partial class DeliveryRuleData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
@@ -25,7 +28,7 @@ namespace MgmtDiscriminator
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleData DeserializeDeliveryRuleData(JsonElement element)
+        internal static DeliveryRuleData DeserializeDeliveryRuleData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

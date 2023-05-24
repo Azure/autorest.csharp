@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     public partial class DeploymentValidateResult
     {
-        internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element)
+        internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

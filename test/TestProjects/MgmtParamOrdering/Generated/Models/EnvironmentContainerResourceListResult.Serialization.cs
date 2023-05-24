@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {
     internal partial class EnvironmentContainerResourceListResult
     {
-        internal static EnvironmentContainerResourceListResult DeserializeEnvironmentContainerResourceListResult(JsonElement element)
+        internal static EnvironmentContainerResourceListResult DeserializeEnvironmentContainerResourceListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

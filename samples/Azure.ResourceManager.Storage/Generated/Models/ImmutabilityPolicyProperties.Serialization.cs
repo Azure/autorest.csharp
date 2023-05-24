@@ -9,12 +9,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ImmutabilityPolicyProperties
     {
-        internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element)
+        internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

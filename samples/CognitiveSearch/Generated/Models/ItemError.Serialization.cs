@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class ItemError
     {
-        internal static ItemError DeserializeItemError(JsonElement element)
+        internal static ItemError DeserializeItemError(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

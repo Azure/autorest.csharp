@@ -8,13 +8,16 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
     internal partial class SecondModel : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(IntProperty))
@@ -41,7 +44,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static SecondModel DeserializeSecondModel(JsonElement element)
+        internal static SecondModel DeserializeSecondModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

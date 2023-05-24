@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     public partial class PirSharedGalleryResource
     {
-        internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element)
+        internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExactMatchFlattenInheritance;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {
     internal partial class AzureResourceFlattenModel1ListResult
     {
-        internal static AzureResourceFlattenModel1ListResult DeserializeAzureResourceFlattenModel1ListResult(JsonElement element)
+        internal static AzureResourceFlattenModel1ListResult DeserializeAzureResourceFlattenModel1ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Language.Authoring.Models
 {
     public partial class SwapDeploymentsJob
     {
-        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element)
+        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

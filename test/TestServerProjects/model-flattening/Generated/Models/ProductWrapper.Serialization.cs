@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace model_flattening.Models
 {
     public partial class ProductWrapper
     {
-        internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
+        internal static ProductWrapper DeserializeProductWrapper(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExactMatchInheritance.Models
 {
     internal partial class ExactMatchModel3ListResult
     {
-        internal static ExactMatchModel3ListResult DeserializeExactMatchModel3ListResult(JsonElement element)
+        internal static ExactMatchModel3ListResult DeserializeExactMatchModel3ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

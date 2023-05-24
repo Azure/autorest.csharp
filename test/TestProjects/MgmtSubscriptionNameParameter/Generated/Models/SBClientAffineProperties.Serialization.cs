@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
     public partial class SBClientAffineProperties : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ClientId))
@@ -33,7 +36,7 @@ namespace MgmtSubscriptionNameParameter.Models
             writer.WriteEndObject();
         }
 
-        internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element)
+        internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

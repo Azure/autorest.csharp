@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     public partial class GuestConfigurationBaseResource : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -28,7 +31,7 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element)
+        internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

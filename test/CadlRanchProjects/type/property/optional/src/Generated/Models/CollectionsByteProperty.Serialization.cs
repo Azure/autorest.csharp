@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Optional.Models
 {
     public partial class CollectionsByteProperty : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsCollectionDefined(Property))
@@ -36,7 +39,7 @@ namespace _Type.Property.Optional.Models
             writer.WriteEndObject();
         }
 
-        internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element)
+        internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

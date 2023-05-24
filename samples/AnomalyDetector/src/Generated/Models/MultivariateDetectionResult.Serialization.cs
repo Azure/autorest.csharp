@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
     public partial class MultivariateDetectionResult
     {
-        internal static MultivariateDetectionResult DeserializeMultivariateDetectionResult(JsonElement element)
+        internal static MultivariateDetectionResult DeserializeMultivariateDetectionResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

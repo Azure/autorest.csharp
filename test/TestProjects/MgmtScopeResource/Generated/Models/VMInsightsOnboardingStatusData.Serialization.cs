@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
 
@@ -15,7 +16,7 @@ namespace MgmtScopeResource
 {
     public partial class VMInsightsOnboardingStatusData
     {
-        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element)
+        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

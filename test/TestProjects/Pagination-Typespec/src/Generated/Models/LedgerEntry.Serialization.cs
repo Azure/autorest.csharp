@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Pagination.Models
 {
     public partial class LedgerEntry
     {
-        internal static LedgerEntry DeserializeLedgerEntry(JsonElement element)
+        internal static LedgerEntry DeserializeLedgerEntry(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

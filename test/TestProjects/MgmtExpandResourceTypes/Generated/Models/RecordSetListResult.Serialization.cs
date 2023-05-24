@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
     internal partial class RecordSetListResult
     {
-        internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element)
+        internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

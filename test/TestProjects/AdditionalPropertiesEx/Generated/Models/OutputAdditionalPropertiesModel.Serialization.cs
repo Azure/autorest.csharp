@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
     public partial class OutputAdditionalPropertiesModel
     {
-        internal static OutputAdditionalPropertiesModel DeserializeOutputAdditionalPropertiesModel(JsonElement element)
+        internal static OutputAdditionalPropertiesModel DeserializeOutputAdditionalPropertiesModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

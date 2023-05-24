@@ -7,13 +7,14 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionResource
 {
     public partial class SubSingletonData
     {
-        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element)
+        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

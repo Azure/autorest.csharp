@@ -8,12 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class SmartSalmon : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(CollegeDegree))
@@ -58,7 +61,7 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
+        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

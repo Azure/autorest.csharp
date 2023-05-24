@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class DotSalmon
     {
-        internal static DotSalmon DeserializeDotSalmon(JsonElement element)
+        internal static DotSalmon DeserializeDotSalmon(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

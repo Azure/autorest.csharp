@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsInCadl.Models
 {
     internal partial class UnknownBaseModelWithDiscriminator
     {
-        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element)
+        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

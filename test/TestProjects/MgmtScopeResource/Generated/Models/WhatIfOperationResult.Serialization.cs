@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     public partial class WhatIfOperationResult
     {
-        internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element)
+        internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

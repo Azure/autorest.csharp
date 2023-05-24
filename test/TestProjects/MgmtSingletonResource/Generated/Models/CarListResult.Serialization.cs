@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models
 {
     internal partial class CarListResult
     {
-        internal static CarListResult DeserializeCarListResult(JsonElement element)
+        internal static CarListResult DeserializeCarListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

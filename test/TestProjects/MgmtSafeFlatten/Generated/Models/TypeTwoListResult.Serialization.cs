@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
     internal partial class TypeTwoListResult
     {
-        internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element)
+        internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

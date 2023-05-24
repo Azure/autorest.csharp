@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentLanguage
     {
-        internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element)
+        internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

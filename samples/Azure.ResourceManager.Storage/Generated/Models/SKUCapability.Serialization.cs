@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     public partial class SKUCapability
     {
-        internal static SKUCapability DeserializeSKUCapability(JsonElement element)
+        internal static SKUCapability DeserializeSKUCapability(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -9,12 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
     public partial class DeletedVaultProperties
     {
-        internal static DeletedVaultProperties DeserializeDeletedVaultProperties(JsonElement element)
+        internal static DeletedVaultProperties DeserializeDeletedVaultProperties(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

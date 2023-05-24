@@ -9,19 +9,22 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtExactMatchInheritance.Models
 {
     [JsonConverter(typeof(ExactMatchModel11Converter))]
     public partial class ExactMatchModel11 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element)
+        internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

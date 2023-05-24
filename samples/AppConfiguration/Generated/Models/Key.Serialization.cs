@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AppConfiguration.Models
 {
     public partial class Key
     {
-        internal static Key DeserializeKey(JsonElement element)
+        internal static Key DeserializeKey(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

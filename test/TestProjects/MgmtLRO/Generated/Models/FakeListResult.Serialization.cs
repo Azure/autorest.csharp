@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtLRO;
 
 namespace MgmtLRO.Models
 {
     internal partial class FakeListResult
     {
-        internal static FakeListResult DeserializeFakeListResult(JsonElement element)
+        internal static FakeListResult DeserializeFakeListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class LinkedEntity
     {
-        internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
+        internal static LinkedEntity DeserializeLinkedEntity(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

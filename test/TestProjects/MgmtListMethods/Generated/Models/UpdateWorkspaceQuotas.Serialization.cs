@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
     public partial class UpdateWorkspaceQuotas
     {
-        internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element)
+        internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

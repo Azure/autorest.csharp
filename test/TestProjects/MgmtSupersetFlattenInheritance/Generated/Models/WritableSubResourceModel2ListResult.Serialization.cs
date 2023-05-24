@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
     internal partial class WritableSubResourceModel2ListResult
     {
-        internal static WritableSubResourceModel2ListResult DeserializeWritableSubResourceModel2ListResult(JsonElement element)
+        internal static WritableSubResourceModel2ListResult DeserializeWritableSubResourceModel2ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

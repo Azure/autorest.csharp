@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace required_optional.Models
 {
     internal partial class Error
     {
-        internal static Error DeserializeError(JsonElement element)
+        internal static Error DeserializeError(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

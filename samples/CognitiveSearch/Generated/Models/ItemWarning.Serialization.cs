@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class ItemWarning
     {
-        internal static ItemWarning DeserializeItemWarning(JsonElement element)
+        internal static ItemWarning DeserializeItemWarning(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

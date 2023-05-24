@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
     public partial class PetAction
     {
-        internal static PetAction DeserializePetAction(JsonElement element)
+        internal static PetAction DeserializePetAction(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

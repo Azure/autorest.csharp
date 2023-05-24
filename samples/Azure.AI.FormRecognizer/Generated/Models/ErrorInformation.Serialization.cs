@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     public partial class ErrorInformation
     {
-        internal static ErrorInformation DeserializeErrorInformation(JsonElement element)
+        internal static ErrorInformation DeserializeErrorInformation(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

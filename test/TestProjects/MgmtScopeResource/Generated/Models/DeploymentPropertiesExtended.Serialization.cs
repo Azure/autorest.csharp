@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     public partial class DeploymentPropertiesExtended
     {
-        internal static DeploymentPropertiesExtended DeserializeDeploymentPropertiesExtended(JsonElement element)
+        internal static DeploymentPropertiesExtended DeserializeDeploymentPropertiesExtended(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

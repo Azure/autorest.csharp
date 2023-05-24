@@ -9,12 +9,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsInCadl.Models
 {
     public partial class CollectionItem : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -28,7 +31,7 @@ namespace ModelsInCadl.Models
             writer.WriteEndObject();
         }
 
-        internal static CollectionItem DeserializeCollectionItem(JsonElement element)
+        internal static CollectionItem DeserializeCollectionItem(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

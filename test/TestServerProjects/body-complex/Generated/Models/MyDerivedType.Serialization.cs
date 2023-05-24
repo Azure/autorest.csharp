@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class MyDerivedType
     {
-        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
+        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

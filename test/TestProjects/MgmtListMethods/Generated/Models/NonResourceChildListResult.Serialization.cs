@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
     internal partial class NonResourceChildListResult
     {
-        internal static NonResourceChildListResult DeserializeNonResourceChildListResult(JsonElement element)
+        internal static NonResourceChildListResult DeserializeNonResourceChildListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

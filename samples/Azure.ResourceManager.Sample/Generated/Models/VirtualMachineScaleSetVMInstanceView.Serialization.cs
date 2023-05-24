@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineScaleSetVMInstanceView
     {
-        internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element)
+        internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

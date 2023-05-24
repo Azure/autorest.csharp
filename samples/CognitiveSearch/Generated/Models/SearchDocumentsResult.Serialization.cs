@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class SearchDocumentsResult
     {
-        internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
+        internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

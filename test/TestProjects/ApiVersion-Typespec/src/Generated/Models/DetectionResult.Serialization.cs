@@ -9,12 +9,13 @@ using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ApiVersionInCadl.Models
 {
     public partial class DetectionResult
     {
-        internal static DetectionResult DeserializeDetectionResult(JsonElement element)
+        internal static DetectionResult DeserializeDetectionResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

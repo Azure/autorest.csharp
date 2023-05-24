@@ -9,12 +9,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
     public partial class UnivariateEntireDetectionResult
     {
-        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element)
+        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

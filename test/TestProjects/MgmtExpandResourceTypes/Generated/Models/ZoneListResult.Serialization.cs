@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
     internal partial class ZoneListResult
     {
-        internal static ZoneListResult DeserializeZoneListResult(JsonElement element)
+        internal static ZoneListResult DeserializeZoneListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

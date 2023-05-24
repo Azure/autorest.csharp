@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtOmitOperationGroups.Models;
 
@@ -14,7 +15,9 @@ namespace MgmtOmitOperationGroups
 {
     public partial class Model2Data : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(B))
@@ -30,7 +33,7 @@ namespace MgmtOmitOperationGroups
             writer.WriteEndObject();
         }
 
-        internal static Model2Data DeserializeModel2Data(JsonElement element)
+        internal static Model2Data DeserializeModel2Data(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtMockAndSample.Models;
 
@@ -14,7 +15,7 @@ namespace MgmtMockAndSample
 {
     public partial class DeletedVaultData
     {
-        internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element)
+        internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

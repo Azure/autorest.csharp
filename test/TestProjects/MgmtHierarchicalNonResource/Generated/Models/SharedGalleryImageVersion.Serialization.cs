@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     public partial class SharedGalleryImageVersion
     {
-        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element)
+        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

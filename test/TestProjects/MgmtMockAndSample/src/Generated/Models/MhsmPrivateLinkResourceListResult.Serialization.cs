@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
     internal partial class MhsmPrivateLinkResourceListResult
     {
-        internal static MhsmPrivateLinkResourceListResult DeserializeMhsmPrivateLinkResourceListResult(JsonElement element)
+        internal static MhsmPrivateLinkResourceListResult DeserializeMhsmPrivateLinkResourceListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

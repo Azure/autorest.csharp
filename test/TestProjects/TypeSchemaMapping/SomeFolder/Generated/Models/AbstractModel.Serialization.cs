@@ -6,12 +6,13 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
     public partial class AbstractModel
     {
-        internal static AbstractModel DeserializeAbstractModel(JsonElement element)
+        internal static AbstractModel DeserializeAbstractModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

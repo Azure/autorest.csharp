@@ -7,13 +7,14 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
     public partial class PrivateEndpointConnectionItem
     {
-        internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element)
+        internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

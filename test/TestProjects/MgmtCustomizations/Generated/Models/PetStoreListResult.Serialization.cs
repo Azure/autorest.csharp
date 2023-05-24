@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
     internal partial class PetStoreListResult
     {
-        internal static PetStoreListResult DeserializePetStoreListResult(JsonElement element)
+        internal static PetStoreListResult DeserializePetStoreListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

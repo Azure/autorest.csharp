@@ -6,12 +6,13 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class MyBaseType
     {
-        internal static MyBaseType DeserializeMyBaseType(JsonElement element)
+        internal static MyBaseType DeserializeMyBaseType(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

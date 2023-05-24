@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace httpInfrastructure.Models
 {
     public partial class D
     {
-        internal static D DeserializeD(JsonElement element)
+        internal static D DeserializeD(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -7,13 +7,16 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
     internal partial struct RenamedModelStruct : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
@@ -42,7 +45,7 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
+        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, SerializableOptions options = default)
         {
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;

@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace SpecialWords.Models
 {
     internal partial class UnknownBaseModel
     {
-        internal static UnknownBaseModel DeserializeUnknownBaseModel(JsonElement element)
+        internal static UnknownBaseModel DeserializeUnknownBaseModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

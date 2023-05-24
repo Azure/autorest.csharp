@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class IndexerLimits
     {
-        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
+        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
     public partial class ApiErrorBase
     {
-        internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element)
+        internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -230,7 +230,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCaaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetCaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCaaRecordSetsClientDiagnostics, Pipeline, "RecordSetCaaCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetCaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCaaRecordSetsClientDiagnostics, Pipeline, "RecordSetCaaCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCaaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetCaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCaaRecordSetsClientDiagnostics, Pipeline, "RecordSetCaaCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetCaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCaaRecordSetsClientDiagnostics, Pipeline, "RecordSetCaaCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

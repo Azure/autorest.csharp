@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
     public partial class JsonOutput
     {
-        internal static JsonOutput DeserializeJsonOutput(JsonElement element)
+        internal static JsonOutput DeserializeJsonOutput(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

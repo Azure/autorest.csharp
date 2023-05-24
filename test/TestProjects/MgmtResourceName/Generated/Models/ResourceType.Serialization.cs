@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtResourceName.Models
 {
     public partial class ResourceType
     {
-        internal static ResourceType DeserializeResourceType(JsonElement element)
+        internal static ResourceType DeserializeResourceType(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

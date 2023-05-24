@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Language.Authoring.Models
 {
     public partial class JobWarning
     {
-        internal static JobWarning DeserializeJobWarning(JsonElement element)
+        internal static JobWarning DeserializeJobWarning(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

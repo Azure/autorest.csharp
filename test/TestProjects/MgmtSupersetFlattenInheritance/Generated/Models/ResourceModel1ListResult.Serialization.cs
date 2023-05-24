@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
     internal partial class ResourceModel1ListResult
     {
-        internal static ResourceModel1ListResult DeserializeResourceModel1ListResult(JsonElement element)
+        internal static ResourceModel1ListResult DeserializeResourceModel1ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

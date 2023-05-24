@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     public partial class WorkspaceInfo
     {
-        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element)
+        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

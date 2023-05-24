@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtRenameRules;
 
 namespace MgmtRenameRules.Models
 {
     internal partial class VirtualMachineListResult
     {
-        internal static VirtualMachineListResult DeserializeVirtualMachineListResult(JsonElement element)
+        internal static VirtualMachineListResult DeserializeVirtualMachineListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtRenameRules;
 
 namespace MgmtRenameRules.Models
 {
     internal partial class ImageListResult
     {
-        internal static ImageListResult DeserializeImageListResult(JsonElement element)
+        internal static ImageListResult DeserializeImageListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

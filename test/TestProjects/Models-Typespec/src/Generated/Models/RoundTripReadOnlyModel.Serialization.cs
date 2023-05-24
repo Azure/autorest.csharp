@@ -9,12 +9,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsInCadl.Models
 {
     public partial class RoundTripReadOnlyModel
     {
-        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element)
+        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

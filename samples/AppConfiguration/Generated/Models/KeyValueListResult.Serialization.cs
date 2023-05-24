@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AppConfiguration.Models
 {
     internal partial class KeyValueListResult
     {
-        internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element)
+        internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

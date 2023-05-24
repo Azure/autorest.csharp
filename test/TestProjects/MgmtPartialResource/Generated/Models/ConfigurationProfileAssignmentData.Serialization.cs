@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtPartialResource.Models;
 
@@ -15,7 +16,9 @@ namespace MgmtPartialResource
 {
     public partial class ConfigurationProfileAssignmentData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
@@ -39,7 +42,7 @@ namespace MgmtPartialResource
             writer.WriteEndObject();
         }
 
-        internal static ConfigurationProfileAssignmentData DeserializeConfigurationProfileAssignmentData(JsonElement element)
+        internal static ConfigurationProfileAssignmentData DeserializeConfigurationProfileAssignmentData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

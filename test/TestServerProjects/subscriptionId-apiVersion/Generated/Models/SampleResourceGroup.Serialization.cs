@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace subscriptionId_apiVersion.Models
 {
     public partial class SampleResourceGroup
     {
-        internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element)
+        internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

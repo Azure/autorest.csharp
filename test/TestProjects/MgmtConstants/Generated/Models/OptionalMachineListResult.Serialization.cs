@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtConstants;
 
 namespace MgmtConstants.Models
 {
     internal partial class OptionalMachineListResult
     {
-        internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element)
+        internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

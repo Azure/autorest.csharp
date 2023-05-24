@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
     public partial class HeaderActionParameters : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
@@ -29,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static HeaderActionParameters DeserializeHeaderActionParameters(JsonElement element)
+        internal static HeaderActionParameters DeserializeHeaderActionParameters(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

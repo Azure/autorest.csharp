@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtMockAndSample.Models;
 
@@ -15,7 +16,7 @@ namespace MgmtMockAndSample
 {
     public partial class VaultData
     {
-        internal static VaultData DeserializeVaultData(JsonElement element)
+        internal static VaultData DeserializeVaultData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

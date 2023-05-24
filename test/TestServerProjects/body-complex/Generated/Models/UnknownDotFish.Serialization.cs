@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     internal partial class UnknownDotFish
     {
-        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element)
+        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

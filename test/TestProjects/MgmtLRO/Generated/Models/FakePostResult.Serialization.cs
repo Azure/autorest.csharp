@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtLRO.Models
 {
     public partial class FakePostResult
     {
-        internal static FakePostResult DeserializeFakePostResult(JsonElement element)
+        internal static FakePostResult DeserializeFakePostResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

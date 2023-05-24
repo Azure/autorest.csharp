@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExactMatchFlattenInheritance;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {
     internal partial class CustomModel2ListResult
     {
-        internal static CustomModel2ListResult DeserializeCustomModel2ListResult(JsonElement element)
+        internal static CustomModel2ListResult DeserializeCustomModel2ListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

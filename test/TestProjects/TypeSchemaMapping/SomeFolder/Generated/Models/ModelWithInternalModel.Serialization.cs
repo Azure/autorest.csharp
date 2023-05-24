@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithInternalModel
     {
-        internal static ModelWithInternalModel DeserializeModelWithInternalModel(JsonElement element)
+        internal static ModelWithInternalModel DeserializeModelWithInternalModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

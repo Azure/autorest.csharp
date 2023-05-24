@@ -231,7 +231,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

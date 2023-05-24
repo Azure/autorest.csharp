@@ -11,6 +11,7 @@ using System.Net;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtExactMatchInheritance.Models;
 
@@ -18,7 +19,9 @@ namespace MgmtExactMatchInheritance
 {
     public partial class ExactMatchModel1Data : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -124,7 +127,7 @@ namespace MgmtExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
+        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

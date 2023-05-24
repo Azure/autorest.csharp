@@ -9,12 +9,13 @@ using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
     public partial class DatetimeProperty
     {
-        internal static DatetimeProperty DeserializeDatetimeProperty(JsonElement element)
+        internal static DatetimeProperty DeserializeDatetimeProperty(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

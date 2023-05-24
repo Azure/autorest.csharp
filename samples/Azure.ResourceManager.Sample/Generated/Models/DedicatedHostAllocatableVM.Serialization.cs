@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
     public partial class DedicatedHostAllocatableVM
     {
-        internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element)
+        internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

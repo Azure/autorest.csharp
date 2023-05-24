@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtCollectionParent.Models;
 
@@ -15,7 +16,7 @@ namespace MgmtCollectionParent
 {
     public partial class OrderResourceData
     {
-        internal static OrderResourceData DeserializeOrderResourceData(JsonElement element)
+        internal static OrderResourceData DeserializeOrderResourceData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

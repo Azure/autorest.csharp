@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Pagination.Models
 {
     public partial class TextBlocklist
     {
-        internal static TextBlocklist DeserializeTextBlocklist(JsonElement element)
+        internal static TextBlocklist DeserializeTextBlocklist(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

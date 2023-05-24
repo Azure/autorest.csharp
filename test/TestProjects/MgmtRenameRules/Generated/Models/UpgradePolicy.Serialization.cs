@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
     public partial class UpgradePolicy : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Mode))
@@ -33,7 +36,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element)
+        internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

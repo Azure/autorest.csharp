@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtExtensionCommonRestOperation;
 
 namespace MgmtExtensionCommonRestOperation.Models
 {
     internal partial class TypeOneListResult
     {
-        internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element)
+        internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

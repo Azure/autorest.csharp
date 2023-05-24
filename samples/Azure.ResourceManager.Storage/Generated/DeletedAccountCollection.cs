@@ -148,7 +148,7 @@ namespace Azure.ResourceManager.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

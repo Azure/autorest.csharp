@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtResourceName.Models
 {
     public partial class ResourceOperation
     {
-        internal static ResourceOperation DeserializeResourceOperation(JsonElement element)
+        internal static ResourceOperation DeserializeResourceOperation(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

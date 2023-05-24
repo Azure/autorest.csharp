@@ -7,13 +7,14 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
     public partial class BrakeData
     {
-        internal static BrakeData DeserializeBrakeData(JsonElement element)
+        internal static BrakeData DeserializeBrakeData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

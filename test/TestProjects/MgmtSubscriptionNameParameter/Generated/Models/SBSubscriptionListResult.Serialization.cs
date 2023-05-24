@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
     internal partial class SBSubscriptionListResult
     {
-        internal static SBSubscriptionListResult DeserializeSBSubscriptionListResult(JsonElement element)
+        internal static SBSubscriptionListResult DeserializeSBSubscriptionListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

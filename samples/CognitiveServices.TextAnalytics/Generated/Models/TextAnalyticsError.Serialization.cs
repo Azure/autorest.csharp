@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class TextAnalyticsError
     {
-        internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
+        internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

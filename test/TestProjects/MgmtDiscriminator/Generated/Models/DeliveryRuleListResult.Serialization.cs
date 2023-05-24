@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
     internal partial class DeliveryRuleListResult
     {
-        internal static DeliveryRuleListResult DeserializeDeliveryRuleListResult(JsonElement element)
+        internal static DeliveryRuleListResult DeserializeDeliveryRuleListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
     internal partial class ErrorModel
     {
-        internal static ErrorModel DeserializeErrorModel(JsonElement element)
+        internal static ErrorModel DeserializeErrorModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

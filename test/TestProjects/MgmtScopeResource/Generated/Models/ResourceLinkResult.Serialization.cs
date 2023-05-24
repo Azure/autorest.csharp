@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
     internal partial class ResourceLinkResult
     {
-        internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element)
+        internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace paging.Models
 {
     internal partial class ProductResultValueWithXMSClientName
     {
-        internal static ProductResultValueWithXMSClientName DeserializeProductResultValueWithXMSClientName(JsonElement element)
+        internal static ProductResultValueWithXMSClientName DeserializeProductResultValueWithXMSClientName(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

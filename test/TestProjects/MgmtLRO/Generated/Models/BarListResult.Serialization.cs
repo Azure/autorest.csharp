@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtLRO;
 
 namespace MgmtLRO.Models
 {
     internal partial class BarListResult
     {
-        internal static BarListResult DeserializeBarListResult(JsonElement element)
+        internal static BarListResult DeserializeBarListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

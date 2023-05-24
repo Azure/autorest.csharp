@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Usage.Models
 {
     public partial class OutputRecord
     {
-        internal static OutputRecord DeserializeOutputRecord(JsonElement element)
+        internal static OutputRecord DeserializeOutputRecord(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

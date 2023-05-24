@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtResourceName;
 
 namespace MgmtResourceName.Models
 {
     internal partial class DisplayResourceListResult
     {
-        internal static DisplayResourceListResult DeserializeDisplayResourceListResult(JsonElement element)
+        internal static DisplayResourceListResult DeserializeDisplayResourceListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

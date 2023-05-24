@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
     internal partial class ResGrpParentWithAncestorWithLocListResult
     {
-        internal static ResGrpParentWithAncestorWithLocListResult DeserializeResGrpParentWithAncestorWithLocListResult(JsonElement element)
+        internal static ResGrpParentWithAncestorWithLocListResult DeserializeResGrpParentWithAncestorWithLocListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -9,12 +9,13 @@ using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
     public partial class BytesProperty
     {
-        internal static BytesProperty DeserializeBytesProperty(JsonElement element)
+        internal static BytesProperty DeserializeBytesProperty(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

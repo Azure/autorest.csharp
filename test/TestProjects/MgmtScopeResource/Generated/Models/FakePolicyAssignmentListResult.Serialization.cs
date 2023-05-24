@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
     internal partial class FakePolicyAssignmentListResult
     {
-        internal static FakePolicyAssignmentListResult DeserializeFakePolicyAssignmentListResult(JsonElement element)
+        internal static FakePolicyAssignmentListResult DeserializeFakePolicyAssignmentListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

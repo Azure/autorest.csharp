@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
     internal partial class MgmtMockAndSamplePrivateEndpointConnectionListResult
     {
-        internal static MgmtMockAndSamplePrivateEndpointConnectionListResult DeserializeMgmtMockAndSamplePrivateEndpointConnectionListResult(JsonElement element)
+        internal static MgmtMockAndSamplePrivateEndpointConnectionListResult DeserializeMgmtMockAndSamplePrivateEndpointConnectionListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

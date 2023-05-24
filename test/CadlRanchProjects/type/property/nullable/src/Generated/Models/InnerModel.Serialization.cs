@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
     public partial class InnerModel
     {
-        internal static InnerModel DeserializeInnerModel(JsonElement element)
+        internal static InnerModel DeserializeInnerModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

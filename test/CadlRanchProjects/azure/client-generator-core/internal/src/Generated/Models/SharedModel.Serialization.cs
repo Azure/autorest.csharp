@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
 {
     public partial class SharedModel
     {
-        internal static SharedModel DeserializeSharedModel(JsonElement element)
+        internal static SharedModel DeserializeSharedModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

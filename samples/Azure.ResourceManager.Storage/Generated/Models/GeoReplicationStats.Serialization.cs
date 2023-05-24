@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     public partial class GeoReplicationStats
     {
-        internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element)
+        internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

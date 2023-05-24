@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
     public partial class NonResourceChild
     {
-        internal static NonResourceChild DeserializeNonResourceChild(JsonElement element)
+        internal static NonResourceChild DeserializeNonResourceChild(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

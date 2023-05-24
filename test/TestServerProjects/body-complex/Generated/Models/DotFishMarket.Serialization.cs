@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
     public partial class DotFishMarket
     {
-        internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
+        internal static DotFishMarket DeserializeDotFishMarket(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

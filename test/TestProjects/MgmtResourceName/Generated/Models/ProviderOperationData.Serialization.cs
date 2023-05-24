@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtResourceName.Models;
 
@@ -15,7 +16,7 @@ namespace MgmtResourceName
 {
     public partial class ProviderOperationData
     {
-        internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element)
+        internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

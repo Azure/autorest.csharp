@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
     internal partial class DiskEncryptionSetList
     {
-        internal static DiskEncryptionSetList DeserializeDiskEncryptionSetList(JsonElement element)
+        internal static DiskEncryptionSetList DeserializeDiskEncryptionSetList(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

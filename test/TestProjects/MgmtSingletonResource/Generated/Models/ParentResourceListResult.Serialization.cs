@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models
 {
     internal partial class ParentResourceListResult
     {
-        internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element)
+        internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

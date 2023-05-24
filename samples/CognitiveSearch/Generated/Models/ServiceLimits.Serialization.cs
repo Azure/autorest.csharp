@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class ServiceLimits
     {
-        internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
+        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

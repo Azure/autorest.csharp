@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
     public partial class VaultValidationResult
     {
-        internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element)
+        internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

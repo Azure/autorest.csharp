@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtPagination;
 
 namespace MgmtPagination.Models
 {
     internal partial class PageSizeInt64ModelListResult
     {
-        internal static PageSizeInt64ModelListResult DeserializePageSizeInt64ModelListResult(JsonElement element)
+        internal static PageSizeInt64ModelListResult DeserializePageSizeInt64ModelListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

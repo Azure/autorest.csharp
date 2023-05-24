@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
     public partial class TableResponse
     {
-        internal static TableResponse DeserializeTableResponse(JsonElement element)
+        internal static TableResponse DeserializeTableResponse(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

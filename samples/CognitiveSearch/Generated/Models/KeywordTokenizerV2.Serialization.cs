@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class KeywordTokenizerV2 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxTokenLength))
@@ -27,7 +30,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element)
+        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

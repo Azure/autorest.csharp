@@ -7,12 +7,15 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
     public partial class NetworkInterfaceReference : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -31,7 +34,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element)
+        internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

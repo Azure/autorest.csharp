@@ -9,13 +9,16 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(BaseClassWithExtensibleEnumDiscriminatorConverter))]
     public partial class BaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -23,7 +26,7 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static BaseClassWithExtensibleEnumDiscriminator DeserializeBaseClassWithExtensibleEnumDiscriminator(JsonElement element)
+        internal static BaseClassWithExtensibleEnumDiscriminator DeserializeBaseClassWithExtensibleEnumDiscriminator(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

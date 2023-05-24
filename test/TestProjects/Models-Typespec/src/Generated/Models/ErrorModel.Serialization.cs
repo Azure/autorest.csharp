@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsInCadl.Models
 {
     public partial class ErrorModel
     {
-        internal static ErrorModel DeserializeErrorModel(JsonElement element)
+        internal static ErrorModel DeserializeErrorModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

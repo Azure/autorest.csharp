@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using MgmtCustomizations.Models;
 
@@ -14,7 +15,9 @@ namespace MgmtCustomizations
 {
     public partial class PetStoreData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
@@ -25,7 +28,7 @@ namespace MgmtCustomizations
             writer.WriteEndObject();
         }
 
-        internal static PetStoreData DeserializePetStoreData(JsonElement element)
+        internal static PetStoreData DeserializePetStoreData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

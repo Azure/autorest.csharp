@@ -230,7 +230,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetTxtRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetTxtRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetTxtRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetTxtRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

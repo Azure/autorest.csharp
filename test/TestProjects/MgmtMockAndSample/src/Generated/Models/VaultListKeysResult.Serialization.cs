@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
     internal partial class VaultListKeysResult
     {
-        internal static VaultListKeysResult DeserializeVaultListKeysResult(JsonElement element)
+        internal static VaultListKeysResult DeserializeVaultListKeysResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -222,7 +222,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<Memory> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtResourceName
         public virtual Pageable<Memory> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

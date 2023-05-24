@@ -227,7 +227,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

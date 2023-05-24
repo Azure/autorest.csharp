@@ -8,13 +8,16 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
     public partial class MhsmNetworkRuleSet : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bypass))
@@ -50,7 +53,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element)
+        internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

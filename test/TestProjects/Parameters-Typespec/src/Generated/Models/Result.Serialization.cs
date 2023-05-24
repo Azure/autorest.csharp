@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ParametersCadl.Models
 {
     public partial class Result
     {
-        internal static Result DeserializeResult(JsonElement element)
+        internal static Result DeserializeResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

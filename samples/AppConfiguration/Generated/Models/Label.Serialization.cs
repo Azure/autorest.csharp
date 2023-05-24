@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AppConfiguration.Models
 {
     public partial class Label
     {
-        internal static Label DeserializeLabel(JsonElement element)
+        internal static Label DeserializeLabel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

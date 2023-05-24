@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class DedicatedHostGroupListResult
     {
-        internal static DedicatedHostGroupListResult DeserializeDedicatedHostGroupListResult(JsonElement element)
+        internal static DedicatedHostGroupListResult DeserializeDedicatedHostGroupListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

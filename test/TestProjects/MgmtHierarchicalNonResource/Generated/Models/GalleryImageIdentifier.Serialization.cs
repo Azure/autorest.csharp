@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     public partial class GalleryImageIdentifier
     {
-        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element)
+        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

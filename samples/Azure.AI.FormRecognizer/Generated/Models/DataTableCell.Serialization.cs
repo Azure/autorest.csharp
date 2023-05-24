@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     public partial class DataTableCell
     {
-        internal static DataTableCell DeserializeDataTableCell(JsonElement element)
+        internal static DataTableCell DeserializeDataTableCell(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

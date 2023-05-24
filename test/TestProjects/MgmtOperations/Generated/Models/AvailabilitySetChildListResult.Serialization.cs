@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
     internal partial class AvailabilitySetChildListResult
     {
-        internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element)
+        internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

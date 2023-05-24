@@ -129,7 +129,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>

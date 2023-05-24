@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
     public partial class ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(SomeProperty))
@@ -93,7 +96,7 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties DeserializeClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(JsonElement element)
+        internal static ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties DeserializeClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

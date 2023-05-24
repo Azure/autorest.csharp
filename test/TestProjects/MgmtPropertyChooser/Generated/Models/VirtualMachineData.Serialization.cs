@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser.Models;
@@ -16,7 +17,9 @@ namespace MgmtPropertyChooser
 {
     public partial class VirtualMachineData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
@@ -104,7 +107,7 @@ namespace MgmtPropertyChooser
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
+        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

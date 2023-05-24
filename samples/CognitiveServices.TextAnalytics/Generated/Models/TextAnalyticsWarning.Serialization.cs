@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class TextAnalyticsWarning
     {
-        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element)
+        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

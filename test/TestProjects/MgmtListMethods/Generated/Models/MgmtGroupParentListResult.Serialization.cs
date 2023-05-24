@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
     internal partial class MgmtGroupParentListResult
     {
-        internal static MgmtGroupParentListResult DeserializeMgmtGroupParentListResult(JsonElement element)
+        internal static MgmtGroupParentListResult DeserializeMgmtGroupParentListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

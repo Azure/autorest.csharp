@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtExpandResourceTypes.Models;
@@ -16,7 +17,9 @@ namespace MgmtExpandResourceTypes
 {
     public partial class ZoneData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Etag))
@@ -83,7 +86,7 @@ namespace MgmtExpandResourceTypes
             writer.WriteEndObject();
         }
 
-        internal static ZoneData DeserializeZoneData(JsonElement element)
+        internal static ZoneData DeserializeZoneData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

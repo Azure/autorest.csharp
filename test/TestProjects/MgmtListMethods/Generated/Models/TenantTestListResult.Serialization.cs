@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
     internal partial class TenantTestListResult
     {
-        internal static TenantTestListResult DeserializeTenantTestListResult(JsonElement element)
+        internal static TenantTestListResult DeserializeTenantTestListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

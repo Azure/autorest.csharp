@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
     public partial class User
     {
-        internal static User DeserializeUser(JsonElement element)
+        internal static User DeserializeUser(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

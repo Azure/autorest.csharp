@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     public partial class ImagePurchasePlan
     {
-        internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element)
+        internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

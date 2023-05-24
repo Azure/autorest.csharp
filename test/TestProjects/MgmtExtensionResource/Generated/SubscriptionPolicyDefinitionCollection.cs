@@ -230,7 +230,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

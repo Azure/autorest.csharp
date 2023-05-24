@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
     public partial class ReadonlyModel
     {
-        internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element)
+        internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

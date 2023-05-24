@@ -8,13 +8,16 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering
 {
     public partial class VirtualMachineScaleSetData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Zones))
@@ -43,7 +46,7 @@ namespace MgmtParamOrdering
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
+        internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

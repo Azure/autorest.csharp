@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace httpInfrastructure.Models
 {
     public partial class MyException
     {
-        internal static MyException DeserializeMyException(JsonElement element)
+        internal static MyException DeserializeMyException(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

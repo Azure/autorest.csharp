@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
     internal partial class DeploymentOperationsListResult
     {
-        internal static DeploymentOperationsListResult DeserializeDeploymentOperationsListResult(JsonElement element)
+        internal static DeploymentOperationsListResult DeserializeDeploymentOperationsListResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

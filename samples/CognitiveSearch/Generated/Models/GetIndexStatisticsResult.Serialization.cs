@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
     public partial class GetIndexStatisticsResult
     {
-        internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
+        internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -222,7 +222,7 @@ namespace MgmtNoTypeReplacement
         public virtual AsyncPageable<NoTypeReplacementModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtNoTypeReplacement
         public virtual Pageable<NoTypeReplacementModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

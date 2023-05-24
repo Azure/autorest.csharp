@@ -8,12 +8,13 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
     public partial struct OutputAdditionalPropertiesModelStruct
     {
-        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element)
+        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, SerializableOptions options = default)
         {
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
