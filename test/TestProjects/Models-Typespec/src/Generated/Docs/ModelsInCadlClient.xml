@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="GetOutputDiscriminatorModelAsync(CancellationToken)">
+<example>
+This sample shows how to call GetOutputDiscriminatorModelAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var result = await client.GetOutputDiscriminatorModelAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetOutputDiscriminatorModel(CancellationToken)">
+<example>
+This sample shows how to call GetOutputDiscriminatorModel.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var result = client.GetOutputDiscriminatorModel();
+]]></code>
+</example>
+    </member>
+    <member name="GetOutputDiscriminatorModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetOutputDiscriminatorModelAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetOutputDiscriminatorModel(RequestContext)">
+<example>
+This sample shows how to call GetOutputDiscriminatorModel with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+Response response = client.GetOutputDiscriminatorModel(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
     <member name="InputToRoundTripAsync(InputModel,CancellationToken)">
 <example>
 This sample shows how to call InputToRoundTripAsync with required parameters.
