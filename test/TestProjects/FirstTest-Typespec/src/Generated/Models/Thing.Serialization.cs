@@ -35,39 +35,18 @@ namespace TypeSpecFirstTest.Models
             }
             if (Optional.IsDefined(OptionalLiteralInt))
             {
-                if (OptionalLiteralInt != null)
-                {
-                    writer.WritePropertyName("optionalLiteralInt"u8);
-                    writer.WriteNumberValue(OptionalLiteralInt.Value);
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralInt");
-                }
+                writer.WritePropertyName("optionalLiteralInt"u8);
+                writer.WriteNumberValue(OptionalLiteralInt.Value);
             }
             if (Optional.IsDefined(OptionalLiteralDouble))
             {
-                if (OptionalLiteralDouble != null)
-                {
-                    writer.WritePropertyName("optionalLiteralDouble"u8);
-                    writer.WriteNumberValue(OptionalLiteralDouble.Value);
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralDouble");
-                }
+                writer.WritePropertyName("optionalLiteralDouble"u8);
+                writer.WriteNumberValue(OptionalLiteralDouble.Value);
             }
             if (Optional.IsDefined(OptionalLiteralBool))
             {
-                if (OptionalLiteralBool != null)
-                {
-                    writer.WritePropertyName("optionalLiteralBool"u8);
-                    writer.WriteBooleanValue(OptionalLiteralBool.Value);
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralBool");
-                }
+                writer.WritePropertyName("optionalLiteralBool"u8);
+                writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);

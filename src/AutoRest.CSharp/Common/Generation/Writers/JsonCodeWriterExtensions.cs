@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -141,7 +142,9 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(DateTime) ||
                                  frameworkType == typeof(TimeSpan))
                         {
-                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
                             {
                                 writer.AppendRaw("WriteNumberValue");
                             }
@@ -187,6 +190,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I});");
                             return;
+                        }
+
+                        if (frameworkType == typeof(TimeSpan))
+                        {
+                            if (valueSerialization.Format == SerializationFormat.Duration_Seconds)
+                            {
+                                writer.Append($"(Convert.ToInt32({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
+                            else if (valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
+                            {
+                                writer.Append($"(Convert.ToDouble({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
                         }
 
                         writer.Append($"({name:I}")
@@ -688,6 +707,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            if (frameworkType == typeof(TimeSpan))
+            {
+                if (format == SerializationFormat.Duration_Seconds)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
+                } else if (format == SerializationFormat.Duration_Seconds_Float)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
+                }
+            }
+
             if (IsCustomJsonConverterAdded(frameworkType))
             {
                 return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{serializationType}>({element}.GetRawText())";
@@ -786,6 +816,8 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTime_RFC1123 => "R",
+            SerializationFormat.DateTime_RFC3339 => "O",
+            SerializationFormat.DateTime_RFC7231 => "R",
             SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
@@ -793,6 +825,8 @@ namespace AutoRest.CSharp.Generation.Writers
             SerializationFormat.Bytes_Base64 => "D",
             SerializationFormat.Duration_ISO8601 => "P",
             SerializationFormat.Duration_Constant => "c",
+            SerializationFormat.Duration_Seconds => "%s",
+            SerializationFormat.Duration_Seconds_Float => "s\\.fff",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };

@@ -24,15 +24,8 @@ namespace Spread.Models
             }
             if (Optional.IsDefined(Age))
             {
-                if (Age != null)
-                {
-                    writer.WritePropertyName("age"u8);
-                    writer.WriteNumberValue(Age.Value);
-                }
-                else
-                {
-                    writer.WriteNull("age");
-                }
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(Age.Value);
             }
             writer.WritePropertyName("items"u8);
             writer.WriteStartArray();
