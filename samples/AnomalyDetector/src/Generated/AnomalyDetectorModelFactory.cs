@@ -139,7 +139,7 @@ namespace AnomalyDetector.Models
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
         /// <returns> A new <see cref="Models.MultivariateDetectionResult"/> instance for mocking. </returns>
-        public static MultivariateDetectionResult MultivariateDetectionResult(string resultId = null, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null)
+        public static MultivariateDetectionResult MultivariateDetectionResult(Guid resultId = default, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null)
         {
             results ??= new List<AnomalyState>();
 
@@ -264,7 +264,7 @@ namespace AnomalyDetector.Models
         /// information.
         /// </param>
         /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
-        public static AnomalyDetectionModel AnomalyDetectionModel(string modelId = null, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
+        public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
         {
             return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo);
         }
