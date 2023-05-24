@@ -156,6 +156,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
+            // TODO -- come up a way to get the value type from customized code
+            // when creating field from existing member (customized code), here we use the same type as its value type.
+            // for 2 reasons:
+            // 1. it works
+            // 2. we do not really have an efficiant way to get the value type of a property because we really cannot relying on the information in the schema when you have to do a customization, and from the csharp code, there is a lot of information we cannot get.
             return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty);
         }
 
