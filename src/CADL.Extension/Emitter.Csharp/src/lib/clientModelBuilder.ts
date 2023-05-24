@@ -217,7 +217,7 @@ export function createModelForService(
         }
     }
 
-    const usages = getUsages(sdkContext, convenienceOperations);
+    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
 

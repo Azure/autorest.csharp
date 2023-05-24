@@ -778,7 +778,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -786,7 +786,7 @@ namespace TypeSpecFirstTest
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
         /// <summary> Return hi again. </summary>
@@ -797,7 +797,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
-        public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -805,7 +805,7 @@ namespace TypeSpecFirstTest
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = HelloAgain(p2, p1, action.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
         /// <summary>

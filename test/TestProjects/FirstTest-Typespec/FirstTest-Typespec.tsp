@@ -91,8 +91,8 @@ model Thing {
     @doc("required literal int")
     requiredLiteralInt: 123;
 
-    @doc("required literal double")
-    requiredLiteralDouble: 1.23;
+    @doc("required literal float")
+    requiredLiteralFloat: 1.23;
 
     @doc("required literal bool")
     requiredLiteralBool: false;
@@ -103,8 +103,8 @@ model Thing {
     @doc("optional literal int")
     optionalLiteralInt?: 456;
 
-    @doc("optional literal double")
-    optionalLiteralDouble?: 4.56;
+    @doc("optional literal float")
+    optionalLiteralFloat?: 4.56;
 
     @doc("optional literal bool")
     optionalLiteralBool?: true;
@@ -227,7 +227,7 @@ namespace Hello.Demo2 {
         @body action: RoundTripModel,
         @header contentType: "text/plain",
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/noContentType")
     @doc("Return hi again")
@@ -237,7 +237,7 @@ namespace Hello.Demo2 {
         @header p1: string,
         @body action: RoundTripModel,
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/demoHi")
     @doc("Return hi in demo2")

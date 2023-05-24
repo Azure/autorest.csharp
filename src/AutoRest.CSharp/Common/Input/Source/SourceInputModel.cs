@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Input.Source
         private readonly INamedTypeSymbol _modelAttribute;
         private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
+        private readonly INamedTypeSymbol _serializationAttribute;
+        private readonly INamedTypeSymbol _serializationHooksAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
         public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
@@ -27,6 +29,8 @@ namespace AutoRest.CSharp.Input.Source
             _existingCompilation = existingCompilation;
 
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
+            _serializationAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberSerializationAttribute).FullName!)!;
+            _serializationHooksAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberSerializationHooksAttribute).FullName!)!;
             _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
             _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
             _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
@@ -56,7 +60,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
         {
-            return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
+            return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, _serializationAttribute, _serializationHooksAttribute, symbol);
         }
 
         internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
@@ -126,20 +130,6 @@ namespace AutoRest.CSharp.Input.Source
 
                     type = type.BaseType;
                 }
-            }
-
-            return name != null;
-        }
-
-        internal static bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
-        {
-            name = null;
-
-            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
-
-            if (attribute?.ConstructorArguments.Length > 0)
-            {
-                name = attribute.ConstructorArguments[0].Value as string;
             }
 
             return name != null;

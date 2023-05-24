@@ -23,7 +23,7 @@ namespace ModelsInCadl.Models
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
             Optional<string> optionalReadonlyString = default;
-            Optional<int?> optionalReadonlyInt = default;
+            Optional<int> optionalReadonlyInt = default;
             DerivedModel requiredReadonlyModel = default;
             Optional<DerivedModel> optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;
@@ -65,7 +65,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalReadonlyInt = null;
                         continue;
                     }
                     optionalReadonlyInt = property.Value.GetInt32();
