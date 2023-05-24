@@ -8,15 +8,47 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null)
+    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CSharpType ValueType, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null)
     {
         public string Name => Declaration.ActualName;
         public string Accessibility => (Modifiers & FieldModifiers.Public) > 0 ? "public" : "internal";
 
-        public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, bool writeAsProperty = false) : this(null, modifiers, type, name, SerializationFormat.Default, writeAsProperty: writeAsProperty) { }
-        public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, FormattableString? defaultValue, SerializationFormat serializationFormat, bool writeAsProperty = false) : this(null, modifiers, type, name, defaultValue, false, serializationFormat, writeAsProperty: writeAsProperty) { }
-        public FieldDeclaration(FormattableString? description, FieldModifiers modifiers, CSharpType type, string name, SerializationFormat serializationFormat, bool writeAsProperty = false) : this(description, modifiers, type, new CodeWriterDeclaration(name), null, false, serializationFormat, false, writeAsProperty) { }
-        public FieldDeclaration(FormattableString? description, FieldModifiers modifiers, CSharpType type, string name, FormattableString? defaultValue, bool isRequired, SerializationFormat serializationFormat, bool isField = false, bool writeAsProperty = false) : this(description, modifiers, type, new CodeWriterDeclaration(name), defaultValue, isRequired, serializationFormat, isField, writeAsProperty) { }
+        public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, bool writeAsProperty = false)
+            : this(description: null,
+                  modifiers: modifiers,
+                  type: type,
+                  name: name,
+                  serializationFormat: SerializationFormat.Default,
+                  writeAsProperty: writeAsProperty)
+        { }
+
+        public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, FormattableString? defaultValue, SerializationFormat serializationFormat, bool writeAsProperty = false)
+            : this(Description: null,
+                  Modifiers: modifiers,
+                  Type: type,
+                  ValueType: type,
+                  Declaration: new CodeWriterDeclaration(name),
+                  DefaultValue: defaultValue,
+                  IsRequired: false,
+                  SerializationFormat: serializationFormat,
+                  IsField: false,
+                  WriteAsProperty: writeAsProperty,
+                  GetterModifiers: null,
+                  SetterModifiers: null)
+        { }
+
+        public FieldDeclaration(FormattableString? description, FieldModifiers modifiers, CSharpType type, string name, SerializationFormat serializationFormat, bool writeAsProperty = false)
+            : this(Description: description,
+                  Modifiers: modifiers,
+                  Type: type,
+                  ValueType: type,
+                  Declaration: new CodeWriterDeclaration(name),
+                  DefaultValue: null,
+                  IsRequired: false,
+                  SerializationFormat: serializationFormat,
+                  IsField: false,
+                  WriteAsProperty: writeAsProperty)
+        { }
     }
 
     [Flags]

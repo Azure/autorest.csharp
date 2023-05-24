@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
                   schemaProperty: null,
                   isRequired: field.IsRequired,
+                  valueType: field.ValueType,
                   inputModelProperty: inputModelProperty,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
