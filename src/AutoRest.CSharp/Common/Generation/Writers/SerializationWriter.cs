@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -183,7 +184,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
         {
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
+            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element, {typeof(SerializableOptions)} options = default)"))
             {
                 if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
                 {
@@ -225,7 +226,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
         {
-            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
+            writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({typeof(IUtf8JsonSerializable)})this).Write(writer, new {typeof(SerializableOptions)}());");
+            writer.Line();
+
+            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer, {typeof(SerializableOptions)} options)"))
             {
                 writer.ToSerializeCall(jsonSerialization);
             }

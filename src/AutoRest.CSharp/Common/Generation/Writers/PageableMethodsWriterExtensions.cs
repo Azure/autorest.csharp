@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
                 // See also PageableHelpers.ParseResponseForBinaryData
-                return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
+                return $"(e, o) => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
             if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var deserializeImplementation = JsonCodeWriterExtensions.GetDeserializeValueFormattable($"e", pageItemType);
-            return $"e => {deserializeImplementation}";
+            return $"(e, o) => {deserializeImplementation}";
         }
     }
 }
