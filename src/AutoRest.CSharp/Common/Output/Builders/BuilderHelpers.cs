@@ -63,6 +63,8 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
+            ConstantSchema constantSchema => GetSerializationFormat(constantSchema.ValueType), // forward the constantSchema to its underlying type
+
             ByteArraySchema byteArraySchema => byteArraySchema.Format switch
                 {
                     ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,

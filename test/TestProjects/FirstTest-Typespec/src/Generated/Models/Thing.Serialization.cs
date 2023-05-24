@@ -21,27 +21,27 @@ namespace TypeSpecFirstTest.Models
             writer.WritePropertyName("requiredUnion"u8);
             writer.WriteStringValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteralString"u8);
-            writer.WriteStringValue(RequiredLiteralString);
+            writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
-            writer.WriteNumberValue(RequiredLiteralInt);
-            writer.WritePropertyName("requiredLiteralDouble"u8);
-            writer.WriteNumberValue(RequiredLiteralDouble);
+            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
+            writer.WritePropertyName("requiredLiteralFloat"u8);
+            writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
             if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
-                writer.WriteStringValue(OptionalLiteralString);
+                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
             if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
-                writer.WriteNumberValue(OptionalLiteralInt.Value);
+                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalLiteralDouble))
+            if (Optional.IsDefined(OptionalLiteralFloat))
             {
-                writer.WritePropertyName("optionalLiteralDouble"u8);
-                writer.WriteNumberValue(OptionalLiteralDouble.Value);
+                writer.WritePropertyName("optionalLiteralFloat"u8);
+                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
             if (Optional.IsDefined(OptionalLiteralBool))
             {
@@ -61,6 +61,14 @@ namespace TypeSpecFirstTest.Models
             }
             string name = default;
             string requiredUnion = default;
+            ThingRequiredLiteralString requiredLiteralString = default;
+            ThingRequiredLiteralInt requiredLiteralInt = default;
+            ThingRequiredLiteralFloat requiredLiteralFloat = default;
+            bool requiredLiteralBool = default;
+            Optional<ThingOptionalLiteralString> optionalLiteralString = default;
+            Optional<ThingOptionalLiteralInt> optionalLiteralInt = default;
+            Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
+            Optional<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -74,13 +82,69 @@ namespace TypeSpecFirstTest.Models
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("requiredLiteralString"u8))
+                {
+                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralInt"u8))
+                {
+                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralFloat"u8))
+                {
+                    requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralBool"u8))
+                {
+                    requiredLiteralBool = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralString"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralFloat"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
+                    continue;
+                }
+                if (property.NameEquals("optionalLiteralBool"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalLiteralBool = property.Value.GetBoolean();
+                    continue;
+                }
                 if (property.NameEquals("requiredBadDescription"u8))
                 {
                     requiredBadDescription = property.Value.GetString();
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredBadDescription);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

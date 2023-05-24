@@ -29,34 +29,57 @@ namespace TypeSpecFirstTest.Models
             RequiredBadDescription = requiredBadDescription;
         }
 
+        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription)
+        {
+            Name = name;
+            RequiredUnion = requiredUnion;
+            RequiredLiteralString = requiredLiteralString;
+            RequiredLiteralInt = requiredLiteralInt;
+            RequiredLiteralFloat = requiredLiteralFloat;
+            RequiredLiteralBool = requiredLiteralBool;
+            OptionalLiteralString = optionalLiteralString;
+            OptionalLiteralInt = optionalLiteralInt;
+            OptionalLiteralFloat = optionalLiteralFloat;
+            OptionalLiteralBool = optionalLiteralBool;
+            RequiredBadDescription = requiredBadDescription;
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary> required Union. </summary>
         public string RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
-        internal string RequiredLiteralString { get; } = "accept";
+        public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
         /// <summary> required literal int. </summary>
-        internal int RequiredLiteralInt { get; } = 123;
+        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
 
-        /// <summary> required literal double. </summary>
-        internal double RequiredLiteralDouble { get; } = 1.23;
+        /// <summary> required literal float. </summary>
+        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = ThingRequiredLiteralFloat._123;
 
         /// <summary> required literal bool. </summary>
-        internal bool RequiredLiteralBool { get; } = false;
+        public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        internal string OptionalLiteralString { get; } = "reject";
-
+        public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
         /// <summary> optional literal int. </summary>
-        internal int? OptionalLiteralInt { get; } = 456;
-
-        /// <summary> optional literal double. </summary>
-        internal double? OptionalLiteralDouble { get; } = 4.56;
-
+        public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
+        /// <summary> optional literal float. </summary>
+        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
         /// <summary> optional literal bool. </summary>
-        internal bool? OptionalLiteralBool { get; } = true;
-
+        public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }
     }

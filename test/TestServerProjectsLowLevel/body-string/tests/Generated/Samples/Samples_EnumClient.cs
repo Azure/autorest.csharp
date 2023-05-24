@@ -290,7 +290,7 @@ namespace body_string_LowLevel.Samples
 
             var data = new
             {
-                ColorConstant = "<ColorConstant>",
+                ColorConstant = "green-color",
             };
 
             Response response = client.PutReferencedConstant(RequestContent.Create(data));
@@ -306,7 +306,7 @@ namespace body_string_LowLevel.Samples
 
             var data = new
             {
-                ColorConstant = "<ColorConstant>",
+                ColorConstant = "green-color",
                 field1 = "<field1>",
             };
 
@@ -323,7 +323,7 @@ namespace body_string_LowLevel.Samples
 
             var data = new
             {
-                ColorConstant = "<ColorConstant>",
+                ColorConstant = "green-color",
             };
 
             Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -339,7 +339,7 @@ namespace body_string_LowLevel.Samples
 
             var data = new
             {
-                ColorConstant = "<ColorConstant>",
+                ColorConstant = "green-color",
                 field1 = "<field1>",
             };
 

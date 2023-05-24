@@ -15,12 +15,12 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputEnumType> Enums, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
     {
-        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: Array.Empty<string>(), Enums: Array.Empty<InputEnumType>(), Models: Array.Empty<InputModelType>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) {}
+        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: Array.Empty<string>(), Enums: Array.Empty<InputEnumType>(), Models: Array.Empty<InputModelType>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) { }
     }
 
     internal record InputAuth(InputApiKeyAuth? ApiKey, InputOAuth2Auth? OAuth2)
     {
-        public InputAuth() : this(null, null) {}
+        public InputAuth() : this(null, null) { }
     }
 
     internal record InputApiKeyAuth(string Name)
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOAuth2Auth(IReadOnlyCollection<string> Scopes)
     {
-        public InputOAuth2Auth() : this(Array.Empty<string>()) {}
+        public InputOAuth2Auth() : this(Array.Empty<string>()) { }
     }
 
     internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, bool Creatable, IReadOnlyList<InputParameter> Parameters, string? Parent)
@@ -167,42 +167,42 @@ namespace AutoRest.CSharp.Common.Input
     {
         public InputOperation? NextLinkOperation => NextLinkOperationRef?.Invoke() ?? null;
         public Func<InputOperation>? NextLinkOperationRef { get; init; }
-        public OperationPaging():this(null, null) { }
+        public OperationPaging() : this(null, null) { }
     }
 
     internal abstract record InputType(string Name, bool IsNullable = false) { }
 
     internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable = false) : InputType(Kind.ToString(), IsNullable)
     {
-        public static InputPrimitiveType AzureLocation { get; }      = new(InputTypeKind.AzureLocation);
-        public static InputPrimitiveType BinaryData { get; }         = new(InputTypeKind.BinaryData);
-        public static InputPrimitiveType Boolean { get; }            = new(InputTypeKind.Boolean);
-        public static InputPrimitiveType Bytes { get; }              = new(InputTypeKind.Bytes);
-        public static InputPrimitiveType BytesBase64Url { get; }     = new(InputTypeKind.BytesBase64Url);
-        public static InputPrimitiveType ContentType { get; }        = new(InputTypeKind.ContentType);
-        public static InputPrimitiveType Date { get; }               = new(InputTypeKind.Date);
-        public static InputPrimitiveType DateTime { get; }           = new(InputTypeKind.DateTime);
-        public static InputPrimitiveType DateTimeISO8601 { get; }    = new(InputTypeKind.DateTimeISO8601);
-        public static InputPrimitiveType DateTimeRFC1123 { get; }    = new(InputTypeKind.DateTimeRFC1123);
-        public static InputPrimitiveType DateTimeUnix { get; }       = new(InputTypeKind.DateTimeUnix);
-        public static InputPrimitiveType DurationISO8601 { get; }    = new(InputTypeKind.DurationISO8601);
-        public static InputPrimitiveType DurationConstant { get; }   = new(InputTypeKind.DurationConstant);
-        public static InputPrimitiveType ETag { get; }               = new(InputTypeKind.ETag);
-        public static InputPrimitiveType Float32 { get; }            = new(InputTypeKind.Float32);
-        public static InputPrimitiveType Float64 { get; }            = new(InputTypeKind.Float64);
-        public static InputPrimitiveType Float128 { get; }           = new(InputTypeKind.Float128);
-        public static InputPrimitiveType Guid { get; }               = new(InputTypeKind.Guid);
-        public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
-        public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
-        public static InputPrimitiveType IPAddress { get; }          = new(InputTypeKind.IPAddress);
-        public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
-        public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
+        public static InputPrimitiveType AzureLocation { get; } = new(InputTypeKind.AzureLocation);
+        public static InputPrimitiveType BinaryData { get; } = new(InputTypeKind.BinaryData);
+        public static InputPrimitiveType Boolean { get; } = new(InputTypeKind.Boolean);
+        public static InputPrimitiveType Bytes { get; } = new(InputTypeKind.Bytes);
+        public static InputPrimitiveType BytesBase64Url { get; } = new(InputTypeKind.BytesBase64Url);
+        public static InputPrimitiveType ContentType { get; } = new(InputTypeKind.ContentType);
+        public static InputPrimitiveType Date { get; } = new(InputTypeKind.Date);
+        public static InputPrimitiveType DateTime { get; } = new(InputTypeKind.DateTime);
+        public static InputPrimitiveType DateTimeISO8601 { get; } = new(InputTypeKind.DateTimeISO8601);
+        public static InputPrimitiveType DateTimeRFC1123 { get; } = new(InputTypeKind.DateTimeRFC1123);
+        public static InputPrimitiveType DateTimeUnix { get; } = new(InputTypeKind.DateTimeUnix);
+        public static InputPrimitiveType DurationISO8601 { get; } = new(InputTypeKind.DurationISO8601);
+        public static InputPrimitiveType DurationConstant { get; } = new(InputTypeKind.DurationConstant);
+        public static InputPrimitiveType ETag { get; } = new(InputTypeKind.ETag);
+        public static InputPrimitiveType Float32 { get; } = new(InputTypeKind.Float32);
+        public static InputPrimitiveType Float64 { get; } = new(InputTypeKind.Float64);
+        public static InputPrimitiveType Float128 { get; } = new(InputTypeKind.Float128);
+        public static InputPrimitiveType Guid { get; } = new(InputTypeKind.Guid);
+        public static InputPrimitiveType Int32 { get; } = new(InputTypeKind.Int32);
+        public static InputPrimitiveType Int64 { get; } = new(InputTypeKind.Int64);
+        public static InputPrimitiveType IPAddress { get; } = new(InputTypeKind.IPAddress);
+        public static InputPrimitiveType Object { get; } = new(InputTypeKind.Object);
+        public static InputPrimitiveType RequestMethod { get; } = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
-        public static InputPrimitiveType ResourceType { get; }       = new(InputTypeKind.ResourceType);
-        public static InputPrimitiveType Stream { get; }             = new(InputTypeKind.Stream);
-        public static InputPrimitiveType String { get; }             = new(InputTypeKind.String);
-        public static InputPrimitiveType Time { get; }               = new(InputTypeKind.Time);
-        public static InputPrimitiveType Uri { get; }                = new(InputTypeKind.Uri);
+        public static InputPrimitiveType ResourceType { get; } = new(InputTypeKind.ResourceType);
+        public static InputPrimitiveType Stream { get; } = new(InputTypeKind.Stream);
+        public static InputPrimitiveType String { get; } = new(InputTypeKind.String);
+        public static InputPrimitiveType Time { get; } = new(InputTypeKind.Time);
+        public static InputPrimitiveType Uri { get; } = new(InputTypeKind.Uri);
 
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
@@ -213,8 +213,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null, SerializationFormat SerializationFormat = SerializationFormat.Default)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, SerializationFormat SerializationFormat = SerializationFormat.Default)
     {
+        public FormattableString? DefaultValue { get; init; }
     }
 
     internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable = false) : InputType(Name, IsNullable);

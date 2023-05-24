@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
+using YamlDotNet.Core.Tokens;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -834,15 +835,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.Uri => "\"http://localhost:3000\"",
                 _ => "new {}"
             },
-            InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
+            InputLiteralType literalType => ComposeRequestContentForLiteral(literalType),
+            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
+            _ => "new {}"
+        };
+
+        private static string ComposeRequestContentForLiteral(InputLiteralType literalType)
+        {
+            var kind = literalType.LiteralValueType switch
+            {
+                InputPrimitiveType primivateType => primivateType.Kind,
+                InputEnumType enumType => enumType.EnumValueType.Kind,
+                _ => throw new InvalidOperationException($"Unsupported type for literal {literalType}")
+            };
+            return kind switch
             {
                 InputTypeKind.String => $"\"{literalType.Value}\"",
                 InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
                 _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
-            },
-            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
-            _ => "new {}"
-        };
+            };
+        }
 
         private string ComposeCSharpType(bool allProperties, CSharpType type, string? propertyDescription, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
         {

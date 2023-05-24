@@ -152,7 +152,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            List<JsonPropertySerialization> result = new List<JsonPropertySerialization>();
             foreach (var objType in EnumerateHierarchy())
             {
                 foreach (var property in objType.Properties)
@@ -161,59 +160,27 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
+                    var paramName = declaredName.ToVariableName();
+                    var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
                     var optionalViaNullability = !inputModelProperty.IsRequired && !inputModelProperty.Type.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false, property.InputModelProperty.SerializationFormat);
-                    var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
-                    //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
-                    //or not it indicates if we should serialize this or not which is different.  Lists are readonly
-                    //in the sense that the don't have setters but they aren't necessarily always readonly in the spec and therefore
-                    //should be serialized based on the spec not based on the presence of a setter
-                    bool shouldSkipSerialization = ShouldSkipSerialization(property);
-                    result.Add(new JsonPropertySerialization(
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, inputModelProperty.SerializationFormat);
+
+                    yield return new JsonPropertySerialization(
                         paramName,
                         declaredName,
                         property.SerializationMapping?.SerializationPath?.Last() ?? serializedName,
                         property.Declaration.Type,
                         property.ValueType,
                         valueSerialization,
-                        property.IsRequired,
-                        shouldSkipSerialization,
-                        ShouldSkipDeserialization(property),
+                        inputModelProperty.IsRequired,
+                        inputModelProperty.IsReadOnly,
+                        false,
                         optionalViaNullability,
                         serializationHook: property.SerializationMapping?.SerializationHook,
-                        deserializationHook: property.SerializationMapping?.DeserializationHook));
+                        deserializationHook: property.SerializationMapping?.DeserializationHook);
                 }
             }
-            return result;
         }
-
-        private bool ShouldSkipSerialization(ObjectTypeProperty property)
-        {
-            if (property.InputModelProperty!.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty.Type is InputLiteralType)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty!.IsReadOnly)
-            {
-                return true;
-            }
-
-            if (property.Declaration.Type.IsCollectionType())
-            {
-                return _inputModel.Usage is InputModelTypeUsage.Output;
-            }
-
-            return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
-        }
-
-        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
         {

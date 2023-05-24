@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -72,14 +73,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                if (inputModelProperty.Type is InputLiteralType)
-                {
-                    continue; // literal property does not show up in the constructor parameter list
-                }
                 var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
+                // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter);
-                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
+                // only required + not readonly + not literal property could get into the public ctor
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);
                 }
@@ -126,7 +125,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+            var propertyShouldOmitSetter = inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
+                (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
+                propertyIsCollection || // a property will not have setter when it is a collection
+                propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
+                propertyIsOptionalInOutputModel; // a property will explicitly omit its setter when it is useless
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
             FieldModifiers fieldModifiers;
@@ -138,9 +141,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                fieldModifiers = propertyIsLiteralType ? Internal : Public;
+                fieldModifiers = Public;
             }
-            if (propertyIsReadOnly)
+            if (propertyShouldOmitSetter)
                 fieldModifiers |= ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
@@ -212,12 +215,21 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, InputModelProperty inputModelProperty)
         {
+            // if the default value is set somewhere else, we just return it.
             if (inputModelProperty.DefaultValue != null)
-            {
                 return inputModelProperty.DefaultValue;
+
+            // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
+            if (inputModelProperty.Type is not InputLiteralType literalType || !inputModelProperty.IsRequired)
+            {
+                return null;
             }
 
-            return null;
+            var constant = literalType.Value != null ?
+                        BuilderHelpers.ParseConstant(literalType.Value, propertyType) :
+                        Constant.NewInstanceOf(propertyType);
+
+            return constant.GetConstantFormattable();
         }
     }
 }
