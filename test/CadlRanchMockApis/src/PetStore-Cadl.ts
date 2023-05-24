@@ -52,3 +52,17 @@ Scenarios.PetStore_GetFirstPet = passOnSuccess(
     };
   }),
 );
+
+Scenarios.PetStore_GetFish = passOnSuccess(
+  mockapi.get("/pets/fish", (req) => {
+    req.expect.containsQueryParam("kind", "shark");
+    return {
+      status: 200,
+      body: json({
+        kind: "shark",
+        size: 100,
+        bite: "I can bite"
+      }),
+    };
+  }),
+);
