@@ -30,51 +30,23 @@ namespace TypeSpecFirstTest.Models
             writer.WriteBooleanValue(RequiredLiteralBool);
             if (Optional.IsDefined(OptionalLiteralString))
             {
-                if (OptionalLiteralString != null)
-                {
-                    writer.WritePropertyName("optionalLiteralString"u8);
-                    writer.WriteStringValue(OptionalLiteralString.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralString");
-                }
+                writer.WritePropertyName("optionalLiteralString"u8);
+                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
             if (Optional.IsDefined(OptionalLiteralInt))
             {
-                if (OptionalLiteralInt != null)
-                {
-                    writer.WritePropertyName("optionalLiteralInt"u8);
-                    writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralInt");
-                }
+                writer.WritePropertyName("optionalLiteralInt"u8);
+                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
             if (Optional.IsDefined(OptionalLiteralFloat))
             {
-                if (OptionalLiteralFloat != null)
-                {
-                    writer.WritePropertyName("optionalLiteralFloat"u8);
-                    writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralFloat");
-                }
+                writer.WritePropertyName("optionalLiteralFloat"u8);
+                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
             if (Optional.IsDefined(OptionalLiteralBool))
             {
-                if (OptionalLiteralBool != null)
-                {
-                    writer.WritePropertyName("optionalLiteralBool"u8);
-                    writer.WriteBooleanValue(OptionalLiteralBool.Value);
-                }
-                else
-                {
-                    writer.WriteNull("optionalLiteralBool");
-                }
+                writer.WritePropertyName("optionalLiteralBool"u8);
+                writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
@@ -93,10 +65,10 @@ namespace TypeSpecFirstTest.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            Optional<ThingOptionalLiteralString?> optionalLiteralString = default;
-            Optional<ThingOptionalLiteralInt?> optionalLiteralInt = default;
-            Optional<ThingOptionalLiteralFloat?> optionalLiteralFloat = default;
-            Optional<bool?> optionalLiteralBool = default;
+            Optional<ThingOptionalLiteralString> optionalLiteralString = default;
+            Optional<ThingOptionalLiteralInt> optionalLiteralInt = default;
+            Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
+            Optional<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -134,7 +106,6 @@ namespace TypeSpecFirstTest.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalLiteralString = null;
                         continue;
                     }
                     optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
@@ -144,7 +115,6 @@ namespace TypeSpecFirstTest.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalLiteralInt = null;
                         continue;
                     }
                     optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
@@ -154,7 +124,6 @@ namespace TypeSpecFirstTest.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalLiteralFloat = null;
                         continue;
                     }
                     optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
@@ -164,7 +133,6 @@ namespace TypeSpecFirstTest.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalLiteralBool = null;
                         continue;
                     }
                     optionalLiteralBool = property.Value.GetBoolean();

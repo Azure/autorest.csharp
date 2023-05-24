@@ -943,6 +943,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } => "string (date & time)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC3339 } => "string (RFC3339 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC7231 } => "string (RFC7231 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",

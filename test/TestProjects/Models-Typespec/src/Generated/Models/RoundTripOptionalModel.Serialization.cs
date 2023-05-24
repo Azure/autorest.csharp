@@ -25,15 +25,8 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsDefined(OptionalInt))
             {
-                if (OptionalInt != null)
-                {
-                    writer.WritePropertyName("optionalInt"u8);
-                    writer.WriteNumberValue(OptionalInt.Value);
-                }
-                else
-                {
-                    writer.WriteNull("optionalInt");
-                }
+                writer.WritePropertyName("optionalInt"u8);
+                writer.WriteNumberValue(OptionalInt.Value);
             }
             if (Optional.IsCollectionDefined(OptionalStringList))
             {
@@ -77,27 +70,13 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
-                if (OptionalFixedStringEnum != null)
-                {
-                    writer.WritePropertyName("optionalFixedStringEnum"u8);
-                    writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("optionalFixedStringEnum");
-                }
+                writer.WritePropertyName("optionalFixedStringEnum"u8);
+                writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
             }
             if (Optional.IsDefined(OptionalExtensibleEnum))
             {
-                if (OptionalExtensibleEnum != null)
-                {
-                    writer.WritePropertyName("optionalExtensibleEnum"u8);
-                    writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("optionalExtensibleEnum");
-                }
+                writer.WritePropertyName("optionalExtensibleEnum"u8);
+                writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
             }
             if (Optional.IsCollectionDefined(OptionalIntRecord))
             {
@@ -134,27 +113,13 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsDefined(OptionalPlainDate))
             {
-                if (OptionalPlainDate != null)
-                {
-                    writer.WritePropertyName("optionalPlainDate"u8);
-                    writer.WriteStringValue(OptionalPlainDate.Value, "D");
-                }
-                else
-                {
-                    writer.WriteNull("optionalPlainDate");
-                }
+                writer.WritePropertyName("optionalPlainDate"u8);
+                writer.WriteStringValue(OptionalPlainDate.Value, "D");
             }
             if (Optional.IsDefined(OptionalPlainTime))
             {
-                if (OptionalPlainTime != null)
-                {
-                    writer.WritePropertyName("optionalPlainTime"u8);
-                    writer.WriteStringValue(OptionalPlainTime.Value, "T");
-                }
-                else
-                {
-                    writer.WriteNull("optionalPlainTime");
-                }
+                writer.WritePropertyName("optionalPlainTime"u8);
+                writer.WriteStringValue(OptionalPlainTime.Value, "T");
             }
             if (Optional.IsCollectionDefined(OptionalCollectionWithNullableIntElement))
             {
@@ -181,19 +146,19 @@ namespace ModelsInCadl.Models
                 return null;
             }
             Optional<string> optionalString = default;
-            Optional<int?> optionalInt = default;
+            Optional<int> optionalInt = default;
             Optional<IList<string>> optionalStringList = default;
             Optional<IList<int>> optionalIntList = default;
             Optional<IList<CollectionItem>> optionalModelCollection = default;
             Optional<DerivedModel> optionalModel = default;
             Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
-            Optional<FixedStringEnum?> optionalFixedStringEnum = default;
-            Optional<ExtensibleEnum?> optionalExtensibleEnum = default;
+            Optional<FixedStringEnum> optionalFixedStringEnum = default;
+            Optional<ExtensibleEnum> optionalExtensibleEnum = default;
             Optional<IDictionary<string, int>> optionalIntRecord = default;
             Optional<IDictionary<string, string>> optionalStringRecord = default;
             Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
-            Optional<DateTimeOffset?> optionalPlainDate = default;
-            Optional<TimeSpan?> optionalPlainTime = default;
+            Optional<DateTimeOffset> optionalPlainDate = default;
+            Optional<TimeSpan> optionalPlainTime = default;
             Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -206,7 +171,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalInt = null;
                         continue;
                     }
                     optionalInt = property.Value.GetInt32();
@@ -276,7 +240,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalFixedStringEnum = null;
                         continue;
                     }
                     optionalFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
@@ -286,7 +249,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalExtensibleEnum = null;
                         continue;
                     }
                     optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
@@ -338,7 +300,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalPlainDate = null;
                         continue;
                     }
                     optionalPlainDate = property.Value.GetDateTimeOffset("D");
@@ -348,7 +309,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalPlainTime = null;
                         continue;
                     }
                     optionalPlainTime = property.Value.GetTimeSpan("T");

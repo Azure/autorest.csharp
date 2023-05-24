@@ -819,6 +819,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
                 InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
                 InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
+                InputTypeKind.DateTimeRFC3339 => "\"2022-05-10T18:57:31.2311892Z\"",
+                InputTypeKind.DateTimeRFC7231 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
                 InputTypeKind.DateTimeUnix => "\"1652209051\"",
                 InputTypeKind.Float32 => "123.45f",
                 InputTypeKind.Float64 => "123.45d",
