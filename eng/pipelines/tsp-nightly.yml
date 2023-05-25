@@ -1,9 +1,94 @@
 trigger: none
 
 variables:
+  BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
+  OfficialBuildId: $(Build.BuildNumber)
   NugetSecurityAnalysisWarningLevel: 'none'
 
 jobs:
-  - template: build-and-test.yml
-    parameters:
-      IsTspDevVersionTest: true
+  - job: Build_and_Test
+    timeoutInMinutes: 120
+    pool:
+      name: azsdk-pool-mms-win-2022-general
+      vmImage: windows-2022
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - task: UseDotNet@2
+        displayName: 'Use .NET Core SDK'
+        retryCountOnTaskFailure: 3
+        inputs:
+          useGlobalJson: true
+          performMultiLevelLookup: true
+      - task: NodeTool@0
+        displayName: "Install Node 18.x"
+        inputs:
+          versionSpec: '18.x'
+      - script: |
+          npm install -g @typespec/compiler@next
+        displayName: "Install latest tsp compiler globally"
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npx @azure-tools/typespec-bump-deps@latest .\src\CADL.Extension\Emitter.Csharp\package.json && npx @azure-tools/typespec-bump-deps@latest .\package.json --add-npm-overrides
+        displayName: "Bump tsp versions"
+        workingDirectory: $(Build.SourcesDirectory)
+      - pwsh: ./eng/RemoveInstalledPackages.ps1
+        displayName: "Remove existing packages"
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npm install
+        displayName: "Install packages"
+        workingDirectory: $(Build.SourcesDirectory)
+      - pwsh: ./eng/CheckInstalledDevTsp.ps1
+        displayName: "Check tsp version"
+        workingDirectory: $(Build.SourcesDirectory)
+      - pwsh: ./eng/Generate.ps1
+        displayName: "Generate codes"
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npm run prettier
+        displayName: "Emitter format check"
+        workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+      - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
+        name: Package
+        displayName: 'Package'
+        workingDirectory: $(Build.SourcesDirectory)
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+      - task: Npm@1
+        displayName: 'Build CADL Ranch Mock Api project'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: $(Build.SourcesDirectory)/test/CadlRanchMockApis
+      - script: |
+          dotnet test AutoRest.CSharp.sln
+        displayName: "Test"
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          dotnet test AutoRest.CSharp.sln -c Release
+        displayName: "Test Release Configuration"
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0
+        workingDirectory: $(Build.SourcesDirectory)
+      - task: Npm@1
+        displayName: 'Build CADL csharp emitter'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+      - pwsh: ./eng/EmitterGenerationCheck.ps1 -DiffCheck $false
+        displayName: 'Generate Emitter Codes'
+        workingDirectory: $(Build.SourcesDirectory)
+      - script: |
+          npm run test --prefix src/CADL.Extension/Emitter.Csharp
+        displayName: 'Emitter Unit Test'
+        workingDirectory: $(Build.SourcesDirectory)
