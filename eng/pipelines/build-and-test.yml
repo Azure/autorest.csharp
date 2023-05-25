@@ -37,7 +37,7 @@ jobs:
             npm install
           displayName: "Install packages"
           workingDirectory: $(Build.SourcesDirectory)
-        - pwsh: ./eng/CheckInstalledTsp.ps1
+        - pwsh: ./eng/CheckInstalledDevTsp.ps1
           displayName: "Check tsp version"
           workingDirectory: $(Build.SourcesDirectory)
         - pwsh: ./eng/Generate.ps1
