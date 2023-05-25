@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         bool writeFormat = false;
                         bool addToArrayForBinaryData = false;
 
-                        if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryExpression<>))
+                        if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryElement<>))
                             writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||

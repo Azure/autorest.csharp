@@ -95,8 +95,8 @@ namespace AutoRest.CSharp.Generation.Types
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema _ when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
-                typeof(DataFactoryExpression<>),
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+                typeof(DataFactoryElement<>),
                 isNullable: isNullable,
                 new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
@@ -276,16 +276,16 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.IPAddress => typeof(IPAddress),
             XMsFormat.ContentType => typeof(ContentType),
             XMsFormat.RequestMethod => typeof(RequestMethod),
-            XMsFormat.DataFactoryExpressionOfString => typeof(DataFactoryExpression<string>),
-            XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
-            XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
-            XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
-            XMsFormat.DataFactoryExpressionOfDateTime => typeof(DataFactoryExpression<DateTimeOffset>),
-            XMsFormat.DataFactoryExpressionOfDuration => typeof(DataFactoryExpression<TimeSpan>),
-            XMsFormat.DataFactoryExpressionOfUri => typeof(DataFactoryExpression<Uri>),
-            XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),
-            XMsFormat.DataFactoryExpressionOfListOfString => typeof(DataFactoryExpression<IList<string>>),
-            XMsFormat.DataFactoryExpressionOfKeyValuePairs => typeof(DataFactoryExpression<IDictionary<string, string>>),
+            XMsFormat.DataFactoryElementOfString => typeof(DataFactoryElement<string>),
+            XMsFormat.DataFactoryElementOfInt => typeof(DataFactoryElement<int>),
+            XMsFormat.DataFactoryElementOfDouble => typeof(DataFactoryElement<double>),
+            XMsFormat.DataFactoryElementOfBool => typeof(DataFactoryElement<bool>),
+            XMsFormat.DataFactoryElementOfDateTime => typeof(DataFactoryElement<DateTimeOffset>),
+            XMsFormat.DataFactoryElementOfDuration => typeof(DataFactoryElement<TimeSpan>),
+            XMsFormat.DataFactoryElementOfUri => typeof(DataFactoryElement<Uri>),
+            XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<BinaryData>),
+            XMsFormat.DataFactoryElementOfListOfString => typeof(DataFactoryElement<IList<string>>),
+            XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
             _ => null
         };
 

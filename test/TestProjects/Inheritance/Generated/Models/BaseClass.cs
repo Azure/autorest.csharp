@@ -32,7 +32,7 @@ namespace Inheritance.Models
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        internal BaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri)
+        internal BaseClass(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;
@@ -51,26 +51,26 @@ namespace Inheritance.Models
         /// <summary> Gets or sets the base class property. </summary>
         public string BaseClassProperty { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<string> DfeString { get; set; }
+        public DataFactoryElement<string> DfeString { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<double> DfeDouble { get; set; }
+        public DataFactoryElement<double> DfeDouble { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<bool> DfeBool { get; set; }
+        public DataFactoryElement<bool> DfeBool { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<int> DfeInt { get; set; }
+        public DataFactoryElement<int> DfeInt { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<BinaryData> DfeObject { get; set; }
+        public DataFactoryElement<BinaryData> DfeObject { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<SeparateClass>> DfeListOfT { get; set; }
+        public DataFactoryElement<IList<SeparateClass>> DfeListOfT { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<string>> DfeListOfString { get; set; }
+        public DataFactoryElement<IList<string>> DfeListOfString { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IDictionary<string, string>> DfeKeyValuePairs { get; set; }
+        public DataFactoryElement<IDictionary<string, string>> DfeKeyValuePairs { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<DateTimeOffset> DfeDateTime { get; set; }
+        public DataFactoryElement<DateTimeOffset> DfeDateTime { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<TimeSpan> DfeDuration { get; set; }
+        public DataFactoryElement<TimeSpan> DfeDuration { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<Uri> DfeUri { get; set; }
+        public DataFactoryElement<Uri> DfeUri { get; set; }
     }
 }
