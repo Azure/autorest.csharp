@@ -102,11 +102,11 @@ stages:
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
           - pwsh: ./eng/EmitterGenerationCheck.ps1 -DiffCheck $true
             displayName: 'Generate Emitter Codes'
-            workingDirectory: $(Build.SourcesDirectory)
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
               npm run test --prefix src/CADL.Extension/Emitter.Csharp
             displayName: 'Emitter Unit Test'
-            workingDirectory: $(Build.SourcesDirectory)
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: PublishBuildArtifacts@1
             condition: succeededOrFailed()
             displayName: 'Publish Artifacts'
