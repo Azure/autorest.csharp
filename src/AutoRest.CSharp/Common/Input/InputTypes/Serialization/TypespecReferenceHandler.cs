@@ -12,17 +12,17 @@ namespace AutoRest.CSharp.Common.Input
     /// Custom reference handler that preserves the same instance of the resolver across multiple calls of the converters Read method
     /// Required for the reference preservation to work with custom converters
     /// </summary>
-    internal sealed class CadlReferenceHandler : ReferenceHandler
+    internal sealed class TypespecReferenceHandler : ReferenceHandler
     {
-        public ReferenceResolver CurrentResolver { get; } = new CadlReferenceResolver();
+        public ReferenceResolver CurrentResolver { get; } = new TypespecReferenceResolver();
 
         public override ReferenceResolver CreateResolver() => CurrentResolver;
 
-        private class CadlReferenceResolver : ReferenceResolver
+        private class TypespecReferenceResolver : ReferenceResolver
         {
             private readonly Dictionary<string, object> _referenceIdToObjectMap;
 
-            public CadlReferenceResolver()
+            public TypespecReferenceResolver()
             {
                 _referenceIdToObjectMap = new Dictionary<string, object>();
             }

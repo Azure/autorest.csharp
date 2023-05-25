@@ -10,10 +10,10 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class CadlInputLiteralTypeConverter : JsonConverter<InputLiteralType>
+    internal class TypespecInputLiteralTypeConverter : JsonConverter<InputLiteralType>
     {
-        private readonly CadlReferenceHandler _referenceHandler;
-        public CadlInputLiteralTypeConverter(CadlReferenceHandler referenceHandler)
+        private readonly TypespecReferenceHandler _referenceHandler;
+        public TypespecInputLiteralTypeConverter(TypespecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }
