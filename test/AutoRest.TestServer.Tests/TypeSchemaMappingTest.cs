@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 using CustomNamespace;
 using NamespaceForEnums;
 using NUnit.Framework;
@@ -195,7 +196,7 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(JsonElement) },
+                new[] { typeof(JsonElement), typeof(SerializableOptions) },
                 null));
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,

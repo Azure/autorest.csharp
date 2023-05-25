@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Azure.Core.Serialization;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests
@@ -91,7 +92,9 @@ namespace Azure.Core.Tests
         {
             internal bool didWrite = false;
 
-            public void Write(Utf8JsonWriter writer)
+            public void Write(Utf8JsonWriter writer) => Write(writer, new SerializableOptions());
+
+            public void Write(Utf8JsonWriter writer, SerializableOptions options)
             {
                 didWrite = true;
             }
