@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
-                    // TODO - add support for DataFactoryExpression lookup
+                    // TODO - add support for DataFactoryElement lookup
                     new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
