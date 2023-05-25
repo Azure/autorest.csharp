@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             if (File.Exists(cadlInputFile))
             {
                 var json = await File.ReadAllTextAsync(cadlInputFile);
-                var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
+                var rootNamespace = TypespecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {

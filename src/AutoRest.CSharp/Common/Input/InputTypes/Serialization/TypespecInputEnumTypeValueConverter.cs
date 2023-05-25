@@ -8,11 +8,11 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class CadlInputEnumTypeValueConverter : JsonConverter<InputEnumTypeValue>
+    internal sealed class TypespecInputEnumTypeValueConverter : JsonConverter<InputEnumTypeValue>
     {
-        private readonly CadlReferenceHandler _referenceHandler;
+        private readonly TypespecReferenceHandler _referenceHandler;
 
-        public CadlInputEnumTypeValueConverter(CadlReferenceHandler referenceHandler)
+        public TypespecInputEnumTypeValueConverter(TypespecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }
