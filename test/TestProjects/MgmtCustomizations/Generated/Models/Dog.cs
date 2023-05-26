@@ -19,8 +19,9 @@ namespace MgmtCustomizations.Models
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
+        /// <param name="size"> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </param>
         /// <param name="bark"> A dog can bark. </param>
-        internal Dog(PetKind kind, string name, string bark) : base(kind, name)
+        internal Dog(PetKind kind, string name, int size, string bark) : base(kind, name, size)
         {
             Bark = bark;
             Kind = kind;

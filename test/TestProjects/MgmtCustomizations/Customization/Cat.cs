@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ComponentModel;
 using Azure.Core;
 
 namespace MgmtCustomizations.Models
@@ -13,7 +14,7 @@ namespace MgmtCustomizations.Models
         public string Meow { get; set; }
 
         /// <summary> This is an old property that already been removed on the current spec, we add this back using customization code to keep backward compatibility </summary>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [CodeGenMemberSerialization("oldProperty")]
         public string OldProperty { get; set; }
     }
