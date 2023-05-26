@@ -276,7 +276,9 @@ namespace AutoRest.CSharp.Output.Builders
                     property.IsRequired,
                     property.IsReadOnly,
                     false,
-                    objectProperty.OptionalViaNullability);
+                    objectProperty.OptionalViaNullability,
+                    serializationHook: objectProperty.SerializationMapping?.SerializationHook,
+                    deserializationHook: objectProperty.SerializationMapping?.DeserializationHook);
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
@@ -288,6 +290,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
+            // TODO -- make the property bag to have the reference of the ObjectTypeProperty as well
             var propertyBag = new PropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
