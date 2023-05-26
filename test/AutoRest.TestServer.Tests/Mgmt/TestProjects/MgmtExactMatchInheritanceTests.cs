@@ -94,19 +94,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void DataFactoryExpressionProperties()
+        public void DataFactoryElementProperties()
         {
-            Assert.AreEqual(typeof(DataFactoryExpression<string>), typeof(ExactMatchModel1Data).GetProperty("Type5").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<double>), typeof(ExactMatchModel1Data).GetProperty("Type6").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(ExactMatchModel1Data).GetProperty("Type7").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(ExactMatchModel1Data).GetProperty("Type8").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<BinaryData>), typeof(ExactMatchModel1Data).GetProperty("Type9").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(ExactMatchModel1Data).GetProperty("Type11").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(ExactMatchModel1Data).GetProperty("Type12").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(ExactMatchModel1Data).GetProperty("Type13").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(ExactMatchModel1Data).GetProperty("Type14").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(ExactMatchModel1Data).GetProperty("Type15").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(ExactMatchModel1Data).GetProperty("Type16").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<string>), typeof(ExactMatchModel1Data).GetProperty("Type5").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<double>), typeof(ExactMatchModel1Data).GetProperty("Type6").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<bool>), typeof(ExactMatchModel1Data).GetProperty("Type7").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<int>), typeof(ExactMatchModel1Data).GetProperty("Type8").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<BinaryData>), typeof(ExactMatchModel1Data).GetProperty("Type9").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IList<string>>), typeof(ExactMatchModel1Data).GetProperty("Type11").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IDictionary<string, string>>), typeof(ExactMatchModel1Data).GetProperty("Type12").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IList<SeparateClass>>), typeof(ExactMatchModel1Data).GetProperty("Type13").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<DateTimeOffset>), typeof(ExactMatchModel1Data).GetProperty("Type14").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<TimeSpan>), typeof(ExactMatchModel1Data).GetProperty("Type15").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<Uri>), typeof(ExactMatchModel1Data).GetProperty("Type16").PropertyType);
             Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
 

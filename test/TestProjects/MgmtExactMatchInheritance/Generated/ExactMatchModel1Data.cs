@@ -47,7 +47,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="type14"> Any object. </param>
         /// <param name="type15"> Any object. </param>
         /// <param name="type16"> Any object. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<BinaryData> type9, DataFactoryExpression<IList<SeparateClass>> type10, DataFactoryExpression<IList<string>> type11, DataFactoryExpression<IDictionary<string, string>> type12, DataFactoryExpression<IList<SeparateClass>> type13, DataFactoryExpression<DateTimeOffset> type14, DataFactoryExpression<TimeSpan> type15, DataFactoryExpression<Uri> type16) : base(id, name, resourceType, systemData)
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -82,28 +82,28 @@ namespace MgmtExactMatchInheritance
         /// <summary> Gets or sets the type 4. </summary>
         public object Type4 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<string> Type5 { get; set; }
+        public DataFactoryElement<string> Type5 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<double> Type6 { get; set; }
+        public DataFactoryElement<double> Type6 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<bool> Type7 { get; set; }
+        public DataFactoryElement<bool> Type7 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<int> Type8 { get; set; }
+        public DataFactoryElement<int> Type8 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<BinaryData> Type9 { get; set; }
+        public DataFactoryElement<BinaryData> Type9 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<SeparateClass>> Type10 { get; set; }
+        public DataFactoryElement<IList<SeparateClass>> Type10 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<string>> Type11 { get; set; }
+        public DataFactoryElement<IList<string>> Type11 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IDictionary<string, string>> Type12 { get; set; }
+        public DataFactoryElement<IDictionary<string, string>> Type12 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<SeparateClass>> Type13 { get; set; }
+        public DataFactoryElement<IList<SeparateClass>> Type13 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<DateTimeOffset> Type14 { get; set; }
+        public DataFactoryElement<DateTimeOffset> Type14 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<TimeSpan> Type15 { get; set; }
+        public DataFactoryElement<TimeSpan> Type15 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<Uri> Type16 { get; set; }
+        public DataFactoryElement<Uri> Type16 { get; set; }
     }
 }
