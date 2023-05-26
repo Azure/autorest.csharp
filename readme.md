@@ -541,11 +541,149 @@ namespace Azure.Service.Models
 
 ### Customize serialization/deserialization methods
 
+If you want to change the property name that serializes into the JSON or deserializes from the JSON, you could define your own property name using the `CodeGenMemberSerialization` attribute.
+
+<details>
+
+Define a partial class and the property you want to change in a partial class, and add `CodeGenMemberSerialization` attribute to it:
+
+``` C#
+public partial class Cat
+{
+    [CodeGenMemberSerialization("catName")]
+    public string Name { get; set; }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+-        public string Name { get; set; }  
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+-           writer.WritePropertyName("name"u8);
++           writer.WritePropertyName("catName"u8);
+            writer.WriteStringValue(Name);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+-               if (property.NameEquals("name"u8))
++               if (property.NameEquals("catName"u8))
+                {
+                    meow = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name);
+        }
+    }
+}
+```
+
+You can also add multiple element in the attribute and the generator will generate the property in a hierarchy.
+
+**NOTE: This only works for mgmt plane and HLC models, does not work for DPG models.**
+
+``` C#
+public partial class Cat
+{
+    [CodeGenMemberSerialization("properties", "catName")]
+    public string Name { get; set; }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+-        public string Name { get; set; }  
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+-           writer.WritePropertyName("name"u8);
++           writer.WritePropertyName("properties"u8);
++           writer.WriteStartObject();
++           writer.WritePropertyName("catName"u8);
+            writer.WriteStringValue(Name);
++           writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+-               if (property.NameEquals("name"u8))
++               if (property.NameEquals("properties"u8))
++               {
++                   foreach (var property in element.EnumerateObject())
++                   {
++                       if (property.NameEquals("catName"u8))
+                        {
+                            meow = property.Value.GetString();
+                            continue;
+                        }
++                   }
++                   continue;
++               }
+            }
+            return new Cat(name);
+        }
+    }
+}
+```
+
+</details>
+
 If you want to change the implementation of serialization/deserialization method of one particular property, you could define your own hook methods and assign them to a property using the `CodeGenMemberSerializationHooks` attribute.
 
 <details>
 
-Define a partial class and add the property you want to change in the partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
+Define a partial class and add the property you want to change in a partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
 
 ``` C#
 public partial class Cat
@@ -555,7 +693,7 @@ public partial class Cat
 }
 ```
 
-Please use the `nameof` expression to avoid typo in the attribute.
+Please use the `nameof` expression to avoid typo in the attribute. Also you could leave the serialization hook to `null` if you do not want to change the serialization logic, similar you could leave deserialization hook to `null` if you do not want to change the deserialization logic.
 
 The hook methods should have the following signature:
 

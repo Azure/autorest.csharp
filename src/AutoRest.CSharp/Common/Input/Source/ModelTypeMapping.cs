@@ -28,6 +28,8 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (ISymbol member in GetMembers(existingType))
             {
+                string[]? serializationPath = null;
+                (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     var attributeTypeSymbol = attributeData.AttributeClass;
@@ -36,8 +38,6 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         _propertyMappings.Add(schemaMemberName, member);
                     }
-                    string[]? serializationPath = null;
-                    (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
                     if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
@@ -46,10 +46,10 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         serializationHooks = hooks;
                     }
-                    if (serializationPath != null || serializationHooks != null)
-                    {
-                        _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
-                    }
+                }
+                if (serializationPath != null || serializationHooks != null)
+                {
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
                 }
             }
 

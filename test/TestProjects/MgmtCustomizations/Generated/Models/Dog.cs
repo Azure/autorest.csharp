@@ -26,8 +26,5 @@ namespace MgmtCustomizations.Models
             Bark = bark;
             Kind = kind;
         }
-
-        /// <summary> A dog can bark. </summary>
-        public string Bark { get; set; }
     }
 }

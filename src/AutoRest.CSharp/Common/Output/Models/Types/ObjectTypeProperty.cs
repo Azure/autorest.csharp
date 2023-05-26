@@ -219,5 +219,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return updatedDescription;
         }
+
+        public override string ToString()
+        {
+            return $"ObjectTypeProperty {{Name: {Declaration.Name}, Type: {Declaration.Type}}}";
+        }
     }
 }
