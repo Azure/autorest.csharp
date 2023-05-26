@@ -545,7 +545,7 @@ If you want to change the property name that serializes into the JSON or deseria
 
 <details>
 
-Define a partial class and the property you want to change in a partial class, and add `CodeGenMemberSerialization` attribute to it:
+Define a partial class and the property you want to change in the partial class, and add `CodeGenMemberSerialization` attribute to it:
 
 ``` C#
 public partial class Cat
@@ -607,7 +607,7 @@ namespace Azure.Service.Models
 
 You can also add multiple element in the attribute and the generator will generate the property in a hierarchy.
 
-**NOTE: This only works for mgmt plane and HLC models, does not work for DPG models.**
+**NOTE: Introducing extra layers in serialized JSON only works for mgmt plane and HLC models, does not work for DPG models.**
 
 ``` C#
 public partial class Cat
@@ -683,7 +683,7 @@ If you want to change the implementation of serialization/deserialization method
 
 <details>
 
-Define a partial class and add the property you want to change in a partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
+Define a partial class and add the property you want to change in the partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
 
 ``` C#
 public partial class Cat
@@ -797,6 +797,70 @@ namespace Azure.Service.Models
     }
 }
 ```
+
+</details>
+
+If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenMemberSerialization` attribute and the `CodeGenMemberSerializationHooks` attribute.
+
+<details>
+
+Define a partial class and add the property you want to add in the partial class, and add `CodeGenMemberSerialization` attribute to it:
+
+``` C#
+public partial class Cat
+{
+    [CodeGenMemberSerialization("color")]
+    public string Color { get; set; } // assuming the original Cat class does not have the Color property
+}
+```
+
+**Generated code after (Generated/Models/Model.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("color"u8);
++           writer.WriteStringValue(Color);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
++           Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    meow = property.Value.GetString();
+                    continue;
+                }
++               if (property.NameEquals("color"u8))
++               {
++                   meow = property.Value.GetString();
++                   continue;
++               }
+            }
+            return new Cat(name);
+        }
+    }
+}
+```
+
+You could also add the `CodeGenMemberSerializationHooks` attribute to the property to have your own serialization/deserialization logic of the new property. You might have to do this if the type of your new property is an object type or any type that our generator does not natively support.
+
+**NOTE: Adding property to serialization/deserialization methods currently only works for DPG.**
 
 </details>
 
