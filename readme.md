@@ -736,9 +736,9 @@ public partial class Cat
 }
 ```
 
-In these three properties of this attribute, `SerializationHook` and `SerializationValueHook` controls the serialization, and `DeserializationValueHook` controls deserialization. When you assign both `SerializationHook` and `SerializationValueHook`, `SerializationValueHook` will be ignored.
+In these three properties of this attribute, `SerializationHook` and `SerializationValueHook` controls the serialization, and `DeserializationValueHook` controls deserialization. `SerializationHook` is the hook method to serialize **the entire property**, and `SerializationValueHook` is the hook method that only serializes **the value of the property**. When you assign both `SerializationHook` and `SerializationValueHook`, `SerializationValueHook` will be ignored.
 
-Please use the `nameof` expression to avoid typo in the attribute. Also you could leave the serialization hook to `null` if you do not want to change the serialization logic, similar you could leave deserialization hook to `null` if you do not want to change the deserialization logic.
+Please use the `nameof` expression to avoid typo in the attribute. Also you could leave both the serialization hook and value hook unassigned if you do not want to change the serialization logic, similar you could leave deserialization hook unassigned if you do not want to change the deserialization logic.
 
 The hook methods should have the following signature:
 
@@ -781,8 +781,105 @@ namespace Azure.Service.Models
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SerializeNameValue(Utf8JsonWriter writer)
         {
-            // this is the logic we would like to have for serialization
+            // this is the logic we would like to have for the value serialization
             writer.WriteStringValue(Name.ToUpper());
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void DeserializeNameValue(JsonProperty property, ref string name) // the type here is string since name is required
+        {
+            // this is the logic we would like to have for the value deserialization
+            name = property.Value.GetString().ToLower();
+        }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+-       public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+-           writer.WriteStringValue(Name);
++           SerializeNameValue(writer);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(Color);
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+-                   meow = property.Value.GetString();
++                   DeserializeNameValue(property, ref name);
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color, size);
+        }
+    }
+}
+```
+
+You could do the same thing using `SerializationHook` instead of `SerializationValueHook`, which is more flexible but requires more code. For instance
+
+**Add customized model (Cat.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        [CodeGenMemberSerializationHooks(SerializationHook = nameof(SerializeName), DeserializationValue = nameof(DeserializeNameValue))]
+        public string Name { get; set; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void SerializeName(Utf8JsonWriter writer)
+        {
+            // using the serialization hook, you get more control when serializing the property
+            // for instance, as an example here we only serialize the name into the payload when the name is tom.
+            if (Name.Equals("Tom", StringComparison.InvariantCultureIgnoreCase))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -819,7 +916,7 @@ namespace Azure.Service.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
+-           writer.WritePropertyName("name"u8);
 -           writer.WriteStringValue(Name);
 +           SerializeName(writer);
             if (Optional.IsDefined(Color))
@@ -843,7 +940,7 @@ namespace Azure.Service.Models
                 if (property.NameEquals("name"u8))
                 {
 -                   meow = property.Value.GetString();
-+                   DeserializeName(property, ref name);
++                   DeserializeNameValue(property, ref name);
                     continue;
                 }
                 if (property.NameEquals("color"u8))
