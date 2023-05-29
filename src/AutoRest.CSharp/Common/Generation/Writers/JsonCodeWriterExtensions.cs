@@ -313,36 +313,44 @@ namespace AutoRest.CSharp.Generation.Writers
                     continue;
                 }
 
-                using (writer.WriteDefinedCheck(property))
+                if (property.SerializationHook is not null)
                 {
-                    var ifScope = writer.WritePropertyNullCheckIf(property);
-                    using (ifScope)
+                    // write the serialization hook
+                    writer.Line($"{property.SerializationHook}({writerName});");
+                }
+                else
+                {
+                    using (writer.WriteDefinedCheck(property))
                     {
-                        var propertyType = property.PropertyType;
-                        var declarationName = property.PropertyName;
+                        var ifScope = writer.WritePropertyNullCheckIf(property);
+                        using (ifScope)
+                        {
+                            var propertyType = property.PropertyType;
+                            var declarationName = property.PropertyName;
 
-                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
+                            writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
-                        if (property.SerializationValueHook != null)
-                        {
-                            // write the serialization hook
-                            writer.Line($"{property.SerializationValueHook}({writerName});");
+                            if (property.SerializationValueHook is not null)
+                            {
+                                // write the serialization value hook
+                                writer.Line($"{property.SerializationValueHook}({writerName});");
+                            }
+                            else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
+                            {
+                                writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
+                            }
+                            else
+                            {
+                                writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
+                            }
                         }
-                        else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
-                        {
-                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
-                        }
-                        else
-                        {
-                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
-                        }
-                    }
 
-                    if (ifScope != null)
-                    {
-                        using (writer.Scope($"else"))
+                        if (ifScope != null)
                         {
-                            writer.Line($"{writerName}.WriteNull({property.SerializedName:L});");
+                            using (writer.Scope($"else"))
+                            {
+                                writer.Line($"{writerName}.WriteNull({property.SerializedName:L});");
+                            }
                         }
                     }
                 }
@@ -356,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
-                    if (property.DeserializationHook != null)
+                    if (property.DeserializationValueHook is not null)
                     {
                         // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
                     }
@@ -393,10 +401,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (property.DeserializationHook is not null)
+                    if (property.DeserializationValueHook is not null)
                     {
                         // write the deserialization hook
-                        writer.Line($"{property.DeserializationHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
+                        writer.Line($"{property.DeserializationValueHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
                     }
                     else if (property.ValueSerialization is not null)
                     {

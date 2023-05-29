@@ -16,13 +16,13 @@ namespace AutoRest.CSharp.Input.Source
             SerializationPath = serializationPath;
             SerializationHook = serializationHook;
             SerializationValueHook = serializationValueHook;
-            DeserializationHook = deserializationHook;
+            DeserializationValueHook = deserializationHook;
         }
 
         public ISymbol ExistingMember { get; }
         public IReadOnlyList<string>? SerializationPath { get; }
         public string? SerializationHook { get; }
         public string? SerializationValueHook { get; }
-        public string? DeserializationHook { get; }
+        public string? DeserializationValueHook { get; }
     }
 }

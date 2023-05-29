@@ -15,19 +15,19 @@ namespace Azure.Core
         /// The signature of the serialization hook method must be or compatible with when invoking:
         /// private void SerializeHook(Utf8JsonWriter writer);
         /// </summary>
-        public string? SerializationHookMethodName { get; set; }
+        public string? SerializationHook { get; set; }
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
         /// private void SerializeHook(Utf8JsonWriter writer);
         /// </summary>
-        public string? SerializationValueHookMethodName { get; set; }
+        public string? SerializationValueHook { get; set; }
         /// <summary>
         /// Gets or sets the method name to use when deserializing the property value from the JSON
         /// private static void DeserializationHook(JsonProperty property, ref TypeOfTheProperty propertyValue); // if the property is required
         /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
         /// </summary>
-        public string? DeserializationHookMethodName { get; set; }
+        public string? DeserializationValueHook { get; set; }
 
         public CodeGenMemberSerializationHooksAttribute()
         {

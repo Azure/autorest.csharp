@@ -731,17 +731,19 @@ Define a partial class and add the property you want to change in the partial cl
 ``` C#
 public partial class Cat
 {
-    [CodeGenMemberSerialization("<SerializationHookMethodName>", "<DeserializationHookMethodName>")]
+    [CodeGenMemberSerialization(SerializationHook = "<SerializationHookMethodName>", SerializationValueHook = "<SerializationValueHookMethodName>", DeserializationValueHook = "<DeserializationValueHookMethodName>")]
     public string Name { get; set; }
 }
 ```
+
+In these three properties of this attribute, `SerializationHook` and `SerializationValueHook` controls the serialization, and `DeserializationValueHook` controls deserialization. When you assign both `SerializationHook` and `SerializationValueHook`, `SerializationValueHook` will be ignored.
 
 Please use the `nameof` expression to avoid typo in the attribute. Also you could leave the serialization hook to `null` if you do not want to change the serialization logic, similar you could leave deserialization hook to `null` if you do not want to change the deserialization logic.
 
 The hook methods should have the following signature:
 
 ``` C#
-// serialization hook
+// serialization hook and serialization value hook
 [MethodImpl(MethodImplOptions.AggressiveInlining)]
 internal void SerializationMethodHook(Utf8JsonWriter writer)
 {
@@ -773,18 +775,18 @@ namespace Azure.Service.Models
 {
     public partial class Cat
     {
-        [CodeGenMemberSerializationHooks(nameof(SerializeName), nameof(DeserializeName))]
+        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeNameValue), DeserializationValue = nameof(DeserializeNameValue))]
         public string Name { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SerializeName(Utf8JsonWriter writer)
+        private void SerializeNameValue(Utf8JsonWriter writer)
         {
             // this is the logic we would like to have for serialization
             writer.WriteStringValue(Name.ToUpper());
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void DeserializeName(JsonProperty property, ref string name) // the type here is string since name is required
+        private static void DeserializeNameValue(JsonProperty property, ref string name) // the type here is string since name is required
         {
             // this is the logic we would like to have for deserialization
             name = property.Value.GetString().ToLower();

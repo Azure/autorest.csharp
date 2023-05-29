@@ -35,7 +35,9 @@ var input = new RootModel()
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
 {
+        OptionalInt = 1234,
         AdditionalSerializableProperty = 1234,
+        AdditionalNullableSerializableProperty = 1234,
     },
 };
 var result = await client.RoundTripAsync(input);
@@ -76,7 +78,9 @@ var input = new RootModel()
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
 {
+        OptionalInt = 1234,
         AdditionalSerializableProperty = 1234,
+        AdditionalNullableSerializableProperty = 1234,
     },
 };
 var result = client.RoundTrip(input);
@@ -141,6 +145,7 @@ var data = new {
     propertyEnumToBeMadeExtensible = "1",
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
+        optionalInt = 1234,
     },
 };
 
@@ -166,6 +171,7 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
 ]]></code>
 </example>
     </member>
@@ -227,6 +233,7 @@ var data = new {
     propertyEnumToBeMadeExtensible = "1",
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
+        optionalInt = 1234,
     },
 };
 
@@ -252,6 +259,7 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
 ]]></code>
 </example>
     </member>

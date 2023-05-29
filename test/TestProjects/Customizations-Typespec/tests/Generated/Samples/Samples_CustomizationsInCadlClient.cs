@@ -88,6 +88,7 @@ namespace CustomizationsInCadl.Samples
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    optionalInt = 1234,
                 },
             };
 
@@ -113,6 +114,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
         }
 
         [Test]
@@ -183,6 +185,7 @@ namespace CustomizationsInCadl.Samples
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    optionalInt = 1234,
                 },
             };
 
@@ -208,6 +211,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
         }
 
         [Test]
@@ -244,7 +248,9 @@ namespace CustomizationsInCadl.Samples
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
                 {
+                    OptionalInt = 1234,
                     AdditionalSerializableProperty = 1234,
+                    AdditionalNullableSerializableProperty = 1234,
                 },
             };
             var result = await client.RoundTripAsync(input);
