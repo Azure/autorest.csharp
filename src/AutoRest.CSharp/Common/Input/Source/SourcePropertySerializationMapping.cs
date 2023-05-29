@@ -10,17 +10,19 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class SourcePropertySerializationMapping
     {
-        public SourcePropertySerializationMapping(ISymbol existingMember, string[]? serializationPath, string? serializationHook, string? deserializationHook)
+        public SourcePropertySerializationMapping(ISymbol existingMember, string[]? serializationPath, string? serializationHook, string? serializationValueHook, string? deserializationHook)
         {
             ExistingMember = existingMember;
             SerializationPath = serializationPath;
             SerializationHook = serializationHook;
+            SerializationValueHook = serializationValueHook;
             DeserializationHook = deserializationHook;
         }
 
         public ISymbol ExistingMember { get; }
         public IReadOnlyList<string>? SerializationPath { get; }
         public string? SerializationHook { get; }
+        public string? SerializationValueHook { get; }
         public string? DeserializationHook { get; }
     }
 }

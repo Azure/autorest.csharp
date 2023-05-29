@@ -323,10 +323,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
-                        if (property.SerializationHook != null)
+                        if (property.SerializationValueHook != null)
                         {
                             // write the serialization hook
-                            writer.Line($"{property.SerializationHook}({writerName});");
+                            writer.Line($"{property.SerializationValueHook}({writerName});");
                         }
                         else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {

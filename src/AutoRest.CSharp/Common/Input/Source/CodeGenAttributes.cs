@@ -66,21 +66,34 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        public bool TryGetSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? SerializationValueHook, string? DeserializationHook) hooks)
         {
             hooks = default;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
                 return false;
 
             string? serializationHook = null;
+            string? serializationValueHook = null;
             string? deserializationHook = null;
 
-            var arguments = attributeData.ConstructorArguments;
-            serializationHook = arguments[0].Value as string;
-            deserializationHook = arguments[1].Value as string;
+            foreach (var namedArgument in attributeData.NamedArguments)
+            {
+                switch (namedArgument.Key)
+                {
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationHookMethodName):
+                        serializationHook = namedArgument.Value.Value as string;
+                        break;
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationValueHookMethodName):
+                        serializationValueHook = namedArgument.Value.Value as string;
+                        break;
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationHookMethodName):
+                        deserializationHook = namedArgument.Value.Value as string;
+                        break;
+                }
+            }
 
-            hooks = (serializationHook, deserializationHook);
-            return serializationHook != null || deserializationHook != null;
+            hooks = (serializationHook, serializationValueHook, deserializationHook);
+            return serializationHook != null || serializationValueHook != null || deserializationHook != null;
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)

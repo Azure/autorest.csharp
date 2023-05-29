@@ -21,7 +21,7 @@ namespace CustomizationsInCadl.Models
         /// In the SDK, this property is defined as int, but in the actual traffic, this property comes as a string.
         /// We use this attribute to fix its serialization and deserialization using the following two methods
         /// </summary>
-        [CodeGenMemberSerializationHooks(nameof(WriteRequiredInt), nameof(DeserializeRequiredInt))]
+        [CodeGenMemberSerializationHooks(SerializationValueHookMethodName = nameof(WriteRequiredInt), DeserializationHookMethodName = nameof(DeserializeRequiredInt))]
         public int RequiredInt { get; set; }
 
         private void WriteRequiredInt(Utf8JsonWriter writer)
