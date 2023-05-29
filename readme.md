@@ -541,7 +541,424 @@ namespace Azure.Service.Models
 
 ### Customize serialization/deserialization methods
 
-Use the [Replace any generated member](#replace-any-generated-member) approach to replace Serialize/Deserialize method with a custom implementation.
+If you want to change the property name that serializes into the JSON or deserializes from the JSON, you could define your own property name using the `CodeGenMemberSerialization` attribute.
+
+<details>
+
+For instance, we have a model class `Cat` with property `Name` and `Color`:
+
+**Generated code before (Generated/Models/Cat.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+        public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+Now we want to change the property name `Name` to `catName` in the serialized JSON, we could do the following: Define a partial class and the property you want to change in the partial class, and add `CodeGenMemberSerialization` attribute to it:
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        [CodeGenMemberSerialization("catName")]
+        public string Name { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+-       public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+-           writer.WritePropertyName("name"u8);
++           writer.WritePropertyName("catName"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("color"u8);
+            writer.WriteStringValue(Color);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+-               if (property.NameEquals("name"u8))
++               if (property.NameEquals("catName"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color);
+        }
+    }
+}
+```
+
+If you want to change the layer of the property in the json, you can add all the elements in the json path of your property to the attribute, then the generator will generate the property into the JSON in the correct hierarchy.
+
+**NOTE: Introducing extra layers in serialized JSON only works for mgmt plane and HLC models, does not work for DPG models.**
+
+For instance, to move `Name` property under property `properties` and rename to `catName`, we need to define a partial class and have the following content:
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        [CodeGenMemberSerialization("properties", "catName")]
+        public string Name { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+-       public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+-           writer.WritePropertyName("name"u8);
++           writer.WritePropertyName("properties"u8);
++           writer.WriteStartObject();
++           writer.WritePropertyName("catName"u8);
+            writer.WriteStringValue(Name);
++           writer.WriteEndObject();
+            writer.WritePropertyName("color"u8);
+            writer.WriteStringValue(Color);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+-               if (property.NameEquals("name"u8))
++               if (property.NameEquals("properties"u8))
++               {
++                   foreach (var property in element.EnumerateObject())
++                   {
++                       if (property.NameEquals("catName"u8))
+                        {
+                            meow = property.Value.GetString();
+                            continue;
+                        }
++                   }
++                   continue;
++               }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color);
+        }
+    }
+}
+```
+
+</details>
+
+If you want to change the implementation of serialization/deserialization method of one particular property, you could define your own hook methods and assign them to a property using the `CodeGenMemberSerializationHooks` attribute.
+
+<details>
+
+Define a partial class and add the property you want to change in the partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
+
+``` C#
+public partial class Cat
+{
+    [CodeGenMemberSerialization("<SerializationHookMethodName>", "<DeserializationHookMethodName>")]
+    public string Name { get; set; }
+}
+```
+
+Please use the `nameof` expression to avoid typo in the attribute. Also you could leave the serialization hook to `null` if you do not want to change the serialization logic, similar you could leave deserialization hook to `null` if you do not want to change the deserialization logic.
+
+The hook methods should have the following signature:
+
+``` C#
+// serialization hook
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+internal void SerializationMethodHook(Utf8JsonWriter writer)
+{
+    // write your own serialization logic here
+}
+
+// deserialization hook for required property
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+internal static void DeserializeSizeProperty(JsonProperty property, ref TypeOfTheProperty name)
+{
+    // write your own deserialization logic here
+}
+// deserialization hook for optional property
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+internal static void DeserializeSizeProperty(JsonProperty property, ref Optional<TypeOfTheProperty> name)
+{
+    // write your own deserialization logic here
+}
+```
+
+Regenerate the library to see the changes.
+
+For instance, we have a model class `Cat` with property `Name` and `Color` (see the code above), and we would like to change the way how `Name` property is serialized and deserialized, we should define a partial class and have the following content:
+
+**Add customized model (Cat.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        [CodeGenMemberSerializationHooks(nameof(SerializeName), nameof(DeserializeName))]
+        public string Name { get; set; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void SerializeName(Utf8JsonWriter writer)
+        {
+            // this is the logic we would like to have for serialization
+            writer.WriteStringValue(Name.ToUpper());
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void DeserializeName(JsonProperty property, ref string name) // the type here is string since name is required
+        {
+            // this is the logic we would like to have for deserialization
+            name = property.Value.GetString().ToLower();
+        }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+-       public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+-           writer.WriteStringValue(Name);
++           SerializeName(writer);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(Color);
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+-                   meow = property.Value.GetString();
++                   DeserializeName(property, ref name);
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color, size);
+        }
+    }
+}
+```
+
+</details>
+
+If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenMemberSerialization` attribute and the `CodeGenMemberSerializationHooks` attribute.
+
+<details>
+
+Define a partial class and add the property you want to add in the partial class, and add `CodeGenMemberSerialization` attribute to it:
+
+``` C#
+public partial class Cat
+{
+    [CodeGenMemberSerialization("size")]
+    public int? Size { get; set; } // the original Cat class only have Name and Color properties
+}
+```
+
+**Generated code after (Generated/Models/Cat.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit other ctors for brevity */
+-       internal Cat(string name, string color)
++       internal Cat(string name, string color, int? size)
+        {
+            Name = name;
+            Color = color;
++           Size = size;
+        }
+
+        public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Cat.Serialization.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(Color);
+            }
++           if (Optional.IsDefined(Size))
++           {
++               writer.WritePropertyName("size"u8);
++               writer.WriteNumberValue(Size);
++           }
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            Optional<int> size = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    meow = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    meow = property.Value.GetString();
+                    continue;
+                }
++               if (property.NameEquals("size"u8))
++               {
++                   size = property.Value.GetInt32();
++                   continue;
++               }
+            }
+            return new Cat(name);
+        }
+    }
+}
+```
+
+You could also add the `CodeGenMemberSerializationHooks` attribute to the property to have your own serialization/deserialization logic of the new property. You might have to do this if the type of your new property is an object type or any type that our generator does not natively support.
+
+**NOTE: Adding property to serialization/deserialization methods currently only works for DPG.**
+
+</details>
+
+If you want to replace the entire serialization/deserialization method, please use the [Replace any generated member](#replace-any-generated-member) approach to replace serialization/deserialization method with a custom implementation.
 
 <details>
 
@@ -550,36 +967,49 @@ Use the [Replace any generated member](#replace-any-generated-member) approach t
 ``` C#
 namespace Azure.Service.Models
 {
-  public partial class Cat
-  {
-      internal static Cat DeserializeCat(JsonElement element)
-      {
-          string color = default;
-          string name = default;
-          foreach (var property in element.EnumerateObject())
-          {
-              if (property.NameEquals("color"))
-              {
-                  if (property.Value.ValueKind == JsonValueKind.Null)
-                  {
-                      continue;
-                  }
-                  color = property.Value.GetString();
-                  continue;
-              }
-              if (property.NameEquals("name"))
-              {
-                  if (property.Value.ValueKind == JsonValueKind.Null)
-                  {
-                      continue;
-                  }
-                  name = property.Value.GetString();
-                  continue;
-              }
-          }
-          return new Cat(id, name);
-      }
-  }
+    public partial class Cat
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(Color);
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            string color = default;
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("color"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    color = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    name = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(id, name);
+        }
+    }
 }
 ```
 
@@ -588,29 +1018,39 @@ namespace Azure.Service.Models
 ``` C#
 namespace Azure.Service.Models
 {
-  public partial class Cat
-  {
-      internal static Cat DeserializeCat(JsonElement element)
-      {
-          string color = default;
-          string name = default;
-          foreach (var property in element.EnumerateObject())
-          {
-              if (property.NameEquals("name"))
-              {
-                  if (property.Value.ValueKind == JsonValueKind.Null)
-                  {
-                      continue;
-                  }
-                  name = property.Value.GetString();
-                  continue;
-              }
-          }
-          // WORKAROUND: server never sends color, default to black
-          color = "black";
-          return new Cat(name, color);
-      }
-  }
+    public partial class Cat
+    {
+        // currently we have to use a full name to ensure this could be replaced
+        void global:Azure.Core.IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            // WORKAROUND: server never needs color, remove it in the customization code
+            writer.WriteEndObject();
+        }
+            
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            string color = default;
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    name = property.Value.GetString();
+                    continue;
+                }
+            }
+            // WORKAROUND: server never sends color, default to black
+            color = "black";
+            return new Cat(name, color);
+        }
+    }
 }
 ```
 
