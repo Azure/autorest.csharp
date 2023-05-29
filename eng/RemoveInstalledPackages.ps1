@@ -1,7 +1,9 @@
 $rootPath = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $packageLockPath = Join-Path $rootPath "package-lock.json"
-Remove-Item $packageLockPath
+if (Test-Path $packageLockPath) {
+    Remove-Item $packageLockPath
+}
 
 $rootPackagePath = Join-Path $rootPath "node_modules"
 if (Test-Path $rootPackagePath) {
