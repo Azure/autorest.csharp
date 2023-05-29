@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Input.Source
             CodeGenClientAttribute = GetSymbol(compilation, typeof(CodeGenClientAttribute));
             CodeGenMemberSerializationAttribute = GetSymbol(compilation, typeof(CodeGenMemberSerializationAttribute));
             CodeGenMemberSerializationHooksAttribute = GetSymbol(compilation, typeof(CodeGenMemberSerializationHooksAttribute));
+            CodeGenMemberSkipSerializationAttribute = GetSymbol(compilation, typeof(CodeGenMemberSkipSerializationAttribute));
         }
 
         public INamedTypeSymbol CodeGenSuppressAttribute { get; }
@@ -33,6 +34,8 @@ namespace AutoRest.CSharp.Input.Source
         public INamedTypeSymbol CodeGenMemberSerializationAttribute { get; }
 
         public INamedTypeSymbol CodeGenMemberSerializationHooksAttribute { get; }
+
+        public INamedTypeSymbol CodeGenMemberSkipSerializationAttribute { get; }
 
         private static INamedTypeSymbol GetSymbol(Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName!) ?? throw new InvalidOperationException($"cannot load symbol of attribute {type}");
     }

@@ -73,6 +73,11 @@ namespace AutoRest.CSharp.Input.Source
                             }
                         }
                     }
+
+                    if (SymbolEqualityComparer.Default.Equals(attributeClass, codeGenAttributes.CodeGenMemberSkipSerializationAttribute))
+                    {
+
+                    }
                 }
             }
         }
