@@ -11,6 +11,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         public CodeGenAttributes(Compilation compilation)
         {
+            CodeGenSuppressAttribute = GetSymbol(compilation, typeof(CodeGenSuppressAttribute));
             CodeGenMemberAttribute = GetSymbol(compilation, typeof(CodeGenMemberAttribute));
             CodeGenTypeAttribute = GetSymbol(compilation, typeof(CodeGenTypeAttribute));
             CodeGenModelAttribute = GetSymbol(compilation, typeof(CodeGenModelAttribute));
@@ -18,6 +19,8 @@ namespace AutoRest.CSharp.Input.Source
             CodeGenMemberSerializationAttribute = GetSymbol(compilation, typeof(CodeGenMemberSerializationAttribute));
             CodeGenMemberSerializationHooksAttribute = GetSymbol(compilation, typeof(CodeGenMemberSerializationHooksAttribute));
         }
+
+        public INamedTypeSymbol CodeGenSuppressAttribute { get; }
 
         public INamedTypeSymbol CodeGenMemberAttribute { get; }
 
