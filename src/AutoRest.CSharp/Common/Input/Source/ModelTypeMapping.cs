@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Input.Source
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol? existingType)
+        public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
         {
             _existingType = existingType;
             _propertyMappings = new();
@@ -54,16 +54,13 @@ namespace AutoRest.CSharp.Input.Source
                 }
             }
 
-            if (existingType != null)
+            foreach (var attributeData in existingType.GetAttributes())
             {
-                foreach (var attributeData in existingType.GetAttributes())
+                // handle CodeGenModel attribute
+                if (codeGenAttributes.TryGetCodeGenModelAttributeValue(attributeData, out var usage, out var formats))
                 {
-                    // handle CodeGenModel attribute
-                    if (codeGenAttributes.TryGetCodeGenModelAttributeValue(attributeData, out var usage, out var formats))
-                    {
-                        Usage = usage;
-                        Formats = formats;
-                    }
+                    Usage = usage;
+                    Formats = formats;
                 }
             }
         }

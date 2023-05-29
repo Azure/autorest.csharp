@@ -48,8 +48,11 @@ namespace AutoRest.CSharp.Input.Source
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
         }
 
-        public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
+        public ModelTypeMapping? CreateForModel(INamedTypeSymbol? symbol)
         {
+            if (symbol == null)
+                return null;
+
             return new ModelTypeMapping(_codeGenAttributes, symbol);
         }
 
