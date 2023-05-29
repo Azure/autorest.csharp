@@ -32,17 +32,18 @@ namespace AutoRest.CSharp.Input.Source
                 (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
-                    var attributeTypeSymbol = attributeData.AttributeClass;
                     // handle CodeGenMember attribute
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberAttribute) && TryGetCodeGenMemberAttributeValue(member, attributeData, out var schemaMemberName))
+                    if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
                         _propertyMappings.Add(schemaMemberName, member);
                     }
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberSerializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
+                    // handle CodeGenMemberSerialization attribute
+                    if (codeGenAttributes.TryGetSerializationAttributeValue(attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
                     }
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberSerializationHooksAttribute) && TryGetSerializationHooks(member, attributeData, out var hooks))
+                    // handle CodeGenMemberSerializationHooks attribute
+                    if (codeGenAttributes.TryGetSerializationHooksAttributeValue(attributeData, out var hooks))
                     {
                         serializationHooks = hooks;
                     }
@@ -57,67 +58,14 @@ namespace AutoRest.CSharp.Input.Source
             {
                 foreach (var attributeData in existingType.GetAttributes())
                 {
-                    var attributeClass = attributeData.AttributeClass;
-                    if (SymbolEqualityComparer.Default.Equals(attributeClass, codeGenAttributes.CodeGenModelAttribute))
+                    // handle CodeGenModel attribute
+                    if (codeGenAttributes.TryGetCodeGenModelAttributeValue(attributeData, out var usage, out var formats))
                     {
-                        foreach (var namedArgument in attributeData.NamedArguments)
-                        {
-                            switch (namedArgument.Key)
-                            {
-                                case nameof(CodeGenModelAttribute.Usage):
-                                    Usage = ToStringArray(namedArgument.Value.Values);
-                                    break;
-                                case nameof(CodeGenModelAttribute.Formats):
-                                    Formats = ToStringArray(namedArgument.Value.Values);
-                                    break;
-                            }
-                        }
+                        Usage = usage;
+                        Formats = formats;
                     }
                 }
             }
-        }
-
-        private static bool TryGetSerializationHooks(ISymbol symbol, AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
-        {
-            string? serializationHook = null;
-            string? deserializationHook = null;
-
-            var arguments = attributeData.ConstructorArguments;
-            serializationHook = arguments[0].Value as string;
-            deserializationHook = arguments[1].Value as string;
-
-            hooks = (serializationHook, deserializationHook);
-            return serializationHook != null || deserializationHook != null;
-        }
-
-        private static bool TryGetCodeGenMemberAttributeValue(ISymbol symbol, AttributeData attributeData, [MaybeNullWhen(false)] out string name)
-        {
-            name = attributeData.ConstructorArguments.FirstOrDefault().Value as string;
-            return name != null;
-        }
-
-        private static bool TryGetSerializationAttributeValue(ISymbol symbol, AttributeData attributeData, [MaybeNullWhen(false)] out string[] propertyNames)
-        {
-            propertyNames = null;
-            if (attributeData.ConstructorArguments.Length > 0)
-            {
-                propertyNames = ToStringArray(attributeData.ConstructorArguments[0].Values);
-            }
-
-            return propertyNames != null;
-        }
-
-        private static string[]? ToStringArray(ImmutableArray<TypedConstant> values)
-        {
-            if (values.IsDefaultOrEmpty)
-            {
-                return null;
-            }
-
-            return values
-                .Select(v => (string?)v.Value)
-                .OfType<string>()
-                .ToArray();
         }
 
         public SourceMemberMapping? GetForMember(string name)

@@ -2,8 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
-using Microsoft.CodeAnalysis;
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
@@ -35,5 +38,84 @@ namespace AutoRest.CSharp.Input.Source
         public INamedTypeSymbol CodeGenMemberSerializationHooksAttribute { get; }
 
         private static INamedTypeSymbol GetSymbol(Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName!) ?? throw new InvalidOperationException($"cannot load symbol of attribute {type}");
+
+        private static bool CheckAttribute(AttributeData attributeData, INamedTypeSymbol codeGenAttribute)
+            => SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, codeGenAttribute);
+
+        public bool TryGetCodeGenMemberAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string name)
+        {
+            name = null;
+            if (!CheckAttribute(attributeData, CodeGenMemberAttribute))
+                return false;
+
+            name = attributeData.ConstructorArguments.FirstOrDefault().Value as string;
+            return name != null;
+        }
+
+        public bool TryGetSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string[] propertyNames)
+        {
+            propertyNames = null;
+            if (!CheckAttribute(attributeData, CodeGenMemberSerializationAttribute))
+                return false;
+
+            if (attributeData.ConstructorArguments.Length > 0)
+            {
+                propertyNames = ToStringArray(attributeData.ConstructorArguments[0].Values);
+            }
+
+            return propertyNames != null;
+        }
+
+        public bool TryGetSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        {
+            hooks = default;
+            if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
+                return false;
+
+            string? serializationHook = null;
+            string? deserializationHook = null;
+
+            var arguments = attributeData.ConstructorArguments;
+            serializationHook = arguments[0].Value as string;
+            deserializationHook = arguments[1].Value as string;
+
+            hooks = (serializationHook, deserializationHook);
+            return serializationHook != null || deserializationHook != null;
+        }
+
+        public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)
+        {
+            usage = null;
+            formats = null;
+            if (!CheckAttribute(attributeData, CodeGenModelAttribute))
+                return false;
+            foreach (var namedArgument in attributeData.NamedArguments)
+            {
+                switch (namedArgument.Key)
+                {
+                    case nameof(Azure.Core.CodeGenModelAttribute.Usage):
+                        usage = ToStringArray(namedArgument.Value.Values);
+                        break;
+                    case nameof(Azure.Core.CodeGenModelAttribute.Formats):
+                        formats = ToStringArray(namedArgument.Value.Values);
+                        break;
+                }
+            }
+
+            return true;
+        }
+
+        private static string[]? ToStringArray(ImmutableArray<TypedConstant> values)
+        {
+            if (values.IsDefaultOrEmpty)
+            {
+                return null;
+            }
+
+            return values
+                .Select(v => (string?)v.Value)
+                .OfType<string>()
+                .ToArray();
+        }
     }
 }
