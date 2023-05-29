@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Input.Source
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol serializationAttribute, INamedTypeSymbol serializationHooksAttribute, INamedTypeSymbol? existingType)
+        public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol? existingType)
         {
             _existingType = existingType;
             _propertyMappings = new();
@@ -32,17 +32,17 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     var attributeTypeSymbol = attributeData.AttributeClass;
                     // handle CodeGenMember attribute
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, memberAttribute) && TryGetCodeGenMemberAttributeValue(member, attributeData, out var schemaMemberName))
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberAttribute) && TryGetCodeGenMemberAttributeValue(member, attributeData, out var schemaMemberName))
                     {
                         _propertyMappings.Add(schemaMemberName, member);
                     }
                     string[]? serializationPath = null;
                     (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberSerializationAttribute) && TryGetSerializationAttributeValue(member, attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
                     }
-                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, serializationHooksAttribute) && TryGetSerializationHooks(member, attributeData, out var hooks))
+                    if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol, codeGenAttributes.CodeGenMemberSerializationHooksAttribute) && TryGetSerializationHooks(member, attributeData, out var hooks))
                     {
                         serializationHooks = hooks;
                     }
@@ -57,7 +57,8 @@ namespace AutoRest.CSharp.Input.Source
             {
                 foreach (var attributeData in existingType.GetAttributes())
                 {
-                    if (SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, modelAttribute))
+                    var attributeClass = attributeData.AttributeClass;
+                    if (SymbolEqualityComparer.Default.Equals(attributeClass, codeGenAttributes.CodeGenModelAttribute))
                     {
                         foreach (var namedArgument in attributeData.NamedArguments)
                         {
