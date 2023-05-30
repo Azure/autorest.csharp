@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Input.Source
             return name != null;
         }
 
-        public bool TryGetSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string[] propertyNames)
+        public bool TryGetCodeGenMemberSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string[] propertyNames)
         {
             propertyNames = null;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationAttribute))
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
         {
             hooks = default;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
