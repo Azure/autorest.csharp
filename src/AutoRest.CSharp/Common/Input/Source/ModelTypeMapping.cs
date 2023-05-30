@@ -38,12 +38,12 @@ namespace AutoRest.CSharp.Input.Source
                         _propertyMappings.Add(schemaMemberName, member);
                     }
                     // handle CodeGenMemberSerialization attribute
-                    if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var pathResult))
+                    if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
                     }
                     // handle CodeGenMemberSerializationHooks attribute
-                    if (codeGenAttributes.TryGetCodeGenSerializationHooksAttributeValue(attributeData, out var hooks))
+                    if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var hooks))
                     {
                         serializationHooks = hooks;
                     }
