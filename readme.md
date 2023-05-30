@@ -541,15 +541,18 @@ namespace Azure.Service.Models
 
 ### Customize serialization/deserialization methods
 
+#### Change the serialized name of a property
+
 If you want to change the property name that serializes into the JSON or deserializes from the JSON, you could define your own property name using the `CodeGenMemberSerialization` attribute.
 
 <details>
 
 For instance, we have a model class `Cat` with property `Name` and `Color`:
 
-**Generated code before (Generated/Models/Cat.cs):**
+**Generated code before:**
 
 ``` C#
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -561,22 +564,24 @@ namespace Azure.Service.Models
 }
 ```
 
-Now we want to change the property name `Name` to `catName` in the serialized JSON, we could do the following: Define a partial class and the property you want to change in the partial class, and add `CodeGenMemberSerialization` attribute to it:
+**Add customized model:**
 
 ``` C#
+// Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
     {
-        [CodeGenMemberSerialization("catName")]
+        [CodeGenMemberSerialization("catName")] // the new serialized name
         public string Name { get; set; }
     }
 }
 ```
 
-**Generated code after (Generated/Models/Cat.cs):**
+**Generated code after:**
 
 ``` diff
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -588,9 +593,8 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Model.Serialization.cs):**
-
 ``` diff
+// Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat : IUtf8JsonSerializable
@@ -634,13 +638,74 @@ namespace Azure.Service.Models
 }
 ```
 
+#### Change the hierarchy of a property in the serialized JSON
+
 If you want to change the layer of the property in the json, you can add all the elements in the json path of your property to the attribute, then the generator will generate the property into the JSON in the correct hierarchy.
 
 **NOTE: Introducing extra layers in serialized JSON only works for mgmt plane and HLC models, does not work for DPG models.**
 
-For instance, to move `Name` property under property `properties` and rename to `catName`, we need to define a partial class and have the following content:
+For instance, we want to move `Name` property in the model `Cat` to make it serialized under property `properties` and rename to `catName`.
+
+**Generated code before:**
 
 ``` C#
+// Generated/Models/Cat.cs
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+        public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+
+// Generated/Models/Cat.Serialization.cs
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("color"u8);
+            writer.WriteStringValue(Color);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color);
+        }
+    }
+}
+```
+
+**Add customized model:**
+
+``` C#
+// Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -651,9 +716,10 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Cat.cs):**
+**Generated code after:**
 
 ``` diff
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -665,9 +731,8 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Model.Serialization.cs):**
-
 ``` diff
+// Generated/Models/Model.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat : IUtf8JsonSerializable
@@ -722,25 +787,13 @@ namespace Azure.Service.Models
 
 </details>
 
+#### Change the implementation of serialization/deserialization method of one particular property
+
 If you want to change the implementation of serialization/deserialization method of one particular property, you could define your own hook methods and assign them to a property using the `CodeGenMemberSerializationHooks` attribute.
 
 <details>
 
-Define a partial class and add the property you want to change in the partial class, and add `CodeGenMemberSerializationHooks` attribute to it:
-
-``` C#
-public partial class Cat
-{
-    [CodeGenMemberSerialization(SerializationHook = "<SerializationHookMethodName>", SerializationValueHook = "<SerializationValueHookMethodName>", DeserializationValueHook = "<DeserializationValueHookMethodName>")]
-    public string Name { get; set; }
-}
-```
-
-In these three properties of this attribute, `SerializationHook` and `SerializationValueHook` controls the serialization, and `DeserializationValueHook` controls deserialization. `SerializationHook` is the hook method to serialize **the entire property**, and `SerializationValueHook` is the hook method that only serializes **the value of the property**. When you assign both `SerializationHook` and `SerializationValueHook`, `SerializationValueHook` will be ignored.
-
-Please use the `nameof` expression to avoid typo in the attribute. Also you could leave both the serialization hook and value hook unassigned if you do not want to change the serialization logic, similar you could leave deserialization hook unassigned if you do not want to change the deserialization logic.
-
-The hook methods should have the following signature:
+The `CodeGenMemberSerializationHooks` attribute takes two parameters: `SerializationValueHook` and `DeserializationValueHook`, these are hook method names, and they should have the signature as below:
 
 ``` C#
 // serialization hook and serialization value hook
@@ -764,13 +817,72 @@ internal static void DeserializeSizeProperty(JsonProperty property, ref Optional
 }
 ```
 
-Regenerate the library to see the changes.
+Please use the `nameof` expression to avoid typo in the attribute. Also you could leave both the serialization value hook unassigned if you do not want to change the serialization logic, similar you could leave deserialization hook unassigned if you do not want to change the deserialization logic.
 
-For instance, we have a model class `Cat` with property `Name` and `Color` (see the code above), and we would like to change the way how `Name` property is serialized and deserialized, we should define a partial class and have the following content:
+The `[MethodImpl(MethodImplOptions.AggressiveInlining)]` attribute is recommended for your hook methods to get optimized performance.
 
-**Add customized model (Cat.cs)**
+For instance, we have a model class `Cat` with property `Name` and `Color`, and we would like to change the way how `Name` property is serialized and deserialized.
+
+**Generated code before:**
 
 ``` C#
+// Generated/Models/Cat.cs
+namespace Azure.Service.Models
+{
+    public partial class Cat
+    {
+        /* omit the ctors for brevity */
+        public string Name { get; set; }
+        public string Color { get; set; }
+    }
+}
+
+// Generated/Models/Cat.Serialization.cs
+namespace Azure.Service.Models
+{
+    public partial class Cat : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("color"u8);
+            writer.WriteStringValue(Color);
+            writer.WriteEndObject();
+        }
+
+        internal static Cat DeserializeCat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<string> color = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("color"u8))
+                {
+                    color = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Cat(name, color);
+        }
+    }
+}
+```
+
+**Add customized model:**
+
+``` C#
+// Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -795,9 +907,10 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Cat.cs):**
+**Generated code after:**
 
 ``` diff
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -809,9 +922,8 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Cat.Serialization.cs):**
-
 ``` diff
+// Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat : IUtf8JsonSerializable
@@ -858,57 +970,29 @@ namespace Azure.Service.Models
 }
 ```
 
-You could do the same thing using `SerializationHook` instead of `SerializationValueHook`, which is more flexible but requires more code. For instance
+</details>
 
-**Add customized model (Cat.cs)**
+#### Add a new property to the model with serialization/deserialization
+
+If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenMemberSerialization` attribute and the `CodeGenMemberSerializationHooks` attribute.
+
+<details>
+
+**Generated code before:**
 
 ``` C#
-namespace Azure.Service.Models
-{
-    public partial class Cat
-    {
-        [CodeGenMemberSerializationHooks(SerializationHook = nameof(SerializeName), DeserializationValue = nameof(DeserializeNameValue))]
-        public string Name { get; set; }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SerializeName(Utf8JsonWriter writer)
-        {
-            // using the serialization hook, you get more control when serializing the property
-            // for instance, as an example here we only serialize the name into the payload when the name is tom.
-            if (Name.Equals("Tom", StringComparison.InvariantCultureIgnoreCase))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void DeserializeNameValue(JsonProperty property, ref string name) // the type here is string since name is required
-        {
-            // this is the logic we would like to have for deserialization
-            name = property.Value.GetString().ToLower();
-        }
-    }
-}
-```
-
-**Generated code after (Generated/Models/Cat.cs):**
-
-``` diff
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
     {
         /* omit the ctors for brevity */
--       public string Name { get; set; }
+        public string Name { get; set; }
         public string Color { get; set; }
     }
 }
-```
 
-**Generated code after (Generated/Models/Cat.Serialization.cs):**
-
-``` diff
+// Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat : IUtf8JsonSerializable
@@ -916,14 +1000,10 @@ namespace Azure.Service.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
--           writer.WritePropertyName("name"u8);
--           writer.WriteStringValue(Name);
-+           SerializeName(writer);
-            if (Optional.IsDefined(Color))
-            {
-                writer.WritePropertyName("color"u8);
-                writer.WriteStringValue(Color);
-            }
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("color"u8);
+            writer.WriteStringValue(Color);
             writer.WriteEndObject();
         }
 
@@ -939,8 +1019,7 @@ namespace Azure.Service.Models
             {
                 if (property.NameEquals("name"u8))
                 {
--                   meow = property.Value.GetString();
-+                   DeserializeNameValue(property, ref name);
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("color"u8))
@@ -949,31 +1028,26 @@ namespace Azure.Service.Models
                     continue;
                 }
             }
-            return new Cat(name, color, size);
+            return new Cat(name, color);
         }
     }
 }
 ```
 
-</details>
-
-If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenMemberSerialization` attribute and the `CodeGenMemberSerializationHooks` attribute.
-
-<details>
-
-Define a partial class and add the property you want to add in the partial class, and add `CodeGenMemberSerialization` attribute to it:
+**Add customized model:**
 
 ``` C#
 public partial class Cat
 {
     [CodeGenMemberSerialization("size")]
-    public int? Size { get; set; } // the original Cat class only have Name and Color properties
+    public int? Size { get; set; }
 }
 ```
 
-**Generated code after (Generated/Models/Cat.cs):**
+**Generated code after:**
 
 ``` diff
+// Generated/Models/Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -993,9 +1067,8 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Cat.Serialization.cs):**
-
 ``` diff
+// Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat : IUtf8JsonSerializable
@@ -1026,7 +1099,7 @@ namespace Azure.Service.Models
             }
             string name = default;
             Optional<string> color = default;
-            Optional<int> size = default;
++           Optional<int> size = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -1057,13 +1130,16 @@ You could also add the `CodeGenMemberSerializationHooks` attribute to the proper
 
 </details>
 
+#### Replace the entire serialization/deserialization method
+
 If you want to replace the entire serialization/deserialization method, please use the [Replace any generated member](#replace-any-generated-member) approach to replace serialization/deserialization method with a custom implementation.
 
 <details>
 
-**Generated code before (Generated/Models/Cat.Serialization.cs):**
+**Generated code before:**
 
 ``` C#
+// Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -1112,9 +1188,10 @@ namespace Azure.Service.Models
 }
 ```
 
-**Add customized model (Cat.cs)**
+**Add customized model:**
 
 ``` C#
+// Cat.cs
 namespace Azure.Service.Models
 {
     public partial class Cat
@@ -1153,7 +1230,7 @@ namespace Azure.Service.Models
 }
 ```
 
-**Generated code after (Generated/Models/Model.cs):**
+**Generated code after:**
 
 Generated code won't contain the DeserializeCat method and the custom one would be used for deserialization.
 
