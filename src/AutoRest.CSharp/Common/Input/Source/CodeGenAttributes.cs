@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Input.Source
                 }
             }
 
-            return true;
+            return usage != null || formats != null;
         }
 
         private static string[]? ToStringArray(ImmutableArray<TypedConstant> values)
