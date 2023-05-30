@@ -18,7 +18,6 @@ namespace CustomizationsInCadl.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             WriteRequiredIntValue(writer);
-            WriteOptionalInt(writer);
             if (Optional.IsDefined(AdditionalSerializableProperty))
             {
                 writer.WritePropertyName("additionalSerializableProperty"u8);
@@ -46,7 +45,6 @@ namespace CustomizationsInCadl.Models
                 return null;
             }
             int requiredInt = default;
-            Optional<int?> optionalInt = default;
             Optional<int> additionalSerializableProperty = default;
             Optional<int?> additionalNullableSerializableProperty = default;
             foreach (var property in element.EnumerateObject())
@@ -54,16 +52,6 @@ namespace CustomizationsInCadl.Models
                 if (property.NameEquals("requiredInt"u8))
                 {
                     DeserializeRequiredIntValue(property, ref requiredInt);
-                    continue;
-                }
-                if (property.NameEquals("optionalInt"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        optionalInt = null;
-                        continue;
-                    }
-                    optionalInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("additionalSerializableProperty"u8))
@@ -86,7 +74,7 @@ namespace CustomizationsInCadl.Models
                     continue;
                 }
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, Optional.ToNullable(optionalInt), additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

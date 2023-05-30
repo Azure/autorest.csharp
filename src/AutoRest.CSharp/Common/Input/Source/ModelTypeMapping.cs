@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Input.Source
             foreach (ISymbol member in GetMembers(existingType))
             {
                 string[]? serializationPath = null;
-                (string? SerializationHook, string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
+                (string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
@@ -38,19 +38,19 @@ namespace AutoRest.CSharp.Input.Source
                         _propertyMappings.Add(schemaMemberName, member);
                     }
                     // handle CodeGenMemberSerialization attribute
-                    if (codeGenAttributes.TryGetSerializationAttributeValue(attributeData, out var pathResult))
+                    if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
                     }
                     // handle CodeGenMemberSerializationHooks attribute
-                    if (codeGenAttributes.TryGetSerializationHooksAttributeValue(attributeData, out var hooks))
+                    if (codeGenAttributes.TryGetCodeGenSerializationHooksAttributeValue(attributeData, out var hooks))
                     {
                         serializationHooks = hooks;
                     }
                 }
                 if (serializationPath != null || serializationHooks != null)
                 {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
                 }
             }
 

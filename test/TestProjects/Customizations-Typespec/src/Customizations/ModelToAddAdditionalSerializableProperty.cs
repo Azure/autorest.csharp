@@ -28,27 +28,6 @@ namespace CustomizationsInCadl.Models
         [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(WriteRequiredIntValue), DeserializationValueHook = nameof(DeserializeRequiredIntValue))]
         public int RequiredInt { get; set; }
 
-        /// <summary>
-        /// Optional int.
-        /// This property is mocking this scenario:
-        /// We want to write null to the request when the value of this property is null.
-        /// </summary>
-        [CodeGenMemberSerializationHooks(SerializationHook = nameof(WriteOptionalInt))]
-        public int? OptionalInt { get; set; }
-
-        private void WriteOptionalInt(Utf8JsonWriter writer)
-        {
-            writer.WritePropertyName("optionalInt");
-            if (OptionalInt.HasValue)
-            {
-                writer.WriteNumberValue(OptionalInt.Value);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
-        }
-
         private void WriteRequiredIntValue(Utf8JsonWriter writer)
         {
             writer.WriteStringValue(RequiredInt.ToString());

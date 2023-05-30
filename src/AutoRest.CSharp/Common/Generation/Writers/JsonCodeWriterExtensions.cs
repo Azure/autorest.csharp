@@ -313,44 +313,36 @@ namespace AutoRest.CSharp.Generation.Writers
                     continue;
                 }
 
-                if (property.SerializationHook is not null)
+                using (writer.WriteDefinedCheck(property))
                 {
-                    // write the serialization hook
-                    writer.Line($"{property.SerializationHook}({writerName});");
-                }
-                else
-                {
-                    using (writer.WriteDefinedCheck(property))
+                    var ifScope = writer.WritePropertyNullCheckIf(property);
+                    using (ifScope)
                     {
-                        var ifScope = writer.WritePropertyNullCheckIf(property);
-                        using (ifScope)
+                        var propertyType = property.PropertyType;
+                        var declarationName = property.PropertyName;
+
+                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
+
+                        if (property.SerializationValueHook is not null)
                         {
-                            var propertyType = property.PropertyType;
-                            var declarationName = property.PropertyName;
-
-                            writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
-
-                            if (property.SerializationValueHook is not null)
-                            {
-                                // write the serialization value hook
-                                writer.Line($"{property.SerializationValueHook}({writerName});");
-                            }
-                            else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
-                            {
-                                writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
-                            }
-                            else
-                            {
-                                writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
-                            }
+                            // write the serialization value hook
+                            writer.Line($"{property.SerializationValueHook}({writerName});");
                         }
-
-                        if (ifScope != null)
+                        else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
-                            using (writer.Scope($"else"))
-                            {
-                                writer.Line($"{writerName}.WriteNull({property.SerializedName:L});");
-                            }
+                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
+                        }
+                        else
+                        {
+                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
+                        }
+                    }
+
+                    if (ifScope != null)
+                    {
+                        using (writer.Scope($"else"))
+                        {
+                            writer.Line($"{writerName}.WriteNull({property.SerializedName:L});");
                         }
                     }
                 }
@@ -720,7 +712,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (format == SerializationFormat.Duration_Seconds)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
-                } else if (format == SerializationFormat.Duration_Seconds_Float)
+                }
+                else if (format == SerializationFormat.Duration_Seconds_Float)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }

@@ -503,21 +503,6 @@
         "IsRequired": true,
         "IsReadOnly": false,
         "IsDiscriminator": false
-       },
-       {
-        "$id": "68",
-        "Name": "optionalInt",
-        "SerializedName": "optionalInt",
-        "Description": "Optional int",
-        "Type": {
-         "$id": "69",
-         "Name": "int32",
-         "Kind": "Int32",
-         "IsNullable": false
-        },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
        }
       ]
      },
@@ -545,18 +530,18 @@
  ],
  "Clients": [
   {
-   "$id": "70",
+   "$id": "68",
    "Name": "CustomizationsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "71",
+     "$id": "69",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "72",
+       "$id": "70",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -573,11 +558,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "71",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "74",
+        "$id": "72",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -592,19 +577,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "73",
         "Type": {
-         "$ref": "74"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "76",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "75",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -619,20 +604,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "76",
         "Type": {
-         "$ref": "77"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "79",
+       "$id": "77",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "80",
+        "$id": "78",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -647,9 +632,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "79",
         "Type": {
-         "$id": "82",
+         "$id": "80",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -660,7 +645,7 @@
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "81",
        "StatusCodes": [
         200
        ],
@@ -685,7 +670,7 @@
     }
    ],
    "Protocol": {
-    "$id": "84"
+    "$id": "82"
    },
    "Creatable": true
   }

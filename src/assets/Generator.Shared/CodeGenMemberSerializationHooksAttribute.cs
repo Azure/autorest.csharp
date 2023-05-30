@@ -11,12 +11,6 @@ namespace Azure.Core
     internal class CodeGenMemberSerializationHooksAttribute : Attribute
     {
         /// <summary>
-        /// Gets or sets the method name to use when serializing the property (property name included)
-        /// The signature of the serialization hook method must be or compatible with when invoking:
-        /// private void SerializeHook(Utf8JsonWriter writer);
-        /// </summary>
-        public string? SerializationHook { get; set; }
-        /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
         /// private void SerializeHook(Utf8JsonWriter writer);

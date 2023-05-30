@@ -21,9 +21,6 @@ using Azure.Core;
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
     requiredInt: int32;
-
-    @doc("Optional int")
-    optionalInt?: int32;
 }
 
 @doc("Public model made internal")
