@@ -22,7 +22,7 @@ namespace CustomizationsInCadl.Models
         /// <param name="optionalInt"> Optional int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
         /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
-        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int? optionalInt, int additionalSerializableProperty, int additionalNullableSerializableProperty)
+        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int? optionalInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty)
         {
             RequiredInt = requiredInt;
             OptionalInt = optionalInt;

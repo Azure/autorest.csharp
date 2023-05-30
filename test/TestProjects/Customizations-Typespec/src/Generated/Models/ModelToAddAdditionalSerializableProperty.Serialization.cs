@@ -26,8 +26,15 @@ namespace CustomizationsInCadl.Models
             }
             if (Optional.IsDefined(AdditionalNullableSerializableProperty))
             {
-                writer.WritePropertyName("additionalNullableSerializableProperty"u8);
-                writer.WriteNumberValue(AdditionalNullableSerializableProperty);
+                if (AdditionalNullableSerializableProperty != null)
+                {
+                    writer.WritePropertyName("additionalNullableSerializableProperty"u8);
+                    writer.WriteNumberValue(AdditionalNullableSerializableProperty.Value);
+                }
+                else
+                {
+                    writer.WriteNull("additionalNullableSerializableProperty");
+                }
             }
             writer.WriteEndObject();
         }
@@ -41,7 +48,7 @@ namespace CustomizationsInCadl.Models
             int requiredInt = default;
             Optional<int?> optionalInt = default;
             Optional<int> additionalSerializableProperty = default;
-            Optional<int> additionalNullableSerializableProperty = default;
+            Optional<int?> additionalNullableSerializableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -72,13 +79,14 @@ namespace CustomizationsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        additionalNullableSerializableProperty = null;
                         continue;
                     }
                     additionalNullableSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, Optional.ToNullable(optionalInt), additionalSerializableProperty, additionalNullableSerializableProperty);
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, Optional.ToNullable(optionalInt), additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
