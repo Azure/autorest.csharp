@@ -3,7 +3,7 @@
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
 
-Write-Host 'Generating test CADL json...'
+Write-Host 'Generating test TypeSpec json...'
 & (Join-Path $PSScriptRoot 'TypespecGenerate.ps1')
 
 Write-Host 'Checking generated file differences...'

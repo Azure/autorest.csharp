@@ -81,15 +81,15 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     }
     else
     {
-        # emit cadl json
+        # emit typespec json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
         $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
-            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
-            $emitCommand = "npx tsp compile $cadlFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
+            $emitCommand = "npx tsp compile $typespecFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }
         Finally 
@@ -108,7 +108,7 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
 function Invoke-TypespecSetup()
 {
     # build emitter
-    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
+    $emitterPath = Join-Path $PSScriptRoot ".." "src" "TypeSpec.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
 

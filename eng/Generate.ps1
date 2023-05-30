@@ -10,7 +10,7 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $swaggerDefinitions = @{};
 $swaggerTestDefinitions = @{};
-$cadlDefinitions = @{};
+$tspDefinitions = @{};
 
 # Test server test configuration
 $testProjectDataFile = Join-Path $repoRoot 'eng' 'testProjects.json'
@@ -20,7 +20,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
+$typespecEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -44,11 +44,11 @@ function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [str
     if ($mainFile -eq "") {
         $mainFile = Get-TypeSpec-Entry $output
     }
-    $cadlDefinitions[$name] = @{
+    $tspDefinitions[$name] = @{
         'projectName' = $name;
         'output'      = $output;
         'mainFile'    = $mainFile;
-        'arguments'   = "$cadlEmitOptions $arguments"
+        'arguments'   = "$typespecEmitOptions $arguments"
     }
 }
 
@@ -67,8 +67,8 @@ function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [stri
     if (Test-Path "$projectDirectory/*.sln") {
         $projectDirectory = Join-Path $projectDirectory "src"
     }
-    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
+    $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
+    Add-Typespec "$projectPrefix$testName" $projectDirectory $tspMain
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
@@ -264,8 +264,8 @@ $swaggerDefinitions.Keys | ForEach-Object {
 $swaggerTestDefinitions.Keys | ForEach-Object {
     $testProjectEntries["$_.Tests"] = $swaggerTestDefinitions[$_];
 }
-$cadlDefinitions.Keys | ForEach-Object {
-    $testProjectEntries[$_] = $cadlDefinitions[$_];
+$tspDefinitions.Keys | ForEach-Object {
+    $testProjectEntries[$_] = $tspDefinitions[$_];
 }
 
 foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
@@ -314,13 +314,13 @@ if (![string]::IsNullOrWhiteSpace($filter)) {
 }
 
 if ($reset -or $env:TF_BUILD) {
-    $cadlCount = ([string]::IsNullOrWhiteSpace($filter) ? $cadlDefinitions : $cadlDefinitions.Keys.Where({ $_ -match $filter })).Count
-    $swaggerCount = $keys.Count - $cadlCount
+    $typespecCount = ([string]::IsNullOrWhiteSpace($filter) ? $tspDefinitions : $tspDefinitions.Keys.Where({ $_ -match $filter })).Count
+    $swaggerCount = $keys.Count - $typespecCount
     if ($swaggerCount -gt 0) {
         AutoRest-Reset;
     }
 
-    if ($cadlCount -gt 0) {
+    if ($typespecCount -gt 0) {
         Invoke-TypespecSetup
     }
 }
@@ -347,7 +347,7 @@ $keys | % { $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
     }
 } -ThrottleLimit $parallel
 
-$keys | % { $cadlDefinitions[$_] } | ForEach-Object -Parallel {
+$keys | % { $tspDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
         Invoke-Typespec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
