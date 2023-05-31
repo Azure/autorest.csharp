@@ -5,5 +5,5 @@ export const projectedNameJsonKey = "json";
 export const projectedNameCSharpKey = "csharp";
 export const projectedNameClientKey = "client";
 export const mockApiVersion = "0000-00-00";
-export const tspOutputFileName = "tsp.json";
+export const tspOutputFileName = "tspCodeModel.json";
 export const configurationFileName = "Configuration.json";

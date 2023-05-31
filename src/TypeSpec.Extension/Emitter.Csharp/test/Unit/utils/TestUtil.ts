@@ -72,7 +72,7 @@ export function createEmitterContext(
         program: program,
         emitterOutputDir: "./",
         options: {
-            outputFile: "tsp.json",
+            outputFile: "tspCodeModel.json",
             logFile: "log.json",
             skipSDKGeneration: false,
             "new-project": false,

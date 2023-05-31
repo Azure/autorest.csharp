@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
-            var tspInputFile = Path.Combine(outputPath, "tsp.json");
+            var tspInputFile = Path.Combine(outputPath, "tspCodeModel.json");
 
             GeneratedCodeWorkspace workspace;
             if (File.Exists(tspInputFile))
@@ -66,12 +66,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                throw new InvalidOperationException($"Neither CodeModel.yaml nor tsp.json exist in {outputPath} folder.");
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor tspCodeModel.json exist in {outputPath} folder.");
             }
 
             if (options.ClearOutputFolder)
             {
-                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tsp.json" };
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
                 DeleteDirectory(sampleOutputPath, keepFiles);
             }

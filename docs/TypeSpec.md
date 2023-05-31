@@ -8,24 +8,24 @@
 - TypeSpec C# Emitter: part of the TypeSpec pipeline. Emitters are used by TypeSpec compiler to output result of its work.
 - CodeModel.yaml: generator input in Swagger pipeline.
 - CodeModel: deserialized object representation of CodeModel.yaml in autorest.csharp.
-- tsp.json: generator input in TypeSpec pipeline produced by TypeSpec emitter.
-- InputModel: deserialized object representation of tsp.json in autorest.csharp.
+- tspCodeModel.json: generator input in TypeSpec pipeline produced by TypeSpec emitter.
+- InputModel: deserialized object representation of tspCodeModel.json in autorest.csharp.
 - OutputModel: variety of objects and object factories used by code writers to generate C# code.
 
 ## TypeSpec Pipeline Overview
 
-C# code generation TypeSpec pipeline consists of two major components: TypeSpec compiler that inputs API specification and outputs tsp.json using [TypeSpec C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/TypeSpec.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)), executed in standalone mode, which inputs tsp.json and outputs C# files that contain  clients and models for interaction with cloud service.
+C# code generation TypeSpec pipeline consists of two major components: TypeSpec compiler that inputs API specification and outputs tspCodeModel.json using [TypeSpec C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/TypeSpec.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)), executed in standalone mode, which inputs tspCodeModel.json and outputs C# files that contain  clients and models for interaction with cloud service.
 
 ## TypeSpec C# Emitter
-Emitter generates tsp.json from subset of TypeSpec compiler output object graph. Resulting output is a standard JSON file with circular references support. It doesn't have explicit specification. Instead, it is assumed that InputModel types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/TypeSpec.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other. When new features in generator require InputModel types to be modified or extended, there is no backwards compatibility requirement. Hence, releases of autorest.csharp and TypeSpec C# Emitter must be synchronized so that autorest.csharp can deserialize `tsp.json` produced by emitter without errors.
+Emitter generates tspCodeModel.json from subset of TypeSpec compiler output object graph. Resulting output is a standard JSON file with circular references support. It doesn't have explicit specification. Instead, it is assumed that InputModel types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/TypeSpec.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other. When new features in generator require InputModel types to be modified or extended, there is no backwards compatibility requirement. Hence, releases of autorest.csharp and TypeSpec C# Emitter must be synchronized so that autorest.csharp can deserialize `tspCodeModel.json` produced by emitter without errors.
 
-Emitter can apply C#-specific transformations and generation rules to the spec before or in process of tsp.json generation (language-agnostic transformations and rules are expected to be applied to spec before it becomes available to the emitter).
+Emitter can apply C#-specific transformations and generation rules to the spec before or in process of tspCodeModel.json generation (language-agnostic transformations and rules are expected to be applied to spec before it becomes available to the emitter).
 
 ## InputModel vs OutputModel
 
-To represent tsp.json in memory, generator deserializes JSON into InputModel object graph. Then, with respect of configuration settings and customizations extracted from partial types and assembly level attributes (via `SourceInputModel`), generator creates OutputModel object graph. Various entities from OutputModel will be used by code writers to generate C# files. 
+To represent tspCodeModel.json in memory, generator deserializes JSON into InputModel object graph. Then, with respect of configuration settings and customizations extracted from partial types and assembly level attributes (via `SourceInputModel`), generator creates OutputModel object graph. Various entities from OutputModel will be used by code writers to generate C# files. 
 
-InputModel is a slim, unvalidated representation of the tsp.json in memory. OutputModel is a rich, self-consistent set of objects that has all the data code writers need to generate valid C# code.
+InputModel is a slim, unvalidated representation of the tspCodeModel.json in memory. OutputModel is a rich, self-consistent set of objects that has all the data code writers need to generate valid C# code.
 
 With the exception of enums, no object should belong to InputModel and OutputModel at the same time.
 
@@ -63,7 +63,7 @@ flowchart TB
       C20((TypeSpec C# Emitter)) --> C30 & C31
       C21(C# specific\noverrides) --> C20
     end
-    C30[/tsp.json/]:::input --> C40
+    C30[/tspCodeModel.json/]:::input --> C40
     C31[/configuration.json/]:::input --> C61
     C01 --> C50 & C90
     subgraph G3 [ ]

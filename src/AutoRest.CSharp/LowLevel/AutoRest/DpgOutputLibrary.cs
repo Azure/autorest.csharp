@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
-        private readonly bool _isTypeSpecInput;
+        private readonly bool _isTspInput;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
@@ -25,12 +25,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, AspDotNetExtensionTypeProvider aspDotNetExtension, bool isTypeSpecInput)
+        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, AspDotNetExtensionTypeProvider aspDotNetExtension, bool isTspInput)
         {
             TypeFactory = new TypeFactory(this);
             _enums = enums;
             _models = models;
-            _isTypeSpecInput = isTypeSpecInput;
+            _isTspInput = isTspInput;
             RestClients = restClients;
             ClientOptions = clientOptions;
             AspDotNetExtension = aspDotNetExtension;
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isTypeSpecInput || enumType.Usage == InputModelTypeUsage.None)
+            if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }
