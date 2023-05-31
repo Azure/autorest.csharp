@@ -245,6 +245,7 @@ namespace CustomizationsInCadl.Samples
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
                 {
                     AdditionalSerializableProperty = 1234,
+                    AdditionalNullableSerializableProperty = 1234,
                 },
             };
             var result = await client.RoundTripAsync(input);

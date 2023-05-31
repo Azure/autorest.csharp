@@ -20,7 +20,7 @@ using Azure.Core;
 @doc("Model to add additional serializable property")
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
-    requiredInt: int32; 
+    requiredInt: int32;
 }
 
 @doc("Public model made internal")
