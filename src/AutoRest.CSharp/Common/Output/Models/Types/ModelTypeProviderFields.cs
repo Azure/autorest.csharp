@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualBasic.FileIO;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -44,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var originalFieldName = discriminator.ToCleanName();
                 var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
-                var field = CreateField(originalFieldName, typeof(string), typeof(string), inputModel, inputModelProperty);
+                var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty, false);
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
                 var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
@@ -57,13 +58,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
-                var (originalFieldType, fieldValueType) = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                var optionalViaNullability = !inputModelProperty.IsRequired &&
+                                             !inputModelProperty.Type.IsNullable &&
+                                             !TypeFactory.IsCollectionType(propertyType);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, serialization, originalFieldType, inputModel, inputModelProperty, typeFactory)
-                    : CreateField(originalFieldName, originalFieldType, fieldValueType, inputModel, inputModelProperty);
+                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
+                    : CreateField(originalFieldName, propertyType, inputModel, inputModelProperty, optionalViaNullability);
 
                 if (existingMember is not null)
                 {
@@ -93,11 +97,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-                    var originalType = GetExistingType(serializationMapping.ExistingMember).GetCSharpType();
                     var isReadOnly = IsReadOnly(serializationMapping.ExistingMember);
-                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String, originalType.IsNullable), false, isReadOnly, false);
-                    // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(string), inputModel, inputModelProperty, typeFactory);
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", InputPrimitiveType.Object, false, isReadOnly, false);
+                    // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
+                    // therefore the top type here is reasonable
+                    // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
+                    // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModel, inputModelProperty, typeFactory, false);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
                     serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
@@ -119,7 +125,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, CSharpType fieldValueType, InputModelType inputModel, InputModelProperty inputModelProperty)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool optionalViaNullability)
         {
             var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
                 // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
@@ -133,6 +139,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
                 propertyIsOptionalInOutputModel; // a property will explicitly omit its setter when it is useless
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+
+            var valueType = originalType;
+            if (optionalViaNullability)
+            {
+                originalType = originalType.WithNullable(true);
+            }
 
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
@@ -153,23 +165,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new FieldDeclaration(
                 $"{inputModelProperty.Description}",
                 fieldModifiers,
-                fieldType,
-                fieldValueType,
+                originalType,
+                valueType,
                 declaration,
-                GetPropertyDefaultValue(fieldType, inputModelProperty),
+                GetPropertyDefaultValue(originalType, inputModelProperty),
                 inputModelProperty.IsRequired,
                 inputModelProperty.SerializationFormat,
+                OptionalViaNullability: optionalViaNullability,
                 IsField: false,
                 WriteAsProperty: true,
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {
-            var existingMemberTypeSymbol = GetExistingType(existingMember);
-
-            // Changing of model types is not supported
-            var fieldType = originalType.IsFrameworkType ? existingMemberTypeSymbol.GetCSharpType() : originalType;
+            if (optionalViaNullability)
+            {
+                originalType = originalType.WithNullable(true);
+            }
+            var fieldType = BuilderHelpers.GetTypeFromExisting(existingMember, originalType, typeFactory);
+            var valueType = fieldType;
+            if (optionalViaNullability)
+            {
+                valueType = valueType.WithNullable(false);
+            }
 
             var fieldModifiers = existingMember.DeclaredAccessibility switch
             {
@@ -183,12 +202,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            // TODO -- come up a way to get the value type from customized code
-            // when creating field from existing member (customized code), here we use the same type as its value type.
-            // for 2 reasons:
-            // 1. it works
-            // 2. we do not really have an efficiant way to get the value type of a property because we really cannot relying on the information in the schema when you have to do a customization, and from the csharp code, there is a lot of information we cannot get.
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, valueType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
         private static INamedTypeSymbol GetExistingType(ISymbol existingMember) => existingMember switch
@@ -205,23 +219,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
 
-        private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
+        private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
-            if (modelUsage == InputModelTypeUsage.Output ||
+            if (!usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {
                 propertyType = TypeFactory.GetOutputType(propertyType);
             }
 
-            var valueType = propertyType;
-            if (propertyType.IsValueType && !property.IsRequired)
-            {
-                propertyType = propertyType.WithNullable(true);
-            }
-
-            return (propertyType, valueType);
+            return propertyType;
         }
 
         private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, InputModelProperty inputModelProperty)

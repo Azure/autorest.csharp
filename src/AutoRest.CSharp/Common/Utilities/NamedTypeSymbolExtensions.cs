@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Utilities
         private const string GeneratedLibrary = "GeneratedCode";
         private static readonly SymbolDisplayFormat FullyQualifiedNameFormat = new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
 
+        // TODO -- to be removed when we refactor the code of sample generator in DPG. This method duplicated the existing method TypeFactory.CreateType
         public static CSharpType? GetCSharpType(this INamedTypeSymbol symbol, TypeFactory factory)
         {
             if (symbol.ContainingAssembly.Name == GeneratedLibrary)
