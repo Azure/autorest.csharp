@@ -10,25 +10,21 @@ namespace Azure.Core
     [AttributeUsage(AttributeTargets.Property)]
     internal class CodeGenMemberSerializationHooksAttribute : Attribute
     {
-        public string? SerializationHookMethodName { get; }
-        public string? DeserializationHookMethodName { get; }
-
         /// <summary>
-        /// Construct information about the serialization and deserialization hook methods for this property.
+        /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
         /// private void SerializeHook(Utf8JsonWriter writer);
-        /// The signature of the deserialization hook method must be or compatible with when invoking:
+        /// </summary>
+        public string? SerializationValueHook { get; set; }
+        /// <summary>
+        /// Gets or sets the method name to use when deserializing the property value from the JSON
         /// private static void DeserializationHook(JsonProperty property, ref TypeOfTheProperty propertyValue); // if the property is required
         /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
-        ///
-        /// Leave null value on either serializationHookMethodName or deserializationHookMethodName to indicate that the generator will not change its corresponding behavior.
         /// </summary>
-        /// <param name="serializationHookMethodName">the method name of the serialization hook method</param>
-        /// <param name="deserializationHookMethodName">the method name of the deserialization hook method</param>
-        public CodeGenMemberSerializationHooksAttribute(string? serializationHookMethodName, string? deserializationHookMethodName)
+        public string? DeserializationValueHook { get; set; }
+
+        public CodeGenMemberSerializationHooksAttribute()
         {
-            SerializationHookMethodName = serializationHookMethodName;
-            DeserializationHookMethodName = deserializationHookMethodName;
         }
     }
 }

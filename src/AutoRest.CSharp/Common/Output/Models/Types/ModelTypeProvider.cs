@@ -176,8 +176,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         inputModelProperty.IsReadOnly,
                         false,
                         optionalViaNullability,
-                        serializationHook: property.SerializationMapping?.SerializationHook,
-                        deserializationHook: property.SerializationMapping?.DeserializationHook);
+                        serializationValueHook: property.SerializationMapping?.SerializationValueHook,
+                        deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
                 }
             }
         }

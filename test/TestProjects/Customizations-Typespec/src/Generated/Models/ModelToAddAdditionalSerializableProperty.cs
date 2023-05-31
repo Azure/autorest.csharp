@@ -20,10 +20,12 @@ namespace CustomizationsInCadl.Models
         /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
-        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty)
+        /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
+        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty)
         {
             RequiredInt = requiredInt;
             AdditionalSerializableProperty = additionalSerializableProperty;
+            AdditionalNullableSerializableProperty = additionalNullableSerializableProperty;
         }
     }
 }
