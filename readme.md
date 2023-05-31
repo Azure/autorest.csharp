@@ -1232,7 +1232,7 @@ namespace Azure.Service.Models
 
 **Generated code after:**
 
-Generated code won't contain the DeserializeCat method and the custom one would be used for deserialization.
+Generated code won't contain the `IUtf8JsonSerializable.Write` or `DeserializeCat` method and the custom one would be used for deserialization.
 
 </details>
 
