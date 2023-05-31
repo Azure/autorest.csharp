@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
-                parameters,
+                (operation.GroupParameters ? parameters.Select(p => (p != KnownParameters.WaitForCompletion && p != KnownParameters.RequestContext) ? p with { IsPropertyBag = true } : p ).ToArray() : parameters),
                 responses,
                 null,
                 operation.BufferResponse,

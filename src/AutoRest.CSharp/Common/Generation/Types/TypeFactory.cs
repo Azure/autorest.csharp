@@ -41,6 +41,8 @@ namespace AutoRest.CSharp.Generation.Types
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
+            InputModelType { Namespace: "Azure.Core", Name: "RequestContent" } => KnownParameters.RequestContent.Type,
+            InputModelType { Namespace: "Azure.Core", Name: "RequestContentNullable" } => KnownParameters.RequestContentNullable.Type,
             InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {

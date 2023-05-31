@@ -9,4 +9,9 @@ input-file: $(this-folder)/Parameters.json
 namespace: Azure.ParametersLowlevel
 security: AzureKey
 security-header-name: Fake-Subscription-Key
+group-parameters-method-list:
+- groupParametersWithOptionalBody
+- groupParametersWithRequiredBody
+csharpgen:
+  attach: true
 ```

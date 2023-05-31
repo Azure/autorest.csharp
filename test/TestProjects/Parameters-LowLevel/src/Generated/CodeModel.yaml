@@ -784,6 +784,280 @@ operationGroups:
             name: OptionalPathBodyParametersWithMixedSequence
             description: Optional path/body parameters with mixed sequence
         protocol: !Protocols {}
+      - !Operation 
+        operationId: groupParametersWithOptionalBody
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_33
+            schema: *ref_4
+            clientDefaultValue: 123
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 123
+            language: !Languages 
+              default:
+                name: id
+                description: Query parameter Id
+                serializedName: id
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_34
+            schema: *ref_4
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Query parameter top
+                serializedName: top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_35
+            schema: *ref_4
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: skip
+                description: Query parameter skip
+                serializedName: skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_36
+            schema: *ref_4
+            clientDefaultValue: 50
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 50
+            language: !Languages 
+              default:
+                name: max
+                description: Query parameter max
+                serializedName: max
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_37
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Query parameter status
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requestMediaTypes:
+          application/json: !Request &ref_32
+            parameters:
+              - !Parameter 
+                schema: *ref_11
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_31
+                schema: *ref_12
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: content
+                    description: Request content
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_31
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /test6/{id}/{name}
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_32
+        signatureParameters:
+          - *ref_33
+          - *ref_34
+          - *ref_35
+          - *ref_36
+          - *ref_37
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GroupParametersWithOptionalBody
+            description: Optional parameters with mixed sequence
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: groupParametersWithRequiredBody
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_40
+            schema: *ref_4
+            clientDefaultValue: 123
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 123
+            language: !Languages 
+              default:
+                name: id
+                description: Query parameter Id
+                serializedName: id
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_41
+            schema: *ref_4
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Query parameter top
+                serializedName: top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_42
+            schema: *ref_4
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: skip
+                description: Query parameter skip
+                serializedName: skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_43
+            schema: *ref_4
+            clientDefaultValue: 50
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 50
+            language: !Languages 
+              default:
+                name: max
+                description: Query parameter max
+                serializedName: max
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_44
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Query parameter status
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requestMediaTypes:
+          application/json: !Request &ref_39
+            parameters:
+              - !Parameter 
+                schema: *ref_11
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_38
+                schema: *ref_12
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: content
+                    description: Request content
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /test7/{id}/{name}
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_39
+        signatureParameters:
+          - *ref_40
+          - *ref_41
+          - *ref_42
+          - *ref_43
+          - *ref_44
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GroupParametersWithRequiredBody
+            description: Optional parameters with mixed sequence and required body parameter
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ''

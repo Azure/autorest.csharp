@@ -90,8 +90,9 @@ namespace AutoRest.CSharp.Output.Models
                 : Array.Empty<CSharpAttribute>();
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            (var protocolMethodParameters, var propertyBag) = GetProtocolMethodParameters(shouldRequestContextOptional);
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
+
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldRequestContextOptional) : null;
 
@@ -99,14 +100,35 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, propertyBag);
+        }
+
+        private (Parameter[] GroupedParameters, LowLevelPropertyBag? PropertyBag) GetProtocolMethodParameters(bool shouldRequestContextOptional)
+        {
+            var parameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            if (!Operation.GroupParameters)
+            {
+                return (parameters, null);
+            }
+
+            var groupedParameters = parameters.Where(p => p == KnownParameters.WaitForCompletion || p == KnownParameters.RequestContext).ToList();
+            var parametersToGroup = parameters.Where(p => p != KnownParameters.WaitForCompletion && p != KnownParameters.RequestContext);
+            var parametersInPropertyBag = new List<Parameter>(parametersToGroup.Count());
+            foreach (var parameter in parametersToGroup)
+            {
+                parametersInPropertyBag.Add(parameter with { IsPropertyBag = true });
+            }
+            var propertyBag = new LowLevelPropertyBag(Operation.Name, $"{_namespaceName}.Models", parametersInPropertyBag, _typeFactory, Operation.Parameters, null, _sourceInputModel);
+
+            groupedParameters.Insert(groupedParameters.Count == 1 ? 0 : 1, propertyBag.PackParameter); // if only cancellation token, then insert property bag as the first parameter, otherwise insert after WaitUntil
+            return (groupedParameters.ToArray(), propertyBag);
         }
 
         private bool ShouldGenerateConvenienceMethod()
         {
             return Operation.GenerateConvenienceMethod
                 && (!Operation.GenerateProtocolMethod
-                ||_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                || _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !_returnType.Convenience.Equals(_returnType.Protocol));
         }
 

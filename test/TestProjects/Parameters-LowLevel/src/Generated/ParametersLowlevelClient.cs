@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Parameters_LowLevel.Models;
 
 namespace Parameters_LowLevel
 {
@@ -605,6 +606,142 @@ namespace Parameters_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] Optional parameters with mixed sequence
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBodyAsync(GroupParametersWithOptionalBodyOptions,RequestContext)']/*" />
+        public virtual async Task<Response> GroupParametersWithOptionalBodyAsync(GroupParametersWithOptionalBodyOptions options, RequestContext context = null)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.GroupParametersWithOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGroupParametersWithOptionalBodyRequest(options.Name, options.Skip, options.Content, options.Id, options.Top, options.Max, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Optional parameters with mixed sequence
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBody(GroupParametersWithOptionalBodyOptions,RequestContext)']/*" />
+        public virtual Response GroupParametersWithOptionalBody(GroupParametersWithOptionalBodyOptions options, RequestContext context = null)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.GroupParametersWithOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGroupParametersWithOptionalBodyRequest(options.Name, options.Skip, options.Content, options.Id, options.Top, options.Max, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Optional parameters with mixed sequence and required body parameter
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBodyAsync(GroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
+        public virtual async Task<Response> GroupParametersWithRequiredBodyAsync(GroupParametersWithRequiredBodyOptions options, RequestContext context = null)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.GroupParametersWithRequiredBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGroupParametersWithRequiredBodyRequest(options.Name, options.Skip, options.Content, options.Id, options.Top, options.Max, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Optional parameters with mixed sequence and required body parameter
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBody(GroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
+        public virtual Response GroupParametersWithRequiredBody(GroupParametersWithRequiredBodyOptions options, RequestContext context = null)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.GroupParametersWithRequiredBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGroupParametersWithRequiredBodyRequest(options.Name, options.Skip, options.Content, options.Id, options.Top, options.Max, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -723,6 +860,52 @@ namespace Parameters_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/test5/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            if (top != null)
+            {
+                uri.AppendQuery("top", top.Value, true);
+            }
+            uri.AppendQuery("max", max, true);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateGroupParametersWithOptionalBodyRequest(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test6/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            if (top != null)
+            {
+                uri.AppendQuery("top", top.Value, true);
+            }
+            uri.AppendQuery("max", max, true);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateGroupParametersWithRequiredBodyRequest(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test7/", false);
             uri.AppendPath(id, true);
             uri.AppendPath("/", false);
             uri.AppendPath(name, true);

@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Input
             public const string ProjectFolder = "project-folder";
             public const string ExistingProjectfolder = "existing-project-folder";
             public const string ProtocolMethodList = "protocol-method-list";
+            public const string GroupParametersMethodList = "group-parameters-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
@@ -77,6 +78,7 @@ namespace AutoRest.CSharp.Input
             string? projectFolder,
             string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
+            IReadOnlyList<string> groupParametersMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
             IReadOnlyList<string> additionalIntrinsicTypesToTreatEmptyStringAsNull,
@@ -138,6 +140,7 @@ namespace AutoRest.CSharp.Input
 
             _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
+            _groupParametersMethodList = groupParametersMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             _oldModelFactoryEntries = modelFactoryForHlc;
@@ -238,6 +241,9 @@ namespace AutoRest.CSharp.Input
         private static IReadOnlyList<string>? _protocolMethodList;
         public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
+        private static IReadOnlyList<string>? _groupParametersMethodList;
+        public static IReadOnlyList<string> GroupParametersMethodList => _groupParametersMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+
         private static HashSet<string>? _modelsToTreatEmptyStringAsNull;
         public static HashSet<string> ModelsToTreatEmptyStringAsNull => _modelsToTreatEmptyStringAsNull ?? throw new InvalidOperationException("Configuration has not been initialized");
 
@@ -279,6 +285,7 @@ namespace AutoRest.CSharp.Input
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                groupParametersMethodList: autoRest.GetValue<string[]?>(Options.GroupParametersMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),

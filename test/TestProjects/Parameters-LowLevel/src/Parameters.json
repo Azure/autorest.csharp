@@ -258,6 +258,122 @@
           }
         }
       }
+    },
+    "/test6/{id}/{name}": {
+      "post": {
+        "operationId": "groupParametersWithOptionalBody",
+        "description": "Optional parameters with mixed sequence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Query parameter Id",
+            "type": "integer",
+            "required": true,
+            "x-ms-client-default": 123
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Query parameter top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Query parameter skip",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "max",
+            "description": "Query parameter max",
+            "type": "integer",
+            "required": true,
+            "x-ms-client-default": 50
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Query parameter status",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "content",
+            "description": "Request content",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          }
+        }
+      }
+    },
+    "/test7/{id}/{name}": {
+      "post": {
+        "operationId": "groupParametersWithRequiredBody",
+        "description": "Optional parameters with mixed sequence and required body parameter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Query parameter Id",
+            "type": "integer",
+            "required": true,
+            "x-ms-client-default": 123
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Query parameter top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Query parameter skip",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "max",
+            "description": "Query parameter max",
+            "type": "integer",
+            "required": true,
+            "x-ms-client-default": 50
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Query parameter status",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "content",
+            "description": "Request content",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          }
+        }
+      }
     }
   },
   "definitions": {

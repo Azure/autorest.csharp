@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
-                var (originalFieldType, fieldValueType) = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                var (originalFieldType, fieldValueType) = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, inputModel.IsPropertyBag, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
-        private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
+        private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, in bool isPropertyBag, TypeFactory typeFactory)
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
@@ -205,7 +205,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var valueType = propertyType;
-            if (propertyType.IsValueType && !property.IsRequired)
+            if (propertyType.IsValueType &&
+                !property.IsRequired &&
+                !isPropertyBag) // For property bag properties, we keep the original type nullability, because in method parameters, we have two types of optional parameters
+                // "int a = 1, in? b = 3", if we will transform all optional parameters as model nullable properties, then there will be compilation error in the property bag
+                // expansion logic, e.g. "Foo(options.A)" won't match "Foo(int a = 1)", since "options.A" is of type int?
+                // Another way to resolve this issue is to change the expansion expression like "Foo(options.A ?? 1)", which is urgly.
             {
                 propertyType = propertyType.WithNullable(true);
             }

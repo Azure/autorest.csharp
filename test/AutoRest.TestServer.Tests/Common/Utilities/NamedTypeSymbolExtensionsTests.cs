@@ -98,6 +98,7 @@ namespace NamedTypeSymbolExtensionsTests
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
+                groupParametersMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),

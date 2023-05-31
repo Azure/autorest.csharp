@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -45,6 +46,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
                 exampleCompileCheckWriter.Write();
                 project.AddGeneratedFile($"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs", exampleCompileCheckWriter.ToString());
+
+                foreach (var propertyBag in client.ClientMethods.Where(m => m.PropertyBag != null).Select(m => m.PropertyBag!))
+                {
+                    WritePropertyBagModel(project, propertyBag);
+                }
             }
 
             var optionsWriter = new CodeWriter();
@@ -58,6 +64,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new PostProcessor(
                 modelFactoryFullName: null,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
+        }
+
+        private static void WritePropertyBagModel(GeneratedCodeWorkspace project, LowLevelPropertyBag propertyBag)
+        {
+            var codeWriter = new CodeWriter();
+            var modelWriter = new ModelWriter();
+            modelWriter.WriteModel(codeWriter, propertyBag.PackModel);
+            var folderPath = Configuration.ModelNamespace ? "Models/" : "";
+            project.AddGeneratedFile($"{folderPath}{propertyBag.PackModel.Type.Name}.cs", codeWriter.ToString());
         }
     }
 }

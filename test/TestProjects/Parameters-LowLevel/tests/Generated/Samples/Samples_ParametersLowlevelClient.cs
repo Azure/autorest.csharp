@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters_LowLevel.Models;
 
 namespace Parameters_LowLevel.Samples
 {
@@ -434,6 +435,110 @@ namespace Parameters_LowLevel.Samples
             };
 
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 123, 1234, 50, new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GroupParametersWithOptionalBody()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            Response response = client.GroupParametersWithOptionalBody(new GroupParametersWithOptionalBodyOptions("<name>", 1234));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GroupParametersWithOptionalBody_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            Response response = client.GroupParametersWithOptionalBody(new GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GroupParametersWithOptionalBody_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            Response response = await client.GroupParametersWithOptionalBodyAsync(new GroupParametersWithOptionalBodyOptions("<name>", 1234));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GroupParametersWithOptionalBody_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            Response response = await client.GroupParametersWithOptionalBodyAsync(new GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GroupParametersWithRequiredBody()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new { };
+
+            Response response = client.GroupParametersWithRequiredBody(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GroupParametersWithRequiredBody_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = client.GroupParametersWithRequiredBody(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GroupParametersWithRequiredBody_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new { };
+
+            Response response = await client.GroupParametersWithRequiredBodyAsync(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GroupParametersWithRequiredBody_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = await client.GroupParametersWithRequiredBodyAsync(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

@@ -66,6 +66,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
+        public static FormattableString GetParameterReferenceExpressions(this IReadOnlyCollection<Parameter> parameters)
+            => GetIdentifiersFormattable(parameters.Select(p => p.IsPropertyBag ? $"options.{p.Name.FirstCharToUpperCase()}" : p.Name), parameters.Count);
+
         public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
         {
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))

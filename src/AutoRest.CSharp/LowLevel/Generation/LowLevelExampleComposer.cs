@@ -303,7 +303,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             ComposeGetClientCodes(builder);
             builder.AppendLine();
-            if (clientMethod.RequestBodyType != null)
+            if (clientMethod.RequestBodyType != null &&
+                    // "var data = {...}" is generated only for plain protocol method or property bag with required body parameter
+                    (clientMethod.PropertyBag is null || clientMethod.PropertyBag.Parameters.Any(p => p == KnownParameters.RequestContent with { IsPropertyBag = true })))
             {
                 ComposeRequestContent(allParameters, clientMethod.RequestBodyType, builder);
                 builder.AppendLine();
@@ -349,7 +351,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), clientMethod.PropertyBag, MockParameterValue, allParameters)});");
             builder.AppendLine();
             using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
             {
@@ -369,7 +371,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), clientMethod.PropertyBag, MockParameterValue, allParameters)});");
             builder.AppendLine();
 
             if (clientMethod.ResponseBodyType == null)
@@ -436,7 +438,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), clientMethod.PropertyBag, MockParameterValue, allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -489,7 +491,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 resposneType = "Response<bool>";
                 responseVar = "response.GetRawResponse()";
             }
-            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
+            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), clientMethod.PropertyBag, MockParameterValue, allParameters)});");
             if (clientMethod.ResponseBodyType != null)
             {
                 ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, responseVar, builder);
@@ -618,6 +620,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private string MockParameterValues(IReadOnlyList<Parameter> parameters, Func<Parameter, string> parameterSelector, bool allParameters)
+            => MockParameterValues(parameters, null, parameterSelector, allParameters);
+
+        private string MockParameterValues(IReadOnlyList<Parameter> parameters, LowLevelPropertyBag? propertyBag, Func<Parameter, string> parameterSelector, bool allParameters)
         {
             if (parameters.Count == 0)
             {
@@ -633,10 +638,34 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (allParameters || parameters[i].DefaultValue == null)
                 {
-                    parameterValues.Add(parameterSelector(parameters[i]));
+                    parameterValues.Add(parameters[i] == propertyBag?.PackParameter ? MockPropertyBagParametereValue(propertyBag, parameterSelector) : parameterSelector(parameters[i]));
                 }
             }
             return string.Join(", ", parameterValues);
+        }
+
+        private string MockPropertyBagParametereValue(LowLevelPropertyBag propertyBag, Func<Parameter, string> parameterSelector)
+        {
+            var modelType = propertyBag.PackModel as ObjectType;
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append($"new {modelType!.Declaration.Namespace}.{modelType!.Declaration.Name}(");
+
+            var parameters = propertyBag.Parameters.Where(p => p.DefaultValue is null && p != KnownParameters.RequestContentNullable with { IsPropertyBag = true });
+            if (parameters.Count() == 0)
+            {
+                stringBuilder.Append(")");
+            }
+
+            var parameterValues = new string[parameters.Count()];
+            int i = 0;
+            foreach (var p in parameters)
+            {
+                parameterValues[i] = parameterSelector(p);
+                i++;
+            }
+            stringBuilder.Append(string.Join(", ", parameterValues));
+            stringBuilder.Append(")");
+            return stringBuilder.ToString();
         }
 
         private string MockConvenienceParameterValue(Parameter parameter)

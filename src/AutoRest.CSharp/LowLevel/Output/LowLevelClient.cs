@@ -426,5 +426,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool? _hasConvenienceMethods;
         internal bool HasConvenienceMethods => _hasConvenienceMethods ??= AllClientMethods.Any(m => m.ConvenienceMethod is not null && m.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public));
+
+        private bool? _hasPropertyBags;
+        internal bool HasPropertyBags => _hasPropertyBags ??= AllClientMethods.Any(m => m.PropertyBag is not null);
     }
 }

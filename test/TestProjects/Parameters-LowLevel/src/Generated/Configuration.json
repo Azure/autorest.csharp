@@ -7,5 +7,9 @@
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "public-clients": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "GroupParametersMethodList": [
+    "groupParametersWithOptionalBody",
+    "groupParametersWithRequiredBody"
+  ]
 }

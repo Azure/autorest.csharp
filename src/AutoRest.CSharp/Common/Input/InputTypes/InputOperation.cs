@@ -27,7 +27,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    bool GroupParameters)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -48,7 +49,8 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        GroupParameters: false)
     { }
 
     private string? _cleanName;
