@@ -36,6 +36,7 @@ var input = new RootModel()
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
 {
         AdditionalSerializableProperty = 1234,
+        AdditionalNullableSerializableProperty = 1234,
     },
 };
 var result = await client.RoundTripAsync(input);
@@ -77,6 +78,7 @@ var input = new RootModel()
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
 {
         AdditionalSerializableProperty = 1234,
+        AdditionalNullableSerializableProperty = 1234,
     },
 };
 var result = client.RoundTrip(input);

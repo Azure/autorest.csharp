@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Input.Source
             foreach (ISymbol member in GetMembers(existingType))
             {
                 string[]? serializationPath = null;
-                (string? SerializationHook, string? DeserializationHook)? serializationHooks = null;
+                (string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Input.Source
                 }
                 if (serializationPath != null || serializationHooks != null)
                 {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationHook, serializationHooks?.DeserializationHook));
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
                 }
             }
 

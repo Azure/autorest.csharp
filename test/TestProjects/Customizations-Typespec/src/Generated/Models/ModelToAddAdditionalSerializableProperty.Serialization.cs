@@ -17,11 +17,23 @@ namespace CustomizationsInCadl.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
-            WriteRequiredInt(writer);
+            WriteRequiredIntValue(writer);
             if (Optional.IsDefined(AdditionalSerializableProperty))
             {
                 writer.WritePropertyName("additionalSerializableProperty"u8);
                 writer.WriteNumberValue(AdditionalSerializableProperty);
+            }
+            if (Optional.IsDefined(AdditionalNullableSerializableProperty))
+            {
+                if (AdditionalNullableSerializableProperty != null)
+                {
+                    writer.WritePropertyName("additionalNullableSerializableProperty"u8);
+                    writer.WriteNumberValue(AdditionalNullableSerializableProperty.Value);
+                }
+                else
+                {
+                    writer.WriteNull("additionalNullableSerializableProperty");
+                }
             }
             writer.WriteEndObject();
         }
@@ -34,11 +46,12 @@ namespace CustomizationsInCadl.Models
             }
             int requiredInt = default;
             Optional<int> additionalSerializableProperty = default;
+            Optional<int?> additionalNullableSerializableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
                 {
-                    DeserializeRequiredInt(property, ref requiredInt);
+                    DeserializeRequiredIntValue(property, ref requiredInt);
                     continue;
                 }
                 if (property.NameEquals("additionalSerializableProperty"u8))
@@ -50,8 +63,18 @@ namespace CustomizationsInCadl.Models
                     additionalSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("additionalNullableSerializableProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        additionalNullableSerializableProperty = null;
+                        continue;
+                    }
+                    additionalNullableSerializableProperty = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty);
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

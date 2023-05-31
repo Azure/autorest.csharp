@@ -323,10 +323,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
-                        if (property.SerializationHook != null)
+                        if (property.SerializationValueHook is not null)
                         {
-                            // write the serialization hook
-                            writer.Line($"{property.SerializationHook}({writerName});");
+                            // write the serialization value hook
+                            writer.Line($"{property.SerializationValueHook}({writerName});");
                         }
                         else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
-                    if (property.DeserializationHook != null)
+                    if (property.DeserializationValueHook is not null)
                     {
                         // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
                     }
@@ -393,10 +393,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (property.DeserializationHook is not null)
+                    if (property.DeserializationValueHook is not null)
                     {
                         // write the deserialization hook
-                        writer.Line($"{property.DeserializationHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
+                        writer.Line($"{property.DeserializationValueHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
                     }
                     else if (property.ValueSerialization is not null)
                     {
@@ -712,7 +712,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (format == SerializationFormat.Duration_Seconds)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
-                } else if (format == SerializationFormat.Duration_Seconds_Float)
+                }
+                else if (format == SerializationFormat.Duration_Seconds_Float)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }
