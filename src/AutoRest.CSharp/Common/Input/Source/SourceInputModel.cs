@@ -15,12 +15,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly Compilation _compilation;
         private readonly CompilationInput? _existingCompilation;
-        private readonly INamedTypeSymbol _typeAttribute;
-        private readonly INamedTypeSymbol _modelAttribute;
-        private readonly INamedTypeSymbol _clientAttribute;
-        private readonly INamedTypeSymbol _schemaMemberNameAttribute;
-        private readonly INamedTypeSymbol _serializationAttribute;
-        private readonly INamedTypeSymbol _serializationHooksAttribute;
+        private readonly CodeGenAttributes _codeGenAttributes;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
         public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
@@ -28,12 +23,7 @@ namespace AutoRest.CSharp.Input.Source
             _compilation = compilation;
             _existingCompilation = existingCompilation;
 
-            _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
-            _serializationAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberSerializationAttribute).FullName!)!;
-            _serializationHooksAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberSerializationHooksAttribute).FullName!)!;
-            _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
-            _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
-            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
+            _codeGenAttributes = new CodeGenAttributes(compilation);
 
             IAssemblySymbol assembly = _compilation.Assembly;
 
@@ -58,9 +48,12 @@ namespace AutoRest.CSharp.Input.Source
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
         }
 
-        public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
+        public ModelTypeMapping? CreateForModel(INamedTypeSymbol? symbol)
         {
-            return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, _serializationAttribute, _serializationHooksAttribute, symbol);
+            if (symbol == null)
+                return null;
+
+            return new ModelTypeMapping(_codeGenAttributes, symbol);
         }
 
         internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
@@ -87,7 +80,7 @@ namespace AutoRest.CSharp.Input.Source
                 var attributeType = attribute.AttributeClass;
                 while (attributeType != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(attributeType, _clientAttribute))
+                    if (SymbolEqualityComparer.Default.Equals(attributeType, _codeGenAttributes.CodeGenClientAttribute))
                     {
                         INamedTypeSymbol? parentClientType = null;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
@@ -119,7 +112,7 @@ namespace AutoRest.CSharp.Input.Source
                 var type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(type, _typeAttribute))
+                    if (SymbolEqualityComparer.Default.Equals(type, _codeGenAttributes.CodeGenTypeAttribute))
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {
