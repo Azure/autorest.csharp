@@ -4,7 +4,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -16,7 +15,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualBasic.FileIO;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -59,6 +57,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+
+                // We represent property being optional by making it nullable (when it is a value type)
+                // Except in the case of collection where there is a special handling
                 var optionalViaNullability = !inputModelProperty.IsRequired &&
                                              !inputModelProperty.Type.IsNullable &&
                                              !TypeFactory.IsCollectionType(propertyType);
