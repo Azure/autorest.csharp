@@ -8,7 +8,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypespecInputTypeConverter : JsonConverter<InputType>
+    internal sealed class TypeSpecInputTypeConverter : JsonConverter<InputType>
     {
         private const string InputTypeName = nameof(InputType.Name);
         private const string PrimitiveTypeKind = nameof(InputPrimitiveType.Kind);
@@ -21,9 +21,9 @@ namespace AutoRest.CSharp.Common.Input
         private const string IsNullableField = nameof(InputType.IsNullable);
         private const string UnionItemTypes = nameof(InputUnionType.UnionItemTypes);
 
-        private readonly TypespecReferenceHandler _referenceHandler;
+        private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public TypespecInputTypeConverter(TypespecReferenceHandler referenceHandler)
+        public TypeSpecInputTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }
@@ -61,22 +61,22 @@ namespace AutoRest.CSharp.Common.Input
                 result = CreateDerivedType(ref reader, propertyName, name, id, options);
             }
 
-            return result ?? TypespecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver);
+            return result ?? TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver);
         }
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? propertyName, string? name, string? id, JsonSerializerOptions options) => propertyName switch
         {
             PrimitiveTypeKind when name == InputIntrinsicType.InputIntrinsicTypeName  => ReadIntrinsicType(ref reader, id, _referenceHandler.CurrentResolver),
             PrimitiveTypeKind => ReadPrimitiveType(ref reader, id, _referenceHandler.CurrentResolver),
-            ListElementType     => TypespecInputListTypeConverter.CreateListType(ref reader, id, name, options),
-            DictionaryKeyType   => TypespecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
-            DictionaryValueType => TypespecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
-            EnumValueType       => TypespecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            EnumAllowedValues   => TypespecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            LiteralValueType    => TypespecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            UnionItemTypes      => TypespecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            ListElementType     => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options),
+            DictionaryKeyType   => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
+            DictionaryValueType => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
+            EnumValueType       => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            EnumAllowedValues   => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            LiteralValueType    => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            UnionItemTypes      => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             "" or null          => throw new JsonException("Property name can't be null or empty"),
-            _                   => TypespecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
+            _                   => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
         };
 
         public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, ReferenceResolver resolver)

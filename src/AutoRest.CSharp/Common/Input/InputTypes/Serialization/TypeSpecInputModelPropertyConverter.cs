@@ -9,11 +9,11 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypespecInputModelPropertyConverter : JsonConverter<InputModelProperty>
+    internal sealed class TypeSpecInputModelPropertyConverter : JsonConverter<InputModelProperty>
     {
-        private readonly TypespecReferenceHandler _referenceHandler;
+        private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public TypespecInputModelPropertyConverter(TypespecReferenceHandler referenceHandler)
+        public TypeSpecInputModelPropertyConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }

@@ -10,10 +10,10 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class TypespecInputUnionTypeConverter : JsonConverter<InputUnionType>
+    internal class TypeSpecInputUnionTypeConverter : JsonConverter<InputUnionType>
     {
-        private readonly TypespecReferenceHandler _referenceHandler;
-        public TypespecInputUnionTypeConverter(TypespecReferenceHandler referenceHandler)
+        private readonly TypeSpecReferenceHandler _referenceHandler;
+        public TypeSpecInputUnionTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }

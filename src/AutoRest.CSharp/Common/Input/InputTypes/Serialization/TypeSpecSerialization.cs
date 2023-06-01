@@ -8,11 +8,11 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal static class TypespecSerialization
+    internal static class TypeSpecSerialization
     {
         public static InputNamespace? Deserialize(string json)
         {
-            var referenceHandler = new TypespecReferenceHandler();
+            var referenceHandler = new TypeSpecReferenceHandler();
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = referenceHandler,
@@ -21,16 +21,16 @@ namespace AutoRest.CSharp.Common.Input
 
             options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             options.Converters.Add(new RequestMethodConverter());
-            options.Converters.Add(new TypespecInputTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputListTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputDictionaryTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputEnumTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputEnumTypeValueConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputModelTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputModelPropertyConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputConstantConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputLiteralTypeConverter(referenceHandler));
-            options.Converters.Add(new TypespecInputUnionTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputListTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputDictionaryTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputEnumTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputEnumTypeValueConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputModelTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputModelPropertyConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputConstantConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputLiteralTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputUnionTypeConverter(referenceHandler));
             return JsonSerializer.Deserialize<InputNamespace>(json, options);
         }
 

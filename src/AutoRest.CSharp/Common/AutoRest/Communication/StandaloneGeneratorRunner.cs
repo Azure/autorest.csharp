@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             if (File.Exists(tspInputFile))
             {
                 var json = await File.ReadAllTextAsync(tspInputFile);
-                var rootNamespace = TypespecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
+                var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
