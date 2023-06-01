@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models
         private (Parameter[] GroupedParameters, LowLevelPropertyBag? PropertyBag) GetProtocolMethodParameters(bool shouldRequestContextOptional)
         {
             var parameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
-            if (!Operation.GroupParameters)
+            if (!Operation.HasPropertyBag)
             {
                 return (parameters, null);
             }

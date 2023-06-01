@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
                     GenerateConvenienceMethod: false,
-                    GroupParameters: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
+                    HasPropertyBag: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
             }
             return new InputOperation();
         }

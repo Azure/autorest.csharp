@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                GroupParameters: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
+                HasPropertyBag: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;

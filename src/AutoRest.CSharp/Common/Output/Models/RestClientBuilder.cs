@@ -86,7 +86,9 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
-                (operation.GroupParameters ? parameters.Select(p => (p != KnownParameters.WaitForCompletion && p != KnownParameters.RequestContext) ? p with { IsPropertyBag = true } : p ).ToArray() : parameters),
+                // set "IsPropertyBag = true" if the up level protocol method has property bag, later we'll generate different expression to refer to passed in parameters
+                // e.g. from "Foo(a, b)" to "Foo(options.A, options.B)"
+                operation.HasPropertyBag ? parameters.Select(p => (p != KnownParameters.WaitForCompletion && p != KnownParameters.RequestContext) ? p with { IsPropertyBag = true } : p ).ToArray() : parameters,
                 responses,
                 null,
                 operation.BufferResponse,

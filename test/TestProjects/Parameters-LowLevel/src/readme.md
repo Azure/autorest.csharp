@@ -12,6 +12,4 @@ security-header-name: Fake-Subscription-Key
 group-parameters-method-list:
 - groupParametersWithOptionalBody
 - groupParametersWithRequiredBody
-csharpgen:
-  attach: true
 ```

@@ -218,10 +218,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueType = propertyType;
             if (propertyType.IsValueType &&
                 !property.IsRequired &&
-                !isPropertyBag) // For property bag properties, we keep the original type nullability, because in method parameters, we have two types of optional parameters
-                // "int a = 1, in? b = 3", if we will transform all optional parameters as model nullable properties, then there will be compilation error in the property bag
-                // expansion logic, e.g. "Foo(options.A)" won't match "Foo(int a = 1)", since "options.A" is of type int?
-                // Another way to resolve this issue is to change the expansion expression like "Foo(options.A ?? 1)", which is urgly.
+                !isPropertyBag) // Protocol method parameters have difference optionality than model properties have.
+                // For example, a protocl method could have this definition "Foo(int a = 1, int? b = 3, RequestContext context = null)"
+                // Here both "int a" and "int? b" are optional.
+                // In model propertyies, by default we represent optionality through nullability. If we follow the same strategy, then there will be compilation error
+                // when expanding the property bag, e.g. "Foo(optiona.A, options.B)" won't compile since "A" and "B" are both "int?".
+                // So here for properties in property bags, we should keep the original nullablity.
             {
                 propertyType = propertyType.WithNullable(true);
             }
