@@ -274,7 +274,7 @@
                     "readOnly": true
                 },
                 "size": {
-                    "description": "The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code.",
+                    "description": "The size of the pet. This property here is mocking the following scenario:\nDespite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.",
                     "type": "string"
                 }
             }

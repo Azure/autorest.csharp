@@ -31,7 +31,10 @@ namespace MgmtCustomizations.Models
 
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="size"> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </param>
+        /// <param name="size">
+        /// The size of the pet. This property here is mocking the following scenario:
+        /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        /// </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null, int size = default)
         {
@@ -40,7 +43,10 @@ namespace MgmtCustomizations.Models
 
         /// <summary> Initializes a new instance of Cat. </summary>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="size"> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </param>
+        /// <param name="size">
+        /// The size of the pet. This property here is mocking the following scenario:
+        /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        /// </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string name = null, int size = default, string meow = null)
@@ -50,7 +56,10 @@ namespace MgmtCustomizations.Models
 
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="size"> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </param>
+        /// <param name="size">
+        /// The size of the pet. This property here is mocking the following scenario:
+        /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        /// </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
         public static Dog Dog(string name = null, int size = default, string bark = null)

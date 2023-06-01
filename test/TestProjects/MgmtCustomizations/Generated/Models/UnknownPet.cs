@@ -13,7 +13,10 @@ namespace MgmtCustomizations.Models
         /// <summary> Initializes a new instance of UnknownPet. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="size"> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </param>
+        /// <param name="size">
+        /// The size of the pet. This property here is mocking the following scenario:
+        /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        /// </param>
         internal UnknownPet(PetKind kind, string name, int size) : base(kind, name, size)
         {
             Kind = kind;
