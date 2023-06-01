@@ -93,7 +93,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
+                    var originalType = GetExistingType(serializationMapping.ExistingMember).GetCSharpType();
+                    var isReadOnly = IsReadOnly(serializationMapping.ExistingMember);
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath?.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String, originalType.IsNullable), false, isReadOnly, false);
                     // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(string), inputModel, inputModelProperty, typeFactory);
                     fields.Add(field);
@@ -125,16 +127,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyShouldOmitSetter = inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
+            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+            var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
+                (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
                 (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
                 propertyIsCollection || // a property will not have setter when it is a collection
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
-                propertyIsOptionalInOutputModel; // a property will explicitly omit its setter when it is useless
-            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+                propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
 
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
-            if (inputModelProperty.IsDiscriminator)
+            if (propertyIsDiscriminator)
             {
                 fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
                 setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
@@ -164,12 +167,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
-            var existingMemberTypeSymbol = existingMember switch
-            {
-                IPropertySymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
-                IFieldSymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
-                _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
-            };
+            var existingMemberTypeSymbol = GetExistingType(existingMember);
 
             // Changing of model types is not supported
             var fieldType = originalType.IsFrameworkType ? existingMemberTypeSymbol.GetCSharpType() : originalType;
@@ -193,6 +191,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             // 2. we do not really have an efficiant way to get the value type of a property because we really cannot relying on the information in the schema when you have to do a customization, and from the csharp code, there is a lot of information we cannot get.
             return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
+
+        private static INamedTypeSymbol GetExistingType(ISymbol existingMember) => existingMember switch
+        {
+            IPropertySymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
+            IFieldSymbol fieldSymbol => (INamedTypeSymbol)fieldSymbol.Type,
+            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+        };
+
+        private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
+        {
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+        };
 
         private static (CSharpType PropertyType, CSharpType ValueType) GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
         {

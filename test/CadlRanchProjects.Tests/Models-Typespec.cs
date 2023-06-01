@@ -1,15 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using ModelsInCadl;
-using NUnit.Framework;
-using Azure;
 using ModelsInCadl.Models;
-using System.Net;
-using System.Collections.Generic;
-using System;
+using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
@@ -21,7 +20,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripPrimitive() => Test(async (host) =>
         {
-            InputModel input = new("test", 1, new BaseModel(), new int[] { }, new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
+            InputModel input = new("test", 1, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
             RoundTripPrimitiveModel result = await new ModelsInCadlClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -55,7 +54,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), new float?[] {}, new bool?[] { });
+            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>());
             RoundTripReadOnlyModel result = await new ModelsInCadlClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);

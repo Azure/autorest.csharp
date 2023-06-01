@@ -8,14 +8,14 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, bool optionalViaNullability, string? serializationHook = null, string? deserializationHook = null)
+        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, bool optionalViaNullability, string? serializationValueHook = null, string? deserializationValueHook = null)
             : base(propertyName, serializedName, propertyType, valueType, isRequired, shouldSkipSerialization, shouldSkipDeserialization)
         {
             ParameterName = parameterName;
             OptionalViaNullability = optionalViaNullability;
             ValueSerialization = valueSerialization;
-            SerializationHook = serializationHook;
-            DeserializationHook = deserializationHook;
+            SerializationValueHook = serializationValueHook;
+            DeserializationValueHook = deserializationValueHook;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         /// </summary>
         public JsonPropertySerialization[]? PropertySerializations { get; }
 
-        public string? SerializationHook { get; }
+        public string? SerializationValueHook { get; }
 
-        public string? DeserializationHook { get; }
+        public string? DeserializationValueHook { get; }
     }
 }

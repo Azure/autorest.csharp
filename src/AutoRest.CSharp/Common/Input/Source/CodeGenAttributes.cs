@@ -72,15 +72,24 @@ namespace AutoRest.CSharp.Input.Source
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
                 return false;
 
-            string? serializationHook = null;
-            string? deserializationHook = null;
+            string? serializationValueHook = null;
+            string? deserializationValueHook = null;
 
-            var arguments = attributeData.ConstructorArguments;
-            serializationHook = arguments[0].Value as string;
-            deserializationHook = arguments[1].Value as string;
+            foreach (var namedArgument in attributeData.NamedArguments)
+            {
+                switch (namedArgument.Key)
+                {
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationValueHook):
+                        serializationValueHook = namedArgument.Value.Value as string;
+                        break;
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationValueHook):
+                        deserializationValueHook = namedArgument.Value.Value as string;
+                        break;
+                }
+            }
 
-            hooks = (serializationHook, deserializationHook);
-            return serializationHook != null || deserializationHook != null;
+            hooks = (serializationValueHook, deserializationValueHook);
+            return serializationValueHook != null || deserializationValueHook != null;
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)
