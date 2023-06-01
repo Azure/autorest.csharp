@@ -22,6 +22,64 @@ namespace ModelsInCadl.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetOutputDiscriminatorModel()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = client.GetOutputDiscriminatorModel(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetOutputDiscriminatorModel_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = client.GetOutputDiscriminatorModel(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetOutputDiscriminatorModel_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetOutputDiscriminatorModel_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetOutputDiscriminatorModel_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsInCadlClient(endpoint);
+
+            var result = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTrip()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");

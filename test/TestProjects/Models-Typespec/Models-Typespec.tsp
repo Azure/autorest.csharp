@@ -430,6 +430,28 @@ model RoundTripRecursiveModel {
   inner?: RoundTripRecursiveModel;
 }
 
+@doc("Output model with a discriminator")
+@discriminator("kind")
+model OutputBaseModelWithDiscriminator {
+}
+
+@doc("First derived model as an output")
+model FirstDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "first";
+  first: boolean;
+}
+
+@doc("Second derived model as an output")
+model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "second";
+  second: boolean;
+}
+
+@route("/pet")
+@get
+@convenientAPI(true)
+op getOutputDiscriminatorModel(): OutputBaseModelWithDiscriminator;
+
 @doc("Input model that has property of its own type")
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
