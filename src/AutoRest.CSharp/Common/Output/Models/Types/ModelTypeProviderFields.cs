@@ -205,13 +205,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, valueType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
         }
 
-        private static INamedTypeSymbol GetExistingType(ISymbol existingMember) => existingMember switch
-        {
-            IPropertySymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
-            IFieldSymbol fieldSymbol => (INamedTypeSymbol)fieldSymbol.Type,
-            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
-        };
-
         private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
         {
             IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
