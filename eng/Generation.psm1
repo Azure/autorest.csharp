@@ -59,7 +59,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
+function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -105,7 +105,7 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
-function Invoke-TypespecSetup()
+function Invoke-TypeSpecSetup()
 {
     # build emitter
     $emitterPath = Join-Path $PSScriptRoot ".." "src" "TypeSpec.Extension" "Emitter.Csharp"
@@ -144,5 +144,5 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
-Export-ModuleMember -Function "Invoke-Typespec"
-Export-ModuleMember -Function "Invoke-TypespecSetup"
+Export-ModuleMember -Function "Invoke-TypeSpec"
+Export-ModuleMember -Function "Invoke-TypeSpecSetup"

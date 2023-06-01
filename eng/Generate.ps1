@@ -38,7 +38,7 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+function Add-TypeSpec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
     if($output.EndsWith("tests")) { return }
 
     if ($mainFile -eq "") {
@@ -62,13 +62,13 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     if (Test-Path "$projectDirectory/*.sln") {
         $projectDirectory = Join-Path $projectDirectory "src"
     }
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    Add-Typespec "$projectPrefix$testName" $projectDirectory $tspMain
+    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
@@ -137,8 +137,8 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
         }
     }
     else {
-        if ($testName.EndsWith("Typespec")) {
-            Add-Typespec $testName $directory
+        if ($testName.EndsWith("TypeSpec")) {
+            Add-TypeSpec $testName $directory
         }
         else {
             Add-Swagger $testName $directory $testArguments
@@ -152,7 +152,7 @@ if (!($Exclude -contains "TestProjects")) {
 
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
-        if ($testName -eq "ConvenienceInitial-Typespec") {
+        if ($testName -eq "ConvenienceInitial-TypeSpec") {
             continue;
         }
         $readmeConfigurationPath = Join-Path $directory "readme.md"
@@ -170,7 +170,7 @@ if (!($Exclude -contains "TestProjects")) {
 
         # if tspconfig.yaml exists, we treat it as a typespec project
         if (Test-Path $tspConfigConfigurationPath) {
-            Add-Typespec $testName $directory
+            Add-TypeSpec $testName $directory
         }
         elseif (Test-Path $readmeConfigurationPath) {
             $testArguments = "--require=$readmeConfigurationPath"
@@ -208,7 +208,7 @@ if (!($Exclude -contains "Samples")) {
             $tspMain = Join-Path $projectDirectory ".." "main.tsp"
             $tspClient = Join-Path $projectDirectory ".."  "client.tsp"
             $mainTspFile = if (Test-Path $tspClient) { Resolve-Path $tspClient } else { Resolve-Path $tspMain }
-            Add-Typespec $sampleName $projectDirectory $mainTspFile
+            Add-TypeSpec $sampleName $projectDirectory $mainTspFile
         }
         else {
             throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"
@@ -216,19 +216,19 @@ if (!($Exclude -contains "Samples")) {
     }
 }
 
-# Typespec projects
+# TypeSpec projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
 $cadlRanchProjectPaths = $testData.CadlRanchProjects
 
 if (!($Exclude -contains "CadlRanchProjects")) {
     foreach ($testPath in $cadlRanchProjectPaths) {
-        Add-CadlRanch-Typespec $testPath "typespec-" $cadlRanchProjectDirectory
+        Add-CadlRanch-TypeSpec $testPath "typespec-" $cadlRanchProjectDirectory
     }
 }
 
 # TODO: remove later after cadl-ranch fixes the discriminator tests
-Add-Typespec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
+Add-TypeSpec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
 
 # Smoke tests
 if (!($Exclude -contains "SmokeTests")) {
@@ -287,9 +287,9 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     if ($key -eq "TypeSchemaMapping") {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
     }
-    elseif ($key -eq "ConvenienceUpdate-Typespec" -or $key -eq "ConvenienceInitial-Typespec")
+    elseif ($key -eq "ConvenienceUpdate-TypeSpec" -or $key -eq "ConvenienceInitial-TypeSpec")
     {
-        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." ".." "ConvenienceInitial-Typespec" "src" "Generated"))"
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." ".." "ConvenienceInitial-TypeSpec" "src" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
@@ -321,7 +321,7 @@ if ($reset -or $env:TF_BUILD) {
     }
 
     if ($typespecCount -gt 0) {
-        Invoke-TypespecSetup
+        Invoke-TypeSpecSetup
     }
 }
 
@@ -329,7 +329,7 @@ if (!$noBuild) {
     Invoke "dotnet build $autoRestPluginProject"
 
     #build the emitter
-    Invoke-TypespecSetup
+    Invoke-TypeSpecSetup
 }
 
 
@@ -350,6 +350,6 @@ $keys | % { $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | % { $tspDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Typespec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-TypeSpec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
