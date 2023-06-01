@@ -56,5 +56,16 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(12, Pet.FromResponse(response).Age);
             Assert.AreEqual("dog", Pet.FromResponse(response).Name);
         });
+
+        [Test]
+        public Task PetStore_GetFish() => Test(async (host) =>
+        {
+            Response<Fish> response = await new PetStoreClient(host, null).GetFishAsync("shark");
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.IsTrue(response.Value is Shark);
+            Shark shark = response.Value as Shark;
+            Assert.AreEqual(100, shark.Size);
+            Assert.AreEqual("I can bite", shark.Bite);
+        });
     }
 }

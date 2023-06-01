@@ -68,6 +68,29 @@ enum PetKind {
     Cat: "cat"
 }
 
+@doc("Fish is the base model")
+@discriminator("kind")
+model Fish {
+    @doc("The size of the fish")
+    size: int32;
+}
+
+@doc("Shark is a fish")
+model Shark extends Fish {
+    kind: "shark";
+
+    @doc("The bite of the shark")
+    bite: string;
+}
+
+@doc("Tuna is a fish")
+model Tuna extends Fish {
+    kind: "tuna";
+
+    @doc("The amount of fat of the tuna")
+    fat: int32;
+}
+
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")
 @route("/pets")
@@ -93,4 +116,8 @@ namespace Pets {
 
   @convenientAPI(true)
   @get op GetFirstPet(@query start?: int32): Pet | Error;
+
+  @convenientAPI(true)
+  @route("/getFish")
+  @get op getFish(@query kind?: string): Fish | Error;
 }
