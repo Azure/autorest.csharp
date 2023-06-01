@@ -63,7 +63,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, requiredInt);
+            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, requiredInt);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

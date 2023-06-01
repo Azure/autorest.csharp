@@ -51,7 +51,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new RoundTripRecursiveModel(message, inner);
+            return new RoundTripRecursiveModel(message, inner.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
