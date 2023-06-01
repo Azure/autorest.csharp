@@ -508,6 +508,98 @@ namespace PetStore
             }
         }
 
+        /// <param name="kind"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFishAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<Fish>> GetFishAsync(string kind = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFishAsync(kind, context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
+        }
+
+        /// <param name="kind"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFish(string,CancellationToken)']/*" />
+        public virtual Response<Fish> GetFish(string kind = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFish(kind, context);
+            return Response.FromValue(Fish.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFishAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="kind"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFishAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> GetFishAsync(string kind, RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFish");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFishRequest(kind, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] 
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFish(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="kind"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFish(string,RequestContext)']/*" />
+        public virtual Response GetFish(string kind, RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFish");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFishRequest(kind, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateDeleteRequest(int petId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -580,6 +672,24 @@ namespace PetStore
             if (start != null)
             {
                 uri.AppendQuery("start", start.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetFishRequest(string kind, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pets/getFish", false);
+            if (kind != null)
+            {
+                uri.AppendQuery("kind", kind, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
