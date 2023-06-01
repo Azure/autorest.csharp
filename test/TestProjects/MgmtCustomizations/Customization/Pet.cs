@@ -13,7 +13,7 @@ namespace MgmtCustomizations.Models
     public abstract partial class Pet
     {
         /// <summary> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </summary>
-        [CodeGenMemberSerializationHooks(nameof(SerializeSizeProperty), nameof(DeserializeSizeProperty))]
+        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeSizeProperty), DeserializationValueHook = nameof(DeserializeSizeProperty))]
         public int Size { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

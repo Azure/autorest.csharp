@@ -13,7 +13,7 @@ namespace MgmtCustomizations.Models
     {
         /// <summary> A dog can bark. </summary>
         [CodeGenMemberSerialization("properties", "dog", "bark")] // use this attribute to let the serialization and deserialization have two extra layers "properties" and "dog"
-        [CodeGenMemberSerializationHooks(nameof(SerializeBarkProperty), null)] // use this attribute to only customize the serialization of the property
+        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeBarkProperty))] // use this attribute to only customize the serialization of the property
         public string Bark { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
