@@ -365,5 +365,67 @@ namespace PetStore.Samples
 
             var result = await client.GetFirstPetAsync(1234);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFish()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.GetFish("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFish_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = client.GetFish("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFish_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetFishAsync("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFish_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            Response response = await client.GetFishAsync("<kind>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFish_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PetStoreClient(endpoint);
+
+            var result = await client.GetFishAsync("<kind>");
+        }
     }
 }

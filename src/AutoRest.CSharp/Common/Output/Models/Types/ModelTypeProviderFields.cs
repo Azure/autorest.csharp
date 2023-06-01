@@ -133,12 +133,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyShouldOmitSetter = inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
+            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+            var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
+                (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
                 (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
                 propertyIsCollection || // a property will not have setter when it is a collection
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
-                propertyIsOptionalInOutputModel; // a property will explicitly omit its setter when it is useless
-            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+                propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
 
             var valueType = originalType;
             if (optionalViaNullability)
@@ -148,7 +149,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
-            if (inputModelProperty.IsDiscriminator)
+            if (propertyIsDiscriminator)
             {
                 fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
                 setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
