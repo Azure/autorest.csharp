@@ -13,6 +13,22 @@ namespace ModelsInCadl.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsInCadlModelFactory
     {
+        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <param name="first"></param>
+        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
+        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
+        {
+            return new FirstDerivedOutputModel("first", first);
+        }
+
+        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
+        /// <param name="second"></param>
+        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
+        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
+        {
+            return new SecondDerivedOutputModel("second", second);
+        }
+
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
