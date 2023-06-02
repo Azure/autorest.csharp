@@ -44,7 +44,7 @@ namespace _Type.Property.Optional.Models
                     continue;
                 }
             }
-            return new BytesProperty(property);
+            return new BytesProperty(property.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

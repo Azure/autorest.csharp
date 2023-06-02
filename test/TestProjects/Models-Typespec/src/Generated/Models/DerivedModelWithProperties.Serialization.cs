@@ -58,7 +58,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new DerivedModelWithProperties(optionalPropertyOnBase, requiredCollection);
+            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, requiredCollection);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

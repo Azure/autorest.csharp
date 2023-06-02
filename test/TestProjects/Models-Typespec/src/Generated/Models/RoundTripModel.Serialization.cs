@@ -293,7 +293,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown, requiredInt8Array, Optional.ToList(optionalInt8Array));
+            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
