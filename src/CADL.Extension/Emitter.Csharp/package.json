@@ -63,7 +63,7 @@
         "@typespec/versioning": "0.44.0",
         "fs-extra": "^10.1.0",
         "js-yaml": "^4.1.0",
-        "json-serialize-refs": "^0.1.0-0",
+        "json-serialize-refs": "0.1.0-0",
         "winston": "^3.8.2"
     }
 }
