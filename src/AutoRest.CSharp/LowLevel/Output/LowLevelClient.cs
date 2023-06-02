@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
         public ClientFields Fields => _fields ??= ClientFields.CreateForClient(Parameters, _authorization);
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors)? _constructors;
-        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) Constructors => _constructors ??= BuildPublicConstructors(Parameters);
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) Constructors => _constructors ??= BuildPublicConstructors(Parameters, _sourceInputModel?.CreateForSymbol(ExistingType));
         public ConstructorSignature[] PrimaryConstructors => Constructors.PrimaryConstructors;
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters, ModelTypeMapping? modelTypeMapping)
         {
             if (!IsSubClient)
             {
@@ -129,8 +129,8 @@ namespace AutoRest.CSharp.Output.Models
                 var optionalParameters = RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter()).ToArray();
 
                 return (
-                    BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
-                    BuildSecondaryConstructors(requiredParameters, optionalParameters).ToArray()
+                    BuildPrimaryConstructors(requiredParameters, optionalParameters, modelTypeMapping).ToArray(),
+                    BuildSecondaryConstructors(requiredParameters, optionalParameters, modelTypeMapping).ToArray()
                 );
             }
             else
@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
+        private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters, ModelTypeMapping? modelTypeMapping)
         {
             var optionalToRequired = optionalParameters
                 .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
@@ -153,18 +153,18 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray(), modelTypeMapping);
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray());
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray(), modelTypeMapping);
                 }
             }
         }
 
-        private IEnumerable<ConstructorSignature> BuildSecondaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
+        private IEnumerable<ConstructorSignature> BuildSecondaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters, ModelTypeMapping? modelTypeMapping)
         {
             if (requiredParameters.Any() || Fields.CredentialFields.Any())
             {
@@ -177,27 +177,47 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreateSecondaryConstructor(requiredParameters, optionalParametersArguments);
+                yield return CreateSecondaryConstructor(requiredParameters, optionalParametersArguments, modelTypeMapping);
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), optionalParametersArguments);
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), optionalParametersArguments, modelTypeMapping);
                 }
             }
         }
 
-        private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
+        private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters, ModelTypeMapping? modelTypeMapping)
+        {
+            return CreateConstructor(parameters, null, modelTypeMapping);
+        }
 
-        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments, ModelTypeMapping? modelTypeMapping)
         {
             var arguments = parameters
                 .Select<Parameter, FormattableString>(p => $"{p.Name}")
                 .Concat(optionalParametersArguments)
                 .ToArray();
-            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
+            return CreateConstructor(parameters, new ConstructorInitializer(false, arguments), modelTypeMapping);
+        }
+
+        private ConstructorSignature CreateConstructor(IReadOnlyList<Parameter> parameters, ConstructorInitializer? initializer, ModelTypeMapping? modelTypeMapping)
+        {
+            var methodMapping = modelTypeMapping?.GetForMember(Declaration.Name, parameters.Select(p => p.Type).ToArray());
+            // TODO -- get the name of the parameter as well and change it in the list correspondingly
+            // get the accessibility from the existing member
+            var accessibility = methodMapping?.ExistingMember is not null ?
+                methodMapping?.ExistingMember.DeclaredAccessibility switch
+                {
+                    Accessibility.Public => Public,
+                    Accessibility.Internal => Internal,
+                    Accessibility.Private => Private,
+                    Accessibility.Protected => Protected,
+                    _ => throw new ArgumentOutOfRangeException()
+                } : Public;
+
+            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, accessibility, parameters, Initializer: initializer);
         }
 
         private Parameter CreateCredentialParameter(CSharpType type)

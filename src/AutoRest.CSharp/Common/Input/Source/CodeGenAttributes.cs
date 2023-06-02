@@ -42,6 +42,11 @@ namespace AutoRest.CSharp.Input.Source
         private static bool CheckAttribute(AttributeData attributeData, INamedTypeSymbol codeGenAttribute)
             => SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, codeGenAttribute);
 
+        public bool TryGetCodeGenSuppressionAttributeValue(AttributeData attributeData)
+        {
+            return false;
+        }
+
         public bool TryGetCodeGenMemberAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string name)
         {
             name = null;

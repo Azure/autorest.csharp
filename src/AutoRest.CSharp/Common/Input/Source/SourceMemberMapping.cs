@@ -6,15 +6,5 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
-    public class SourceMemberMapping
-    {
-        public SourceMemberMapping(string originalName, ISymbol existingMember)
-        {
-            OriginalName = originalName;
-            ExistingMember = existingMember;
-        }
-
-        public string OriginalName { get; }
-        public ISymbol ExistingMember { get; }
-    }
+    internal record SourcePropertyMapping(string OriginalName, ISymbol ExistingMember);
 }

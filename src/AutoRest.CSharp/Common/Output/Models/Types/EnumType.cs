@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         $" expected enum or struct got {ExistingType.TypeKind}")
                 };
 
-                _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
+                _typeMapping = sourceInputModel?.CreateForSymbol(ExistingType);
             }
 
             IsExtensible = isExtensible;

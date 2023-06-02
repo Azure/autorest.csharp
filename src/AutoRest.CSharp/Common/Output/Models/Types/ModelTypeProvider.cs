@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForSymbol(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
