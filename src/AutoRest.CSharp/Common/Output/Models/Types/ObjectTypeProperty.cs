@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   isRequired: field.IsRequired,
                   valueType: field.ValueType,
                   inputModelProperty: inputModelProperty,
+                  optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
                   serializationFormat: serializationFormat,

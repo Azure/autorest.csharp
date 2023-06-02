@@ -56,7 +56,7 @@ namespace LroBasicCadl.Models
                     continue;
                 }
             }
-            return new Project(id, description, name);
+            return new Project(id, description.Value, name.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

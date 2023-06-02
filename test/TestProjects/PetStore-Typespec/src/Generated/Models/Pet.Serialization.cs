@@ -55,7 +55,7 @@ namespace PetStore.Models
                     continue;
                 }
             }
-            return new Pet(name, tag, age);
+            return new Pet(name, tag.Value, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
