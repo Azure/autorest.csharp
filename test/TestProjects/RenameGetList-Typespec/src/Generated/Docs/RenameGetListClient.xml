@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetProjectAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetProjectAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("projectName").ToString());
+Console.WriteLine(result.GetProperty("projectKind").ToString());
+Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("multilingual").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("language").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetProject(string,RequestContext)">
+<example>
+This sample shows how to call GetProject with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+Response response = client.GetProject("<projectName>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("projectName").ToString());
+Console.WriteLine(result.GetProperty("projectKind").ToString());
+Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("multilingual").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("language").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetDeploymentAsync(string,string,RequestContext)">
+<example>
+This sample shows how to call GetDeploymentAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetDeployment(string,string,RequestContext)">
+<example>
+This sample shows how to call GetDeployment with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+Response response = client.GetDeployment("<projectName>", "<deploymentName>", new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetProjectsAsync(RequestContext)">
+<example>
+This sample shows how to call GetProjectsAsync and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+await foreach (var item in client.GetProjectsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+    Console.WriteLine(result.GetProperty("multilingual").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetProjects(RequestContext)">
+<example>
+This sample shows how to call GetProjects and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+foreach (var item in client.GetProjects(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+    Console.WriteLine(result.GetProperty("multilingual").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetDeploymentsAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetDeployments(string,RequestContext)">
+<example>
+This sample shows how to call GetDeployments with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new RenameGetListClient(endpoint);
+
+foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

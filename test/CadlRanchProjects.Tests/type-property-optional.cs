@@ -50,7 +50,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_Bytes_getAll() => Test(async (host) =>
         {
             Response response = await new OptionalClient(host, null).GetBytesClient().GetAllAsync(new RequestContext());
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), BytesProperty.FromResponse(response).Property.ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), BytesProperty.FromResponse(response).Property.ToString());
         });
 
         [Test]
@@ -65,7 +65,7 @@ namespace CadlRanchProjects.Tests
         {
             BytesProperty data = new()
             {
-                Property = BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"")
+                Property = BinaryData.FromString("hello, world!")
             };
             Response response = await new OptionalClient(host, null).GetBytesClient().PutAllAsync(data.ToRequestContent());
             Assert.AreEqual(204, response.Status);
@@ -146,8 +146,8 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_CollectionsByte_getAll() => Test(async (host) =>
         {
             Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetAllAsync(new RequestContext());
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), CollectionsByteProperty.FromResponse(response).Property[0].ToString());
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), CollectionsByteProperty.FromResponse(response).Property[1].ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), CollectionsByteProperty.FromResponse(response).Property[0].ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), CollectionsByteProperty.FromResponse(response).Property[1].ToString());
         });
 
         [Test]
@@ -161,8 +161,8 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_CollectionsByte_putAll() => Test(async (host) =>
         {
             CollectionsByteProperty data = new();
-            data.Property.Add(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\""));
-            data.Property.Add(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\""));
+            data.Property.Add(BinaryData.FromString("hello, world!"));
+            data.Property.Add(BinaryData.FromString("hello, world!"));
 
             Response response = await new OptionalClient(host, null).GetCollectionsByteClient().PutAllAsync(data.ToRequestContent());
             Assert.AreEqual(204, response.Status);

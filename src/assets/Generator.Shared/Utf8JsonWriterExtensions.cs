@@ -141,6 +141,9 @@ namespace Azure.Core
                     }
                     writer.WriteEndArray();
                     break;
+                case TimeSpan timeSpan:
+                    writer.WriteStringValue(timeSpan, "P");
+                    break;
 
                 default:
                     throw new NotSupportedException("Not supported type " + value.GetType());

@@ -163,18 +163,6 @@ namespace AutoRest.CSharp.Generation.Types
         internal static CSharpType FromSystemType(BuildContext context, Type type)
             => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
 
-        public bool IsCollectionType()
-        {
-            if (!IsFrameworkType)
-                return false;
-
-            return FrameworkType.Equals(typeof(IList<>)) ||
-                FrameworkType.Equals(typeof(IEnumerable<>)) ||
-                FrameworkType == typeof(IReadOnlyList<>) ||
-                FrameworkType.Equals(typeof(IDictionary<,>)) ||
-                FrameworkType == typeof(IReadOnlyDictionary<,>);
-        }
-
         public CSharpType GetNonNullable()
         {
             if (!IsNullable)
@@ -192,5 +180,24 @@ namespace AutoRest.CSharp.Generation.Types
             provider = this.Implementation as T;
             return provider != null;
         }
+
+        internal string ConvertParamNameForCode() => ConvertParamName(false);
+
+        internal string ConvertParamNameForDocs() => ConvertParamName(true);
+
+        private string ConvertParamName(bool useSquiggles)
+        {
+            var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
+            if (IsNullable && IsValueType)
+                name += "?";
+            if (Arguments is not null && Arguments.Count() > 0)
+            {
+                name += useSquiggles ? "{" : "<";
+                name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));
+                name += useSquiggles ? "}" : ">";
+            }
+            return name;
+        }
+
     }
 }

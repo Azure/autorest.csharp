@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
+using Newtonsoft.Json;
 
 namespace CadlRanchProjects.Tests
 {
@@ -47,13 +48,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_Bytes_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetBytesClient().GetByteAsync();
-            Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), response.Value.Property.ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.Property.ToString());
         });
 
         [Test]
         public Task Type_Property_ValueTypes_Bytes_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("hello, world!")).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -227,6 +228,74 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_Never_put() => Test(async (host) =>
         {
             Response response = await new ValueTypesClient(host, null).GetNeverClient().PutAsync(new NeverProperty().ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownString_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnknownStringClient().GetUnknownStringAsync();
+            Assert.AreEqual("hello", response.Value.Property.ToObjectFromJson());
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownString_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetUnknownStringClient().PutAsync(new UnknownStringProperty(new BinaryData("\"hello\"")).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownInt_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnknownIntClient().GetUnknownIntAsync();
+            Assert.AreEqual(42, response.Value.Property.ToObjectFromJson());
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownInt_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetUnknownIntClient().PutAsync(new UnknownIntProperty(new BinaryData(42)).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownDict_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnknownDictClient().GetUnknownDictAsync();
+            var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(response.Value.Property.ToObjectFromJson()));
+            Assert.AreEqual("hello", result["k1"]);
+            Assert.AreEqual(42, result["k2"]);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownDict_put() => Test(async (host) =>
+        {
+            var input = new Dictionary<string, object>()
+            {
+                {"k1", "hello" },
+                {"k2", 42 }
+            };
+
+            Response response = await new ValueTypesClient(host, null).GetUnknownDictClient().PutAsync(new UnknownDictProperty(new BinaryData(input)).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownArray_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnknownArrayClient().GetUnknownArrayAsync();
+            var result = response.Value.Property.ToObjectFromJson() as object[];
+            Assert.AreEqual("hello", result[0]);
+            Assert.AreEqual("world", result[1]);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnknownArray_put() => Test(async (host) =>
+        {
+            var input = new[] { "hello", "world" };
+
+            Response response = await new ValueTypesClient(host, null).GetUnknownArrayClient().PutAsync(new UnknownArrayProperty(new BinaryData(input)).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
     }

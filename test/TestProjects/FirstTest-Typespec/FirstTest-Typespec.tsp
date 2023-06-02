@@ -91,8 +91,8 @@ model Thing {
     @doc("required literal int")
     requiredLiteralInt: 123;
 
-    @doc("required literal double")
-    requiredLiteralDouble: 1.23;
+    @doc("required literal float")
+    requiredLiteralFloat: 1.23;
 
     @doc("required literal bool")
     requiredLiteralBool: false;
@@ -103,8 +103,8 @@ model Thing {
     @doc("optional literal int")
     optionalLiteralInt?: 456;
 
-    @doc("optional literal double")
-    optionalLiteralDouble?: 4.56;
+    @doc("optional literal float")
+    optionalLiteralFloat?: 4.56;
 
     @doc("optional literal bool")
     optionalLiteralBool?: true;
@@ -195,6 +195,16 @@ enum DaysOfWeekExtensibleEnum {
     Sunday,
 }
 
+model ModelWithFormat {
+    @doc("url format")
+    @format("Uri")
+    sourceUrl: string;
+
+    @doc("uuid format")
+    @format("uuid")
+    guid: string;
+}
+
 @doc("Hello world service")
 @route("/hello")
 namespace Hello.Demo {
@@ -217,7 +227,7 @@ namespace Hello.Demo2 {
         @body action: RoundTripModel,
         @header contentType: "text/plain",
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/noContentType")
     @doc("Return hi again")
@@ -227,7 +237,7 @@ namespace Hello.Demo2 {
         @header p1: string,
         @body action: RoundTripModel,
         @path p2: string
-    ): Thing;
+    ): RoundTripModel;
 
     @route("/demoHi")
     @doc("Return hi in demo2")
@@ -281,6 +291,12 @@ op friendlyModel(...NotFriend): NotFriend;
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
+
+@route("/stringFormat")
+@doc("paramete has string format.")
+@post
+@convenientAPI(true)
+op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
 namespace EnumTest {
     @get

@@ -142,8 +142,8 @@ namespace AutoRest.CSharp.Output.Models
                     BufferResponse: operation.Extensions?.BufferResponse ?? true,
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
-                    true,
-                    false);
+                    GenerateProtocolMethod: true,
+                    GenerateConvenienceMethod: false);
             }
             return new InputOperation();
         }
@@ -178,7 +178,8 @@ namespace AutoRest.CSharp.Output.Models
                     Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null);
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
+                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema));
         }
 
         private static InputConstant? GetDefaultValue(RequestParameter parameter)
@@ -444,7 +445,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
             }
 
-            if (requestParameter.Schema is ConstantSchema constant)
+            if (requestParameter.Schema is ConstantSchema constant && requestParameter.IsRequired)
             {
                 return ParseConstant(constant);
             }
@@ -459,7 +460,6 @@ namespace AutoRest.CSharp.Output.Models
             var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
 
             return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
-
         }
 
         private static SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
@@ -597,7 +597,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
-            => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
+            => requestParameter.Implementation == ImplementationLocation.Method &&
+                (requestParameter.Schema is not ConstantSchema || !requestParameter.IsRequired) && // we should put the parameter in signature when it is not Constant or "it is Constant, but it is optional"
+                !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
 
         public static bool IsEndpointParameter(RequestParameter requestParameter)
             => requestParameter.Origin == "modelerfour:synthesized/host";

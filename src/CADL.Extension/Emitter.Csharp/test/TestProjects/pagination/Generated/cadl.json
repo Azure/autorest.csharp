@@ -8,11 +8,11 @@
  "Models": [
   {
    "$id": "2",
-   "Name": "CustomPage",
+   "Name": "CustomPageLedgerEntry",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -90,7 +90,7 @@
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",
-      "Kind": "String",
+      "Kind": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,

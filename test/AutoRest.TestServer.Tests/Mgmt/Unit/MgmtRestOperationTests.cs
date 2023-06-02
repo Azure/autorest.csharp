@@ -29,6 +29,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 generateArmResourceExtensions: Array.Empty<string>(),
                 parameterizedScopes: Array.Empty<string>(),
                 mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
+                operationsToSkipLroApiVersionOverride: default,
                 requestPathToParent: default,
                 requestPathToResourceName: default,
                 requestPathToResourceData: default,
@@ -75,6 +76,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
+                shouldTreatBase64AsBinaryData: true,
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null);
         }

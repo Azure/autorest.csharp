@@ -17,21 +17,26 @@ namespace CadlRanchProjects.Tests
         [Test]
         public async Task LiteralModelProperties() => await Test(async (host) =>
         {
-            Thing result = await new TypeSpecFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc"));
-            Assert.AreEqual(result.Name, "literal");
-            Assert.AreEqual(result.RequiredUnion, "union");
-            Assert.AreEqual(result.RequiredBadDescription, "def");
-            // the following are stick to literal value, despite the mock server returns different value
-            Assert.AreEqual(result.RequiredLiteralString, "accept");
-            Assert.AreEqual(result.RequiredLiteralInt, 123);
-            Assert.AreEqual(result.RequiredLiteralDouble, 1.23);
-            Assert.AreEqual(result.RequiredLiteralBool, false);
-            Assert.AreEqual(result.OptionalLiteralString, "reject");
-            Assert.AreEqual(result.OptionalLiteralInt, 456);
-            Assert.AreEqual(result.OptionalLiteralDouble, 4.56);
-            Assert.AreEqual(result.OptionalLiteralBool, true);
+            Thing result = await new TypeSpecFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            });
+            Assert.AreEqual("literal", result.Name);
+            Assert.AreEqual("union", result.RequiredUnion);
+            Assert.AreEqual("def", result.RequiredBadDescription);
+            // the type of the following properties are literal types, but if the server returns different value (for instance there is a service update but the SDK does not update, they are actually no longer literal types)
+            // but nevertheless, the SDK should still be able to get the new values
+            Assert.AreEqual(new ThingRequiredLiteralString("reject"), result.RequiredLiteralString);
+            Assert.AreEqual(new ThingRequiredLiteralInt(12345), result.RequiredLiteralInt);
+            Assert.AreEqual(new ThingRequiredLiteralFloat(123.45f), result.RequiredLiteralFloat);
+            Assert.AreEqual(true, result.RequiredLiteralBool);
+            Assert.AreEqual(new ThingOptionalLiteralString("accept"), result.OptionalLiteralString);
+            Assert.AreEqual(new ThingOptionalLiteralInt(12345), result.OptionalLiteralInt);
+            Assert.AreEqual(new ThingOptionalLiteralFloat(123.45f), result.OptionalLiteralFloat);
+            Assert.AreEqual(false, result.OptionalLiteralBool);
         });
-
     }
-
 }

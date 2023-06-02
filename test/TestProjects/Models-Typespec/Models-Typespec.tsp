@@ -150,6 +150,30 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required Model Record")
   requiredModelRecord: Record<RecordItem>;
+
+  @doc("Required bytes")
+  requiredBytes: bytes;
+
+  @doc("Optional bytes")
+  optionalBytes?: bytes;
+
+  @doc("Required uint8[]")
+  requiredUint8Array: uint8[];
+
+  @doc("Optional uint8[]")
+  optionalUint8Array?: uint8[];
+  
+  @doc("Required unknown")
+  requiredUnknown: unknown;
+
+  @doc("Optional unknown")
+  optionalUnknown?: unknown;
+
+  @doc("Required int8[]")
+  requiredInt8Array: int8[];
+
+  @doc("Optional int8[]")
+  optionalInt8Array?: int8[];
 }
 
 @doc("Model used both as input and output with primitive types")
@@ -405,6 +429,28 @@ model RoundTripRecursiveModel {
   @doc("Required Record")
   inner?: RoundTripRecursiveModel;
 }
+
+@doc("Output model with a discriminator")
+@discriminator("kind")
+model OutputBaseModelWithDiscriminator {
+}
+
+@doc("First derived model as an output")
+model FirstDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "first";
+  first: boolean;
+}
+
+@doc("Second derived model as an output")
+model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "second";
+  second: boolean;
+}
+
+@route("/pet")
+@get
+@convenientAPI(true)
+op getOutputDiscriminatorModel(): OutputBaseModelWithDiscriminator;
 
 @doc("Input model that has property of its own type")
 @route("/inputToRoundTrip")

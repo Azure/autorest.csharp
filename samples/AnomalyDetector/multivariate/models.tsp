@@ -122,7 +122,7 @@ either pointed to an Azure blob storage folder, or pointed to a CSV file in
 Azure blob storage based on you data schema selection. The data schema should
 be exactly the same with those used in the training phase.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 An optional field, which is used to specify the number of top contributed

@@ -44,11 +44,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
             if (File.Exists(cadlInputFile))
             {
                 var json = await File.ReadAllTextAsync(cadlInputFile);
-                var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
+                var rootNamespace = TypespecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
-                    // TODO - add support for DataFactoryExpression lookup
+                    // TODO - add support for DataFactoryElement lookup
                     new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
@@ -277,6 +277,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 suppressAbstractBaseClasses,
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
+                ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
             );

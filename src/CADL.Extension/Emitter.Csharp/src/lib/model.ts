@@ -3,11 +3,13 @@
 
 import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
+    EncodeData,
     Enum,
     EnumMember,
     getDoc,
     getDeprecated,
     getEffectiveModelType,
+    getEncode,
     getFormat,
     getFriendlyName,
     getKnownValues,
@@ -63,27 +65,35 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType
+    getSdkSimpleType,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize } from "./utils.js";
+import { capitalize, getNameForTemplate } from "./utils.js";
+import { FormattedType } from "../type/formattedType.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
  * Map calType to csharp InputTypeKind
  */
-export function mapCadlTypeToCSharpInputTypeKind(
+export function mapTypeSpecTypeToCSharpInputTypeKind(
     context: SdkContext,
-    cadlType: Type
+    typespecType: Type,
+    format?: string,
+    encode?: EncodeData
 ): InputTypeKind {
-    const format = getFormat(context.program, cadlType);
-    const kind = cadlType.kind;
+    const kind = typespecType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
+            return getCSharpInputTypeKindByIntrinsicModelName(
+                typespecType.name,
+                format,
+                encode
+            );
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let numberValue = cadlType.value;
+            let numberValue = typespecType.value;
             if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
@@ -100,13 +110,28 @@ export function mapCadlTypeToCSharpInputTypeKind(
 }
 
 function getCSharpInputTypeKindByIntrinsicModelName(
-    name: string
+    name: string,
+    format?: string,
+    encode?: EncodeData
 ): InputTypeKind {
     switch (name) {
         case "bytes":
-            return InputTypeKind.BinaryData;
+            switch (encode?.encoding) {
+                case undefined:
+                case "base64":
+                    return InputTypeKind.Bytes;
+                case "base64url":
+                    return InputTypeKind.BytesBase64Url;
+                default:
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for bytes.`
+                    );
+                    return InputTypeKind.Bytes;
+            }
         case "int8":
-            return InputTypeKind.Int32;
+            return InputTypeKind.SByte;
+        case "unit8":
+            return InputTypeKind.Byte;
         case "int32":
             return InputTypeKind.Int32;
         case "int64":
@@ -116,19 +141,61 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "float64":
             return InputTypeKind.Float64;
         case "string":
-            return InputTypeKind.String;
+            switch (format?.toLowerCase()) {
+                case "date":
+                    return InputTypeKind.DateTime;
+                case "uri":
+                case "url":
+                    return InputTypeKind.Uri;
+                case "uuid":
+                    return InputTypeKind.Guid;
+                default:
+                    if (format) {
+                        logger.warn(`invalid format ${format}`);
+                    }
+                    return InputTypeKind.String;
+            }
         case "boolean":
             return InputTypeKind.Boolean;
         case "date":
             return InputTypeKind.Date;
         case "datetime":
-            return InputTypeKind.DateTime;
+            switch (encode?.encoding) {
+                case undefined:
+                    return InputTypeKind.DateTime;
+                case "rfc3339":
+                    return InputTypeKind.DateTimeRFC3339;
+                case "rfc7231":
+                    return InputTypeKind.DateTimeRFC7231;
+                case "unixTimeStamp":
+                    return InputTypeKind.DateTimeUnix;
+                default:
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for date time.`
+                    );
+                    return InputTypeKind.DateTime;
+            }
         case "time":
             return InputTypeKind.Time;
         case "duration":
-            return InputTypeKind.Duration;
+            switch (encode?.encoding) {
+                case undefined:
+                case "ISO8601":
+                    return InputTypeKind.DurationISO8601;
+                case "seconds":
+                    if (encode.type?.name === "float") {
+                        return InputTypeKind.DurationSecondsFloat;
+                    } else {
+                        return InputTypeKind.DurationSeconds;
+                    }
+                default:
+                    logger.warn(
+                        `invalid encode ${encode?.encoding} for duration.`
+                    );
+                    return InputTypeKind.DurationISO8601;
+            }
         default:
-            return InputTypeKind.Model;
+            return InputTypeKind.Object;
     }
 }
 
@@ -185,16 +252,27 @@ export function getDefaultValue(type: Type): any {
             return undefined;
     }
 }
+
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
 }
 
+function isInputEnumType(x: any): x is InputEnumType {
+    return x.AllowedValues !== undefined;
+}
+
+function isInputLiteralType(x: any): x is InputLiteralType {
+    return x.Name === "Literal";
+}
+
 export function getInputType(
     context: SdkContext,
-    type: Type,
+    formattedType: FormattedType,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
 ): InputType {
+    const type = formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
     if (type.kind === "Model") {
@@ -204,23 +282,7 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        // For literal types, we just want to emit them directly as well.
-        const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
-            context,
-            type
-        );
-        const valueType = {
-            Name: type.kind,
-            Kind: builtInKind,
-            IsNullable: false
-        } as InputPrimitiveType;
-
-        return {
-            Name: "Literal",
-            LiteralValueType: valueType,
-            Value: getDefaultValue(type),
-            IsNullable: false
-        } as InputLiteralType;
+        return getInputLiteralType(formattedType, literalTypeContext);
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -252,7 +314,9 @@ export function getInputType(
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                        sdkType.kind
+                        sdkType.kind,
+                        sdkType.format ?? formattedType.format,
+                        formattedType.encode
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
@@ -301,6 +365,71 @@ export function getInputType(
             enums.set(m.name, extensibleEnum);
         }
         return extensibleEnum;
+    }
+
+    function getInputLiteralType(
+        formattedType: FormattedType,
+        literalContext?: LiteralTypeContext
+    ): InputLiteralType {
+        // For literal types, we just want to emit them directly as well.
+        const type = formattedType.type;
+        const builtInKind: InputTypeKind = mapTypeSpecTypeToCSharpInputTypeKind(
+            context,
+            type,
+            formattedType.format,
+            formattedType.encode
+        );
+        const rawValueType = {
+            Name: type.kind,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
+        const literalValue = getDefaultValue(type);
+        const newValueType = getLiteralValueType();
+
+        if (isInputEnumType(newValueType)) {
+            enums.set(newValueType.Name, newValueType);
+        }
+
+        return {
+            Name: "Literal",
+            LiteralValueType: newValueType,
+            Value: literalValue,
+            IsNullable: false
+        } as InputLiteralType;
+
+        function getLiteralValueType(): InputPrimitiveType | InputEnumType {
+            // we will not wrap it if it comes from outside a model or it is a boolean
+            // TODO -- we need to wrap it into extensible enum when it comes from an operation
+            if (literalContext === undefined || rawValueType.Kind === "Boolean")
+                return rawValueType;
+
+            // otherwise we need to wrap this into an extensible enum
+            // we use the model name followed by the property name as the enum name to ensure it is unique
+            const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
+            const enumValueType =
+                rawValueType.Kind === "String" ? "String" : "Float32";
+            const allowValues: InputEnumTypeValue[] = [
+                {
+                    Name: literalValue.toString(),
+                    Value: literalValue,
+                    Description: literalValue.toString()
+                } as InputEnumTypeValue
+            ];
+            // TODO -- we need to make it low confident if the enum is not string
+            const enumType = {
+                Name: enumName,
+                Namespace: literalContext.Namespace,
+                Accessibility: undefined,
+                Deprecated: undefined,
+                Description: `The ${enumName}`, // TODO -- what should we put here?
+                EnumValueType: enumValueType,
+                AllowedValues: allowValues,
+                IsExtensible: true,
+                IsNullable: false
+            } as InputEnumType;
+            return enumType;
+        }
     }
 
     function getInputTypeForEnum(
@@ -363,7 +492,12 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
-            ElementType: getInputType(context, elementType, models, enums),
+            ElementType: getInputType(
+                context,
+                getFormattedType(program, elementType),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputListType;
     }
@@ -371,15 +505,25 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
-            KeyType: getInputType(context, key, models, enums),
-            ValueType: getInputType(context, value, models, enums),
+            KeyType: getInputType(
+                context,
+                getFormattedType(program, key),
+                models,
+                enums
+            ),
+            ValueType: getInputType(
+                context,
+                getFormattedType(program, value),
+                models,
+                enums
+            ),
             IsNullable: false
         } as InputDictionaryType;
     }
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getFriendlyName(program, m) ?? m.name;
+        const name = getFriendlyName(program, m) ?? getNameForTemplate(m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -388,6 +532,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Accessibility: isInternal(context, m) ? "internal" : undefined,
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -403,6 +548,7 @@ export function getInputType(
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(
+                model,
                 m.properties,
                 properties,
                 baseModel?.DiscriminatorPropertyName
@@ -412,7 +558,12 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(context, dm, models, enums);
+                    getInputType(
+                        context,
+                        getFormattedType(program, dm),
+                        models,
+                        enums
+                    );
                 }
             }
         }
@@ -439,6 +590,7 @@ export function getInputType(
     }
 
     function addModelProperties(
+        model: InputModelType,
         inputProperties: Map<string, ModelProperty>,
         outputProperties: InputModelProperty[],
         discriminatorPropertyName?: string
@@ -461,11 +613,23 @@ export function getInputType(
                     value.name;
                 const serializedName =
                     projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                const literalTypeContext = {
+                    ModelName: model.Name,
+                    PropertyName: name,
+                    Namespace: model.Namespace
+                } as LiteralTypeContext;
+                const inputType = getInputType(
+                    context,
+                    getFormattedType(program, value),
+                    models,
+                    enums,
+                    literalTypeContext
+                );
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
-                    Type: getInputType(context, value.type, models, enums),
+                    Type: inputType,
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
@@ -474,7 +638,6 @@ export function getInputType(
             }
         });
     }
-
     function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {
             return undefined;
@@ -534,7 +697,7 @@ export function getInputType(
         for (const variant of variants) {
             const inputType = getInputType(
                 context,
-                variant.type,
+                getFormattedType(program, variant.type),
                 models,
                 enums
             );
@@ -567,7 +730,8 @@ export function getInputType(
 
 export function getUsages(
     context: SdkContext,
-    ops?: HttpOperation[]
+    ops?: HttpOperation[],
+    modelMap?: Map<string, InputModelType>
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     const program = context.program;
     const result: {
@@ -679,6 +843,26 @@ export function getUsages(
         }
     }
 
+    // handle the types introduces by us
+    if (modelMap) {
+        // iterate all models to find if it contains literal type properties
+        for (const [name, model] of modelMap) {
+            // get the usage of this model
+            let usage = usagesMap.get(name);
+            for (const prop of model.Properties) {
+                const type = prop.Type;
+                if (!isInputLiteralType(type)) continue;
+                // now type should be a literal type
+                // find its corresponding enum type
+                const literalValueType = type.LiteralValueType;
+                if (!isInputEnumType(literalValueType)) continue;
+                // now literalValueType should be an enum type
+                // apply the usage on this model to the usagesMap
+                appendUsage(literalValueType.Name, usage!);
+            }
+        }
+    }
+
     for (const [key, value] of usagesMap) {
         if (value === (UsageFlags.Input | UsageFlags.Output)) {
             result.roundTrips.push(key);
@@ -696,4 +880,22 @@ export function getUsages(
         else value = value | flag;
         usagesMap.set(name, value);
     }
+}
+
+export function getFormattedType(program: Program, type: Type): FormattedType {
+    let targetType = type;
+    let format = getFormat(program, type);
+    if (type.kind === "ModelProperty") {
+        targetType = type.type;
+    }
+    let encodeData = undefined;
+    if (type.kind === "Scalar" || type.kind === "ModelProperty") {
+        encodeData = getEncode(program, type);
+    }
+
+    return {
+        type: targetType,
+        format: format,
+        encode: encodeData
+    } as FormattedType;
 }

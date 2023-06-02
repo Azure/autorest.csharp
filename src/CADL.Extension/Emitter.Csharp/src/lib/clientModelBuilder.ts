@@ -8,7 +8,8 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
-    SdkContext
+    SdkContext,
+    createStateSymbol
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -17,7 +18,8 @@ import {
     getDoc,
     getNamespaceFullName,
     Operation,
-    ignoreDiagnostics
+    ignoreDiagnostics,
+    NoTarget
 } from "@typespec/compiler";
 import {
     getAuthentication,
@@ -52,6 +54,7 @@ import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
+import { $lib } from "../emitter.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -93,7 +96,11 @@ export function createModelForService(
     }
 
     if (apiVersions.size === 0) {
-        throw "No Api-Version Provided";
+        $lib.reportDiagnostic(program, {
+            code: "No-APIVersion",
+            format: { service: service.type.name },
+            target: NoTarget
+        });
     }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
@@ -157,7 +164,11 @@ export function createModelForService(
     const [services] = getAllHttpServices(program);
     const routes = services[0].operations;
     if (routes.length === 0) {
-        throw `No Route for service ${services[0].namespace.name}`;
+        $lib.reportDiagnostic(program, {
+            code: "No-Route",
+            format: { service: services[0].namespace.name },
+            target: NoTarget
+        });
     }
     logger.info("routes:" + routes.length);
 
@@ -206,7 +217,7 @@ export function createModelForService(
         }
     }
 
-    const usages = getUsages(sdkContext, convenienceOperations);
+    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
 
