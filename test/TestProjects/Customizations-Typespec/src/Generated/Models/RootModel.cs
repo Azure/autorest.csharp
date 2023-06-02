@@ -24,7 +24,10 @@ namespace CustomizationsInCadl.Models
         /// <param name="propertyEnumWithValueToRename"> EnumWithValueToRename. </param>
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
-        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty)
+        /// <param name="firstLayerModel"> First layer model's property. </param>
+        /// <param name="secondLayerModel"> Second layer model's property. </param>
+        /// <param name="thirdLayerModel"> Third layer model's property. </param>
+        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, FirstLayer firstLayerModel, SecondLayer secondLayerModel, ThirdLayer thirdLayerModel)
         {
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
             PropertyModelToRename = propertyModelToRename;
@@ -34,6 +37,9 @@ namespace CustomizationsInCadl.Models
             PropertyEnumWithValueToRename = propertyEnumWithValueToRename;
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
+            FirstLayerModel = firstLayerModel;
+            SecondLayerModel = secondLayerModel;
+            ThirdLayerModel = thirdLayerModel;
         }
         /// <summary> ModelToRename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }
@@ -49,5 +55,11 @@ namespace CustomizationsInCadl.Models
         public EnumToBeMadeExtensible? PropertyEnumToBeMadeExtensible { get; set; }
         /// <summary> ModelToAddAdditionalSerializableProperty. </summary>
         public ModelToAddAdditionalSerializableProperty PropertyModelToAddAdditionalSerializableProperty { get; set; }
+        /// <summary> First layer model's property. </summary>
+        public FirstLayer FirstLayerModel { get; set; }
+        /// <summary> Second layer model's property. </summary>
+        public SecondLayer SecondLayerModel { get; set; }
+        /// <summary> Third layer model's property. </summary>
+        public ThirdLayer ThirdLayerModel { get; set; }
     }
 }

@@ -423,7 +423,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
             SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
+            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember?.Name ?? name);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -492,8 +492,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 isReadOnly,
                 property,
                 valueType,
-                optionalViaNullability,
-                serializationMapping);
+                optionalViaNullability);
             return objectTypeProperty;
         }
 

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Utilities
 {
@@ -10,6 +12,7 @@ namespace AutoRest.CSharp.Utilities
         internal static string UpdateSwaggerOrFile = "\n\nPlease review your swagger and make necessary corrections.\n\nIf the definition is correct file an issue at https://github.com/Azure/autorest.csharp/issues/new with details to reproduce.\n";
 
         // We wrap all 'reported' errors in a custom exception type so CSharpGen can recognize them as not internal errors and not show 'Internal error in AutoRest.CSharp'
+        [DoesNotReturn]
         internal static void ThrowError (string errorText)
         {
             throw new ErrorException (errorText);

@@ -17,6 +17,25 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
+@doc("The first layer model in the inheritance tree")
+model FirstLayer {
+    @doc("Property to change serialization and deserialization in this class and all derived classes")
+    stringToBeChanged: string;
+}
+
+model SecondLayer extends FirstLayer {
+    @doc("Other property")
+    optionalString?: string;
+
+    @doc("Yet another property")
+    intToBeChanged?: int32;
+}
+
+model ThirdLayer extends SecondLayer {
+    @doc("Other property on 3rd layer")
+    optionalFloat?: float32;
+}
+
 @doc("Model to add additional serializable property")
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
@@ -128,6 +147,15 @@ model RootModel {
 
   @doc("ModelToAddAdditionalSerializableProperty")
   propertyModelToAddAdditionalSerializableProperty?: ModelToAddAdditionalSerializableProperty;
+
+  @doc("First layer model's property")
+  firstLayerModel?: FirstLayer;
+
+  @doc("Second layer model's property")
+  secondLayerModel?: SecondLayer;
+
+  @doc("Third layer model's property")
+  thirdLayerModel?: ThirdLayer;
 }
 
 @route("/inputToRoundTrip")

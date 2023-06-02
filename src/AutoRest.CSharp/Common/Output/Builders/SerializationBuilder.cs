@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
@@ -10,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -120,7 +122,7 @@ namespace AutoRest.CSharp.Output.Builders
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
                         TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), null, false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
@@ -255,7 +257,7 @@ namespace AutoRest.CSharp.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType, Dictionary<ObjectTypeProperty, SourcePropertySerializationMapping> propertySerializationDict)
         {
             foreach (ObjectTypeProperty property in propertyBag.Properties)
             {
@@ -266,10 +268,12 @@ namespace AutoRest.CSharp.Output.Builders
                     throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
                 }
 
+                var serializationMapping = propertySerializationDict.GetValueOrDefault(property);
+
                 yield return new JsonPropertySerialization(
                     parameter.Name,
                     property.Declaration.Name,
-                    property.SerializationMapping?.SerializationPath?.Last() ?? schemaProperty.SerializedName,
+                    serializationMapping?.SerializationPath?.Last() ?? schemaProperty.SerializedName,
                     property.Declaration.Type,
                     property.ValueType,
                     BuildSerialization(schemaProperty.Schema, property.ValueType, false),
@@ -277,13 +281,13 @@ namespace AutoRest.CSharp.Output.Builders
                     schemaProperty.IsReadOnly,
                     false,
                     property.OptionalViaNullability,
-                    serializationValueHook: property.SerializationMapping?.SerializationValueHook,
-                    deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
+                    serializationValueHook: serializationMapping?.SerializationValueHook,
+                    deserializationValueHook: serializationMapping?.DeserializationValueHook);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType, propertySerializationDict).ToArray();
                 yield return new JsonPropertySerialization(name, serializationProperties);
             }
         }
@@ -291,6 +295,7 @@ namespace AutoRest.CSharp.Output.Builders
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
+            var propertySerializationDict = new Dictionary<ObjectTypeProperty, SourcePropertySerializationMapping>();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
@@ -298,12 +303,16 @@ namespace AutoRest.CSharp.Output.Builders
                     if (objectTypeProperty.SchemaProperty != null)
                     {
                         propertyBag.Properties.Add(objectTypeProperty);
+                        // making sure the serialization mapping is properly inherited from base
+                        var serializationMapping = objectType.ModelTypeMapping?.GetForMemberSerialization(objectTypeProperty.Declaration.Name) ?? objectTypeLevel.ModelTypeMapping?.GetForMemberSerialization(objectTypeProperty.Declaration.Name);
+                        if (serializationMapping != null)
+                            propertySerializationDict.Add(objectTypeProperty, serializationMapping);
                     }
                 }
             }
 
-            PopulatePropertyBag(propertyBag, 0);
-            var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
+            PopulatePropertyBag(propertyBag, 0, propertySerializationDict);
+            var properties = GetPropertySerializationsFromBag(propertyBag, objectType, propertySerializationDict).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter, false, false);
         }
@@ -311,15 +320,19 @@ namespace AutoRest.CSharp.Output.Builders
         private class SerializationPropertyBag
         {
             public Dictionary<string, SerializationPropertyBag> Bag { get; } = new Dictionary<string, SerializationPropertyBag>();
-            public List<ObjectTypeProperty> Properties { get; } = new List<ObjectTypeProperty>();
+            public List<ObjectTypeProperty> Properties { get; } = new();
         }
 
-        private static void PopulatePropertyBag(SerializationPropertyBag propertyBag, int depthIndex)
+        private static void PopulatePropertyBag(SerializationPropertyBag propertyBag, int depthIndex, Dictionary<ObjectTypeProperty, SourcePropertySerializationMapping> propertySerializationDict)
         {
             foreach (ObjectTypeProperty property in propertyBag.Properties.ToArray())
             {
                 var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
-                ICollection<string> flattenedNames = property.SerializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
+                ICollection<string> flattenedNames = schemaProperty.FlattenedNames;
+                if (propertySerializationDict.TryGetValue(property, out var serializationMapping) && serializationMapping.SerializationPath != null)
+                {
+                    flattenedNames = serializationMapping.SerializationPath.ToArray();
+                }
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;
@@ -338,7 +351,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             foreach (SerializationPropertyBag innerBag in propertyBag.Bag.Values)
             {
-                PopulatePropertyBag(innerBag, depthIndex + 1);
+                PopulatePropertyBag(innerBag, depthIndex + 1, propertySerializationDict);
             }
         }
 

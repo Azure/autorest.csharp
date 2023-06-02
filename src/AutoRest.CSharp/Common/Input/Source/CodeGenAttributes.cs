@@ -66,12 +66,13 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out (string? SerializationHook, string? DeserializationHook) hooks)
+        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out (string? PropertyName, string? SerializationHook, string? DeserializationHook) hooks)
         {
             hooks = default;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
                 return false;
 
+            string? propertyName = null;
             string? serializationValueHook = null;
             string? deserializationValueHook = null;
 
@@ -85,11 +86,19 @@ namespace AutoRest.CSharp.Input.Source
                     case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationValueHook):
                         deserializationValueHook = namedArgument.Value.Value as string;
                         break;
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.PropertyName):
+                        propertyName = namedArgument.Value.Value as string;
+                        break;
                 }
             }
 
-            hooks = (serializationValueHook, deserializationValueHook);
-            return serializationValueHook != null || deserializationValueHook != null;
+            if (attributeData.ConstructorArguments.Length > 0)
+            {
+                propertyName = attributeData.ConstructorArguments[0].Value as string;
+            }
+
+            hooks = (propertyName, serializationValueHook, deserializationValueHook);
+            return propertyName != null || serializationValueHook != null || deserializationValueHook != null;
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)

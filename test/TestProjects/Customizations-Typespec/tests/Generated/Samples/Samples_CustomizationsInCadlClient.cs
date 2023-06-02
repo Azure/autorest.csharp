@@ -89,6 +89,23 @@ namespace CustomizationsInCadl.Samples
                 {
                     requiredInt = 1234,
                 },
+                firstLayerModel = new
+                {
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
+                secondLayerModel = new
+                {
+                    optionalString = "<optionalString>",
+                    intToBeChanged = 1234,
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
+                thirdLayerModel = new
+                {
+                    optionalFloat = 123.45f,
+                    optionalString = "<optionalString>",
+                    intToBeChanged = 1234,
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
             };
 
             Response response = client.RoundTrip(RequestContent.Create(data), new RequestContext());
@@ -113,6 +130,14 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("firstLayerModel").GetProperty("stringToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("intToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("stringToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("optionalFloat").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("intToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("stringToBeChanged").ToString());
         }
 
         [Test]
@@ -184,6 +209,23 @@ namespace CustomizationsInCadl.Samples
                 {
                     requiredInt = 1234,
                 },
+                firstLayerModel = new
+                {
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
+                secondLayerModel = new
+                {
+                    optionalString = "<optionalString>",
+                    intToBeChanged = 1234,
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
+                thirdLayerModel = new
+                {
+                    optionalFloat = 123.45f,
+                    optionalString = "<optionalString>",
+                    intToBeChanged = 1234,
+                    stringToBeChanged = "<stringToBeChanged>",
+                },
             };
 
             Response response = await client.RoundTripAsync(RequestContent.Create(data), new RequestContext());
@@ -208,6 +250,14 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("firstLayerModel").GetProperty("stringToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("intToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("secondLayerModel").GetProperty("stringToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("optionalFloat").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("intToBeChanged").ToString());
+            Console.WriteLine(result.GetProperty("thirdLayerModel").GetProperty("stringToBeChanged").ToString());
         }
 
         [Test]
@@ -246,6 +296,18 @@ namespace CustomizationsInCadl.Samples
                 {
                     AdditionalSerializableProperty = 1234,
                     AdditionalNullableSerializableProperty = 1234,
+                },
+                FirstLayerModel = new FirstLayer("<stringToBeChanged>"),
+                SecondLayerModel = new SecondLayer("<stringToBeChanged>")
+                {
+                    OptionalString = "<OptionalString>",
+                    IntToBeChanged = 1234,
+                },
+                ThirdLayerModel = new ThirdLayer("<stringToBeChanged>")
+                {
+                    OptionalFloat = 3.14f,
+                    OptionalString = "<OptionalString>",
+                    IntToBeChanged = 1234,
                 },
             };
             var result = await client.RoundTripAsync(input);

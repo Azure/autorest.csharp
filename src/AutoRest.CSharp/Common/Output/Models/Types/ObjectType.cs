@@ -23,14 +23,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<ModelMethodDefinition>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
+        private readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
+
         protected ObjectType(BuildContext context)
             : base(context)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => context.SourceInputModel?.CreateForModel(ExistingType));
         }
 
         protected ObjectType(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => sourceInputModel?.CreateForModel(ExistingType));
         }
 
         public bool IsStruct => ExistingType?.IsValueType ?? false;
@@ -52,6 +56,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract string CreateDescription();
         public abstract bool IncludeConverter { get; }
+
+        internal ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
         protected virtual IEnumerable<ModelMethodDefinition> BuildMethods()
         {

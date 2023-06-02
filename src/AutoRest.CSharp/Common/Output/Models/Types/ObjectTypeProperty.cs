@@ -27,18 +27,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: serializationFormat,
-                  serializationMapping: field.SerializationMapping)
+                  serializationFormat: serializationFormat)
         {
             InitializationValue = field.DefaultValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability, serializationMapping: serializationMapping)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -53,7 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
             SerializationFormat = serializationFormat;
-            SerializationMapping = serializationMapping;
         }
 
         public ObjectTypeProperty MarkFlatten()
@@ -160,8 +158,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldModifiers? GetterModifiers { get; }
         public FieldModifiers? SetterModifiers { get; }
-
-        public SourcePropertySerializationMapping? SerializationMapping { get; }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {

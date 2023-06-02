@@ -56,6 +56,21 @@ namespace CustomizationsInCadl.Models
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
                 writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
             }
+            if (Optional.IsDefined(FirstLayerModel))
+            {
+                writer.WritePropertyName("firstLayerModel"u8);
+                writer.WriteObjectValue(FirstLayerModel);
+            }
+            if (Optional.IsDefined(SecondLayerModel))
+            {
+                writer.WritePropertyName("secondLayerModel"u8);
+                writer.WriteObjectValue(SecondLayerModel);
+            }
+            if (Optional.IsDefined(ThirdLayerModel))
+            {
+                writer.WritePropertyName("thirdLayerModel"u8);
+                writer.WriteObjectValue(ThirdLayerModel);
+            }
             writer.WriteEndObject();
         }
 
@@ -73,6 +88,9 @@ namespace CustomizationsInCadl.Models
             Optional<EnumWithValueToRename> propertyEnumWithValueToRename = default;
             Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
             Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
+            Optional<FirstLayer> firstLayerModel = default;
+            Optional<SecondLayer> secondLayerModel = default;
+            Optional<ThirdLayer> thirdLayerModel = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyModelToMakeInternal"u8))
@@ -147,8 +165,35 @@ namespace CustomizationsInCadl.Models
                     propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value);
                     continue;
                 }
+                if (property.NameEquals("firstLayerModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    firstLayerModel = FirstLayer.DeserializeFirstLayer(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("secondLayerModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    secondLayerModel = SecondLayer.DeserializeSecondLayer(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("thirdLayerModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    thirdLayerModel = ThirdLayer.DeserializeThirdLayer(property.Value);
+                    continue;
+                }
             }
-            return new RootModel(propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value);
+            return new RootModel(propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, firstLayerModel.Value, secondLayerModel.Value, thirdLayerModel.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

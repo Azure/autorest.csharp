@@ -49,7 +49,7 @@ namespace MgmtCustomizations
                 }
                 if (property.NameEquals("id"u8))
                 {
-                    id = new ResourceIdentifier(property.Value.GetString());
+                    ReadIdValue(property, ref id);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

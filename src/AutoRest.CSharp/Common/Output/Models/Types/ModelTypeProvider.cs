@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, _typeFactory, ModelTypeMapping);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -164,10 +164,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, inputModelProperty.SerializationFormat);
 
+                    var serializationMapping = ModelTypeMapping?.GetForMemberSerialization(declaredName) ?? objType.ModelTypeMapping?.GetForMemberSerialization(declaredName);
+
                     yield return new JsonPropertySerialization(
                         paramName,
                         declaredName,
-                        property.SerializationMapping?.SerializationPath?.Last() ?? serializedName,
+                        serializationMapping?.SerializationPath?.Last() ?? serializedName,
                         property.Declaration.Type,
                         property.ValueType,
                         valueSerialization,
@@ -175,8 +177,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         inputModelProperty.IsReadOnly,
                         false,
                         property.OptionalViaNullability,
-                        serializationValueHook: property.SerializationMapping?.SerializationValueHook,
-                        deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
+                        serializationValueHook: serializationMapping?.SerializationValueHook,
+                        deserializationValueHook: serializationMapping?.DeserializationValueHook);
                 }
             }
         }

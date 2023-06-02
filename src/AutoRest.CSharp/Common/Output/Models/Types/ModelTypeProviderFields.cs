@@ -65,9 +65,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                                              !TypeFactory.IsCollectionType(propertyType);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
-                var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
+                    ? CreateFieldFromExisting(existingMember, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
                     : CreateField(originalFieldName, propertyType, inputModel, inputModelProperty, optionalViaNullability);
 
                 if (existingMember is not null)
@@ -94,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var serializationMapping in sourceTypeMapping.GetSerializationMembers())
                 {
-                    if (visitedMembers.Contains(serializationMapping.ExistingMember))
+                    if (serializationMapping.ExistingMember is null || visitedMembers.Contains(serializationMapping.ExistingMember))
                     {
                         continue;
                     }
@@ -104,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // therefore the top type here is reasonable
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModel, inputModelProperty, typeFactory, false);
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, typeof(object), inputModel, inputModelProperty, typeFactory, false);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
                     serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
@@ -179,7 +178,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {
             if (optionalViaNullability)
             {
@@ -204,7 +203,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, valueType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, valueType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty);
         }
 
         private static bool IsReadOnly(ISymbol existingMember) => existingMember switch

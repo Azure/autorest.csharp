@@ -509,6 +509,127 @@
      "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "68",
+     "Name": "firstLayerModel",
+     "SerializedName": "firstLayerModel",
+     "Description": "First layer model's property",
+     "Type": {
+      "$id": "69",
+      "Name": "FirstLayer",
+      "Namespace": "CustomizationsInCadl",
+      "Description": "The first layer model in the inheritance tree",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "70",
+        "Name": "stringToBeChanged",
+        "SerializedName": "stringToBeChanged",
+        "Description": "Property to change serialization and deserialization in this class and all derived classes",
+        "Type": {
+         "$id": "71",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "72",
+     "Name": "secondLayerModel",
+     "SerializedName": "secondLayerModel",
+     "Description": "Second layer model's property",
+     "Type": {
+      "$id": "73",
+      "Name": "SecondLayer",
+      "Namespace": "CustomizationsInCadl",
+      "IsNullable": false,
+      "BaseModel": {
+       "$ref": "69"
+      },
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "74",
+        "Name": "optionalString",
+        "SerializedName": "optionalString",
+        "Description": "Other property",
+        "Type": {
+         "$id": "75",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "76",
+        "Name": "intToBeChanged",
+        "SerializedName": "intToBeChanged",
+        "Description": "Yet another property",
+        "Type": {
+         "$id": "77",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "78",
+     "Name": "thirdLayerModel",
+     "SerializedName": "thirdLayerModel",
+     "Description": "Third layer model's property",
+     "Type": {
+      "$id": "79",
+      "Name": "ThirdLayer",
+      "Namespace": "CustomizationsInCadl",
+      "IsNullable": false,
+      "BaseModel": {
+       "$ref": "73"
+      },
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "80",
+        "Name": "optionalFloat",
+        "SerializedName": "optionalFloat",
+        "Description": "Other property on 3rd layer",
+        "Type": {
+         "$id": "81",
+         "Name": "float32",
+         "Kind": "Float32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -526,22 +647,31 @@
   },
   {
    "$ref": "65"
+  },
+  {
+   "$ref": "69"
+  },
+  {
+   "$ref": "73"
+  },
+  {
+   "$ref": "79"
   }
  ],
  "Clients": [
   {
-   "$id": "68",
+   "$id": "82",
    "Name": "CustomizationsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "69",
+     "$id": "83",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "70",
+       "$id": "84",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -558,11 +688,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "71",
+       "$id": "85",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "72",
+        "$id": "86",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -577,19 +707,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "73",
+        "$id": "87",
         "Type": {
-         "$ref": "72"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "74",
+       "$id": "88",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "75",
+        "$id": "89",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -604,20 +734,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "90",
         "Type": {
-         "$ref": "75"
+         "$ref": "89"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "77",
+       "$id": "91",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "78",
+        "$id": "92",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -632,9 +762,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "79",
+        "$id": "93",
         "Type": {
-         "$id": "80",
+         "$id": "94",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -645,7 +775,7 @@
      ],
      "Responses": [
       {
-       "$id": "81",
+       "$id": "95",
        "StatusCodes": [
         200
        ],
@@ -670,7 +800,7 @@
     }
    ],
    "Protocol": {
-    "$id": "82"
+    "$id": "96"
    },
    "Creatable": true
   }

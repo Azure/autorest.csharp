@@ -9,7 +9,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CSharpType ValueType, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null, SourcePropertySerializationMapping? SerializationMapping = null)
+    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CSharpType ValueType, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null)
     {
         public string Name => Declaration.ActualName;
         public string Accessibility => (Modifiers & FieldModifiers.Public) > 0 ? "public" : "internal";
