@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -20,6 +21,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
+        private static readonly ResponseClassifierType NextPageStatusCodes = new(new[] { new StatusCodes(200, null) }.OrderBy(sc => sc.Code));
+
         protected OperationPaging Paging { get; }
         protected CSharpType ResponseType { get; }
 
@@ -50,19 +53,19 @@ namespace AutoRest.CSharp.Output.Models
             yield return createRequestMethod;
             if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
             {
-                yield return BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, createRequestMethod.Signature.Summary, createRequestMethod.Signature.Description, responseClassifierType);
+                yield return BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, createRequestMethod.Signature.Summary, createRequestMethod.Signature.Description);
             }
         }
 
-        private Method BuildCreateNextPageRequestMethod(string name, string? summary, string? description, ResponseClassifierType responseClassifierType)
+        private Method BuildCreateNextPageRequestMethod(string name, string? summary, string? description)
         {
             var signature = new MethodSignature(name, summary, description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateNextPageMessageMethodParameters);
-            return new Method(signature, BuildCreateNextPageRequestMethodBody(responseClassifierType).AsStatement());
+            return new Method(signature, BuildCreateNextPageRequestMethodBody().AsStatement());
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody(ResponseClassifierType responseClassifierType)
+        private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody()
         {
-            yield return CreateHttpMessage(responseClassifierType, RequestMethod.Get, out var message, out var request, out var uriBuilder);
+            yield return CreateHttpMessage(NextPageStatusCodes, RequestMethod.Get, out var message, out var request, out var uriBuilder);
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false);
             yield return Assign(request.Uri, uriBuilder);
