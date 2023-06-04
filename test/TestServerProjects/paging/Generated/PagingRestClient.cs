@@ -570,11 +570,11 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Timeout != null)
             {
                 request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }
@@ -1784,11 +1784,11 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Timeout != null)
             {
                 request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }

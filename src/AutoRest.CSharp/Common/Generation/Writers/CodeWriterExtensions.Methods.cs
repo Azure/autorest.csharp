@@ -291,14 +291,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (parameters.Count == 1)
                         {
-                            writer.Declaration(parameters[0]);
+                            var parameter = parameters[0];
+                            if (parameter is not null)
+                            {
+                                writer.Declaration(parameter);
+                            }
+                            else
+                            {
+                                writer.AppendRaw("_");
+                            }
                         }
                         else
                         {
                             writer.AppendRaw("(");
                             foreach (var parameter in parameters)
                             {
-                                writer.Declaration(parameter);
+                                if (parameter is not null)
+                                {
+                                    writer.Declaration(parameter);
+                                }
+                                else
+                                {
+                                    writer.AppendRaw("_");
+                                }
                                 writer.AppendRaw(", ");
                             }
 

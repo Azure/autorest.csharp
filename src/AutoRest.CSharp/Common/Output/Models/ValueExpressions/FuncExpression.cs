@@ -6,5 +6,5 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 {
-    internal record FuncExpression(IReadOnlyList<CodeWriterDeclaration> Parameters, ValueExpression Inner) : ValueExpression;
+    internal record FuncExpression(IReadOnlyList<CodeWriterDeclaration?> Parameters, ValueExpression Inner) : ValueExpression;
 }

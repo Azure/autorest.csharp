@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody(ResponseClassifierType responseClassifierType)
         {
-            yield return CreateHttpMessage(responseClassifierType, out var message, out var request, out var uriBuilder);
+            yield return CreateHttpMessage(responseClassifierType, RequestMethod.Get, out var message, out var request, out var uriBuilder);
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false);
             yield return Assign(request.Uri, uriBuilder);

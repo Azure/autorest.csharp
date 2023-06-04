@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Output.Models
                 restClientNextPageMethods,
                 convenienceMethods,
 
-                this is LroOperationMethodsBuilder ? 2 : this is PagingOperationMethodsBuilderBase ? 1 : 0,
+                this is LroOperationMethodsBuilder or LroPagingOperationMethodsBuilder ? 2 : this is PagingOperationMethodsBuilder ? 1 : 0,
                 Operation,
                 null,
                 restClientMethod,
@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType responseClassifierType)
         {
-            yield return CreateHttpMessage(responseClassifierType, out var message, out var request, out var uriBuilder);
+            yield return CreateHttpMessage(responseClassifierType, Operation.HttpMethod, out var message, out var request, out var uriBuilder);
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return AddPath(uriBuilder, Operation.Path);
             yield return AddQuery(uriBuilder).AsStatement();
@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Output.Models
             yield return Return(message);
         }
 
-        protected List<MethodBodyStatement> CreateHttpMessage(ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
+        protected List<MethodBodyStatement> CreateHttpMessage(ResponseClassifierType? responseClassifierType, RequestMethod requestMethod, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
         {
             var callPipelineCreateMessage = CreateMessageRequestContext is not null
                 ? responseClassifierType is not null
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Output.Models
                 statements.Add(Assign(message.BufferResponse, False));
             }
 
-            statements.Add(Assign(request.Method, new MemberReference(typeof(RequestMethod), Operation.HttpMethod.ToRequestMethodName())));
+            statements.Add(Assign(request.Method, new MemberReference(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
             statements.Add(Var("uri", RawRequestUriBuilderExpression.New(), out uriBuilder));
 
             return statements;
