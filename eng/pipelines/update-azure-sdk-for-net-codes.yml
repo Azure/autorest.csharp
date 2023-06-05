@@ -3,7 +3,7 @@
 parameters:
   Name: ''
   AutorestCSharpVersion: ''
-  CadlEmitterVersion: ''
+  TypeSpecEmitterVersion: ''
   IsInternalFeed: false
   Matrix: {}
   DependsOn: []
@@ -57,7 +57,7 @@ jobs:
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkForNet.ps1
       arguments: >
         -AutorestCSharpVersion ${{ parameters.AutorestCSharpVersion }}
-        -CadlEmitterVersion ${{ parameters.CadlEmitterVersion }}
+        -TypeSpecEmitterVersion ${{ parameters.TypeSpecEmitterVersion }}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
         -ShowSummary

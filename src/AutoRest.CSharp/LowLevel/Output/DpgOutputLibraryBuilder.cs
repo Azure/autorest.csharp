@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
         }
 
-        public DpgOutputLibrary Build(bool isCadlInput)
+        public DpgOutputLibrary Build(bool isTspInput)
         {
             var inputClients = UpdateOperations();
 
@@ -54,9 +54,9 @@ namespace AutoRest.CSharp.Output.Models
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isCadlInput, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
-            if (isCadlInput)
+            if (isTspInput)
             {
                 CreateEnums(enums, library.TypeFactory);
                 CreateModels(models, library.TypeFactory);

@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _rootNamespace;
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
-        private readonly bool _isCadlInput;
+        private readonly bool _isTspInput;
         private readonly SourceInputModel? _sourceInputModel;
 
         public TypeFactory TypeFactory { get; }
@@ -29,15 +29,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
             _rootNamespace = rootNamespace;
             _enums = enums;
             _models = models;
-            _isCadlInput = isCadlInput;
-            _sourceInputModel = sourceInputModel;
+            _isTspInput = isTspInput;
+             _sourceInputModel = sourceInputModel;
             RestClients = restClients;
             ClientOptions = clientOptions;
         }
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isCadlInput || enumType.Usage == InputModelTypeUsage.None)
+            if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }

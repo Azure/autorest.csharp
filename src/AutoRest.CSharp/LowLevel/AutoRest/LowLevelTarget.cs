@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelTarget
     {
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool isTspInput)
         {
-            var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
+            var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(isTspInput);
 
             foreach (var model in library.AllModels)
             {
