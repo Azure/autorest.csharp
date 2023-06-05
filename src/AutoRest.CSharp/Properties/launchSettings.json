@@ -32,17 +32,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
     },
-    "ApiVersion-Typespec": {
+    "ApiVersion-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion-TypeSpec\\src\\Generated"
     },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
     },
-    "Authoring-Typespec": {
+    "Authoring-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Authoring-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Authoring-TypeSpec\\src\\Generated"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
@@ -164,9 +164,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\src\\Generated"
     },
-    "ClientAndOperationGroup-Typespec": {
+    "ClientAndOperationGroup-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-TypeSpec\\src\\Generated"
     },
     "CognitiveSearch": {
       "commandName": "Project",
@@ -184,9 +184,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
     },
-    "ConvenienceUpdate-Typespec": {
+    "ConvenienceUpdate-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceUpdate-Typespec\\src\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceUpdate-TypeSpec\\src\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-TypeSpec\\src\\Generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",
@@ -212,9 +212,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\src\\Generated"
     },
-    "Customizations-Typespec": {
+    "Customizations-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-TypeSpec\\src\\Generated"
     },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
@@ -236,9 +236,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\Generated"
     },
-    "FirstTest-Typespec": {
+    "FirstTest-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-TypeSpec\\src\\Generated"
     },
     "FlattenedParameters": {
       "commandName": "Project",
@@ -296,9 +296,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\Generated"
     },
-    "Lro-Basic-Typespec": {
+    "Lro-Basic-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-TypeSpec\\src\\Generated"
     },
     "lro-LowLevel": {
       "commandName": "Project",
@@ -316,9 +316,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\src\\Generated"
     },
-    "MediaTypes-Typespec": {
+    "MediaTypes-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MediaTypes-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MediaTypes-TypeSpec\\src\\Generated"
     },
     "MgmtCollectionParent": {
       "commandName": "Project",
@@ -460,9 +460,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\Generated"
     },
-    "MixAPIVersion-Typespec": {
+    "MixAPIVersion-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-TypeSpec\\src\\Generated"
     },
     "model-flattening": {
       "commandName": "Project",
@@ -472,9 +472,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\Generated"
     },
-    "Models-Typespec": {
+    "Models-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-TypeSpec\\src\\Generated"
     },
     "ModelShapes": {
       "commandName": "Project",
@@ -504,9 +504,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
     },
-    "Pagination-Typespec": {
+    "Pagination-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-TypeSpec\\src\\Generated"
     },
     "PaginationParams-LowLevel": {
       "commandName": "Project",
@@ -524,17 +524,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-LowLevel\\src\\Generated"
     },
-    "Parameters-Typespec": {
+    "Parameters-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-TypeSpec\\src\\Generated"
     },
     "ParameterSequence-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\src\\Generated"
     },
-    "PetStore-Typespec": {
+    "PetStore-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-TypeSpec\\src\\Generated"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
@@ -544,9 +544,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PublicClientCtor\\Generated"
     },
-    "RenameGetList-Typespec": {
+    "RenameGetList-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-TypeSpec\\src\\Generated"
     },
     "required-optional": {
       "commandName": "Project",
@@ -580,9 +580,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingleTopLevelClientWithoutOperations-LowLevel\\src\\Generated"
     },
-    "Spread-Typespec": {
+    "Spread-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-Typespec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-TypeSpec\\src\\Generated"
     },
     "SubClients-LowLevel": {
       "commandName": "Project",
