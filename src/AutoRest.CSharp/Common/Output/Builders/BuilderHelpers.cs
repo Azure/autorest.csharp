@@ -66,37 +66,37 @@ namespace AutoRest.CSharp.Output.Builders
             ConstantSchema constantSchema => GetSerializationFormat(constantSchema.ValueType), // forward the constantSchema to its underlying type
 
             ByteArraySchema byteArraySchema => byteArraySchema.Format switch
-                {
-                    ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
-                    ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
-                    _ => SerializationFormat.Default
-                },
+            {
+                ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
+                ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
+                _ => SerializationFormat.Default
+            },
 
             UnixTimeSchema => SerializationFormat.DateTime_Unix,
             DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
-                {
-                    DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
-                    DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
-                    _ => SerializationFormat.Default
-                },
+            {
+                DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+                _ => SerializationFormat.Default
+            },
 
             DateSchema _ => SerializationFormat.Date_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
 
             DurationSchema _ => schema.Extensions?.Format switch
-                {
-                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
-                    _ => SerializationFormat.Duration_ISO8601
-                },
+            {
+                XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                _ => SerializationFormat.Duration_ISO8601
+            },
 
             _ => schema.Extensions?.Format switch
-                {
-                    XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
-                    XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                    XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
-                    _ => SerializationFormat.Default
-                }
+            {
+                XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
+                XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                _ => SerializationFormat.Default
+            }
         };
 
         public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
@@ -203,28 +203,31 @@ namespace AutoRest.CSharp.Output.Builders
             return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract, false);
         }
 
+        public static CSharpType GetTypeFromExisting(ISymbol existingMember, CSharpType defaultType, TypeFactory typeFactory)
+        {
+            var newType = existingMember switch
+            {
+                IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
+                IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
+                IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
+                _ => defaultType
+            };
+
+            return PromoteNullabilityInformation(newType, defaultType);
+        }
+
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
         {
-            if (existingMember != null)
-            {
-                var newType = existingMember switch
-                {
-                    IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
-                    IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
-                    IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
-                    _ => defaultType
-                };
-
-                return new MemberDeclarationOptions(
+            return existingMember != null ?
+                new MemberDeclarationOptions(
                     SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
                     existingMember.Name,
-                    PromoteNullabilityInformation(newType, defaultType)
-                );
-            }
-            return new MemberDeclarationOptions(
-                defaultAccessibility,
-                defaultName,
-                defaultType
+                    GetTypeFromExisting(existingMember, defaultType, typeFactory)
+                ) :
+                new MemberDeclarationOptions(
+                    defaultAccessibility,
+                    defaultName,
+                    defaultType
                 );
         }
 

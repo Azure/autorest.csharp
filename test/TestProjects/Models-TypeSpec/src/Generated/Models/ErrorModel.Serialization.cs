@@ -38,7 +38,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new ErrorModel(message, innerError);
+            return new ErrorModel(message, innerError.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

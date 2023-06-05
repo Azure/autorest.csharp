@@ -148,7 +148,7 @@ namespace CustomizationsInCadl.Models
                     continue;
                 }
             }
-            return new RootModel(propertyModelToMakeInternal, propertyModelToRename, propertyModelToChangeNamespace, propertyModelWithCustomizedProperties, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty);
+            return new RootModel(propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
