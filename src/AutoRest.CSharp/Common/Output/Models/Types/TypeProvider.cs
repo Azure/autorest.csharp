@@ -58,14 +58,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return namespaceExtension;
             }
 
-            var defaultNamespace = Configuration.Namespace ?? rootNamespaceName;
-
             if (Configuration.ModelNamespace)
             {
-                return $"{defaultNamespace}.Models";
+                return $"{rootNamespaceName}.Models";
             }
 
-            return defaultNamespace;
+            return rootNamespaceName;
         }
 
         public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
