@@ -72,7 +72,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
             process.exit(1);
         }
-        const namespace = root.Name;
+        const tspNamespace = root.Name; // this is the top-level namespace defined in the typespec file, which is actually always different from the namespace of the SDK
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -113,8 +113,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             //emit configuration.json
             const configurations = {
                 OutputFolder: ".",
-                Namespace: options.namespace ?? namespace,
-                LibraryName: options["library-name"] ?? namespace,
+                Namespace: options.namespace ?? tspNamespace,
+                LibraryName: options["library-name"] ?? options.namespace ?? tspNamespace,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
