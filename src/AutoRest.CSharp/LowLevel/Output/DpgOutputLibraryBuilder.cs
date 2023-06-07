@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
-            _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
-            _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            _defaultNamespace = Configuration.Namespace;
+            _libraryName = Configuration.LibraryName;
         }
 
         public DpgOutputLibrary Build(bool isTspInput)

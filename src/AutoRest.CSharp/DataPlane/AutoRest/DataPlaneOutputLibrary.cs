@@ -48,8 +48,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             ConstantSchemaTransformer.Transform(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
-            _defaultNamespace = Configuration.Namespace ?? _input.Name;
-            _libraryName = Configuration.LibraryName ?? _input.Name;
+            _defaultNamespace = Configuration.Namespace;
+            _libraryName = Configuration.LibraryName;
 
             _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
