@@ -43,17 +43,19 @@ model Thing {
 interface Authoring {
   createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
 
-  @convenientAPI(true)
-  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
-  createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
-  
+// uncomment the following after https://github.com/Azure/typespec-azure/issues/3109 is fixed
+//   @convenientAPI(true)
+//   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+//   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
 
-  @convenientAPI(true)
-  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
-  op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
+// uncomment the following after we upgrade to typespec 0.45.0: https://github.com/Azure/autorest.csharp/issues/3477
+// there is an official long running rpc operation template
+//   @convenientAPI(true)
+//   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+//   op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
 }
 
 namespace CustomCore {

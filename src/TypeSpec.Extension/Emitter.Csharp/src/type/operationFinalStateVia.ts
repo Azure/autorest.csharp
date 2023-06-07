@@ -4,5 +4,6 @@
 export enum OperationFinalStateVia {
     AzureAsyncOperation,
     Location,
-    OriginalUri
+    OriginalUri,
+    OperationLocation
 }

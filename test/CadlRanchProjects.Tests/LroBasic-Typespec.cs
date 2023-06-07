@@ -16,27 +16,27 @@ namespace CadlRanchProjects.Tests
     /// </summary>
     public class LroBasicCadlTests : CadlRanchMockApiTestBase
     {
-        [Test]
-        public Task LroBasic_CreateProject() => Test(async (host) =>
-        {
-            Project project = new(null, "foo", "bar");
-            var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Completed, project);
-            Assert.IsTrue(operation.HasCompleted);
-            Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
-        });
+        //[Test]
+        //public Task LroBasic_CreateProject() => Test(async (host) =>
+        //{
+        //    Project project = new(null, "foo", "bar");
+        //    var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Completed, project);
+        //    Assert.IsTrue(operation.HasCompleted);
+        //    Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
+        //});
 
-        [Test]
-        public Task LroBasic_CreateProjectWaitForCompletion() => Test(async (host) =>
-        {
-            Project project = new(null, "foo", "bar");
-            var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Started, project);
-            Assert.IsFalse(operation.HasCompleted);
-            Assert.AreEqual(((int)HttpStatusCode.Accepted), operation.GetRawResponse().Status);
+        //[Test]
+        //public Task LroBasic_CreateProjectWaitForCompletion() => Test(async (host) =>
+        //{
+        //    Project project = new(null, "foo", "bar");
+        //    var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Started, project);
+        //    Assert.IsFalse(operation.HasCompleted);
+        //    Assert.AreEqual(((int)HttpStatusCode.Accepted), operation.GetRawResponse().Status);
 
-            await operation.WaitForCompletionResponseAsync();
-            Assert.IsTrue(operation.HasCompleted);
-            Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
-        });
+        //    await operation.WaitForCompletionResponseAsync();
+        //    Assert.IsTrue(operation.HasCompleted);
+        //    Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
+        //});
 
         [Test]
         public Task LroBasic_UpdateProject() => Test(async (host) =>

@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
+import {
+    getLroMetadata,
+    FinalStateValue
+} from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
@@ -380,7 +383,8 @@ export function loadOperation(
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(context, op.operation)) return undefined;
+        let metadata = getLroMetadata(program, op.operation);
+        if (metadata === undefined) return undefined;
 
         const finalResponse = loadLongRunningFinalResponse(
             context,
@@ -390,7 +394,7 @@ export function loadOperation(
         if (finalResponse === undefined) return undefined;
 
         return {
-            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
+            FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
             FinalResponse: finalResponse
         } as OperationLongRunning;
     }
@@ -426,8 +430,21 @@ export function loadOperation(
         );
     }
 
-    function isLongRunningOperation(context: SdkContext, op: Operation) {
-        return getOperationLink(context.program, op, "polling") !== undefined;
+    function convertLroFinalStateVia(
+        finalStateValue: FinalStateValue
+    ): OperationFinalStateVia {
+        switch (finalStateValue) {
+            case FinalStateValue.azureAsyncOperation:
+                return OperationFinalStateVia.AzureAsyncOperation;
+            case FinalStateValue.location:
+                return OperationFinalStateVia.Location;
+            case FinalStateValue.originalUri:
+                return OperationFinalStateVia.OriginalUri;
+            case FinalStateValue.operationLocation:
+                return OperationFinalStateVia.OperationLocation;
+            default:
+                throw `Unsupported LRO final state value: ${finalStateValue}`;
+        }
     }
 }
 
