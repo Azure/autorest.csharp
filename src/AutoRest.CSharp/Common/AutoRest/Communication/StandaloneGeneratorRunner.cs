@@ -180,7 +180,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.GroupParametersMethodList), Configuration.GroupParametersMethodList);
+                    writer.WriteStartArray(nameof(Configuration.Options.GroupParametersMethodList));
+                    foreach (var method in  Configuration.GroupParametersMethodList)
+                    {
+                        writer.WriteObjectValue(method);
+                    }
+                    writer.WriteEndArray();
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), Configuration.ModelsToTreatEmptyStringAsNull.ToList<string>());
                     if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
@@ -247,7 +252,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
             root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
             var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
             root.TryGetProperty(nameof(Configuration.Options.GroupParametersMethodList), out var groupParameterMethodList);
-            var groupParameterMethods = Configuration.DeserializeArray(groupParameterMethodList);
             root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
             root.TryGetProperty(nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), out var modelsToTreatEmptyStringAsNullElement);
@@ -280,7 +284,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,
-                groupParameterMethods,
+                groupParameterMethodList,
                 suppressAbstractBaseClasses,
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,

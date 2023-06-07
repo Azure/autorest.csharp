@@ -10,14 +10,14 @@ using Azure.Core;
 
 namespace Parameters_LowLevel.Models
 {
-    /// <summary> The GroupParametersWithOptionalBodyOptions. </summary>
-    public partial class GroupParametersWithOptionalBodyOptions
+    /// <summary> The OptionalBodyOptions. </summary>
+    public partial class OptionalBodyOptions
     {
-        /// <summary> Initializes a new instance of GroupParametersWithOptionalBodyOptions. </summary>
+        /// <summary> Initializes a new instance of OptionalBodyOptions. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public GroupParametersWithOptionalBodyOptions(string name, int skip)
+        public OptionalBodyOptions(string name, int skip)
         {
             Argument.AssertNotNull(name, nameof(name));
 

@@ -10,6 +10,6 @@ namespace: Azure.ParametersLowlevel
 security: AzureKey
 security-header-name: Fake-Subscription-Key
 group-parameters-method-list:
-- groupParametersWithOptionalBody
+- groupParametersWithOptionalBody: OptionalBodyOptions
 - groupParametersWithRequiredBody
 ```

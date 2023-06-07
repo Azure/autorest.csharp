@@ -445,7 +445,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.GroupParametersWithOptionalBody(new GroupParametersWithOptionalBodyOptions("<name>", 1234));
+            Response response = client.GroupParametersWithOptionalBody(new OptionalBodyOptions("<name>", 1234));
             Console.WriteLine(response.Status);
         }
 
@@ -456,7 +456,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.GroupParametersWithOptionalBody(new GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+            Response response = client.GroupParametersWithOptionalBody(new OptionalBodyOptions("<name>", 1234), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -467,7 +467,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.GroupParametersWithOptionalBodyAsync(new GroupParametersWithOptionalBodyOptions("<name>", 1234));
+            Response response = await client.GroupParametersWithOptionalBodyAsync(new OptionalBodyOptions("<name>", 1234));
             Console.WriteLine(response.Status);
         }
 
@@ -478,7 +478,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.GroupParametersWithOptionalBodyAsync(new GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+            Response response = await client.GroupParametersWithOptionalBodyAsync(new OptionalBodyOptions("<name>", 1234), new RequestContext());
             Console.WriteLine(response.Status);
         }
 

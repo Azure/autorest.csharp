@@ -327,14 +327,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GroupParametersWithOptionalBodyAsync(GroupParametersWithOptionalBodyOptions,RequestContext)">
+    <member name="GroupParametersWithOptionalBodyAsync(OptionalBodyOptions,RequestContext)">
 <example>
 This sample shows how to call GroupParametersWithOptionalBodyAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.GroupParametersWithOptionalBodyAsync(new Parameters_LowLevel.Models.GroupParametersWithOptionalBodyOptions("<name>", 1234));
+Response response = await client.GroupParametersWithOptionalBodyAsync(new Parameters_LowLevel.Models.OptionalBodyOptions("<name>", 1234));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GroupParametersWithOptionalBodyAsync with all parameters.
@@ -342,19 +342,19 @@ This sample shows how to call GroupParametersWithOptionalBodyAsync with all para
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.GroupParametersWithOptionalBodyAsync(new Parameters_LowLevel.Models.GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+Response response = await client.GroupParametersWithOptionalBodyAsync(new Parameters_LowLevel.Models.OptionalBodyOptions("<name>", 1234), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GroupParametersWithOptionalBody(GroupParametersWithOptionalBodyOptions,RequestContext)">
+    <member name="GroupParametersWithOptionalBody(OptionalBodyOptions,RequestContext)">
 <example>
 This sample shows how to call GroupParametersWithOptionalBody with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = client.GroupParametersWithOptionalBody(new Parameters_LowLevel.Models.GroupParametersWithOptionalBodyOptions("<name>", 1234));
+Response response = client.GroupParametersWithOptionalBody(new Parameters_LowLevel.Models.OptionalBodyOptions("<name>", 1234));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GroupParametersWithOptionalBody with all parameters.
@@ -362,7 +362,7 @@ This sample shows how to call GroupParametersWithOptionalBody with all parameter
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = client.GroupParametersWithOptionalBody(new Parameters_LowLevel.Models.GroupParametersWithOptionalBodyOptions("<name>", 1234), new RequestContext());
+Response response = client.GroupParametersWithOptionalBody(new Parameters_LowLevel.Models.OptionalBodyOptions("<name>", 1234), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

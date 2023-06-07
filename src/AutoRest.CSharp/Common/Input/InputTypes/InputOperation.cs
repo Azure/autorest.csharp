@@ -28,7 +28,8 @@ internal record InputOperation(
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
     bool GenerateConvenienceMethod,
-    bool HasPropertyBag)
+    bool HasPropertyBag,
+    string? PropertyBagName)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -50,7 +51,8 @@ internal record InputOperation(
         Paging: null,
         GenerateProtocolMethod: true,
         GenerateConvenienceMethod: false,
-        HasPropertyBag: false)
+        HasPropertyBag: false,
+        PropertyBagName: string.Empty)
     { }
 
     private string? _cleanName;

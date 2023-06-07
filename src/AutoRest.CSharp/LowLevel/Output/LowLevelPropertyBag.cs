@@ -22,15 +22,15 @@ namespace AutoRest.CSharp.Output.Models
         /// <summary>
         /// Constructor of the <see cref="LowLevelPropertyBag">LowLevelPropertyBag</see>.
         /// </summary>
-        /// <param baseName="baseName">Base name to be used to generate the name of the property bag class</param>
+        /// <param baseName="name">Name of the property bag class</param>
         /// <param baseName="rootNamespace">Root namespace of the whole SDK</param>
         /// <param baseName="paramsToKeep">Parameters to be wrapped</param>
         /// <param baseName="typeFactory">A <see cref="TypeFactory">TypeFactory</see> instance</param>
         /// <param baseName="inputParameters">A list of <see cref="InputParameter">InputParameter</see> of the protocol method. Note that it does not contain spread parameters.</param>
         /// <param baseName="spreadBackingModel">Optional spread model if there is spread parameter.</param>
         /// <param baseName="sourceInputModel">Optional source input model for customization codes.</param>
-        public LowLevelPropertyBag(string baseName, string rootNamespace, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory, IEnumerable<InputParameter> inputParameters, ModelTypeProvider? spreadBackingModel, SourceInputModel? sourceInputModel)
-            : base(baseName)
+        public LowLevelPropertyBag(string name, string rootNamespace, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory, IEnumerable<InputParameter> inputParameters, ModelTypeProvider? spreadBackingModel, SourceInputModel? sourceInputModel)
+            : base(name)
         {
             _rootNamespace = rootNamespace;
             _paramsToKeep = paramsToKeep;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override TypeProvider EnsurePackModel()
         {
-            var packModelName = $"{Name}Options";
+            var packModelName = Name;
 
             var properties = new List<InputModelProperty>();
             foreach (var parameter in _paramsToKeep)

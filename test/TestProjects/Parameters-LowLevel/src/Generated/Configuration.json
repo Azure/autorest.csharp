@@ -9,7 +9,9 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "GroupParametersMethodList": [
-    "groupParametersWithOptionalBody",
+    {
+      "groupParametersWithOptionalBody": "OptionalBodyOptions"
+    },
     "groupParametersWithRequiredBody"
   ]
 }

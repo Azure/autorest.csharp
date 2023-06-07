@@ -84,6 +84,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
+            var propertyBagOptions = Configuration.GroupParametersMethodList.FirstOrDefault(options => options.OperationId == operation.OperationId);
+
             var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
@@ -104,7 +106,8 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                HasPropertyBag: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
+                HasPropertyBag: propertyBagOptions != null,
+                PropertyBagName: propertyBagOptions != null ? propertyBagOptions.PropertyBagName : null);
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;

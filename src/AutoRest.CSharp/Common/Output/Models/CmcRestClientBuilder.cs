@@ -124,6 +124,8 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     continue;
                 }
+
+                var propertyBagOptions = Configuration.GroupParametersMethodList.FirstOrDefault(options => options.OperationId == operation.OperationId);
                 return new InputOperation(
                     Name: operation.Language.Default.Name,
                     ResourceName: null,
@@ -144,7 +146,8 @@ namespace AutoRest.CSharp.Output.Models
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
                     GenerateConvenienceMethod: false,
-                    HasPropertyBag: Configuration.GroupParametersMethodList.Any(id => id == operation.OperationId));
+                    HasPropertyBag: propertyBagOptions != null,
+                    PropertyBagName: propertyBagOptions != null ? propertyBagOptions.PropertyBagName : null);
             }
             return new InputOperation();
         }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Input
 {
@@ -55,6 +56,39 @@ namespace AutoRest.CSharp.Input
             KeepAll = 2
         }
 
+        internal record GroupParametersMethodOptions(string OperationId, string? PropertyBagName) : IUtf8JsonSerializable
+        {
+            internal static GroupParametersMethodOptions Parse(JsonElement element)
+            {
+                if (element.ValueKind == JsonValueKind.String)
+                {
+                    return new GroupParametersMethodOptions(element.GetString()!, null);
+                }
+                if (element.ValueKind == JsonValueKind.Object)
+                {
+                    var property = element.EnumerateObject().FirstOrDefault();
+                    if (property.Value.ValueKind == JsonValueKind.String)
+                    {
+                        return new GroupParametersMethodOptions(property.Name, property.Value.GetString());
+                    }
+                }
+                throw new ArgumentException($"Incorrect input for 'group-parameters-method-list': {element}");
+            }
+
+            public void Write(Utf8JsonWriter writer)
+            {
+                if (string.IsNullOrEmpty(PropertyBagName))
+                {
+                    writer.WriteStringValue(OperationId);
+                    return;
+                }
+                writer.WriteStartObject();
+                writer.WritePropertyName(OperationId);
+                writer.WriteStringValue(PropertyBagName);
+                writer.WriteEndObject();
+            }
+        }
+
         public static void Initialize(
             string outputFolder,
             string ns,
@@ -78,7 +112,7 @@ namespace AutoRest.CSharp.Input
             string? projectFolder,
             string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
-            IReadOnlyList<string> groupParametersMethodList,
+            JsonElement? groupParametersMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
             IReadOnlyList<string> additionalIntrinsicTypesToTreatEmptyStringAsNull,
@@ -140,7 +174,7 @@ namespace AutoRest.CSharp.Input
 
             _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
-            _groupParametersMethodList = groupParametersMethodList;
+            _groupParametersMethodList = DeserializeParametersMethodList(groupParametersMethodList);
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             _oldModelFactoryEntries = modelFactoryForHlc;
@@ -241,8 +275,8 @@ namespace AutoRest.CSharp.Input
         private static IReadOnlyList<string>? _protocolMethodList;
         public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static IReadOnlyList<string>? _groupParametersMethodList;
-        public static IReadOnlyList<string> GroupParametersMethodList => _groupParametersMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static IReadOnlyList<GroupParametersMethodOptions>? _groupParametersMethodList;
+        public static IReadOnlyList<GroupParametersMethodOptions> GroupParametersMethodList => _groupParametersMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static HashSet<string>? _modelsToTreatEmptyStringAsNull;
         public static HashSet<string> ModelsToTreatEmptyStringAsNull => _modelsToTreatEmptyStringAsNull ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -285,7 +319,7 @@ namespace AutoRest.CSharp.Input
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                groupParametersMethodList: autoRest.GetValue<string[]?>(Options.GroupParametersMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                groupParametersMethodList: autoRest.GetValue<JsonElement?>(Options.GroupParametersMethodList).GetAwaiter().GetResult(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -384,5 +418,15 @@ namespace AutoRest.CSharp.Input
 
         public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
             => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
+
+        private static IReadOnlyList<GroupParametersMethodOptions>? DeserializeParametersMethodList(JsonElement? element)
+        {
+            if (element == null || !IsValidJsonElement(element))
+            {
+                return null;
+            }
+
+            return element.Value.ValueKind != JsonValueKind.Array ? Array.Empty<GroupParametersMethodOptions>() : element.Value.EnumerateArray().Select(t => GroupParametersMethodOptions.Parse(t)).ToList();
+        }
     }
 }

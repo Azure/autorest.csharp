@@ -20,7 +20,7 @@ namespace AutoRest.LowLevel.Tests
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathParametersWithMixedSequence", new Type[] { typeof(int), typeof(string), typeof(int), typeof(RequestContext) }, new string[] { "id", "name", "skip", "context" }, new bool[] { false, true, true, true })]
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathBodyParametersWithMixedSequence", new Type[] { typeof(string), typeof(int), typeof(RequestContent), typeof(int), typeof(int), typeof(int), typeof(RequestContext) }, new string[] { "name", "skip", "content", "id", "top", "max", "context" }, new bool[] { false, false, false, true, true, true, true })]
         [TestCase(typeof(ParametersLowlevelClient), "GroupParametersWithRequiredBody", new Type[] { typeof(GroupParametersWithRequiredBodyOptions), typeof(RequestContext) }, new string[] { "options", "context" }, new bool[] { false, true })]
-        [TestCase(typeof(ParametersLowlevelClient), "GroupParametersWithOptionalBody", new Type[] { typeof(GroupParametersWithOptionalBodyOptions), typeof(RequestContext) }, new string[] { "options", "context" }, new bool[] { false, true })]
+        [TestCase(typeof(ParametersLowlevelClient), "GroupParametersWithOptionalBody", new Type[] { typeof(OptionalBodyOptions), typeof(RequestContext) }, new string[] { "options", "context" }, new bool[] { false, true })]
         [TestCase(typeof(ParametersCadlClient), "Operation", new Type[] { typeof(int), typeof(int), typeof(CancellationToken) }, new string[] { "start", "end", "cancellationToken" }, new bool[] { false, true, true })]
         [TestCase(typeof(ParametersCadlClient), "Operation", new Type[] { typeof(int), typeof(int), typeof(RequestContext) }, new string[] { "start", "end", "context" }, new bool[] { false, false, false })]
         [TestCase(typeof(ParametersCadlClient), "Operation2", new Type[] { typeof(int), typeof(int), typeof(CancellationToken) }, new string[] { "end", "start", "cancellationToken" }, new bool[] { false, true, true })]
@@ -33,7 +33,7 @@ namespace AutoRest.LowLevel.Tests
         }
 
         [TestCase(typeof(GroupParametersWithRequiredBodyOptions), new string[] { "Name", "Skip", "Content" }, new string[] { "Id", "Top", "Max" })]
-        [TestCase(typeof(GroupParametersWithOptionalBodyOptions), new string[] { "Name", "Skip" }, new string[] { "Content", "Id", "Top", "Max" })]
+        [TestCase(typeof(OptionalBodyOptions), new string[] { "Name", "Skip" }, new string[] { "Content", "Id", "Top", "Max" })]
         public void PropertyBag(Type propertyBagType, string[] requiredPropertyNames, string[] optionalPropertyNames)
         {
             var properties = propertyBagType.GetProperties();

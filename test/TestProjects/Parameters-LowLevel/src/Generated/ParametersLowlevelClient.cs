@@ -621,8 +621,8 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBodyAsync(GroupParametersWithOptionalBodyOptions,RequestContext)']/*" />
-        public virtual async Task<Response> GroupParametersWithOptionalBodyAsync(GroupParametersWithOptionalBodyOptions options, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBodyAsync(OptionalBodyOptions,RequestContext)']/*" />
+        public virtual async Task<Response> GroupParametersWithOptionalBodyAsync(OptionalBodyOptions options, RequestContext context = null)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -655,8 +655,8 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBody(GroupParametersWithOptionalBodyOptions,RequestContext)']/*" />
-        public virtual Response GroupParametersWithOptionalBody(GroupParametersWithOptionalBodyOptions options, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithOptionalBody(OptionalBodyOptions,RequestContext)']/*" />
+        public virtual Response GroupParametersWithOptionalBody(OptionalBodyOptions options, RequestContext context = null)
         {
             Argument.AssertNotNull(options, nameof(options));
 
