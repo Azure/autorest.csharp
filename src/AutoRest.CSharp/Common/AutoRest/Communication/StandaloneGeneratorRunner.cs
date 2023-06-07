@@ -180,12 +180,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
-                    writer.WriteStartArray(nameof(Configuration.Options.GroupParametersMethodList));
-                    foreach (var method in  Configuration.GroupParametersMethodList)
-                    {
-                        writer.WriteObjectValue(method);
-                    }
-                    writer.WriteEndArray();
+                    Utf8JsonWriterExtensions.WriteNonEmptyObjectArray(writer, nameof(Configuration.Options.GroupParametersMethodList), Configuration.GroupParametersMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), Configuration.ModelsToTreatEmptyStringAsNull.ToList<string>());
                     if (Configuration.ModelsToTreatEmptyStringAsNull.Any())

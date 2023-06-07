@@ -40,6 +40,20 @@ namespace Azure.Core
             }
         }
 
+        public static void WriteNonEmptyObjectArray(this Utf8JsonWriter writer, string name, IReadOnlyList<object> values)
+        {
+            if (values.Any())
+            {
+                writer.WriteStartArray(name);
+                foreach (var s in values)
+                {
+                    writer.WriteObjectValue(s);
+                }
+
+                writer.WriteEndArray();
+            }
+        }
+
         public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)
         {
             if (value == null)
