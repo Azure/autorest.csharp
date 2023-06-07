@@ -37,8 +37,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
-
+            /*
             var defaultValue = operationParameter.DefaultValue != null
+                ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
+                : (Constant?)null;
+            */
+            var defaultValue = (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion) && operationParameter.DefaultValue != null
                 ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
                 : (Constant?)null;
 
@@ -64,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString())),
+                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)): null),
                 inputType,
                 defaultValue,
                 validation,
@@ -75,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
-        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
+        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."
@@ -87,7 +91,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+            var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : defaultValue?.Value?.ToString();
+            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}{defaltValueString}";
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -111,7 +116,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
-            var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
+            //var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
+            var defaultValue = ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
@@ -133,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(requestParameter, type),
+                CreateDescription(requestParameter, type, null),
                 inputType,
                 defaultValue,
                 validation,
@@ -155,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 _ => RequestLocation.None
             };
 
-        private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
+        private static string CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :

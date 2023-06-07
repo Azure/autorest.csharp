@@ -295,6 +295,21 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
+            /*
+            if (clientParameter.DefaultValue != null)
+            {
+                var defaultValue = clientParameter.DefaultValue.Value;
+                if (defaultValue.IsNewInstanceSentinel && defaultValue.Type.IsValueType || clientParameter.IsApiVersionParameter && clientParameter.Initializer != null)
+                {
+                    writer.Append($" = default");
+                }
+                else
+                {
+                    writer.Append($" = {clientParameter.DefaultValue.Value.GetConstantFormattable()}");
+                }
+            }
+            */
+            /* TODO: Only apply the defautl value if the parameter is not required. */
             if (clientParameter.DefaultValue != null)
             {
                 var defaultValue = clientParameter.DefaultValue.Value;

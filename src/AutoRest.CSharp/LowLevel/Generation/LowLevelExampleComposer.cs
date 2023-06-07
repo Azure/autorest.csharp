@@ -628,9 +628,10 @@ namespace AutoRest.CSharp.Generation.Writers
             for (int i = 0; i < parameters.Count; i++)
             {
                 //skip last param if its optional and cancellation token or request context
-                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContent))))
+                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContext))))
                     continue;
 
+                //parameterValues.Add(parameterSelector(parameters[i]));
                 if (allParameters || parameters[i].DefaultValue == null)
                 {
                     parameterValues.Add(parameterSelector(parameters[i]));
