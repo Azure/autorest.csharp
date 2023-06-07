@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
                 {
-                    WriteClientFields(writer, restClient);
+                    writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
                     foreach (var legacyMethod in restClient.Methods)
@@ -33,22 +33,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.WriteMethod(legacyMethod.CreateRequest);
                         foreach (var method in legacyMethod.RestClientConvenience)
                         {
+                            writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
+                            writer.WriteMethodDocumentationSignature(method.Signature);
                             writer.WriteMethod(method);
                         }
                     }
 
-                    foreach (var nextPageMethod in restClient.Methods.Select(m => m.CreateNextPageRequest).WhereNotNull())
+                    foreach (var legacyMethod in restClient.Methods)
                     {
-                        writer.WriteMethod(nextPageMethod);
+                        if (legacyMethod.CreateNextPageRequest is {} nextPageMethod)
+                        {
+                            writer.WriteMethod(nextPageMethod);
+
+                            foreach (var method in legacyMethod.RestClientNextPageConvenience)
+                            {
+                                writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
+                                writer.WriteMethodDocumentationSignature(method.Signature);
+                                writer.WriteMethod(method);
+                            }
+                        }
                     }
                 }
             }
-        }
-
-        protected void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
-        {
-            writer.Line($"private readonly {typeof(TelemetryDetails)} {UserAgentField};");
-            writer.WriteFieldDeclarations(restClient.Fields);
         }
 
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)

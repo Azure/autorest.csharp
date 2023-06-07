@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 PipelineField,
                 message,
-                ClientDiagnosticsDeclaration,
+                ClientDiagnosticsProperty,
                 Literal(scope),
                 FrameworkEnumValue(finalStateVia),
                 KnownParameters.RequestContext,

@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models
             return WrapInDiagnosticScope(ProtocolMethodName,
                 Declare("message", InvokeCreateRequestMethod(null), out var message),
                 _headAsBoolean
-                    ? Return(PipelineField.ProcessHeadAsBoolMessage(message, ClientDiagnosticsDeclaration, CreateMessageRequestContext, async))
+                    ? Return(PipelineField.ProcessHeadAsBoolMessage(message, ClientDiagnosticsProperty, CreateMessageRequestContext, async))
                     : Return(PipelineField.ProcessMessage(message, CreateMessageRequestContext, null, async))
             );
         }

@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
         {
-            var createRequestMethod = base.BuildCreateRequestMethods(responseClassifierType).Single();
+            var createRequestMethod = BuildCreateRequestMethod(responseClassifierType);
             yield return createRequestMethod;
             if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
             {
@@ -71,6 +71,7 @@ namespace AutoRest.CSharp.Output.Models
             yield return Assign(request.Uri, uriBuilder);
 
             yield return AddHeaders(request, false).AsStatement();
+            yield return AddUserAgent(message);
             yield return Return(message);
         }
 

@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private Func<bool, FormattableString>? _returnsDescription;
         public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
 
-        public PagingMethodWrapper? PagingMethod { get; }
+        public PagingMethod? PagingMethod { get; }
 
         private CSharpType? _mgmtReturnType;
         public CSharpType? MgmtReturnType => _mgmtReturnType ??= GetMgmtReturnType(OriginalReturnType);
@@ -574,13 +574,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             };
         }
 
-        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
+        private static PagingMethod? GetPagingMethodWrapper(RestClientMethod method)
         {
             if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
-                return new PagingMethodWrapper(pagingMethod);
+                return pagingMethod;
 
             if (method.IsListMethod(out var itemType, out var valuePropertyName))
-                return new PagingMethodWrapper(method, itemType, valuePropertyName);
+                return new PagingMethod(method.Name, itemType, valuePropertyName);
 
             return null;
         }

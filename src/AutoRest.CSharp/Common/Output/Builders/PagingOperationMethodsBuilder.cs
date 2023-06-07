@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
             }
 
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineField, typeof(BinaryData), CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, typeof(BinaryData), CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
 
             return nextPageRequestLine is not null
                 ? new[]{firstPageRequestLine, nextPageRequestLine, returnLine}
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
             }
 
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineField, ResponseType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, ResponseType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
                 ? new[]{parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}

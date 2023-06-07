@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> EnsureParameterMappings()
         {
-            var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Enumerable.Empty<ContextualParameterMapping>();
+            var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Array.Empty<ContextualParameterMapping>();
 
             var contextualParameterMappings = new Dictionary<RequestPath, IEnumerable<ContextualParameterMapping>>();
             foreach (var contextualPath in OperationMappings.Keys)

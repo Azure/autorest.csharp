@@ -4,6 +4,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -23,6 +25,11 @@ namespace AutoRest.CSharp.Output.Models
         protected override bool ShouldConvenienceMethodGenerated() => ResponseType is not null || base.ShouldConvenienceMethodGenerated();
 
         protected CSharpType? ResponseType { get; }
+
+        protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
+        {
+            yield return BuildCreateRequestMethod(responseClassifierType);
+        }
 
         protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(List<ValueExpression> protocolMethodArguments)
         {

@@ -348,21 +348,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var legacyMethod in restClient.Methods)
                 {
-                    if (legacyMethod.RestClientNextPageMethod is null)
+                    if (legacyMethod.CreateNextPageRequest is not {} createNextPageRequest)
                     {
                         continue;
                     }
 
                     var method = legacyMethod.RestClientMethod;
-                    var nextPageMethod = legacyMethod.RestClientNextPageMethod;
                     if (method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody objectResponseBody)
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
                     var pagingMethod = new PagingMethod(
-                        method,
-                        nextPageMethod,
+                        legacyMethod.CreateRequest.Signature.Name,
+                        createNextPageRequest.Signature.Name,
                         method.Name,
                         new Diagnostic($"Placeholder.{method.Name}"),
                         new PagingResponseInfo(/*paging.NextLinkName, paging.ItemName*/string.Empty, string.Empty, objectResponseBody.Type));

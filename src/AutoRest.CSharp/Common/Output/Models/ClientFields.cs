@@ -13,6 +13,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         public FieldDeclaration ClientDiagnosticsProperty { get; }
         public FieldDeclaration PipelineField { get; }
         public FieldDeclaration? EndpointField { get; }
+        public FieldDeclaration? UserAgentField { get; }
 
         public CodeWriterScopeDeclarations ScopeDeclarations { get; }
 
@@ -79,6 +81,11 @@ namespace AutoRest.CSharp.Output.Models
                 }
 
                 fields.Add(PipelineField);
+            }
+            else if (Configuration.AzureArm)
+            {
+                UserAgentField = new FieldDeclaration(Private | ReadOnly, typeof(TelemetryDetails), "_userAgent");
+                fields.Add(UserAgentField);
             }
 
             foreach (Parameter parameter in parameters)

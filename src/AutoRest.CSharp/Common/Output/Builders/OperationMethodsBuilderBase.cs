@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Xml.Schema;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -17,6 +18,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -32,6 +34,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using ConstantExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.ConstantExpression;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.Output.Models.Responses.Response;
+using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -48,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public InputOperation Operation { get; }
 
-        protected CodeWriterDeclaration ClientDiagnosticsDeclaration { get; }
+        protected ClientDiagnosticsExpression ClientDiagnosticsProperty { get; }
         protected HttpPipelineExpression PipelineField { get; }
         protected ValueExpression? RestClient { get; }
 
@@ -70,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models
         protected OperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
         {
             Operation = operation;
-            ClientDiagnosticsDeclaration = fields.ClientDiagnosticsProperty.Declaration;
+            ClientDiagnosticsProperty = new ClientDiagnosticsExpression(fields.ClientDiagnosticsProperty.Declaration);
             PipelineField = new HttpPipelineExpression(fields.PipelineField.Declaration);
             RestClient = restClient;
 
@@ -101,8 +104,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildDpg()
         {
-            var responseClassifier = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, null, null, _fields, _typeFactory).ResponseClassifierType;
+            var responses = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, null, null, _fields, _typeFactory).Responses;
+
+            var responseClassifier = CreateResponseClassifier(responses);
             var createRequestMethods = BuildCreateRequestMethods(responseClassifier).ToArray();
+
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
             var convenienceMethods = Array.Empty<Method>();
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
@@ -125,36 +131,46 @@ namespace AutoRest.CSharp.Output.Models
         public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? lroType, CSharpType? resourceDataType)
         {
             var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
-            var createRequestMethods = BuildCreateRequestMethods(restClientMethod.ResponseClassifierType).ToArray();
+            var responses = restClientMethod.Responses;
+            var returnType = restClientMethod.ReturnType;
+
+            var createRequestMethods = BuildCreateRequestMethods(CreateResponseClassifier(responses)).ToArray();
 
             var restClientMethods = new[]
             {
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, true),
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), restClientMethod.Responses, restClientMethod.ReturnType, headerModel?.Type, resourceDataType, false)
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, returnType, headerModel?.Type, resourceDataType, true),
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, returnType, headerModel?.Type, resourceDataType, false)
             };
 
-            RestClientMethod? nextPage;
             Method? createNextPageRequest;
             IReadOnlyList<Method> restClientNextPageMethods;
 
             if (createRequestMethods.Length == 2)
             {
-                nextPage = BuildNextPageMethod(restClientMethod);
+                var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+
+                var nextPageParameters = ConvenienceMethodParameters
+                    .Where(p => p.Name != nextPageUrlParameter.Name)
+                    .Prepend(nextPageUrlParameter)
+                    .ToArray();
+
+                var nextPageResponses = Operation.LongRunning is null
+                    ? responses
+                    : new[] { new Response(null, new[] { new StatusCodes(200, null) }) };
+
                 createNextPageRequest = createRequestMethods[1];
 
                 var methodName = ProtocolMethodName + "NextPage";
-                var parameters = ConvenienceMethodParameters.Prepend(nextPage.Parameters.First()).ToList();
                 var invokeCreateRequestMethod = InvokeCreateRequestMethod(null, createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
 
                 restClientNextPageMethods = new[]
                 {
-                    BuildRestClientConvenienceMethod(methodName, parameters, invokeCreateRequestMethod, nextPage.Responses, nextPage.ReturnType, headerModel?.Type, resourceDataType, true),
-                    BuildRestClientConvenienceMethod(methodName, parameters, invokeCreateRequestMethod, nextPage.Responses, nextPage.ReturnType, headerModel?.Type, resourceDataType, false)
+                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, returnType, headerModel?.Type, resourceDataType, true),
+                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, returnType, headerModel?.Type, resourceDataType, false)
                 };
             }
             else
             {
-                nextPage = null;
                 createNextPageRequest = null;
                 restClientNextPageMethods = Array.Empty<Method>();
             }
@@ -176,51 +192,16 @@ namespace AutoRest.CSharp.Output.Models
                 this is LroOperationMethodsBuilder or LroPagingOperationMethodsBuilder ? 2 : this is PagingOperationMethodsBuilder ? 1 : 0,
                 Operation,
                 null,
-                restClientMethod,
-                nextPage
+                restClientMethod
             );
         }
 
-        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
-        {
-            var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+        protected abstract IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType);
 
-            var pathSegments = method.Request.PathSegments
-                .Where(ps => ps.IsRaw)
-                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
-                .ToArray();
-
-            var request = new Request(RequestMethod.Get, pathSegments, Array.Empty<QueryParameter>(), method.Request.Headers, null);
-            var parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name).Prepend(nextPageUrlParameter).ToArray();
-            var responses = method.Responses;
-
-            // We hardcode 200 as expected response code for paged LRO results
-            if (method.Operation.LongRunning != null)
-            {
-                responses = new[]
-                {
-                    new Response(null, new[] { new StatusCodes(200, null) })
-                };
-            }
-
-            return new RestClientMethod(
-                $"{method.Name}NextPage",
-                method.Summary,
-                method.Description,
-                method.ReturnType,
-                request,
-                parameters,
-                responses,
-                method.HeaderModel,
-                bufferResponse: true,
-                accessibility: "internal",
-                method.Operation);
-        }
-
-        protected virtual IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
+        protected Method BuildCreateRequestMethod(ResponseClassifierType responseClassifierType)
         {
             var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
-            yield return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
+            return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
         }
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType responseClassifierType)
@@ -234,6 +215,7 @@ namespace AutoRest.CSharp.Output.Models
 
             yield return AddHeaders(request, false).AsStatement();
             yield return AddBody(request);
+            yield return AddUserAgent(message);
             yield return Return(message);
         }
 
@@ -357,6 +339,11 @@ namespace AutoRest.CSharp.Output.Models
 
             return NullCheckRequestPartValue(value, outputParameter.Type, addToQuery);
         }
+
+        protected MethodBodyStatement AddUserAgent(HttpMessageExpression message)
+            => _fields.UserAgentField is { } userAgent
+                ? new InvokeInstanceMethodStatement(userAgent, nameof(TelemetryDetails.Apply), message)
+                : new MethodBodyStatement();
 
         protected IEnumerable<MethodBodyStatement> AddHeaders(RequestExpression request, bool addContentHeaders)
         {
@@ -626,10 +613,10 @@ namespace AutoRest.CSharp.Output.Models
             var signature = new MethodSignature(methodName, _summary, _description, MethodSignatureModifiers.Public, returnType, null, parameters);
             var body = new[]
             {
-                new ParameterValidationBlock(signature.Parameters, IsLegacy: true),
+                new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),
                 UsingVar("message", invokeCreateRequestMethod, out var message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
-                BuildStatusCodeSwitch(message, responses, responseType, headerModelType, resourceDataType, new ClientDiagnosticsExpression(ClientDiagnosticsDeclaration), async)
+                BuildStatusCodeSwitch(message, responses, responseType, headerModelType, resourceDataType, _fields.Contains(_fields.ClientDiagnosticsProperty) ? ClientDiagnosticsProperty : null, async)
             };
 
             return new Method(signature.WithAsync(async), body);
@@ -720,7 +707,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 ObjectResponseBody objectResponseBody => new[]
                 {
-                    new DeclareVariableStatement(responseBody.Type, "value", Default, out value),
+                    new DeclareVariableStatement(responseBody.Type, "value", Snippets.Default, out value),
                     objectResponseBody.Serialization switch
                     {
                         JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, responseBody.Type.Equals(typeof(BinaryData))),
@@ -744,6 +731,11 @@ namespace AutoRest.CSharp.Output.Models
 
             return new[] { valueStatement, returnStatement };
         }
+
+        private static ResponseClassifierType CreateResponseClassifier(IEnumerable<Response> responses) => new(responses
+            .SelectMany(r => r.StatusCodes)
+            .Distinct()
+            .OrderBy(c => c.Code ?? c.Family * 100));
 
         private static MethodSignatureModifiers GetAccessibility(string? accessibility) => accessibility switch
         {

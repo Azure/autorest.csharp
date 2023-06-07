@@ -22,7 +22,6 @@ namespace AutoRest.CSharp.Output.Models
         int Order,
         InputOperation Operation,
         LowLevelClientMethod? ProtocolMethod,
-        RestClientMethod RestClientMethod,
-        RestClientMethod? RestClientNextPageMethod
+        RestClientMethod RestClientMethod
     );
 }

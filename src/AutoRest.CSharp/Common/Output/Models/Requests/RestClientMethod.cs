@@ -31,12 +31,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
             Accessibility = GetAccessibility(accessibility);
             Operation = operation;
 
-            var statusCodes = Responses
-                .SelectMany(r => r.StatusCodes)
-                .Distinct()
-                .OrderBy(c => c.Code ?? c.Family * 100);
-            ResponseClassifierType = new ResponseClassifierType(statusCodes);
-
             PropertyBag = null;
             // By default, we enable property bag feature in management plane and the real behavior will be determined later.
             if (Configuration.AzureArm)
@@ -70,8 +64,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ReturnType { get; }
         public MethodSignatureModifiers Accessibility { get; }
         public InputOperation Operation { get; }
-
-        public ResponseClassifierType ResponseClassifierType { get; }
 
         public PropertyBag? PropertyBag { get;  }
     }

@@ -232,7 +232,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)

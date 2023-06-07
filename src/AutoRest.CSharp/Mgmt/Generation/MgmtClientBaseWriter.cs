@@ -609,12 +609,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
+            _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, pagingMethod.CreateRequestMethodName, firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
-            if (pagingMethod.NextPageMethod is {} nextPageMethod)
+            if (pagingMethod.CreateNextPageRequestMethodName is {} nextPageMethod)
             {
                 var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
-                _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
+                _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, nextPageMethod, nextPageRequestArguments, out nextPageRequest));
             }
 
             var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
