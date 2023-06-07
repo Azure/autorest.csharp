@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Input
         public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static IReadOnlyList<GroupParametersMethodOptions>? _groupParametersMethodList;
-        public static IReadOnlyList<GroupParametersMethodOptions> GroupParametersMethodList => _groupParametersMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static IReadOnlyList<GroupParametersMethodOptions> GroupParametersMethodList => _groupParametersMethodList ?? throw new InvalidOperationException("Configuration 'group-parameters-method-list' has not been initialized");
 
         private static HashSet<string>? _modelsToTreatEmptyStringAsNull;
         public static HashSet<string> ModelsToTreatEmptyStringAsNull => _modelsToTreatEmptyStringAsNull ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -419,11 +419,11 @@ namespace AutoRest.CSharp.Input
         public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
             => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
 
-        private static IReadOnlyList<GroupParametersMethodOptions>? DeserializeParametersMethodList(JsonElement? element)
+        private static IReadOnlyList<GroupParametersMethodOptions> DeserializeParametersMethodList(JsonElement? element)
         {
             if (element == null || !IsValidJsonElement(element))
             {
-                return null;
+                return Array.Empty<GroupParametersMethodOptions>();
             }
 
             return element.Value.ValueKind != JsonValueKind.Array ? Array.Empty<GroupParametersMethodOptions>() : element.Value.EnumerateArray().Select(t => GroupParametersMethodOptions.Parse(t)).ToList();
