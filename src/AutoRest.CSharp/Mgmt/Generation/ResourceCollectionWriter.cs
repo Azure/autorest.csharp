@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
-                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
+                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First().SkipLast(1));
                 _writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
                 .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
-            WriteArguments(writer, parameterMappings);
+            WriteArguments(writer, parameterMappings.SkipLast(1));
             writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             var armResource = new ArmResourceExpression(new MemberReference(response, nameof(Response<object>.Value)));

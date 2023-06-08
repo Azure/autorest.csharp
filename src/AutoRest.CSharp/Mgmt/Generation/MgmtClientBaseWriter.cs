@@ -607,6 +607,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var pagingMethod = operation.PagingMethod!;
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
+            firstPageRequestArguments.RemoveAt(firstPageRequestArguments.Count - 1);
+
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
             _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, pagingMethod.CreateRequestMethodName, firstPageRequestArguments, out var firstPageRequest));
