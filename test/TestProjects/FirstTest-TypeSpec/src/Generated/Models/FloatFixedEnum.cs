@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> float fixed enum. </summary>
     public enum FloatFixedEnum

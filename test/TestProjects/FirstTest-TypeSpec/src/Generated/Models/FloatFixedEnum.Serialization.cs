@@ -7,7 +7,7 @@
 
 using System;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     internal static partial class FloatFixedEnumExtensions
     {

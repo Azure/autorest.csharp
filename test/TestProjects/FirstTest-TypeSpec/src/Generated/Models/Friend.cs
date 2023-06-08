@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> this is not a friendly model but with a friendly name. </summary>
     public partial class Friend

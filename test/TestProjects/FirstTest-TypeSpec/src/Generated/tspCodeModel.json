@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "TypeSpecFirstTest",
+ "Name": "FirstTestTypeSpec",
  "Description": "This is a sample typespec project.",
  "ApiVersions": [
   "0.1.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "Thing_requiredLiteralString",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -27,7 +27,7 @@
   {
    "$id": "4",
    "Name": "Thing_requiredLiteralInt",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -45,7 +45,7 @@
   {
    "$id": "6",
    "Name": "Thing_requiredLiteralFloat",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -63,7 +63,7 @@
   {
    "$id": "8",
    "Name": "Thing_optionalLiteralString",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -81,7 +81,7 @@
   {
    "$id": "10",
    "Name": "Thing_optionalLiteralInt",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -99,7 +99,7 @@
   {
    "$id": "12",
    "Name": "Thing_optionalLiteralFloat",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -117,7 +117,7 @@
   {
    "$id": "14",
    "Name": "StringFixedEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -144,7 +144,7 @@
   {
    "$id": "18",
    "Name": "StringExtensibleEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -171,7 +171,7 @@
   {
    "$id": "22",
    "Name": "IntExtensibleEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "Int based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -198,7 +198,7 @@
   {
    "$id": "26",
    "Name": "FloatExtensibleEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "Float based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -225,7 +225,7 @@
   {
    "$id": "30",
    "Name": "FloatFixedEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "float fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -252,7 +252,7 @@
   {
    "$id": "34",
    "Name": "IntFixedEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "int fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -279,7 +279,7 @@
   {
    "$id": "38",
    "Name": "DaysOfWeekExtensibleEnum",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -328,7 +328,7 @@
   {
    "$id": "46",
    "Name": "Thing",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -557,7 +557,7 @@
   {
    "$id": "75",
    "Name": "Friend",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -582,7 +582,7 @@
   {
    "$id": "78",
    "Name": "ModelWithFormat",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -621,7 +621,7 @@
   {
    "$id": "83",
    "Name": "RoundTripModel",
-   "Namespace": "TypeSpecFirstTest",
+   "Namespace": "FirstTestTypeSpec",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -976,13 +976,13 @@
  "Clients": [
   {
    "$id": "127",
-   "Name": "TypeSpecFirstTestClient",
+   "Name": "FirstTestTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
      "$id": "128",
      "Name": "topAction",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "top level method",
      "Parameters": [
       {
@@ -1109,7 +1109,7 @@
     {
      "$id": "141",
      "Name": "topAction2",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "top level method2",
      "Parameters": [
       {
@@ -1171,7 +1171,7 @@
     {
      "$id": "146",
      "Name": "patchAction",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "top level patch",
      "Parameters": [
       {
@@ -1280,7 +1280,7 @@
     {
      "$id": "155",
      "Name": "anonymousBody",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
@@ -1390,7 +1390,7 @@
     {
      "$id": "164",
      "Name": "friendlyModel",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "Model can have its friendly name",
      "Parameters": [
       {
@@ -1500,7 +1500,7 @@
     {
      "$id": "173",
      "Name": "addTimeHeader",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Parameters": [
       {
        "$ref": "129"
@@ -1578,7 +1578,7 @@
     {
      "$id": "180",
      "Name": "stringFormat",
-     "ResourceName": "TypeSpecFirstTest",
+     "ResourceName": "FirstTestTypeSpec",
      "Description": "paramete has string format.",
      "Parameters": [
       {

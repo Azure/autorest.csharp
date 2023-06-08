@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Model used both as input and output with primitive types. </summary>
     public partial class RoundTripPrimitiveModel : BaseModel

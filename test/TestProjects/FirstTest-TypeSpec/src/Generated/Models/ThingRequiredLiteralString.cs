@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> The Thing_requiredLiteralString. </summary>
     public readonly partial struct ThingRequiredLiteralString : IEquatable<ThingRequiredLiteralString>

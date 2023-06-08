@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary>
     /// Output model with a discriminator

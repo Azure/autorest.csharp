@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "ModelsInCadl",
+ "Name": "ModelsTypeSpec",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "FixedStringEnum",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Fixed string enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -36,7 +36,7 @@
   {
    "$id": "6",
    "Name": "FixedIntEnum",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "EnumValueType": "Float32",
@@ -64,7 +64,7 @@
   {
    "$id": "10",
    "Name": "ExtensibleEnum",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "EnumValueType": "String",
@@ -94,7 +94,7 @@
   {
    "$id": "14",
    "Name": "OutputBaseModelWithDiscriminator",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Output model with a discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
@@ -104,7 +104,7 @@
   {
    "$id": "15",
    "Name": "FirstDerivedOutputModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "First derived model as an output",
    "IsNullable": false,
    "DiscriminatorValue": "first",
@@ -133,7 +133,7 @@
   {
    "$id": "18",
    "Name": "SecondDerivedOutputModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Second derived model as an output",
    "IsNullable": false,
    "DiscriminatorValue": "second",
@@ -162,7 +162,7 @@
   {
    "$id": "21",
    "Name": "InputModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as input",
    "IsNullable": false,
    "Usage": "Input",
@@ -205,7 +205,7 @@
      "Type": {
       "$id": "27",
       "Name": "BaseModel",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "ModelsTypeSpec",
       "Description": "Base model",
       "IsNullable": false,
       "Usage": "Input",
@@ -266,7 +266,7 @@
       "ElementType": {
        "$id": "36",
        "Name": "CollectionItem",
-       "Namespace": "ModelsInCadl",
+       "Namespace": "ModelsTypeSpec",
        "Description": "Collection item model",
        "IsNullable": false,
        "Usage": "RoundTrip",
@@ -288,13 +288,13 @@
           "ValueType": {
            "$id": "40",
            "Name": "RecordItem",
-           "Namespace": "ModelsInCadl",
+           "Namespace": "ModelsTypeSpec",
            "Description": "Record item model",
            "IsNullable": false,
            "BaseModel": {
             "$id": "41",
             "Name": "DerivedModel",
-            "Namespace": "ModelsInCadl",
+            "Namespace": "ModelsTypeSpec",
             "Description": "Derived model",
             "IsNullable": false,
             "BaseModel": {
@@ -418,7 +418,7 @@
   {
    "$id": "53",
    "Name": "RoundTripModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output",
    "IsNullable": false,
    "BaseModel": {
@@ -464,7 +464,7 @@
      "Type": {
       "$id": "59",
       "Name": "BaseModelWithDiscriminator",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "ModelsTypeSpec",
       "Description": "Base model with discriminator property.",
       "IsNullable": false,
       "DiscriminatorPropertyName": "discriminatorProperty",
@@ -782,7 +782,7 @@
   {
    "$id": "100",
    "Name": "DerivedModelWithDiscriminatorA",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "A",
@@ -811,7 +811,7 @@
   {
    "$id": "103",
    "Name": "DerivedModelWithDiscriminatorB",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "B",
@@ -840,7 +840,7 @@
   {
    "$id": "106",
    "Name": "RoundTripPrimitiveModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
    "BaseModel": {
@@ -1008,7 +1008,7 @@
   {
    "$id": "128",
    "Name": "RoundTripOptionalModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
@@ -1121,13 +1121,13 @@
      "Type": {
       "$id": "143",
       "Name": "DerivedModelWithProperties",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "ModelsTypeSpec",
       "Description": "Derived model with properties",
       "IsNullable": false,
       "BaseModel": {
        "$id": "144",
        "Name": "BaseModelWithProperties",
-       "Namespace": "ModelsInCadl",
+       "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
        "IsNullable": false,
        "Usage": "None",
@@ -1334,7 +1334,7 @@
   {
    "$id": "169",
    "Name": "RoundTripReadOnlyModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Output model with readonly properties.",
    "IsNullable": false,
    "Usage": "Output",
@@ -1780,7 +1780,7 @@
   {
    "$id": "228",
    "Name": "OutputModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as output",
    "IsNullable": false,
    "Usage": "Output",
@@ -1872,7 +1872,7 @@
   {
    "$id": "239",
    "Name": "InputRecursiveModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Input model that has property of its own type",
    "IsNullable": false,
    "Usage": "Input",
@@ -1909,7 +1909,7 @@
   {
    "$id": "243",
    "Name": "RoundTripRecursiveModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Roundtrip model that has property of its own type",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -1946,7 +1946,7 @@
   {
    "$id": "247",
    "Name": "ErrorModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Output model that has property of its own type",
    "IsNullable": false,
    "Usage": "Output",
@@ -1983,7 +1983,7 @@
   {
    "$id": "251",
    "Name": "NoUseBase",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Base model",
    "IsNullable": false,
    "Usage": "None",
@@ -2008,7 +2008,7 @@
   {
    "$id": "254",
    "Name": "RoundTripOnNoUse",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "ModelsTypeSpec",
    "Description": "Derived model",
    "IsNullable": false,
    "BaseModel": {
@@ -2039,13 +2039,13 @@
  "Clients": [
   {
    "$id": "257",
-   "Name": "ModelsInCadlClient",
+   "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
      "$id": "258",
      "Name": "getOutputDiscriminatorModel",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
        "$id": "259",
@@ -2151,7 +2151,7 @@
     {
      "$id": "269",
      "Name": "inputToRoundTrip",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
@@ -2260,7 +2260,7 @@
     {
      "$id": "278",
      "Name": "inputToRoundTripPrimitive",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
@@ -2369,7 +2369,7 @@
     {
      "$id": "287",
      "Name": "inputToRoundTripOptional",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
@@ -2478,7 +2478,7 @@
     {
      "$id": "296",
      "Name": "inputToRoundTripReadOnly",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
@@ -2588,7 +2588,7 @@
     {
      "$id": "305",
      "Name": "roundTripToOutput",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
@@ -2697,7 +2697,7 @@
     {
      "$id": "314",
      "Name": "InputRecursive",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Parameters": [
       {
@@ -2803,7 +2803,7 @@
     {
      "$id": "323",
      "Name": "roundTripRecursive",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
@@ -2912,7 +2912,7 @@
     {
      "$id": "332",
      "Name": "selfReference",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
@@ -2974,7 +2974,7 @@
     {
      "$id": "337",
      "Name": "roundTripToOutputWithNoUseBase",
-     "ResourceName": "ModelsInCadl",
+     "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Parameters": [
       {

@@ -1,23 +1,23 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.TestServer.Tests.Infrastructure;
-using NUnit.Framework;
-using TypeSpecFirstTest.Models;
-using TypeSpecFirstTest;
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
+using FirstTestTypeSpec;
+using FirstTestTypeSpec.Models;
+using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
     /// <summary>
     ///  E2E tests for literal value types.
     /// </summary>
-    public class LiteralValueTypeTests : CadlRanchMockApiTestBase
+    public class FirstTestTypeSpecTests : CadlRanchMockApiTestBase
     {
         [Test]
-        public async Task LiteralModelProperties() => await Test(async (host) =>
+        public async Task FirstTest_CreateLiteral() => await Test(async (host) =>
         {
-            Thing result = await new TypeSpecFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc")
+            Thing result = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(new Thing("test", "test", "abc")
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,

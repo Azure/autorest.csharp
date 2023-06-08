@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using TypeSpecFirstTest.Models;
+using FirstTestTypeSpec.Models;
 
-namespace TypeSpecFirstTest
+namespace FirstTestTypeSpec
 {
     // Data plane generated client.
     /// <summary> This is a sample typespec project. </summary>
-    public partial class TypeSpecFirstTestClient
+    public partial class FirstTestTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -33,37 +33,37 @@ namespace TypeSpecFirstTest
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of TypeSpecFirstTestClient for mocking. </summary>
-        protected TypeSpecFirstTestClient()
+        /// <summary> Initializes a new instance of FirstTestTypeSpecClient for mocking. </summary>
+        protected FirstTestTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public TypeSpecFirstTestClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new TypeSpecFirstTestClientOptions())
+        public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public TypeSpecFirstTestClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new TypeSpecFirstTestClientOptions())
+        public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public TypeSpecFirstTestClient(Uri endpoint, AzureKeyCredential credential, TypeSpecFirstTestClientOptions options)
+        public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential, FirstTestTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new TypeSpecFirstTestClientOptions();
+            options ??= new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -72,16 +72,16 @@ namespace TypeSpecFirstTest
             _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public TypeSpecFirstTestClient(Uri endpoint, TokenCredential credential, TypeSpecFirstTestClientOptions options)
+        public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential, FirstTestTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new TypeSpecFirstTestClientOptions();
+            options ??= new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
@@ -93,7 +93,7 @@ namespace TypeSpecFirstTest
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -104,7 +104,7 @@ namespace TypeSpecFirstTest
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -131,10 +131,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> TopActionAsync(DateTimeOffset action, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction");
             scope.Start();
             try
             {
@@ -167,10 +167,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,RequestContext)']/*" />
         public virtual Response TopAction(DateTimeOffset action, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction");
             scope.Start();
             try
             {
@@ -197,10 +197,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
             scope.Start();
             try
             {
@@ -227,10 +227,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
         public virtual Response TopAction2(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
             scope.Start();
             try
             {
@@ -259,12 +259,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.PatchAction");
             scope.Start();
             try
             {
@@ -293,12 +293,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.PatchAction");
             scope.Start();
             try
             {
@@ -316,7 +316,7 @@ namespace TypeSpecFirstTest
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -330,7 +330,7 @@ namespace TypeSpecFirstTest
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -360,12 +360,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -399,12 +399,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -422,7 +422,7 @@ namespace TypeSpecFirstTest
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
@@ -436,7 +436,7 @@ namespace TypeSpecFirstTest
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
@@ -466,12 +466,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -505,12 +505,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -538,10 +538,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset?,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -569,10 +569,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset?,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset?,RequestContext)']/*" />
         public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -591,7 +591,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The ModelWithFormat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -606,7 +606,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The ModelWithFormat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -637,12 +637,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StringFormat");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
             scope.Start();
             try
             {
@@ -677,12 +677,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StringFormat");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
             scope.Start();
             try
             {
@@ -713,13 +713,13 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.SayHi");
             scope.Start();
             try
             {
@@ -750,13 +750,13 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.SayHi");
             scope.Start();
             try
             {
@@ -777,7 +777,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -796,7 +796,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -831,14 +831,14 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloAgain");
             scope.Start();
             try
             {
@@ -875,14 +875,14 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloAgain");
             scope.Start();
             try
             {
@@ -914,14 +914,14 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NoContentType");
             scope.Start();
             try
             {
@@ -953,14 +953,14 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.NoContentType");
             scope.Start();
             try
             {
@@ -976,7 +976,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -986,7 +986,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
         public virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1012,10 +1012,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
         public virtual async Task<Response> HelloDemo2Async(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -1047,10 +1047,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
         public virtual Response HelloDemo2(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -1068,7 +1068,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1082,7 +1082,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1112,12 +1112,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -1151,12 +1151,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -1172,7 +1172,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1182,7 +1182,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1208,10 +1208,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -1243,10 +1243,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -1273,10 +1273,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -1303,10 +1303,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -1324,7 +1324,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1338,7 +1338,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1368,12 +1368,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1407,12 +1407,12 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1428,7 +1428,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(CancellationToken)']/*" />
         public virtual async Task<Response> StillConvenientAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1438,7 +1438,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(CancellationToken)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(CancellationToken)']/*" />
         public virtual Response StillConvenient(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1464,10 +1464,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenient");
             scope.Start();
             try
             {
@@ -1499,10 +1499,10 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenient");
             scope.Start();
             try
             {

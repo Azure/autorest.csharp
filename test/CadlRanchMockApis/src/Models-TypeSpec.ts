@@ -6,11 +6,11 @@ import {
 } from "@azure-tools/cadl-ranch-api";
 
 /**
- * Test mock server for `Models-cadl` test project.
+ * Test mock server for `Models-TypeSpec` test project.
  */
 export const Scenarios: Record<string, ScenarioMockApi> = {};
 
-Scenarios.ModelsCald_InputToRoundTripPrimitive = passOnSuccess([
+Scenarios.Models_InputToRoundTripPrimitive = passOnSuccess([
     mockapi.get("/inputToRoundTripPrimitive", (req) => {
         req.expect.bodyEquals({
             requiredString: "test",
@@ -41,7 +41,7 @@ Scenarios.ModelsCald_InputToRoundTripPrimitive = passOnSuccess([
     }),
 ]);
 
-Scenarios.ModelsCald_InputToRoundTripOptional = passOnSuccess([
+Scenarios.Models_InputToRoundTripOptional = passOnSuccess([
     mockapi.get("/inputToRoundTripOptional", (req) => {
         req.expect.bodyEquals({
             optionalPlainDate: "2023-02-14",
@@ -56,7 +56,7 @@ Scenarios.ModelsCald_InputToRoundTripOptional = passOnSuccess([
         };
     }),
 ]);
-Scenarios.ModelsCald_InputToRoundTripReadOnly = passOnSuccess([
+Scenarios.Models_InputToRoundTripReadOnly = passOnSuccess([
     mockapi.get("/inputToRoundTripReadOnly", (req) => {
         req.expect.bodyEquals({
             requiredString: "test",

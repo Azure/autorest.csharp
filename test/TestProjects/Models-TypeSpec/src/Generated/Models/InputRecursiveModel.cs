@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Input model that has property of its own type. </summary>
     public partial class InputRecursiveModel

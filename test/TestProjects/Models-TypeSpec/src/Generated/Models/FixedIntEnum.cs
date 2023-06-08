@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Fixed int enum. </summary>
     [Obsolete("deprecated for test")]
