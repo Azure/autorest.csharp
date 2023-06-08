@@ -31,6 +31,11 @@ namespace _Type.Property.Nullable.Models
                 }
                 if (property.NameEquals("nullableProperty"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nullableProperty = null;
+                        continue;
+                    }
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -40,7 +45,7 @@ namespace _Type.Property.Nullable.Models
                     continue;
                 }
             }
-            return new CollectionsModelProperty(requiredProperty, nullableProperty);
+            return new CollectionsModelProperty(requiredProperty, nullableProperty ?? new ChangeTrackingList<InnerModel>());
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

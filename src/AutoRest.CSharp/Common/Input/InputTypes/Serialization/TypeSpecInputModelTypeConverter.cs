@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
-
+            bool isNullable = false;
             string? ns = null;
             string? accessibility = null;
             string? deprecated = null;
@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -74,10 +75,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -85,7 +86,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, IsNullable: isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, model);

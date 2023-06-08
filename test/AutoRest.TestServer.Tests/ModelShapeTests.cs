@@ -245,16 +245,16 @@ namespace AutoRest.TestServer.Tests
         public void NullablePropertiesDeserializedAsNullsWithUndefined()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{}").RootElement);
-            Assert.Null(model.RequiredNullableIntList);
-            Assert.Null(model.RequiredNullableStringList);
+            Assert.IsNull(model.RequiredNullableIntList);
+            Assert.IsNull(model.RequiredNullableStringList);
         }
 
         [Test]
         public void NullablePropertiesDeserializedAsNullsWithNulls()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":null, \"RequiredNullableStringList\": null}").RootElement);
-            Assert.Null(model.RequiredNullableIntList);
-            Assert.Null(model.RequiredNullableStringList);
+            Assert.IsNull(model.RequiredNullableIntList);
+            Assert.IsNull(model.RequiredNullableStringList);
         }
 
         [Test]

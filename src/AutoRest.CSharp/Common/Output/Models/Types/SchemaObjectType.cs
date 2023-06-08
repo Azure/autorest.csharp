@@ -457,19 +457,19 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             bool isCollection = TypeFactory.IsCollectionType(type);
 
-            bool isReadOnly = IsStruct ||
+            bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||
                               property.IsReadOnly;
 
 
             if (isCollection)
             {
-                isReadOnly |= !property.IsNullable;
+                propertyShouldOmitSetter |= !property.IsNullable;
             }
             else
             {
                 // In mixed models required properties are not readonly
-                isReadOnly |= property.IsRequired &&
+                propertyShouldOmitSetter |= property.IsRequired &&
                               _usage.HasFlag(SchemaTypeUsage.Input) &&
                               !_usage.HasFlag(SchemaTypeUsage.Output);
             }
@@ -477,19 +477,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             // we should remove the setter of required constant
             if (property.Schema is ConstantSchema && property.IsRequired)
             {
-                isReadOnly = true;
+                propertyShouldOmitSetter = true;
             }
 
             if (property.IsDiscriminator == true)
             {
                 // Discriminator properties should be writeable
-                isReadOnly = false;
+                propertyShouldOmitSetter = false;
             }
 
             var objectTypeProperty = new ObjectTypeProperty(
                 memberDeclaration,
                 BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                isReadOnly,
+                propertyShouldOmitSetter,
                 property,
                 valueType,
                 optionalViaNullability,

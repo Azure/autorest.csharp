@@ -113,6 +113,15 @@ namespace ModelsInCadl.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
             };
 
             Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -166,6 +175,24 @@ namespace ModelsInCadl.Samples
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
+        new {}
+    },
+                optionalNullableStringList = new[] {
+        "<String>"
+    },
+                optionalNullableIntList = new[] {
+        1234
     },
             };
 
@@ -226,6 +253,15 @@ namespace ModelsInCadl.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
             };
 
             Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -280,6 +316,24 @@ namespace ModelsInCadl.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
+        new {}
+    },
+                optionalNullableStringList = new[] {
+        "<String>"
+    },
+                optionalNullableIntList = new[] {
+        1234
+    },
             };
 
             Response response = await client.InputToRoundTripAsync(RequestContent.Create(data), new RequestContext());
@@ -329,7 +383,24 @@ namespace ModelsInCadl.Samples
             }, new bool?[]
             {
     true
-            });
+            }, Array.Empty<CollectionItem>(), new string[]
+            {
+    "<null>"
+            }, new int[]
+            {
+    1234
+            })
+            {
+                OptionalModelCollection = { },
+                OptionalNullableStringList =
+{
+        "<null>"
+    },
+                OptionalNullableIntList =
+{
+        1234
+    },
+            };
             var result = await client.InputToRoundTripAsync(input);
         }
 
@@ -367,6 +438,15 @@ namespace ModelsInCadl.Samples
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
     },
             };
 
@@ -420,6 +500,24 @@ namespace ModelsInCadl.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
+        new {}
+    },
+                optionalNullableStringList = new[] {
+        "<String>"
+    },
+                optionalNullableIntList = new[] {
+        1234
+    },
             };
 
             Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data), new RequestContext());
@@ -471,6 +569,15 @@ namespace ModelsInCadl.Samples
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
     },
             };
 
@@ -524,6 +631,24 @@ namespace ModelsInCadl.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
+                requiredNullableModelCollection = new[] {
+        new {}
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                optionalModelCollection = new[] {
+        new {}
+    },
+                optionalNullableStringList = new[] {
+        "<String>"
+    },
+                optionalNullableIntList = new[] {
+        1234
+    },
             };
 
             Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data), new RequestContext());
@@ -566,7 +691,24 @@ namespace ModelsInCadl.Samples
             }, new bool?[]
             {
     true
-            });
+            }, Array.Empty<CollectionItem>(), new string[]
+            {
+    "<null>"
+            }, new int[]
+            {
+    1234
+            })
+            {
+                OptionalModelCollection = { },
+                OptionalNullableStringList =
+{
+        "<null>"
+    },
+                OptionalNullableIntList =
+{
+        1234
+    },
+            };
             var result = await client.InputToRoundTripPrimitiveAsync(input);
         }
 

@@ -74,6 +74,99 @@ namespace ModelsInCadl.Models
                 writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
+            if (RequiredNullableModelCollection != null)
+            {
+                writer.WritePropertyName("requiredNullableModelCollection"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableModelCollection)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableModelCollection");
+            }
+            if (RequiredNullableStringList != null)
+            {
+                writer.WritePropertyName("requiredNullableStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableStringList");
+            }
+            if (RequiredNullableIntList != null)
+            {
+                writer.WritePropertyName("requiredNullableIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableIntList");
+            }
+            if (Optional.IsCollectionDefined(OptionalModelCollection))
+            {
+                if (OptionalModelCollection != null)
+                {
+                    writer.WritePropertyName("optionalModelCollection"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalModelCollection)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalModelCollection");
+                }
+            }
+            if (Optional.IsCollectionDefined(OptionalNullableStringList))
+            {
+                if (OptionalNullableStringList != null)
+                {
+                    writer.WritePropertyName("optionalNullableStringList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalNullableStringList)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableStringList");
+                }
+            }
+            if (Optional.IsCollectionDefined(OptionalNullableIntList))
+            {
+                if (OptionalNullableIntList != null)
+                {
+                    writer.WritePropertyName("optionalNullableIntList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalNullableIntList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableIntList");
+                }
+            }
             writer.WriteEndObject();
         }
 

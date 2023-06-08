@@ -25,8 +25,11 @@ namespace ModelsInCadl.Models
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
         /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
+        /// <param name="requiredNullableModelCollection"> Required model nullable collection. </param>
+        /// <param name="requiredNullableStringList"> Required string nullable collection. </param>
+        /// <param name="requiredNullableIntList"> Required int nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredIntCollection"/>, <paramref name="requiredStringCollection"/>, <paramref name="requiredModelCollection"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredCollectionWithNullableFloatElement"/> or <paramref name="requiredCollectionWithNullableBooleanElement"/> is null. </exception>
-        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<int> requiredIntCollection, IEnumerable<string> requiredStringCollection, IEnumerable<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float?> requiredCollectionWithNullableFloatElement, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement)
+        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<int> requiredIntCollection, IEnumerable<string> requiredStringCollection, IEnumerable<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float?> requiredCollectionWithNullableFloatElement, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement, IEnumerable<CollectionItem> requiredNullableModelCollection, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
@@ -46,6 +49,12 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
             RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement.ToList();
+            RequiredNullableModelCollection = requiredNullableModelCollection?.ToList();
+            RequiredNullableStringList = requiredNullableStringList?.ToList();
+            RequiredNullableIntList = requiredNullableIntList?.ToList();
+            OptionalModelCollection = new ChangeTrackingList<CollectionItem>();
+            OptionalNullableStringList = new ChangeTrackingList<string>();
+            OptionalNullableIntList = new ChangeTrackingList<int>();
         }
 
         /// <summary> Initializes a new instance of InputModel. </summary>
@@ -58,7 +67,13 @@ namespace ModelsInCadl.Models
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
         /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
-        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<int> requiredIntCollection, IList<string> requiredStringCollection, IList<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement)
+        /// <param name="requiredNullableModelCollection"> Required model nullable collection. </param>
+        /// <param name="requiredNullableStringList"> Required string nullable collection. </param>
+        /// <param name="requiredNullableIntList"> Required int nullable collection. </param>
+        /// <param name="optionalModelCollection"> Optional model nullable collection. </param>
+        /// <param name="optionalNullableStringList"> Optional string nullable collection. </param>
+        /// <param name="optionalNullableIntList"> Optional int nullable collection. </param>
+        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<int> requiredIntCollection, IList<string> requiredStringCollection, IList<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelCollection, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> optionalModelCollection, IList<string> optionalNullableStringList, IList<int> optionalNullableIntList)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -69,6 +84,12 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
             RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement;
+            RequiredNullableModelCollection = requiredNullableModelCollection;
+            RequiredNullableStringList = requiredNullableStringList;
+            RequiredNullableIntList = requiredNullableIntList;
+            OptionalModelCollection = optionalModelCollection;
+            OptionalNullableStringList = optionalNullableStringList;
+            OptionalNullableIntList = optionalNullableIntList;
         }
 
         /// <summary> Required string. </summary>
@@ -89,5 +110,17 @@ namespace ModelsInCadl.Models
         public IList<float?> RequiredCollectionWithNullableFloatElement { get; }
         /// <summary> Required collection of which the element is a nullable boolean. </summary>
         public IList<bool?> RequiredCollectionWithNullableBooleanElement { get; }
+        /// <summary> Required model nullable collection. </summary>
+        public IList<CollectionItem> RequiredNullableModelCollection { get; }
+        /// <summary> Required string nullable collection. </summary>
+        public IList<string> RequiredNullableStringList { get; }
+        /// <summary> Required int nullable collection. </summary>
+        public IList<int> RequiredNullableIntList { get; }
+        /// <summary> Optional model nullable collection. </summary>
+        public IList<CollectionItem> OptionalModelCollection { get; set; }
+        /// <summary> Optional string nullable collection. </summary>
+        public IList<string> OptionalNullableStringList { get; set; }
+        /// <summary> Optional int nullable collection. </summary>
+        public IList<int> OptionalNullableIntList { get; set; }
     }
 }

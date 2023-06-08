@@ -53,11 +53,12 @@ namespace TypeSpecFirstTest.Models
         /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
+        /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = null, IDictionary<string, StringExtensibleEnum> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null)
         {
-            requiredCollection ??= new List<StringFixedEnum>();
-            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum>();
+            requiredCollection ??= new List<StringFixedEnum?>();
+            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum?>();
             intExtensibleEnumCollection ??= new List<IntExtensibleEnum>();
             floatExtensibleEnumCollection ??= new List<FloatExtensibleEnum>();
             floatFixedEnumCollection ??= new List<FloatFixedEnum>();
@@ -67,7 +68,7 @@ namespace TypeSpecFirstTest.Models
             readOnlyRequiredRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyOptionalRecordUnknown ??= new Dictionary<string, BinaryData>();
 
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown, modelWithRequiredNullable);
         }
     }
 }

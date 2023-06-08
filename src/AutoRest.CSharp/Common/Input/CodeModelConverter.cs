@@ -244,7 +244,8 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
+                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName(),
+                IsNullable: false);
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
@@ -378,8 +379,8 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
-            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
+            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
             ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             AnySchema when IsDPG => InputIntrinsicType.Unknown,
@@ -409,7 +410,7 @@ namespace AutoRest.CSharp.Common.Input
                 _ => rawValue
             };
 
-            return new InputLiteralType("Literal", valueType, normalizedValue);
+            return new InputLiteralType("Literal", valueType, normalizedValue, false);
         }
 
         public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(

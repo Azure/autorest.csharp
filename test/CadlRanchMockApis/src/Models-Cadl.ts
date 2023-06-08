@@ -22,6 +22,9 @@ Scenarios.ModelsCald_InputToRoundTripPrimitive = passOnSuccess([
             requiredModelRecord: {},
             requiredCollectionWithNullableFloatElement: [null, 12.3],
             requiredCollectionWithNullableBooleanElement: [null, true, false],
+            requiredNullableModelCollection: null,
+            requiredNullableStringList: null,
+            requiredNullableIntList: null,
         });
         return {
             status: 200,
@@ -68,6 +71,9 @@ Scenarios.ModelsCald_InputToRoundTripReadOnly = passOnSuccess([
             requiredModelRecord: {},
             requiredCollectionWithNullableFloatElement: [],
             requiredCollectionWithNullableBooleanElement: [],
+            requiredNullableModelCollection: null,
+            requiredNullableStringList: null,
+            requiredNullableIntList: null,
         });
         return {
             status: 200,

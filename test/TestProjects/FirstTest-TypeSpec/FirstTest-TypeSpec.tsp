@@ -113,6 +113,18 @@ model Thing {
     requiredBadDescription: string;
 }
 
+@doc("A model with a few required nullable properties")
+model ModelWithRequiredNullableProperties {
+    @doc("required nullable primitive type")
+    requiredNullablePrimitive: int32 | null;
+
+    @doc("required nullable extensible enum type")
+    requiredExtensibleEnum: StringExtensibleEnum | null;
+
+    @doc("required nullable fixed enum type")
+    requiredFixedEnum: StringFixedEnum | null;
+}
+
 @doc("this is not a friendly model but with a friendly name")
 @friendlyName("Friend")
 model NotFriend {
@@ -183,6 +195,9 @@ model RoundTripModel {
     @doc("optional readonly record of unknown")
     @visibility("read")
     readOnlyOptionalRecordUnknown?: Record<unknown>;
+
+    @doc("this is a model with required nullable properties")
+    modelWithRequiredNullable: ModelWithRequiredNullableProperties;
 }
 
 enum DaysOfWeekExtensibleEnum {

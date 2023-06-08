@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
-    public class TypePropertyNullableTests  : CadlRanchTestBase
+    public class TypePropertyNullableTests : CadlRanchTestBase
     {
         [Test]
         public Task Type_Property_Nullable_String_getNonNull() => Test(async (host) =>
@@ -166,7 +166,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3363")]
         public Task Type_Property_Nullable_CollectionsByte_getNull() => Test(async (host) =>
         {
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
@@ -204,7 +203,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3363")]
         public Task Type_Property_Nullable_CollectionsModel_getNull() => Test(async (host) =>
         {
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();

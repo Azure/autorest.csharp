@@ -18,14 +18,13 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> or <paramref name="nullableProperty"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
-            Argument.AssertNotNull(nullableProperty, nameof(nullableProperty));
 
             RequiredProperty = requiredProperty;
-            NullableProperty = nullableProperty.ToList();
+            NullableProperty = nullableProperty?.ToList() as IReadOnlyList<BinaryData> ?? new ChangeTrackingList<BinaryData>();
         }
 
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>

@@ -74,7 +74,24 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
 }, new bool?[] 
 {
     true
-});
+}, Array.Empty<CollectionItem>(), new string[] 
+{
+    "<null>"
+}, new int[] 
+{
+    1234
+})
+{
+    OptionalModelCollection = {},
+    OptionalNullableStringList = 
+{
+        "<null>"
+    },
+    OptionalNullableIntList = 
+{
+        1234
+    },
+};
 var result = await client.InputToRoundTripAsync(input);
 ]]></code>
 </example>
@@ -104,14 +121,31 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
 }, new bool?[] 
 {
     true
-});
+}, Array.Empty<CollectionItem>(), new string[] 
+{
+    "<null>"
+}, new int[] 
+{
+    1234
+})
+{
+    OptionalModelCollection = {},
+    OptionalNullableStringList = 
+{
+        "<null>"
+    },
+    OptionalNullableIntList = 
+{
+        1234
+    },
+};
 var result = client.InputToRoundTrip(input);
 ]]></code>
 </example>
     </member>
     <member name="InputToRoundTripAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -141,6 +175,82 @@ var data = new {
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+};
+
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTripAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {},
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {},
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
+        new {}
+    },
+    optionalNullableStringList = new[] {
+        "<String>"
+    },
+    optionalNullableIntList = new[] {
+        1234
     },
 };
 
@@ -169,7 +279,7 @@ Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
     </member>
     <member name="InputToRoundTrip(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTrip with required request content and parse the result.
+This sample shows how to call InputToRoundTrip with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -199,6 +309,82 @@ var data = new {
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+};
+
+Response response = client.InputToRoundTrip(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredBytes").ToString());
+Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTrip with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {},
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {},
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
+        new {}
+    },
+    optionalNullableStringList = new[] {
+        "<String>"
+    },
+    optionalNullableIntList = new[] {
+        1234
     },
 };
 
@@ -250,7 +436,24 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
 }, new bool?[] 
 {
     true
-});
+}, Array.Empty<CollectionItem>(), new string[] 
+{
+    "<null>"
+}, new int[] 
+{
+    1234
+})
+{
+    OptionalModelCollection = {},
+    OptionalNullableStringList = 
+{
+        "<null>"
+    },
+    OptionalNullableIntList = 
+{
+        1234
+    },
+};
 var result = await client.InputToRoundTripPrimitiveAsync(input);
 ]]></code>
 </example>
@@ -280,14 +483,31 @@ var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
 }, new bool?[] 
 {
     true
-});
+}, Array.Empty<CollectionItem>(), new string[] 
+{
+    "<null>"
+}, new int[] 
+{
+    1234
+})
+{
+    OptionalModelCollection = {},
+    OptionalNullableStringList = 
+{
+        "<null>"
+    },
+    OptionalNullableIntList = 
+{
+        1234
+    },
+};
 var result = client.InputToRoundTripPrimitive(input);
 ]]></code>
 </example>
     </member>
     <member name="InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripPrimitiveAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -317,6 +537,80 @@ var data = new {
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+};
+
+Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
+Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTripPrimitiveAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {},
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {},
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
+        new {}
+    },
+    optionalNullableStringList = new[] {
+        "<String>"
+    },
+    optionalNullableIntList = new[] {
+        1234
     },
 };
 
@@ -338,7 +632,7 @@ Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement
     </member>
     <member name="InputToRoundTripPrimitive(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
+This sample shows how to call InputToRoundTripPrimitive with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -368,6 +662,80 @@ var data = new {
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+};
+
+Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
+Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTripPrimitive with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {},
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {},
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+    requiredNullableModelCollection = new[] {
+        new {}
+    },
+    requiredNullableStringList = new[] {
+        "<String>"
+    },
+    requiredNullableIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
+        new {}
+    },
+    optionalNullableStringList = new[] {
+        "<String>"
+    },
+    optionalNullableIntList = new[] {
+        1234
     },
 };
 

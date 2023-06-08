@@ -32,6 +32,11 @@ namespace _Type.Property.Nullable.Models
                 }
                 if (property.NameEquals("nullableProperty"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nullableProperty = null;
+                        continue;
+                    }
                     List<BinaryData> array = new List<BinaryData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -48,7 +53,7 @@ namespace _Type.Property.Nullable.Models
                     continue;
                 }
             }
-            return new CollectionsByteProperty(requiredProperty, nullableProperty);
+            return new CollectionsByteProperty(requiredProperty, nullableProperty ?? new ChangeTrackingList<BinaryData>());
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

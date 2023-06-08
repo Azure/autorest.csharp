@@ -810,6 +810,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
@@ -829,6 +835,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -890,6 +899,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
@@ -925,6 +940,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -960,6 +978,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -979,6 +1003,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1040,6 +1067,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
@@ -1075,6 +1108,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1084,10 +1120,10 @@ namespace TypeSpecFirstTest.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new TypeSpecFirstTestClient(endpoint);
 
-            var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
+            var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
             {
     StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum>
+            }, new Dictionary<string, StringExtensibleEnum?>
             {
                 ["key"] = StringExtensibleEnum.One,
             }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
@@ -1099,7 +1135,7 @@ namespace TypeSpecFirstTest.Samples
             }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
             {
                 ["key"] = BinaryData.FromString("<your binary data content>"),
-            })
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection =
@@ -1164,6 +1200,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
@@ -1183,6 +1225,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1244,6 +1289,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
@@ -1279,6 +1330,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1314,6 +1368,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -1333,6 +1393,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1394,6 +1457,12 @@ namespace TypeSpecFirstTest.Samples
                 {
                     key = new { },
                 },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
             };
 
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
@@ -1429,6 +1498,9 @@ namespace TypeSpecFirstTest.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]

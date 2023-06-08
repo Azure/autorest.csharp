@@ -237,6 +237,24 @@ model InputModel {
 
   @doc("Required collection of which the element is a nullable boolean")
   requiredCollectionWithNullableBooleanElement: (boolean | null) [];
+
+  @doc("Required model nullable collection")
+  requiredNullableModelCollection: CollectionItem[] | null;
+
+  @doc("Required string nullable collection")
+  requiredNullableStringList: string[] | null;
+
+  @doc("Required int nullable collection")
+  requiredNullableIntList: int32[] | null;
+
+  @doc("Optional model nullable collection")
+  optionalModelCollection?: CollectionItem[] | null;
+
+  @doc("Optional string nullable collection")
+  optionalNullableStringList?: string[] | null;
+
+  @doc("Optional int nullable collection")
+  optionalNullableIntList?: int32[] | null;
 }
 
 @doc("Model used only as output")
@@ -268,7 +286,7 @@ model RoundTripOptionalModel {
 
   @doc("Optional string collection.")
   optionalStringList?: string[];
-
+  
   @doc("Optional int collection.")
   optionalIntList?: int32[];
 

@@ -13,14 +13,17 @@ using NUnit.Framework;
 namespace CadlRanchProjects.Tests
 {
     /// <summary>
-    /// End-to-end test cases for `lro-basic-cadl` test project.
+    /// End-to-end test cases for `Models-TypeSpec` test project.
     /// </summary>
     public class ModelsCadlTests : CadlRanchMockApiTestBase
     {
         [Test]
         public Task InputToRoundTripPrimitive() => Test(async (host) =>
         {
-            InputModel input = new("test", 1, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
+            // we should not call the internal ctor. Because this test case is in the same assembly as the source code therefore we can access to the internal ctor now.
+            // our customer never could.
+            // when we are calling the internal ctor, we can assign null to collections, which is a case we should avoid.
+            InputModel input = new("test", 1, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false}, null, null, null);
             RoundTripPrimitiveModel result = await new ModelsInCadlClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -29,7 +32,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(1234567, result.RequiredSafeInt);
             Assert.AreEqual(12.3f, result.RequiredFloat);
             Assert.AreEqual(123.456, result.RequiredDouble);
-            Assert.True(result.RequiredBoolean);
+            Assert.IsTrue(result.RequiredBoolean);
             Assert.AreEqual(DateTimeOffset.Parse("2023-02-14Z02:08:47"), result.RequiredDateTimeOffset);
             Assert.AreEqual(new TimeSpan(1, 2, 59, 59), result.RequiredTimeSpan);
             CollectionAssert.AreEqual(new float?[] { null, 12.3f }, result.RequiredCollectionWithNullableFloatElement);
@@ -54,7 +57,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>());
+            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
             RoundTripReadOnlyModel result = await new ModelsInCadlClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
