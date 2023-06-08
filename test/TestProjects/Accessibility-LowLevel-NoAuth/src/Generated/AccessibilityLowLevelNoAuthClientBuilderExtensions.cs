@@ -6,23 +6,21 @@
 #nullable disable
 
 using System;
-using Accessibility_LowLevel;
-using Azure;
+using Accessibility_LowLevel_NoAuth;
 using Azure.Core.Extensions;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="AccessibilityClient"/> to client builder. </summary>
-    public static partial class AccessibilityClientBuilderExtensions
+    public static partial class AccessibilityLowLevelNoAuthClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<AccessibilityClient, AccessibilityClientOptions> AddAccessibilityClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        public static IAzureClientBuilder<AccessibilityClient, AccessibilityClientOptions> AddAccessibilityClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options) => new AccessibilityClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options) => new AccessibilityClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>

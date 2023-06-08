@@ -11,7 +11,7 @@ using System.Linq;
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class AzureNetworkManagementInterfaceModelFactory
+    public static partial class InterfaceModelFactory
     {
         /// <summary> Initializes a new instance of NetworkInterface. </summary>
         /// <param name="id"> Resource ID. </param>

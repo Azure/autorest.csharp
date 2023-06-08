@@ -12,7 +12,7 @@ using System.Linq;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class AzureAIFormRecognizerModelFactory
+    public static partial class FormRecognizerModelFactory
     {
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"></param>

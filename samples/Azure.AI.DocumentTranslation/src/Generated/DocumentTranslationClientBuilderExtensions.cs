@@ -12,7 +12,7 @@ using Azure.Core.Extensions;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="DocumentTranslationClient"/> to client builder. </summary>
-    public static partial class AzureAIDocumentTranslationClientBuilderExtensions
+    public static partial class DocumentTranslationClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="DocumentTranslationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

@@ -12,7 +12,7 @@ using System.Linq;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class AzureStorageTablesModelFactory
+    public static partial class TablesModelFactory
     {
         /// <summary> Initializes a new instance of TableQueryResponse. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
