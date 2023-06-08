@@ -210,7 +210,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, valueType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, inputModelProperty.SerializationFormat, existingMember is IFieldSymbol, writeAsProperty, SerializationMapping: serialization);
+            return new FieldDeclaration(
+                Description: $"Must be removed by post-generation processing,",
+                Modifiers: fieldModifiers,
+                Type: fieldType,
+                ValueType: valueType,
+                Declaration: declaration,
+                DefaultValue: GetPropertyDefaultValue(originalType, inputModelProperty),
+                IsRequired: inputModelProperty.IsRequired,
+                SerializationFormat: inputModelProperty.SerializationFormat,
+                IsField: existingMember is IFieldSymbol,
+                WriteAsProperty: writeAsProperty,
+                OptionalViaNullability: optionalViaNullability,
+                SerializationMapping: serialization);
         }
 
         private static bool IsReadOnly(ISymbol existingMember) => existingMember switch

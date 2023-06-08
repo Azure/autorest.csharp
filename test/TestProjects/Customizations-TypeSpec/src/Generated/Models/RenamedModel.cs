@@ -17,6 +17,15 @@ namespace CustomizationsInCadl.Models
             RequiredInt = requiredInt;
         }
 
+        /// <summary> Initializes a new instance of RenamedModel. </summary>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
+        internal RenamedModel(int requiredInt, int? optionalInt)
+        {
+            RequiredInt = requiredInt;
+            OptionalInt = optionalInt;
+        }
+
         /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
