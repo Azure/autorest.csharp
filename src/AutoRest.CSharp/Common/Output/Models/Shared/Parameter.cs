@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
                 : (Constant?)null;
             */
-            var defaultValue = (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion) && operationParameter.DefaultValue != null
+            var defaultValue = (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint) && operationParameter.DefaultValue != null
                 ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
                 : (Constant?)null;
 
