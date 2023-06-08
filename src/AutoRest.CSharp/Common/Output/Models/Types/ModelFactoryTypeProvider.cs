@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static string GetRPName(string defaultNamespace)
         {
             var prefix = Configuration.AzureArm ? "Arm" : string.Empty;
-            return $"{prefix}{defaultNamespace.Split('.').Last()}";
+            return $"{prefix}{ClientBuilder.GetRPName(defaultNamespace)}";
         }
 
         private static string GetDefaultNamespace()

@@ -30,6 +30,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? $"The {clientPrefix} service client."
                 : BuilderHelpers.EscapeXmlDescription(description);
 
+        public static string GetRPName(string namespaceName) => namespaceName.Split('.').Last();
+
         public static string GetClientPrefix(string name, BuildContext context)
             => GetClientPrefix(name, context.DefaultName);
 
