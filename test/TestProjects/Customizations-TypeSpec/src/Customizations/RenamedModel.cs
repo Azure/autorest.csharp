@@ -6,5 +6,9 @@ using Azure.Core;
 namespace CustomizationsInCadl.Models
 {
     [CodeGenModel("ModelToRename")]
-    public partial class RenamedModel { }
+    public partial class RenamedModel
+    {
+        /// <summary> Optional int. </summary>
+        public int? OptionalInt { get; set; }
+    }
 }
