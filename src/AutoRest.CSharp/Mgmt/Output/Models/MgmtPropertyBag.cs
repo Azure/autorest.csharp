@@ -13,25 +13,16 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal class MgmtPropertyBag : PropertyBag
     {
-        public MgmtPropertyBag(string name, InputOperation operation)
+        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
             : base(name)
         {
             _operation = operation;
-            _paramsToKeep = Array.Empty<Parameter>();
-        }
-
-        private MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
-            : this(name, operation)
-        {
             _paramsToKeep = paramsToKeep;
         }
 
-        public MgmtPropertyBag WithUpdatedInfo(string name, IEnumerable<Parameter> paramsToKeep) =>
-            new MgmtPropertyBag(name, _operation, paramsToKeep);
+        private readonly InputOperation _operation;
 
-        private InputOperation _operation;
-
-        private IEnumerable<Parameter> _paramsToKeep;
+        private readonly IEnumerable<Parameter> _paramsToKeep;
 
         protected override TypeProvider EnsurePackModel()
         {
@@ -63,6 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 false,
                 true);
+
             return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
         }
 

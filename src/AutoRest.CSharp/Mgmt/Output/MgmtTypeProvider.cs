@@ -241,7 +241,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             var resourceName = string.Empty;
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
+            if (operation.IsListMethod(out _))
             {
                 resourceName = ogKey.IsNullOrEmpty() ? string.Empty : singularOGKey.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());

@@ -61,9 +61,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var response = new CodeWriterDeclaration("response");
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
-                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
-                _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }
         }
@@ -92,9 +92,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             var armResource = new ArmResourceExpression(new MemberReference(response, nameof(Response<object>.Value)));
 

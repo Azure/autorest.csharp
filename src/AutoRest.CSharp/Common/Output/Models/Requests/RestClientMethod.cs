@@ -30,15 +30,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
             BufferResponse = bufferResponse;
             Accessibility = GetAccessibility(accessibility);
             Operation = operation;
-
-            PropertyBag = null;
-            // By default, we enable property bag feature in management plane and the real behavior will be determined later.
-            if (Configuration.AzureArm)
-            {
-                // At this point we can't finalize the name for the property bag model
-                // So we pass in the empty string here
-                PropertyBag = new MgmtPropertyBag(string.Empty, operation);
-            }
         }
 
         private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
@@ -64,7 +55,5 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ReturnType { get; }
         public MethodSignatureModifiers Accessibility { get; }
         public InputOperation Operation { get; }
-
-        public PropertyBag? PropertyBag { get;  }
     }
 }

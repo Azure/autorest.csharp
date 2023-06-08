@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), null);
             }
 
             return null;
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 : ReturnType, null, MethodParameters.ToArray());
 
         // TODO -- we need a better way to get the name of this
-        public string Name => _operations.First().Name;
+        public string Name => _operations.First().OperationName;
 
         // TODO -- we need a better way to get the description of this
         private string? _description;
@@ -196,7 +196,6 @@ namespace AutoRest.CSharp.Mgmt.Models
                     parameters.AddRange(_passThroughParams);
                 }
             }
-            parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;
         }
     }

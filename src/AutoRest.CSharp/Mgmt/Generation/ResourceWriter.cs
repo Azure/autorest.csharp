@@ -289,10 +289,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
-                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
+                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.MethodName, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
-            _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+            _writer.Line($"){GetConfigureAwait(isAsync)};");
 
             var armResource = new ArmResourceExpression(new MemberReference(originalResponse, nameof(Response<object>.Value)));
             if (This.ResourceData.ShouldSetResourceIdentifier)

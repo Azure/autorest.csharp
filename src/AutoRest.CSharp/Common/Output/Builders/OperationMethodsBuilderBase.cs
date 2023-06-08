@@ -132,14 +132,14 @@ namespace AutoRest.CSharp.Output.Models
         {
             var restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
             var responses = restClientMethod.Responses;
-            var returnType = restClientMethod.ReturnType;
+            var responseType = restClientMethod.ReturnType;
 
             var createRequestMethods = BuildCreateRequestMethods(CreateResponseClassifier(responses)).ToArray();
 
             var restClientMethods = new[]
             {
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, returnType, headerModel?.Type, resourceDataType, true),
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, returnType, headerModel?.Type, resourceDataType, false)
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, responseType, headerModel?.Type, resourceDataType, true),
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), responses, responseType, headerModel?.Type, resourceDataType, false)
             };
 
             Method? createNextPageRequest;
@@ -165,8 +165,8 @@ namespace AutoRest.CSharp.Output.Models
 
                 restClientNextPageMethods = new[]
                 {
-                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, returnType, headerModel?.Type, resourceDataType, true),
-                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, returnType, headerModel?.Type, resourceDataType, false)
+                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, responseType, headerModel?.Type, resourceDataType, true),
+                    BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, responseType, headerModel?.Type, resourceDataType, false)
                 };
             }
             else
@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models
                 this is LroOperationMethodsBuilder or LroPagingOperationMethodsBuilder ? 2 : this is PagingOperationMethodsBuilder ? 1 : 0,
                 Operation,
                 null,
-                restClientMethod
+                responseType
             );
         }
 

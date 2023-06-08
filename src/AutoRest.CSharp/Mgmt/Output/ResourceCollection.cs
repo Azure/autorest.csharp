@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null)
                 return result;
 
-            RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
+            var method = MgmtContext.Library.GetRestClientPublicMethodSignature(op);
             // calculate the ResourceType from the RequestPath of this resource
             var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
             // iterate over all the reference segments in the diff of this GetAll operation
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     }
                     catch (InvalidOperationException)
                     {
-                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{method.Operation.Path}'");
+                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{opRequestPath}'");
                     }
                 }
             }

@@ -67,9 +67,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
-        public CachedDictionary<RestClientMethod, PagingMethod> PagingMethods { get; }
-
-        private CachedDictionary<Operation, RestClientMethod> RestClientMethods { get; }
+        private CachedDictionary<Operation, LegacyMethods> OperationMethods { get; }
 
         private Dictionary<Schema, TypeProvider> AllSchemaMap { get; }
 
@@ -120,8 +118,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
-            PagingMethods = new CachedDictionary<RestClientMethod, PagingMethod>(EnsurePagingMethods);
-            RestClientMethods = new CachedDictionary<Operation, RestClientMethod>(EnsureRestClientMethods);
+            OperationMethods = new CachedDictionary<Operation, LegacyMethods>(EnsureRestClientMethods);
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
@@ -330,71 +327,41 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
-        public RestClientMethod GetRestClientMethod(Operation operation)
+        public LegacyMethods GetOperationMethods(Operation operation)
         {
-            if (RestClientMethods.TryGetValue(operation, out var restClientMethod))
+            if (OperationMethods.TryGetValue(operation, out var legacyMethods))
             {
-                return restClientMethod;
+                return legacyMethods;
             }
-            throw new Exception($"The {operation.OperationId} method does not exist.");
+            throw new Exception($"The {operation.OperationId} methods do not exist.");
         }
+
+        public MethodSignature GetRestClientPublicMethodSignature(Operation operation)
+            => (MethodSignature)GetOperationMethods(operation).RestClientConvenience[1].Signature; // return sync version
 
         public RequestPath GetRequestPath(Operation operation) => OperationsToRequestPaths[operation];
 
-        private Dictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
+        private Dictionary<Operation, LegacyMethods> EnsureRestClientMethods()
         {
-            var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
+            var operationMethods = new Dictionary<Operation, LegacyMethods>();
             foreach (var restClient in RestClients)
             {
                 foreach (var legacyMethod in restClient.Methods)
                 {
-                    if (legacyMethod.CreateNextPageRequest is not {} createNextPageRequest)
-                    {
-                        continue;
-                    }
-
-                    var method = legacyMethod.RestClientMethod;
-                    if (method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody objectResponseBody)
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    var pagingMethod = new PagingMethod(
-                        legacyMethod.CreateRequest.Signature.Name,
-                        createNextPageRequest.Signature.Name,
-                        method.Name,
-                        new Diagnostic($"Placeholder.{method.Name}"),
-                        new PagingResponseInfo(/*paging.NextLinkName, paging.ItemName*/string.Empty, string.Empty, objectResponseBody.Type));
-
-                    pagingMethods.Add(method, pagingMethod);
-                }
-            }
-
-            return pagingMethods;
-        }
-
-        private Dictionary<Operation, RestClientMethod> EnsureRestClientMethods()
-        {
-            var restClientMethods = new Dictionary<Operation, RestClientMethod>();
-            foreach (var restClient in RestClients)
-            {
-                foreach (var legacyMethod in restClient.Methods)
-                {
-                    var restClientMethod = legacyMethod.RestClientMethod;
-                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
+                    if (!legacyMethod.RestClientConvenience[0].Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
                         continue;
                     }
 
                     var operation = _inputOperationToOperation[legacyMethod.Operation];
-                    if (!restClientMethods.TryAdd(operation, restClientMethod))
+                    if (!operationMethods.TryAdd(operation, legacyMethod))
                     {
                         throw new Exception($"An rest method '{operation.OperationId}' has already been added");
                     }
                 }
             }
 
-            return restClientMethods;
+            return operationMethods;
         }
 
         private ModelFactoryTypeProvider? _modelFactory;

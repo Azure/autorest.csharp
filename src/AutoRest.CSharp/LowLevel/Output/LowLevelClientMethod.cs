@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -22,6 +22,6 @@ namespace AutoRest.CSharp.Output.Models
         int Order,
         InputOperation Operation,
         LowLevelClientMethod? ProtocolMethod,
-        RestClientMethod RestClientMethod
+        CSharpType? ResponseType
     );
 }

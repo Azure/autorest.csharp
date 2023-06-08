@@ -274,9 +274,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static IEnumerable<ParameterMapping> BuildParameterMapping(this MgmtRestOperation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
         {
-            var method = operation.Method;
             var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
-            foreach (var parameter in method.Parameters)
+            foreach (var parameter in operation.Parameters)
             {
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression

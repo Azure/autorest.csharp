@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The operation set
         /// </summary>
-        public HashSet<Operation> Operations { get; }
+        private HashSet<Operation> Operations { get; }
 
         public int Count => Operations.Count;
 

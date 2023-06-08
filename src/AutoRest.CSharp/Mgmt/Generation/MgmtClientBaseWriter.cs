@@ -678,9 +678,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var response = new CodeWriterDeclaration("response");
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
-                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, parameterMappings);
-                _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"){GetConfigureAwait(async)};");
 
                 var armResource = new ArmResourceExpression(new MemberReference(response, nameof(Response<object>.Value)));
 
@@ -769,9 +769,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
-            _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"){GetConfigureAwait(async)};");
 
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
         }
@@ -812,9 +812,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Append($"), ");
                 }
 
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.MethodName)}(");
                 WriteArguments(_writer, parameterMapping);
-                _writer.RemoveTrailingComma();
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
             _writer.Line($");");
@@ -837,6 +836,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteValueExpression(argument);
                     writer.AppendRaw(", ");
                 }
+                _writer.RemoveTrailingComma();
             }
         }
 
