@@ -49,6 +49,7 @@ namespace CustomizationsInCadl.Samples
                 propertyModelToRename = new
                 {
                     requiredInt = 1234,
+                    optionalInt = 1234,
                 },
                 propertyModelToChangeNamespace = new
                 {
@@ -96,6 +97,7 @@ namespace CustomizationsInCadl.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
@@ -144,6 +146,7 @@ namespace CustomizationsInCadl.Samples
                 propertyModelToRename = new
                 {
                     requiredInt = 1234,
+                    optionalInt = 1234,
                 },
                 propertyModelToChangeNamespace = new
                 {
@@ -191,6 +194,7 @@ namespace CustomizationsInCadl.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
@@ -218,7 +222,10 @@ namespace CustomizationsInCadl.Samples
 
             var input = new RootModel()
             {
-                PropertyModelToRename = new RenamedModel(1234),
+                PropertyModelToRename = new RenamedModel(1234)
+                {
+                    OptionalInt = 1234,
+                },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
                 PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[]
             {
