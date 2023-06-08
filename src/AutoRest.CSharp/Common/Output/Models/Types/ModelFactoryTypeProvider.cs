@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = "public";
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(string defaultClientName, string defaultNamespace, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel, string? namespaceOverride = null)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
@@ -56,9 +56,26 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            defaultNamespace = namespaceOverride ?? GetDefaultModelNamespace(null, defaultNamespace);
+            var defaultNamespace = GetDefaultNamespace();
+            var defaultRPName = GetRPName(defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
+            defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
+
+            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+        }
+
+        public static string GetRPName(string defaultNamespace)
+        {
+            var prefix = Configuration.AzureArm ? "Arm" : string.Empty;
+            return $"{prefix}{defaultNamespace.Split('.').Last()}";
+        }
+
+        private static string GetDefaultNamespace()
+        {
+            if (Configuration.AzureArm && Configuration.MgmtConfiguration.IsArmCore)
+                return "Azure.ResourceManager";
+
+            return Configuration.Namespace;
         }
 
         private HashSet<MethodInfo>? _existingModelFactoryMethods;

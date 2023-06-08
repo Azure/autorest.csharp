@@ -44,8 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, _libraryName), Configuration.Namespace, AllModels, _sourceInputModel);
-
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(Configuration.Namespace, AllModels);
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
