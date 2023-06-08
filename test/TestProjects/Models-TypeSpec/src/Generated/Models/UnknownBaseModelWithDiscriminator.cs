@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Unknown version of BaseModelWithDiscriminator. </summary>
     internal partial class UnknownBaseModelWithDiscriminator : BaseModelWithDiscriminator

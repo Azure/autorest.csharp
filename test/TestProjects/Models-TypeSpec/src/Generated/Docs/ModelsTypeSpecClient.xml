@@ -6,7 +6,7 @@
 This sample shows how to call GetOutputDiscriminatorModelAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var result = await client.GetOutputDiscriminatorModelAsync();
 ]]></code>
@@ -17,7 +17,7 @@ var result = await client.GetOutputDiscriminatorModelAsync();
 This sample shows how to call GetOutputDiscriminatorModel.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var result = client.GetOutputDiscriminatorModel();
 ]]></code>
@@ -28,7 +28,7 @@ var result = client.GetOutputDiscriminatorModel();
 This sample shows how to call GetOutputDiscriminatorModelAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
@@ -41,7 +41,7 @@ Console.WriteLine(response.ToString());
 This sample shows how to call GetOutputDiscriminatorModel with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
@@ -54,7 +54,7 @@ Console.WriteLine(response.ToString());
 This sample shows how to call InputToRoundTripAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[] 
 {
@@ -84,7 +84,7 @@ var result = await client.InputToRoundTripAsync(input);
 This sample shows how to call InputToRoundTrip with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[] 
 {
@@ -114,7 +114,7 @@ var result = client.InputToRoundTrip(input);
 This sample shows how to call InputToRoundTripAsync with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -172,7 +172,7 @@ Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
 This sample shows how to call InputToRoundTrip with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -230,7 +230,7 @@ Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
 This sample shows how to call InputToRoundTripPrimitiveAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[] 
 {
@@ -260,7 +260,7 @@ var result = await client.InputToRoundTripPrimitiveAsync(input);
 This sample shows how to call InputToRoundTripPrimitive with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[] 
 {
@@ -290,7 +290,7 @@ var result = client.InputToRoundTripPrimitive(input);
 This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -341,7 +341,7 @@ Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement
 This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -396,7 +396,7 @@ Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement
 This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -408,7 +408,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call InputToRoundTripOptionalAsync with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     optionalString = "<optionalString>",
@@ -471,7 +471,7 @@ Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")
 This sample shows how to call InputToRoundTripOptional and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -483,7 +483,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call InputToRoundTripOptional with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     optionalString = "<optionalString>",
@@ -558,7 +558,7 @@ Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")
 This sample shows how to call RoundTripToOutputAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -604,7 +604,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 This sample shows how to call RoundTripToOutputAsync with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -663,7 +663,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 This sample shows how to call RoundTripToOutput with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -709,7 +709,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 This sample shows how to call RoundTripToOutput with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -768,7 +768,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 This sample shows how to call InputRecursiveAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputRecursiveModel("<message>");
 var result = await client.InputRecursiveAsync(input);
@@ -780,7 +780,7 @@ var result = await client.InputRecursiveAsync(input);
 This sample shows how to call InputRecursive with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputRecursiveModel("<message>");
 var result = client.InputRecursive(input);
@@ -792,7 +792,7 @@ var result = client.InputRecursive(input);
 This sample shows how to call InputRecursiveAsync with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -804,7 +804,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call InputRecursiveAsync with all request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -820,7 +820,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call InputRecursive with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -832,7 +832,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call InputRecursive with all request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -848,7 +848,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call RoundTripRecursiveAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new RoundTripRecursiveModel("<message>");
 var result = await client.RoundTripRecursiveAsync(input);
@@ -860,7 +860,7 @@ var result = await client.RoundTripRecursiveAsync(input);
 This sample shows how to call RoundTripRecursive with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new RoundTripRecursiveModel("<message>");
 var result = client.RoundTripRecursive(input);
@@ -872,7 +872,7 @@ var result = client.RoundTripRecursive(input);
 This sample shows how to call RoundTripRecursiveAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -886,7 +886,7 @@ Console.WriteLine(result.GetProperty("message").ToString());
 This sample shows how to call RoundTripRecursiveAsync with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -905,7 +905,7 @@ Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString())
 This sample shows how to call RoundTripRecursive with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -919,7 +919,7 @@ Console.WriteLine(result.GetProperty("message").ToString());
 This sample shows how to call RoundTripRecursive with all request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -938,7 +938,7 @@ Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString())
 This sample shows how to call SelfReferenceAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var result = await client.SelfReferenceAsync();
 ]]></code>
@@ -949,7 +949,7 @@ var result = await client.SelfReferenceAsync();
 This sample shows how to call SelfReference.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var result = client.SelfReference();
 ]]></code>
@@ -960,7 +960,7 @@ var result = client.SelfReference();
 This sample shows how to call SelfReferenceAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = await client.SelfReferenceAsync(new RequestContext());
 
@@ -975,7 +975,7 @@ Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToStri
 This sample shows how to call SelfReference with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = client.SelfReference(new RequestContext());
 
@@ -990,7 +990,7 @@ Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToStri
 This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
 {
@@ -1008,7 +1008,7 @@ var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
 This sample shows how to call RoundTripToOutputWithNoUseBase with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
 {
@@ -1026,7 +1026,7 @@ var result = client.RoundTripToOutputWithNoUseBase(input);
 This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredCollection = new[] {
@@ -1051,7 +1051,7 @@ Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 This sample shows how to call RoundTripToOutputWithNoUseBase with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsInCadlClient(endpoint);
+var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {
     requiredCollection = new[] {

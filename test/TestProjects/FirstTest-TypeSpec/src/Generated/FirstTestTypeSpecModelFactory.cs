@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class TypeSpecFirstTestModelFactory
+    public static partial class FirstTestTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>

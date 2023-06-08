@@ -8,10 +8,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ModelsInCadlModelFactory
+    public static partial class ModelsTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
         /// <param name="first"></param>

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace LroBasicCadl.Models
+namespace LroBasicTypeSpec.Models
 {
     /// <summary> The Thing. </summary>
     public partial class Thing

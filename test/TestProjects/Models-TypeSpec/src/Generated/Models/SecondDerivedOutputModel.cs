@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Second derived model as an output. </summary>
     public partial class SecondDerivedOutputModel : OutputBaseModelWithDiscriminator
