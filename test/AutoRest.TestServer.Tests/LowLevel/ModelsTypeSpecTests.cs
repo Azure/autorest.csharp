@@ -1,15 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using ModelsInCadl.Models;
-using NUnit.Framework;
-using AutoRest.TestServer.Tests.Infrastructure;
-using System.Text.Json;
 using System;
+using AutoRest.TestServer.Tests.Infrastructure;
+using ModelsTypeSpec.Models;
+using NUnit.Framework;
 
 namespace AutoRest.LowLevel.Tests
 {
-    public class ModelsCadlTests
+    public class ModelsTypeSpecTests
     {
         private static readonly DateTimeOffset PlainDateData = new DateTimeOffset(2022, 12, 12, 0, 0, 0, 0, new TimeSpan());
         private static readonly TimeSpan PlainTimeData = new TimeSpan(13, 06, 12);

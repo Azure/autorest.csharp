@@ -18,6 +18,11 @@ namespace CustomizationsInCadl.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
+            if (Optional.IsDefined(OptionalInt))
+            {
+                writer.WritePropertyName("optionalInt"u8);
+                writer.WriteNumberValue(OptionalInt.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -28,6 +33,7 @@ namespace CustomizationsInCadl.Models
                 return null;
             }
             int requiredInt = default;
+            Optional<int> optionalInt = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -35,8 +41,17 @@ namespace CustomizationsInCadl.Models
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("optionalInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalInt = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new RenamedModel(requiredInt);
+            return new RenamedModel(requiredInt, Optional.ToNullable(optionalInt));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

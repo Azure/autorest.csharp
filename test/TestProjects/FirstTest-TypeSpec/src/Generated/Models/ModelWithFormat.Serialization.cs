@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     public partial class ModelWithFormat : IUtf8JsonSerializable
     {

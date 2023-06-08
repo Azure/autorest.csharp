@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace LroBasicCadl.Models
+namespace LroBasicTypeSpec.Models
 {
     /// <summary> The Project. </summary>
     public partial class Project

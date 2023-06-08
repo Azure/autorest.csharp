@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using ModelsInCadl;
-using ModelsInCadl.Models;
+using ModelsTypeSpec;
+using ModelsTypeSpec.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -15,13 +15,13 @@ namespace CadlRanchProjects.Tests
     /// <summary>
     /// End-to-end test cases for `lro-basic-cadl` test project.
     /// </summary>
-    public class ModelsCadlTests : CadlRanchMockApiTestBase
+    public class ModelsTypeSpecTests : CadlRanchMockApiTestBase
     {
         [Test]
-        public Task InputToRoundTripPrimitive() => Test(async (host) =>
+        public Task Models_InputToRoundTripPrimitive() => Test(async (host) =>
         {
             InputModel input = new("test", 1, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
-            RoundTripPrimitiveModel result = await new ModelsInCadlClient(host).InputToRoundTripPrimitiveAsync(input);
+            RoundTripPrimitiveModel result = await new ModelsTypeSpecClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
             Assert.AreEqual(123, result.RequiredInt);
@@ -36,7 +36,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task InputToRoundTripOptional() => Test(async (host) =>
+        public Task Models_InputToRoundTripOptional() => Test(async (host) =>
         {
             RoundTripOptionalModel input = new()
             {
@@ -46,16 +46,16 @@ namespace CadlRanchProjects.Tests
             input.OptionalCollectionWithNullableIntElement.Add(123);
             input.OptionalCollectionWithNullableIntElement.Add(null);
 
-            RoundTripOptionalModel result = await new ModelsInCadlClient(host).InputToRoundTripOptionalAsync(input);
+            RoundTripOptionalModel result = await new ModelsTypeSpecClient(host).InputToRoundTripOptionalAsync(input);
 
             CollectionAssert.AreEqual(new int?[] { null, 123 }, result.OptionalCollectionWithNullableIntElement);
         });
 
         [Test]
-        public Task InputToRoundTripReadOnly() => Test(async (host) =>
+        public Task Models_InputToRoundTripReadOnly() => Test(async (host) =>
         {
             InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>());
-            RoundTripReadOnlyModel result = await new ModelsInCadlClient(host).InputToRoundTripReadOnlyAsync(input);
+            RoundTripReadOnlyModel result = await new ModelsTypeSpecClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
             Assert.AreEqual(12, result.RequiredReadonlyInt);

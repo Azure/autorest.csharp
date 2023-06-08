@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> The ModelWithFormat. </summary>
     public partial class ModelWithFormat

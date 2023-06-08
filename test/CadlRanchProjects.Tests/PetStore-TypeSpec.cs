@@ -10,7 +10,7 @@ using PetStore.Models;
 
 namespace CadlRanchProjects.Tests
 {
-    public class PetStoreCadlTests : CadlRanchMockApiTestBase
+    public class PetStoreTypeSpecTests : CadlRanchMockApiTestBase
     {
         [Test]
         public Task PetStore_DeletePetById() => Test(async (host) =>
