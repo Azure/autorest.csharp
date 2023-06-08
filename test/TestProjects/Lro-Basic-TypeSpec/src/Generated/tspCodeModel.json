@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "LroBasicCadl",
+ "Name": "LroBasicTypeSpec",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "Project",
-   "Namespace": "LroBasicCadl",
+   "Namespace": "LroBasicTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -63,7 +63,7 @@
   {
    "$id": "9",
    "Name": "Thing",
-   "Namespace": "LroBasicCadl",
+   "Namespace": "LroBasicTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -88,7 +88,7 @@
  "Clients": [
   {
    "$id": "12",
-   "Name": "LroBasicCadlClient",
+   "Name": "LroBasicTypeSpecClient",
    "Description": "",
    "Operations": [
     {

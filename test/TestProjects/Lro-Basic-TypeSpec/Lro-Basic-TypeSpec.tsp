@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
         lroBasicUrl: string,
     }
 )
-namespace LroBasicCadl;
+namespace LroBasicTypeSpec;
 
 
 @resource("projects")

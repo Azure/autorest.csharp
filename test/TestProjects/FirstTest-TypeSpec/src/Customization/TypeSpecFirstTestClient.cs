@@ -7,19 +7,19 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace TypeSpecFirstTest
+namespace FirstTestTypeSpec
 {
 
-    public partial class TypeSpecFirstTestClient
+    public partial class FirstTestTypeSpecClient
     {
         /// <summary>
         /// Constructor for testing purpose. Bearer token check policy is removed.
         /// </summary>
         /// <param name="endpoint"></param>
-        public TypeSpecFirstTestClient(Uri endpoint)
+        public FirstTestTypeSpecClient(Uri endpoint)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            var options = new TypeSpecFirstTestClientOptions();
+            var options = new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { }, new ResponseClassifier());

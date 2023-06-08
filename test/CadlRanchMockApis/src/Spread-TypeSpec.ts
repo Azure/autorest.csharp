@@ -40,7 +40,7 @@ const spreadAliasWithOptionalPropRequest = {
     elements: ["a", "b"]
 };
 
-Scenarios.Spread_spreadModel = passOnSuccess(
+Scenarios.Spread_SpreadModel = passOnSuccess(
     mockapi.post("/spreadModel", (req) => {
         req.expect.bodyEquals(spreadModelRequest);
         return {
@@ -49,7 +49,7 @@ Scenarios.Spread_spreadModel = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadAlias = passOnSuccess(
+Scenarios.Spread_SpreadAlias = passOnSuccess(
     mockapi.post("/spreadAlias", (req) => {
         req.expect.bodyEquals(spreadAliasRequest);
         return {
@@ -58,7 +58,7 @@ Scenarios.Spread_spreadAlias = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadMultiTargetAlias = passOnSuccess(
+Scenarios.Spread_SpreadMultiTargetAlias = passOnSuccess(
     mockapi.post("/spreadMultiTargetAlias/1", (req) => {
         req.expect.bodyEquals(spreadMultiTargetAliasRequest);
         req.expect.containsHeader("top", "1");
@@ -68,7 +68,7 @@ Scenarios.Spread_spreadMultiTargetAlias = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadAliasWithModel = passOnSuccess(
+Scenarios.Spread_SpreadAliasWithModel = passOnSuccess(
     mockapi.post("/spreadAliasWithModel/1", (req) => {
         req.expect.bodyEquals(spreadAliasWithModelRequest);
         req.expect.containsHeader("top", "1");
@@ -78,7 +78,7 @@ Scenarios.Spread_spreadAliasWithModel = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadAliasWithSpreadAlias = passOnSuccess(
+Scenarios.Spread_SpreadAliasWithSpreadAlias = passOnSuccess(
     mockapi.post("/spreadAliasWithSpreadAlias/1", (req) => {
         req.expect.bodyEquals(spreadAliasWithSpreadAliasRequest);
         req.expect.containsHeader("top", "1");
@@ -88,7 +88,7 @@ Scenarios.Spread_spreadAliasWithSpreadAlias = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadAliasWithoutOptionalProps = passOnSuccess(
+Scenarios.Spread_SpreadAliasWithoutOptionalProps = passOnSuccess(
     mockapi.post("/spreadAliasWithOptionalProps/1", (req) => {
         req.expect.bodyEquals(spreadAliasWithoutOptionalPropRequest);
         req.expect.containsHeader("top", "1");
@@ -98,7 +98,7 @@ Scenarios.Spread_spreadAliasWithoutOptionalProps = passOnSuccess(
     }),
 );
 
-Scenarios.Spread_spreadAliasWithOptionalProps = passOnSuccess(
+Scenarios.Spread_SpreadAliasWithOptionalProps = passOnSuccess(
     mockapi.post("/spreadAliasWithOptionalProps/2", (req) => {
         req.expect.bodyEquals(spreadAliasWithOptionalPropRequest);
         req.expect.containsHeader("top", "1");

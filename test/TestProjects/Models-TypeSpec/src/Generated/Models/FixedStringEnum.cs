@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Fixed string enum. </summary>
     public enum FixedStringEnum

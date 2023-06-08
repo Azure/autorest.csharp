@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Deriver model with discriminator property. </summary>
     public partial class DerivedModelWithDiscriminatorB : BaseModelWithDiscriminator

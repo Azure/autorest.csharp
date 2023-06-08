@@ -13,19 +13,19 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using LroBasicCadl.Models;
+using LroBasicTypeSpec.Models;
 using NUnit.Framework;
 
-namespace LroBasicCadl.Samples
+namespace LroBasicTypeSpec.Samples
 {
-    public class Samples_LroBasicCadlClient
+    public class Samples_LroBasicTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateProject()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -39,7 +39,7 @@ namespace LroBasicCadl.Samples
         public void Example_CreateProject_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -57,7 +57,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -71,7 +71,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -89,7 +89,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateProject_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var resource = new Project()
             {
@@ -104,7 +104,7 @@ namespace LroBasicCadl.Samples
         public void Example_UpdateProject()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -120,7 +120,7 @@ namespace LroBasicCadl.Samples
         public void Example_UpdateProject_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -142,7 +142,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_UpdateProject_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -158,7 +158,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_UpdateProject_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -180,7 +180,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_UpdateProject_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var resource = new Project()
             {
@@ -195,7 +195,7 @@ namespace LroBasicCadl.Samples
         public void Example_CreateThing()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -214,7 +214,7 @@ namespace LroBasicCadl.Samples
         public void Example_CreateThing_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -233,7 +233,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateThing_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -252,7 +252,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateThing_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -271,7 +271,7 @@ namespace LroBasicCadl.Samples
         public async Task Example_CreateThing_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicCadlClient(endpoint);
+            var client = new LroBasicTypeSpecClient(endpoint);
 
             var thing = new Thing("<name>");
             var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);

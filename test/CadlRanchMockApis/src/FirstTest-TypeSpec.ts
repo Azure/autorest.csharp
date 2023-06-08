@@ -1,11 +1,11 @@
 import { passOnSuccess, ScenarioMockApi, mockapi, json } from "@azure-tools/cadl-ranch-api";
 
 /**
- * Test mock server for `FirstTest-cadl` test project.
+ * Test mock server for `FirstTest-TypeSpec` test project.
  */
 export const Scenarios: Record<string, ScenarioMockApi> = {};
 
-Scenarios.FirstTestCadl_CreateLiteral = passOnSuccess([
+Scenarios.FirstTest_CreateLiteral = passOnSuccess([
   mockapi.post("/literal", (req) => {
     req.expect.bodyEquals({
         name: "test",
@@ -26,7 +26,7 @@ Scenarios.FirstTestCadl_CreateLiteral = passOnSuccess([
         name: "literal",
         requiredUnion: "union",
         requiredBadDescription: "def",
-        // below are useless
+        // below are intentionally different from the request, to mimic the case that the library could handle the case if server returns different values from the client values
         requiredLiteralString: "reject",
         requiredLiteralInt: 12345,
         requiredLiteralFloat: 123.45,

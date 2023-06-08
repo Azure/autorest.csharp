@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Extensible enum. </summary>
     [Obsolete("deprecated for test")]

@@ -100,7 +100,7 @@ stages:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+          - pwsh: ./eng/ExecuteTypeSpecEmitterUnitTests.ps1
             displayName: 'E2E Test for TypeSpec emitter'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |

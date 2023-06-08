@@ -5,10 +5,10 @@
 
 #nullable disable
 
-namespace LroBasicCadl.Models
+namespace LroBasicTypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class LroBasicCadlModelFactory
+    public static partial class LroBasicTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of Project. </summary>
         /// <param name="id"></param>

@@ -13,19 +13,19 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using ModelsInCadl.Models;
+using ModelsTypeSpec.Models;
 using NUnit.Framework;
 
-namespace ModelsInCadl.Samples
+namespace ModelsTypeSpec.Samples
 {
-    public class Samples_ModelsInCadlClient
+    public class Samples_ModelsTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetOutputDiscriminatorModel()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
@@ -37,7 +37,7 @@ namespace ModelsInCadl.Samples
         public void Example_GetOutputDiscriminatorModel_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
@@ -49,7 +49,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_GetOutputDiscriminatorModel_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
@@ -61,7 +61,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_GetOutputDiscriminatorModel_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
@@ -73,7 +73,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_GetOutputDiscriminatorModel_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var result = await client.GetOutputDiscriminatorModelAsync();
         }
@@ -83,7 +83,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTrip()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -146,7 +146,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTrip_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -223,7 +223,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTrip_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -286,7 +286,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTrip_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -363,7 +363,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTrip_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
             {
@@ -409,7 +409,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTripPrimitive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -470,7 +470,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTripPrimitive_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -540,7 +540,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTripPrimitive_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -601,7 +601,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTripPrimitive_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -671,7 +671,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTripPrimitive_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
             {
@@ -717,7 +717,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTripOptional()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -732,7 +732,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputToRoundTripOptional_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -799,7 +799,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTripOptional_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -814,7 +814,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputToRoundTripOptional_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -881,7 +881,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripToOutput()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -935,7 +935,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripToOutput_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -998,7 +998,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripToOutput_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1052,7 +1052,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripToOutput_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1115,7 +1115,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputRecursive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1131,7 +1131,7 @@ namespace ModelsInCadl.Samples
         public void Example_InputRecursive_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1147,7 +1147,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputRecursive_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1163,7 +1163,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputRecursive_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1179,7 +1179,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_InputRecursive_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var input = new InputRecursiveModel("<message>");
             var result = await client.InputRecursiveAsync(input);
@@ -1190,7 +1190,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripRecursive()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1208,7 +1208,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripRecursive_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1227,7 +1227,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripRecursive_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1245,7 +1245,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripRecursive_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1264,7 +1264,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripRecursive_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var input = new RoundTripRecursiveModel("<message>");
             var result = await client.RoundTripRecursiveAsync(input);
@@ -1275,7 +1275,7 @@ namespace ModelsInCadl.Samples
         public void Example_SelfReference()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(new RequestContext());
 
@@ -1288,7 +1288,7 @@ namespace ModelsInCadl.Samples
         public void Example_SelfReference_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(new RequestContext());
 
@@ -1302,7 +1302,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_SelfReference_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(new RequestContext());
 
@@ -1315,7 +1315,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_SelfReference_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(new RequestContext());
 
@@ -1329,7 +1329,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_SelfReference_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var result = await client.SelfReferenceAsync();
         }
@@ -1339,7 +1339,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripToOutputWithNoUseBase()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1364,7 +1364,7 @@ namespace ModelsInCadl.Samples
         public void Example_RoundTripToOutputWithNoUseBase_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1389,7 +1389,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripToOutputWithNoUseBase_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1414,7 +1414,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripToOutputWithNoUseBase_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1439,7 +1439,7 @@ namespace ModelsInCadl.Samples
         public async Task Example_RoundTripToOutputWithNoUseBase_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsInCadlClient(endpoint);
+            var client = new ModelsTypeSpecClient(endpoint);
 
             var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
             {
