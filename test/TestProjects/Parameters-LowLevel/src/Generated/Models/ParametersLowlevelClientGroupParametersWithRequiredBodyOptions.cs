@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace Parameters_LowLevel.Models
 {
-    /// <summary> The GroupParametersWithRequiredBodyOptions. </summary>
-    public partial class GroupParametersWithRequiredBodyOptions
+    /// <summary> The ParametersLowlevelClientGroupParametersWithRequiredBodyOptions. </summary>
+    public partial class ParametersLowlevelClientGroupParametersWithRequiredBodyOptions
     {
-        /// <summary> Initializes a new instance of GroupParametersWithRequiredBodyOptions. </summary>
+        /// <summary> Initializes a new instance of ParametersLowlevelClientGroupParametersWithRequiredBodyOptions. </summary>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="content"/> is null. </exception>
-        public GroupParametersWithRequiredBodyOptions(string name, int skip, RequestContent content)
+        public ParametersLowlevelClientGroupParametersWithRequiredBodyOptions(string name, int skip, RequestContent content)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(content, nameof(content));

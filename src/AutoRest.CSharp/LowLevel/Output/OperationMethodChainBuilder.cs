@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 parametersInPropertyBag.Add(parameter with { IsPropertyBag = true });
             }
-            var propertyBag = new LowLevelPropertyBag(Operation.PropertyBagName ?? $"{Operation.Name}Options", $"{_namespaceName}.Models", parametersInPropertyBag, _typeFactory, Operation.Parameters, null, _sourceInputModel);
+            var propertyBag = new LowLevelPropertyBag(Operation.PropertyBagName ?? $"{_clientName}{Operation.Name}Options", $"{_namespaceName}.Models", parametersInPropertyBag, _typeFactory, Operation.Parameters, null, _sourceInputModel);
 
             groupedParameters.Insert(groupedParameters.Count == 1 ? 0 : 1, propertyBag.PackParameter); // if only cancellation token, then insert property bag as the first parameter, otherwise insert after WaitUntil
             return (groupedParameters.ToArray(), propertyBag);

@@ -491,7 +491,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.GroupParametersWithRequiredBody(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
+            Response response = client.GroupParametersWithRequiredBody(new ParametersLowlevelClientGroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
             Console.WriteLine(response.Status);
         }
 
@@ -508,7 +508,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.GroupParametersWithRequiredBody(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
+            Response response = client.GroupParametersWithRequiredBody(new ParametersLowlevelClientGroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -521,7 +521,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.GroupParametersWithRequiredBodyAsync(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
+            Response response = await client.GroupParametersWithRequiredBodyAsync(new ParametersLowlevelClientGroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)));
             Console.WriteLine(response.Status);
         }
 
@@ -538,7 +538,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.GroupParametersWithRequiredBodyAsync(new GroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
+            Response response = await client.GroupParametersWithRequiredBodyAsync(new ParametersLowlevelClientGroupParametersWithRequiredBodyOptions("<name>", 1234, RequestContent.Create(data)), new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

@@ -689,8 +689,8 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBodyAsync(GroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
-        public virtual async Task<Response> GroupParametersWithRequiredBodyAsync(GroupParametersWithRequiredBodyOptions options, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBodyAsync(ParametersLowlevelClientGroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
+        public virtual async Task<Response> GroupParametersWithRequiredBodyAsync(ParametersLowlevelClientGroupParametersWithRequiredBodyOptions options, RequestContext context = null)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -723,8 +723,8 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBody(GroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
-        public virtual Response GroupParametersWithRequiredBody(GroupParametersWithRequiredBodyOptions options, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='GroupParametersWithRequiredBody(ParametersLowlevelClientGroupParametersWithRequiredBodyOptions,RequestContext)']/*" />
+        public virtual Response GroupParametersWithRequiredBody(ParametersLowlevelClientGroupParametersWithRequiredBodyOptions options, RequestContext context = null)
         {
             Argument.AssertNotNull(options, nameof(options));
 

@@ -69,7 +69,12 @@ namespace AutoRest.CSharp.Input
                     var property = element.EnumerateObject().FirstOrDefault();
                     if (property.Value.ValueKind == JsonValueKind.String)
                     {
-                        return new GroupParametersMethodOptions(property.Name, property.Value.GetString());
+                        var propertyBagName = property.Value.GetString();
+                        if (!propertyBagName!.EndsWith("Options"))
+                        {
+                            throw new ArgumentException($"The property bag model name '{propertyBagName}' for operation '{property.Name}' should end with 'Options'.");
+                        }
+                        return new GroupParametersMethodOptions(property.Name, propertyBagName);
                     }
                 }
                 throw new ArgumentException($"Incorrect input for 'group-parameters-method-list': {element}");
