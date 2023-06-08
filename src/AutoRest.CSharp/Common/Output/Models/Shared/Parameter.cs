@@ -116,8 +116,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
-            //var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
-            var defaultValue = ParseConstant(requestParameter, typeFactory);
+            var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
+            //var defaultValue = ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.ClientDefaultValue != null)
+            if (parameter.ClientDefaultValue != null && parameter.Implementation == ImplementationLocation.Client)
             {
                 CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);
                 return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
