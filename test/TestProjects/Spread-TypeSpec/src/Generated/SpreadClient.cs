@@ -674,7 +674,6 @@ namespace Spread
             };
             if (elements != null)
             {
-                spreadAliasWithOptionalPropsRequest.Elements.Clear();
                 foreach (var value in elements)
                 {
                     spreadAliasWithOptionalPropsRequest.Elements.Add(value);
@@ -711,7 +710,6 @@ namespace Spread
             };
             if (elements != null)
             {
-                spreadAliasWithOptionalPropsRequest.Elements.Clear();
                 foreach (var value in elements)
                 {
                     spreadAliasWithOptionalPropsRequest.Elements.Add(value);

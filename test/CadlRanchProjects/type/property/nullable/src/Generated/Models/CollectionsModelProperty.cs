@@ -24,7 +24,7 @@ namespace _Type.Property.Nullable.Models
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
             RequiredProperty = requiredProperty;
-            NullableProperty = nullableProperty?.ToList() as IReadOnlyList<InnerModel> ?? new ChangeTrackingList<InnerModel>();
+            NullableProperty = nullableProperty?.ToList();
         }
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>

@@ -45,7 +45,7 @@ namespace _Type.Property.Nullable.Models
                     continue;
                 }
             }
-            return new CollectionsModelProperty(requiredProperty, nullableProperty ?? new ChangeTrackingList<InnerModel>());
+            return new CollectionsModelProperty(requiredProperty, nullableProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

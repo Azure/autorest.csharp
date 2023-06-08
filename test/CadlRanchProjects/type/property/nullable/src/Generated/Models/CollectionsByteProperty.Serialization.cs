@@ -53,7 +53,7 @@ namespace _Type.Property.Nullable.Models
                     continue;
                 }
             }
-            return new CollectionsByteProperty(requiredProperty, nullableProperty ?? new ChangeTrackingList<BinaryData>());
+            return new CollectionsByteProperty(requiredProperty, nullableProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

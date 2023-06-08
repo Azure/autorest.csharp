@@ -36,6 +36,6 @@ namespace MgmtPropertyBag.Models
         /// <summary> Optional. Number of records to skip. </summary>
         public int? Skip { get; set; }
         /// <summary> The items to query on the bar resource. </summary>
-        public IList<string> Items { get; }
+        public IList<string> Items { get; set; }
     }
 }
