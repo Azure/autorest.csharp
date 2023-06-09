@@ -50,7 +50,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = client.SpreadModel(RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadModel(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -84,7 +84,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = await client.SpreadModelAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadModelAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +129,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = client.SpreadAlias(RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAlias(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -163,7 +163,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = await client.SpreadAliasAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAliasAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -207,7 +207,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = client.SpreadMultiTargetAlias("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadMultiTargetAlias("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -241,7 +241,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -285,7 +285,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = client.SpreadAliasWithModel("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAliasWithModel("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -319,7 +319,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -364,7 +364,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -398,7 +398,7 @@ namespace Spread.Samples
                 age = 1234,
             };
 
-            Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -451,7 +451,7 @@ namespace Spread.Samples
     },
             };
 
-            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -494,7 +494,7 @@ namespace Spread.Samples
     },
             };
 
-            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

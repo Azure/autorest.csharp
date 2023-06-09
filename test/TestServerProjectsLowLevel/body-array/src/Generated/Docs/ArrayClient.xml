@@ -8,7 +8,7 @@ This sample shows how to call GetNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetNullAsync(new RequestContext());
+Response response = await client.GetNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -22,7 +22,7 @@ This sample shows how to call GetNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetNull(new RequestContext());
+Response response = client.GetNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -36,7 +36,7 @@ This sample shows how to call GetInvalidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetInvalidAsync(new RequestContext());
+Response response = await client.GetInvalidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -50,7 +50,7 @@ This sample shows how to call GetInvalid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetInvalid(new RequestContext());
+Response response = client.GetInvalid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -64,7 +64,7 @@ This sample shows how to call GetEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetEmptyAsync(new RequestContext());
+Response response = await client.GetEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -78,7 +78,7 @@ This sample shows how to call GetEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetEmpty(new RequestContext());
+Response response = client.GetEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -96,7 +96,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = await client.PutEmptyAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutEmptyAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -112,7 +112,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = client.PutEmpty(RequestContent.Create(data), new RequestContext());
+Response response = client.PutEmpty(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -124,7 +124,7 @@ This sample shows how to call GetBooleanTfftAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetBooleanTfftAsync(new RequestContext());
+Response response = await client.GetBooleanTfftAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -138,7 +138,7 @@ This sample shows how to call GetBooleanTfft and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetBooleanTfft(new RequestContext());
+Response response = client.GetBooleanTfft();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -156,7 +156,7 @@ var data = new[] {
     true
 };
 
-Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -172,7 +172,7 @@ var data = new[] {
     true
 };
 
-Response response = client.PutBooleanTfft(RequestContent.Create(data), new RequestContext());
+Response response = client.PutBooleanTfft(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -184,7 +184,7 @@ This sample shows how to call GetBooleanInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetBooleanInvalidNullAsync(new RequestContext());
+Response response = await client.GetBooleanInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -198,7 +198,7 @@ This sample shows how to call GetBooleanInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetBooleanInvalidNull(new RequestContext());
+Response response = client.GetBooleanInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -212,7 +212,7 @@ This sample shows how to call GetBooleanInvalidStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetBooleanInvalidStringAsync(new RequestContext());
+Response response = await client.GetBooleanInvalidStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -226,7 +226,7 @@ This sample shows how to call GetBooleanInvalidString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetBooleanInvalidString(new RequestContext());
+Response response = client.GetBooleanInvalidString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -240,7 +240,7 @@ This sample shows how to call GetIntegerValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetIntegerValidAsync(new RequestContext());
+Response response = await client.GetIntegerValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -254,7 +254,7 @@ This sample shows how to call GetIntegerValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetIntegerValid(new RequestContext());
+Response response = client.GetIntegerValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -272,7 +272,7 @@ var data = new[] {
     1234
 };
 
-Response response = await client.PutIntegerValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutIntegerValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -288,7 +288,7 @@ var data = new[] {
     1234
 };
 
-Response response = client.PutIntegerValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutIntegerValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -300,7 +300,7 @@ This sample shows how to call GetIntInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetIntInvalidNullAsync(new RequestContext());
+Response response = await client.GetIntInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -314,7 +314,7 @@ This sample shows how to call GetIntInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetIntInvalidNull(new RequestContext());
+Response response = client.GetIntInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -328,7 +328,7 @@ This sample shows how to call GetIntInvalidStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetIntInvalidStringAsync(new RequestContext());
+Response response = await client.GetIntInvalidStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -342,7 +342,7 @@ This sample shows how to call GetIntInvalidString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetIntInvalidString(new RequestContext());
+Response response = client.GetIntInvalidString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -356,7 +356,7 @@ This sample shows how to call GetLongValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetLongValidAsync(new RequestContext());
+Response response = await client.GetLongValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -370,7 +370,7 @@ This sample shows how to call GetLongValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetLongValid(new RequestContext());
+Response response = client.GetLongValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -388,7 +388,7 @@ var data = new[] {
     1234L
 };
 
-Response response = await client.PutLongValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutLongValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -404,7 +404,7 @@ var data = new[] {
     1234L
 };
 
-Response response = client.PutLongValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutLongValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -416,7 +416,7 @@ This sample shows how to call GetLongInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetLongInvalidNullAsync(new RequestContext());
+Response response = await client.GetLongInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -430,7 +430,7 @@ This sample shows how to call GetLongInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetLongInvalidNull(new RequestContext());
+Response response = client.GetLongInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -444,7 +444,7 @@ This sample shows how to call GetLongInvalidStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetLongInvalidStringAsync(new RequestContext());
+Response response = await client.GetLongInvalidStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -458,7 +458,7 @@ This sample shows how to call GetLongInvalidString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetLongInvalidString(new RequestContext());
+Response response = client.GetLongInvalidString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -472,7 +472,7 @@ This sample shows how to call GetFloatValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetFloatValidAsync(new RequestContext());
+Response response = await client.GetFloatValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -486,7 +486,7 @@ This sample shows how to call GetFloatValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetFloatValid(new RequestContext());
+Response response = client.GetFloatValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -504,7 +504,7 @@ var data = new[] {
     123.45f
 };
 
-Response response = await client.PutFloatValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -520,7 +520,7 @@ var data = new[] {
     123.45f
 };
 
-Response response = client.PutFloatValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutFloatValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -532,7 +532,7 @@ This sample shows how to call GetFloatInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetFloatInvalidNullAsync(new RequestContext());
+Response response = await client.GetFloatInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -546,7 +546,7 @@ This sample shows how to call GetFloatInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetFloatInvalidNull(new RequestContext());
+Response response = client.GetFloatInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -560,7 +560,7 @@ This sample shows how to call GetFloatInvalidStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetFloatInvalidStringAsync(new RequestContext());
+Response response = await client.GetFloatInvalidStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -574,7 +574,7 @@ This sample shows how to call GetFloatInvalidString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetFloatInvalidString(new RequestContext());
+Response response = client.GetFloatInvalidString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -588,7 +588,7 @@ This sample shows how to call GetDoubleValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDoubleValidAsync(new RequestContext());
+Response response = await client.GetDoubleValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -602,7 +602,7 @@ This sample shows how to call GetDoubleValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDoubleValid(new RequestContext());
+Response response = client.GetDoubleValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -620,7 +620,7 @@ var data = new[] {
     123.45d
 };
 
-Response response = await client.PutDoubleValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -636,7 +636,7 @@ var data = new[] {
     123.45d
 };
 
-Response response = client.PutDoubleValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDoubleValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -648,7 +648,7 @@ This sample shows how to call GetDoubleInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDoubleInvalidNullAsync(new RequestContext());
+Response response = await client.GetDoubleInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -662,7 +662,7 @@ This sample shows how to call GetDoubleInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDoubleInvalidNull(new RequestContext());
+Response response = client.GetDoubleInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -676,7 +676,7 @@ This sample shows how to call GetDoubleInvalidStringAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDoubleInvalidStringAsync(new RequestContext());
+Response response = await client.GetDoubleInvalidStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -690,7 +690,7 @@ This sample shows how to call GetDoubleInvalidString and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDoubleInvalidString(new RequestContext());
+Response response = client.GetDoubleInvalidString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -704,7 +704,7 @@ This sample shows how to call GetStringValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetStringValidAsync(new RequestContext());
+Response response = await client.GetStringValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -718,7 +718,7 @@ This sample shows how to call GetStringValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetStringValid(new RequestContext());
+Response response = client.GetStringValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -736,7 +736,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = await client.PutStringValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutStringValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -752,7 +752,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = client.PutStringValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutStringValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -764,7 +764,7 @@ This sample shows how to call GetEnumValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetEnumValidAsync(new RequestContext());
+Response response = await client.GetEnumValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -778,7 +778,7 @@ This sample shows how to call GetEnumValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetEnumValid(new RequestContext());
+Response response = client.GetEnumValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -796,7 +796,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = await client.PutEnumValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutEnumValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -812,7 +812,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = client.PutEnumValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutEnumValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -824,7 +824,7 @@ This sample shows how to call GetStringEnumValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetStringEnumValidAsync(new RequestContext());
+Response response = await client.GetStringEnumValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -838,7 +838,7 @@ This sample shows how to call GetStringEnumValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetStringEnumValid(new RequestContext());
+Response response = client.GetStringEnumValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -856,7 +856,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -872,7 +872,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = client.PutStringEnumValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutStringEnumValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -884,7 +884,7 @@ This sample shows how to call GetStringWithNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetStringWithNullAsync(new RequestContext());
+Response response = await client.GetStringWithNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -898,7 +898,7 @@ This sample shows how to call GetStringWithNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetStringWithNull(new RequestContext());
+Response response = client.GetStringWithNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -912,7 +912,7 @@ This sample shows how to call GetStringWithInvalidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetStringWithInvalidAsync(new RequestContext());
+Response response = await client.GetStringWithInvalidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -926,7 +926,7 @@ This sample shows how to call GetStringWithInvalid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetStringWithInvalid(new RequestContext());
+Response response = client.GetStringWithInvalid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -940,7 +940,7 @@ This sample shows how to call GetUuidValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetUuidValidAsync(new RequestContext());
+Response response = await client.GetUuidValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -954,7 +954,7 @@ This sample shows how to call GetUuidValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetUuidValid(new RequestContext());
+Response response = client.GetUuidValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -972,7 +972,7 @@ var data = new[] {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-Response response = await client.PutUuidValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutUuidValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -988,7 +988,7 @@ var data = new[] {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-Response response = client.PutUuidValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutUuidValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1000,7 +1000,7 @@ This sample shows how to call GetUuidInvalidCharsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetUuidInvalidCharsAsync(new RequestContext());
+Response response = await client.GetUuidInvalidCharsAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1014,7 +1014,7 @@ This sample shows how to call GetUuidInvalidChars and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetUuidInvalidChars(new RequestContext());
+Response response = client.GetUuidInvalidChars();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1028,7 +1028,7 @@ This sample shows how to call GetDateValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateValidAsync(new RequestContext());
+Response response = await client.GetDateValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1042,7 +1042,7 @@ This sample shows how to call GetDateValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateValid(new RequestContext());
+Response response = client.GetDateValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1060,7 +1060,7 @@ var data = new[] {
     "2022-05-10"
 };
 
-Response response = await client.PutDateValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1076,7 +1076,7 @@ var data = new[] {
     "2022-05-10"
 };
 
-Response response = client.PutDateValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1088,7 +1088,7 @@ This sample shows how to call GetDateInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateInvalidNullAsync(new RequestContext());
+Response response = await client.GetDateInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1102,7 +1102,7 @@ This sample shows how to call GetDateInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateInvalidNull(new RequestContext());
+Response response = client.GetDateInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1116,7 +1116,7 @@ This sample shows how to call GetDateInvalidCharsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateInvalidCharsAsync(new RequestContext());
+Response response = await client.GetDateInvalidCharsAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1130,7 +1130,7 @@ This sample shows how to call GetDateInvalidChars and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateInvalidChars(new RequestContext());
+Response response = client.GetDateInvalidChars();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1144,7 +1144,7 @@ This sample shows how to call GetDateTimeValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateTimeValidAsync(new RequestContext());
+Response response = await client.GetDateTimeValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1158,7 +1158,7 @@ This sample shows how to call GetDateTimeValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateTimeValid(new RequestContext());
+Response response = client.GetDateTimeValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1176,7 +1176,7 @@ var data = new[] {
     "2022-05-10T18:57:31.2311892Z"
 };
 
-Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1192,7 +1192,7 @@ var data = new[] {
     "2022-05-10T18:57:31.2311892Z"
 };
 
-Response response = client.PutDateTimeValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateTimeValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1204,7 +1204,7 @@ This sample shows how to call GetDateTimeInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateTimeInvalidNullAsync(new RequestContext());
+Response response = await client.GetDateTimeInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1218,7 +1218,7 @@ This sample shows how to call GetDateTimeInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateTimeInvalidNull(new RequestContext());
+Response response = client.GetDateTimeInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1232,7 +1232,7 @@ This sample shows how to call GetDateTimeInvalidCharsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateTimeInvalidCharsAsync(new RequestContext());
+Response response = await client.GetDateTimeInvalidCharsAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1246,7 +1246,7 @@ This sample shows how to call GetDateTimeInvalidChars and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateTimeInvalidChars(new RequestContext());
+Response response = client.GetDateTimeInvalidChars();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1260,7 +1260,7 @@ This sample shows how to call GetDateTimeRfc1123ValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDateTimeRfc1123ValidAsync(new RequestContext());
+Response response = await client.GetDateTimeRfc1123ValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1274,7 +1274,7 @@ This sample shows how to call GetDateTimeRfc1123Valid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDateTimeRfc1123Valid(new RequestContext());
+Response response = client.GetDateTimeRfc1123Valid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1292,7 +1292,7 @@ var data = new[] {
     "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1308,7 +1308,7 @@ var data = new[] {
     "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1320,7 +1320,7 @@ This sample shows how to call GetDurationValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDurationValidAsync(new RequestContext());
+Response response = await client.GetDurationValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1334,7 +1334,7 @@ This sample shows how to call GetDurationValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDurationValid(new RequestContext());
+Response response = client.GetDurationValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1352,7 +1352,7 @@ var data = new[] {
     "PT1H23M45S"
 };
 
-Response response = await client.PutDurationValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDurationValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1368,7 +1368,7 @@ var data = new[] {
     "PT1H23M45S"
 };
 
-Response response = client.PutDurationValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDurationValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1380,7 +1380,7 @@ This sample shows how to call GetByteValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetByteValidAsync(new RequestContext());
+Response response = await client.GetByteValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1394,7 +1394,7 @@ This sample shows how to call GetByteValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetByteValid(new RequestContext());
+Response response = client.GetByteValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1412,7 +1412,7 @@ var data = new[] {
     new {}
 };
 
-Response response = await client.PutByteValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutByteValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1428,7 +1428,7 @@ var data = new[] {
     new {}
 };
 
-Response response = client.PutByteValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutByteValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1440,7 +1440,7 @@ This sample shows how to call GetByteInvalidNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetByteInvalidNullAsync(new RequestContext());
+Response response = await client.GetByteInvalidNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1454,7 +1454,7 @@ This sample shows how to call GetByteInvalidNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetByteInvalidNull(new RequestContext());
+Response response = client.GetByteInvalidNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1468,7 +1468,7 @@ This sample shows how to call GetBase64UrlAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetBase64UrlAsync(new RequestContext());
+Response response = await client.GetBase64UrlAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1482,7 +1482,7 @@ This sample shows how to call GetBase64Url and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetBase64Url(new RequestContext());
+Response response = client.GetBase64Url();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -1496,7 +1496,7 @@ This sample shows how to call GetComplexNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetComplexNullAsync(new RequestContext());
+Response response = await client.GetComplexNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1511,7 +1511,7 @@ This sample shows how to call GetComplexNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetComplexNull(new RequestContext());
+Response response = client.GetComplexNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1526,7 +1526,7 @@ This sample shows how to call GetComplexEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetComplexEmptyAsync(new RequestContext());
+Response response = await client.GetComplexEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1541,7 +1541,7 @@ This sample shows how to call GetComplexEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetComplexEmpty(new RequestContext());
+Response response = client.GetComplexEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1556,7 +1556,7 @@ This sample shows how to call GetComplexItemNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetComplexItemNullAsync(new RequestContext());
+Response response = await client.GetComplexItemNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1571,7 +1571,7 @@ This sample shows how to call GetComplexItemNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetComplexItemNull(new RequestContext());
+Response response = client.GetComplexItemNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1586,7 +1586,7 @@ This sample shows how to call GetComplexItemEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetComplexItemEmptyAsync(new RequestContext());
+Response response = await client.GetComplexItemEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1601,7 +1601,7 @@ This sample shows how to call GetComplexItemEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetComplexItemEmpty(new RequestContext());
+Response response = client.GetComplexItemEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1616,7 +1616,7 @@ This sample shows how to call GetComplexValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetComplexValidAsync(new RequestContext());
+Response response = await client.GetComplexValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1631,7 +1631,7 @@ This sample shows how to call GetComplexValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetComplexValid(new RequestContext());
+Response response = client.GetComplexValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -1653,7 +1653,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutComplexValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutComplexValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1672,7 +1672,7 @@ var data = new[] {
     }
 };
 
-Response response = client.PutComplexValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutComplexValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1684,7 +1684,7 @@ This sample shows how to call GetArrayNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetArrayNullAsync(new RequestContext());
+Response response = await client.GetArrayNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1698,7 +1698,7 @@ This sample shows how to call GetArrayNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetArrayNull(new RequestContext());
+Response response = client.GetArrayNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1712,7 +1712,7 @@ This sample shows how to call GetArrayEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetArrayEmptyAsync(new RequestContext());
+Response response = await client.GetArrayEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1726,7 +1726,7 @@ This sample shows how to call GetArrayEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetArrayEmpty(new RequestContext());
+Response response = client.GetArrayEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1740,7 +1740,7 @@ This sample shows how to call GetArrayItemNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetArrayItemNullAsync(new RequestContext());
+Response response = await client.GetArrayItemNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1754,7 +1754,7 @@ This sample shows how to call GetArrayItemNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetArrayItemNull(new RequestContext());
+Response response = client.GetArrayItemNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1768,7 +1768,7 @@ This sample shows how to call GetArrayItemEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetArrayItemEmptyAsync(new RequestContext());
+Response response = await client.GetArrayItemEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1782,7 +1782,7 @@ This sample shows how to call GetArrayItemEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetArrayItemEmpty(new RequestContext());
+Response response = client.GetArrayItemEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1796,7 +1796,7 @@ This sample shows how to call GetArrayValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetArrayValidAsync(new RequestContext());
+Response response = await client.GetArrayValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1810,7 +1810,7 @@ This sample shows how to call GetArrayValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetArrayValid(new RequestContext());
+Response response = client.GetArrayValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0][0].ToString());
@@ -1830,7 +1830,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutArrayValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutArrayValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1848,7 +1848,7 @@ var data = new[] {
     }
 };
 
-Response response = client.PutArrayValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutArrayValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1860,7 +1860,7 @@ This sample shows how to call GetDictionaryNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDictionaryNullAsync(new RequestContext());
+Response response = await client.GetDictionaryNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1874,7 +1874,7 @@ This sample shows how to call GetDictionaryNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDictionaryNull(new RequestContext());
+Response response = client.GetDictionaryNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1888,7 +1888,7 @@ This sample shows how to call GetDictionaryEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDictionaryEmptyAsync(new RequestContext());
+Response response = await client.GetDictionaryEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1902,7 +1902,7 @@ This sample shows how to call GetDictionaryEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDictionaryEmpty(new RequestContext());
+Response response = client.GetDictionaryEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1916,7 +1916,7 @@ This sample shows how to call GetDictionaryItemNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDictionaryItemNullAsync(new RequestContext());
+Response response = await client.GetDictionaryItemNullAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1930,7 +1930,7 @@ This sample shows how to call GetDictionaryItemNull and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDictionaryItemNull(new RequestContext());
+Response response = client.GetDictionaryItemNull();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1944,7 +1944,7 @@ This sample shows how to call GetDictionaryItemEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDictionaryItemEmptyAsync(new RequestContext());
+Response response = await client.GetDictionaryItemEmptyAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1958,7 +1958,7 @@ This sample shows how to call GetDictionaryItemEmpty and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDictionaryItemEmpty(new RequestContext());
+Response response = client.GetDictionaryItemEmpty();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1972,7 +1972,7 @@ This sample shows how to call GetDictionaryValidAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetDictionaryValidAsync(new RequestContext());
+Response response = await client.GetDictionaryValidAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -1986,7 +1986,7 @@ This sample shows how to call GetDictionaryValid and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetDictionaryValid(new RequestContext());
+Response response = client.GetDictionaryValid();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -2006,7 +2006,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -2024,7 +2024,7 @@ var data = new[] {
     }
 };
 
-Response response = client.PutDictionaryValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDictionaryValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

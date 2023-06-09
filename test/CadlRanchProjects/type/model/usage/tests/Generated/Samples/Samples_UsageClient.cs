@@ -46,7 +46,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = client.Input(RequestContent.Create(data), new RequestContext());
+            Response response = client.Input(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +76,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -175,7 +175,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = client.InputAndOutput(RequestContent.Create(data), new RequestContext());
+            Response response = client.InputAndOutput(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -209,7 +209,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAndOutputAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());

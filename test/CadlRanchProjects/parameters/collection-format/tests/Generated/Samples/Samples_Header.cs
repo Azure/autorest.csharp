@@ -35,7 +35,7 @@ namespace Parameters.CollectionFormat.Samples
         {
             var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
-            Response response = client.Csv(new string[] { "<colors>" }, new RequestContext());
+            Response response = client.Csv(new string[] { "<colors>" });
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +55,7 @@ namespace Parameters.CollectionFormat.Samples
         {
             var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.CsvAsync(new string[] { "<colors>" }, new RequestContext());
+            Response response = await client.CsvAsync(new string[] { "<colors>" });
             Console.WriteLine(response.Status);
         }
     }

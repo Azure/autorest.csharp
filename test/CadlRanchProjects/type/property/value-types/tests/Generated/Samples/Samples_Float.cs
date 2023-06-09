@@ -103,7 +103,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = 123.45f,
             };
 
-            Response response = client.Put(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -133,7 +133,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = 123.45f,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

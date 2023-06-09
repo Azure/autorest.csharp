@@ -157,7 +157,7 @@ namespace _Type.Property.Optional.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = client.PutAll(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutAll(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -184,7 +184,7 @@ namespace _Type.Property.Optional.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = await client.PutAllAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAllAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -224,7 +224,7 @@ namespace _Type.Property.Optional.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = client.PutDefault(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutDefault(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -251,7 +251,7 @@ namespace _Type.Property.Optional.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

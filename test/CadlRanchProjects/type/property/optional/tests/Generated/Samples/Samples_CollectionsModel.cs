@@ -161,7 +161,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = client.PutAll(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutAll(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -192,7 +192,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = await client.PutAllAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAllAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -242,7 +242,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = client.PutDefault(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutDefault(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -273,7 +273,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

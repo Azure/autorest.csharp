@@ -92,7 +92,7 @@ namespace CustomizationsInCadl.Samples
                 },
             };
 
-            Response response = client.RoundTrip(RequestContent.Create(data), new RequestContext());
+            Response response = client.RoundTrip(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
@@ -189,7 +189,7 @@ namespace CustomizationsInCadl.Samples
                 },
             };
 
-            Response response = await client.RoundTripAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RoundTripAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());

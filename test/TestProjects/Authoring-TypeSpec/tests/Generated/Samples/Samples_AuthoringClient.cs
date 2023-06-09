@@ -67,7 +67,7 @@ namespace Azure.Language.Authoring.Samples
                 language = "<language>",
             };
 
-            Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -130,7 +130,7 @@ namespace Azure.Language.Authoring.Samples
                 language = "<language>",
             };
 
-            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -173,7 +173,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.GetProject("<projectName>", new RequestContext());
+            Response response = client.GetProject("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -216,7 +216,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+            Response response = await client.GetProjectAsync("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -259,7 +259,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.Delete("<projectName>", new RequestContext());
+            Response response = client.Delete("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -302,7 +302,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.DeleteAsync("<projectName>", new RequestContext());
+            Response response = await client.DeleteAsync("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -336,7 +336,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.Export("<projectName>", "<projectFileVersion>", new RequestContext());
+            Response response = client.Export("<projectName>", "<projectFileVersion>");
             Console.WriteLine(response.Status);
         }
 
@@ -358,7 +358,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>", new RequestContext());
+            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
             Console.WriteLine(response.Status);
         }
 
@@ -380,7 +380,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.Importx("<projectName>", new RequestContext());
+            Response response = client.Importx("<projectName>");
             Console.WriteLine(response.Status);
         }
 
@@ -402,7 +402,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.ImportxAsync("<projectName>", new RequestContext());
+            Response response = await client.ImportxAsync("<projectName>");
             Console.WriteLine(response.Status);
         }
 
@@ -434,7 +434,7 @@ namespace Azure.Language.Authoring.Samples
                 modelLabel = "<modelLabel>",
             };
 
-            Response response = client.Train("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = client.Train("<projectName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -466,7 +466,7 @@ namespace Azure.Language.Authoring.Samples
                 modelLabel = "<modelLabel>",
             };
 
-            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -490,7 +490,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.GetDeployment("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -516,7 +516,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -546,7 +546,7 @@ namespace Azure.Language.Authoring.Samples
 
             var data = new { };
 
-            Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data), new RequestContext());
+            Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -576,7 +576,7 @@ namespace Azure.Language.Authoring.Samples
 
             var data = new { };
 
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -602,7 +602,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = client.DeleteDeployment("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -628,7 +628,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -664,7 +664,7 @@ namespace Azure.Language.Authoring.Samples
                 secondDeploymentName = "<secondDeploymentName>",
             };
 
-            Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -698,7 +698,7 @@ namespace Azure.Language.Authoring.Samples
                 secondDeploymentName = "<secondDeploymentName>",
             };
 
-            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -934,7 +934,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            foreach (var item in client.GetProjects(new RequestContext()))
+            foreach (var item in client.GetProjects())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -979,7 +979,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            await foreach (var item in client.GetProjectsAsync(new RequestContext()))
+            await foreach (var item in client.GetProjectsAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -1017,7 +1017,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
+            foreach (var item in client.GetDeployments("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1045,7 +1045,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+            await foreach (var item in client.GetDeploymentsAsync("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1074,7 +1074,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("languageName").ToString());
@@ -1104,7 +1104,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("languageName").ToString());
@@ -1134,7 +1134,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
@@ -1164,7 +1164,7 @@ namespace Azure.Language.Authoring.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringClient(endpoint);
 
-            await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
