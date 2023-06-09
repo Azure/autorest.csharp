@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     public partial class RecordItem : IUtf8JsonSerializable
     {

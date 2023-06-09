@@ -32,7 +32,10 @@ model ModelToMakeInternal {
 @doc("Renamed model (original name: ModelToRename)")
 model ModelToRename {
   @doc("Required int")
-  requiredInt: int32; 
+  requiredInt: int32;
+
+  @doc("Optional int")
+  optionalInt?: int32; 
 }
 
 @doc("Model moved into custom namespace")

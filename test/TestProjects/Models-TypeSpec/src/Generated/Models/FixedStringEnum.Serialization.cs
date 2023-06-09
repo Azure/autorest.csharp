@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     internal static partial class FixedStringEnumExtensions
     {

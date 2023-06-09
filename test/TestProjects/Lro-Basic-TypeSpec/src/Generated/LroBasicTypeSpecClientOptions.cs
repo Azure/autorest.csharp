@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace LroBasicCadl
+namespace LroBasicTypeSpec
 {
-    /// <summary> Client options for LroBasicCadlClient. </summary>
-    public partial class LroBasicCadlClientOptions : ClientOptions
+    /// <summary> Client options for LroBasicTypeSpecClient. </summary>
+    public partial class LroBasicTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;
 
@@ -24,8 +24,8 @@ namespace LroBasicCadl
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of LroBasicCadlClientOptions. </summary>
-        public LroBasicCadlClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of LroBasicTypeSpecClientOptions. </summary>
+        public LroBasicTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

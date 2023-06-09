@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace TypeSpecFirstTest
+namespace ModelsTypeSpec
 {
-    /// <summary> Client options for TypeSpecFirstTestClient. </summary>
-    public partial class TypeSpecFirstTestClientOptions : ClientOptions
+    /// <summary> Client options for ModelsTypeSpecClient. </summary>
+    public partial class ModelsTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 
@@ -24,8 +24,8 @@ namespace TypeSpecFirstTest
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of TypeSpecFirstTestClientOptions. </summary>
-        public TypeSpecFirstTestClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ModelsTypeSpecClientOptions. </summary>
+        public ModelsTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

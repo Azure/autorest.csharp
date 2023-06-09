@@ -3,24 +3,24 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using LroBasicCadl;
+using LroBasicTypeSpec;
 using NUnit.Framework;
 using Azure;
-using LroBasicCadl.Models;
+using LroBasicTypeSpec.Models;
 using System.Net;
 
 namespace CadlRanchProjects.Tests
 {
     /// <summary>
-    /// End-to-end test cases for `lro-basic-cadl` test project.
+    /// End-to-end test cases for `Lro-Basic-TypeSpec` test project.
     /// </summary>
-    public class LroBasicCadlTests : CadlRanchMockApiTestBase
+    public class LroBasicTypeSpecTests : CadlRanchMockApiTestBase
     {
         [Test]
         public Task LroBasic_CreateProject() => Test(async (host) =>
         {
             Project project = new(null, "foo", "bar");
-            var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Completed, project);
+            var operation = await new LroBasicTypeSpecClient(host).CreateProjectAsync(WaitUntil.Completed, project);
             Assert.IsTrue(operation.HasCompleted);
             Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
         });
@@ -29,7 +29,7 @@ namespace CadlRanchProjects.Tests
         public Task LroBasic_CreateProjectWaitForCompletion() => Test(async (host) =>
         {
             Project project = new(null, "foo", "bar");
-            var operation = await new LroBasicCadlClient(host).CreateProjectAsync(WaitUntil.Started, project);
+            var operation = await new LroBasicTypeSpecClient(host).CreateProjectAsync(WaitUntil.Started, project);
             Assert.IsFalse(operation.HasCompleted);
             Assert.AreEqual(((int)HttpStatusCode.Accepted), operation.GetRawResponse().Status);
 
@@ -42,7 +42,7 @@ namespace CadlRanchProjects.Tests
         public Task LroBasic_UpdateProject() => Test(async (host) =>
         {
             Project project = new("123", "test", "test");
-            var operation = await new LroBasicCadlClient(host).UpdateProjectAsync(WaitUntil.Started, "123", project);
+            var operation = await new LroBasicTypeSpecClient(host).UpdateProjectAsync(WaitUntil.Started, "123", project);
             await operation.WaitForCompletionResponseAsync();
             Assert.IsTrue(operation.HasCompleted);
             Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
@@ -56,7 +56,7 @@ namespace CadlRanchProjects.Tests
         public Task LroBasic_UpdateProjectWaitForCompletion() => Test(async (host) =>
         {
             Project project = new("123", "test", "test");
-            var operation = await new LroBasicCadlClient(host).UpdateProjectAsync(WaitUntil.Started, "123", project);
+            var operation = await new LroBasicTypeSpecClient(host).UpdateProjectAsync(WaitUntil.Started, "123", project);
             Assert.IsFalse(operation.HasCompleted);
             Assert.AreEqual(((int)HttpStatusCode.Created), operation.GetRawResponse().Status);
 

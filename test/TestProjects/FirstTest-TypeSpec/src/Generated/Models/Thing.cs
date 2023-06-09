@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace TypeSpecFirstTest.Models
+namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing

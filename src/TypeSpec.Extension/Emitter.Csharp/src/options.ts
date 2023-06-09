@@ -26,6 +26,7 @@ export type NetEmitterOptions = {
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
     logLevel?: string;
+    "package-dir"?: string;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -82,7 +83,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
                 LoggerLevel.VERBOSE
             ],
             nullable: true
-        }
+        },
+        "package-dir": { type: "string", nullable: true }
     },
     required: []
 };

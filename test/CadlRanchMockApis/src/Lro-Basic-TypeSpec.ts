@@ -1,7 +1,7 @@
 import { passOnSuccess, ScenarioMockApi, mockapi, json, MockApi } from "@azure-tools/cadl-ranch-api";
 
 /**
- * Test mock server for `lro-basic-cadl` test project.
+ * Test mock server for `Lro-Basic-TypeSpec` test project.
  */
 export const Scenarios: Record<string, ScenarioMockApi> = {};
 

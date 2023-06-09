@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Collection item model. </summary>
     public partial class CollectionItem

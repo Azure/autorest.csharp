@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Base model. </summary>
     public partial class NoUseBase
