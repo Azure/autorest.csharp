@@ -47,7 +47,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+            Response response = client.Operation(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -79,7 +79,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

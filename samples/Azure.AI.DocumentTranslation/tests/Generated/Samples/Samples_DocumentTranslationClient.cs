@@ -45,7 +45,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid(), new RequestContext());
+            Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("path").ToString());
@@ -91,7 +91,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("path").ToString());
@@ -141,7 +141,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.GetTranslationStatus(Guid.NewGuid(), new RequestContext());
+            Response response = client.GetTranslationStatus(Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -193,7 +193,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.GetTranslationStatusAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -245,7 +245,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.CancelTranslation(Guid.NewGuid(), new RequestContext());
+            Response response = client.CancelTranslation(Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -297,7 +297,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.CancelTranslationAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.CancelTranslationAsync(Guid.NewGuid());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -341,7 +341,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.GetSupportedDocumentFormats(new RequestContext());
+            Response response = client.GetSupportedDocumentFormats();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -373,7 +373,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.GetSupportedDocumentFormatsAsync(new RequestContext());
+            Response response = await client.GetSupportedDocumentFormatsAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -405,7 +405,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.GetSupportedGlossaryFormats(new RequestContext());
+            Response response = client.GetSupportedGlossaryFormats();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -437,7 +437,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.GetSupportedGlossaryFormatsAsync(new RequestContext());
+            Response response = await client.GetSupportedGlossaryFormatsAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -467,7 +467,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = client.GetSupportedStorageSources(new RequestContext());
+            Response response = client.GetSupportedStorageSources();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -493,7 +493,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            Response response = await client.GetSupportedStorageSourcesAsync(new RequestContext());
+            Response response = await client.GetSupportedStorageSourcesAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -530,7 +530,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            foreach (var item in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }, new RequestContext()))
+            foreach (var item in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -584,7 +584,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            await foreach (var item in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }, new RequestContext()))
+            await foreach (var item in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -634,7 +634,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            foreach (var item in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }, new RequestContext()))
+            foreach (var item in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("path").ToString());
@@ -682,7 +682,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-            await foreach (var item in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }, new RequestContext()))
+            await foreach (var item in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[] { Guid.NewGuid() }, new string[] { "<statuses>" }, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("path").ToString());
@@ -773,7 +773,7 @@ namespace Azure.AI.DocumentTranslation.Samples
     },
             };
 
-            var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -848,7 +848,7 @@ namespace Azure.AI.DocumentTranslation.Samples
     },
             };
 
-            var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }

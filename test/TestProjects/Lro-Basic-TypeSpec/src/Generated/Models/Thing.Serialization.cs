@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace LroBasicCadl.Models
+namespace LroBasicTypeSpec.Models
 {
     public partial class Thing : IUtf8JsonSerializable
     {

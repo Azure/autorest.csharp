@@ -6,7 +6,7 @@
 This sample shows how to call CreateProjectAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var resource = new Project()
 {
@@ -22,7 +22,7 @@ var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
 This sample shows how to call CreateProject with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var resource = new Project()
 {
@@ -38,7 +38,7 @@ var operation = client.CreateProject(WaitUntil.Completed, resource);
 This sample shows how to call CreateProjectAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -49,14 +49,14 @@ Console.WriteLine(operation.GetRawResponse().Status);
 This sample shows how to call CreateProjectAsync with all parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     description = "<description>",
     name = "<name>",
 };
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
 
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
@@ -67,7 +67,7 @@ Console.WriteLine(operation.GetRawResponse().Status);
 This sample shows how to call CreateProject with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -78,14 +78,14 @@ Console.WriteLine(operation.GetRawResponse().Status);
 This sample shows how to call CreateProject with all parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     description = "<description>",
     name = "<name>",
 };
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
 
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
@@ -96,7 +96,7 @@ Console.WriteLine(operation.GetRawResponse().Status);
 This sample shows how to call UpdateProjectAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var resource = new Project()
 {
@@ -112,7 +112,7 @@ var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", res
 This sample shows how to call UpdateProject with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var resource = new Project()
 {
@@ -128,7 +128,7 @@ var operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
 This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -141,14 +141,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
 This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     description = "<description>",
     name = "<name>",
 };
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -163,7 +163,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call UpdateProject with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
@@ -176,14 +176,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
 This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     description = "<description>",
     name = "<name>",
 };
 
-var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data), new RequestContext());
+var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -198,7 +198,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call CreateThingAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>");
 var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
@@ -210,7 +210,7 @@ var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
 This sample shows how to call CreateThing with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>");
 var operation = client.CreateThing(WaitUntil.Completed, thing);
@@ -222,13 +222,13 @@ var operation = client.CreateThing(WaitUntil.Completed, thing);
 This sample shows how to call CreateThingAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -241,13 +241,13 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call CreateThing with required parameters and request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LroBasicCadlClient(endpoint);
+var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
 };
 
-var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

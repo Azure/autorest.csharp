@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl.Models
+namespace ModelsTypeSpec.Models
 {
     /// <summary> Output model that has property of its own type. </summary>
     public partial class ErrorModel

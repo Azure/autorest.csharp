@@ -103,7 +103,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ConvenienceOptionalBeforeRequired(RequestContent.Create(data), 1234, new RequestContext());
+            Response response = client.ConvenienceOptionalBeforeRequired(RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -133,7 +133,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234, new RequestContext());
+            Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -165,7 +165,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.Protocol(new RequestContext());
+            Response response = client.Protocol();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -189,7 +189,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ProtocolAsync(new RequestContext());
+            Response response = await client.ProtocolAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -222,7 +222,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ConvenienceWithOptional(new RequestContext());
+            Response response = client.ConvenienceWithOptional();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -246,7 +246,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ConvenienceWithOptionalAsync(new RequestContext());
+            Response response = await client.ConvenienceWithOptionalAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -334,7 +334,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ConvenienceShouldNotGenerate(new RequestContext());
+            Response response = client.ConvenienceShouldNotGenerate();
             Console.WriteLine(response.Status);
         }
 
@@ -354,7 +354,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ConvenienceShouldNotGenerateAsync(new RequestContext());
+            Response response = await client.ConvenienceShouldNotGenerateAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -374,7 +374,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ProtocolShouldNotGenerateConvenience(new RequestContext());
+            Response response = client.ProtocolShouldNotGenerateConvenience();
             Console.WriteLine(response.Status);
         }
 
@@ -394,7 +394,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ProtocolShouldNotGenerateConvenienceAsync(new RequestContext());
+            Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -416,7 +416,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ProtocolOptionalQuery(1234, new RequestContext());
+            Response response = client.ProtocolOptionalQuery(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -440,7 +440,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ProtocolOptionalQueryAsync(1234, new RequestContext());
+            Response response = await client.ProtocolOptionalQueryAsync(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -473,7 +473,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ProtocolRequiredQuery(1234, new RequestContext());
+            Response response = client.ProtocolRequiredQuery(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -497,7 +497,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ProtocolRequiredQueryAsync(1234, new RequestContext());
+            Response response = await client.ProtocolRequiredQueryAsync(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -538,7 +538,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ProtocolOptionalModel(RequestContent.Create(data), new RequestContext());
+            Response response = client.ProtocolOptionalModel(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -568,7 +568,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ProtocolOptionalModelAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ProtocolOptionalModelAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -608,7 +608,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ProtocolRequiredModel(RequestContent.Create(data), new RequestContext());
+            Response response = client.ProtocolRequiredModel(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -638,7 +638,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ProtocolRequiredModelAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ProtocolRequiredModelAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -670,7 +670,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ConvenienceOptionalQueryWithOptional(1234, new RequestContext());
+            Response response = client.ConvenienceOptionalQueryWithOptional(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -694,7 +694,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(1234, new RequestContext());
+            Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -727,7 +727,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = client.ConvenienceRequiredQueryWithOptional(1234, new RequestContext());
+            Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -751,7 +751,7 @@ namespace ConvenienceInCadl.Samples
         {
             var client = new ConvenienceInCadlClient();
 
-            Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234, new RequestContext());
+            Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -906,7 +906,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ConvenienceOptionalModelWithOptional(RequestContent.Create(data), new RequestContext());
+            Response response = client.ConvenienceOptionalModelWithOptional(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -936,7 +936,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ConvenienceOptionalModelWithOptionalAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ConvenienceOptionalModelWithOptionalAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -976,7 +976,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ConvenienceRequiredModelWithOptional(RequestContent.Create(data), new RequestContext());
+            Response response = client.ConvenienceRequiredModelWithOptional(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1006,7 +1006,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ConvenienceRequiredModelWithOptionalAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ConvenienceRequiredModelWithOptionalAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1116,7 +1116,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data), 1234, new RequestContext());
+            Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -1146,7 +1146,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234, new RequestContext());
+            Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 

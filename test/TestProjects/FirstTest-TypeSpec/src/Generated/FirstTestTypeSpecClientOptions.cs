@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace FirstTestTypeSpec
 {
-    /// <summary> Client options for ModelsInCadlClient. </summary>
-    public partial class ModelsInCadlClientOptions : ClientOptions
+    /// <summary> Client options for FirstTestTypeSpecClient. </summary>
+    public partial class FirstTestTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 
@@ -24,8 +24,8 @@ namespace ModelsInCadl
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of ModelsInCadlClientOptions. </summary>
-        public ModelsInCadlClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of FirstTestTypeSpecClientOptions. </summary>
+        public FirstTestTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

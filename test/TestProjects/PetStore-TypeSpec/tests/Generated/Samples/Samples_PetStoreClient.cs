@@ -38,7 +38,7 @@ namespace PetStore.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
 
-            Response response = client.Delete(1234, new RequestContext());
+            Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -60,7 +60,7 @@ namespace PetStore.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
 
-            Response response = await client.DeleteAsync(1234, new RequestContext());
+            Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -166,7 +166,7 @@ namespace PetStore.Samples
                 age = 1234,
             };
 
-            Response response = client.Create(RequestContent.Create(data), new RequestContext());
+            Response response = client.Create(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -208,7 +208,7 @@ namespace PetStore.Samples
                 age = 1234,
             };
 
-            Response response = await client.CreateAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -251,7 +251,7 @@ namespace PetStore.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
 
-            Response response = client.GetPetByKind("<kind>", new RequestContext());
+            Response response = client.GetPetByKind("<kind>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -280,7 +280,7 @@ namespace PetStore.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PetStoreClient(endpoint);
 
-            Response response = await client.GetPetByKindAsync("<kind>", new RequestContext());
+            Response response = await client.GetPetByKindAsync("<kind>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());

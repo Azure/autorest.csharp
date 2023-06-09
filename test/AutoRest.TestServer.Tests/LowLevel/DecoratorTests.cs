@@ -1,14 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using ModelsInCadl.Models;
-using NUnit.Framework;
-using AutoRest.TestServer.Tests.Infrastructure;
 using System;
-using AutoRest.CSharp.Mgmt.Decorator;
-using System.Reflection;
-using ModelsInCadl;
 using System.Linq;
+using System.Reflection;
+using ModelsTypeSpec;
+using ModelsTypeSpec.Models;
+using NUnit.Framework;
 
 namespace AutoRest.LowLevel.Tests
 {
@@ -28,7 +26,7 @@ namespace AutoRest.LowLevel.Tests
             Assert.AreEqual("deprecated for test", ((ObsoleteAttribute)attribute).Message);
         }
 
-        [TestCase(typeof(ModelsInCadlClient), "InputToRoundTripReadOnly")]
+        [TestCase(typeof(ModelsTypeSpecClient), "InputToRoundTripReadOnly")]
         public void DeprecatedOperations(Type client, string operationBaseName)
         {
             var methods = client.GetMethods(BindingFlags.Public | BindingFlags.Instance);

@@ -39,7 +39,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, "start", new RequestContext());
+            Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, "start");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, "start", new RequestContext());
+            Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, "start");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -99,7 +99,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.RequestBodyResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("Code").ToString());
@@ -134,7 +134,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("Code").ToString());
@@ -161,7 +161,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", new RequestContext());
+            Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -187,7 +187,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", new RequestContext());
+            Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -211,7 +211,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.NoRequestBodyNoResponseBody(new RequestContext());
+            Response response = client.NoRequestBodyNoResponseBody();
             Console.WriteLine(response.Status);
         }
 
@@ -233,7 +233,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.NoRequestBodyNoResponseBodyAsync(new RequestContext());
+            Response response = await client.NoRequestBodyNoResponseBodyAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -259,7 +259,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -285,7 +285,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -307,7 +307,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParameters(1234, 1234, "start", new RequestContext());
+            Response response = client.OptionalPathParameters(1234, 1234, "start");
             Console.WriteLine(response.Status);
         }
 
@@ -329,7 +329,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersAsync(1234, 1234, "start", new RequestContext());
+            Response response = await client.OptionalPathParametersAsync(1234, 1234, "start");
             Console.WriteLine(response.Status);
         }
 
@@ -351,7 +351,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", 12, new RequestContext());
+            Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", 12);
             Console.WriteLine(response.Status);
         }
 
@@ -373,7 +373,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12, new RequestContext());
+            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12);
             Console.WriteLine(response.Status);
         }
 
@@ -403,7 +403,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data), 123, 1234, 50, new RequestContext());
+            Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data), 123, 1234, 50);
             Console.WriteLine(response.Status);
         }
 
@@ -433,7 +433,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 123, 1234, 50, new RequestContext());
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 123, 1234, 50);
             Console.WriteLine(response.Status);
         }
     }

@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using ModelsInCadl.Models;
-using NUnit.Framework;
 using AutoRest.TestServer.Tests.Infrastructure;
-using System.Text.Json;
+using ModelsTypeSpec.Models;
+using NUnit.Framework;
 
 namespace AutoRest.LowLevel.Tests
 {
