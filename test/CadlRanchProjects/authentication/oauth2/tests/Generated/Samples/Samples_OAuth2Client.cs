@@ -37,7 +37,7 @@ namespace Authentication.OAuth2.Samples
             var credential = new DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = client.Valid(new RequestContext());
+            Response response = client.Valid();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace Authentication.OAuth2.Samples
             var credential = new DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.ValidAsync(new RequestContext());
+            Response response = await client.ValidAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace Authentication.OAuth2.Samples
             var credential = new DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = client.Invalid(new RequestContext());
+            Response response = client.Invalid();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace Authentication.OAuth2.Samples
             var credential = new DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.InvalidAsync(new RequestContext());
+            Response response = await client.InvalidAsync();
             Console.WriteLine(response.Status);
         }
     }

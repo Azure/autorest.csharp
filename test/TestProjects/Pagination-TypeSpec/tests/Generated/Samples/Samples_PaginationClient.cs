@@ -57,7 +57,7 @@ namespace Pagination.Samples
                 requiredInt = 1234,
             };
 
-            foreach (var item in client.GetPaginationLedgerEntries(RequestContent.Create(data), new RequestContext()))
+            foreach (var item in client.GetPaginationLedgerEntries(RequestContent.Create(data)))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("contents").ToString());
@@ -103,7 +103,7 @@ namespace Pagination.Samples
                 requiredInt = 1234,
             };
 
-            await foreach (var item in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data), new RequestContext()))
+            await foreach (var item in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data)))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("contents").ToString());

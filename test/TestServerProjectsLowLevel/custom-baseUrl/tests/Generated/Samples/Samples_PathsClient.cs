@@ -37,7 +37,7 @@ namespace custom_baseUrl_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = client.GetEmpty("<accountName>", new RequestContext());
+            Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace custom_baseUrl_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetEmptyAsync("<accountName>", new RequestContext());
+            Response response = await client.GetEmptyAsync("<accountName>");
             Console.WriteLine(response.Status);
         }
     }

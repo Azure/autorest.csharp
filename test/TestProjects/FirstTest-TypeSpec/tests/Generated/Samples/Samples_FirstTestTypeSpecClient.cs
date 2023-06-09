@@ -140,7 +140,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction2(new RequestContext());
+            Response response = client.TopAction2();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -182,7 +182,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopAction2Async(new RequestContext());
+            Response response = await client.TopAction2Async();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -250,7 +250,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = client.PatchAction(RequestContent.Create(data), new RequestContext());
+            Response response = client.PatchAction(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -318,7 +318,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = await client.PatchActionAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PatchActionAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -386,7 +386,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = client.AnonymousBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.AnonymousBody(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -454,7 +454,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -517,7 +517,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = client.FriendlyModel(RequestContent.Create(data), new RequestContext());
+            Response response = client.FriendlyModel(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -553,7 +553,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = await client.FriendlyModelAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -588,7 +588,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AddTimeHeader(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -610,7 +610,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -644,7 +644,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -678,7 +678,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data), new RequestContext());
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -719,7 +719,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -761,7 +761,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -892,7 +892,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
+            Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1042,7 +1042,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1246,7 +1246,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
+            Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1396,7 +1396,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1577,7 +1577,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = client.CreateLiteral(RequestContent.Create(data), new RequestContext());
+            Response response = client.CreateLiteral(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1645,7 +1645,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             };
 
-            Response response = await client.CreateLiteralAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1792,7 +1792,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.GetUnknownValue(new RequestContext());
+            Response response = client.GetUnknownValue();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1818,7 +1818,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

@@ -37,7 +37,7 @@ namespace Authentication.Union.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
 
-            Response response = client.ValidKey(new RequestContext());
+            Response response = client.ValidKey();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace Authentication.Union.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
 
-            Response response = await client.ValidKeyAsync(new RequestContext());
+            Response response = await client.ValidKeyAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace Authentication.Union.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
 
-            Response response = client.ValidToken(new RequestContext());
+            Response response = client.ValidToken();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace Authentication.Union.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new UnionClient(credential);
 
-            Response response = await client.ValidTokenAsync(new RequestContext());
+            Response response = await client.ValidTokenAsync();
             Console.WriteLine(response.Status);
         }
     }
