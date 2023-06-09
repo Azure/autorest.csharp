@@ -66,12 +66,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static string GetRPName(string defaultNamespace)
         {
-            var prefix = Configuration.AzureArm ? "Arm" : string.Empty;
+            // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
+            var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;
             return $"{prefix}{ClientBuilder.GetRPName(defaultNamespace)}";
         }
 
         private static string GetDefaultNamespace()
         {
+            // we have this because the Azure.ResourceManager package is generated using batch, which generates multiple times, and each time Configuration.Namespace has a different value.
             if (Configuration.AzureArm && Configuration.MgmtConfiguration.IsArmCore)
                 return "Azure.ResourceManager";
 
