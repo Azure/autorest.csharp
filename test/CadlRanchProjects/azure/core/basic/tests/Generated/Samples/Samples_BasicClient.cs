@@ -56,7 +56,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -103,7 +103,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -150,7 +150,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = client.CreateOrReplace(1234, RequestContent.Create(data), new RequestContext());
+            Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -197,7 +197,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -311,7 +311,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = client.Delete(1234, new RequestContext());
+            Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -331,7 +331,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.DeleteAsync(1234, new RequestContext());
+            Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
         }
 

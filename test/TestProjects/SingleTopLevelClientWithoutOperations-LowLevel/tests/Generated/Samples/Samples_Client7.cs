@@ -39,7 +39,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-            Response response = client.Operation(new RequestContext());
+            Response response = client.Operation();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-            Response response = await client.OperationAsync(new RequestContext());
+            Response response = await client.OperationAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

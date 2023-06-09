@@ -39,7 +39,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
 
-            Response response = client.Four(new RequestContext());
+            Response response = client.Four();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
 
-            Response response = await client.FourAsync(new RequestContext());
+            Response response = await client.FourAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -91,7 +91,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
 
-            Response response = client.Five(new RequestContext());
+            Response response = client.Five();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +117,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
 
-            Response response = await client.FiveAsync(new RequestContext());
+            Response response = await client.FiveAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

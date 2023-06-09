@@ -37,7 +37,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = client.Head200(new RequestContext());
+            Response<bool> response = client.Head200();
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -59,7 +59,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = await client.Head200Async(new RequestContext());
+            Response<bool> response = await client.Head200Async();
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -81,7 +81,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = client.Head204(new RequestContext());
+            Response<bool> response = client.Head204();
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -103,7 +103,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = await client.Head204Async(new RequestContext());
+            Response<bool> response = await client.Head204Async();
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -125,7 +125,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = client.Head404(new RequestContext());
+            Response<bool> response = client.Head404();
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -147,7 +147,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response<bool> response = await client.Head404Async(new RequestContext());
+            Response<bool> response = await client.Head404Async();
             Console.WriteLine(response.GetRawResponse().Status);
         }
     }

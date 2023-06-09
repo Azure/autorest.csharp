@@ -35,7 +35,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = client.Operation(new RequestContext());
+            Response response = client.Operation();
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +55,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync(new RequestContext());
+            Response response = await client.OperationAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -75,7 +75,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = client.Parameter("<defaultName>", new RequestContext());
+            Response response = client.Parameter("<defaultName>");
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +95,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<defaultName>", new RequestContext());
+            Response response = await client.ParameterAsync("<defaultName>");
             Console.WriteLine(response.Status);
         }
     }

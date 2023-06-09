@@ -42,7 +42,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = new { };
 
-            Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -68,7 +68,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = new { };
 
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -105,7 +105,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = "<String>";
 
-            Response response = client.OneStringBodyThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.OneStringBodyThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -131,7 +131,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = "<String>";
 
-            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -174,7 +174,7 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             };
 
-            Response response = client.OneModelBodyOneContentType(RequestContent.Create(data), new RequestContext());
+            Response response = client.OneModelBodyOneContentType(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -206,7 +206,7 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             };
 
-            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

@@ -42,7 +42,7 @@ var data = new {
     language = "<language>",
 };
 
-Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -100,7 +100,7 @@ var data = new {
     language = "<language>",
 };
 
-Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -124,7 +124,7 @@ This sample shows how to call GetProjectAsync with required parameters and parse
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+Response response = await client.GetProjectAsync("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -148,7 +148,7 @@ This sample shows how to call GetProject with required parameters and parse the 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.GetProject("<projectName>", new RequestContext());
+Response response = client.GetProject("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -172,7 +172,7 @@ This sample shows how to call DeleteAsync with required parameters and parse the
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.DeleteAsync("<projectName>", new RequestContext());
+Response response = await client.DeleteAsync("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -196,7 +196,7 @@ This sample shows how to call Delete with required parameters and parse the resu
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.Delete("<projectName>", new RequestContext());
+Response response = client.Delete("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -220,7 +220,7 @@ This sample shows how to call ExportAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>", new RequestContext());
+Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -232,7 +232,7 @@ This sample shows how to call Export with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.Export("<projectName>", "<projectFileVersion>", new RequestContext());
+Response response = client.Export("<projectName>", "<projectFileVersion>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -244,7 +244,7 @@ This sample shows how to call ImportxAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.ImportxAsync("<projectName>", new RequestContext());
+Response response = await client.ImportxAsync("<projectName>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -256,7 +256,7 @@ This sample shows how to call Importx with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.Importx("<projectName>", new RequestContext());
+Response response = client.Importx("<projectName>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ var data = new {
     modelLabel = "<modelLabel>",
 };
 
-Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -288,7 +288,7 @@ var data = new {
     modelLabel = "<modelLabel>",
 };
 
-Response response = client.Train("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = client.Train("<projectName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -300,7 +300,7 @@ This sample shows how to call GetDeploymentAsync with required parameters and pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -314,7 +314,7 @@ This sample shows how to call GetDeployment with required parameters and parse t
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.GetDeployment("<projectName>", "<deploymentName>", new RequestContext());
+Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -330,7 +330,7 @@ var client = new AuthoringClient(endpoint);
 
 var data = new {};
 
-Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data), new RequestContext());
+Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -346,7 +346,7 @@ var client = new AuthoringClient(endpoint);
 
 var data = new {};
 
-Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data), new RequestContext());
+Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -360,7 +360,7 @@ This sample shows how to call DeleteDeploymentAsync with required parameters and
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -374,7 +374,7 @@ This sample shows how to call DeleteDeployment with required parameters and pars
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.DeleteDeployment("<projectName>", "<deploymentName>", new RequestContext());
+Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -393,7 +393,7 @@ var data = new {
     secondDeploymentName = "<secondDeploymentName>",
 };
 
-Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -410,7 +410,7 @@ var data = new {
     secondDeploymentName = "<secondDeploymentName>",
 };
 
-Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data), new RequestContext());
+Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -566,7 +566,7 @@ This sample shows how to call GetProjectsAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var item in client.GetProjectsAsync(new RequestContext()))
+await foreach (var item in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -591,7 +591,7 @@ This sample shows how to call GetProjects and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var item in client.GetProjects(new RequestContext()))
+foreach (var item in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -616,7 +616,7 @@ This sample shows how to call GetDeploymentsAsync with required parameters and p
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+await foreach (var item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
@@ -631,7 +631,7 @@ This sample shows how to call GetDeployments with required parameters and parse 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
+foreach (var item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
@@ -658,7 +658,7 @@ This sample shows how to call GetSupportedLanguagesAsync with all parameters, an
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
@@ -686,7 +686,7 @@ This sample shows how to call GetSupportedLanguages with all parameters, and how
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234, new RequestContext()))
+foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("languageName").ToString());
@@ -714,7 +714,7 @@ This sample shows how to call GetTrainingConfigVersionsAsync with all parameters
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
@@ -742,7 +742,7 @@ This sample shows how to call GetTrainingConfigVersions with all parameters, and
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234, new RequestContext()))
+foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
