@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace Spread
+namespace SpreadTypeSpec
 {
-    /// <summary> Client options for SpreadClient. </summary>
-    public partial class SpreadClientOptions : ClientOptions
+    /// <summary> Client options for SpreadTypeSpecClient. </summary>
+    public partial class SpreadTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_01_01_Preview;
 
@@ -24,8 +24,8 @@ namespace Spread
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of SpreadClientOptions. </summary>
-        public SpreadClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of SpreadTypeSpecClientOptions. </summary>
+        public SpreadTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Spread.Models;
+using SpreadTypeSpec.Models;
 
-namespace Spread
+namespace SpreadTypeSpec
 {
     // Data plane generated client.
     /// <summary> This is a spread model or alias service. </summary>
-    public partial class SpreadClient
+    public partial class SpreadTypeSpecClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -31,26 +31,26 @@ namespace Spread
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of SpreadClient for mocking. </summary>
-        protected SpreadClient()
+        /// <summary> Initializes a new instance of SpreadTypeSpecClient for mocking. </summary>
+        protected SpreadTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of SpreadClient. </summary>
+        /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public SpreadClient(Uri endpoint) : this(endpoint, new SpreadClientOptions())
+        public SpreadTypeSpecClient(Uri endpoint) : this(endpoint, new SpreadTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of SpreadClient. </summary>
+        /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public SpreadClient(Uri endpoint, SpreadClientOptions options)
+        public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new SpreadClientOptions();
+            options ??= new SpreadTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
@@ -62,7 +62,7 @@ namespace Spread
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadModelAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -76,7 +76,7 @@ namespace Spread
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
         public virtual Response SpreadModel(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -106,12 +106,12 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadModel");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadModel");
             scope.Start();
             try
             {
@@ -145,12 +145,12 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadModel");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadModel");
             scope.Start();
             try
             {
@@ -169,7 +169,7 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -185,7 +185,7 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -216,12 +216,12 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAlias");
             scope.Start();
             try
             {
@@ -255,12 +255,12 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAlias(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAlias(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAlias");
             scope.Start();
             try
             {
@@ -282,7 +282,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -302,7 +302,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -337,13 +337,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadMultiTargetAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadMultiTargetAlias");
             scope.Start();
             try
             {
@@ -380,13 +380,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadMultiTargetAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadMultiTargetAlias");
             scope.Start();
             try
             {
@@ -407,7 +407,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -425,7 +425,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,Thing,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,Thing,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -459,13 +459,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithModel");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithModel");
             scope.Start();
             try
             {
@@ -502,13 +502,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithModel");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithModel");
             scope.Start();
             try
             {
@@ -530,7 +530,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -550,7 +550,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -585,13 +585,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithSpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithSpreadAlias");
             scope.Start();
             try
             {
@@ -628,13 +628,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithSpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithSpreadAlias");
             scope.Start();
             try
             {
@@ -659,7 +659,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -695,7 +695,7 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -743,13 +743,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithOptionalProps");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithOptionalProps");
             scope.Start();
             try
             {
@@ -786,13 +786,13 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithOptionalProps");
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithOptionalProps");
             scope.Start();
             try
             {

@@ -6,7 +6,7 @@
 This sample shows how to call SpreadModelAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
 var result = await client.SpreadModelAsync(thing);
@@ -18,7 +18,7 @@ var result = await client.SpreadModelAsync(thing);
 This sample shows how to call SpreadModel with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
 var result = client.SpreadModel(thing);
@@ -30,7 +30,7 @@ var result = client.SpreadModel(thing);
 This sample shows how to call SpreadModelAsync with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -47,7 +47,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadModel with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -64,7 +64,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = await client.SpreadAliasAsync("<name>", 1234);
 ]]></code>
@@ -75,7 +75,7 @@ var result = await client.SpreadAliasAsync("<name>", 1234);
 This sample shows how to call SpreadAlias with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = client.SpreadAlias("<name>", 1234);
 ]]></code>
@@ -86,7 +86,7 @@ var result = client.SpreadAlias("<name>", 1234);
 This sample shows how to call SpreadAliasAsync with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -103,7 +103,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAlias with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -120,7 +120,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
 ]]></code>
@@ -131,7 +131,7 @@ var result = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 12
 This sample shows how to call SpreadMultiTargetAlias with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
 ]]></code>
@@ -142,7 +142,7 @@ var result = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -159,7 +159,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithModelAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
 var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
@@ -188,7 +188,7 @@ var result = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
 This sample shows how to call SpreadAliasWithModel with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>", 1234);
 var result = client.SpreadAliasWithModel("<id>", 1234, thing);
@@ -200,7 +200,7 @@ var result = client.SpreadAliasWithModel("<id>", 1234, thing);
 This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -217,7 +217,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithModel with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -234,7 +234,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
 ]]></code>
@@ -245,7 +245,7 @@ var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>"
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
 ]]></code>
@@ -256,7 +256,7 @@ var result = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -273,7 +273,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -290,7 +290,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
 ]]></code>
@@ -301,7 +301,7 @@ var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
 ]]></code>
@@ -312,7 +312,7 @@ var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -327,7 +327,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -351,7 +351,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -366,7 +366,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SpreadAliasWithOptionalProps with all parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new SpreadClient(endpoint);
+var client = new SpreadTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
