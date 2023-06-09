@@ -196,7 +196,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = client.InputToRoundTrip(RequestContent.Create(data), new RequestContext());
+            Response response = client.InputToRoundTrip(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -336,7 +336,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -520,7 +520,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data), new RequestContext());
+            Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -651,7 +651,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -777,7 +777,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = client.InputToRoundTripOptional(RequestContent.Create(data), new RequestContext());
+            Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -859,7 +859,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -986,7 +986,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = client.RoundTripToOutput(RequestContent.Create(data), new RequestContext());
+            Response response = client.RoundTripToOutput(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1103,7 +1103,7 @@ namespace ModelsTypeSpec.Samples
     },
             };
 
-            Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1138,7 +1138,7 @@ namespace ModelsTypeSpec.Samples
                 message = "<message>",
             };
 
-            Response response = client.InputRecursive(RequestContent.Create(data), new RequestContext());
+            Response response = client.InputRecursive(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1170,7 +1170,7 @@ namespace ModelsTypeSpec.Samples
                 message = "<message>",
             };
 
-            Response response = await client.InputRecursiveAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1215,7 +1215,7 @@ namespace ModelsTypeSpec.Samples
                 message = "<message>",
             };
 
-            Response response = client.RoundTripRecursive(RequestContent.Create(data), new RequestContext());
+            Response response = client.RoundTripRecursive(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("message").ToString());
@@ -1252,7 +1252,7 @@ namespace ModelsTypeSpec.Samples
                 message = "<message>",
             };
 
-            Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("message").ToString());
@@ -1378,7 +1378,7 @@ namespace ModelsTypeSpec.Samples
                 baseModelProp = "<baseModelProp>",
             };
 
-            Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data), new RequestContext());
+            Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("baseModelProp").ToString());
@@ -1428,7 +1428,7 @@ namespace ModelsTypeSpec.Samples
                 baseModelProp = "<baseModelProp>",
             };
 
-            Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("baseModelProp").ToString());

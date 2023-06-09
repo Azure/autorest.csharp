@@ -46,7 +46,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = client.GetProject("<projectName>", new RequestContext());
+            Response response = client.GetProject("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -89,7 +89,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+            Response response = await client.GetProjectAsync("<projectName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -125,7 +125,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = client.GetDeployment("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -151,7 +151,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -185,7 +185,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            foreach (var item in client.GetProjects(new RequestContext()))
+            foreach (var item in client.GetProjects())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -230,7 +230,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            await foreach (var item in client.GetProjectsAsync(new RequestContext()))
+            await foreach (var item in client.GetProjectsAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -268,7 +268,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            foreach (var item in client.GetDeployments("<projectName>", new RequestContext()))
+            foreach (var item in client.GetDeployments("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
@@ -296,7 +296,7 @@ namespace Azure.RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            await foreach (var item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
+            await foreach (var item in client.GetDeploymentsAsync("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());

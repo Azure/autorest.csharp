@@ -37,7 +37,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringMultiNull(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringMultiNull(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiNullAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringMultiNullAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringMultiEmpty(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringMultiEmpty(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiEmptyAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringMultiEmptyAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -125,7 +125,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringMultiValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringMultiValid(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +147,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringMultiValidAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
     }

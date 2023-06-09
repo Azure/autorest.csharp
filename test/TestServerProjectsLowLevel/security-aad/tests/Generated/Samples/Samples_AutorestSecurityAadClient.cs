@@ -37,7 +37,7 @@ namespace security_aad_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new AutorestSecurityAadClient(credential);
 
-            Response response = client.Head(new RequestContext());
+            Response response = client.Head();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace security_aad_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new AutorestSecurityAadClient(credential);
 
-            Response response = await client.HeadAsync(new RequestContext());
+            Response response = await client.HeadAsync();
             Console.WriteLine(response.Status);
         }
     }

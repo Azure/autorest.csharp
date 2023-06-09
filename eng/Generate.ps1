@@ -59,7 +59,7 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     }
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
-    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs --clear-output-folder=true"
 }
 
 function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
@@ -124,11 +124,11 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     $readmeConfigurationPath = Join-Path $directory "readme.md"
     $testArguments = $null
     if (Test-Path $readmeConfigurationPath) {
-        $testArguments = "--require=$readmeConfigurationPath"
+        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
     }
     else {
         $inputFile = Join-Path $directory "$testName.json"
-        $testArguments = "--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
+        $testArguments = "--require=$configurationPath --input-file=$inputFile --generation1-convenience-client --clear-output-folder=true"
     }
 
     if ($forTest) {
@@ -173,11 +173,11 @@ if (!($Exclude -contains "TestProjects")) {
             Add-TypeSpec $testName $directory
         }
         elseif (Test-Path $readmeConfigurationPath) {
-            $testArguments = "--require=$readmeConfigurationPath"
+            $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
             Add-Swagger $testName $directory $testArguments
         }
         elseif (Test-Path $possibleInputJsonFilePath) {
-            $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client"
+            $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client --clear-output-folder=true"
             Add-Swagger $testName $directory $testArguments
         }
         else {
@@ -201,7 +201,7 @@ if (!($Exclude -contains "Samples")) {
 
         if (Test-Path $sampleConfigurationPath) {
             # for swagger samples
-            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath"
+            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath --clear-output-folder=true"
         }
         elseif (Test-Path $tspConfigPath) {
             # for typespec projects
@@ -240,7 +240,7 @@ if (!($Exclude -contains "SmokeTests")) {
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
-            Add-Swagger $projectName $projectDirectory "--generation1-convenience-client --require=$configurationPath $args $input"
+            Add-Swagger $projectName $projectDirectory "--generation1-convenience-client --require=$configurationPath $args $input --clear-output-folder=true"
         }
     }
 }
