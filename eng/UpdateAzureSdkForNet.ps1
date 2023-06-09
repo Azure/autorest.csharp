@@ -3,7 +3,7 @@ param(
     [string]$AutorestCSharpVersion,
 
     [Parameter(Mandatory)]
-    [string]$CadlEmitterVersion,
+    [string]$TypeSpecEmitterVersion,
 
     [Parameter(Mandatory)]
     [string]$SdkRepoRoot,
@@ -18,6 +18,6 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot -UseInternalFeed `$$UseInternalFeed"
+Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -TypeSpecEmitterVersion $TypeSpecEmitterVersion -SdkRepoRoot $SdkRepoRoot -UseInternalFeed `$$UseInternalFeed"
 
 Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',') -ProjectListOverrideFile $ProjectListOverrideFile $(if ($ShowSummary) {'-ShowSummary'})"

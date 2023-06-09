@@ -66,7 +66,7 @@ stages:
           displayName: 'Publish @azure-tools/typespec-csharp'
           inputs:
             command: 'publish'
-            workingDir: '$(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp'
+            workingDir: '$(Build.SourcesDirectory)/src/TypeSpec.Extension/Emitter.Csharp'
             publishRegistry: 'useFeed'
             publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
         - task: PublishBuildArtifacts@1
@@ -79,12 +79,12 @@ stages:
       - Build_and_Publish
     variables:
       AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
-      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['PackEmitter.emitterVersion']]
+      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['PackEmitter.emitterVersion']]
     jobs:
       - template: update-generator-versions.yml
         parameters:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          CadlEmitterVersion: $(CadlEmitterVersion)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
           IsInternalFeed: true
       - template: generate-sdk-job-matrix-files.yml
         parameters:
@@ -95,7 +95,7 @@ stages:
           Name: Update_Code
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          CadlEmitterVersion: $(CadlEmitterVersion)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
           IsInternalFeed: true
           DependsOn: Generate_Job_Matrix
       - job: Create_PR
