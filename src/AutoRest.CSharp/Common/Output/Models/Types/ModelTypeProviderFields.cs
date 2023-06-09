@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
                 (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
                 (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
-                (propertyIsCollection && !inputModelProperty.Type.IsNullable) || // a property will not have setter when it is a non-nullable collection, in other words, a collection property only has setter when it is nullable
+                (propertyIsCollection && (!inputModelProperty.Type.IsNullable || inputModel.IsPropertyBag)) || // a property will not have setter when it is a non-nullable collection, in other words, a collection property only has setter when it is nullable
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
                 propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
 
