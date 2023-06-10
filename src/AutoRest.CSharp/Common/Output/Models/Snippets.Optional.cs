@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                 }
 
                 return TypeFactory.IsCollectionType(serialization.ValueType)
-                    ? new IfElseStatement(IsCollectionDefined(serialization.Value), statement, null)
-                    : new IfElseStatement(IsDefined(serialization.Value), statement, null);
+                    ? new IfStatement(IsCollectionDefined(serialization.Value)) {statement}
+                    : new IfStatement(IsDefined(serialization.Value)) {statement};
             }
         }
     }

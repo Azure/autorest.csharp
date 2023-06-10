@@ -37,26 +37,35 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingVar(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
             => UsingVar(null, name, value, d => new JsonDocumentExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, ResponseExpression value, out ResponseExpression variable)
-            => Var(null, name, value, d => new ResponseExpression(d), out variable);
+        public static DeclarationStatement Var(string name, DictionaryExpression value, out DictionaryExpression variable)
+            => Var(null, name, value, d => new DictionaryExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
-            => Var(null, name, value, d => new XmlWriterContentExpression(d), out variable);
+        public static DeclarationStatement Var(string name, HttpMessageExpression value, out HttpMessageExpression variable)
+            => Var(null, name, value, d => new HttpMessageExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
-            => Var(null, name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
+        public static DeclarationStatement Var(string name, ListExpression value, out ListExpression variable)
+            => Var(null, name, value, d => new ListExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
             => Var(null, name, value, d => new RawRequestUriBuilderExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
-            => Var(null, name, value, d => new Utf8JsonWriterExpression(d), out variable);
-
         public static DeclarationStatement Var(string name, RequestExpression value, out RequestExpression variable)
             => Var(null, name, value, d => new RequestExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, HttpMessageExpression value, out HttpMessageExpression variable)
-            => Var(null, name, value, d => new HttpMessageExpression(d), out variable);
+        public static DeclarationStatement Var(string name, ResponseExpression value, out ResponseExpression variable)
+            => Var(null, name, value, d => new ResponseExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
+            => Var(null, name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
+            => Var(null, name, value, d => new Utf8JsonWriterExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, XDocumentExpression value, out XDocumentExpression variable)
+            => Var(null, name, value, d => new XDocumentExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
+            => Var(null, name, value, d => new XmlWriterContentExpression(d), out variable);
 
 
         private static DeclarationStatement UsingVar<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression

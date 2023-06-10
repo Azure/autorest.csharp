@@ -42,6 +42,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethodBodyStatement(writer, diagnosticScope.InnerStatement);
                     }
                     break;
+                case IfStatement ifStatement:
+                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null));
+                    break;
                 case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
                     writer.AppendRaw("if (");
                     writer.WriteValueExpression(condition);

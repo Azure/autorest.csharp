@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.Output.Models
             var writeNullStatement = property.IsRequired ? jsonWriter.WriteNull(propertyName) : null;
             if (parameter.Type.IsNullable)
             {
-                return new IfElseStatement(IsNotNull(parameter), writePropertyStatement, writeNullStatement);
+                return new IfElseStatement(NotEqual(parameter, Null), writePropertyStatement, writeNullStatement);
             }
 
             return writePropertyStatement;

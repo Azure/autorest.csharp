@@ -4,10 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -47,8 +49,12 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression LiteralU8(string value) => new LiteralExpression(value, true);
 
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
-        public static BoolExpression IsNull(ValueExpression value) => new(new BinaryOperatorExpression("==", value, Null));
-        public static BoolExpression IsNotNull(ValueExpression value) => new(new BinaryOperatorExpression("!=", value, Null));
+        public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
+        public static BoolExpression Is(ValueExpression value, CSharpType type) => new(new BinaryOperatorExpression("is", value, type));
+
+        public static BoolExpression Is(ValueExpression value, string name, out XElementExpression xElement)
+            => Is<XElementExpression>(value, typeof(XElement), name, d => new XElementExpression(d), out xElement);
+
         public static BoolExpression Or(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("||", left.Untyped, right.Untyped));
         public static BoolExpression And(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("&&", left.Untyped, right.Untyped));
 
@@ -62,5 +68,12 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
             => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
+
+        private static BoolExpression Is<T>(ValueExpression value, CSharpType type, string name, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        {
+            var declaration = new CodeWriterDeclaration(name);
+            variable = factory(declaration);
+            return new(new BinaryOperatorExpression("is", value, new FormattableStringToExpression($"{type} {declaration:D}")));
+        }
     }
 }

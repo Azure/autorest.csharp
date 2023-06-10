@@ -10,11 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
     }
 
-    internal sealed record EnumerableExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Dictionary<,>), Untyped)
-    {
-    }
-
-    internal sealed record DictionaryExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Dictionary<,>), Untyped)
+    internal sealed record EnumerableExpression(ValueExpression Untyped) : TypedValueExpression(typeof(IEnumerable<>), Untyped)
     {
     }
 

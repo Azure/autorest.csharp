@@ -11,5 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
     /// </summary>
     /// <param name="ReturnType">Type expected to be returned by value expression</param>
     /// <param name="Untyped"></param>
-    internal abstract record TypedValueExpression(CSharpType ReturnType, ValueExpression Untyped) : ValueExpression;
+    internal abstract record TypedValueExpression(CSharpType ReturnType, ValueExpression Untyped) : ValueExpression
+    {
+    }
 }

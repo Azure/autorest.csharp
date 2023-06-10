@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return InvokeOptional.WrapInIsDefined(serialization, writeProperty);
             }
 
-            var nullSafeWriteProperty = new IfElseStatement(IsNotNull(serialization.Value), writeProperty, utf8JsonWriter.WriteNull(serialization.SerializedName));
+            var nullSafeWriteProperty = new IfElseStatement(NotEqual(serialization.Value, Null), writeProperty, utf8JsonWriter.WriteNull(serialization.SerializedName));
             return InvokeOptional.WrapInIsDefined(serialization, nullSafeWriteProperty);
         }
 
@@ -281,7 +281,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
             => CollectionItemRequiresNullCheckInSerialization(valueSerialization)
-                ? new IfElseStatement(IsNull(value), new[]{utf8JsonWriter.WriteNullValue(), Continue}, null)
+                ? new IfStatement(Equal(value, Null)) {utf8JsonWriter.WriteNullValue(), Continue}
                 : new MethodBodyStatement();
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
@@ -314,18 +314,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var jsonElement = new JsonElementExpression(element);
             if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
             {
-                yield return new IfElseStatement(jsonElement.ValueKindEqualsNull(), Return(Null), null);
+                yield return new IfStatement(jsonElement.ValueKindEqualsNull())
+                {
+                    Return(Null)
+                };
             }
 
             var discriminator = serialization.Discriminator;
             if (discriminator is not null && discriminator.HasDescendants)
             {
-                yield return new IfElseStatement
-                (
-                    jsonElement.TryGetProperty(element.Name, discriminator.SerializedName, out var discriminatorElement),
-                    new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray()),
-                    null
-                );
+                yield return new IfStatement(jsonElement.TryGetProperty(element.Name, discriminator.SerializedName, out var discriminatorElement))
+                {
+                    new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
+                };
             }
 
             if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
@@ -430,11 +431,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (jsonPropertySerialization.SerializedType?.IsNullable == true)
             {
-                yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
+                yield return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
                 {
                     Assign(propertyVariables[jsonPropertySerialization].Declaration, Null),
                     Continue
-                }, null);
+                };
             }
             else if (!jsonPropertySerialization.IsRequired &&
                      jsonPropertySerialization.SerializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
@@ -442,15 +443,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (jsonPropertySerialization.PropertySerializations is null)
                 {
-                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), Continue, null);
+                    yield return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
+                    {
+                        Continue
+                    };
                 }
                 else
                 {
-                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
+                    yield return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
                     {
                         jsonProperty.ThrowNonNullablePropertyIsNull(),
                         Continue
-                    }, null);
+                    };
                 }
             }
 

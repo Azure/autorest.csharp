@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public ValueExpression Status => new MemberReference(Untyped, nameof(Response.Status));
         public BinaryDataExpression Content => new(new MemberReference(Untyped, nameof(Response.Content)));
-        public ValueExpression ContentStream => new MemberReference(Untyped, nameof(Response.ContentStream));
+        public StringExpression ContentStream => new(new MemberReference(Untyped, nameof(Response.ContentStream)));
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));

@@ -549,7 +549,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
-                return new EnumExpression(enumType, value.NullConditional(fromType)).ToSerial();
+                return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
             }
 
             if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
@@ -567,7 +567,7 @@ namespace AutoRest.CSharp.Output.Models
                 return inner;
             }
 
-            return new IfElseStatement(IsNotNull(value), inner, null);
+            return new IfElseStatement(NotEqual(value, Null), inner, null);
         }
 
         protected virtual bool ShouldConvenienceMethodGenerated()
@@ -711,7 +711,7 @@ namespace AutoRest.CSharp.Output.Models
                     objectResponseBody.Serialization switch
                     {
                         JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, responseBody.Type.Equals(typeof(BinaryData))),
-                        XmlElementSerialization xmlSerialization => throw new Exception(),
+                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, httpMessage.Response).AsStatement(),
                         _ => throw new NotImplementedException(objectResponseBody.Serialization.ToString())
                     }
                 },

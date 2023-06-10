@@ -3,13 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -55,7 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return statement;
             }
 
-            return new IfElseStatement(IsNotNull(serialization.Value), statement, null);
+            return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
         }
 
         public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)
@@ -138,6 +142,153 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return xmlWriter.WriteValue(value, frameworkType, valueSerialization.Format);
 
+        }
+
+        public static IEnumerable<MethodBodyStatement> BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, ResponseExpression response)
+        {
+            yield return Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document);
+            if (serialization is XmlArraySerialization { Wrapped: false } arraySerialization)
+            {
+                var deserializedDocument = BuildDeserializationForArray(arraySerialization, document, out var deserialization);
+                yield return deserialization;
+                yield return AssignOrReturn(variable, deserializedDocument);
+            }
+            else
+            {
+                var elementName = serialization.Name.ToVariableName() + "Element";
+                yield return new IfStatement(Is(document.Element(serialization.Name), elementName, out var element))
+                {
+                    BuildDeserializationForXContainer(serialization, element, out var deserializedContainer),
+                    AssignOrReturn(variable, deserializedContainer)
+                };
+            }
+        }
+
+        private static MethodBodyStatement BuildDeserializationForXContainer(XmlElementSerialization serialization, XElementExpression element, out ValueExpression deserializedContainer)
+        {
+            var deserialization = new MethodBodyStatement();
+            switch (serialization)
+            {
+                case XmlArraySerialization arraySerialization:
+                    deserializedContainer = BuildDeserializationForArray(arraySerialization, element, out deserialization);
+                    break;
+
+                case XmlDictionarySerialization dictionarySerialization:
+                    deserializedContainer = BuildDeserializationForDictionary(dictionarySerialization, element, out deserialization);
+                    break;
+
+                case XmlElementValueSerialization valueSerialization:
+                    deserializedContainer = DeserializeValue(valueSerialization.Value, element);
+                    break;
+
+                default:
+                    throw new InvalidOperationException($"Unexpected {nameof(XmlElementSerialization)} type.");
+            }
+
+            return deserialization;
+        }
+
+        private static ValueExpression BuildDeserializationForArray(XmlArraySerialization arraySerialization, XContainerExpression container, out MethodBodyStatement deserializationStatement)
+        {
+            deserializationStatement = new MethodBodyStatement[]
+            {
+                Var("array", ListExpression.New(arraySerialization.Type), out var array),
+                new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
+                {
+                    BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
+                    array.Add(deserializedChild)
+                }
+            };
+            return array;
+        }
+
+        private static ValueExpression BuildDeserializationForDictionary(XmlDictionarySerialization dictionarySerialization, XContainerExpression container, out MethodBodyStatement deserializationStatement)
+        {
+            deserializationStatement = new MethodBodyStatement[]
+            {
+                Var("dictionary", DictionaryExpression.New(dictionarySerialization.Type), out var dictionary),
+                new ForeachStatement("e", container.Elements(), out var element)
+                {
+                    BuildDeserializationForXContainer(dictionarySerialization.ValueSerialization, new XElementExpression(element), out var deserializedElement),
+                    dictionary.Add(new XElementExpression(element).Name.LocalName, deserializedElement)
+                }
+            };
+            return dictionary;
+        }
+
+        private static ValueExpression DeserializeValue(XmlValueSerialization serialization, XElementExpression element)
+        {
+            var type = serialization.Type;
+
+            if (type.IsFrameworkType)
+            {
+                var frameworkType = type.FrameworkType;
+                if (frameworkType == typeof(bool) ||
+                    frameworkType == typeof(char) ||
+                    frameworkType == typeof(short) ||
+                    frameworkType == typeof(int) ||
+                    frameworkType == typeof(long) ||
+                    frameworkType == typeof(float) ||
+                    frameworkType == typeof(double) ||
+                    frameworkType == typeof(decimal) ||
+                    frameworkType == typeof(string)
+                )
+                {
+                    return new CastExpression(element, type);
+                }
+
+                if (frameworkType == typeof(ResourceIdentifier))
+                {
+                    return New(typeof(ResourceIdentifier), new CastExpression(element, typeof(string)));
+                }
+
+                if (frameworkType == typeof(ResourceType))
+                {
+                    return new CastExpression(element, typeof(string));
+                }
+
+                if (frameworkType == typeof(Guid))
+                {
+                    return New(typeof(Guid), element.Value);
+                }
+
+                if (frameworkType == typeof(Uri))
+                {
+                    return New(typeof(Uri), new CastExpression(element, typeof(string)));
+                }
+
+                if (frameworkType == typeof(byte[]))
+                {
+                    return element.GetBytesFromBase64Value(serialization.Format.ToFormatSpecifier());
+                }
+
+                if (frameworkType == typeof(DateTimeOffset))
+                {
+                    return element.GetDateTimeOffsetValue(serialization.Format.ToFormatSpecifier());
+                }
+
+                if (frameworkType == typeof(TimeSpan))
+                {
+                    return element.GetTimeSpanValue(serialization.Format.ToFormatSpecifier());
+                }
+
+                if (frameworkType == typeof(object))
+                {
+                    return element.GetObjectValue(serialization.Format.ToFormatSpecifier());
+                }
+            }
+
+            switch (type.Implementation)
+            {
+                case SerializableObjectType serializableObjectType:
+                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, element);
+
+                case EnumType clientEnum:
+                    return clientEnum.IsExtensible ? New(clientEnum.Type, element.Value) : InvokeToEnum(clientEnum.Type, element.Value);
+
+                default:
+                    throw new NotSupportedException();
+            }
         }
     }
 }
