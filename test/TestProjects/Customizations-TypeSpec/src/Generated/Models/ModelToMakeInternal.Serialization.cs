@@ -12,11 +12,11 @@ using Azure.Core.Serialization;
 
 namespace CustomizationsInCadl.Models
 {
-    internal partial class ModelToMakeInternal : IUtf8JsonSerializable
+    internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);

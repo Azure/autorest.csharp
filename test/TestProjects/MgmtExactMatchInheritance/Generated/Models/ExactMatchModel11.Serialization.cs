@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 namespace MgmtExactMatchInheritance.Models
 {
     [JsonConverter(typeof(ExactMatchModel11Converter))]
-    public partial class ExactMatchModel11 : IUtf8JsonSerializable
+    public partial class ExactMatchModel11 : IUtf8JsonSerializable, IModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();

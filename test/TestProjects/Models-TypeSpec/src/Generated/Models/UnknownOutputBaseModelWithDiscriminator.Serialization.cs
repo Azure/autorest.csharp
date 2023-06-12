@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
     internal partial class UnknownOutputBaseModelWithDiscriminator
     {
-        internal static UnknownOutputBaseModelWithDiscriminator DeserializeUnknownOutputBaseModelWithDiscriminator(JsonElement element)
+        internal static UnknownOutputBaseModelWithDiscriminator DeserializeUnknownOutputBaseModelWithDiscriminator(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

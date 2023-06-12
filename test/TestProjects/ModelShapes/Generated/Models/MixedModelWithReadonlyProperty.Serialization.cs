@@ -12,11 +12,11 @@ using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class MixedModelWithReadonlyProperty : IUtf8JsonSerializable
+    public partial class MixedModelWithReadonlyProperty : IUtf8JsonSerializable, IModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();

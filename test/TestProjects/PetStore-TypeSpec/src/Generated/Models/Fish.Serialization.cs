@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure;
+using Azure.Core.Serialization;
 
 namespace PetStore.Models
 {
     public partial class Fish
     {
-        internal static Fish DeserializeFish(JsonElement element)
+        internal static Fish DeserializeFish(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

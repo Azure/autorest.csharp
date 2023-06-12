@@ -7,12 +7,13 @@
 
 using System.Text.Json;
 using Azure;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
     public partial class OutputBaseModelWithDiscriminator
     {
-        internal static OutputBaseModelWithDiscriminator DeserializeOutputBaseModelWithDiscriminator(JsonElement element)
+        internal static OutputBaseModelWithDiscriminator DeserializeOutputBaseModelWithDiscriminator(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

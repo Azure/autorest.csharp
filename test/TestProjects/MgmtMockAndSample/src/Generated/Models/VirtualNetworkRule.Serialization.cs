@@ -11,11 +11,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VirtualNetworkRule : IUtf8JsonSerializable
+    public partial class VirtualNetworkRule : IUtf8JsonSerializable, IModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);

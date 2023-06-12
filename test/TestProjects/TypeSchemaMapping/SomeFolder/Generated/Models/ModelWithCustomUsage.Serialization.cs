@@ -13,7 +13,7 @@ using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IModelSerializable, IXmlSerializable
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -37,9 +37,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsage(modelProperty);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))

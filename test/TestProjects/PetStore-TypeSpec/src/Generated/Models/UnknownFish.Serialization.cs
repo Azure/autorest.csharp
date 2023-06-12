@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace PetStore.Models
 {
     internal partial class UnknownFish
     {
-        internal static UnknownFish DeserializeUnknownFish(JsonElement element)
+        internal static UnknownFish DeserializeUnknownFish(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

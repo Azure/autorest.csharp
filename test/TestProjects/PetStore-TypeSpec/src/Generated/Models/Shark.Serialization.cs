@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace PetStore.Models
 {
     public partial class Shark
     {
-        internal static Shark DeserializeShark(JsonElement element)
+        internal static Shark DeserializeShark(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

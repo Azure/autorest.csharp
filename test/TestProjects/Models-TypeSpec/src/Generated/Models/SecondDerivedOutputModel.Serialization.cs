@@ -8,12 +8,13 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
     public partial class SecondDerivedOutputModel
     {
-        internal static SecondDerivedOutputModel DeserializeSecondDerivedOutputModel(JsonElement element)
+        internal static SecondDerivedOutputModel DeserializeSecondDerivedOutputModel(JsonElement element, SerializableOptions options = default)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {

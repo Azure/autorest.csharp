@@ -14,7 +14,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IXmlSerializable
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IModelSerializable, IXmlSerializable
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -37,9 +37,9 @@ namespace MgmtXmlDeserialization
             writer.WriteEndElement();
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
