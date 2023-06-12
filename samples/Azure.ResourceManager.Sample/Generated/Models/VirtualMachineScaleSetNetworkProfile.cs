@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkProfile. </summary>
         /// <param name="healthProbe">
-        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;.
+        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
         /// Serialized Name: VirtualMachineScaleSetNetworkProfile.healthProbe
         /// </param>
         /// <param name="networkInterfaceConfigurations">
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary>
-        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;.
+        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
         /// Serialized Name: VirtualMachineScaleSetNetworkProfile.healthProbe
         /// </summary>
         internal WritableSubResource HealthProbe { get; set; }
