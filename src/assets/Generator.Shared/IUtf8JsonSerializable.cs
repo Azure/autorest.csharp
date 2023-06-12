@@ -11,6 +11,5 @@ namespace Azure.Core
     internal interface IUtf8JsonSerializable
     {
         void Write(Utf8JsonWriter writer);
-        void Write(Utf8JsonWriter writer, SerializableOptions options);
     }
 }

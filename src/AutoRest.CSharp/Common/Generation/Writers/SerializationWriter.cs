@@ -69,6 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer
                         .AppendIf($": ", hasJson || hasXml)
                         .AppendIf($"{typeof(IUtf8JsonSerializable)}, ", hasJson)
+                        .AppendIf($"{typeof(IModelSerializable)}, ", hasJson)
                         .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
                         .RemoveTrailingComma();
                 }
@@ -226,10 +227,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
         {
-            writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({typeof(IUtf8JsonSerializable)})this).Write(writer, new {typeof(SerializableOptions)}());");
+            writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({typeof(IModelSerializable)})this).Serialize(writer, new {typeof(SerializableOptions)}());");
             writer.Line();
 
-            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer, {typeof(SerializableOptions)} options)"))
+            using (writer.Scope($"void {typeof(IModelSerializable)}.{nameof(IModelSerializable.Serialize)}({typeof(Utf8JsonWriter)} writer, {typeof(SerializableOptions)} options)"))
             {
                 writer.ToSerializeCall(jsonSerialization);
             }
