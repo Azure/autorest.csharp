@@ -2,14 +2,23 @@
 # Also check if projects under `samples` and `test` folders are updated.
 
 parameters:
-  name: ''
-  filter: ''
+  - name: name
+    type: string
+  - name: filter
+    type: string
+  - name: usePackageJsonFromArtifacts
+    type: boolean
+    default: false
+  - name: dependsOn
+    type: object
+    default: []
 
 jobs:
 - job: ${{ parameters.name }}
   pool:
     name: azsdk-pool-mms-win-2022-general
     vmImage: windows-2022
+  dependsOn: ${{ parameters.dependsOn }}
   steps:
     - task: NodeTool@0
       displayName: "Install Node 18.x"
@@ -20,6 +29,18 @@ jobs:
       inputs:
         useGlobalJson: true
         performMultiLevelLookup: true
+    - ${{ if eq(parameters.usePackageJsonFromArtifacts, 'true') }}:
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download package-json artifact'
+        inputs: 
+          buildType: current
+          artifact: package-json
+          targetPath: $(Build.SourcesDirectory)
+      - pwsh: |
+          Move-Item ./emitter-package.json ./src/TypeSpec.Extension/Emitter.Csharp/package.json -Force
+          git add './package.json' './package-lock.json' './src/TypeSpec.Extension/Emitter.Csharp/package.json'
+        displayName: 'Replace Emitter.Csharp/package.json'
+        workingDirectory: $(Build.SourcesDirectory)
     - script: |
         npm ci
       displayName: "Install packages"
