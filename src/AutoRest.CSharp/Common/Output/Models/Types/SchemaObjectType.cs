@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IObjectTypeFields<Property>? _fields;
         public IObjectTypeFields<Property> Fields => _fields ??= EnsureFields();
 
-        private IObjectTypeFields<Property> EnsureFields()
+        protected virtual IObjectTypeFields<Property> EnsureFields()
             => new SchemaObjectTypeFields(Type, ObjectSchema.Properties, _usage, _typeFactory, _context.SourceInputModel?.CreateForModel(ExistingType));
 
         protected override ConstructorSignature EnsurePublicConstructorSignature()
@@ -373,24 +373,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             )).ToArray();
         }
 
-        private HashSet<string?> GetParentPropertySerializedNames()
-        {
-            return EnumerateHierarchy()
-                .Skip(1)
-                .SelectMany(type => type.Properties)
-                .Select(p => p.SchemaProperty?.Language.Default.Name)
-                .ToHashSet();
-        }
-
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this, field.SerializationFormat);
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
-            {
                 yield return additionalPropertiesProperty;
-            }
         }
 
         protected override bool EnsureHasJsonSerialization()

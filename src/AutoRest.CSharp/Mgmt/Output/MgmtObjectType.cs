@@ -61,6 +61,41 @@ namespace AutoRest.CSharp.Mgmt.Output
                 .ToHashSet();
         }
 
+        private HashSet<string?> GetParentSchemaPropertyNames()
+            => EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
+                .ToHashSet();
+
+        /// <summary>
+        /// Returns the schema propeties that should be generated for this model, properties on parent model excluded
+        /// We need this method instead of just call `ObjectSchema.Properties` because in mgmt plane, we may replace the base object type with types from Azure.ResourceManager, therefore the current base type might not come from the base schema.
+        /// Therefore there might be properties that are not included in the base object type, and we need to include them here.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Property> GetSchemaProperties()
+        {
+            var existingProperties = GetParentSchemaPropertyNames();
+            foreach (var objectSchema in GetCombinedSchemas())
+            {
+                foreach (var property in objectSchema.Properties!)
+                {
+                    if (existingProperties.Contains(property.Language.Default.Name))
+                    {
+                        continue;
+                    }
+
+                    yield return property;
+                }
+            }
+        }
+
+        protected override IObjectTypeFields<Property> EnsureFields()
+        {
+            return new SchemaObjectTypeFields(Type, GetSchemaProperties(), _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
+        }
+
         private IEnumerable<ObjectTypeProperty> AllProperties
         {
             get
