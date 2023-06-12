@@ -27,7 +27,7 @@ namespace lro_parameterized_endpoints
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in &apos;host:3000&apos; to pass test. </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         internal LROWithParamaterizedEndpointsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
@@ -37,7 +37,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual async Task<LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation> StartPollWithParameterizedEndpointsAsync(string accountName, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation StartPollWithParameterizedEndpoints(string accountName, CancellationToken cancellationToken = default)
@@ -87,7 +87,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual async Task<LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation> StartPollWithConstantParameterizedEndpointsAsync(string accountName, CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation StartPollWithConstantParameterizedEndpoints(string accountName, CancellationToken cancellationToken = default)
