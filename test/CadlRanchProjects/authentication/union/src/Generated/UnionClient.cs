@@ -52,7 +52,7 @@ namespace Authentication.Union
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public UnionClient(AzureKeyCredential credential, Uri endpoint, UnionClientOptions options)
@@ -70,7 +70,7 @@ namespace Authentication.Union
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public UnionClient(TokenCredential credential, Uri endpoint, UnionClientOptions options)

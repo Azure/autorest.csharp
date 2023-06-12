@@ -214,7 +214,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
@@ -237,7 +237,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }

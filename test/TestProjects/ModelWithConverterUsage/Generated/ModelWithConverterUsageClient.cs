@@ -29,7 +29,7 @@ namespace ModelWithConverterUsage
         /// <summary> Initializes a new instance of ModelWithConverterUsageClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal ModelWithConverterUsageClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {

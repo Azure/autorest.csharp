@@ -244,11 +244,11 @@ namespace ParametersCadl
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/parameterOrders", false);
             uri.AppendQuery("start", start, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (end != null)
             {
                 uri.AppendQuery("end", end.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -262,11 +262,11 @@ namespace ParametersCadl
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/parameterOrders", false);
             uri.AppendQuery("end", end, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (start != null)
             {
                 uri.AppendQuery("start", start.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

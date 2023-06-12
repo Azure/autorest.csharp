@@ -29,7 +29,7 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Initializes a new instance of TestServiceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         public TestServiceClient(AzureKeyCredential credential, Uri endpoint = null, TestServiceClientOptions options = null)
         {
@@ -48,7 +48,7 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Initializes a new instance of TestServiceClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal TestServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {

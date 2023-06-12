@@ -42,7 +42,7 @@ namespace ParameterSequence_LowLevel
 
         /// <summary> Initializes a new instance of ParameterSequenceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public ParameterSequenceClient(AzureKeyCredential credential, Uri endpoint, ParameterSequenceClientOptions options)
@@ -220,11 +220,11 @@ namespace ParameterSequence_LowLevel
             uri.AppendPath(itemName, true);
             uri.AppendQuery("origin", origin, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (version != null)
             {
                 request.Headers.Add("version", version);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -239,11 +239,11 @@ namespace ParameterSequence_LowLevel
             uri.AppendPath(itemName, true);
             uri.AppendQuery("origin", origin, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (version != null)
             {
                 request.Headers.Add("version", version);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

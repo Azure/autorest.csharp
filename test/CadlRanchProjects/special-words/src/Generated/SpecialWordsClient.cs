@@ -30,7 +30,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of SpecialWordsClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecialWordsClient(Uri endpoint, SpecialWordsClientOptions options)
@@ -44,7 +44,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Operation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Operation GetOperationClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Parameter. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Parameter GetParameterClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {

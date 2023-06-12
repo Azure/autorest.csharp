@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="BasicClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<BasicClient, AutoRestComplexTestServiceClientOptions> AddBasicClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PrimitiveClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<PrimitiveClient, AutoRestComplexTestServiceClientOptions> AddPrimitiveClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -38,7 +38,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ArrayClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<ArrayClient, AutoRestComplexTestServiceClientOptions> AddArrayClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="DictionaryClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<DictionaryClient, AutoRestComplexTestServiceClientOptions> AddDictionaryClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="InheritanceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<InheritanceClient, AutoRestComplexTestServiceClientOptions> AddInheritanceClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PolymorphismClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<PolymorphismClient, AutoRestComplexTestServiceClientOptions> AddPolymorphismClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -78,7 +78,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PolymorphicrecursiveClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<PolymorphicrecursiveClient, AutoRestComplexTestServiceClientOptions> AddPolymorphicrecursiveClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -88,7 +88,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ReadonlypropertyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<ReadonlypropertyClient, AutoRestComplexTestServiceClientOptions> AddReadonlypropertyClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -98,7 +98,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="FlattencomplexClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<FlattencomplexClient, AutoRestComplexTestServiceClientOptions> AddFlattencomplexClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

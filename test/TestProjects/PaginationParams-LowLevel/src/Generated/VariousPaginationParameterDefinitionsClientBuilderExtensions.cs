@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PaginationParamsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "https://management.azure.com". </param>
         public static IAzureClientBuilder<PaginationParamsClient, PaginationParamsClientOptions> AddPaginationParamsClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {

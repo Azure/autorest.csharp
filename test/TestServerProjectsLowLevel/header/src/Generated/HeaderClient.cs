@@ -42,7 +42,7 @@ namespace header_LowLevel
 
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public HeaderClient(AzureKeyCredential credential, Uri endpoint, HeaderClientOptions options)
@@ -2239,11 +2239,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2329,11 +2329,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value.Value, "R");
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2419,11 +2419,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

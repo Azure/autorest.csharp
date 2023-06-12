@@ -33,7 +33,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary> Initializes a new instance of ServiceVersionOverrideClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ServiceVersionOverrideClient(Uri endpoint, ServiceVersionOverrideClientOptions options)
@@ -123,9 +123,9 @@ namespace ServiceVersionOverride
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/op", false);
-            uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);
+            uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
             request.Uri = uri;
             return message;
         }

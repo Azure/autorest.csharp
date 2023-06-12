@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ApiKeyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<ApiKeyClient, ApiKeyClientOptions> AddApiKeyClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

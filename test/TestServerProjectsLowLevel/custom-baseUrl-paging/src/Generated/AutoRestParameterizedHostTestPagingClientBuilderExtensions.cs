@@ -16,12 +16,12 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
-        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, string host)
+        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, string host, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(credential, host, options));
+            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(host, credential, options));
         }
 
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>

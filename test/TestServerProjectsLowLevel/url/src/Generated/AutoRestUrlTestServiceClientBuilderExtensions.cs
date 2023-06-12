@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PathsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<PathsClient, AutoRestUrlTestServiceClientOptions> AddPathsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="QueriesClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<QueriesClient, AutoRestUrlTestServiceClientOptions> AddQueriesClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="globalStringQuery"> should contain value null. </param>
         public static IAzureClientBuilder<PathItemsClient, AutoRestUrlTestServiceClientOptions> AddPathItemsClient<TBuilder>(this TBuilder builder, string globalStringPath, AzureKeyCredential credential, Uri endpoint, string globalStringQuery)
         where TBuilder : IAzureClientFactoryBuilder

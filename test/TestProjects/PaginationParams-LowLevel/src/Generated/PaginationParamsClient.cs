@@ -42,7 +42,7 @@ namespace PaginationParams_LowLevel
 
         /// <summary> Initializes a new instance of PaginationParamsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "https://management.azure.com". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public PaginationParamsClient(TokenCredential credential, Uri endpoint, PaginationParamsClientOptions options)
@@ -258,6 +258,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-text/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -270,7 +271,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -284,6 +284,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-language/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (limit != null)
             {
                 uri.AppendQuery("limit", limit.Value, true);
@@ -296,7 +297,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -310,6 +310,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-lyrics/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("Top", maxCount.Value, true);
@@ -322,7 +323,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -336,6 +336,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-song/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (top != null)
             {
                 uri.AppendQuery("top", top.Value, true);
@@ -348,7 +349,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxcount", maxcount.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

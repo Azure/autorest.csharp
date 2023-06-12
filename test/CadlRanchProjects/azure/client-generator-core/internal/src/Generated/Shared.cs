@@ -37,8 +37,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <summary> Initializes a new instance of Shared. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         internal Shared(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;

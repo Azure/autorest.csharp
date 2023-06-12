@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpSuccessClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpSuccessClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpSuccessClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -38,7 +38,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpRedirectsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpRedirectsClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRedirectsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpClientFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpClientFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpClientFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpServerFailureClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpServerFailureClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpServerFailureClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="HttpRetryClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<HttpRetryClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddHttpRetryClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -78,7 +78,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="MultipleResponsesClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<MultipleResponsesClient, AutoRestHttpInfrastructureTestServiceClientOptions> AddMultipleResponsesClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

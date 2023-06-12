@@ -30,7 +30,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of CollectionFormatClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CollectionFormatClient(Uri endpoint, CollectionFormatClientOptions options)
@@ -44,7 +44,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of Query. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Query GetQueryClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of Header. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
         {

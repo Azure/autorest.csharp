@@ -43,7 +43,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint, TopLevelClientWithOperationClientOptions options)

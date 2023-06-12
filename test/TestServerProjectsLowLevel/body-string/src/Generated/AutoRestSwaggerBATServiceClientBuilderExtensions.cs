@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="StringClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<StringClient, AutoRestSwaggerBATServiceClientOptions> AddStringClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="EnumClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<EnumClient, AutoRestSwaggerBATServiceClientOptions> AddEnumClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

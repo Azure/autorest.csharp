@@ -35,7 +35,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary> Initializes a new instance of InheritanceClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public InheritanceClient(Uri endpoint, InheritanceClientOptions options)

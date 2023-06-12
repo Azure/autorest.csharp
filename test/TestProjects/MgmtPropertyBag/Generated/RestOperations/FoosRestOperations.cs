@@ -70,7 +70,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -102,7 +102,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -182,7 +182,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -220,7 +220,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));

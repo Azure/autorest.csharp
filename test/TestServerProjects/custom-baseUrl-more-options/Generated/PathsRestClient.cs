@@ -17,8 +17,8 @@ namespace custom_baseUrl_more_options
     internal partial class PathsRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _subscriptionId;
         private readonly string _dnsSuffix;
+        private readonly string _subscriptionId;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -26,16 +26,16 @@ namespace custom_baseUrl_more_options
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. The default is "host". </param>
         /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="dnsSuffix"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
+        public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string dnsSuffix, string subscriptionId)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             _dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
+            _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
         }
 
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)

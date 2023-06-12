@@ -36,7 +36,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "2015-06-18". </param>
         internal Gamma(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;

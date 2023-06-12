@@ -1603,11 +1603,11 @@ namespace FirstTestTypeSpec
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (repeatabilityFirstSent != null)
             {
                 request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1637,11 +1637,11 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (optionalQuery != null)
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");

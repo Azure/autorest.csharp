@@ -30,7 +30,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of DictionaryClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DictionaryClient(Uri endpoint, DictionaryClientOptions options)
@@ -44,7 +44,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of Int32Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Int32Value GetInt32ValueClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of Int64Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Int64Value GetInt64ValueClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of BooleanValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual BooleanValue GetBooleanValueClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of StringValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringValue GetStringValueClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of Float32Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Float32Value GetFloat32ValueClient(string apiVersion = "1.0.0")
         {
@@ -94,7 +94,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of DatetimeValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual DatetimeValue GetDatetimeValueClient(string apiVersion = "1.0.0")
         {
@@ -104,7 +104,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of DurationValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual DurationValue GetDurationValueClient(string apiVersion = "1.0.0")
         {
@@ -114,7 +114,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of UnknownValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnknownValue GetUnknownValueClient(string apiVersion = "1.0.0")
         {
@@ -124,7 +124,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of ModelValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ModelValue GetModelValueClient(string apiVersion = "1.0.0")
         {
@@ -134,7 +134,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of RecursiveModelValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual RecursiveModelValue GetRecursiveModelValueClient(string apiVersion = "1.0.0")
         {
@@ -144,7 +144,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary> Initializes a new instance of NullableFloatValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual NullableFloatValue GetNullableFloatValueClient(string apiVersion = "1.0.0")
         {

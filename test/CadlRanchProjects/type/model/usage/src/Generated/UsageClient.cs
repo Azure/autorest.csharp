@@ -35,7 +35,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)

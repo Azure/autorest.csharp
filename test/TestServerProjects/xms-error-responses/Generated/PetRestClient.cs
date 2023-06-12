@@ -27,7 +27,7 @@ namespace xms_error_responses
         /// <summary> Initializes a new instance of PetRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public PetRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
@@ -195,9 +195,9 @@ namespace xms_error_responses
         }
 
         /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn&apos;t conflict with the input param name &apos;models&apos;. </summary>
-        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. </param>
+        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. The default is "value1". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> HasModelsParamAsync(string models = "value1", CancellationToken cancellationToken = default)
+        public async Task<Response> HasModelsParamAsync(string models = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateHasModelsParamRequest(models);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -211,9 +211,9 @@ namespace xms_error_responses
         }
 
         /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn&apos;t conflict with the input param name &apos;models&apos;. </summary>
-        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. </param>
+        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. The default is "value1". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response HasModelsParam(string models = "value1", CancellationToken cancellationToken = default)
+        public Response HasModelsParam(string models = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateHasModelsParamRequest(models);
             _pipeline.Send(message, cancellationToken);

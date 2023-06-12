@@ -36,7 +36,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Initializes a new instance of BasicClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BasicClient(Uri endpoint, BasicClientOptions options)
@@ -907,8 +907,8 @@ namespace _Specs_.Azure.Core.Basic
             uri.AppendPath("/azure/core/basic/users/", false);
             uri.AppendPath(id, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("format", format, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("format", format, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

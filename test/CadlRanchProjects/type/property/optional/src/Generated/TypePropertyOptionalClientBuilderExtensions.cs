@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="OptionalClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
         public static IAzureClientBuilder<OptionalClient, OptionalClientOptions> AddOptionalClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
