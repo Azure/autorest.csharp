@@ -236,9 +236,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\Generated"
     },
-    "FirstTest-TypeSpec": {
+    "FirstTest-Typespec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-TypeSpec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Typespec\\src\\Generated"
     },
     "FlattenedParameters": {
       "commandName": "Project",
@@ -472,9 +472,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\Generated"
     },
-    "Models-TypeSpec": {
+    "Models-Typespec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-TypeSpec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Typespec\\src\\Generated"
     },
     "ModelShapes": {
       "commandName": "Project",
