@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -84,6 +85,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."
                 : BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
+            if (defaultValue != null)
+            {
+                var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaltValueString}";
+            }
 
             if (!type.IsFrameworkType || values == null)
             {
@@ -91,8 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : defaultValue?.Value?.ToString();
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}{defaltValueString}";
+            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -116,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
-            var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
+            var defaultValue = (isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter)) ? GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory) : ParseConstant(requestParameter, typeFactory);
             //var defaultValue = ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
@@ -148,6 +153,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
+            static bool isApiVersionParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/api-version";
+            static bool isEndpointParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/host";
+            static bool isContentTypeParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/content-type";
         }
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
@@ -166,6 +177,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+            if (defaultValue != null)
+            {
+                var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaltValueString}";
+            }
 
             return requestParameter.Schema switch
             {
@@ -186,7 +202,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.ClientDefaultValue != null && parameter.Implementation == ImplementationLocation.Client)
+            if (parameter.ClientDefaultValue != null)
             {
                 CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);
                 return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
