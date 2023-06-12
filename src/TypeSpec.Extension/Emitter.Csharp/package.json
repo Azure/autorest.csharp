@@ -50,7 +50,6 @@
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",
-        "@azure-tools/typespec-autorest": "0.31.0",
         "@azure-tools/typespec-azure-core": "0.31.0",
         "@azure-tools/typespec-client-generator-core": "0.31.0",
         "@typespec/compiler": "0.45.0",
@@ -58,7 +57,6 @@
         "@typespec/eslint-plugin": "0.45.0",
         "@typespec/http": "0.45.0",
         "@typespec/library-linter": "0.45.0",
-        "@typespec/openapi": "0.45.0",
         "@typespec/rest": "0.45.0",
         "@typespec/versioning": "0.45.0",
         "fs-extra": "^10.1.0",
