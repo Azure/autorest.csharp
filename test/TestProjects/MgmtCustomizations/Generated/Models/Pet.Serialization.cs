@@ -20,6 +20,11 @@ namespace MgmtCustomizations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (Optional.IsDefined(Size))
+            {
+                writer.WritePropertyName("size"u8);
+                SerializeSizeProperty(writer);
+            }
             writer.WriteEndObject();
         }
 

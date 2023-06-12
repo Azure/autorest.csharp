@@ -42,7 +42,7 @@ namespace _Type.Property.Optional.Models
                     continue;
                 }
             }
-            return new StringProperty(property);
+            return new StringProperty(property.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

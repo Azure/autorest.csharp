@@ -575,7 +575,7 @@ schemas: !Schemas
                   serializedName: type10
                   extensions:
                     x-ms-format: dfe-list-generic
-                    x-ms-format-element-definition: SeparateClass
+                    x-ms-format-element-type: SeparateClass
                   language: !Languages 
                     default:
                       name: type10
@@ -606,7 +606,7 @@ schemas: !Schemas
                   serializedName: type13
                   extensions:
                     x-ms-format: dfe-list-generic
-                    x-ms-format-element-definition: '#/definitions/SeparateClass'
+                    x-ms-format-element-type: '#/definitions/SeparateClass'
                   language: !Languages 
                     default:
                       name: type13

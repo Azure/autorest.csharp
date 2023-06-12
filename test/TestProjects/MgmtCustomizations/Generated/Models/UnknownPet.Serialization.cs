@@ -20,6 +20,11 @@ namespace MgmtCustomizations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (Optional.IsDefined(Size))
+            {
+                writer.WritePropertyName("size"u8);
+                SerializeSizeProperty(writer);
+            }
             writer.WriteEndObject();
         }
 
@@ -31,6 +36,7 @@ namespace MgmtCustomizations.Models
             }
             PetKind kind = default;
             Optional<string> name = default;
+            Optional<int> size = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -43,8 +49,13 @@ namespace MgmtCustomizations.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("size"u8))
+                {
+                    DeserializeSizeProperty(property, ref size);
+                    continue;
+                }
             }
-            return new UnknownPet(kind, name.Value);
+            return new UnknownPet(kind, name.Value, size);
         }
     }
 }

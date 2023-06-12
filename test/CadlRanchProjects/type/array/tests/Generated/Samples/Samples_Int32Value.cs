@@ -101,7 +101,7 @@ namespace _Type._Array.Samples
     1234
 };
 
-            Response response = client.Put(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +129,7 @@ namespace _Type._Array.Samples
     1234
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

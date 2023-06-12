@@ -162,7 +162,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var declaredName = property.Declaration.Name;
                     var paramName = declaredName.ToVariableName();
                     var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
-                    var optionalViaNullability = !inputModelProperty.IsRequired && !inputModelProperty.Type.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, inputModelProperty.SerializationFormat);
 
                     yield return new JsonPropertySerialization(
@@ -175,9 +174,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         inputModelProperty.IsRequired,
                         inputModelProperty.IsReadOnly,
                         false,
-                        optionalViaNullability,
-                        serializationHook: property.SerializationMapping?.SerializationHook,
-                        deserializationHook: property.SerializationMapping?.DeserializationHook);
+                        property.OptionalViaNullability,
+                        serializationValueHook: property.SerializationMapping?.SerializationValueHook,
+                        deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
                 }
             }
         }

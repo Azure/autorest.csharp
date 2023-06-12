@@ -1,9 +1,9 @@
 param($BuildNumber, $AutorestVersion, $StagingDirectory)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'CADL.Extension' 'Emitter.Csharp')
+$emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'TypeSpec.Extension' 'Emitter.Csharp')
 
-# Pack emitter npm package "@azure-tools/cadl-csharp"
+# Pack emitter npm package "@azure-tools/typespec-csharp"
 Push-Location $emitterPath
 try {
     npm run build

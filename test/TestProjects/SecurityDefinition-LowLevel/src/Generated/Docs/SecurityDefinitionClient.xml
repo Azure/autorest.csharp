@@ -25,7 +25,7 @@ var data = new {
     Status = "<Status>",
 };
 
-Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.OperationAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -54,7 +54,7 @@ var data = new {
     Status = "<Status>",
 };
 
-Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+Response response = client.Operation(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

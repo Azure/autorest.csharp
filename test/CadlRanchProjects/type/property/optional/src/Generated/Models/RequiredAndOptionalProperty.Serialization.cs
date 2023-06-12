@@ -50,7 +50,7 @@ namespace _Type.Property.Optional.Models
                     continue;
                 }
             }
-            return new RequiredAndOptionalProperty(optionalProperty, requiredProperty);
+            return new RequiredAndOptionalProperty(optionalProperty.Value, requiredProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

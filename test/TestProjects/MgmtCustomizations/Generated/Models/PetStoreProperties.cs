@@ -27,9 +27,6 @@ namespace MgmtCustomizations.Models
             Order = order;
             Pet = pet;
         }
-
-        /// <summary> The order. </summary>
-        public int? Order { get; set; }
         /// <summary>
         /// A pet
         /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.

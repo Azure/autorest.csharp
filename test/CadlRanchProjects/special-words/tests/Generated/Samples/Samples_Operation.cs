@@ -35,7 +35,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
-            Response response = client.For(new RequestContext());
+            Response response = client.For();
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +55,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
-            Response response = await client.ForAsync(new RequestContext());
+            Response response = await client.ForAsync();
             Console.WriteLine(response.Status);
         }
     }

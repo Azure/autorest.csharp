@@ -46,7 +46,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +76,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -115,7 +115,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +145,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -194,7 +194,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             };
 
-            Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -234,7 +234,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             };
 
-            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

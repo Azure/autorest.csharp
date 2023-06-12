@@ -49,7 +49,7 @@ namespace AnomalyDetector.Models
                     continue;
                 }
             }
-            return new AnomalyInterpretation(variable, Optional.ToNullable(contributionScore), correlationChanges);
+            return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

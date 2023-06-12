@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Common.Decorator
     /// </summary>
     internal static class SchemaUsageTransformer
     {
-        private const string FormatElementDefinition = "x-ms-format-element-definition";
+        private const string FormatElementDefinition = "x-ms-format-element-type";
         private const string CSharpUsage = "x-csharp-usage";
 
         public static void Transform(CodeModel codeModel)
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Common.Decorator
                 schema.Extensions ??= new RecordOfStringAndAny();
 
                 // apply usages and media types based on the enclosing schemas for the properties that reference
-                // the "x-ms-format-element-definition" schema
+                // the "x-ms-format-element-type" schema
 
                 HashSet<string> additionalUsages = new();
                 HashSet<KnownMediaType> additionalMediaTypes = new();

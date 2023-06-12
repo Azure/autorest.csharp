@@ -114,7 +114,7 @@ namespace _Type.Model.Inheritance.Models
                     continue;
                 }
             }
-            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner);
+            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

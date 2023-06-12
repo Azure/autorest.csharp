@@ -59,7 +59,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
+function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -81,15 +81,15 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     }
     else
     {
-        # emit cadl json
+        # emit typespec json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
         $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
-            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
-            $emitCommand = "npx tsp compile $cadlFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
+            $emitCommand = "npx tsp compile $typespecFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }
         Finally 
@@ -105,10 +105,10 @@ function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $s
     Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
-function Invoke-TypespecSetup()
+function Invoke-TypeSpecSetup()
 {
     # build emitter
-    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
+    $emitterPath = Join-Path $PSScriptRoot ".." "src" "TypeSpec.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
 
@@ -144,5 +144,5 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
-Export-ModuleMember -Function "Invoke-Typespec"
-Export-ModuleMember -Function "Invoke-TypespecSetup"
+Export-ModuleMember -Function "Invoke-TypeSpec"
+Export-ModuleMember -Function "Invoke-TypeSpecSetup"
