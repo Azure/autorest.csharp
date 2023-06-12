@@ -12,11 +12,11 @@ using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class StorageAccountCreateOrUpdateContent : IUtf8JsonSerializable
+    public partial class StorageAccountCreateOrUpdateContent : IUtf8JsonSerializable, IModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IUtf8JsonSerializable)this).Write(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer, SerializableOptions options)
+        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
