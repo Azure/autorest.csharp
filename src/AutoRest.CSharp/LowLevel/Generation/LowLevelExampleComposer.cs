@@ -631,7 +631,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContext))))
                     continue;
 
-                //parameterValues.Add(parameterSelector(parameters[i]));
                 if (allParameters || parameters[i].DefaultValue == null)
                 {
                     parameterValues.Add(parameterSelector(parameters[i]));

@@ -341,22 +341,9 @@ namespace AutoRest.CSharp.Output.Models
                             : requestConditionSerializationFormat;
 
                         break;
-                    /*
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
-                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
-                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    */
                     case { Location: RequestLocation.Uri or RequestLocation.Path }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
-                    /*
-                    case { IsRequired: true, DefaultValue: null }:
-                        requiredRequestParameters.Add(operationParameter);
-                        break;
-                    */
                     case { IsRequired: true }:
                         requiredRequestParameters.Add(operationParameter);
                         break;

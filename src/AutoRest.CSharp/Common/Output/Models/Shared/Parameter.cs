@@ -38,11 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
-            /*
-            var defaultValue = operationParameter.DefaultValue != null
-                ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
-                : (Constant?)null;
-            */
+
             var defaultValue = (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint) && operationParameter.DefaultValue != null
                 ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
                 : (Constant?)null;
@@ -122,7 +118,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var requestLocation = GetRequestLocation(requestParameter);
 
             var defaultValue = (isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter)) ? GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory) : ParseConstant(requestParameter, typeFactory);
-            //var defaultValue = ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
