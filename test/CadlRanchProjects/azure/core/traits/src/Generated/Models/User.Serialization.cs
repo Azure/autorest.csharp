@@ -34,7 +34,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                     continue;
                 }
             }
-            return new User(id, name);
+            return new User(id, name.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

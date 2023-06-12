@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Input
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
             public const string PublicDiscriminatorProperty = "public-discriminator-property";
+            public const string ShouldTreatBase64AsBinaryData = "should-treat-base64-as-binary-data";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -79,6 +80,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
             IReadOnlyList<string> additionalIntrinsicTypesToTreatEmptyStringAsNull,
+            bool shouldTreatBase64AsBinaryData,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
@@ -98,6 +100,7 @@ namespace AutoRest.CSharp.Input
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
+            ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -184,6 +187,8 @@ namespace AutoRest.CSharp.Input
 
             return null;
         }
+
+        public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -277,6 +282,7 @@ namespace AutoRest.CSharp.Input
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                shouldTreatBase64AsBinaryData: GetOptionBoolValue(autoRest, Options.ShouldTreatBase64AsBinaryData),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
@@ -338,6 +344,8 @@ namespace AutoRest.CSharp.Input
                 case Options.PublicDiscriminatorProperty:
                     return false;
                 case Options.UseOverloadsBetweenProtocolAndConvenience:
+                    return true;
+                case Options.ShouldTreatBase64AsBinaryData:
                     return true;
                 default:
                     return null;

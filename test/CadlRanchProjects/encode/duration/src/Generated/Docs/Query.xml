@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="DefaultAsync(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call DefaultAsync with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Default(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call Default with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = client.Default(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Iso8601Async(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call Iso8601Async with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = await client.Iso8601Async(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Iso8601(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call Iso8601 with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = client.Iso8601(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Int32SecondsAsync(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call Int32SecondsAsync with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = await client.Int32SecondsAsync(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Int32Seconds(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call Int32Seconds with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = client.Int32Seconds(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatSecondsAsync(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call FloatSecondsAsync with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FloatSeconds(TimeSpan,RequestContext)">
+<example>
+This sample shows how to call FloatSeconds with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = client.FloatSeconds(new TimeSpan(1, 2, 3));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

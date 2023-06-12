@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types

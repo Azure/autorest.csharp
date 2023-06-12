@@ -74,7 +74,7 @@ namespace AnomalyDetector.Samples
                 imputeFixedValue = 123.45f,
             };
 
-            Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data), new RequestContext());
+            Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -141,7 +141,7 @@ namespace AnomalyDetector.Samples
                 imputeFixedValue = 123.45f,
             };
 
-            Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -236,7 +236,7 @@ namespace AnomalyDetector.Samples
                 imputeFixedValue = 123.45f,
             };
 
-            Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data), new RequestContext());
+            Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -305,7 +305,7 @@ namespace AnomalyDetector.Samples
                 imputeFixedValue = 123.45f,
             };
 
-            Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -393,7 +393,7 @@ namespace AnomalyDetector.Samples
                 threshold = 123.45f,
             };
 
-            Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data), new RequestContext());
+            Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -448,7 +448,7 @@ namespace AnomalyDetector.Samples
                 threshold = 123.45f,
             };
 
-            Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -488,7 +488,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -508,7 +508,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", new RequestContext());
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -543,7 +543,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -563,7 +563,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", new RequestContext());
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -598,7 +598,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            var result = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+            var result = await client.GetMultivariateBatchDetectionResultAsync(Guid.NewGuid());
         }
 
         [Test]
@@ -676,7 +676,7 @@ namespace AnomalyDetector.Samples
                 },
             };
 
-            Response response = client.TrainMultivariateModel(RequestContent.Create(data), new RequestContext());
+            Response response = client.TrainMultivariateModel(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -780,7 +780,7 @@ namespace AnomalyDetector.Samples
                 },
             };
 
-            Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -886,7 +886,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.DeleteMultivariateModel("<modelId>", new RequestContext());
+            Response response = client.DeleteMultivariateModel("<modelId>");
             Console.WriteLine(response.Status);
         }
 
@@ -910,7 +910,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.DeleteMultivariateModelAsync("<modelId>", new RequestContext());
+            Response response = await client.DeleteMultivariateModelAsync("<modelId>");
             Console.WriteLine(response.Status);
         }
 
@@ -1041,7 +1041,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1069,13 +1069,13 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             };
 
-            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
+            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1112,7 +1112,7 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -1140,13 +1140,13 @@ namespace AnomalyDetector.Samples
 
             var data = new
             {
-                dataSource = "<dataSource>",
+                dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             };
 
-            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1181,7 +1181,7 @@ namespace AnomalyDetector.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AnomalyDetectorClient(endpoint, credential);
 
-            var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+            var options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
             var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
         }
 
@@ -1239,7 +1239,7 @@ namespace AnomalyDetector.Samples
                 topContributorCount = 1234,
             };
 
-            Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
+            Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -1312,7 +1312,7 @@ namespace AnomalyDetector.Samples
                 topContributorCount = 1234,
             };
 
-            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());

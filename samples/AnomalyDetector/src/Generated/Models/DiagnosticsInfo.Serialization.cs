@@ -69,7 +69,7 @@ namespace AnomalyDetector.Models
                     continue;
                 }
             }
-            return new DiagnosticsInfo(modelState, Optional.ToList(variableStates));
+            return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -1,8 +1,8 @@
-# Update `autorest.csharp` and cadl emitter versions
+# Update `autorest.csharp` and TypeSpec emitter versions
 
 parameters:
   AutorestCSharpVersion: ""
-  CadlEmitterVersion: ""
+  TypeSpecEmitterVersion: ""
   IsInternalFeed: false
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateGeneratorMetadata.ps1
       arguments: >
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
-        -CadlEmitterVersion ${{parameters.CadlEmitterVersion}}
+        -TypeSpecEmitterVersion ${{parameters.TypeSpecEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -UseInternalFeed $${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp

@@ -8,7 +8,7 @@ This sample shows how to call GetBooleanTrueAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetBooleanTrueAsync(new RequestContext());
+Response response = await client.GetBooleanTrueAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call GetBooleanTrue.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetBooleanTrue(new RequestContext());
+Response response = client.GetBooleanTrue();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call GetBooleanFalseAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetBooleanFalseAsync(new RequestContext());
+Response response = await client.GetBooleanFalseAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ This sample shows how to call GetBooleanFalse.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetBooleanFalse(new RequestContext());
+Response response = client.GetBooleanFalse();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,7 +56,7 @@ This sample shows how to call GetIntOneMillionAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetIntOneMillionAsync(new RequestContext());
+Response response = await client.GetIntOneMillionAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -68,7 +68,7 @@ This sample shows how to call GetIntOneMillion.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetIntOneMillion(new RequestContext());
+Response response = client.GetIntOneMillion();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -80,7 +80,7 @@ This sample shows how to call GetIntNegativeOneMillionAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetIntNegativeOneMillionAsync(new RequestContext());
+Response response = await client.GetIntNegativeOneMillionAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -92,7 +92,7 @@ This sample shows how to call GetIntNegativeOneMillion.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetIntNegativeOneMillion(new RequestContext());
+Response response = client.GetIntNegativeOneMillion();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -104,7 +104,7 @@ This sample shows how to call GetTenBillionAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetTenBillionAsync(new RequestContext());
+Response response = await client.GetTenBillionAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -116,7 +116,7 @@ This sample shows how to call GetTenBillion.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetTenBillion(new RequestContext());
+Response response = client.GetTenBillion();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -128,7 +128,7 @@ This sample shows how to call GetNegativeTenBillionAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.GetNegativeTenBillionAsync(new RequestContext());
+Response response = await client.GetNegativeTenBillionAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -140,7 +140,7 @@ This sample shows how to call GetNegativeTenBillion.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.GetNegativeTenBillion(new RequestContext());
+Response response = client.GetNegativeTenBillion();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -152,7 +152,7 @@ This sample shows how to call FloatScientificPositiveAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.FloatScientificPositiveAsync(new RequestContext());
+Response response = await client.FloatScientificPositiveAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -164,7 +164,7 @@ This sample shows how to call FloatScientificPositive.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.FloatScientificPositive(new RequestContext());
+Response response = client.FloatScientificPositive();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -176,7 +176,7 @@ This sample shows how to call FloatScientificNegativeAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.FloatScientificNegativeAsync(new RequestContext());
+Response response = await client.FloatScientificNegativeAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -188,7 +188,7 @@ This sample shows how to call FloatScientificNegative.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.FloatScientificNegative(new RequestContext());
+Response response = client.FloatScientificNegative();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -200,7 +200,7 @@ This sample shows how to call DoubleDecimalPositiveAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DoubleDecimalPositiveAsync(new RequestContext());
+Response response = await client.DoubleDecimalPositiveAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -212,7 +212,7 @@ This sample shows how to call DoubleDecimalPositive.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DoubleDecimalPositive(new RequestContext());
+Response response = client.DoubleDecimalPositive();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -224,7 +224,7 @@ This sample shows how to call DoubleDecimalNegativeAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DoubleDecimalNegativeAsync(new RequestContext());
+Response response = await client.DoubleDecimalNegativeAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -236,7 +236,7 @@ This sample shows how to call DoubleDecimalNegative.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DoubleDecimalNegative(new RequestContext());
+Response response = client.DoubleDecimalNegative();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -248,7 +248,7 @@ This sample shows how to call StringUnicodeAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.StringUnicodeAsync(new RequestContext());
+Response response = await client.StringUnicodeAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -260,7 +260,7 @@ This sample shows how to call StringUnicode.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.StringUnicode(new RequestContext());
+Response response = client.StringUnicode();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ This sample shows how to call StringUrlEncodedAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.StringUrlEncodedAsync(new RequestContext());
+Response response = await client.StringUrlEncodedAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -284,7 +284,7 @@ This sample shows how to call StringUrlEncoded.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.StringUrlEncoded(new RequestContext());
+Response response = client.StringUrlEncoded();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -296,7 +296,7 @@ This sample shows how to call StringUrlNonEncodedAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.StringUrlNonEncodedAsync(new RequestContext());
+Response response = await client.StringUrlNonEncodedAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -308,7 +308,7 @@ This sample shows how to call StringUrlNonEncoded.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.StringUrlNonEncoded(new RequestContext());
+Response response = client.StringUrlNonEncoded();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -320,7 +320,7 @@ This sample shows how to call StringEmptyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.StringEmptyAsync(new RequestContext());
+Response response = await client.StringEmptyAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -332,7 +332,7 @@ This sample shows how to call StringEmpty.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.StringEmpty(new RequestContext());
+Response response = client.StringEmpty();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -344,7 +344,7 @@ This sample shows how to call StringNullAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.StringNullAsync("<stringPath>", new RequestContext());
+Response response = await client.StringNullAsync("<stringPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -356,7 +356,7 @@ This sample shows how to call StringNull with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.StringNull("<stringPath>", new RequestContext());
+Response response = client.StringNull("<stringPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -368,7 +368,7 @@ This sample shows how to call EnumValidAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.EnumValidAsync("<enumPath>", new RequestContext());
+Response response = await client.EnumValidAsync("<enumPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -380,7 +380,7 @@ This sample shows how to call EnumValid with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.EnumValid("<enumPath>", new RequestContext());
+Response response = client.EnumValid("<enumPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -392,7 +392,7 @@ This sample shows how to call EnumNullAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.EnumNullAsync("<enumPath>", new RequestContext());
+Response response = await client.EnumNullAsync("<enumPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -404,31 +404,31 @@ This sample shows how to call EnumNull with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.EnumNull("<enumPath>", new RequestContext());
+Response response = client.EnumNull("<enumPath>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteMultiByteAsync(Byte[],RequestContext)">
+    <member name="ByteMultiByteAsync(BinaryData,RequestContext)">
 <example>
 This sample shows how to call ByteMultiByteAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.ByteMultiByteAsync(null, new RequestContext());
+Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteMultiByte(Byte[],RequestContext)">
+    <member name="ByteMultiByte(BinaryData,RequestContext)">
 <example>
 This sample shows how to call ByteMultiByte with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.ByteMultiByte(null, new RequestContext());
+Response response = client.ByteMultiByte(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -440,7 +440,7 @@ This sample shows how to call ByteEmptyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.ByteEmptyAsync(new RequestContext());
+Response response = await client.ByteEmptyAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -452,31 +452,31 @@ This sample shows how to call ByteEmpty.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.ByteEmpty(new RequestContext());
+Response response = client.ByteEmpty();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteNullAsync(Byte[],RequestContext)">
+    <member name="ByteNullAsync(BinaryData,RequestContext)">
 <example>
 This sample shows how to call ByteNullAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.ByteNullAsync(null, new RequestContext());
+Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ByteNull(Byte[],RequestContext)">
+    <member name="ByteNull(BinaryData,RequestContext)">
 <example>
 This sample shows how to call ByteNull with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.ByteNull(null, new RequestContext());
+Response response = client.ByteNull(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -488,7 +488,7 @@ This sample shows how to call DateValidAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DateValidAsync(new RequestContext());
+Response response = await client.DateValidAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -500,7 +500,7 @@ This sample shows how to call DateValid.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DateValid(new RequestContext());
+Response response = client.DateValid();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -512,7 +512,7 @@ This sample shows how to call DateNullAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DateNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -524,7 +524,7 @@ This sample shows how to call DateNull with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DateNull(DateTimeOffset.UtcNow, new RequestContext());
+Response response = client.DateNull(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -536,7 +536,7 @@ This sample shows how to call DateTimeValidAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DateTimeValidAsync(new RequestContext());
+Response response = await client.DateTimeValidAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -548,7 +548,7 @@ This sample shows how to call DateTimeValid.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DateTimeValid(new RequestContext());
+Response response = client.DateTimeValid();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -560,7 +560,7 @@ This sample shows how to call DateTimeNullAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -572,31 +572,31 @@ This sample shows how to call DateTimeNull with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.DateTimeNull(DateTimeOffset.UtcNow, new RequestContext());
+Response response = client.DateTimeNull(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Base64UrlAsync(Byte[],RequestContext)">
+    <member name="Base64UrlAsync(BinaryData,RequestContext)">
 <example>
 This sample shows how to call Base64UrlAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.Base64UrlAsync(null, new RequestContext());
+Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Base64Url(Byte[],RequestContext)">
+    <member name="Base64Url(BinaryData,RequestContext)">
 <example>
 This sample shows how to call Base64Url with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.Base64Url(null, new RequestContext());
+Response response = client.Base64Url(BinaryData.FromString("<your binary data content>"));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -608,7 +608,7 @@ This sample shows how to call ArrayCsvInPathAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"}, new RequestContext());
+Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -620,7 +620,7 @@ This sample shows how to call ArrayCsvInPath with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"}, new RequestContext());
+Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -632,7 +632,7 @@ This sample shows how to call UnixTimeUrlAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow, new RequestContext());
+Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -644,7 +644,7 @@ This sample shows how to call UnixTimeUrl with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.UnixTimeUrl(DateTimeOffset.UtcNow, new RequestContext());
+Response response = client.UnixTimeUrl(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

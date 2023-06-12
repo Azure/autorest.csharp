@@ -20,11 +20,7 @@ namespace _Type.Property.Optional.Models
             if (Azure.Core.Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(Property);
-#else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Property.ToString()).RootElement);
-#endif
+                writer.WriteBase64StringValue(Property.ToArray(), "D");
             }
             writer.WriteEndObject();
         }
@@ -44,11 +40,11 @@ namespace _Type.Property.Optional.Models
                     {
                         continue;
                     }
-                    property = BinaryData.FromString(property0.Value.GetRawText());
+                    property = BinaryData.FromBytes(property0.Value.GetBytesFromBase64("D"));
                     continue;
                 }
             }
-            return new BytesProperty(property);
+            return new BytesProperty(property.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

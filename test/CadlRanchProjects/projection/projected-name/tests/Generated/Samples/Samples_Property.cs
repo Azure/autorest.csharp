@@ -46,7 +46,7 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             };
 
-            Response response = client.Json(RequestContent.Create(data), new RequestContext());
+            Response response = client.Json(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +76,7 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             };
 
-            Response response = await client.JsonAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.JsonAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -116,7 +116,7 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             };
 
-            Response response = client.Client(RequestContent.Create(data), new RequestContext());
+            Response response = client.Client(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -146,7 +146,7 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             };
 
-            Response response = await client.ClientAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -186,7 +186,7 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             };
 
-            Response response = client.Language(RequestContent.Create(data), new RequestContext());
+            Response response = client.Language(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -216,7 +216,7 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             };
 
-            Response response = await client.LanguageAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.LanguageAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -256,7 +256,7 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             };
 
-            Response response = client.JsonAndClient(RequestContent.Create(data), new RequestContext());
+            Response response = client.JsonAndClient(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -286,7 +286,7 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             };
 
-            Response response = await client.JsonAndClientAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.JsonAndClientAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

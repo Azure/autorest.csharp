@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesEnumNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).EnumNullAsync( null));
 
         [Test]
-        public Task UrlQueriesByteMultiByte() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteMultiByteAsync( TestConstants.ByteArray));
+        public Task UrlQueriesByteMultiByte() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteMultiByteAsync( BinaryData.FromBytes(TestConstants.ByteArray)));
 
         [Test]
         public Task UrlQueriesByteNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteNullAsync( null));

@@ -37,7 +37,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetBooleanTrue(new RequestContext());
+            Response response = client.GetBooleanTrue();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetBooleanTrueAsync(new RequestContext());
+            Response response = await client.GetBooleanTrueAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetBooleanFalse(new RequestContext());
+            Response response = client.GetBooleanFalse();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetBooleanFalseAsync(new RequestContext());
+            Response response = await client.GetBooleanFalseAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -125,7 +125,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetBooleanNull(true, new RequestContext());
+            Response response = client.GetBooleanNull(true);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +147,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetBooleanNullAsync(true, new RequestContext());
+            Response response = await client.GetBooleanNullAsync(true);
             Console.WriteLine(response.Status);
         }
 
@@ -169,7 +169,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetIntOneMillion(new RequestContext());
+            Response response = client.GetIntOneMillion();
             Console.WriteLine(response.Status);
         }
 
@@ -191,7 +191,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetIntOneMillionAsync(new RequestContext());
+            Response response = await client.GetIntOneMillionAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -213,7 +213,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetIntNegativeOneMillion(new RequestContext());
+            Response response = client.GetIntNegativeOneMillion();
             Console.WriteLine(response.Status);
         }
 
@@ -235,7 +235,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetIntNegativeOneMillionAsync(new RequestContext());
+            Response response = await client.GetIntNegativeOneMillionAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -257,7 +257,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetIntNull(1234, new RequestContext());
+            Response response = client.GetIntNull(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -279,7 +279,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetIntNullAsync(1234, new RequestContext());
+            Response response = await client.GetIntNullAsync(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -301,7 +301,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetTenBillion(new RequestContext());
+            Response response = client.GetTenBillion();
             Console.WriteLine(response.Status);
         }
 
@@ -323,7 +323,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetTenBillionAsync(new RequestContext());
+            Response response = await client.GetTenBillionAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -345,7 +345,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetNegativeTenBillion(new RequestContext());
+            Response response = client.GetNegativeTenBillion();
             Console.WriteLine(response.Status);
         }
 
@@ -367,7 +367,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetNegativeTenBillionAsync(new RequestContext());
+            Response response = await client.GetNegativeTenBillionAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -389,7 +389,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetLongNull(1234, new RequestContext());
+            Response response = client.GetLongNull(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -411,7 +411,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetLongNullAsync(1234, new RequestContext());
+            Response response = await client.GetLongNullAsync(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -433,7 +433,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.FloatScientificPositive(new RequestContext());
+            Response response = client.FloatScientificPositive();
             Console.WriteLine(response.Status);
         }
 
@@ -455,7 +455,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.FloatScientificPositiveAsync(new RequestContext());
+            Response response = await client.FloatScientificPositiveAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -477,7 +477,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.FloatScientificNegative(new RequestContext());
+            Response response = client.FloatScientificNegative();
             Console.WriteLine(response.Status);
         }
 
@@ -499,7 +499,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.FloatScientificNegativeAsync(new RequestContext());
+            Response response = await client.FloatScientificNegativeAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -521,7 +521,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.FloatNull(3.14f, new RequestContext());
+            Response response = client.FloatNull(3.14f);
             Console.WriteLine(response.Status);
         }
 
@@ -543,7 +543,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.FloatNullAsync(3.14f, new RequestContext());
+            Response response = await client.FloatNullAsync(3.14f);
             Console.WriteLine(response.Status);
         }
 
@@ -565,7 +565,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DoubleDecimalPositive(new RequestContext());
+            Response response = client.DoubleDecimalPositive();
             Console.WriteLine(response.Status);
         }
 
@@ -587,7 +587,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DoubleDecimalPositiveAsync(new RequestContext());
+            Response response = await client.DoubleDecimalPositiveAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -609,7 +609,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DoubleDecimalNegative(new RequestContext());
+            Response response = client.DoubleDecimalNegative();
             Console.WriteLine(response.Status);
         }
 
@@ -631,7 +631,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DoubleDecimalNegativeAsync(new RequestContext());
+            Response response = await client.DoubleDecimalNegativeAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -653,7 +653,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DoubleNull(3.14, new RequestContext());
+            Response response = client.DoubleNull(3.14);
             Console.WriteLine(response.Status);
         }
 
@@ -675,7 +675,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DoubleNullAsync(3.14, new RequestContext());
+            Response response = await client.DoubleNullAsync(3.14);
             Console.WriteLine(response.Status);
         }
 
@@ -697,7 +697,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.StringUnicode(new RequestContext());
+            Response response = client.StringUnicode();
             Console.WriteLine(response.Status);
         }
 
@@ -719,7 +719,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.StringUnicodeAsync(new RequestContext());
+            Response response = await client.StringUnicodeAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -741,7 +741,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.StringUrlEncoded(new RequestContext());
+            Response response = client.StringUrlEncoded();
             Console.WriteLine(response.Status);
         }
 
@@ -763,7 +763,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.StringUrlEncodedAsync(new RequestContext());
+            Response response = await client.StringUrlEncodedAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -785,7 +785,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.StringEmpty(new RequestContext());
+            Response response = client.StringEmpty();
             Console.WriteLine(response.Status);
         }
 
@@ -807,7 +807,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.StringEmptyAsync(new RequestContext());
+            Response response = await client.StringEmptyAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -829,7 +829,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.StringNull("<stringQuery>", new RequestContext());
+            Response response = client.StringNull("<stringQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -851,7 +851,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.StringNullAsync("<stringQuery>", new RequestContext());
+            Response response = await client.StringNullAsync("<stringQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -873,7 +873,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.EnumValid("<enumQuery>", new RequestContext());
+            Response response = client.EnumValid("<enumQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -895,7 +895,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.EnumValidAsync("<enumQuery>", new RequestContext());
+            Response response = await client.EnumValidAsync("<enumQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -917,7 +917,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.EnumNull("<enumQuery>", new RequestContext());
+            Response response = client.EnumNull("<enumQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -939,7 +939,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.EnumNullAsync("<enumQuery>", new RequestContext());
+            Response response = await client.EnumNullAsync("<enumQuery>");
             Console.WriteLine(response.Status);
         }
 
@@ -961,7 +961,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ByteMultiByte(null, new RequestContext());
+            Response response = client.ByteMultiByte(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -983,7 +983,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(null, new RequestContext());
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1005,7 +1005,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ByteEmpty(new RequestContext());
+            Response response = client.ByteEmpty();
             Console.WriteLine(response.Status);
         }
 
@@ -1027,7 +1027,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ByteEmptyAsync(new RequestContext());
+            Response response = await client.ByteEmptyAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -1049,7 +1049,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ByteNull(null, new RequestContext());
+            Response response = client.ByteNull(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1071,7 +1071,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ByteNullAsync(null, new RequestContext());
+            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"));
             Console.WriteLine(response.Status);
         }
 
@@ -1093,7 +1093,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DateValid(new RequestContext());
+            Response response = client.DateValid();
             Console.WriteLine(response.Status);
         }
 
@@ -1115,7 +1115,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DateValidAsync(new RequestContext());
+            Response response = await client.DateValidAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -1137,7 +1137,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DateNull(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = client.DateNull(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -1159,7 +1159,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -1181,7 +1181,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DateTimeValid(new RequestContext());
+            Response response = client.DateTimeValid();
             Console.WriteLine(response.Status);
         }
 
@@ -1203,7 +1203,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DateTimeValidAsync(new RequestContext());
+            Response response = await client.DateTimeValidAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -1225,7 +1225,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DateTimeNull(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = client.DateTimeNull(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -1247,7 +1247,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
             Console.WriteLine(response.Status);
         }
 
@@ -1269,7 +1269,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringCsvValid(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1291,7 +1291,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringCsvValidAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1313,7 +1313,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvNull(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringCsvNull(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1335,7 +1335,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvNullAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringCsvNullAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1357,7 +1357,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvEmpty(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringCsvEmpty(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1379,7 +1379,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvEmptyAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringCsvEmptyAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1401,7 +1401,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringNoCollectionFormatEmpty(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringNoCollectionFormatEmpty(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1423,7 +1423,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1445,7 +1445,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringSsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringSsvValid(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1467,7 +1467,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringSsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringSsvValidAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1489,7 +1489,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringTsvValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringTsvValid(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1511,7 +1511,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringTsvValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringTsvValidAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1533,7 +1533,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringPipesValid(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = client.ArrayStringPipesValid(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
 
@@ -1555,7 +1555,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringPipesValidAsync(new string[] { "<arrayQuery>" }, new RequestContext());
+            Response response = await client.ArrayStringPipesValidAsync(new string[] { "<arrayQuery>" });
             Console.WriteLine(response.Status);
         }
     }

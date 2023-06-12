@@ -39,13 +39,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsArrayCSVInPath() => TestStatus(async (host) => await new PathsClient(Key, host, null).ArrayCsvInPathAsync( new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlPathsStringBase64Url() => TestStatus(async (host) => await new PathsClient(Key, host, null).Base64UrlAsync( Encoding.UTF8.GetBytes("lorem")));
+        public Task UrlPathsStringBase64Url() => TestStatus(async (host) => await new PathsClient(Key, host, null).Base64UrlAsync( BinaryData.FromBytes(Encoding.UTF8.GetBytes("lorem"))));
 
         [Test]
         public Task UrlPathsByteEmpty() => TestStatus(async (host) => await new PathsClient(Key, host, null).ByteEmptyAsync());
 
         [Test]
-        public Task UrlPathsByteMultiByte() => TestStatus(async (host) => await new PathsClient(Key, host, null).ByteMultiByteAsync( TestConstants.ByteArray));
+        public Task UrlPathsByteMultiByte() => TestStatus(async (host) => await new PathsClient(Key, host, null).ByteMultiByteAsync( BinaryData.FromBytes(TestConstants.ByteArray)));
 
         [Test]
         public void UrlByteNullAsync()

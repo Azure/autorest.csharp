@@ -37,7 +37,7 @@ namespace AnomalyDetector.Models
         /// be date-time of ISO 8601 format.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
-        public MultivariateBatchDetectionOptions(string dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime)
+        public MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime)
         {
             Argument.AssertNotNull(dataSource, nameof(dataSource));
 
@@ -53,7 +53,7 @@ namespace AnomalyDetector.Models
         /// Azure blob storage based on you data schema selection. The data schema should
         /// be exactly the same with those used in the training phase.
         /// </summary>
-        public string DataSource { get; set; }
+        public Uri DataSource { get; set; }
         /// <summary>
         /// An optional field, which is used to specify the number of top contributed
         /// variables for one anomalous timestamp in the response. The default number is

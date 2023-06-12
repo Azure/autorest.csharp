@@ -1709,8 +1709,8 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(string,Byte[],RequestContext)']/*" />
-        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(string,BinaryData,RequestContext)']/*" />
+        public virtual async Task<Response> ParamByteAsync(string scenario, BinaryData value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
@@ -1745,8 +1745,8 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(string,Byte[],RequestContext)']/*" />
-        public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(string,BinaryData,RequestContext)']/*" />
+        public virtual Response ParamByte(string scenario, BinaryData value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
@@ -2380,7 +2380,7 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestContext context)
+        internal HttpMessage CreateParamByteRequest(string scenario, BinaryData value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -2390,7 +2390,7 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "D");
+            request.Headers.Add("value", value.ToArray(), "D");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

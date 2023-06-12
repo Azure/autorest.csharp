@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.31.0" />
+    <PackageReference Include="Azure.Core" Version="1.32.0" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
@@ -36,7 +36,7 @@
     <Compile Include="../TestServerProjectsLowLevel/**/*.cs" LinkBase="TestServerProjectsLowLevel" />
     <Compile Include="../TestProjectsLowLevel/**/*.cs" LinkBase="TestProjectsLowLevel" />
     <None Include="../TestServerProjectsLowLevel/**/*.yaml" LinkBase="TestServerProjectsLowLevel" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-Typespec/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
 
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
