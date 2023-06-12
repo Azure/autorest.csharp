@@ -99,9 +99,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IObjectTypeFields<InputModelProperty> Fields => _fields ??= EnsureFields();
 
         private IObjectTypeFields<InputModelProperty> EnsureFields()
-        {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
-        }
+            => new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
 
         protected override ConstructorSignature EnsurePublicConstructorSignature()
         {
@@ -216,8 +214,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ReferenceOrConstant? initializationValue = null;
                 Constant? defaultInitializationValue = null;
 
+                var variableName = property.Declaration.Name.ToVariableName();
                 var propertyType = property.Declaration.Type;
-                if (parameterMap.TryGetValue(property.Declaration.Name.ToVariableName(), out var parameter) || IsStruct)
+                if (parameterMap.TryGetValue(variableName, out var parameter) || IsStruct)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
@@ -236,7 +235,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
-                        property.Declaration.Name.ToVariableName(),
+                        variableName,
                         property.ParameterDescription,
                         inputType,
                         defaultParameterValue,
