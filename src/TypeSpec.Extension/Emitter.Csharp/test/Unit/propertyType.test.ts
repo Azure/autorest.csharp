@@ -118,9 +118,21 @@ describe("Test GetInputType for enum", () => {
                     Description: "fixed string enum",
                     EnumValueType: "String",
                     AllowedValues: [
-                        { Name: "One", Value: "1", Description: "Enum value one" },
-                        { Name: "Two", Value: "2", Description: "Enum value two" },
-                        { Name: "Four", Value: "4", Description: "Enum value four" }
+                        {
+                            Name: "One",
+                            Value: "1",
+                            Description: "Enum value one"
+                        },
+                        {
+                            Name: "Two",
+                            Value: "2",
+                            Description: "Enum value two"
+                        },
+                        {
+                            Name: "Four",
+                            Value: "4",
+                            Description: "Enum value four"
+                        }
                     ],
                     IsExtensible: false,
                     IsNullable: false,
@@ -169,9 +181,21 @@ describe("Test GetInputType for enum", () => {
                     Description: "Fixed int enum",
                     EnumValueType: "Float32",
                     AllowedValues: [
-                        { Name: "One", Value: 1, Description: "Enum value one" },
-                        { Name: "Two", Value: 2, Description: "Enum value two" },
-                        { Name: "Four", Value: 4, Description: "Enum value four" }
+                        {
+                            Name: "One",
+                            Value: 1,
+                            Description: "Enum value one"
+                        },
+                        {
+                            Name: "Two",
+                            Value: 2,
+                            Description: "Enum value two"
+                        },
+                        {
+                            Name: "Four",
+                            Value: 4,
+                            Description: "Enum value four"
+                        }
                     ],
                     IsExtensible: false,
                     IsNullable: false,
