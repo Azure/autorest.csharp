@@ -34,7 +34,6 @@ namespace Azure.ResourceManager.Sample.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            Unit = UsageUnit.Count;
             CurrentValue = currentValue;
             Limit = limit;
             Name = name;
@@ -69,7 +68,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: SampleUsage.unit
         /// </summary>
-        public UsageUnit Unit { get; }
+        public UsageUnit Unit { get; } = UsageUnit.Count;
+
         /// <summary>
         /// The current usage of the resource.
         /// Serialized Name: SampleUsage.currentValue

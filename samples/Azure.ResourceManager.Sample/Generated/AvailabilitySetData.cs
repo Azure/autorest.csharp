@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sku">
-        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
+        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
         /// Serialized Name: AvailabilitySet.sku
         /// </param>
         /// <param name="platformUpdateDomainCount">
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
+        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
         /// Serialized Name: AvailabilitySet.sku
         /// </summary>
         public SampleSku Sku { get; set; }

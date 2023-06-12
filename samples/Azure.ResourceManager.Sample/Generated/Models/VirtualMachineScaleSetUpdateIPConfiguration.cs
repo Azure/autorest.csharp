@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.publicIPAddressConfiguration
         /// </param>
         /// <param name="privateIPAddressVersion">
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.privateIPAddressVersion
         /// </param>
         /// <param name="applicationGatewayBackendAddressPools">
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public VirtualMachineScaleSetUpdatePublicIPAddressConfiguration PublicIPAddressConfiguration { get; set; }
         /// <summary>
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.privateIPAddressVersion
         /// </summary>
         public IPVersion? PrivateIPAddressVersion { get; set; }
