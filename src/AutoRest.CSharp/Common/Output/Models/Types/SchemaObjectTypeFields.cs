@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
 
-        public SchemaObjectTypeFields(CSharpType enclosingType, ObjectSchema inputModel, SchemaTypeUsage usage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public SchemaObjectTypeFields(CSharpType enclosingType, IEnumerable<Property> inputModelProperties, SchemaTypeUsage usage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, Property>();
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             //    serializationParameters.Add(parameter);
             //}
 
-            foreach (var inputModelProperty in inputModel.Properties)
+            foreach (var inputModelProperty in inputModelProperties)
             {
                 var originalFieldName = BuilderHelpers.DisambiguateName(enclosingType, inputModelProperty.CSharpName());
                 var propertyType = GetPropertyDefaultType(usage, inputModelProperty, typeFactory);
@@ -66,8 +66,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
-                    : CreateField(originalFieldName, propertyType, usage, inputModel, inputModelProperty, optionalViaNullability);
+                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
+                    : CreateField(originalFieldName, propertyType, usage, inputModelProperty, optionalViaNullability);
 
                 // TODO -- enable this
                 // if (existingMember is not null)
@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, SchemaTypeUsage usage, ObjectSchema inputModel, Property inputModelProperty, bool optionalViaNullability)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, SchemaTypeUsage usage, Property inputModelProperty, bool optionalViaNullability)
         {
             var propertyIsCollection = inputModelProperty.Schema is ArraySchema or DictionarySchema;
             var propertyIsRequiredInNonRoundTripModel = !usage.HasFlag(SchemaTypeUsage.RoundTrip) && inputModelProperty.IsRequired;
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, ObjectSchema inputModel, Property inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, Property inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {
             if (optionalViaNullability)
             {

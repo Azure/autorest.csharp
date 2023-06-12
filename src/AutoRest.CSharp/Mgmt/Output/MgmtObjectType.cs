@@ -162,12 +162,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return objType switch
             {
                 SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
-                SchemaObjectType schemaObjectType => HandleMgmtObjectType(schemaObjectType),
+                SchemaObjectType schemaObjectType => HandleSchemaObjectType(schemaObjectType),
                 _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
             };
         }
 
-        private static bool HandleMgmtObjectType(SchemaObjectType objType)
+        private static bool HandleSchemaObjectType(SchemaObjectType objType)
         {
             if (objType.Discriminator != null)
                 return false;
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var objectSchema in GetCombinedSchemas())
             {
-                var fields = new SchemaObjectTypeFields(Type, objectSchema, _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
+                var fields = new SchemaObjectTypeFields(Type, objectSchema.Properties, _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
                 foreach (var field in fields)
                     yield return new ObjectTypeProperty(field, fields.GetInputByField(field), this, field.SerializationFormat);
             }

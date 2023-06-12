@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IObjectTypeFields<Property> Fields => _fields ??= EnsureFields();
 
         private IObjectTypeFields<Property> EnsureFields()
-            => new SchemaObjectTypeFields(Type, ObjectSchema, _usage, _typeFactory, _context.SourceInputModel?.CreateForModel(ExistingType));
+            => new SchemaObjectTypeFields(Type, ObjectSchema.Properties, _usage, _typeFactory, _context.SourceInputModel?.CreateForModel(ExistingType));
 
         protected override ConstructorSignature EnsurePublicConstructorSignature()
         {
@@ -421,19 +421,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override XmlObjectSerialization EnsureXmlSerialization()
         {
             return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
-        }
-
-        private CSharpType GetDefaultPropertyType(Property property)
-        {
-            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable, property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format, property: property);
-
-            if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
-                property.IsReadOnly)
-            {
-                valueType = TypeFactory.GetOutputType(valueType);
-            }
-
-            return valueType;
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
