@@ -10,7 +10,9 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -59,6 +61,81 @@ namespace AutoRest.CSharp.Mgmt.Output
                 .ToHashSet();
         }
 
+        private IEnumerable<ObjectTypeProperty> AllProperties
+        {
+            get
+            {
+                ObjectType? objectType = this;
+                while (objectType != null)
+                {
+                    foreach (var property in objectType.Properties)
+                    {
+                        yield return property;
+                    }
+                    objectType = objectType.GetBaseObjectType();
+                }
+            }
+        }
+
+        protected override ConstructorSignature EnsurePublicConstructorSignature()
+        {
+            var signature = base.EnsurePublicConstructorSignature();
+
+            var properties = AllProperties.ToDictionary(
+                property => property.Declaration.Name.ToVariableName(),
+                property => property);
+            var parameters = signature.Parameters.ToArray();
+            bool changed = false;
+            // apply the replaced types
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                var parameter = parameters[i];
+                var property = properties[parameter.Name];
+                var inputType = TypeFactory.GetInputType(property.Declaration.Type);
+                if (!inputType.Equals(parameter.Type))
+                {
+                    changed = true;
+                    parameters[i] = parameter with
+                    {
+                        Type = property.Declaration.Type
+                    };
+                }
+            }
+            return !changed ? signature : signature with
+            {
+                Parameters = parameters
+            };
+        }
+
+        protected override ConstructorSignature EnsureSerializationConstructorSignature()
+        {
+            var signature = base.EnsureSerializationConstructorSignature();
+
+            var properties = AllProperties.ToDictionary(
+                property => property.Declaration.Name.ToVariableName(),
+                property => property);
+            var parameters = signature.Parameters.ToArray();
+            bool changed = false;
+            // apply the replaced types
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                var parameter = parameters[i];
+                var property = properties[parameter.Name];
+                if (!property.Declaration.Type.Equals(parameter.Type))
+                {
+                    changed = true;
+                    parameters[i] = parameter with
+                    {
+                        Type = property.Declaration.Type
+                    };
+                }
+            }
+            return !changed ? signature : signature with
+            {
+                Parameters = parameters
+            };
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             var parentProperties = GetParentPropertyNames();
@@ -66,13 +143,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
-                    var propertyType = CreatePropertyType(property);
+                    var newProperty = CreatePropertyType(property);
                     // check if the type of this property is "single property type"
-                    if (IsSinglePropertyObject(propertyType))
+                    if (IsSinglePropertyObject(newProperty))
                     {
-                        propertyType = propertyType.MarkFlatten();
+                        newProperty = newProperty.MarkFlatten();
                     }
-                    yield return propertyType;
+                    yield return newProperty;
                 }
             }
         }
@@ -113,10 +190,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var objectSchema in GetCombinedSchemas())
             {
-                foreach (var property in objectSchema.Properties)
-                {
-                    yield return CreateProperty(property);
-                }
+                var fields = new SchemaObjectTypeFields(Type, objectSchema, _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
+                foreach (var field in fields)
+                    yield return new ObjectTypeProperty(field, fields.GetInputByField(field), this, field.SerializationFormat);
             }
         }
 
@@ -223,8 +299,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // try to replace the base type if this is not a type from discriminator
             // try exact match first
-            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
-            if (typeToReplace != null)
+            if (inheritedType != null && inheritedType.TryCast<MgmtObjectType>(out var typeToReplace))
             {
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)

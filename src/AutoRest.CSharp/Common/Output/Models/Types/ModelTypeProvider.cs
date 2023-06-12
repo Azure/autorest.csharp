@@ -32,9 +32,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
         private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
 
-        private ModelTypeProviderFields? _fields;
-        private ConstructorSignature? _publicConstructor;
-        private ConstructorSignature? _serializationConstructor;
         private InputModelType _inputModel;
         private TypeFactory _typeFactory;
         private SourceInputModel? _sourceInputModel;
@@ -46,13 +43,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
-        public IObjectTypeFields<InputModelProperty> Fields => _fields ??= EnsureFields();
-        private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
-        private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
-
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
-        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+        public override bool IsPropertyBag => _inputModel.IsPropertyBag;
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
@@ -102,18 +95,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _inputModel.Description ?? $"The {_inputModel.Name}.";
         }
 
-        private ModelTypeProviderFields EnsureFields()
+        private IObjectTypeFields<InputModelProperty>? _fields;
+        public IObjectTypeFields<InputModelProperty> Fields => _fields ??= EnsureFields();
+
+        private IObjectTypeFields<InputModelProperty> EnsureFields()
         {
             return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
-        private ConstructorSignature EnsurePublicConstructorSignature()
+        protected override ConstructorSignature EnsurePublicConstructorSignature()
         {
             var name = Declaration.Name;
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
 
-            var summary = $"Initializes a new instance of {name}";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;
@@ -125,17 +120,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 name,
-                summary,
+                $"Initializes a new instance of {name}",
                 null,
                 accessibility,
                 fullParameterList,
                 Initializer: new(true, baseInitializers));
         }
 
-        private ConstructorSignature EnsureSerializationConstructorSignature()
+        protected override ConstructorSignature EnsureSerializationConstructorSignature()
         {
             var name = Declaration.Name;
-
             //get base public ctor params
             GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
 
@@ -181,7 +175,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
+        protected override void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
         {
             fullParameterList = new List<Parameter>();
             var parent = GetBaseObjectType();
@@ -204,29 +198,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor()
-        {
-            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
-
-            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(InitializationConstructorSignature.Parameters, true), baseCtor);
-        }
-
-        protected override ObjectTypeConstructor BuildSerializationConstructor()
-        {
-            // the property bag never needs deserialization, therefore we return the initialization constructor here so that we do not write it in the generated code
-            if (IsPropertyBag)
-                return InitializationConstructor;
-
-            // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
-            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
-                return InitializationConstructor;
-
-            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
-
-            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters, false), baseCtor);
-        }
-
-        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
+        protected override ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
         {
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
@@ -303,13 +275,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var field in Fields)
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this, field.SerializationFormat);
-        }
-
-        protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
-        {
-            yield return InitializationConstructor;
-            if (SerializationConstructor != InitializationConstructor)
-                yield return SerializationConstructor;
         }
 
         protected override bool EnsureHasJsonSerialization()

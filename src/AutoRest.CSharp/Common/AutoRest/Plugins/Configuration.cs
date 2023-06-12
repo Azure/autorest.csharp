@@ -224,6 +224,7 @@ namespace AutoRest.CSharp.Input
         /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
         /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
+
         public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;

@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         continue;
                     }
-                    requestMethods.Add(serviceRequest, _clientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
+                    requestMethods.Add(serviceRequest, _clientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, "public", ShouldReturnNullOn404(operation)));
                 }
             }
 

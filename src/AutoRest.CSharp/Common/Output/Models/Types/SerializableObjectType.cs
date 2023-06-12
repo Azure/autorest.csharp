@@ -3,12 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
@@ -21,6 +26,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
         }
+
+        public virtual bool IsPropertyBag => false;
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
@@ -46,5 +53,54 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureIncludeDeserializer();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+
+        private ConstructorSignature? _publicConstructor;
+        private ConstructorSignature? _serializationConstructor;
+        protected ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
+        protected ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
+
+        /// <summary>
+        /// A flag to control if we need to skip the initialization constructor to support forward compatibility in polymorphism
+        /// </summary>
+        protected virtual bool SkipInitializerConstructor => false;
+
+        protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        {
+            // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
+            if (!SkipInitializerConstructor)
+                yield return InitializationConstructor;
+
+            // Skip serialization ctor if they are the same
+            if (InitializationConstructor != SerializationConstructor)
+                yield return SerializationConstructor;
+        }
+
+        protected abstract ConstructorSignature EnsurePublicConstructorSignature();
+        protected abstract ConstructorSignature EnsureSerializationConstructorSignature();
+
+        protected abstract ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator);
+
+        protected override ObjectTypeConstructor BuildInitializationConstructor()
+        {
+            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
+
+            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(InitializationConstructorSignature.Parameters, true), baseCtor);
+        }
+
+        protected override ObjectTypeConstructor BuildSerializationConstructor()
+        {
+            if (IsPropertyBag)
+                return InitializationConstructor;
+
+            // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
+            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+                return InitializationConstructor;
+
+            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
+
+            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters, false), baseCtor);
+        }
+
+        protected abstract void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator);
     }
 }

@@ -79,16 +79,15 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         /// <summary>
-        /// Build CmcRestClientMethod for mgmt and HLC
+        /// Build CmcRestClientMethod for mgmt only
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="httpRequest"></param>
         /// <param name="requestParameters"></param>
-        /// <param name="responseHeaderModel"></param>
         /// <param name="accessibility"></param>
         /// <param name="returnNullOn404Func"></param>
         /// <returns></returns>
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
             var allParameters = GetOperationAllParameters(operation, requestParameters);
             var methodParameters = BuildMethodParameters(allParameters);
@@ -106,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 methodParameters,
                 responses,
-                responseHeaderModel,
+                null,
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
                 CreateInputOperation(operation)
@@ -410,7 +409,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_context.TypeFactory.CreateType(bodyRequestParameter.Schema, false).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)

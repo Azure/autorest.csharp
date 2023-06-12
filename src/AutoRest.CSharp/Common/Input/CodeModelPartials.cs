@@ -252,6 +252,8 @@ namespace AutoRest.CSharp.Input
             Parents = new Relations();
             Children = new Relations();
         }
+
+        public bool IsUnknownDiscriminatorModel { get; init; }
     }
 
     // redefined manually to inherit from ObjectSchema

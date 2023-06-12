@@ -33,6 +33,23 @@ namespace AutoRest.CSharp.Output.Models.Types
             InitializationValue = field.DefaultValue;
         }
 
+        public ObjectTypeProperty(FieldDeclaration field, Property inputModelProperty, ObjectType enclosingType, SerializationFormat serializationFormat)
+            : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
+                  parameterDescription: field.Description?.ToString() ?? string.Empty,
+                  isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
+                  schemaProperty: inputModelProperty,
+                  isRequired: field.IsRequired,
+                  valueType: field.ValueType,
+                  inputModelProperty: null,
+                  optionalViaNullability: field.OptionalViaNullability,
+                  getterModifiers: field.GetterModifiers,
+                  setterModifiers: field.SetterModifiers,
+                  serializationFormat: serializationFormat,
+                  serializationMapping: field.SerializationMapping)
+        {
+            InitializationValue = field.DefaultValue;
+        }
+
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
             : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability, serializationMapping: serializationMapping)
         {

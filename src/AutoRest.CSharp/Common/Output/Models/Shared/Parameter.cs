@@ -32,6 +32,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
+        public static Parameter FromSchemaProperty(in Property property, string name, CSharpType propertyType)
+        {
+            // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
+            var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.IsNullable ? ValidationType.None : ValidationType.AssertNotNull;
+            return new Parameter(name, BuilderHelpers.EscapeXmlDocDescription(property.Language.Default.Description), propertyType, null, validation, null);
+        }
+
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();

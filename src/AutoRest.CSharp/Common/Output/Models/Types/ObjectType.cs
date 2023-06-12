@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
-        protected ObjectType? GetBaseObjectType()
+        protected internal ObjectType? GetBaseObjectType()
             => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
 
         protected virtual ObjectTypeDiscriminator? BuildDiscriminator()
