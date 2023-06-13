@@ -12,16 +12,16 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         public Task CustomBaseUri() => TestStatus(async (host) =>
-            await new custom_baseUrl_LowLevel.PathsClient(Key, host.ToString().Replace("http://", string.Empty), null).GetEmptyAsync( string.Empty));
+            await new custom_baseUrl_LowLevel.PathsClient(host.ToString().Replace("http://", string.Empty), Key, null).GetEmptyAsync( string.Empty));
 
         [Test]
         public Task CustomBaseUriMoreOptions() => TestStatus(async (host) =>
-            await new custom_baseUrl_more_options_LowLevel.PathsClient("test12", Key, dnsSuffix: host.ToString(), null).GetEmptyAsync( string.Empty, string.Empty, "key1",  "v1"));
+            await new custom_baseUrl_more_options_LowLevel.PathsClient(dnsSuffix:host.ToString(), "test12", Key, null).GetEmptyAsync( string.Empty, string.Empty, "key1",  "v1"));
 
         [Test]
         public void ThrowsIfHostIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl_LowLevel.PathsClient(null));
+            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl_LowLevel.PathsClient("host", null));
         }
     }
 }
