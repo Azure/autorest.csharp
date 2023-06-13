@@ -30,7 +30,6 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -40,11 +39,6 @@ import {
     HttpOperation,
     isStatusCode
 } from "@typespec/http";
-import {
-    projectedNameClientKey,
-    projectedNameCSharpKey,
-    projectedNameJsonKey
-} from "../constants.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
@@ -65,6 +59,8 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
+    getLibraryName,
+    getPropertyNames,
     getSdkSimpleType,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
@@ -72,19 +68,19 @@ import { capitalize, getNameForTemplate } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
- * Map calType to csharp InputTypeKind
+ * Map typespec types to csharp InputTypeKind
  */
 export function mapTypeSpecTypeToCSharpInputTypeKind(
     context: SdkContext,
-    typespecType: Type,
+    typeSpecType: Type,
     format?: string,
     encode?: EncodeData
 ): InputTypeKind {
-    const kind = typespecType.kind;
+    const kind = typeSpecType.kind;
     switch (kind) {
         case "Model":
             return getCSharpInputTypeKindByIntrinsicModelName(
-                typespecType.name,
+                typeSpecType.name,
                 format,
                 encode
             );
@@ -93,7 +89,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let numberValue = typespecType.value;
+            let numberValue = typeSpecType.value;
             if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
@@ -523,7 +519,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getFriendlyName(program, m) ?? getNameForTemplate(m);
+        const name = getLibraryName(context, m) ?? getNameForTemplate(m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -606,13 +602,8 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
-                const projectedNamesMap = getProjectedNames(program, value);
-                const name =
-                    projectedNamesMap?.get(projectedNameCSharpKey) ??
-                    projectedNamesMap?.get(projectedNameClientKey) ??
-                    value.name;
-                const serializedName =
-                    projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
+                // Get the library and wire name of a model property
+                const [name, serializedName] = getPropertyNames(context, value);
                 const literalTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
