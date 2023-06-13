@@ -14,16 +14,12 @@ import {
     EmitContext,
     getDeprecated,
     getDoc,
-    getEncode,
-    getFormat,
     getSummary,
     isErrorModel,
     Model,
     ModelProperty,
     Namespace,
-    Operation,
-    Program
-} from "@typespec/compiler";
+    Operation} from "@typespec/compiler";
 import { getResourceOperation, ResourceOperation } from "@typespec/rest";
 import {
     HttpOperation,
@@ -42,7 +38,6 @@ import {
     InputEnumType,
     InputListType,
     InputModelType,
-    InputPrimitiveType,
     InputType,
     isInputLiteralType,
     isInputUnionType

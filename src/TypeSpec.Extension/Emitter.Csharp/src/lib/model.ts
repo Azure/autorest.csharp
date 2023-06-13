@@ -58,7 +58,8 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    InputDiscriminator
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -529,6 +530,28 @@ export function getInputType(
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
 
+            const discriminator = getDiscriminator(program, m);
+            let inputDiscriminator: InputDiscriminator | undefined = undefined;
+            if (discriminator) {
+                const discriminatorProperty = {
+                    Name: discriminator.propertyName,
+                    SerializedName: discriminator.propertyName,
+                    Description: "The discriminator",
+                    IsRequired: true,
+                    IsReadOnly: false,
+                    IsNullable: false,
+                    Type: {
+                        Name: "string",
+                        Kind: InputTypeKind.String,
+                        IsNullable: false
+                    } as InputPrimitiveType,
+                    IsDiscriminator: true
+                } as InputModelProperty;
+                properties.push(discriminatorProperty);
+                inputDiscriminator = {
+                    Property: discriminatorProperty
+                } as InputDiscriminator;
+            }
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
@@ -536,8 +559,7 @@ export function getInputType(
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
-                DiscriminatorPropertyName: getDiscriminator(program, m)
-                    ?.propertyName,
+                Discriminator: inputDiscriminator,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
@@ -551,12 +573,13 @@ export function getInputType(
                 model,
                 m.properties,
                 properties,
-                baseModel?.DiscriminatorPropertyName
+                baseModel?.Discriminator?.Property.Name
             );
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
+            // TODO -- remove this since the above issue is closed
+            if (model.Discriminator && m.derivedModels) {
                 for (const dm of m.derivedModels) {
                     getInputType(
                         context,
@@ -575,7 +598,7 @@ export function getInputType(
         m: Model,
         baseModel?: InputModelType
     ): string | undefined {
-        const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
+        const discriminatorPropertyName = baseModel?.Discriminator?.Property.Name;
 
         if (discriminatorPropertyName) {
             const discriminatorProperty = m.properties.get(
