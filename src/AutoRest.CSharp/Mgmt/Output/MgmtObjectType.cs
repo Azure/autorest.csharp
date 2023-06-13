@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IObjectTypeFields<Property> EnsureFields()
         {
-            return new SchemaObjectTypeFields(Type, GetSchemaProperties(), _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
+            return new SchemaObjectTypeFields(Type, ObjectSchema, GetSchemaProperties(), _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
         }
 
         private IEnumerable<ObjectTypeProperty> AllProperties
@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var objectSchema in GetCombinedSchemas())
             {
-                var fields = new SchemaObjectTypeFields(Type, objectSchema.Properties, _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
+                var fields = new SchemaObjectTypeFields(Type, objectSchema, objectSchema.Properties, _usage, MgmtContext.Context.TypeFactory, MgmtContext.Context.SourceInputModel?.CreateForModel(ExistingType));
                 foreach (var field in fields)
                     yield return new ObjectTypeProperty(field, fields.GetInputByField(field), this, field.SerializationFormat);
             }

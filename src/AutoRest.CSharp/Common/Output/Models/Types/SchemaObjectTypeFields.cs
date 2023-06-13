@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
 
-        public SchemaObjectTypeFields(CSharpType enclosingType, IEnumerable<Property> inputModelProperties, SchemaTypeUsage usage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public SchemaObjectTypeFields(CSharpType enclosingType, ObjectSchema inputModel, IEnumerable<Property> inputModelProperties, SchemaTypeUsage usage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, Property>();
@@ -89,6 +89,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
+            // TODO -- adding the AdditionalProperties property
+
             // TODO -- adding the leftover members from the source type
             _fields = fields;
             _fieldsToInputs = fieldsToInputs;
@@ -101,6 +103,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parameterNamesToFields[parameter.Name];
         public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
         public Property GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
+        public ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

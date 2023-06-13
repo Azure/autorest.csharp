@@ -14,5 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         FieldDeclaration GetFieldByParameter(Parameter parameter);
         bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration);
         T GetInputByField(FieldDeclaration field);
+        ObjectTypeProperty? AdditionalPropertiesProperty { get; }
     }
 }

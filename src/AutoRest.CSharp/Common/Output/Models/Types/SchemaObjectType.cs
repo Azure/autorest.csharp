@@ -93,30 +93,31 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema.Extensions != null &&
             (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty
-        {
-            get
-            {
-                if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
-                {
-                    return _additionalPropertiesProperty;
-                }
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => Fields.AdditionalPropertiesProperty;
+        //public override ObjectTypeProperty? AdditionalPropertiesProperty
+        //{
+        //    get
+        //    {
+        //        if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
+        //        {
+        //            return _additionalPropertiesProperty;
+        //        }
 
-                // We use a $ prefix here as AdditionalProperties comes from a swagger concept
-                // and not a swagger model/operation name to disambiguate from a possible property with
-                // the same name.
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
+        //        // We use a $ prefix here as AdditionalProperties comes from a swagger concept
+        //        // and not a swagger model/operation name to disambiguate from a possible property with
+        //        // the same name.
+        //        SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
-                _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
-                    "Additional Properties",
-                    true,
-                    null
-                    );
+        //        _additionalPropertiesProperty = new ObjectTypeProperty(
+        //            BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
+        //            "Additional Properties",
+        //            true,
+        //            null
+        //            );
 
-                return _additionalPropertiesProperty;
-            }
-        }
+        //        return _additionalPropertiesProperty;
+        //    }
+        //}
 
         protected override string CreateDescription()
         {
@@ -127,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IObjectTypeFields<Property> Fields => _fields ??= EnsureFields();
 
         protected virtual IObjectTypeFields<Property> EnsureFields()
-            => new SchemaObjectTypeFields(Type, ObjectSchema.Properties, _usage, _typeFactory, _context.SourceInputModel?.CreateForModel(ExistingType));
+            => new SchemaObjectTypeFields(Type, ObjectSchema, ObjectSchema.Properties, _usage, _typeFactory, _context.SourceInputModel?.CreateForModel(ExistingType));
 
         protected override ConstructorSignature EnsurePublicConstructorSignature()
         {

@@ -122,6 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parameterNamesToFields[parameter.Name];
         public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
         public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
+        public ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
