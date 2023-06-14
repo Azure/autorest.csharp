@@ -815,7 +815,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.MethodName)}(");
-                WriteArguments(_writer, parameterMapping);
+                WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
             _writer.Line($");");
@@ -849,7 +849,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
+                    if (parameter.Parameter == KnownParameters.CancellationTokenParameter)
+                    {
+                        args.Add(parameter.Parameter);
+                    }
+                    else if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))

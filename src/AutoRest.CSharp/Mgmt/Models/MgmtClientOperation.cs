@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -43,8 +44,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation>? _operationMappings;
         public IReadOnlyDictionary<RequestPath, MgmtRestOperation> OperationMappings => _operationMappings ??= EnsureOperationMappings();
 
-        private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>>? _parameterMappings;
-        public IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> ParameterMappings => _parameterMappings ??= EnsureParameterMappings();
+        private IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>>? _parameterMappings;
+        public IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>> ParameterMappings => _parameterMappings ??= EnsureParameterMappings();
 
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
@@ -143,18 +144,18 @@ namespace AutoRest.CSharp.Mgmt.Models
                 operation => operation);
         }
 
-        private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> EnsureParameterMappings()
+        private IReadOnlyDictionary<RequestPath, IReadOnlyList<ParameterMapping>> EnsureParameterMappings()
         {
             var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Array.Empty<ContextualParameterMapping>();
 
-            var contextualParameterMappings = new Dictionary<RequestPath, IEnumerable<ContextualParameterMapping>>();
+            var contextualParameterMappings = new Dictionary<RequestPath, IReadOnlyList<ContextualParameterMapping>>();
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams));
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams).ToList());
             }
 
-            var parameterMappings = new Dictionary<RequestPath, IEnumerable<ParameterMapping>>();
+            var parameterMappings = new Dictionary<RequestPath, IReadOnlyList<ParameterMapping>>();
             foreach (var operationMappings in OperationMappings)
             {
                 var parameterMapping = operationMappings.Value.BuildParameterMapping(contextualParameterMappings[operationMappings.Key]).ToList();

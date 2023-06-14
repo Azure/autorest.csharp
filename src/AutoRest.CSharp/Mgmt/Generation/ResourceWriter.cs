@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IReadOnlyList<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
