@@ -153,8 +153,8 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
-        /// <param name="language"> Returned value should be &apos;english&apos;. </param>
-        /// <param name="content"> Returned value should be &apos;I am text&apos;. </param>
+        /// <param name="language"> Returned value should be 'english'. </param>
+        /// <param name="content"> Returned value should be 'I am text'. </param>
         /// <returns> A new <see cref="Models.ObjectWithXMsTextProperty"/> instance for mocking. </returns>
         public static ObjectWithXMsTextProperty ObjectWithXMsTextProperty(string language = null, string content = null)
         {

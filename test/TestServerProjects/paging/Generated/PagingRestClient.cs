@@ -49,7 +49,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
@@ -69,7 +69,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValue> GetNoItemNamePages(CancellationToken cancellationToken = default)
         {
@@ -208,7 +208,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ProductResultValue>> FirstResponseEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -228,7 +228,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValue> FirstResponseEmpty(CancellationToken cancellationToken = default)
         {
@@ -332,8 +332,8 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ProductResult>> GetWithQueryParamsAsync(int requiredQueryParameter, CancellationToken cancellationToken = default)
         {
@@ -353,8 +353,8 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetWithQueryParams(int requiredQueryParameter, CancellationToken cancellationToken = default)
         {
@@ -391,8 +391,8 @@ namespace paging
             return message;
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ProductResult>> DuplicateParamsAsync(string filter = null, CancellationToken cancellationToken = default)
         {
@@ -412,8 +412,8 @@ namespace paging
             }
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> DuplicateParams(string filter = null, CancellationToken cancellationToken = default)
         {
@@ -918,7 +918,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -950,7 +950,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -997,7 +997,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
@@ -1024,7 +1024,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
@@ -1127,7 +1127,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
@@ -1164,7 +1164,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
@@ -1218,7 +1218,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1250,7 +1250,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1295,7 +1295,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ProductResultValueWithXMSClientName>> GetPagingModelWithItemNameWithXMSClientNameAsync(CancellationToken cancellationToken = default)
         {
@@ -1315,7 +1315,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValueWithXMSClientName> GetPagingModelWithItemNameWithXMSClientName(CancellationToken cancellationToken = default)
         {
@@ -1348,7 +1348,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
@@ -1375,7 +1375,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
@@ -1482,7 +1482,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
@@ -1509,7 +1509,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
@@ -1632,9 +1632,9 @@ namespace paging
             return message;
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         public async Task<Response<ProductResult>> DuplicateParamsNextPageAsync(string nextLink, string filter = null, CancellationToken cancellationToken = default)
@@ -1660,9 +1660,9 @@ namespace paging
             }
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         public Response<ProductResult> DuplicateParamsNextPage(string nextLink, string filter = null, CancellationToken cancellationToken = default)
@@ -2283,7 +2283,7 @@ namespace paging
             return message;
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
@@ -2310,7 +2310,7 @@ namespace paging
             }
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>

@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         /// <summary> Initializes a new instance of VirtualMachineCaptureContent. </summary>
         /// <param name="vhdPrefix">
-        /// The captured virtual hard disk&apos;s name prefix.
+        /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
         /// </param>
         /// <param name="destinationContainerName">
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary>
-        /// The captured virtual hard disk&apos;s name prefix.
+        /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
         /// </summary>
         public string VhdPrefix { get; }

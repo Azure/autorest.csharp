@@ -58,7 +58,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+        /// [Protocol Method] Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -88,7 +88,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+        /// [Protocol Method] Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+        /// [Protocol Method] Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+        /// [Protocol Method] Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +186,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+        /// [Protocol Method] Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -216,7 +216,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;.
+        /// [Protocol Method] Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -246,7 +246,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+        /// [Protocol Method] Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -280,7 +280,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;
+        /// [Protocol Method] Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -314,7 +314,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get value &apos;green-color&apos; from the constant.
+        /// [Protocol Method] Get value 'green-color' from the constant.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -344,7 +344,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get value &apos;green-color&apos; from the constant.
+        /// [Protocol Method] Get value 'green-color' from the constant.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -374,7 +374,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;green-color&apos; from a constant
+        /// [Protocol Method] Sends value 'green-color' from a constant
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -408,7 +408,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Sends value &apos;green-color&apos; from a constant
+        /// [Protocol Method] Sends value 'green-color' from a constant
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>
         public string Filter { get; set; }
-        /// <summary> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </summary>
+        /// <summary> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </summary>
         public bool? UseFuzzyMatching { get; set; }
         /// <summary> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </summary>
         public string HighlightPostTag { get; set; }

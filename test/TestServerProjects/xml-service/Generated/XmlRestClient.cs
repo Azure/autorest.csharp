@@ -1827,7 +1827,7 @@ namespace xml_service
             return message;
         }
 
-        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ObjectWithXMsTextProperty>> GetXMsTextAsync(CancellationToken cancellationToken = default)
         {
@@ -1850,7 +1850,7 @@ namespace xml_service
             }
         }
 
-        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ObjectWithXMsTextProperty> GetXMsText(CancellationToken cancellationToken = default)
         {

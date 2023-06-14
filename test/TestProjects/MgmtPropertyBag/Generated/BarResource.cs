@@ -101,7 +101,7 @@ namespace MgmtPropertyBag
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
@@ -138,7 +138,7 @@ namespace MgmtPropertyBag
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
@@ -179,7 +179,7 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
@@ -220,7 +220,7 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)

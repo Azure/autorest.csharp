@@ -67,7 +67,7 @@ namespace dpg_update1_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -98,7 +98,7 @@ namespace dpg_update1_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -131,7 +131,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -167,7 +167,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -203,7 +203,7 @@ namespace dpg_update1_LowLevel
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -239,7 +239,7 @@ namespace dpg_update1_LowLevel
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -274,7 +274,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: "application/json" | "image/jpeg". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -309,7 +309,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: "application/json" | "image/jpeg". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -407,7 +407,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -440,7 +440,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -462,7 +462,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] I&apos;m a new operation.
+        /// [Protocol Method] I'm a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// <list type="bullet">
         /// <item>
@@ -493,7 +493,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] I&apos;m a new operation.
+        /// [Protocol Method] I'm a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// <list type="bullet">
         /// <item>

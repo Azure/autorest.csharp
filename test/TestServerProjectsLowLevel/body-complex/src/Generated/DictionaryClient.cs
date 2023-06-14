@@ -374,7 +374,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get complex types with dictionary property while server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get complex types with dictionary property while server doesn't provide a response payload
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -404,7 +404,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get complex types with dictionary property while server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get complex types with dictionary property while server doesn't provide a response payload
         /// <list type="bullet">
         /// <item>
         /// <description>

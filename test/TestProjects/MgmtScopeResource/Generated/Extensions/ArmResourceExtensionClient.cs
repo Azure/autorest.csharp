@@ -125,7 +125,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports &apos;eq&apos;, &apos;lt&apos;, &apos;gt&apos;, &apos;le&apos;, &apos;ge&apos;, and &apos;and&apos;. It does not currently support &apos;ne&apos;, &apos;or&apos;, or &apos;not&apos;. </param>
+        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. </param>
         /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
         /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -150,7 +150,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports &apos;eq&apos;, &apos;lt&apos;, &apos;gt&apos;, &apos;le&apos;, &apos;ge&apos;, and &apos;and&apos;. It does not currently support &apos;ne&apos;, &apos;or&apos;, or &apos;not&apos;. </param>
+        /// <param name="filter"> May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. </param>
         /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
         /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

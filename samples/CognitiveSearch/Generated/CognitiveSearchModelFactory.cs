@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
     public static partial class CognitiveSearchModelFactory
     {
         /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>
-        /// <param name="count"> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can&apos;t return all the requested documents in a single Search response. </param>
+        /// <param name="count"> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can't return all the requested documents in a single Search response. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="facets"> The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions. </param>
-        /// <param name="nextPageParameters"> Continuation JSON payload returned when Azure Cognitive Search can&apos;t return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response. </param>
+        /// <param name="nextPageParameters"> Continuation JSON payload returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response. </param>
         /// <param name="results"> The sequence of results returned by the query. </param>
-        /// <param name="nextLink"> Continuation URL returned when Azure Cognitive Search can&apos;t return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response. </param>
+        /// <param name="nextLink"> Continuation URL returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response. </param>
         /// <returns> A new <see cref="Models.SearchDocumentsResult"/> instance for mocking. </returns>
         public static SearchDocumentsResult SearchDocumentsResult(long? count = null, double? coverage = null, IReadOnlyDictionary<string, IList<FacetResult>> facets = null, SearchRequest nextPageParameters = null, IEnumerable<SearchResult> results = null, string nextLink = null)
         {
@@ -227,7 +227,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of SynonymMap. </summary>
         /// <param name="name"> The name of the synonym map. </param>
-        /// <param name="format"> The format of the synonym map. Only the &apos;solr&apos; format is currently supported. </param>
+        /// <param name="format"> The format of the synonym map. Only the 'solr' format is currently supported. </param>
         /// <param name="synonyms"> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </param>
         /// <param name="encryptionKey"> A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. </param>
         /// <param name="eTag"> The ETag of the synonym map. </param>

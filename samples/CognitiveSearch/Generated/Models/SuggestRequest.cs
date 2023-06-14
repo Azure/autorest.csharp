@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of SuggestRequest. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
         public SuggestRequest(string searchText, string suggesterName)
         {
@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>
         public string Filter { get; set; }
-        /// <summary> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </summary>
+        /// <summary> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </summary>
         public bool? UseFuzzyMatching { get; set; }
         /// <summary> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </summary>
         public string HighlightPostTag { get; set; }
@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
         public string SearchFields { get; set; }
         /// <summary> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </summary>
         public string Select { get; set; }
-        /// <summary> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </summary>
+        /// <summary> The name of the suggester as specified in the suggesters collection that's part of the index definition. </summary>
         public string SuggesterName { get; }
         /// <summary> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </summary>
         public int? Top { get; set; }
