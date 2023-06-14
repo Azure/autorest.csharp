@@ -531,7 +531,6 @@ export function getInputType(
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
-            let inputDiscriminator: InputDiscriminator | undefined = undefined;
             if (discriminator) {
                 const discriminatorProperty = {
                     Name: discriminator.propertyName,
@@ -548,9 +547,6 @@ export function getInputType(
                     IsDiscriminator: true
                 } as InputModelProperty;
                 properties.push(discriminatorProperty);
-                inputDiscriminator = {
-                    Property: discriminatorProperty
-                } as InputDiscriminator;
             }
             model = {
                 Name: name,
@@ -559,7 +555,7 @@ export function getInputType(
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
-                Discriminator: inputDiscriminator,
+                DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
@@ -573,13 +569,13 @@ export function getInputType(
                 model,
                 m.properties,
                 properties,
-                baseModel?.Discriminator?.Property.Name
+                baseModel?.DiscriminatorPropertyName
             );
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
             // TODO -- remove this since the above issue is closed
-            if (model.Discriminator && m.derivedModels) {
+            if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
                     getInputType(
                         context,
@@ -598,7 +594,7 @@ export function getInputType(
         m: Model,
         baseModel?: InputModelType
     ): string | undefined {
-        const discriminatorPropertyName = baseModel?.Discriminator?.Property.Name;
+        const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
 
         if (discriminatorPropertyName) {
             const discriminatorProperty = m.properties.get(

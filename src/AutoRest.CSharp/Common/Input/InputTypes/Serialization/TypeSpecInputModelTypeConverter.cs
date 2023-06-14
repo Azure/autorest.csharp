@@ -36,11 +36,10 @@ namespace AutoRest.CSharp.Common.Input
             string? deprecated = null;
             string? description = null;
             string? usageString = null;
-            string? discriminatorPropertyValue = null;
+            string? discriminatorPropertyName = null;
             string? discriminatorValue = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
-            InputDiscriminator? discriminator = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -50,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
-                    || reader.TryReadWithConverter(nameof(InputModelType.Discriminator), options, ref discriminator)
+                    || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
                     || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
 
@@ -61,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, discriminator, baseModel, properties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -75,10 +74,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, discriminator, baseModel, properties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputDiscriminator? discriminator, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -86,7 +85,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, discriminator);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue);
             if (id != null)
             {
                 resolver.AddReference(id, model);

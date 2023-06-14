@@ -39,10 +39,6 @@ export function isInputUnionType(type: InputType): type is InputUnionType {
     );
 }
 
-export interface InputDiscriminator {
-    Property: InputModelProperty;
-}
-
 export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
@@ -51,8 +47,7 @@ export interface InputModelType extends InputType {
     Usage: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
-    Discriminator?: InputDiscriminator;
-    // DiscriminatorPropertyName?: string;
+    DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
 }
 

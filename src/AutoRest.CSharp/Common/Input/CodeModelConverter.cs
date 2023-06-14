@@ -244,8 +244,7 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName(),
-                Discriminator: null); // TODO -- find a way to get this
+                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName()); // TODO -- find a way to get this
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
