@@ -110,8 +110,8 @@ namespace xms_error_responses
             }
         }
 
-        /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn&apos;t conflict with the input param name &apos;models&apos;. </summary>
-        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. </param>
+        /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'. </summary>
+        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> HasModelsParamAsync(string models = "value1", CancellationToken cancellationToken = default)
         {
@@ -128,8 +128,8 @@ namespace xms_error_responses
             }
         }
 
-        /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn&apos;t conflict with the input param name &apos;models&apos;. </summary>
-        /// <param name="models"> Make sure model deserialization doesn&apos;t conflict with this param name, which has input name &apos;models&apos;. Use client default value in call. </param>
+        /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'. </summary>
+        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response HasModelsParam(string models = "value1", CancellationToken cancellationToken = default)
         {

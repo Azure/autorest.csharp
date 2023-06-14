@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of MgmtReferenceTypesResourceData. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
-        /// <param name="resourceType"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
         [SerializationConstructor]
         protected MgmtReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType)
         {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Fake.Models
         public ResourceIdentifier Id { get; }
         /// <summary> The name of the resource. </summary>
         public string Name { get; }
-        /// <summary> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </summary>
+        /// <summary> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </summary>
         public ResourceType ResourceType { get; }
     }
 }

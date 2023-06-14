@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machine scale set network profile&apos;s IP configuration. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network
+    /// Describes a virtual machine scale set network profile's IP configuration. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network
     /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateIPConfiguration : SubResource
@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.publicIPAddressConfiguration
         /// </param>
         /// <param name="privateIPAddressVersion">
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.privateIPAddressVersion
         /// </param>
         /// <param name="applicationGatewayBackendAddressPools">
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public VirtualMachineScaleSetUpdatePublicIPAddressConfiguration PublicIPAddressConfiguration { get; set; }
         /// <summary>
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.privateIPAddressVersion
         /// </summary>
         public IPVersion? PrivateIPAddressVersion { get; set; }

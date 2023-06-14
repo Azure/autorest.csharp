@@ -38,7 +38,7 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.publisher
         /// </param>
         /// <param name="typePropertiesType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -94,7 +94,7 @@ namespace MgmtRenameRules.Models
         /// </summary>
         public string Publisher { get; set; }
         /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.type
         /// </summary>
         public string TypePropertiesType { get; set; }
