@@ -24,8 +24,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequiredPropertiesAreSetableInMixedModels()
         {
-            var requiredInt = TypeAsserts.HasProperty(typeof(RoundTripModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
-            var requiredString = TypeAsserts.HasProperty(typeof(RoundTripModel), "RequiredString", BindingFlags.Public | BindingFlags.Instance);
+            var requiredInt = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.RequiredInt), BindingFlags.Public | BindingFlags.Instance);
+            var requiredString = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.RequiredString), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredInt.SetMethod);
             Assert.NotNull(requiredString.SetMethod);
@@ -34,8 +34,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequiredPropertiesAreNotSetableInInputModels()
         {
-            var requiredInt = TypeAsserts.HasProperty(typeof(InputModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
-            var requiredString = TypeAsserts.HasProperty(typeof(InputModel), "RequiredString", BindingFlags.Public | BindingFlags.Instance);
+            var requiredInt = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredInt), BindingFlags.Public | BindingFlags.Instance);
+            var requiredString = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredString), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.Null(requiredInt.SetMethod);
             Assert.Null(requiredString.SetMethod);
@@ -44,8 +44,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequiredListsAreReadOnly()
         {
-            var requiredIntList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredIntList", BindingFlags.Public | BindingFlags.Instance);
-            var requiredStringList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredStringList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredIntList = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredIntList), BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredStringList), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.Null(requiredIntList.SetMethod);
             Assert.Null(requiredStringList.SetMethod);
@@ -54,8 +54,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequiredNullableListsOnInputsAreWriteable()
         {
-            var requiredIntList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredNullableIntList", BindingFlags.Public | BindingFlags.Instance);
-            var requiredStringList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredNullableStringList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredIntList = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredNullableIntList), BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(InputModel), nameof(InputModel.RequiredNullableStringList), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredIntList.SetMethod);
             Assert.NotNull(requiredStringList.SetMethod);
@@ -64,8 +64,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequiredNullableListsOnMixedAreWriteableAndNullByDefault()
         {
-            var requiredIntList = TypeAsserts.HasProperty(typeof(RoundTripModel), "RequiredNullableIntList", BindingFlags.Public | BindingFlags.Instance);
-            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), "RequiredNullableStringList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredIntList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.RequiredNullableIntList), BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.RequiredNullableStringList), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredIntList.SetMethod);
             Assert.NotNull(requiredStringList.SetMethod);
@@ -74,8 +74,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NotRequiredNullableListsAreSetable()
         {
-            var requiredIntList = TypeAsserts.HasProperty(typeof(RoundTripModel), "NonRequiredNullableIntList", BindingFlags.Public | BindingFlags.Instance);
-            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), "NonRequiredNullableStringList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredIntList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.NonRequiredNullableIntList), BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.NonRequiredNullableStringList)BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredIntList.SetMethod);
             Assert.NotNull(requiredStringList.SetMethod);
@@ -97,10 +97,10 @@ namespace AutoRest.TestServer.Tests
             var inputModel = CreateInputModel();
 
             var element = JsonAsserts.AssertSerializes(inputModel);
-            Assert.False(element.TryGetProperty("NonRequiredNullableInt", out _));
-            Assert.False(element.TryGetProperty("NonRequiredNullableString", out _));
-            Assert.False(element.TryGetProperty("NonRequiredNullableIntList", out _));
-            Assert.False(element.TryGetProperty("NonRequiredNullableStringList", out _));
+            Assert.False(element.TryGetProperty("nonRequiredNullableInt", out _));
+            Assert.False(element.TryGetProperty("nonRequiredNullableString", out _));
+            Assert.False(element.TryGetProperty("nonRequiredNullableIntList", out _));
+            Assert.False(element.TryGetProperty("nonRequiredNullableStringList", out _));
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace AutoRest.TestServer.Tests
                 Array.Empty<int>(),
                 Array.Empty<string>(),
                 Array.Empty<CollectionItem>(),
-                new Dictionary<string,RecordItem>(),
+                new Dictionary<string, RecordItem>(),
                 Array.Empty<float?>(),
                 Array.Empty<bool?>(),
                 null,
@@ -263,8 +263,8 @@ namespace AutoRest.TestServer.Tests
         public void NullablePropertiesDeserializedAsValues()
         {
             var model = RoundTripModel.DeserializeRoundTripModel(JsonDocument.Parse("{\"requiredNullableIntList\":[1,2,3], \"requiredNullableStringList\": [\"a\", \"b\"]}").RootElement);
-            Assert.AreEqual(new[] {1, 2, 3}, model.RequiredNullableIntList);
-            Assert.AreEqual(new[] {"a", "b"}, model.RequiredNullableStringList);
+            Assert.AreEqual(new[] { 1, 2, 3 }, model.RequiredNullableIntList);
+            Assert.AreEqual(new[] { "a", "b" }, model.RequiredNullableStringList);
         }
 
         [Test]
@@ -330,8 +330,8 @@ namespace AutoRest.TestServer.Tests
 
             var element = JsonAsserts.AssertSerializes(inputModel);
 
-            Assert.False(element.TryGetProperty("NonRequiredStringList", out _));
-            Assert.False(element.TryGetProperty("NonRequiredIntList", out _));
+            Assert.False(element.TryGetProperty("nonRequiredStringList", out _));
+            Assert.False(element.TryGetProperty("nonRequiredIntList", out _));
         }
 
         [Test]
