@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sku">
-        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
+        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
         /// Serialized Name: AvailabilitySet.sku
         /// </param>
         /// <param name="platformUpdateDomainCount">
@@ -164,7 +164,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostGroup.properties.instanceView
         /// </param>
         /// <param name="supportAutomaticPlacement">
-        /// Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to &apos;true&apos; when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
+        /// Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
         /// Serialized Name: DedicatedHostGroup.properties.supportAutomaticPlacement
         /// </param>
         /// <returns> A new <see cref="Sample.DedicatedHostGroupData"/> instance for mocking. </returns>
@@ -244,7 +244,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
         /// </param>
         /// <param name="count">
-        /// Maximum number of VMs of size vmSize that can fit in the dedicated host&apos;s remaining capacity.
+        /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
         /// <returns> A new <see cref="Models.DedicatedHostAllocatableVM"/> instance for mocking. </returns>
@@ -269,7 +269,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHost.properties.platformFaultDomain
         /// </param>
         /// <param name="autoReplaceOnFailure">
-        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to &apos;true&apos; when not provided.
+        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
         /// Serialized Name: DedicatedHost.properties.autoReplaceOnFailure
         /// </param>
         /// <param name="hostId">
@@ -408,7 +408,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineExtension.properties.publisher
         /// </param>
         /// <param name="extensionType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtension.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -564,7 +564,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachine.properties.priority
         /// </param>
         /// <param name="evictionPolicy">
-        /// Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2017-10-30-preview.
+        /// Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview.
         /// Serialized Name: VirtualMachine.properties.evictionPolicy
         /// </param>
         /// <param name="billingMaxPrice">
@@ -628,11 +628,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: ImageReference.sku
         /// </param>
         /// <param name="version">
-        /// Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or &apos;latest&apos;. Major, Minor, and Build are decimal numbers. Specify &apos;latest&apos; to use the latest version of an image available at deploy time. Even if you use &apos;latest&apos;, the VM image will not automatically update after deploy time even if a new version becomes available.
+        /// Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available.
         /// Serialized Name: ImageReference.version
         /// </param>
         /// <param name="exactVersion">
-        /// Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from &apos;version&apos;, only if the value specified in &apos;version&apos; field is &apos;latest&apos;.
+        /// Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.
         /// Serialized Name: ImageReference.exactVersion
         /// </param>
         /// <returns> A new <see cref="Models.ImageReference"/> instance for mocking. </returns>
@@ -795,7 +795,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionHandlerInstanceView. </summary>
         /// <param name="virtualMachineExtensionHandlerInstanceViewType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -905,7 +905,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
         /// <param name="status">
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
         /// </param>
         /// <param name="assessmentActivityId">
@@ -1007,7 +1007,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
         /// <param name="status">
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
         /// </param>
         /// <param name="installationActivityId">
@@ -1019,11 +1019,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: LastPatchInstallationSummary.maintenanceWindowExceeded
         /// </param>
         /// <param name="rebootStatus">
-        /// The reboot status of the machine after the patch operation. It will be in &quot;NotNeeded&quot; status if reboot is not needed after the patch operation. &quot;Required&quot; will be the status once the patch is applied and machine is required to reboot. &quot;Started&quot; will be the reboot status when the machine has started to reboot. &quot;Failed&quot; will be the status if the machine is failed to reboot. &quot;Completed&quot; will be the status once the machine is rebooted successfully
+        /// The reboot status of the machine after the patch operation. It will be in "NotNeeded" status if reboot is not needed after the patch operation. "Required" will be the status once the patch is applied and machine is required to reboot. "Started" will be the reboot status when the machine has started to reboot. "Failed" will be the status if the machine is failed to reboot. "Completed" will be the status once the machine is rebooted successfully
         /// Serialized Name: LastPatchInstallationSummary.rebootStatus
         /// </param>
         /// <param name="notSelectedPatchCount">
-        /// The number of all available patches but not going to be installed because it didn&apos;t match a classification or inclusion list entry.
+        /// The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry.
         /// Serialized Name: LastPatchInstallationSummary.notSelectedPatchCount
         /// </param>
         /// <param name="excludedPatchCount">
@@ -1141,7 +1141,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
         /// <param name="status">
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
         /// </param>
         /// <param name="assessmentActivityId">
@@ -1340,7 +1340,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.publisher
         /// </param>
         /// <param name="extensionType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -1468,7 +1468,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.publisher
         /// </param>
         /// <param name="typePropertiesType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">

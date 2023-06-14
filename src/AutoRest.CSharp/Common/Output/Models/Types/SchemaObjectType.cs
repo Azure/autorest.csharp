@@ -488,7 +488,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var objectTypeProperty = new ObjectTypeProperty(
                 memberDeclaration,
-                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDocDescription(property.Language.Default.Description),
                 propertyShouldOmitSetter,
                 property,
                 valueType,

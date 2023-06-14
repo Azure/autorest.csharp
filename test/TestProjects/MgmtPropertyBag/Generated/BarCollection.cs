@@ -72,7 +72,7 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
@@ -116,7 +116,7 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
