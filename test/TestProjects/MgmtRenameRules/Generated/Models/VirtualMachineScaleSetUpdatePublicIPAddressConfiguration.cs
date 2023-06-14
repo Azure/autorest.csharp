@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary>
-    /// Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration
+    /// Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
     /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration

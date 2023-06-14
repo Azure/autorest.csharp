@@ -48,7 +48,7 @@ namespace MgmtScopeResource.Models
         /// <param name="departmentName"> Department name. </param>
         /// <param name="consumedService"> Consumed service name. </param>
         /// <param name="costCenter"> The cost center of this department if it is a department and a costcenter exists. </param>
-        /// <param name="additionalProperties"> Additional details of this usage item. By default this is not populated, unless it&apos;s specified in $expand. </param>
+        /// <param name="additionalProperties"> Additional details of this usage item. By default this is not populated, unless it's specified in $expand. </param>
         /// <param name="publisherName"> The name of publisher. </param>
         /// <param name="planName"> The name of plan. </param>
         /// <param name="isRecurringCharge"> Flag indicating whether this is a recurring charge or not. </param>
@@ -130,7 +130,7 @@ namespace MgmtScopeResource.Models
         public string ConsumedService { get; }
         /// <summary> The cost center of this department if it is a department and a costcenter exists. </summary>
         public string CostCenter { get; }
-        /// <summary> Additional details of this usage item. By default this is not populated, unless it&apos;s specified in $expand. </summary>
+        /// <summary> Additional details of this usage item. By default this is not populated, unless it's specified in $expand. </summary>
         public string AdditionalProperties { get; }
         /// <summary> The name of publisher. </summary>
         public string PublisherName { get; }

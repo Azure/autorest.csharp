@@ -38,7 +38,7 @@ namespace MgmtMockAndSample
         /// <param name="provisioningState"> The disk encryption set provisioning state. </param>
         /// <param name="rotationToLatestKeyVersionEnabled"> Set this flag to true to enable auto-updating of this disk encryption set to the latest key version. </param>
         /// <param name="lastKeyRotationTimestamp"> The time when the active key of this disk encryption set was updated. </param>
-        /// <param name="federatedClientId"> Multi-tenant application client id to access key vault in a different tenant. Setting the value to &apos;None&apos; will clear the property. </param>
+        /// <param name="federatedClientId"> Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property. </param>
         /// <param name="minimumTlsVersion"> The minimum tls version. </param>
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample
         public bool? RotationToLatestKeyVersionEnabled { get; set; }
         /// <summary> The time when the active key of this disk encryption set was updated. </summary>
         public DateTimeOffset? LastKeyRotationTimestamp { get; }
-        /// <summary> Multi-tenant application client id to access key vault in a different tenant. Setting the value to &apos;None&apos; will clear the property. </summary>
+        /// <summary> Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property. </summary>
         public string FederatedClientId { get; set; }
         /// <summary> The minimum tls version. </summary>
         public MinimumTlsVersion? MinimumTlsVersion { get; set; }

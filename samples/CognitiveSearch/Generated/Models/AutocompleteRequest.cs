@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
         public AutocompleteRequest(string searchText, string suggesterName)
         {
@@ -28,11 +28,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> The search text on which to base autocomplete results. </summary>
         public string SearchText { get; }
-        /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </summary>
+        /// <summary> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </summary>
         public AutocompleteMode? AutocompleteMode { get; set; }
         /// <summary> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </summary>
         public string Filter { get; set; }
-        /// <summary> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </summary>
+        /// <summary> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </summary>
         public bool? UseFuzzyMatching { get; set; }
         /// <summary> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </summary>
         public string HighlightPostTag { get; set; }
@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
         public double? MinimumCoverage { get; set; }
         /// <summary> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </summary>
         public string SearchFields { get; set; }
-        /// <summary> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </summary>
+        /// <summary> The name of the suggester as specified in the suggesters collection that's part of the index definition. </summary>
         public string SuggesterName { get; }
         /// <summary> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </summary>
         public int? Top { get; set; }
