@@ -376,6 +376,7 @@ namespace PetStore.Samples
             Response response = client.GetFish("<kind>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
 
@@ -389,6 +390,7 @@ namespace PetStore.Samples
             Response response = client.GetFish("<kind>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
 
@@ -402,6 +404,7 @@ namespace PetStore.Samples
             Response response = await client.GetFishAsync("<kind>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
 
@@ -415,6 +418,7 @@ namespace PetStore.Samples
             Response response = await client.GetFishAsync("<kind>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
 
