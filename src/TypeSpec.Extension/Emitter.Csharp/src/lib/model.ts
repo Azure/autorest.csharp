@@ -58,8 +58,7 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType,
-    InputDiscriminator
+    InputUnknownType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -535,7 +534,7 @@ export function getInputType(
                 const discriminatorProperty = {
                     Name: discriminator.propertyName,
                     SerializedName: discriminator.propertyName,
-                    Description: "The discriminator",
+                    Description: "Discriminator",
                     IsRequired: true,
                     IsReadOnly: false,
                     IsNullable: false,

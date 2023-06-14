@@ -39,17 +39,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             string? discriminator = inputModel.DiscriminatorPropertyName;
-            if (discriminator is not null)
-            {
-                var originalFieldName = discriminator.ToCleanName();
-                var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
-                var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty, false);
-                fields.Add(field);
-                fieldsToInputs[field] = inputModelProperty;
-                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
-                parametersToFields[parameter.Name] = field;
-                serializationParameters.Add(parameter);
-            }
+            //if (discriminator is not null)
+            //{
+            //    var originalFieldName = discriminator.ToCleanName();
+            //    var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
+            //    var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty, false);
+            //    fields.Add(field);
+            //    fieldsToInputs[field] = inputModelProperty;
+            //    var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
+            //    parametersToFields[parameter.Name] = field;
+            //    serializationParameters.Add(parameter);
+            //}
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
 
@@ -82,8 +82,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter);
-                // only required + not readonly + not literal property could get into the public ctor
-                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
+                // only required + not readonly + not literal property + not discriminator could get into the public ctor
+                if (inputModelProperty.IsRequired &&
+                    !inputModelProperty.IsReadOnly &&
+                    !inputModelProperty.IsDiscriminator &&
+                    inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);
                 }
