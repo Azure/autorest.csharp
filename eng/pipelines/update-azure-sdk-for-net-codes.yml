@@ -10,6 +10,7 @@ parameters:
 
 jobs:
 - job: ${{ parameters.Name }}
+  displayName: Update SDK Code
   timeoutInMinutes: 60
   pool:
     name: azsdk-pool-mms-ubuntu-2004-general
@@ -81,7 +82,7 @@ jobs:
     parameters:
       BaseRepoBranch: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}
       BaseRepoOwner: azure-sdk
-      CommitMsg: Update SDK codes ${{ parameters.filter }}
+      CommitMsg: $(System.JobDisplayName)
       TargetRepoOwner: Azure
       TargetRepoName: azure-sdk-for-net
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
