@@ -17,9 +17,9 @@ namespace ModelsTypeSpec.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredCollection"u8);
+            writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
+            foreach (var item in RequiredList)
             {
                 writer.WriteObjectValue(item);
             }
@@ -33,21 +33,21 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            IList<CollectionItem> requiredCollection = default;
+            IList<CollectionItem> requiredList = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredCollection"u8))
+                if (property.NameEquals("requiredList"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    requiredCollection = array;
+                    requiredList = array;
                     continue;
                 }
             }
-            return new RecordItem(requiredCollection);
+            return new RecordItem(requiredList);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

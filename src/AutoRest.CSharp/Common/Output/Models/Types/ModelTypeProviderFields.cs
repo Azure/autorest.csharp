@@ -126,21 +126,40 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        private static bool ShouldPropertyOmitSetter(InputModelTypeUsage usage, InputModelProperty property, CSharpType type)
+        {
+            if (property.IsDiscriminator)
+            {
+                // Discriminator properties should be writeable
+                return false;
+            }
+            if (property.Type is InputLiteralType && property.IsRequired)
+            {
+                // we should remove the setter of required constant
+                return true;
+            }
+
+            var propertyShouldOmitSetter = !usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly;
+
+            if (TypeFactory.IsCollectionType(type))
+            {
+                // nullable collection should be settable
+                propertyShouldOmitSetter |= !property.Type.IsNullable;
+            }
+            else
+            {
+                // In mixed models required properties are not readonly
+                propertyShouldOmitSetter |= property.IsRequired &&
+                                usage.HasFlag(InputModelTypeUsage.Input) &&
+                                !usage.HasFlag(InputModelTypeUsage.Output);
+            }
+
+            return propertyShouldOmitSetter;
+        }
+
         private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool optionalViaNullability)
         {
-            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
-                // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
-                inputModelProperty.Type is CodeModelType type && (type.Schema is ArraySchema or DictionarySchema);
-            var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
-            var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
-            var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
-            var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
-                (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
-                (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
-                (propertyIsCollection && (!inputModelProperty.Type.IsNullable || inputModel.IsPropertyBag)) || // a property will not have setter when it is a non-nullable collection, in other words, a collection property only has setter when it is nullable
-                propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
-                propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
+            var propertyShouldOmitSetter = ShouldPropertyOmitSetter(inputModel.Usage, inputModelProperty, originalType);
 
             var valueType = originalType;
             if (optionalViaNullability)
@@ -150,7 +169,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
-            if (propertyIsDiscriminator)
+            if (inputModelProperty.IsDiscriminator)
             {
                 fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
                 setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
