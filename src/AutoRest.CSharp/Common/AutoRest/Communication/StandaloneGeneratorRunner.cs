@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
         private static void DeleteDirectory(string path, string[] keepFiles)
         {
             var directoryInfo = new DirectoryInfo(path);
-            if(!directoryInfo.Exists)
+            if (!directoryInfo.Exists)
             {
                 return;
             }
