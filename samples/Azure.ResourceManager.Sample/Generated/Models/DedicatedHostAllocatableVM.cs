@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
         /// </param>
         /// <param name="count">
-        /// Maximum number of VMs of size vmSize that can fit in the dedicated host&apos;s remaining capacity.
+        /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
         internal DedicatedHostAllocatableVM(string vmSize, double? count)
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public string VmSize { get; }
         /// <summary>
-        /// Maximum number of VMs of size vmSize that can fit in the dedicated host&apos;s remaining capacity.
+        /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </summary>
         public double? Count { get; }

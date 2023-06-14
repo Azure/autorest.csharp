@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
         /// <param name="uri">
-        /// Specifies the virtual hard disk&apos;s uri.
+        /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri
         /// </param>
         internal VirtualHardDisk(Uri uri)
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary>
-        /// Specifies the virtual hard disk&apos;s uri.
+        /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri
         /// </summary>
         public Uri Uri { get; set; }

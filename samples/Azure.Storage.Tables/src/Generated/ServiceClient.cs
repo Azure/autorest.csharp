@@ -39,11 +39,11 @@ namespace Azure.Storage.Tables
             _pipeline = pipeline;
         }
 
-        /// <summary> Sets properties for a storage account&apos;s Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> Sets properties for a storage account's Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="restype"> Required query string to set the storage service properties. </param>
         /// <param name="comp"> Required query string to set the storage service properties. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SetPropertiesAsync(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
@@ -60,11 +60,11 @@ namespace Azure.Storage.Tables
             }
         }
 
-        /// <summary> Sets properties for a storage account&apos;s Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> Sets properties for a storage account's Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="restype"> Required query string to set the storage service properties. </param>
         /// <param name="comp"> Required query string to set the storage service properties. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SetProperties(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
@@ -81,10 +81,10 @@ namespace Azure.Storage.Tables
             }
         }
 
-        /// <summary> gets the properties of a storage account&apos;s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> gets the properties of a storage account's Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="restype"> Required query string to set the storage service properties. </param>
         /// <param name="comp"> Required query string to set the storage service properties. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageServiceProperties>> GetPropertiesAsync(Enum4 restype, Enum5 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {
@@ -101,10 +101,10 @@ namespace Azure.Storage.Tables
             }
         }
 
-        /// <summary> gets the properties of a storage account&apos;s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> gets the properties of a storage account's Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="restype"> Required query string to set the storage service properties. </param>
         /// <param name="comp"> Required query string to set the storage service properties. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageServiceProperties> GetProperties(Enum4 restype, Enum5 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {
@@ -124,7 +124,7 @@ namespace Azure.Storage.Tables
         /// <summary> Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. </summary>
         /// <param name="restype"> Required query string to get storage service stats. </param>
         /// <param name="comp"> Required query string to get storage service stats. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageServiceStats>> GetStatisticsAsync(Enum4 restype, Enum6 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {
@@ -144,7 +144,7 @@ namespace Azure.Storage.Tables
         /// <summary> Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. </summary>
         /// <param name="restype"> Required query string to get storage service stats. </param>
         /// <param name="comp"> Required query string to get storage service stats. </param>
-        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageServiceStats> GetStatistics(Enum4 restype, Enum6 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {

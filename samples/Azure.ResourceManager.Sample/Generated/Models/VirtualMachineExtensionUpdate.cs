@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public string Publisher { get; set; }
         /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionUpdate.properties.type
         /// </summary>
         public string ExtensionType { get; set; }

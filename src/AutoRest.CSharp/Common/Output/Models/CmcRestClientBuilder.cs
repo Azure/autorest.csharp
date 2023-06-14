@@ -100,8 +100,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CSharpName(),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDocDescription(operation.Language.Default.Summary ?? string.Empty),
+                BuilderHelpers.EscapeXmlDocDescription(operation.Language.Default.Description),
                 responseType,
                 request,
                 methodParameters,
