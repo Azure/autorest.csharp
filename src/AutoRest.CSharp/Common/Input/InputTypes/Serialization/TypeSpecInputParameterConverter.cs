@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.Common.Input
             => throw new NotSupportedException("Writing not supported");
 
         private static InputParameter? ReadInputParameter(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
-            => reader.ReadReferenceAndResolve<InputParameter>(resolver) ?? CreateInputParameter(ref reader, null, null, options);
+            => reader.ReadReferenceAndResolve<InputParameter>(resolver) ?? CreateInputParameter(ref reader, null, null, options, resolver);
 
-        public static InputParameter CreateInputParameter(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options)
+        public static InputParameter CreateInputParameter(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
 
@@ -93,7 +93,14 @@ namespace AutoRest.CSharp.Common.Input
             InputOperationParameterKind parameterKind;
             Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out parameterKind);
 
-            return new InputParameter(name, nameInRequest, description, parameterType, requestLocation, defaultValue, virtualParameter, groupBy, parameterKind, isRequired, isApiVersion, isResourceParameter, isContentType, isEndpoint, skipUrlEncoding, explode, arraySerializationDelimiter, headerCollectionPrefix, GetSerializationFormat(parameterType, requestLocation));
+            var parameter = new InputParameter(name, nameInRequest, description, parameterType, requestLocation, defaultValue, virtualParameter, groupBy, parameterKind, isRequired, isApiVersion, isResourceParameter, isContentType, isEndpoint, skipUrlEncoding, explode, arraySerializationDelimiter, headerCollectionPrefix, GetSerializationFormat(parameterType, requestLocation));
+
+            if (id != null)
+            {
+                resolver.AddReference(id, parameter);
+            }
+
+            return parameter;
         }
 
         private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
