@@ -33,7 +33,7 @@ namespace _Type.Property.Nullable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        nullableProperty = null;
+                        nullableProperty = new ChangeTrackingList<InnerModel>();
                         continue;
                     }
                     List<InnerModel> array = new List<InnerModel>();
