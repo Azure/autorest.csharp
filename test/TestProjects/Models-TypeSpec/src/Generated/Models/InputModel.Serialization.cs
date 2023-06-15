@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
-            if (RequiredNullableModelList != null)
+            if (RequiredNullableModelList != null && Optional.IsCollectionDefined(RequiredNullableModelList))
             {
                 writer.WritePropertyName("requiredNullableModelList"u8);
                 writer.WriteStartArray();
@@ -130,7 +130,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableModelList");
             }
-            if (RequiredNullableStringList != null)
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -144,7 +144,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableStringList");
             }
-            if (RequiredNullableIntList != null)
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();

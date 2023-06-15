@@ -613,7 +613,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return null;
             }
 
-            return writer.Scope($"if ({property.PropertyName} != null)");
+            var propertyName = property.PropertyName;
+            if (TypeFactory.IsCollectionType(property.ValueType) && property.IsRequired)
+                return writer.Scope($"if ({propertyName} != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}({propertyName}))");
+
+            return writer.Scope($"if ({propertyName} != null)");
         }
 
         public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
