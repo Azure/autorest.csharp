@@ -32,7 +32,8 @@ var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 </example>
     </member>
@@ -45,7 +46,8 @@ var client = new ModelsTypeSpecClient(endpoint);
 
 Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 </example>
     </member>
@@ -219,6 +221,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -309,6 +312,7 @@ Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
 Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
 Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -385,6 +389,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -475,6 +480,7 @@ Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
 Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
 Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -1072,6 +1078,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {
+        discriminatorProperty = "",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -1130,6 +1137,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {
+        discriminatorProperty = "",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },
@@ -1203,6 +1211,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {
+        discriminatorProperty = "",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -1261,6 +1270,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {
+        discriminatorProperty = "",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },

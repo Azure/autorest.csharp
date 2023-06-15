@@ -29,7 +29,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -41,7 +42,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -53,7 +55,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -65,7 +68,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -134,6 +138,7 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -229,6 +234,7 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
             Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -306,6 +312,7 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -401,6 +408,7 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
             Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -1007,6 +1015,7 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1073,6 +1082,7 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -1150,6 +1160,7 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1216,6 +1227,7 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
