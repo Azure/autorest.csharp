@@ -1,5 +1,5 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import assert from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/codeModel.js";
 import {
@@ -7,9 +7,7 @@ import {
     createEmitterContext,
     createEmitterTestHost
 } from "./utils/TestUtil.js";
-import { InputEnumType } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
-import { stringify } from "querystring";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
