@@ -66,6 +66,8 @@ Scenarios.Models_InputToRoundTripReadOnly = passOnSuccess([
         req.expect.bodyEquals({
             requiredString: "test",
             requiredInt: 2,
+            requiredNullableString: null,
+            requiredNullableInt: null,
             requiredModel: { requiredList: [null] },
             requiredIntList: [1, 2],
             requiredStringList: ["a", null],

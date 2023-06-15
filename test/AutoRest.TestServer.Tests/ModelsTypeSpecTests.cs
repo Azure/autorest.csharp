@@ -252,11 +252,13 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NullablePropertiesDeserializedAsNullsWithNulls()
+        public void NullablePropertiesDeserializedAsUndefinedWithNulls()
         {
             var model = RoundTripModel.DeserializeRoundTripModel(JsonDocument.Parse("{\"requiredNullableIntList\":null, \"requiredNullableStringList\": null}").RootElement);
-            Assert.IsNull(model.RequiredNullableIntList);
-            Assert.IsNull(model.RequiredNullableStringList);
+            Assert.IsNotNull(model.RequiredNullableIntList);
+            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableIntList));
+            Assert.IsNotNull(model.RequiredNullableStringList);
+            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableStringList));
         }
 
         [Test]
