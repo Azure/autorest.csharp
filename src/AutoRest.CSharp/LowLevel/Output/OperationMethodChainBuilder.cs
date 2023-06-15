@@ -337,7 +337,9 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
+                            ? (operationParameter.SerializationFormat == SerializationFormat.Default
                             ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
+                            : operationParameter.SerializationFormat)
                             : requestConditionSerializationFormat;
 
                         break;

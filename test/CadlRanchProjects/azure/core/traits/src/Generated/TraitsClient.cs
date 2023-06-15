@@ -178,7 +178,7 @@ namespace _Specs_.Azure.Core.Traits
             request.Headers.Add("Accept", "application/json");
             if (requestConditions != null)
             {
-                request.Headers.Add(requestConditions, "O");
+                request.Headers.Add(requestConditions, "R");
             }
             return message;
         }
