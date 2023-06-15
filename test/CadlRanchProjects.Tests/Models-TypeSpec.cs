@@ -23,7 +23,7 @@ namespace CadlRanchProjects.Tests
             // we should not call the internal ctor. Because this test case is in the same assembly as the source code therefore we can access to the internal ctor now.
             // our customer never could.
             // when we are calling the internal ctor, we can assign null to collections, which is a case we should avoid.
-            InputModel input = new("test", 1, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false}, null, null, null);
+            InputModel input = new("test", 1, null, null, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false}, null, null, null);
             RoundTripPrimitiveModel result = await new ModelsTypeSpecClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -57,13 +57,13 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
+            InputModel input = new("test", 2, null, null, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
             RoundTripReadOnlyModel result = await new ModelsTypeSpecClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
             Assert.AreEqual(12, result.RequiredReadonlyInt);
             Assert.AreEqual(11, result.OptionalReadonlyInt);
-            Assert.IsEmpty(result.RequiredReadonlyModel.RequiredCollection);
+            Assert.IsEmpty(result.RequiredReadonlyModel.RequiredList);
             Assert.AreEqual(FixedStringEnum.One, result.RequiredReadonlyFixedStringEnum);
             Assert.AreEqual("3", result.RequiredReadonlyExtensibleEnum.ToString());
             Assert.AreEqual(FixedStringEnum.Two, result.OptionalReadonlyFixedStringEnum);
@@ -71,7 +71,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(1, result.RequiredReadonlyStringList.Count);
             Assert.AreEqual("abc", result.RequiredReadonlyStringList[0]);
             Assert.IsEmpty(result.RequiredReadonlyIntList);
-            Assert.IsEmpty(result.RequiredReadOnlyModelCollection);
+            Assert.IsEmpty(result.RequiredReadOnlyModelList);
             Assert.AreEqual(1, result.RequiredReadOnlyIntRecord.Count);
             Assert.AreEqual(1, result.RequiredReadOnlyIntRecord["test"]);
             Assert.AreEqual(1, result.RequiredStringRecord.Count);
@@ -79,10 +79,10 @@ namespace CadlRanchProjects.Tests
             Assert.IsEmpty(result.RequiredReadOnlyModelRecord);
             Assert.AreEqual(1, result.OptionalReadonlyStringList.Count);
             Assert.IsNull(result.OptionalReadonlyStringList[0]);
-            Assert.IsEmpty(result.OptionalReadOnlyModelCollection);
+            Assert.IsEmpty(result.OptionalReadOnlyModelList);
             Assert.IsEmpty(result.OptionalReadOnlyStringRecord);
             Assert.AreEqual(1, result.OptionalModelRecord.Count);
-            Assert.IsEmpty(result.OptionalModelRecord["test"].RequiredCollection);
+            Assert.IsEmpty(result.OptionalModelRecord["test"].RequiredList);
             CollectionAssert.AreEqual(new int?[] { null, 123 }, result.RequiredCollectionWithNullableIntElement);
             CollectionAssert.AreEqual(new bool?[] { null, false, true }, result.OptionalCollectionWithNullableBooleanElement);
         });

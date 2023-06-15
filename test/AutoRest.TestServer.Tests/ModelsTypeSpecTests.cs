@@ -75,7 +75,7 @@ namespace AutoRest.TestServer.Tests
         public void NotRequiredNullableListsAreSetable()
         {
             var requiredIntList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.NonRequiredNullableIntList), BindingFlags.Public | BindingFlags.Instance);
-            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.NonRequiredNullableStringList)BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(RoundTripModel), nameof(RoundTripModel.NonRequiredNullableStringList), BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredIntList.SetMethod);
             Assert.NotNull(requiredStringList.SetMethod);
