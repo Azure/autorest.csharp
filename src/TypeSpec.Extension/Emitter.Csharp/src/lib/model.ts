@@ -573,7 +573,6 @@ export function getInputType(
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            // TODO -- remove this since the above issue is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
                     getInputType(
