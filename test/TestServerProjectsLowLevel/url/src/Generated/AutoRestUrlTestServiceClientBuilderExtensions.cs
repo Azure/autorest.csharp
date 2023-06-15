@@ -37,7 +37,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <summary> Registers a <see cref="PathItemsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
+        /// <param name="globalStringPath"> A string value 'globalItemStringPath' that appears in the path. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
         /// <param name="globalStringQuery"> should contain value null. </param>

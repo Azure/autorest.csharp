@@ -48,7 +48,7 @@ namespace body_time
             return message;
         }
 
-        /// <summary> Get time value &quot;11:34:56&quot;. </summary>
+        /// <summary> Get time value "11:34:56". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<TimeSpan>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -68,7 +68,7 @@ namespace body_time
             }
         }
 
-        /// <summary> Get time value &quot;11:34:56&quot;. </summary>
+        /// <summary> Get time value "11:34:56". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> Get(CancellationToken cancellationToken = default)
         {
@@ -105,8 +105,8 @@ namespace body_time
             return message;
         }
 
-        /// <summary> Put time value &quot;08:07:56&quot;. </summary>
-        /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
+        /// <summary> Put time value "08:07:56". </summary>
+        /// <param name="timeBody"> Put time value "08:07:56" in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
@@ -126,8 +126,8 @@ namespace body_time
             }
         }
 
-        /// <summary> Put time value &quot;08:07:56&quot;. </summary>
-        /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
+        /// <summary> Put time value "08:07:56". </summary>
+        /// <param name="timeBody"> Put time value "08:07:56" in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> Put(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {

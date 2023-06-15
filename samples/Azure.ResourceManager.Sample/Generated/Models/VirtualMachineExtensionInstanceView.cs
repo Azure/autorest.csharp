@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineExtensionInstanceView.name
         /// </param>
         /// <param name="virtualMachineExtensionInstanceViewType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionInstanceView.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionInstanceView.type
         /// </summary>
         public string VirtualMachineExtensionInstanceViewType { get; set; }

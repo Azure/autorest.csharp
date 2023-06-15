@@ -16,17 +16,17 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
-        /// <param name="language"> Returned value should be &apos;english&apos;. </param>
-        /// <param name="content"> Returned value should be &apos;I am text&apos;. </param>
+        /// <param name="language"> Returned value should be 'english'. </param>
+        /// <param name="content"> Returned value should be 'I am text'. </param>
         internal ObjectWithXMsTextProperty(string language, string content)
         {
             Language = language;
             Content = content;
         }
 
-        /// <summary> Returned value should be &apos;english&apos;. </summary>
+        /// <summary> Returned value should be 'english'. </summary>
         public string Language { get; }
-        /// <summary> Returned value should be &apos;I am text&apos;. </summary>
+        /// <summary> Returned value should be 'I am text'. </summary>
         public string Content { get; }
     }
 }

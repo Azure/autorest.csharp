@@ -119,7 +119,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn't have a parameter with `x-ms-resource-identifier: true`.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,7 +144,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn't have a parameter with `x-ms-resource-identifier: true`.
         /// <list type="bullet">
         /// <item>
         /// <description>

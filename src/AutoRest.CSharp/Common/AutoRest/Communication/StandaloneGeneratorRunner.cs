@@ -92,6 +92,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
         private static void DeleteDirectory(string path, string[] keepFiles)
         {
             var directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+            {
+                return;
+            }
             foreach (FileInfo file in directoryInfo.GetFiles())
             {
                 if (keepFiles.Contains(file.Name))

@@ -562,7 +562,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -596,7 +596,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// [Protocol Method] Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
         /// <list type="bullet">
         /// <item>
         /// <description>

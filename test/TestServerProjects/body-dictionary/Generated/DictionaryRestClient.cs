@@ -495,7 +495,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <summary> Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
@@ -520,7 +520,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <summary> Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
@@ -568,7 +568,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
         /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -590,7 +590,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
         /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -625,7 +625,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
+        /// <summary> Get boolean dictionary value {"0": true, "1": null, "2": false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -650,7 +650,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
+        /// <summary> Get boolean dictionary value {"0": true, "1": null, "2": false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -688,7 +688,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
+        /// <summary> Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -713,7 +713,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
+        /// <summary> Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
@@ -751,7 +751,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
@@ -776,7 +776,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
@@ -824,7 +824,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -846,7 +846,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -881,7 +881,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": null, "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -906,7 +906,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": null, "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -944,7 +944,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": "integer", "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -969,7 +969,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": "integer", "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
@@ -1007,7 +1007,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1032,7 +1032,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
         {
@@ -1080,7 +1080,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1102,7 +1102,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1137,7 +1137,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get long dictionary value {"0": 1, "1": null, "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1162,7 +1162,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get long dictionary value {"0": 1, "1": null, "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -1200,7 +1200,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get long dictionary value {"0": 1, "1": "integer", "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -1225,7 +1225,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <summary> Get long dictionary value {"0": 1, "1": "integer", "2": 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
@@ -1263,7 +1263,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1288,7 +1288,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
@@ -1336,7 +1336,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1358,7 +1358,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1393,7 +1393,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1418,7 +1418,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -1456,7 +1456,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <summary> Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -1481,7 +1481,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <summary> Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
@@ -1519,7 +1519,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1544,7 +1544,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
@@ -1592,7 +1592,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1614,7 +1614,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1649,7 +1649,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1674,7 +1674,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <summary> Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -1712,7 +1712,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <summary> Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -1737,7 +1737,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <summary> Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
@@ -1775,7 +1775,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1800,7 +1800,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
         {
@@ -1848,7 +1848,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1870,7 +1870,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1905,7 +1905,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1930,7 +1930,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
@@ -1968,7 +1968,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
@@ -1993,7 +1993,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <summary> Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
@@ -2031,7 +2031,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <summary> Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2056,7 +2056,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <summary> Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
@@ -2104,7 +2104,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2126,7 +2126,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2161,7 +2161,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -2186,7 +2186,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -2224,7 +2224,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2011-03-22", "1": "date"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
@@ -2249,7 +2249,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2011-03-22", "1": "date"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
@@ -2287,7 +2287,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <summary> Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2312,7 +2312,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <summary> Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
@@ -2360,7 +2360,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2382,7 +2382,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2417,7 +2417,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
+        /// <summary> Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -2442,7 +2442,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
+        /// <summary> Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -2480,7 +2480,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
@@ -2505,7 +2505,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
+        /// <summary> Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
@@ -2543,7 +2543,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <summary> Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2568,7 +2568,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <summary> Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
@@ -2616,7 +2616,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2638,7 +2638,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2673,7 +2673,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <summary> Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2698,7 +2698,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <summary> Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
@@ -2746,7 +2746,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2768,7 +2768,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2803,7 +2803,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
+        /// <summary> Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2828,7 +2828,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
+        /// <summary> Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
@@ -2876,7 +2876,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
+        /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2898,7 +2898,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
+        /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2933,7 +2933,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
+        /// <summary> Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -2958,7 +2958,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
+        /// <summary> Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -2996,7 +2996,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
+        /// <summary> Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
@@ -3021,7 +3021,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
+        /// <summary> Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
@@ -3199,7 +3199,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -3224,7 +3224,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
@@ -3262,7 +3262,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -3287,7 +3287,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -3325,7 +3325,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
@@ -3350,7 +3350,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
         {
@@ -3398,7 +3398,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -3420,7 +3420,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -3643,7 +3643,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -3680,7 +3680,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
@@ -3730,7 +3730,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -3767,7 +3767,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -3817,7 +3817,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
@@ -3854,7 +3854,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
@@ -3924,7 +3924,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -3946,7 +3946,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -4155,7 +4155,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -4192,7 +4192,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
@@ -4242,7 +4242,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -4279,7 +4279,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -4329,7 +4329,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
@@ -4366,7 +4366,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
@@ -4437,7 +4437,7 @@ namespace body_dictionary
             return message;
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -4459,7 +4459,7 @@ namespace body_dictionary
             }
         }
 
-        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>

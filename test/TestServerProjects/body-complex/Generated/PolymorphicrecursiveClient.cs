@@ -76,54 +76,54 @@ namespace body_complex
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
         /// {
-        ///     &quot;fishtype&quot;: &quot;salmon&quot;,
-        ///     &quot;species&quot;: &quot;king&quot;,
-        ///     &quot;length&quot;: 1,
-        ///     &quot;age&quot;: 1,
-        ///     &quot;location&quot;: &quot;alaska&quot;,
-        ///     &quot;iswild&quot;: true,
-        ///     &quot;siblings&quot;: [
+        ///     "fishtype": "salmon",
+        ///     "species": "king",
+        ///     "length": 1,
+        ///     "age": 1,
+        ///     "location": "alaska",
+        ///     "iswild": true,
+        ///     "siblings": [
         ///         {
-        ///             &quot;fishtype&quot;: &quot;shark&quot;,
-        ///             &quot;species&quot;: &quot;predator&quot;,
-        ///             &quot;length&quot;: 20,
-        ///             &quot;age&quot;: 6,
-        ///             &quot;siblings&quot;: [
+        ///             "fishtype": "shark",
+        ///             "species": "predator",
+        ///             "length": 20,
+        ///             "age": 6,
+        ///             "siblings": [
         ///                 {
-        ///                     &quot;fishtype&quot;: &quot;salmon&quot;,
-        ///                     &quot;species&quot;: &quot;coho&quot;,
-        ///                     &quot;length&quot;: 2,
-        ///                     &quot;age&quot;: 2,
-        ///                     &quot;location&quot;: &quot;atlantic&quot;,
-        ///                     &quot;iswild&quot;: true,
-        ///                     &quot;siblings&quot;: [
+        ///                     "fishtype": "salmon",
+        ///                     "species": "coho",
+        ///                     "length": 2,
+        ///                     "age": 2,
+        ///                     "location": "atlantic",
+        ///                     "iswild": true,
+        ///                     "siblings": [
         ///                         {
-        ///                             &quot;fishtype&quot;: &quot;shark&quot;,
-        ///                             &quot;species&quot;: &quot;predator&quot;,
-        ///                             &quot;length&quot;: 20,
-        ///                             &quot;age&quot;: 6
+        ///                             "fishtype": "shark",
+        ///                             "species": "predator",
+        ///                             "length": 20,
+        ///                             "age": 6
         ///                         },
         ///                         {
-        ///                             &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///                             &quot;species&quot;: &quot;dangerous&quot;,
-        ///                             &quot;length&quot;: 10,
-        ///                             &quot;age&quot;: 105
+        ///                             "fishtype": "sawshark",
+        ///                             "species": "dangerous",
+        ///                             "length": 10,
+        ///                             "age": 105
         ///                         }
         ///                     ]
         ///                 },
         ///                 {
-        ///                     &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///                     &quot;species&quot;: &quot;dangerous&quot;,
-        ///                     &quot;length&quot;: 10,
-        ///                     &quot;age&quot;: 105
+        ///                     "fishtype": "sawshark",
+        ///                     "species": "dangerous",
+        ///                     "length": 10,
+        ///                     "age": 105
         ///                 }
         ///             ]
         ///         },
         ///         {
-        ///             &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///             &quot;species&quot;: &quot;dangerous&quot;,
-        ///             &quot;length&quot;: 10,
-        ///             &quot;age&quot;: 105
+        ///             "fishtype": "sawshark",
+        ///             "species": "dangerous",
+        ///             "length": 10,
+        ///             "age": 105
         ///         }
         ///     ]
         /// }
@@ -148,54 +148,54 @@ namespace body_complex
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
         /// {
-        ///     &quot;fishtype&quot;: &quot;salmon&quot;,
-        ///     &quot;species&quot;: &quot;king&quot;,
-        ///     &quot;length&quot;: 1,
-        ///     &quot;age&quot;: 1,
-        ///     &quot;location&quot;: &quot;alaska&quot;,
-        ///     &quot;iswild&quot;: true,
-        ///     &quot;siblings&quot;: [
+        ///     "fishtype": "salmon",
+        ///     "species": "king",
+        ///     "length": 1,
+        ///     "age": 1,
+        ///     "location": "alaska",
+        ///     "iswild": true,
+        ///     "siblings": [
         ///         {
-        ///             &quot;fishtype&quot;: &quot;shark&quot;,
-        ///             &quot;species&quot;: &quot;predator&quot;,
-        ///             &quot;length&quot;: 20,
-        ///             &quot;age&quot;: 6,
-        ///             &quot;siblings&quot;: [
+        ///             "fishtype": "shark",
+        ///             "species": "predator",
+        ///             "length": 20,
+        ///             "age": 6,
+        ///             "siblings": [
         ///                 {
-        ///                     &quot;fishtype&quot;: &quot;salmon&quot;,
-        ///                     &quot;species&quot;: &quot;coho&quot;,
-        ///                     &quot;length&quot;: 2,
-        ///                     &quot;age&quot;: 2,
-        ///                     &quot;location&quot;: &quot;atlantic&quot;,
-        ///                     &quot;iswild&quot;: true,
-        ///                     &quot;siblings&quot;: [
+        ///                     "fishtype": "salmon",
+        ///                     "species": "coho",
+        ///                     "length": 2,
+        ///                     "age": 2,
+        ///                     "location": "atlantic",
+        ///                     "iswild": true,
+        ///                     "siblings": [
         ///                         {
-        ///                             &quot;fishtype&quot;: &quot;shark&quot;,
-        ///                             &quot;species&quot;: &quot;predator&quot;,
-        ///                             &quot;length&quot;: 20,
-        ///                             &quot;age&quot;: 6
+        ///                             "fishtype": "shark",
+        ///                             "species": "predator",
+        ///                             "length": 20,
+        ///                             "age": 6
         ///                         },
         ///                         {
-        ///                             &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///                             &quot;species&quot;: &quot;dangerous&quot;,
-        ///                             &quot;length&quot;: 10,
-        ///                             &quot;age&quot;: 105
+        ///                             "fishtype": "sawshark",
+        ///                             "species": "dangerous",
+        ///                             "length": 10,
+        ///                             "age": 105
         ///                         }
         ///                     ]
         ///                 },
         ///                 {
-        ///                     &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///                     &quot;species&quot;: &quot;dangerous&quot;,
-        ///                     &quot;length&quot;: 10,
-        ///                     &quot;age&quot;: 105
+        ///                     "fishtype": "sawshark",
+        ///                     "species": "dangerous",
+        ///                     "length": 10,
+        ///                     "age": 105
         ///                 }
         ///             ]
         ///         },
         ///         {
-        ///             &quot;fishtype&quot;: &quot;sawshark&quot;,
-        ///             &quot;species&quot;: &quot;dangerous&quot;,
-        ///             &quot;length&quot;: 10,
-        ///             &quot;age&quot;: 105
+        ///             "fishtype": "sawshark",
+        ///             "species": "dangerous",
+        ///             "length": 10,
+        ///             "age": 105
         ///         }
         ///     ]
         /// }

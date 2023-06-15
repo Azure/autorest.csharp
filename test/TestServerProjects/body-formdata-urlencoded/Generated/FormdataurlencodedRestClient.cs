@@ -124,7 +124,7 @@ namespace body_formdata_urlencoded
             return message;
         }
 
-        /// <summary> Test a partially constant formdata body. Pass in { grant_type: &apos;access_token&apos;, access_token: &apos;foo&apos;, service: &apos;bar&apos; } to pass the test. </summary>
+        /// <summary> Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test. </summary>
         /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
@@ -152,7 +152,7 @@ namespace body_formdata_urlencoded
             }
         }
 
-        /// <summary> Test a partially constant formdata body. Pass in { grant_type: &apos;access_token&apos;, access_token: &apos;foo&apos;, service: &apos;bar&apos; } to pass the test. </summary>
+        /// <summary> Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test. </summary>
         /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>

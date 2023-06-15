@@ -52,7 +52,7 @@ namespace body_complex
             return message;
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary> Get complex type {id: 2, name: 'abc', color: 'YELLOW'}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
@@ -72,7 +72,7 @@ namespace body_complex
             }
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary> Get complex type {id: 2, name: 'abc', color: 'YELLOW'}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetValid(CancellationToken cancellationToken = default)
         {
@@ -110,8 +110,8 @@ namespace body_complex
             return message;
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
+        /// <summary> Please put {id: 2, name: 'abc', color: 'Magenta'}. </summary>
+        /// <param name="complexBody"> Please put {id: 2, name: 'abc', color: 'Magenta'}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
@@ -132,8 +132,8 @@ namespace body_complex
             }
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
+        /// <summary> Please put {id: 2, name: 'abc', color: 'Magenta'}. </summary>
+        /// <param name="complexBody"> Please put {id: 2, name: 'abc', color: 'Magenta'}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutValid(Basic complexBody, CancellationToken cancellationToken = default)
@@ -326,7 +326,7 @@ namespace body_complex
             return message;
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary> Get a basic complex type while the server doesn't provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
@@ -346,7 +346,7 @@ namespace body_complex
             }
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary> Get a basic complex type while the server doesn't provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)
         {

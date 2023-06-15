@@ -35,8 +35,8 @@ namespace custom_baseUrl_more_options_LowLevel
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. The default is "host". </param>
-        /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
+        /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dnsSuffix"/>, <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -45,8 +45,8 @@ namespace custom_baseUrl_more_options_LowLevel
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. The default is "host". </param>
-        /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
+        /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dnsSuffix"/>, <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
@@ -77,8 +77,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
-        /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
-        /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
+        /// <param name="keyName"> The key name with value 'key1'. </param>
+        /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -117,8 +117,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
-        /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
-        /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
+        /// <param name="keyName"> The key name with value 'key1'. </param>
+        /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>

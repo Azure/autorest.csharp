@@ -109,7 +109,7 @@ namespace model_flattening
             }
         }
 
-        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
+        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
@@ -127,7 +127,7 @@ namespace model_flattening
             }
         }
 
-        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
+        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
@@ -145,7 +145,7 @@ namespace model_flattening
             }
         }
 
-        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
+        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
@@ -162,7 +162,7 @@ namespace model_flattening
             }
         }
 
-        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
+        /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {

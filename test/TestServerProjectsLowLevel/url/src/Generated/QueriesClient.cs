@@ -241,7 +241,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get '1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -271,7 +271,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get '1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -301,7 +301,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get '-1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -331,7 +331,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get '-1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -423,7 +423,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -453,7 +453,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -483,7 +483,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '-10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -513,7 +513,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '-10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -543,7 +543,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;null 64 bit integer value (no query param in uri)
+        /// [Protocol Method] Get 'null 64 bit integer value (no query param in uri)
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -574,7 +574,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;null 64 bit integer value (no query param in uri)
+        /// [Protocol Method] Get 'null 64 bit integer value (no query param in uri)
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -605,7 +605,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get '1.034E+20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -635,7 +635,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get '1.034E+20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -665,7 +665,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get '-1.034E-20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -695,7 +695,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get '-1.034E-20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -787,7 +787,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get '9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -817,7 +817,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get '9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -847,7 +847,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get '-9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -877,7 +877,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get '-9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -969,7 +969,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -999,7 +999,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1029,7 +1029,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1059,7 +1059,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1089,7 +1089,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos;
+        /// [Protocol Method] Get ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1119,7 +1119,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos;
+        /// [Protocol Method] Get ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1211,7 +1211,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get using uri with query parameter &apos;green color&apos;
+        /// [Protocol Method] Get using uri with query parameter 'green color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1220,7 +1220,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumQuery"> 'green color' enum value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1242,7 +1242,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get using uri with query parameter &apos;green color&apos;
+        /// [Protocol Method] Get using uri with query parameter 'green color'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1251,7 +1251,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumQuery"> 'green color' enum value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1282,7 +1282,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1313,7 +1313,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1335,7 +1335,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1344,7 +1344,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="byteQuery"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1366,7 +1366,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1375,7 +1375,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="byteQuery"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1397,7 +1397,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos; as byte array
+        /// [Protocol Method] Get '' as byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1427,7 +1427,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos; as byte array
+        /// [Protocol Method] Get '' as byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1519,7 +1519,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get '2012-01-01' as date
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1549,7 +1549,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get '2012-01-01' as date
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1641,7 +1641,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get '2012-01-01T01:01:01Z' as date-time
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1671,7 +1671,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get '2012-01-01T01:01:01Z' as date-time
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1763,7 +1763,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1772,7 +1772,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1794,7 +1794,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1803,7 +1803,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1949,7 +1949,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service
+        /// [Protocol Method] Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1958,7 +1958,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1980,7 +1980,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service
+        /// [Protocol Method] Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1989,7 +1989,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2011,7 +2011,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2020,7 +2020,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2042,7 +2042,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2051,7 +2051,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2073,7 +2073,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2082,7 +2082,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2104,7 +2104,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2113,7 +2113,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2135,7 +2135,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2144,7 +2144,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -2166,7 +2166,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format
+        /// [Protocol Method] Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2175,7 +2175,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

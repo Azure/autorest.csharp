@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Represents a resource&apos;s usage and quota. </summary>
+    /// <summary> Represents a resource's usage and quota. </summary>
     public partial class ResourceCounter
     {
         /// <summary> Initializes a new instance of ResourceCounter. </summary>

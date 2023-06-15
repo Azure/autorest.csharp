@@ -51,7 +51,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method] Adds a user or updates a user&apos;s fields.
+        /// [Protocol Method] Adds a user or updates a user's fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -86,7 +86,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method] Adds a user or updates a user&apos;s fields.
+        /// [Protocol Method] Adds a user or updates a user's fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -95,7 +95,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -120,8 +120,8 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <summary> Adds a user or replaces a user's fields. </summary>
+        /// <param name="id"> The user's id. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
@@ -136,8 +136,8 @@ namespace _Specs_.Azure.Core.Basic
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <summary> Adds a user or replaces a user's fields. </summary>
+        /// <param name="id"> The user's id. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
@@ -153,7 +153,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user's fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -167,7 +167,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -193,7 +193,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method] Adds a user or replaces a user&apos;s fields.
+        /// [Protocol Method] Adds a user or replaces a user's fields.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +207,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -233,7 +233,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Gets a user. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,CancellationToken)']/*" />
@@ -245,7 +245,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Gets a user. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,CancellationToken)']/*" />
@@ -271,7 +271,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -307,7 +307,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -338,7 +338,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -369,7 +369,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -391,7 +391,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports a user. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
@@ -407,7 +407,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports a user. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
@@ -437,7 +437,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
@@ -477,7 +477,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>

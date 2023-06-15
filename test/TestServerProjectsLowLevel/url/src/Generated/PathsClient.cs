@@ -179,7 +179,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get '1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -209,7 +209,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1000000&apos; integer value
+        /// [Protocol Method] Get '1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -239,7 +239,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get '-1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -269,7 +269,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1000000&apos; integer value
+        /// [Protocol Method] Get '-1000000' integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -299,7 +299,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -329,7 +329,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -359,7 +359,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '-10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -389,7 +389,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-10000000000&apos; 64 bit integer value
+        /// [Protocol Method] Get '-10000000000' 64 bit integer value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -419,7 +419,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get '1.034E+20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -449,7 +449,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;1.034E+20&apos; numeric value
+        /// [Protocol Method] Get '1.034E+20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -479,7 +479,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get '-1.034E-20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -509,7 +509,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-1.034E-20&apos; numeric value
+        /// [Protocol Method] Get '-1.034E-20' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -539,7 +539,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get '9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -569,7 +569,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;9999999.999&apos; numeric value
+        /// [Protocol Method] Get '9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -599,7 +599,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get '-9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -629,7 +629,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;-9999999.999&apos; numeric value
+        /// [Protocol Method] Get '-9999999.999' numeric value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -659,7 +659,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -689,7 +689,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -719,7 +719,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -749,7 +749,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end
+        /// [Protocol Method] Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -779,7 +779,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@&amp;=+$,end
+        /// [Protocol Method] Get 'begin!*'();:@&amp;=+$,end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -809,7 +809,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;begin!*&apos;();:@&amp;=+$,end
+        /// [Protocol Method] Get 'begin!*'();:@&amp;=+$,end
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -839,7 +839,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos;
+        /// [Protocol Method] Get ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -869,7 +869,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos;
+        /// [Protocol Method] Get ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -969,7 +969,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get using uri with &apos;green color&apos; in path parameter
+        /// [Protocol Method] Get using uri with 'green color' in path parameter
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -978,7 +978,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1004,7 +1004,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get using uri with &apos;green color&apos; in path parameter
+        /// [Protocol Method] Get using uri with 'green color' in path parameter
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1013,7 +1013,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1048,7 +1048,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1083,7 +1083,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1109,7 +1109,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1118,7 +1118,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1143,7 +1143,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array
+        /// [Protocol Method] Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1152,7 +1152,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1177,7 +1177,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos; as byte array
+        /// [Protocol Method] Get '' as byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1207,7 +1207,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;&apos; as byte array
+        /// [Protocol Method] Get '' as byte array
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1305,7 +1305,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get '2012-01-01' as date
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1335,7 +1335,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01&apos; as date
+        /// [Protocol Method] Get '2012-01-01' as date
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1427,7 +1427,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get '2012-01-01T01:01:01Z' as date-time
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1457,7 +1457,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;2012-01-01T01:01:01Z&apos; as date-time
+        /// [Protocol Method] Get '2012-01-01T01:01:01Z' as date-time
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1549,7 +1549,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
+        /// [Protocol Method] Get 'lorem' encoded value as 'bG9yZW0' (base64url)
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1583,7 +1583,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url)
+        /// [Protocol Method] Get 'lorem' encoded value as 'bG9yZW0' (base64url)
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1617,7 +1617,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1626,7 +1626,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayPath"> an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1651,7 +1651,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format
+        /// [Protocol Method] Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1660,7 +1660,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayPath"> an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1685,7 +1685,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
+        /// [Protocol Method] Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1716,7 +1716,7 @@ namespace url_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time)
+        /// [Protocol Method] Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
         /// <list type="bullet">
         /// <item>
         /// <description>

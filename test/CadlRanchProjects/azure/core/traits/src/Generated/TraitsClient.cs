@@ -50,7 +50,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Get a resource, sending and receiving headers. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -66,7 +66,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Get a resource, sending and receiving headers. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -96,7 +96,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -137,7 +137,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

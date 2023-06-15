@@ -10,13 +10,13 @@ namespace media_types.Models
     /// <summary> Content type for upload. </summary>
     public enum ContentType
     {
-        /// <summary> Content Type &apos;application/pdf&apos;. </summary>
+        /// <summary> Content Type 'application/pdf'. </summary>
         ApplicationPdf,
-        /// <summary> Content Type &apos;image/jpeg&apos;. </summary>
+        /// <summary> Content Type 'image/jpeg'. </summary>
         ImageJpeg,
-        /// <summary> Content Type &apos;image/png&apos;. </summary>
+        /// <summary> Content Type 'image/png'. </summary>
         ImagePng,
-        /// <summary> Content Type &apos;image/tiff&apos;. </summary>
+        /// <summary> Content Type 'image/tiff'. </summary>
         ImageTiff
     }
 }

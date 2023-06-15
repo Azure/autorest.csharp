@@ -38,7 +38,7 @@ namespace multiple_inheritance
             _pipeline = pipeline;
         }
 
-        /// <summary> Get a horse with name &apos;Fred&apos; and isAShowHorse true. </summary>
+        /// <summary> Get a horse with name 'Fred' and isAShowHorse true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Horse>> GetHorseAsync(CancellationToken cancellationToken = default)
         {
@@ -55,7 +55,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a horse with name &apos;Fred&apos; and isAShowHorse true. </summary>
+        /// <summary> Get a horse with name 'Fred' and isAShowHorse true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Horse> GetHorse(CancellationToken cancellationToken = default)
         {
@@ -72,8 +72,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a horse with name &apos;General&apos; and isAShowHorse false. </summary>
-        /// <param name="horse"> Put a horse with name &apos;General&apos; and isAShowHorse false. </param>
+        /// <summary> Put a horse with name 'General' and isAShowHorse false. </summary>
+        /// <param name="horse"> Put a horse with name 'General' and isAShowHorse false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutHorseAsync(Horse horse, CancellationToken cancellationToken = default)
         {
@@ -90,8 +90,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a horse with name &apos;General&apos; and isAShowHorse false. </summary>
-        /// <param name="horse"> Put a horse with name &apos;General&apos; and isAShowHorse false. </param>
+        /// <summary> Put a horse with name 'General' and isAShowHorse false. </summary>
+        /// <param name="horse"> Put a horse with name 'General' and isAShowHorse false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> PutHorse(Horse horse, CancellationToken cancellationToken = default)
         {
@@ -108,7 +108,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a pet with name &apos;Peanut&apos;. </summary>
+        /// <summary> Get a pet with name 'Peanut'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Pet>> GetPetAsync(CancellationToken cancellationToken = default)
         {
@@ -125,7 +125,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a pet with name &apos;Peanut&apos;. </summary>
+        /// <summary> Get a pet with name 'Peanut'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Pet> GetPet(CancellationToken cancellationToken = default)
         {
@@ -142,8 +142,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a pet with name &apos;Butter&apos;. </summary>
-        /// <param name="pet"> Put a pet with name &apos;Butter&apos;. </param>
+        /// <summary> Put a pet with name 'Butter'. </summary>
+        /// <param name="pet"> Put a pet with name 'Butter'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutPetAsync(Pet pet, CancellationToken cancellationToken = default)
         {
@@ -160,8 +160,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a pet with name &apos;Butter&apos;. </summary>
-        /// <param name="pet"> Put a pet with name &apos;Butter&apos;. </param>
+        /// <summary> Put a pet with name 'Butter'. </summary>
+        /// <param name="pet"> Put a pet with name 'Butter'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> PutPet(Pet pet, CancellationToken cancellationToken = default)
         {
@@ -212,8 +212,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a feline who hisses and doesn&apos;t meow. </summary>
-        /// <param name="feline"> Put a feline who hisses and doesn&apos;t meow. </param>
+        /// <summary> Put a feline who hisses and doesn't meow. </summary>
+        /// <param name="feline"> Put a feline who hisses and doesn't meow. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutFelineAsync(Feline feline, CancellationToken cancellationToken = default)
         {
@@ -230,8 +230,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a feline who hisses and doesn&apos;t meow. </summary>
-        /// <param name="feline"> Put a feline who hisses and doesn&apos;t meow. </param>
+        /// <summary> Put a feline who hisses and doesn't meow. </summary>
+        /// <param name="feline"> Put a feline who hisses and doesn't meow. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> PutFeline(Feline feline, CancellationToken cancellationToken = default)
         {
@@ -248,7 +248,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a cat with name &apos;Whiskers&apos; where likesMilk, meows, and hisses is true. </summary>
+        /// <summary> Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Cat>> GetCatAsync(CancellationToken cancellationToken = default)
         {
@@ -265,7 +265,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a cat with name &apos;Whiskers&apos; where likesMilk, meows, and hisses is true. </summary>
+        /// <summary> Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Cat> GetCat(CancellationToken cancellationToken = default)
         {
@@ -282,8 +282,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </summary>
-        /// <param name="cat"> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </param>
+        /// <summary> Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true. </summary>
+        /// <param name="cat"> Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutCatAsync(Cat cat, CancellationToken cancellationToken = default)
         {
@@ -300,8 +300,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </summary>
-        /// <param name="cat"> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </param>
+        /// <summary> Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true. </summary>
+        /// <param name="cat"> Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> PutCat(Cat cat, CancellationToken cancellationToken = default)
         {
@@ -318,7 +318,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a kitten with name &apos;Gatito&apos; where likesMilk and meows is true, and hisses and eatsMiceYet is false. </summary>
+        /// <summary> Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Kitten>> GetKittenAsync(CancellationToken cancellationToken = default)
         {
@@ -335,7 +335,7 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Get a kitten with name &apos;Gatito&apos; where likesMilk and meows is true, and hisses and eatsMiceYet is false. </summary>
+        /// <summary> Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Kitten> GetKitten(CancellationToken cancellationToken = default)
         {
@@ -352,8 +352,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
-        /// <param name="kitten"> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
+        /// <summary> Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
+        /// <param name="kitten"> Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutKittenAsync(Kitten kitten, CancellationToken cancellationToken = default)
         {
@@ -370,8 +370,8 @@ namespace multiple_inheritance
             }
         }
 
-        /// <summary> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
-        /// <param name="kitten"> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
+        /// <summary> Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
+        /// <param name="kitten"> Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> PutKitten(Kitten kitten, CancellationToken cancellationToken = default)
         {

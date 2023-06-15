@@ -15,9 +15,9 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> &apos;from&apos; is a reserved word. Pass in &apos;bob&apos; to pass. </summary>
+        /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>
         public string From { get; set; }
-        /// <summary> &apos;accept&apos; is a reserved word. Pass in &apos;yes&apos; to pass. </summary>
+        /// <summary> 'accept' is a reserved word. Pass in 'yes' to pass. </summary>
         public string Accept { get; set; }
     }
 }

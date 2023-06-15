@@ -48,7 +48,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -63,7 +63,7 @@ namespace azure_special_properties
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMethodLocalValid(CancellationToken cancellationToken = default)
         {
@@ -141,7 +141,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -156,7 +156,7 @@ namespace azure_special_properties
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetPathLocalValid(CancellationToken cancellationToken = default)
         {
@@ -185,7 +185,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -200,7 +200,7 @@ namespace azure_special_properties
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetSwaggerLocalValid(CancellationToken cancellationToken = default)
         {

@@ -52,7 +52,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen'ed as a resource client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -86,7 +86,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen'ed as a resource client.
         /// <list type="bullet">
         /// <item>
         /// <description>
