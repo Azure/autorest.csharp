@@ -12,7 +12,7 @@ import {
 } from "@typespec/compiler";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import fs from "fs";
+import fs, { existsSync } from "fs";
 import path from "node:path";
 import { Configuration } from "./type/configuration.js";
 import { execSync } from "child_process";
@@ -151,7 +151,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             if (options.skipSDKGeneration !== true) {
-                const newProjectOption = options["new-project"]
+                const csProjFile = resolvePath(outputFolder, `${configurations.LibraryName}.csproj`);
+                logger.verbose(`Checking if ${csProjFile} exists`)
+                const newProjectOption = options["new-project"] || !existsSync(csProjFile)
                     ? "--new-project"
                     : "";
                 const existingProjectOption = options["existing-project-folder"]
@@ -164,7 +166,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }${debugFlag}`;
-                logger.verbose(command);
+                logger.info(command);
 
                 try {
                     execSync(command, { stdio: "inherit" });
