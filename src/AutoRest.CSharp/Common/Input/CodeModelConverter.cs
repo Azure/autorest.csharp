@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
+                DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName);
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
