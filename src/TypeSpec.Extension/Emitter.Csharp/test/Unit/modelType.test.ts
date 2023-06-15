@@ -57,14 +57,13 @@ op test(@body input: Pet): Pet;
         const dogModel = models.find((m) => m.Name === "Dog");
         // assert the discriminator property name
         assert(
-            isEqual(
-                "kind",
-                petModel?.DiscriminatorPropertyName
-            ),
+            isEqual("kind", petModel?.DiscriminatorPropertyName),
             `Discriminator property name is not correct, got ${petModel?.DiscriminatorPropertyName}`
         );
         // assert we have a property corresponding to the discriminator property above on the base model
-        const discriminatorProperty = petModel?.Properties.find((p) => p.Name === petModel?.DiscriminatorPropertyName);
+        const discriminatorProperty = petModel?.Properties.find(
+            (p) => p.Name === petModel?.DiscriminatorPropertyName
+        );
         assert(
             isEqual(
                 {
@@ -79,11 +78,13 @@ op test(@body input: Pet): Pet;
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
-                    Description: "Discriminator",
+                    Description: "Discriminator"
                 },
                 discriminatorProperty
             ),
-            `Discriminator property is not correct, got ${JSON.stringify(discriminatorProperty)}`
+            `Discriminator property is not correct, got ${JSON.stringify(
+                discriminatorProperty
+            )}`
         );
         // assert we will NOT have a DiscriminatorPropertyName on the derived models
         assert(
@@ -95,8 +96,12 @@ op test(@body input: Pet): Pet;
             "Dog model should not have the discriminator property name"
         );
         // assert we will NOT have a property corresponding to the discriminator property on the derived models
-        const catDiscriminatorProperty = catModel?.Properties.find((p) => p.Name === petModel?.DiscriminatorPropertyName);
-        const dogDiscriminatorProperty = dogModel?.Properties.find((p) => p.Name === petModel?.DiscriminatorPropertyName);
+        const catDiscriminatorProperty = catModel?.Properties.find(
+            (p) => p.Name === petModel?.DiscriminatorPropertyName
+        );
+        const dogDiscriminatorProperty = dogModel?.Properties.find(
+            (p) => p.Name === petModel?.DiscriminatorPropertyName
+        );
         assert(
             catDiscriminatorProperty === undefined,
             "Cat model should not have the discriminator property"
