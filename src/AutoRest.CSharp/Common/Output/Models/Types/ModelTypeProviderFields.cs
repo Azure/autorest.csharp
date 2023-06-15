@@ -38,19 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
-            string? discriminator = inputModel.DiscriminatorPropertyName;
-            //if (discriminator is not null)
-            //{
-            //    var originalFieldName = discriminator.ToCleanName();
-            //    var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
-            //    var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty, false);
-            //    fields.Add(field);
-            //    fieldsToInputs[field] = inputModelProperty;
-            //    var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
-            //    parametersToFields[parameter.Name] = field;
-            //    serializationParameters.Add(parameter);
-            //}
-
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
 
             foreach (var inputModelProperty in inputModel.Properties)
