@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static bool ShouldPropertyOmitSetter(InputModelTypeUsage usage, InputModelProperty property, CSharpType type)
+        private static bool ShouldPropertyOmitSetter(InputModelType inputModel, InputModelProperty property, CSharpType type)
         {
             if (property.IsDiscriminator)
             {
@@ -139,19 +139,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            var propertyShouldOmitSetter = !usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly;
+            var propertyShouldOmitSetter = !inputModel.Usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly;
 
             if (TypeFactory.IsCollectionType(type))
             {
                 // nullable collection should be settable
-                propertyShouldOmitSetter |= !property.Type.IsNullable;
+                // one exception is in the property bag, we never let them to be settable.
+                propertyShouldOmitSetter |= !property.Type.IsNullable || inputModel.IsPropertyBag;
             }
             else
             {
                 // In mixed models required properties are not readonly
                 propertyShouldOmitSetter |= property.IsRequired &&
-                                usage.HasFlag(InputModelTypeUsage.Input) &&
-                                !usage.HasFlag(InputModelTypeUsage.Output);
+                                inputModel.Usage.HasFlag(InputModelTypeUsage.Input) &&
+                                !inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
             }
 
             return propertyShouldOmitSetter;
@@ -159,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool optionalViaNullability)
         {
-            var propertyShouldOmitSetter = ShouldPropertyOmitSetter(inputModel.Usage, inputModelProperty, originalType);
+            var propertyShouldOmitSetter = ShouldPropertyOmitSetter(inputModel, inputModelProperty, originalType);
 
             var valueType = originalType;
             if (optionalViaNullability)
