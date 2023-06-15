@@ -1127,8 +1127,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
             // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
-            var result = serializedName.Replace('-', '_');
-            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result.ToCleanName(false) : $"@{result}";
+            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
+            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 
         private void ComposeGetClientCodes(StringBuilder builder)

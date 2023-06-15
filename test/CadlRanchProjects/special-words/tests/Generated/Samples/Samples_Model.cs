@@ -85,7 +85,7 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelKind = "",
+                modelkind = "",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +100,7 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelKind = "",
+                modelkind = "",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,7 +115,7 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelKind = "",
+                modelkind = "",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +130,7 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelKind = "",
+                modelkind = "",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
