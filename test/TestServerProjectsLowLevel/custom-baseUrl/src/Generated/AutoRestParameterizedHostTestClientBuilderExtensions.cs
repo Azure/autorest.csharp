@@ -16,12 +16,12 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PathsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<PathsClient, PathsClientOptions> AddPathsClient<TBuilder>(this TBuilder builder, string host, AzureKeyCredential credential)
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
+        public static IAzureClientBuilder<PathsClient, PathsClientOptions> AddPathsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, string host)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PathsClient, PathsClientOptions>((options) => new PathsClient(host, credential, options));
+            return builder.RegisterClientFactory<PathsClient, PathsClientOptions>((options) => new PathsClient(credential, host, options));
         }
 
         /// <summary> Registers a <see cref="PathsClient"/> instance. </summary>

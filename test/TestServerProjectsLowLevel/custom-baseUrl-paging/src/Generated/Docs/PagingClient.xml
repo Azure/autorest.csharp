@@ -6,7 +6,7 @@
 This sample shows how to call GetPagesPartialUrlAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>"))
 {
@@ -22,7 +22,7 @@ await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>"))
 This sample shows how to call GetPagesPartialUrl with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 foreach (var item in client.GetPagesPartialUrl("<accountName>"))
 {
@@ -38,7 +38,7 @@ foreach (var item in client.GetPagesPartialUrl("<accountName>"))
 This sample shows how to call GetPagesPartialUrlOperationAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName>"))
 {
@@ -54,7 +54,7 @@ await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName
 This sample shows how to call GetPagesPartialUrlOperation with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 foreach (var item in client.GetPagesPartialUrlOperation("<accountName>"))
 {
@@ -70,7 +70,7 @@ foreach (var item in client.GetPagesPartialUrlOperation("<accountName>"))
 This sample shows how to call GetPagesPartialUrlOperationNextAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
 {
@@ -86,7 +86,7 @@ await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<account
 This sample shows how to call GetPagesPartialUrlOperationNext with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient("<host>", credential);
+var client = new PagingClient(credential);
 
 foreach (var item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
 {

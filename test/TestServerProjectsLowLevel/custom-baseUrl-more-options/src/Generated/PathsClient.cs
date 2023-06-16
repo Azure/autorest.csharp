@@ -20,8 +20,8 @@ namespace custom_baseUrl_more_options_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly string _dnsSuffix;
         private readonly string _subscriptionId;
+        private readonly string _dnsSuffix;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -35,34 +35,33 @@ namespace custom_baseUrl_more_options_LowLevel
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
         /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dnsSuffix"/>, <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathsClient(string dnsSuffix, string subscriptionId, AzureKeyCredential credential) : this(dnsSuffix, subscriptionId, credential, new PathsClientOptions())
+        public PathsClient(string subscriptionId, AzureKeyCredential credential) : this(subscriptionId, credential, "host", new PathsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
         /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dnsSuffix"/>, <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/> or <paramref name="dnsSuffix"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathsClient(string dnsSuffix, string subscriptionId, AzureKeyCredential credential, PathsClientOptions options)
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix, PathsClientOptions options)
         {
-            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
             options ??= new PathsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _dnsSuffix = dnsSuffix;
             _subscriptionId = subscriptionId;
+            _dnsSuffix = dnsSuffix;
         }
 
         /// <summary>

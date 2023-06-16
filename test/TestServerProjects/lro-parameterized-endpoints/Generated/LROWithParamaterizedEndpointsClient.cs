@@ -27,9 +27,9 @@ namespace lro_parameterized_endpoints
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test. The default is "host". </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
-        internal LROWithParamaterizedEndpointsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host)
+        internal LROWithParamaterizedEndpointsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             RestClient = new LROWithParamaterizedEndpointsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;

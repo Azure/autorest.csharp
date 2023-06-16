@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
-            bool keepClientDefaultValue = operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
+            bool keepClientDefaultValue = operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint || operationParameter.Location == RequestLocation.Uri;
             var clientDefaultValue = operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)) : (Constant?)null;
 
             var defaultValue = keepClientDefaultValue
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var requestLocation = GetRequestLocation(requestParameter);
 
             var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
-            bool keepClientDefaultValue = isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter);
+            bool keepClientDefaultValue = isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter) || requestParameter.In == HttpParameterIn.Uri;
             var defaultValue = keepClientDefaultValue
                 ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
                 : ParseConstant(requestParameter, typeFactory);
