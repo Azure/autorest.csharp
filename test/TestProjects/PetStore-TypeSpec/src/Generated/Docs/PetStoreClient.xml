@@ -325,6 +325,7 @@ var client = new PetStoreClient(endpoint);
 Response response = await client.GetFishAsync("<kind>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
 </example>
@@ -339,6 +340,7 @@ var client = new PetStoreClient(endpoint);
 Response response = client.GetFish("<kind>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
 </example>
