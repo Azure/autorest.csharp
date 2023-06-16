@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="cachedParameter"> The String to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> server parameter. </param>
         public static IAzureClientBuilder<RootClient, RootClientOptions> AddRootClient<TBuilder>(this TBuilder builder, string cachedParameter, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

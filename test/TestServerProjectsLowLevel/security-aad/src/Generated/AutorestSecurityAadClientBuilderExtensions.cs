@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AutorestSecurityAadClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> server parameter. </param>
         public static IAzureClientBuilder<AutorestSecurityAadClient, AutorestSecurityAadClientOptions> AddAutorestSecurityAadClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {

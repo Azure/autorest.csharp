@@ -33,7 +33,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary> Initializes a new instance of ServiceVersionOverrideClient. </summary>
-        /// <param name="endpoint"> server parameter. The default is "". </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ServiceVersionOverrideClient(Uri endpoint, ServiceVersionOverrideClientOptions options)

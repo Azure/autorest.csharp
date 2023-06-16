@@ -30,7 +30,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of SpreadClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadClient(Uri endpoint, SpreadClientOptions options)
@@ -44,7 +44,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of Alias. </summary>
-        /// <param name="apiVersion"> The String to use. The default is "1.0.0". </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Alias GetAliasClient(string apiVersion = "1.0.0")
         {

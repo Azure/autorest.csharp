@@ -42,7 +42,7 @@ namespace PaginationParams_LowLevel
 
         /// <summary> Initializes a new instance of PaginationParamsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. The default is "https://management.azure.com". </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public PaginationParamsClient(TokenCredential credential, Uri endpoint, PaginationParamsClientOptions options)

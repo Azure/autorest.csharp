@@ -35,7 +35,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Initializes a new instance of TraitsClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TraitsClient(Uri endpoint, TraitsClientOptions options)

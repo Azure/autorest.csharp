@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="InternalClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> TestServer endpoint. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         public static IAzureClientBuilder<InternalClient, InternalClientOptions> AddInternalClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

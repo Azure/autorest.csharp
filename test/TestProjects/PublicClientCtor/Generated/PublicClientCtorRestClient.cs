@@ -32,7 +32,7 @@ namespace PublicClientCtor
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="param1"> Tesing Param1. The default is "value1". </param>
         /// <param name="param2"> Testing Param2. </param>
-        /// <param name="apiVersion"> Api Version. The default is "1.0.0". </param>
+        /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = null, string param2 = null, string apiVersion = "1.0.0")
         {

@@ -45,7 +45,7 @@ namespace ResourceClients_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="itemId"> Item identifier. </param>
-        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> server parameter. </param>
         internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -43,7 +43,7 @@ namespace url_LowLevel
 
         /// <summary> Initializes a new instance of QueriesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         public QueriesClient(AzureKeyCredential credential, Uri endpoint, AutoRestUrlTestServiceClientOptions options)

@@ -39,8 +39,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
-            var defaultValue = (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint) && operationParameter.DefaultValue != null
-                ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
+            bool keepClientDefaultValue = operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
+            var clientDefaultValue = operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)) : (Constant?)null;
+
+            var defaultValue = keepClientDefaultValue
+                ? clientDefaultValue
                 : (Constant?)null;
 
             var initializer = (FormattableString?)null;
@@ -65,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)): null),
+                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -117,7 +120,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
-            var defaultValue = (isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter)) ? GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory) : ParseConstant(requestParameter, typeFactory);
+            var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
+            bool keepClientDefaultValue = isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter);
+            var defaultValue = keepClientDefaultValue
+                ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
+                : ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
@@ -139,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(requestParameter, type, null),
+                CreateDescription(requestParameter, type, keepClientDefaultValue ? null :clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,

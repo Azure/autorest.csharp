@@ -32,7 +32,7 @@ namespace constants
         /// <param name="headerConstant"> Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'. The default is True. </param>
         /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'. The default is 100. </param>
         /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'. The default is "path". </param>
-        /// <param name="endpoint"> server parameter. The default is "http://localhost:3000". </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="pathConstant"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathConstant"/> is an empty string, and was expected to be non-empty. </exception>
         public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, bool headerConstant, int queryConstant, string pathConstant, Uri endpoint = null)
