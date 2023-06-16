@@ -164,7 +164,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Test for repeatable requests. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="userActionParam"> User action param. </param>
         /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
         /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
@@ -181,7 +181,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Test for repeatable requests. </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="userActionParam"> User action param. </param>
         /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
         /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
@@ -212,7 +212,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
         /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
@@ -254,7 +254,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user&apos;s id. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
         /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
