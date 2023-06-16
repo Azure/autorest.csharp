@@ -89,5 +89,27 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)">
+<example>
+This sample shows how to call Int32SecondsArrayAsync with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]{new TimeSpan(1, 2, 3)});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Int32SecondsArray(IEnumerable{TimeSpan},RequestContext)">
+<example>
+This sample shows how to call Int32SecondsArray with required parameters.
+<code><![CDATA[
+var client = new DurationClient().GetQueryClient("1.0.0");
+
+Response response = client.Int32SecondsArray(new TimeSpan[]{new TimeSpan(1, 2, 3)});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

@@ -200,6 +200,7 @@ var client = new InheritanceClient();
 Response response = await client.GetModelAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -213,6 +214,7 @@ var client = new InheritanceClient();
 Response response = client.GetModel(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -246,6 +248,7 @@ This sample shows how to call PutModelAsync with required request content.
 var client = new InheritanceClient();
 
 var data = new {
+    kind = "",
     age = 1234,
 };
 
@@ -261,6 +264,7 @@ This sample shows how to call PutModel with required request content.
 var client = new InheritanceClient();
 
 var data = new {
+    kind = "",
     age = 1234,
 };
 
@@ -298,6 +302,7 @@ var client = new InheritanceClient();
 Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -311,6 +316,7 @@ var client = new InheritanceClient();
 Response response = client.GetRecursiveModel(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -344,6 +350,7 @@ This sample shows how to call PutRecursiveModelAsync with required request conte
 var client = new InheritanceClient();
 
 var data = new {
+    kind = "",
     age = 1234,
 };
 
@@ -359,6 +366,7 @@ This sample shows how to call PutRecursiveModel with required request content.
 var client = new InheritanceClient();
 
 var data = new {
+    kind = "",
     age = 1234,
 };
 
@@ -396,6 +404,7 @@ var client = new InheritanceClient();
 Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -409,6 +418,7 @@ var client = new InheritanceClient();
 Response response = client.GetMissingDiscriminator(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -442,6 +452,7 @@ var client = new InheritanceClient();
 Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
@@ -455,6 +466,7 @@ var client = new InheritanceClient();
 Response response = client.GetWrongDiscriminator(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 </example>
