@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success. </summary>
     public partial class LROsPost202NoRetry204Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly OperationInternal<Product> _operation;

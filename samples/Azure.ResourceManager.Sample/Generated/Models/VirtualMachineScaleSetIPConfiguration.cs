@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machine scale set network profile&apos;s IP configuration.
+    /// Describes a virtual machine scale set network profile's IP configuration.
     /// Serialized Name: VirtualMachineScaleSetIPConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetIPConfiguration : SubResource
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.publicIPAddressConfiguration
         /// </param>
         /// <param name="privateIPAddressVersion">
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.privateIPAddressVersion
         /// </param>
         /// <param name="applicationGatewayBackendAddressPools">
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public VirtualMachineScaleSetPublicIPAddressConfiguration PublicIPAddressConfiguration { get; set; }
         /// <summary>
-        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.privateIPAddressVersion
         /// </summary>
         public IPVersion? PrivateIPAddressVersion { get; set; }

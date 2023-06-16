@@ -122,7 +122,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// [Protocol Method] Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -154,7 +154,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// [Protocol Method] Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +186,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// [Protocol Method] Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +218,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// [Protocol Method] Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1328,7 +1328,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers
+        /// [Protocol Method] Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1359,7 +1359,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers
+        /// [Protocol Method] Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1514,7 +1514,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1546,7 +1546,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
         /// <list type="bullet">
         /// <item>
         /// <description>

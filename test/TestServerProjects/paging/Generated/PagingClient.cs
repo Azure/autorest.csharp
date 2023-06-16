@@ -39,7 +39,7 @@ namespace paging
             _pipeline = pipeline;
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
@@ -48,7 +48,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary> A paging operation that must return result of the default 'value' node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetNoItemNamePages(CancellationToken cancellationToken = default)
         {
@@ -91,7 +91,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> FirstResponseEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -100,7 +100,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary> A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> FirstResponseEmpty(CancellationToken cancellationToken = default)
         {
@@ -131,8 +131,8 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetWithQueryParamsAsync(int requiredQueryParameter, CancellationToken cancellationToken = default)
         {
@@ -141,8 +141,8 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetWithQueryParams(int requiredQueryParameter, CancellationToken cancellationToken = default)
         {
@@ -151,8 +151,8 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> DuplicateParamsAsync(string filter = null, CancellationToken cancellationToken = default)
         {
@@ -161,8 +161,8 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> DuplicateParams(string filter = null, CancellationToken cancellationToken = default)
         {
@@ -327,7 +327,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -342,7 +342,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -357,7 +357,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
@@ -370,7 +370,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
@@ -383,7 +383,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
@@ -400,7 +400,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
@@ -417,7 +417,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -432,7 +432,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary> A paging operation that doesn't return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -447,7 +447,7 @@ namespace paging
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetPagingModelWithItemNameWithXMSClientNameAsync(CancellationToken cancellationToken = default)
         {
@@ -456,7 +456,7 @@ namespace paging
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", cancellationToken);
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetPagingModelWithItemNameWithXMSClientName(CancellationToken cancellationToken = default)
         {

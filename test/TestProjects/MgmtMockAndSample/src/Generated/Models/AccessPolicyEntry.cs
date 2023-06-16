@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. </summary>
+    /// <summary> An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </summary>
     public partial class AccessPolicyEntry
     {
         /// <summary> Initializes a new instance of AccessPolicyEntry. </summary>

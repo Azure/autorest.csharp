@@ -82,8 +82,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CleanName,
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 parameters,
@@ -114,8 +114,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CleanName,
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 methodParameters,

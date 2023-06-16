@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
         /// Please note <see cref="ScoringFunction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DistanceScoringFunction"/>, <see cref="FreshnessScoringFunction"/>, <see cref="MagnitudeScoringFunction"/> and <see cref="TagScoringFunction"/>.
         /// </param>
-        /// <param name="functionAggregation"> A value indicating how the results of individual scoring functions should be combined. Defaults to &quot;Sum&quot;. Ignored if there are no scoring functions. </param>
+        /// <param name="functionAggregation"> A value indicating how the results of individual scoring functions should be combined. Defaults to "Sum". Ignored if there are no scoring functions. </param>
         internal ScoringProfile(string name, TextWeights textWeights, IList<ScoringFunction> functions, ScoringFunctionAggregation? functionAggregation)
         {
             Name = name;
@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="DistanceScoringFunction"/>, <see cref="FreshnessScoringFunction"/>, <see cref="MagnitudeScoringFunction"/> and <see cref="TagScoringFunction"/>.
         /// </summary>
         public IList<ScoringFunction> Functions { get; }
-        /// <summary> A value indicating how the results of individual scoring functions should be combined. Defaults to &quot;Sum&quot;. Ignored if there are no scoring functions. </summary>
+        /// <summary> A value indicating how the results of individual scoring functions should be combined. Defaults to "Sum". Ignored if there are no scoring functions. </summary>
         public ScoringFunctionAggregation? FunctionAggregation { get; set; }
     }
 }
