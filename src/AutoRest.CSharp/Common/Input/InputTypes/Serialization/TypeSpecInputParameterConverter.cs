@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
@@ -116,7 +117,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return SerializationFormat.Default;
+            return SerializationBuilder.GetSerializationFormat(parameterType);
         }
     }
 }
