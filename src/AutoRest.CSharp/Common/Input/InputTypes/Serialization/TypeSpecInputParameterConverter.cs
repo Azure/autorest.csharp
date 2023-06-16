@@ -83,15 +83,13 @@ namespace AutoRest.CSharp.Common.Input
             {
                 throw new JsonException("Parameter must have location");
             }
-            RequestLocation requestLocation;
-            Enum.TryParse<RequestLocation>(location, ignoreCase: true, out requestLocation);
+            Enum.TryParse<RequestLocation>(location, ignoreCase: true, out var requestLocation);
 
             if (kind == null)
             {
                 throw new JsonException("Parameter must have kind");
             }
-            InputOperationParameterKind parameterKind;
-            Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out parameterKind);
+            Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out var parameterKind);
 
             var parameter = new InputParameter(name, nameInRequest, description, parameterType, requestLocation, defaultValue, virtualParameter, groupBy, parameterKind, isRequired, isApiVersion, isResourceParameter, isContentType, isEndpoint, skipUrlEncoding, explode, arraySerializationDelimiter, headerCollectionPrefix, GetSerializationFormat(parameterType, requestLocation));
 
