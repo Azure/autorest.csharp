@@ -529,6 +529,24 @@ export function getInputType(
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
 
+            const discriminator = getDiscriminator(program, m);
+            if (discriminator) {
+                const discriminatorProperty = {
+                    Name: discriminator.propertyName,
+                    SerializedName: discriminator.propertyName,
+                    Description: "Discriminator",
+                    IsRequired: true,
+                    IsReadOnly: false,
+                    IsNullable: false,
+                    Type: {
+                        Name: "string",
+                        Kind: InputTypeKind.String,
+                        IsNullable: false
+                    } as InputPrimitiveType,
+                    IsDiscriminator: true
+                } as InputModelProperty;
+                properties.push(discriminatorProperty);
+            }
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
@@ -536,8 +554,7 @@ export function getInputType(
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
-                DiscriminatorPropertyName: getDiscriminator(program, m)
-                    ?.propertyName,
+                DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
