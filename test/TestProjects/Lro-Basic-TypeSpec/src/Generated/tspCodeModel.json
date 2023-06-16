@@ -95,6 +95,7 @@
      "$id": "13",
      "Name": "createProject",
      "ResourceName": "Project",
+     "Description": "The most basic operation.",
      "Parameters": [
       {
        "$id": "14",
@@ -285,6 +286,7 @@
      "$id": "34",
      "Name": "updateProject",
      "ResourceName": "Project",
+     "Description": "The most basic operation.",
      "Parameters": [
       {
        "$ref": "14"

@@ -62,5 +62,15 @@ namespace Encode.Duration
 
             return new Property(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of Header. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Header(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }
