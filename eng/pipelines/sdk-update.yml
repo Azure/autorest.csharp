@@ -5,9 +5,6 @@ parameters:
     type: boolean
     default: false
 
-variables:
-  NugetSecurityAnalysisWarningLevel: 'none'
-
 resources:
   repositories:
     - repository: azure-sdk-tools
@@ -25,6 +22,11 @@ resources:
       name: internal/azure-sdk-build-tools
       ref: refs/tags/azure-sdk-build-tools_20230307.1
 
+variables:
+  NugetSecurityAnalysisWarningLevel: 'none'
+  AzureSdkForNetRef: $[ resources.repositories['azure-sdk-for-net'].ref ]
+  jsonResources: $[ convertToJson(resources) ]
+
 stages:
   - stage: 'Build_and_Test'
     jobs:
@@ -34,6 +36,12 @@ stages:
           name: azsdk-pool-mms-win-2022-general
           vmImage: windows-2022
         steps:
+          - pwsh: |
+                Write-Host $env:jsonResources
+                Write-Host ''
+                gci env:* | sort-object name
+            env:
+              jsonResources: $(jsonResources)
           - checkout: self
             fetchDepth: 1
           - checkout: azure-sdk-tools
@@ -182,6 +190,7 @@ stages:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
           IsInternalFeed: true
+          AzureSdkForNetCommitish: $(AzureSdkForNetRef)
           DependsOn: Generate_Job_Matrix
       - job: Create_PR
         dependsOn: 

@@ -4,6 +4,7 @@ parameters:
   Name: ''
   AutorestCSharpVersion: ''
   TypeSpecEmitterVersion: ''
+  AzureSdkForNetCommitish: ''
   IsInternalFeed: false
   Matrix: {}
   DependsOn: []
@@ -30,7 +31,7 @@ jobs:
       Repositories:
       - Name: Azure/azure-sdk-for-net
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-        Commitish: $[ resources.repositories['azure-sdk-for-net'].ref ]
+        Commitish: ${{ parameters.AzureSdkForNetCommitish }}}
       SkipCheckoutNone: true
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK'
