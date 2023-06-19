@@ -92,7 +92,26 @@ namespace AutoRest.CSharp.Common.Input
             }
             Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out var parameterKind);
 
-            var parameter = new InputParameter(name, nameInRequest, description, parameterType, requestLocation, defaultValue, virtualParameter, groupBy, parameterKind, isRequired, isApiVersion, isResourceParameter, isContentType, isEndpoint, skipUrlEncoding, explode, arraySerializationDelimiter, headerCollectionPrefix, GetSerializationFormat(parameterType, requestLocation));
+            var parameter = new InputParameter(
+                Name: name,
+                NameInRequest: nameInRequest,
+                Description: description,
+                Type: parameterType,
+                Location: requestLocation,
+                DefaultValue: defaultValue, 
+                VirtualParameter: virtualParameter, 
+                GroupedBy: groupBy, 
+                Kind: parameterKind, 
+                IsRequired: isRequired, 
+                IsApiVersion: isApiVersion, 
+                IsResourceParameter: isResourceParameter, 
+                IsContentType: isContentType, 
+                IsEndpoint: isEndpoint, 
+                SkipUrlEncoding: skipUrlEncoding, 
+                Explode: explode, 
+                ArraySerializationDelimiter: arraySerializationDelimiter, 
+                HeaderCollectionPrefix: headerCollectionPrefix, 
+                SerializationFormat: GetSerializationFormat(parameterType, requestLocation));
 
             if (id != null)
             {
@@ -104,7 +123,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
         {
-            if (parameterType is InputPrimitiveType type && type.Kind == InputTypeKind.DateTime)
+            if (parameterType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
             {
                 if (requestLocation == RequestLocation.Header)
                 {
