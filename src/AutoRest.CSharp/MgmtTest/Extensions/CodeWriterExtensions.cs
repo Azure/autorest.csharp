@@ -142,7 +142,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             else
             {
-                CSharpType literlType = type.Arguments[0];
+                const int DFE_LITERAL_TYPE_ARG_INDEX = 0;
+                CSharpType literlType = type.Arguments[DFE_LITERAL_TYPE_ARG_INDEX];
                 writer.AppendExampleValue(exampleValue, literlType);
             }
             return writer;
