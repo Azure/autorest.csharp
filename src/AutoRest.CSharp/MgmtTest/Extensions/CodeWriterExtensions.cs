@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
 {
@@ -104,10 +105,47 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
 
+            if (type.FrameworkType == typeof(DataFactoryElement<>))
+                return writer.AppendDataFactoryElementValue(type, exampleValue);
+
             if (exampleValue.Schema is ObjectSchema objectSchema)
                 return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
 
             return writer.AppendRawValue(exampleValue.RawValue, type.FrameworkType, exampleValue.Schema.Type);
+        }
+
+        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        {
+            if (type.FrameworkType != typeof(DataFactoryElement<>))
+                throw new ArgumentException("DataFactoryElement<> is expected but got: " + type.ToString());
+
+            const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement-";
+
+            if (exampleValue.Schema is ObjectSchema os && os.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            {
+                const string DFE_OBJECT_PROPERTY_TYPE = "type";
+                const string DFE_OBJECT_PROPERTY_VALUE = "value";
+                Dictionary<string, string> DFE_FACTORY_METHOD_MAPPING = new Dictionary<string, string>()
+                {
+                    ["Expression"] = "FromExpression",
+                    ["SecureString"] = "FromMaskedString",
+                    ["AzureKeyVaultSecretReference"] = "FromKeyVaultSecretReference"
+                };
+
+                string dfeType = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_TYPE].RawValue!;
+                string dfeValue = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_VALUE].RawValue!;
+
+                writer.UseNamespace(type.Namespace!);
+                writer.AppendRaw($"{type.ToString().Trim()}.{DFE_FACTORY_METHOD_MAPPING[dfeType]}(");
+                writer.AppendRawValue(dfeValue, typeof(string));
+                writer.AppendRaw(")");
+            }
+            else
+            {
+                CSharpType literlType = type.Arguments[0];
+                writer.AppendExampleValue(exampleValue, literlType);
+            }
+            return writer;
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
