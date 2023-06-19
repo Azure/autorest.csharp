@@ -30,6 +30,7 @@ jobs:
       Repositories:
       - Name: Azure/azure-sdk-for-net
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+        Commitish: $[ resources.repositories['azure-sdk-for-net'].ref ]
       SkipCheckoutNone: true
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK'
