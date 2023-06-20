@@ -57,7 +57,7 @@ interface Authoring {
 }
 
 namespace CustomCore {
-  @parentResource(T)
+  @parentResource(Project)
   @resource("operations")
   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
     operationId: string;
