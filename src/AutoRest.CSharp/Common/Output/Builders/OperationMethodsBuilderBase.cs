@@ -519,9 +519,8 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)
-        {
-            return serialization switch
+        private static MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)
+            => serialization switch
             {
                 JsonSerialization jsonSerialization => new[]
                 {
@@ -537,7 +536,6 @@ namespace AutoRest.CSharp.Output.Models
                 },
                 _ => throw new NotImplementedException()
             };
-        }
 
         private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out Parameter outputParameter, out SerializationFormat serializationFormat)
         {
@@ -787,9 +785,14 @@ namespace AutoRest.CSharp.Output.Models
                 _ => throw new InvalidOperationException()
             };
 
-            var returnStatement = headers is not null
-                ? Return(ResponseWithHeadersExpression.FromValue(value, headers, httpMessage.Response))
-                : Return(ResponseExpression.FromValue(value, httpMessage.Response));
+            var returnStatement =
+                commonResponseType != null && !commonResponseType.EqualsIgnoreNullable(responseBody.Type)
+                    ? headers is not null
+                        ? Return(ResponseWithHeadersExpression.FromValue(commonResponseType, value, headers, httpMessage.Response))
+                        : Return(ResponseExpression.FromValue(commonResponseType, value, httpMessage.Response))
+                    : headers is not null
+                        ? Return(ResponseWithHeadersExpression.FromValue(value, headers, httpMessage.Response))
+                        : Return(ResponseExpression.FromValue(value, httpMessage.Response));
 
             return new[] { valueStatement, returnStatement };
         }

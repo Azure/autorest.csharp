@@ -16,5 +16,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));
+
+        public static ResponseExpression FromValue(CSharpType explicitValueType, ValueExpression value, ResponseExpression rawResponse)
+            => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }, new[]{ explicitValueType }));
     }
 }
