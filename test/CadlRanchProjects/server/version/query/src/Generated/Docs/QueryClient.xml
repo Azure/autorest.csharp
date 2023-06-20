@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="ValidAsync(RequestContext)">
+<example>
+This sample shows how to call ValidAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new QueryClient(endpoint);
+
+Response response = await client.ValidAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Valid(RequestContext)">
+<example>
+This sample shows how to call Valid.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new QueryClient(endpoint);
+
+Response response = client.Valid();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

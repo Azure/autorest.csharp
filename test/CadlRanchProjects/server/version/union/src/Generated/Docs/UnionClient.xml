@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CustomerDefinedAsync(RequestContext)">
+<example>
+This sample shows how to call CustomerDefinedAsync.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.CustomerDefinedAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CustomerDefined(RequestContext)">
+<example>
+This sample shows how to call CustomerDefined.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.CustomerDefined();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CustomerDefinedWithDefaultAsync(RequestContext)">
+<example>
+This sample shows how to call CustomerDefinedWithDefaultAsync.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.CustomerDefinedWithDefaultAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CustomerDefinedWithDefault(RequestContext)">
+<example>
+This sample shows how to call CustomerDefinedWithDefault.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.CustomerDefinedWithDefault();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="TemplateDefinedAsync(string,RequestContext)">
+<example>
+This sample shows how to call TemplateDefinedAsync with required parameters.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.TemplateDefinedAsync("<name>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="TemplateDefined(string,RequestContext)">
+<example>
+This sample shows how to call TemplateDefined with required parameters.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.TemplateDefined("<name>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -18,6 +18,9 @@
         "projection/projected-name",
         "server/path/multiple",
         "server/path/single",
+        "server/version/path",
+        "server/version/query",
+        "server/version/union",
         "special-words",
         "parameters/collection-format",
         "parameters/spread"
