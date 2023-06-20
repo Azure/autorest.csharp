@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("array", ListExpression.New(arraySerialization.Type), out var array),
+                Var("array", New.List(arraySerialization.Type), out var array),
                 new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
                 {
                     BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("dictionary", DictionaryExpression.New(dictionarySerialization.Type), out var dictionary),
+                Var("dictionary", New.Dictionary(dictionarySerialization.Type), out var dictionary),
                 new ForeachStatement("e", container.Elements(), out var element)
                 {
                     BuildDeserializationForXContainer(dictionarySerialization.ValueSerialization, new XElementExpression(element), out var deserializedElement),
@@ -239,7 +239,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New(typeof(ResourceIdentifier), new CastExpression(element, typeof(string)));
+                    return New.ResourceIdentifier(new CastExpression(element, typeof(string)));
                 }
 
                 if (frameworkType == typeof(ResourceType))
@@ -249,12 +249,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(Guid))
                 {
-                    return New(typeof(Guid), element.Value);
+                    return New.Instance(typeof(Guid), element.Value);
                 }
 
                 if (frameworkType == typeof(Uri))
                 {
-                    return New(typeof(Uri), new CastExpression(element, typeof(string)));
+                    return New.Instance(typeof(Uri), new CastExpression(element, typeof(string)));
                 }
 
                 if (frameworkType == typeof(byte[]))
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return SerializableObjectTypeExpression.Deserialize(serializableObjectType, element);
 
                 case EnumType clientEnum:
-                    return clientEnum.IsExtensible ? New(clientEnum.Type, element.Value) : InvokeToEnum(clientEnum.Type, element.Value);
+                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, element.Value) : InvokeToEnum(clientEnum.Type, element.Value);
 
                 default:
                     throw new NotSupportedException();

@@ -11,8 +11,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record RawRequestUriBuilderExpression(ValueExpression Untyped) : TypedValueExpression(typeof(RawRequestUriBuilder), Untyped)
     {
-        public static RawRequestUriBuilderExpression New() => new(Snippets.New(typeof(RawRequestUriBuilder)));
-
         public MethodBodyStatement Reset(ValueExpression uri) => new InvokeInstanceMethodStatement(Untyped, nameof(RawRequestUriBuilder.Reset), uri);
 
         public MethodBodyStatement AppendRaw(string value, bool escape) => new InvokeInstanceMethodStatement(Untyped, nameof(RawRequestUriBuilder.AppendRaw), Literal(value), Bool(escape));

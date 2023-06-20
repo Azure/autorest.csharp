@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 type.FrameworkType == typeof(Azure.Core.RequestMethod) ||
                 type.FrameworkType == typeof(Azure.Core.AzureLocation))
             {
-                return New(type, valueExpression);
+                return New.Instance(type, valueExpression);
             }
 
             return new InvokeStaticMethodExpression(type, "Parse", new[]{valueExpression});

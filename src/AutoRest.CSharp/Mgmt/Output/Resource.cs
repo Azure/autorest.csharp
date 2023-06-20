@@ -461,14 +461,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             Modifiers: Public | Static,
             ReturnType: typeof(ResourceIdentifier),
             ReturnDescription: null,
-            Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
+            Parameters: RequestPath.Where(segment => segment.IsReference).Select(CreateResourceIdentifierParameter).ToArray());
 
         public ValueExpression ResourceDataIdExpression(Parameter resourceDataParameter)
         {
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return Snippets.New(typeof(ResourceIdentifier), new MemberReference(resourceDataParameter, "Id"));
+                return Snippets.New.ResourceIdentifier(resourceDataParameter);
             }
             else
             {

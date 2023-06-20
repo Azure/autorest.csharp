@@ -135,8 +135,8 @@ namespace AutoRest.CSharp.Output.Models
 
             if (flatten is not null)
             {
-                var (inputParameter, outputParameter) = flatten.Value;
-                CreateFlattenedConversions(inputParameter, outputParameter);
+                var (_, outputParameter) = flatten.Value;
+                CreateFlattenedConversions(outputParameter);
             }
 
             return new ClientMethodParameters
@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Output.Models
             var optionalConvenienceMethodParameters = new List<Parameter>();
             var conversion = new List<MethodBodyStatement>
             {
-                Var(protocolMethodParameter.Name, Utf8JsonRequestContentExpression.New(), out var requestContent),
+                Var(protocolMethodParameter.Name, New.Utf8JsonRequestContent(), out var requestContent),
                 Var("writer", requestContent.JsonWriter, out var utf8JsonWriter),
                 utf8JsonWriter.WriteStartObject()
             };
@@ -335,11 +335,11 @@ namespace AutoRest.CSharp.Output.Models
             _arguments[protocolMethodParameter] = requestContent;
         }
 
-        private void CreateFlattenedConversions(InputParameter flattenParameter, Parameter parameter)
+        private void CreateFlattenedConversions(Parameter parameter)
         {
             var conversion = new List<MethodBodyStatement>
             {
-                Var("content", Utf8JsonRequestContentExpression.New(), out var content),
+                Var("content", New.Utf8JsonRequestContent(), out var content),
                 content.JsonWriter.WriteStartObject()
             };
 
@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.Output.Models
         };
 
         private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)
-            => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, RequestContextExpression.New(cancellationToken), Null));
+            => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, New.RequestContext(cancellationToken), Null));
 
         private static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
         {

@@ -9,8 +9,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record XElementExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XElement), Untyped)
     {
-        public static implicit operator XContainerExpression(XElementExpression xElement) => new(xElement.Untyped);
-
         public XNameExpression Name => new(new MemberReference(Untyped, nameof(XElement.Name)));
         public StringExpression Value => new(new MemberReference(Untyped, nameof(XElement.Value)));
 

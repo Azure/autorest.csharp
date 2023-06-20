@@ -239,7 +239,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             statements.Add(Assign(request.Method, new MemberReference(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
-            statements.Add(Var("uri", RawRequestUriBuilderExpression.New(), out uriBuilder));
+            statements.Add(Var("uri", New.RawRequestUriBuilder(), out uriBuilder));
 
             return statements;
         }
@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected MethodBodyStatement AddBody(RequestExpression request)
         {
-            var bodyParameters = new Dictionary<InputParameter, Parameter>();
+            var bodyParameters = new Dictionary<string, Parameter>();
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
             {
                 if (inputParameter is null || inputParameter.Location != RequestLocation.Body)
@@ -413,7 +413,7 @@ namespace AutoRest.CSharp.Output.Models
                 switch (Operation.RequestBodyMediaType)
                 {
                     case BodyMediaType.Multipart or BodyMediaType.Form:
-                        bodyParameters.Add(inputParameter, outputParameter);
+                        bodyParameters.Add(inputParameter.NameInRequest, outputParameter);
                         break;
 
                     case BodyMediaType.Binary:
@@ -429,7 +429,7 @@ namespace AutoRest.CSharp.Output.Models
                         return NullCheckRequestPartValue(stringValue, outputParameter.Type, new[]
                         {
                             AddHeaders(request, true).AsStatement(),
-                            Assign(request.Content, New(typeof(StringRequestContent), RemoveAllNullConditional(stringValue)))
+                            Assign(request.Content, New.StringRequestContent(RemoveAllNullConditional(stringValue)))
                         });
 
                     case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
@@ -449,21 +449,61 @@ namespace AutoRest.CSharp.Output.Models
             if (bodyParameters.Any())
             {
                 return Operation.RequestBodyMediaType == BodyMediaType.Multipart
-                    ? AddMultipartBody(request, bodyParameters)
-                    : AddFormBody(request, bodyParameters);
+                    ? AddMultipartBody(request, bodyParameters.Values).AsStatement()
+                    : AddFormBody(request, bodyParameters).AsStatement();
             }
 
             return new MethodBodyStatement();
         }
 
-        private MethodBodyStatement AddMultipartBody(RequestExpression request, IReadOnlyDictionary<InputParameter, Parameter> bodyParameters)
+        private IEnumerable<MethodBodyStatement> AddMultipartBody(RequestExpression request, IEnumerable<Parameter> bodyParameters)
         {
-            throw new NotImplementedException();
+            yield return AddHeaders(request, true).AsStatement();
+            yield return Var("content", New.MultipartFormDataContent(), out var multipartContent);
+
+            foreach (var parameter in bodyParameters)
+            {
+                var bodyPartName = parameter.Name;
+                var bodyPartType = parameter.Type;
+
+                if (bodyPartType.Equals(typeof(string)))
+                {
+                    yield return NullCheckRequestPartValue(parameter, bodyPartType, multipartContent.Add(New.StringRequestContent(parameter), bodyPartName, Null));
+                }
+                else if (bodyPartType.IsFrameworkType && bodyPartType.FrameworkType == typeof(Stream))
+                {
+                    yield return NullCheckRequestPartValue(parameter, bodyPartType, multipartContent.Add(RequestContentExpression.Create(parameter), bodyPartName, Null));
+                }
+                else if (TypeFactory.IsList(bodyPartType))
+                {
+                    yield return new ForeachStatement("value", parameter, out var item)
+                    {
+                        multipartContent.Add(RequestContentExpression.Create(item), bodyPartName, Null)
+                    };
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            yield return multipartContent.ApplyToRequest(request);
         }
 
-        private MethodBodyStatement AddFormBody(RequestExpression request, IReadOnlyDictionary<InputParameter, Parameter> bodyParameters)
+        private IEnumerable<MethodBodyStatement> AddFormBody(RequestExpression request, IReadOnlyDictionary<string, Parameter> bodyParameters)
         {
-            throw new NotImplementedException();
+            yield return AddHeaders(request, true).AsStatement();
+            yield return Var("content", New.FormUrlEncodedContent(), out var urlContent);
+
+            foreach (var (nameInRequest, parameter) in bodyParameters)
+            {
+                var type = parameter.Type;
+                var value = new ParameterReference(parameter);
+
+                yield return NullCheckRequestPartValue(value, type, urlContent.Add(nameInRequest, ConvertToString(value, type)));
+            }
+
+            yield return Assign(request.Content, urlContent);
         }
 
         private MethodBodyStatement AddFlattenedBody(RequestExpression request, Parameter parameter)
@@ -485,13 +525,13 @@ namespace AutoRest.CSharp.Output.Models
             {
                 JsonSerialization jsonSerialization => new[]
                 {
-                    Var("content", Utf8JsonRequestContentExpression.New(), out var content),
+                    Var("content", New.Utf8JsonRequestContent(), out var content),
                     JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, expression),
                     Assign(request.Content, content)
                 },
                 XmlElementSerialization xmlSerialization => new[]
                 {
-                    Var("content", XmlWriterContentExpression.New(), out var content),
+                    Var("content", New.XmlWriterContent(), out var content),
                     XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, expression),
                     Assign(request.Content, content)
                 },
@@ -554,10 +594,22 @@ namespace AutoRest.CSharp.Output.Models
 
             if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
             {
-                return new InvokeInstanceMethodExpression(value.NullableStructValue(fromType), nameof(ToString));
+                return value.NullableStructValue(fromType).InvokeToString();
             }
 
             return value.NullableStructValue(fromType);
+        }
+
+        private static StringExpression ConvertToString(ValueExpression value, CSharpType fromType)
+        {
+            if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType })
+            {
+                return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
+            }
+
+            return fromType.EqualsIgnoreNullable(typeof(string))
+                ? new(value)
+                : value.NullableStructValue(fromType).InvokeToString();
         }
 
         private static MethodBodyStatement NullCheckRequestPartValue(ValueExpression value, CSharpType type, MethodBodyStatement inner)
@@ -663,12 +715,12 @@ namespace AutoRest.CSharp.Output.Models
             ValueExpression? headers = null;
 
             var declareHeaders = headerModelType is not null
-                ? new DeclareVariableStatement(null, "headers", New(headerModelType, httpMessage.Response), out headers)
+                ? new DeclareVariableStatement(null, "headers", New.Instance(headerModelType, httpMessage.Response), out headers)
                 : null;
 
             var requestFailedException = clientDiagnostics is not null
                 ? clientDiagnostics.CreateRequestFailedException(httpMessage.Response, async)
-                : New(typeof(RequestFailedException), httpMessage.Response);
+                : New.RequestFailedException(httpMessage.Response);
 
             var cases = responses
                 .Select(r => BuildStatusCodeSwitchCases(r.StatusCodes, responseType, r.ResponseBody, httpMessage, headers, headerModelType, async))
@@ -719,7 +771,7 @@ namespace AutoRest.CSharp.Output.Models
                 ConstantResponseBody body => new DeclareVariableStatement(responseBody.Type, "value", new ConstantExpression(body.Value), out value),
                 StringResponseBody _ => new[]
                 {
-                    Declare("streamReader", StreamReaderExpression.New(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
+                    Declare("streamReader", New.StreamReader(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
                     new DeclareVariableStatement(responseBody.Type, "value", streamReader.ReadToEnd(async), out value)
                 },
                 _ => throw new InvalidOperationException()

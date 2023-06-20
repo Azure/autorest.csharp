@@ -40,11 +40,17 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, DictionaryExpression value, out DictionaryExpression variable)
             => Var(null, name, value, d => new DictionaryExpression(d), out variable);
 
+        public static DeclarationStatement Var(string name, FormUrlEncodedContentExpression value, out FormUrlEncodedContentExpression variable)
+            => Var(null, name, value, d => new FormUrlEncodedContentExpression(d), out variable);
+
         public static DeclarationStatement Var(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => Var(null, name, value, d => new HttpMessageExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, ListExpression value, out ListExpression variable)
             => Var(null, name, value, d => new ListExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, MultipartFormDataContentExpression value, out MultipartFormDataContentExpression variable)
+            => Var(null, name, value, d => new MultipartFormDataContentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
             => Var(null, name, value, d => new RawRequestUriBuilderExpression(d), out variable);

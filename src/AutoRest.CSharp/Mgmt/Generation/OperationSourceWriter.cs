@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     yield return Assign(new MemberReference(dataVariable, "Id"), new MemberReference(_opSource.ArmClientField, "Id"));
                 }
-                yield return Return(New(_opSource.Resource.Type, _opSource.ArmClientField, dataVariable));
+                yield return Return(New.Instance(_opSource.Resource.Type, _opSource.ArmClientField, dataVariable));
             }
             else
             {

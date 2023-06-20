@@ -12,8 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public static XDocumentExpression Load(StringExpression stream, LoadOptions loadOptions)
             => new(new InvokeStaticMethodExpression(typeof(XDocument), nameof(XDocument.Load), new[]{stream, FrameworkEnumValue(loadOptions)}));
 
-        public static implicit operator XContainerExpression(XDocumentExpression xDocument) => new(xDocument.Untyped);
-
         public XElementExpression Element(string name) => new(new InvokeInstanceMethodExpression(Untyped, nameof(XDocument.Element), Literal(name)));
     }
 }

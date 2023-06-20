@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models
                 new ParameterValidationBlock(ConvenienceMethodParameters, true),
                 WrapInDiagnosticScopeLegacy(methodName,
                     Var("originalResponse", InvokeProtocolMethod(RestClient, arguments, async), out var response),
-                    Return(New(lroType!, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response, nextPageDelegate))
+                    Return(New.Instance(lroType!, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response, nextPageDelegate))
                 )
             };
 

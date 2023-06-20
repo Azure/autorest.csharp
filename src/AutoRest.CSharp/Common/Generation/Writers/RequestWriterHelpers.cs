@@ -240,14 +240,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case JsonSerialization jsonSerialization:
                     {
-                        writer.WriteMethodBodyStatement(Snippets.Var("content", Utf8JsonRequestContentExpression.New(), out var content));
+                        writer.WriteMethodBodyStatement(Snippets.Var("content", Snippets.New.Utf8JsonRequestContent(), out var content));
                         writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, new FormattableStringToExpression(value)));
                         writer.WriteMethodBodyStatement(Snippets.Assign(new RequestExpression(request).Content, content));
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:
                     {
-                        writer.WriteMethodBodyStatement(Snippets.Var("content", XmlWriterContentExpression.New(), out var content));
+                        writer.WriteMethodBodyStatement(Snippets.Var("content", Snippets.New.XmlWriterContent(), out var content));
                         writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, new FormattableStringToExpression(value)));
                         writer.WriteMethodBodyStatement(Snippets.Assign(new RequestExpression(request).Content, content));
                         break;

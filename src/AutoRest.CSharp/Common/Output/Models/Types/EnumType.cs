@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var switchCases = enumType.Values
                 .Select(v => new SwitchCaseExpression(EnumValue(enumType, v), new ConstantExpression(v.Value)))
-                .Append(new SwitchCaseExpression(Dash, ThrowExpression(NewArgumentOutOfRangeException(enumType, valueParameter))))
+                .Append(new SwitchCaseExpression(Dash, ThrowExpression(Snippets.New.ArgumentOutOfRangeException(enumType, valueParameter))))
                 .ToArray();
 
             return new Method(signature, new SwitchExpression(valueParameter, switchCases));
@@ -143,14 +143,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static string GetSerializationMethodName(EnumType enumType) => $"ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}";
 
-        private static ValueExpression NewArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
-            => New(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
-
         private static Method CreateExtensibleDeserializationMethod(EnumType enumType)
         {
             var valueParameter = new Parameter("value", null, enumType.ValueType, null, Validation.None, null);
             var signature = new OperatorSignature(false, $"Converts a string to a <see cref=\"{enumType.Type.Name}\"/>.", null, valueParameter, enumType.Type);
-            var bodyExpression = New(enumType.Type, valueParameter);
+            var bodyExpression = Snippets.New.Instance(enumType.Type, valueParameter);
             return new Method(signature, bodyExpression);
         }
 
@@ -185,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 bodyLines.Add(new IfElseStatement(condition, Return(EnumValue(enumType, enumTypeValue)), null, true));
             }
 
-            bodyLines.Add(Throw(NewArgumentOutOfRangeException(enumType, valueParameter)));
+            bodyLines.Add(Throw(Snippets.New.ArgumentOutOfRangeException(enumType, valueParameter)));
 
             return new Method(signature, bodyLines);
         }

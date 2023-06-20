@@ -10,7 +10,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ListExpression(ValueExpression Untyped) : TypedValueExpression(typeof(List<>), Untyped)
     {
-        public static ListExpression New(CSharpType listType) => new(Snippets.New(listType));
         public MethodBodyStatement Add(ValueExpression item) => new InvokeInstanceMethodStatement(Untyped, nameof(List<object>.Add), item);
     }
 }

@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
                 new[]
                 {
-                    Var("content", Utf8JsonRequestContentExpression.New(), out var requestContent),
+                    Var("content", New.Utf8JsonRequestContent(), out var requestContent),
                     requestContent.JsonWriter.WriteObjectValue(This),
                     Return(requestContent)
                 }
@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress))
             {
-                return utf8JsonWriter.WriteStringValue(new InvokeInstanceMethodExpression(value , nameof(ToString)));
+                return utf8JsonWriter.WriteStringValue(value.InvokeToString());
             }
 
             if (valueType == typeof(Uri))
@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(new InvokeInstanceMethodExpression(value, nameof(ToString))).RootElement)
+                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(value.InvokeToString()).RootElement)
                 );
             }
 
@@ -384,7 +384,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var objAdditionalProperties = serialization.AdditionalProperties;
             if (objAdditionalProperties != null)
             {
-                yield return new DeclareVariableStatement(objAdditionalProperties.Type, dictionaryVariable, New(objAdditionalProperties.Type));
+                yield return new DeclareVariableStatement(objAdditionalProperties.Type, dictionaryVariable, New.Instance(objAdditionalProperties.Type));
             }
 
             var shouldTreatEmptyStringAsNull = Configuration.ModelsToTreatEmptyStringAsNull.Contains(serialization.Type.Name);
@@ -403,7 +403,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            yield return Return(New(serialization.Type, parameters));
+            yield return Return(New.Instance(serialization.Type, parameters));
         }
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonSerialization? additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, CodeWriterDeclaration dictionaryVariable, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
@@ -557,7 +557,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        public static MethodBodyStatement[] DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value)
+        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value)
         {
             switch (serialization)
             {
@@ -567,7 +567,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     return new MethodBodyStatement[]
                     {
-                        new DeclareVariableStatement(jsonArray.ImplementationType, array, New(jsonArray.ImplementationType)),
+                        new DeclareVariableStatement(jsonArray.ImplementationType, array, New.Instance(jsonArray.ImplementationType)),
                         new ForeachStatement("item", element.EnumerateArray(), out var item)
                         {
                             DeserializeArrayItem(jsonArray.ValueSerialization, array, new JsonElementExpression(item))
@@ -580,7 +580,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     return new MethodBodyStatement[]
                     {
-                        new DeclareVariableStatement(jsonDictionary.Type, dictionary, New(jsonDictionary.Type)),
+                        new DeclareVariableStatement(jsonDictionary.Type, dictionary, New.Instance(jsonDictionary.Type)),
                         new ForeachStatement("property", element.EnumerateObject(), out var property)
                         {
                             DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, new JsonPropertyExpression(property))
@@ -590,14 +590,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
                     var declareSerializeOptions = DeclareJsonSerializerOptions(out var serializeOptions);
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format, serializeOptions);
-                    return new MethodBodyStatement[]
-                    {
-                        declareSerializeOptions
-                    };
+                    return declareSerializeOptions;
 
                 case JsonValueSerialization valueSerialization:
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
-                    return new MethodBodyStatement[]{};
+                    return new MethodBodyStatement();
 
                 default:
                     throw new InvalidOperationException($"{serialization.GetType()} is not supported.");
@@ -672,7 +669,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
 
                 case Resource { ResourceData: SerializableObjectType { IncludeDeserializer: true } resourceDataType } resource:
-                    return New(resource.Type, new FormattableStringToExpression($"Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
+                    return New.Instance(resource.Type, new FormattableStringToExpression($"Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
@@ -682,7 +679,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
-                    return clientEnum.IsExtensible ? New(clientEnum.Type, value) : InvokeToEnum(clientEnum.Type, value);
+                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, value) : InvokeToEnum(clientEnum.Type, value);
 
                 default:
                     throw new NotSupportedException($"No deserialization logic exists for {implementation.Declaration.Name}");
@@ -731,7 +728,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 frameworkType == typeof(RequestMethod) ||
                 frameworkType == typeof(AzureLocation))
             {
-                return New(frameworkType, element.GetString());
+                return New.Instance(frameworkType, element.GetString());
             }
 
             if (frameworkType == typeof(IPAddress))
@@ -809,11 +806,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static DeclareVariableStatement DeclareJsonSerializerOptions(out CodeWriterDeclaration serializeOptions)
         {
             serializeOptions = new CodeWriterDeclaration("serializeOptions");
-            var properties = new Dictionary<string, ValueExpression>
-            {
-                [nameof(JsonSerializerOptions.Converters)] = new CollectionInitializerExpression(New(typeof(ManagedServiceIdentityTypeV3Converter)))
-            };
-            return new DeclareVariableStatement(null, serializeOptions, New(typeof(JsonSerializerOptions), properties));
+            return new DeclareVariableStatement(null, serializeOptions, New.JsonSerializerOptions());
         }
 
         private static bool IsCustomJsonConverterAdded(Type type)

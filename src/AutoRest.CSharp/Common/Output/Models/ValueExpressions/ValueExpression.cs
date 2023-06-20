@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -21,6 +22,7 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 
         public ValueExpression NullConditional(CSharpType type) => type.IsNullable ? new NullConditionalExpression(this) : this;
         public ValueExpression NullableStructValue(CSharpType candidateType) => candidateType is { IsNullable: true, IsValueType: true } ? new MemberReference(this, nameof(Nullable<int>.Value)) : this;
+        public StringExpression InvokeToString() => new(new InvokeInstanceMethodExpression(this, nameof(ToString)));
 
         private string GetDebuggerDisplay()
         {

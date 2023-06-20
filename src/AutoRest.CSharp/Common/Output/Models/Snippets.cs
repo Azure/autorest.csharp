@@ -42,9 +42,6 @@ namespace AutoRest.CSharp.Common.Output.Models
                 ? new MemberReference(RemoveAllNullConditional(inner), memberName)
                 : expression;
 
-        public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
-        public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
-
         public static ValueExpression Literal(string? value) => value is null ? Null : new LiteralExpression(value, false);
         public static ValueExpression LiteralU8(string value) => new LiteralExpression(value, true);
 

@@ -11,5 +11,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public XElementExpression Element(string name) => new(new InvokeInstanceMethodExpression(Untyped, nameof(XDocument.Element), Snippets.Literal(name)));
         public DictionaryExpression Elements() => new(new InvokeInstanceMethodExpression(Untyped, nameof(XDocument.Elements)));
         public EnumerableExpression Elements(string name) => new(new InvokeInstanceMethodExpression(Untyped, nameof(XDocument.Elements), Snippets.Literal(name)));
+
+        public static implicit operator XContainerExpression(XElementExpression xElement) => new(xElement.Untyped);
+        public static implicit operator XContainerExpression(XDocumentExpression xDocument) => new(xDocument.Untyped);
     }
 }

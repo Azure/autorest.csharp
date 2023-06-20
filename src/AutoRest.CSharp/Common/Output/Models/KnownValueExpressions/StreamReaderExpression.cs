@@ -9,8 +9,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record StreamReaderExpression(ValueExpression Untyped) : TypedValueExpression(typeof(StreamReader), Untyped)
     {
-        public static StreamReaderExpression New(ValueExpression stream) => new(Snippets.New(typeof(Stream), stream));
-
         public ValueExpression ReadToEnd(bool async)
         {
             var methodName = async ? nameof(StreamReader.ReadToEndAsync) : nameof(StreamReader.ReadToEnd);
