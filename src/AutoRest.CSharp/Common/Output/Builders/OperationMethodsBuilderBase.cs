@@ -710,7 +710,7 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? responseType, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
+        private MethodBodyStatement BuildStatusCodeSwitch(HttpMessageExpression httpMessage, Response[] responses, CSharpType? responseType, CSharpType? headerModelType, CSharpType? resourceDataType, ClientDiagnosticsExpression? clientDiagnostics, bool async)
         {
             ValueExpression? headers = null;
 
@@ -731,15 +731,25 @@ namespace AutoRest.CSharp.Output.Models
             return declareHeaders is not null ? new MethodBodyStatement[] { declareHeaders, switchStatement } : switchStatement;
         }
 
-        private static SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, CSharpType? responseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
+        private SwitchCase BuildStatusCodeSwitchCases(IReadOnlyList<StatusCodes> statusCodes, CSharpType? responseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
             var match = statusCodes
                 .Select(sc => sc.Code is {} code ? Int(code) : new FormattableStringToExpression($"int s when s >= {sc.Family * 100:L} && s < {sc.Family * 100 + 100:L}"))
                 .ToList();
 
-            var statement = BuildStatusCodeSwitchCaseStatement(responseType, responseBody, httpMessage, headers, headerModelType, async);
+            var statement = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean && statusCodes is [{ Family: {} family }]
+                ? BuildHeadAsBooleanSwitchCaseStatement(httpMessage, family)
+                : BuildStatusCodeSwitchCaseStatement(responseType, responseBody, httpMessage, headers, headerModelType, async);
+
             return new SwitchCase(match, statement, AddScope: responseBody is not null);
         }
+
+        private static MethodBodyStatement BuildHeadAsBooleanSwitchCaseStatement(HttpMessageExpression httpMessage, int family)
+            => new MethodBodyStatement[]
+            {
+                new DeclareVariableStatement(typeof(bool), "value", family == 2 ? True : False, out var value),
+                Return(ResponseExpression.FromValue(value, httpMessage.Response))
+            };
 
         private static MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? commonResponseType, ResponseBody? responseBody, HttpMessageExpression httpMessage, ValueExpression? headers, CSharpType? headerModelType, bool async)
         {
