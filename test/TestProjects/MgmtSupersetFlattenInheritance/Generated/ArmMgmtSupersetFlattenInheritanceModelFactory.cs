@@ -14,7 +14,6 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetFlattenInheritanceModelFactory
     {
-
         /// <summary> Initializes a new instance of SubResourceModel1. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>

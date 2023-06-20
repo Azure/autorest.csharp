@@ -14,7 +14,6 @@ namespace MgmtDiscriminator.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtDiscriminatorModelFactory
     {
-
         /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

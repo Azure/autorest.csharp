@@ -10,7 +10,6 @@ namespace CustomNamespace
     /// <summary> The Model. </summary>
     internal partial class CustomizedModel
     {
-
         /// <summary> Initializes a new instance of CustomizedModel. </summary>
         /// <param name="propertyRenamedAndTypeChanged"> . </param>
         /// <param name="field"> . </param>

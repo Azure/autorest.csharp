@@ -12,7 +12,6 @@ namespace Pagination.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PaginationModelFactory
     {
-
         /// <summary> Initializes a new instance of LedgerEntry. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>

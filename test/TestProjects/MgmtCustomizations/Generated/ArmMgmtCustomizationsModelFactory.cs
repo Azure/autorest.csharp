@@ -14,7 +14,6 @@ namespace MgmtCustomizations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCustomizationsModelFactory
     {
-
         /// <summary> Initializes a new instance of PetStoreData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

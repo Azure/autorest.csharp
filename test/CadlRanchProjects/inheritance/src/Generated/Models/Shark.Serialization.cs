@@ -47,7 +47,7 @@ namespace _Type.Model.Inheritance.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Shark FromResponse(Response response)
+        internal static new Shark FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeShark(document.RootElement);

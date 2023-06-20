@@ -14,7 +14,6 @@ namespace MgmtNoTypeReplacement.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtNoTypeReplacementModelFactory
     {
-
         /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
