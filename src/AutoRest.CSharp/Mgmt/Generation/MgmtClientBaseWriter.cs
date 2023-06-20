@@ -849,11 +849,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    if (parameter.Parameter == KnownParameters.CancellationTokenParameter)
-                    {
-                        args.Add(parameter.Parameter);
-                    }
-                    else if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
+                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
@@ -863,10 +859,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            if (parameter.Parameter.IsPropertyBag)
-                                args.Add(parameter.ValueExpression);
-                            else
-                                args.Add(parameter.Parameter);
+                            args.Add(parameter.Parameter.IsPropertyBag ? parameter.ValueExpression : parameter.Parameter);
                         }
                     }
                     else
@@ -884,11 +877,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (parameter.Parameter.Type.IsEnum)
                     {
                         writer.UseNamespace(parameter.Parameter.Type.Namespace);
-                    }
-
-                    foreach (var @namespace in parameter.Usings)
-                    {
-                        writer.UseNamespace(@namespace);
                     }
 
                     args.Add(parameter.ValueExpression);

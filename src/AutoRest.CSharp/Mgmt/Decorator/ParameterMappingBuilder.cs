@@ -283,13 +283,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var mapping = FindContextualParameterForMethod(parameter, operation.RequestPath, contextualParameterMappingCache);
                 // Update parameter type if the method is a `ById` method
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
-                if (mapping == null)
+                if (parameter == KnownParameters.CancellationTokenParameter)
                 {
-                    yield return new ParameterMapping(p, true, Null, Enumerable.Empty<string>());
+                    yield return new ParameterMapping(KnownParameters.CancellationTokenParameter, false, KnownParameters.CancellationTokenParameter);
+                }
+                else if (mapping == null)
+                {
+                    yield return new ParameterMapping(p, true, Null);
                 }
                 else
                 {
-                    yield return new ParameterMapping(p, false, mapping.ValueExpression, mapping.Usings);
+                    yield return new ParameterMapping(p, false, mapping.ValueExpression);
                 }
             }
         }
@@ -311,33 +315,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
-        public record ParameterMapping
-        {
-            /// <summary>
-            /// The parameter object in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public Parameter Parameter;
-            /// <summary>
-            /// Should the parameter be passed through from the method in collection class?
-            /// </summary>
-            public bool IsPassThru;
-            /// <summary>
-            /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public ValueExpression ValueExpression;
-            /// <summary>
-            /// the using statements used in the ValueExpression
-            /// </summary>
-            public IEnumerable<string> Usings;
-
-            public ParameterMapping(Parameter parameter, bool isPassThru, ValueExpression valueExpression, IEnumerable<string> usings)
-            {
-                Parameter = parameter;
-                IsPassThru = isPassThru;
-                ValueExpression = valueExpression;
-                Usings = usings;
-            }
-        }
+        public record ParameterMapping(
+            // The parameter object in <see cref="RestClientMethod"/>.
+            Parameter Parameter,
+            // Should the parameter be passed through from the method in collection class?
+            bool IsPassThru,
+            // if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
+            ValueExpression ValueExpression);
 
         private static ContextualParameterMapping? FindContextualParameterForMethod(Parameter pathParameter, RequestPath requestPath, List<ContextualParameterMapping> contextualParameterMappings)
         {

@@ -29,8 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="itemType"></param>
         /// <param name="valuePropertyName"></param>
+        /// <param name="nextLinkPropertyName"></param>
         /// <returns></returns>
-        internal static bool IsListMethod(this Operation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, [MaybeNullWhen(false)] out string nextLinkPropertyName)
+        internal static bool IsListMethod(this Operation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, out string? nextLinkPropertyName)
         {
             itemType = null;
             valuePropertyName = null;
@@ -53,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 itemType = returnType.Arguments[0];
                 valuePropertyName = string.Empty;
-                nextLinkPropertyName = string.Empty;
+                nextLinkPropertyName = null;
                 return true;
             }
 

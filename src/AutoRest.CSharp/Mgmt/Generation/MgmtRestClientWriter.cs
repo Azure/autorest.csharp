@@ -1,15 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -74,34 +69,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
                 writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {KnownParameters.ApplicationId.Name});");
-            }
-            writer.Line();
-        }
-
-        private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
-        {
-            var returnType = operation.ReturnType != null
-                ? new CSharpType(typeof(Response<>), operation.ReturnType)
-                : new CSharpType(typeof(Response));
-
-            var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
-
-            writer
-                .WriteXmlDocumentationSummary($"{method.Description}")
-                .WriteMethodDocumentationSignature(method);
-
-            using (writer.WriteMethodDeclaration(method))
-            {
-                writer.WriteParametersValidation(parameters);
-                var messageVariable = new CodeWriterDeclaration("message");
-                var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
-
-                writer
-                    .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                    .WriteMethodCall(async, $"{restClient.Fields.PipelineField.Name}.SendAsync", $"{restClient.Fields.PipelineField.Name}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
-
-                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, null);
             }
             writer.Line();
         }

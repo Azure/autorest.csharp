@@ -26,9 +26,10 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 
         protected override TypeProvider EnsurePackModel()
         {
-            var packModelName = string.IsNullOrEmpty(Name) ?
-            throw new InvalidOperationException("Not enough information is provided for constructing management plane property bag, please make sure you first call the WithUpdatedInfo method of MgmtPropertyBag to update the property bag before using it.") :
-            $"{Name}Options";
+            var packModelName = string.IsNullOrEmpty(Name)
+                ? throw new InvalidOperationException("Not enough information is provided for constructing management plane property bag, please make sure you first call the WithUpdatedInfo method of MgmtPropertyBag to update the property bag before using it.") :
+                $"{Name}Options";
+
             var properties = new List<InputModelProperty>();
             foreach (var parameter in _paramsToKeep)
             {

@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -79,9 +80,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                     ? Public | Static | Extension
                     : Public | Virtual
                 : Accessibility,
-            IsPagingOperation
-                ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+            IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
+            null,
+            MethodParameters);
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().OperationName;
@@ -165,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     {
                         if (parameterMapping[i].IsPassThru)
                         {
-                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, parameterMapping[i].Parameter.GetPropertyBagValueExpression(), Enumerable.Empty<string>());
+                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, parameterMapping[i].Parameter.GetPropertyBagValueExpression());
                         }
                     }
                 }
@@ -181,10 +182,11 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
                 parameters.Add(KnownParameters.WaitForCompletion);
-            var overrideParameters = OperationMappings.Values.First().OverrideParameters;
-            if (overrideParameters.Length > 0)
+
+            var operation = _operations.First();
+            if (operation.OverrideParameters.Any())
             {
-                parameters.AddRange(overrideParameters);
+                parameters.AddRange(operation.OverrideParameters);
             }
             else
             {
@@ -196,7 +198,10 @@ namespace AutoRest.CSharp.Mgmt.Models
                 {
                     parameters.AddRange(_passThroughParams);
                 }
+
+                parameters.Add(KnownParameters.CancellationTokenParameter);
             }
+
             return parameters;
         }
     }
