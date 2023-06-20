@@ -64,11 +64,17 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    $configFile = Join-Path $projectDirectory "tspconfig.yaml"
     if (Test-Path "$projectDirectory/*.sln") {
         $projectDirectory = Join-Path $projectDirectory "src"
     }
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain
+    if (Test-Path $configFile) {
+        Add-Typespec "$projectPrefix$testName" $projectDirectory $tspMain "--config=$configFile"
+    }
+    else {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain
+    }
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {

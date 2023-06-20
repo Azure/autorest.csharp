@@ -305,6 +305,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private void BuildParameters()
         {
+            SerializationFormat GetSerializationFormat(InputParameter parameter)
+            {
+                return parameter.SerializationFormat == SerializationFormat.Default
+                        ? SerializationBuilder.GetSerializationFormat(parameter.Type)
+                        : parameter.SerializationFormat;
+            }
+
             var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
@@ -337,7 +344,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
+                            ? GetSerializationFormat(operationParameter)
                             : requestConditionSerializationFormat;
 
                         break;
