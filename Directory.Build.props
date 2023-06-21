@@ -4,6 +4,8 @@
     <RepoEngPath>$(MSBuildThisFileDirectory)eng</RepoEngPath>
     <RepoSrcPath>$(RepoRoot)src</RepoSrcPath>
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
+    <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
+    <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
   </PropertyGroup>
 
   <!-- Setup default project properties -->

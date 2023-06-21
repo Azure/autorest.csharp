@@ -2,7 +2,7 @@
   <PropertyGroup>
     <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 
   <!-- Placeholders to mimic Directory.Build.Common.props from azure-sdk-for-net for new project tests-->
