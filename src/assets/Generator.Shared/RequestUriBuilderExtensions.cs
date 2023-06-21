@@ -139,5 +139,11 @@ namespace Azure.Core
             var stringValues = value.Select(v => ConvertToString(v));
             builder.AppendQuery(name, string.Join(delimiter, stringValues), escape);
         }
+
+        public static void AppendQueryDelimited<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, string delimiter, string format, bool escape = true)
+        {
+            var stringValues = value.Select(v => ConvertToString(v, format));
+            builder.AppendQuery(name, string.Join(delimiter, stringValues), escape);
+        }
     }
 }

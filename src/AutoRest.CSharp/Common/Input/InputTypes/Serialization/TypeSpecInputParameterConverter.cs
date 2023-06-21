@@ -123,7 +123,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
         {
-            if (parameterType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
+            var affectType = parameterType is InputListType listType? listType.ElementType : parameterType;
+            if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
             {
                 if (requestLocation == RequestLocation.Header)
                 {
@@ -136,7 +137,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return SerializationBuilder.GetSerializationFormat(parameterType);
+            return SerializationBuilder.GetSerializationFormat(affectType);
         }
     }
 }

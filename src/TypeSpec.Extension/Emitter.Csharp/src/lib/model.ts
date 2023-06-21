@@ -167,7 +167,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     return InputTypeKind.DateTimeRFC3339;
                 case "rfc7231":
                     return InputTypeKind.DateTimeRFC7231;
-                case "unixTimeStamp":
+                case "unixTimestamp":
                     return InputTypeKind.DateTimeUnix;
                 default:
                     logger.warn(
