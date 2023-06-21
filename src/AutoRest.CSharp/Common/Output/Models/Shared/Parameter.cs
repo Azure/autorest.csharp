@@ -86,8 +86,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
             if (defaultValue != null)
             {
-                var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaltValueString}";
+                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaultValueString}";
             }
 
             if (!type.IsFrameworkType || values == null)
@@ -181,8 +181,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
             if (defaultValue != null)
             {
-                var defaltValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaltValueString}";
+                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaultValueString}";
             }
 
             return requestParameter.Schema switch
