@@ -114,7 +114,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const configurations = {
                 OutputFolder: ".",
                 Namespace: options.namespace ?? namespace,
-                LibraryName: options["library-name"] ?? options.namespace ?? namespace,
+                LibraryName:
+                    options["library-name"] ?? options.namespace ?? namespace,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
@@ -151,11 +152,15 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             if (options.skipSDKGeneration !== true) {
-                const csProjFile = resolvePath(outputFolder, `${configurations.LibraryName}.csproj`);
-                logger.info(`Checking if ${csProjFile} exists`)
-                const newProjectOption = options["new-project"] || !existsSync(csProjFile)
-                    ? "--new-project"
-                    : "";
+                const csProjFile = resolvePath(
+                    outputFolder,
+                    `${configurations.LibraryName}.csproj`
+                );
+                logger.info(`Checking if ${csProjFile} exists`);
+                const newProjectOption =
+                    options["new-project"] || !existsSync(csProjFile)
+                        ? "--new-project"
+                        : "";
                 const existingProjectOption = options["existing-project-folder"]
                     ? `--existing-project-folder ${options["existing-project-folder"]}`
                     : "";
