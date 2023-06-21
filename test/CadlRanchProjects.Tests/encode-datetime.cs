@@ -112,5 +112,25 @@ namespace CadlRanchProjects.Tests
             Response<Rfc7231DatetimeProperty> response = await new DatetimeClient(host, null).GetPropertyClient().Rfc7231Async(body);
             Assert.AreEqual(body.Value, response.Value.Value);
         });
+
+
+        [Test]
+        public Task Encode_DateTime_Property_unixTimestamp() => Test(async (host) =>
+        {
+            DateTimeOffset data = DateTimeOffset.FromUnixTimeSeconds(1686566864);
+            var body = new UnixTimestampDatetimeProperty(data);
+            Response<UnixTimestampDatetimeProperty> response = await new DatetimeClient(host, null).GetPropertyClient().UnixTimestampAsync(body);
+            Assert.AreEqual(body.Value, response.Value.Value);
+        });
+
+        [Test]
+        public Task Encode_DateTime_Property_unixTimestampArray() => Test(async (host) =>
+        {
+            DateTimeOffset data1 = DateTimeOffset.FromUnixTimeSeconds(1686566864);
+            DateTimeOffset data2 = DateTimeOffset.FromUnixTimeSeconds(1686734256);
+            var body = new UnixTimestampArrayDatetimeProperty(new[] { data1, data2 });
+            Response<UnixTimestampArrayDatetimeProperty> response = await new DatetimeClient(host, null).GetPropertyClient().UnixTimestampArrayAsync(body);
+            Assert.AreEqual(body.Value, response.Value.Value);
+        });
     }
 }
