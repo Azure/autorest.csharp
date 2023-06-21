@@ -9,13 +9,14 @@
    "$id": "2",
    "Name": "Versions",
    "Namespace": "Server.Path.Multiple",
-   "Description": "",
+   "Description": "Service versions",
    "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
      "Name": "v1_0",
-     "Value": "v1.0"
+     "Value": "v1.0",
+     "Description": "Version 1.0"
     }
    ],
    "IsExtensible": true,

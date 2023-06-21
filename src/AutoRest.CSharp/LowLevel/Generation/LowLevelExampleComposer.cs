@@ -18,6 +18,7 @@ using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
 using YamlDotNet.Core.Tokens;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -1124,7 +1125,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string FixKeyWords(string serializedName)
         {
-            var result = serializedName.Replace('-', '_');
+            // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
+            // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
+            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
             return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 

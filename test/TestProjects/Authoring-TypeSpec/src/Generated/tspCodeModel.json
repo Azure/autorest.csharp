@@ -642,7 +642,7 @@
          },
          "IsNullable": false
         },
-        "IsRequired": true,
+        "IsRequired": false,
         "IsReadOnly": false,
         "IsDiscriminator": false
        },
@@ -670,7 +670,7 @@
             "Kind": "String",
             "IsNullable": false
            },
-           "IsRequired": true,
+           "IsRequired": false,
            "IsReadOnly": false,
            "IsDiscriminator": false
           },

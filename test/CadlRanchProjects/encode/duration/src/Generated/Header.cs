@@ -15,8 +15,8 @@ using Azure.Core.Pipeline;
 namespace Encode.Duration
 {
     // Data plane generated sub-client.
-    /// <summary> The Query sub-client. </summary>
-    public partial class Query
+    /// <summary> The Header sub-client. </summary>
+    public partial class Header
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,17 +28,17 @@ namespace Encode.Duration
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Query for mocking. </summary>
-        protected Query()
+        /// <summary> Initializes a new instance of Header for mocking. </summary>
+        protected Header()
         {
         }
 
-        /// <summary> Initializes a new instance of Query. </summary>
+        /// <summary> Initializes a new instance of Header. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
-        internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Header(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -56,18 +56,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The DurationISO8601 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='DefaultAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> DefaultAsync(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='DefaultAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> DefaultAsync(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Default");
+            using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDefaultRequest(input, context);
+                using HttpMessage message = CreateDefaultRequest(duration, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -87,18 +87,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The DurationISO8601 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Default(TimeSpan,RequestContext)']/*" />
-        public virtual Response Default(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Default(TimeSpan,RequestContext)']/*" />
+        public virtual Response Default(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Default");
+            using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDefaultRequest(input, context);
+                using HttpMessage message = CreateDefaultRequest(duration, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -118,18 +118,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The DurationISO8601 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Iso8601Async(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> Iso8601Async(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601Async(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> Iso8601Async(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Iso8601");
+            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601Request(input, context);
+                using HttpMessage message = CreateIso8601Request(duration, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -149,18 +149,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The DurationISO8601 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Iso8601(TimeSpan,RequestContext)']/*" />
-        public virtual Response Iso8601(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601(TimeSpan,RequestContext)']/*" />
+        public virtual Response Iso8601(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Iso8601");
+            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601Request(input, context);
+                using HttpMessage message = CreateIso8601Request(duration, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -180,18 +180,21 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSeconds to use. </param>
+        /// <param name="duration"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> Int32SecondsAsync(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601ArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual async Task<Response> Iso8601ArrayAsync(IEnumerable<TimeSpan> duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Int32Seconds");
+            Argument.AssertNotNull(duration, nameof(duration));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsRequest(input, context);
+                using HttpMessage message = CreateIso8601ArrayRequest(duration, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -211,18 +214,21 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSeconds to use. </param>
+        /// <param name="duration"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32Seconds(TimeSpan,RequestContext)']/*" />
-        public virtual Response Int32Seconds(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601Array(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual Response Iso8601Array(IEnumerable<TimeSpan> duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.Int32Seconds");
+            Argument.AssertNotNull(duration, nameof(duration));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsRequest(input, context);
+                using HttpMessage message = CreateIso8601ArrayRequest(duration, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -242,18 +248,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSecondsFloat to use. </param>
+        /// <param name="duration"> The DurationSeconds to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='FloatSecondsAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> FloatSecondsAsync(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32SecondsAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> Int32SecondsAsync(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.FloatSeconds");
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32Seconds");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatSecondsRequest(input, context);
+                using HttpMessage message = CreateInt32SecondsRequest(duration, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -273,18 +279,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSecondsFloat to use. </param>
+        /// <param name="duration"> The DurationSeconds to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='FloatSeconds(TimeSpan,RequestContext)']/*" />
-        public virtual Response FloatSeconds(TimeSpan input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32Seconds(TimeSpan,RequestContext)']/*" />
+        public virtual Response Int32Seconds(TimeSpan duration, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Query.FloatSeconds");
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32Seconds");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatSecondsRequest(input, context);
+                using HttpMessage message = CreateInt32SecondsRequest(duration, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -304,21 +310,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The Array to use. </param>
+        /// <param name="duration"> The DurationSecondsFloat to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
-        public virtual async Task<Response> Int32SecondsArrayAsync(IEnumerable<TimeSpan> input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatSecondsAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> FloatSecondsAsync(TimeSpan duration, RequestContext context = null)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
+            using var scope = ClientDiagnostics.CreateScope("Header.FloatSeconds");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsArrayRequest(input, context);
+                using HttpMessage message = CreateFloatSecondsRequest(duration, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -338,21 +341,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The Array to use. </param>
+        /// <param name="duration"> The DurationSecondsFloat to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArray(IEnumerable{TimeSpan},RequestContext)']/*" />
-        public virtual Response Int32SecondsArray(IEnumerable<TimeSpan> input, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatSeconds(TimeSpan,RequestContext)']/*" />
+        public virtual Response FloatSeconds(TimeSpan duration, RequestContext context = null)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
+            using var scope = ClientDiagnostics.CreateScope("Header.FloatSeconds");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsArrayRequest(input, context);
+                using HttpMessage message = CreateFloatSecondsRequest(duration, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -362,80 +362,77 @@ namespace Encode.Duration
             }
         }
 
-        internal HttpMessage CreateDefaultRequest(TimeSpan input, RequestContext context)
+        internal HttpMessage CreateDefaultRequest(TimeSpan duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/query/default", false);
-            uri.AppendQuery("input", input, "P", true);
+            uri.AppendPath("/encode/duration/header/default", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("duration", duration, "P");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateIso8601Request(TimeSpan input, RequestContext context)
+        internal HttpMessage CreateIso8601Request(TimeSpan duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/query/iso8601", false);
-            uri.AppendQuery("input", input, "P", true);
+            uri.AppendPath("/encode/duration/header/iso8601", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("duration", duration, "P");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInt32SecondsRequest(TimeSpan input, RequestContext context)
+        internal HttpMessage CreateIso8601ArrayRequest(IEnumerable<TimeSpan> duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/query/int32-seconds", false);
-            uri.AppendQuery("input", input, "%s", true);
+            uri.AppendPath("/encode/duration/header/iso8601-array", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.AddDelimited("duration", duration, ",");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateFloatSecondsRequest(TimeSpan input, RequestContext context)
+        internal HttpMessage CreateInt32SecondsRequest(TimeSpan duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/query/float-seconds", false);
-            uri.AppendQuery("input", input, "s\\.fff", true);
+            uri.AppendPath("/encode/duration/header/int32-seconds", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("duration", duration, "%s");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInt32SecondsArrayRequest(IEnumerable<TimeSpan> input, RequestContext context)
+        internal HttpMessage CreateFloatSecondsRequest(TimeSpan duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
-            if (input != null && Optional.IsCollectionDefined(input))
-            {
-                uri.AppendQueryDelimited("input", input, ",", true);
-            }
+            uri.AppendPath("/encode/duration/header/float-seconds", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("duration", duration, "s\\.fff");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

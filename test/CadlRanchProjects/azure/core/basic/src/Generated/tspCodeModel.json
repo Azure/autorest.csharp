@@ -121,7 +121,7 @@
      "Description": "The entity tag for this resource.",
      "Type": {
       "$id": "17",
-      "Name": "string",
+      "Name": "eTag",
       "Kind": "String",
       "IsNullable": false
      },

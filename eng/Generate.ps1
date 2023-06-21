@@ -67,9 +67,10 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    $configFile = Join-Path $projectDirectory "tspconfig.yaml"
     $projectDirectory = Join-Path $projectDirectory "src"
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain "--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain "--config=$configFile --option @azure-tools/typespec-csharp.new-project=true" "-n"
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
