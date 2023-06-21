@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "ApiVersionInCadl",
+ "Name": "ApiVersionInTsp",
  "Description": "CADL project to test api versions.",
  "ApiVersions": [
   "v1.1",
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "APIVersion",
-   "Namespace": "ApiVersionInCadl",
+   "Namespace": "ApiVersionInTsp",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -33,7 +33,7 @@
   {
    "$id": "5",
    "Name": "DetectionResult",
-   "Namespace": "ApiVersionInCadl",
+   "Namespace": "ApiVersionInTsp",
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
    "Usage": "Output",
@@ -59,13 +59,13 @@
  "Clients": [
   {
    "$id": "8",
-   "Name": "ApiVersionInCadlClient",
+   "Name": "ApiVersionInTspClient",
    "Description": "CADL project to test api versions.",
    "Operations": [
     {
      "$id": "9",
      "Name": "GetBatchDetectionResult",
-     "ResourceName": "ApiVersionInCadl",
+     "ResourceName": "ApiVersionInTsp",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Parameters": [

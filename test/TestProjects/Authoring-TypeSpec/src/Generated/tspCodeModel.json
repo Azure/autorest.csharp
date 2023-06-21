@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Azure.Language.Authoring",
+ "Name": "AuthoringTypeSpec",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -38,7 +38,7 @@
   {
    "$id": "6",
    "Name": "JobStatus",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the job status values.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -87,7 +87,7 @@
   {
    "$id": "14",
    "Name": "Project",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -311,7 +311,7 @@
   {
    "$id": "43",
    "Name": "TrainingJobOptions",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
    "IsNullable": false,
    "Usage": "None",
@@ -336,7 +336,7 @@
   {
    "$id": "46",
    "Name": "Deployment",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -402,7 +402,7 @@
   {
    "$id": "54",
    "Name": "SwapDeploymentsOptions",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -441,7 +441,7 @@
   {
    "$id": "59",
    "Name": "DeploymentJob",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -528,7 +528,7 @@
       "ElementType": {
        "$id": "71",
        "Name": "JobWarning",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
        "IsNullable": false,
        "Usage": "Output",
@@ -727,7 +727,7 @@
   {
    "$id": "93",
    "Name": "SwapDeploymentsJob",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -852,7 +852,7 @@
   {
    "$id": "108",
    "Name": "PagedSupportedLanguage",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
    "IsNullable": false,
    "Usage": "None",
@@ -868,7 +868,7 @@
       "ElementType": {
        "$id": "111",
        "Name": "SupportedLanguage",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
        "IsNullable": false,
        "Usage": "None",
@@ -934,7 +934,7 @@
   {
    "$id": "118",
    "Name": "PagedTrainingConfigVersion",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
    "IsNullable": false,
    "Usage": "None",
@@ -950,7 +950,7 @@
       "ElementType": {
        "$id": "121",
        "Name": "TrainingConfigVersion",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
        "IsNullable": false,
        "Usage": "None",
@@ -1017,7 +1017,7 @@
  "Clients": [
   {
    "$id": "128",
-   "Name": "AuthoringClient",
+   "Name": "AuthoringTypeSpecClient",
    "Description": "",
    "Operations": [
     {

@@ -3,7 +3,7 @@
 
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     [CodeGenModel("ModelToRename")]
     public partial class RenamedModel

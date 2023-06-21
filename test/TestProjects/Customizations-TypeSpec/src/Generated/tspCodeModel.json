@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "CustomizationsInCadl",
+ "Name": "CustomizationsInTsp",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "EnumToRename",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Renamed enum (original name: EnumToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -36,7 +36,7 @@
   {
    "$id": "6",
    "Name": "EnumWithValueToRename",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -63,7 +63,7 @@
   {
    "$id": "10",
    "Name": "EnumToBeMadeExtensible",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -92,7 +92,7 @@
   {
    "$id": "14",
    "Name": "RootModel",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -105,7 +105,7 @@
      "Type": {
       "$id": "16",
       "Name": "ModelToMakeInternal",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Public model made internal",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -139,7 +139,7 @@
      "Type": {
       "$id": "20",
       "Name": "ModelToRename",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -188,7 +188,7 @@
      "Type": {
       "$id": "26",
       "Name": "ModelToChangeNamespace",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -222,7 +222,7 @@
      "Type": {
       "$id": "30",
       "Name": "ModelWithCustomizedProperties",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -499,7 +499,7 @@
      "Type": {
       "$id": "67",
       "Name": "ModelToAddAdditionalSerializableProperty",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -546,13 +546,13 @@
  "Clients": [
   {
    "$id": "70",
-   "Name": "CustomizationsInCadlClient",
+   "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
      "$id": "71",
      "Name": "roundTrip",
-     "ResourceName": "CustomizationsInCadl",
+     "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
