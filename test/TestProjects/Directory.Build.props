@@ -11,7 +11,7 @@
     <IsTestGenerationTestProjet Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProjet>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationTestProjet)' == 'true'">net7.0;net6.0;net462</RequiredTargetFrameworks>
-    <ShouldUseCentralVersions>true</ShouldUseCentralVersions>
+    <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />
