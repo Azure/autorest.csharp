@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.Output.Models
                         });
 
                     case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
-                        return AddFlattenedBody(request, outputParameter);
+                        return AddFlattenedBody(request);
 
                     default:
                         var value = GetValueForRequestPart(inputParameter, outputParameter);
@@ -506,10 +506,23 @@ namespace AutoRest.CSharp.Output.Models
             yield return Assign(request.Content, urlContent);
         }
 
-        private MethodBodyStatement AddFlattenedBody(RequestExpression request, Parameter parameter)
+        private MethodBodyStatement AddFlattenedBody(RequestExpression request)
         {
-            var content = ArgumentsMap[parameter];
-            var conversion = ConversionsMap[parameter];
+            var conversion = new List<MethodBodyStatement>
+            {
+                Var("content", New.Utf8JsonRequestContent(), out var content),
+                content.JsonWriter.WriteStartObject()
+            };
+
+            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
+            {
+                if (inputParameter is { FlattenedBodyProperty: { } property })
+                {
+                    conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, inputParameter, outputParameter));
+                }
+            }
+
+            conversion.Add(content.JsonWriter.WriteEndObject());
 
             return new[]
             {
@@ -517,6 +530,27 @@ namespace AutoRest.CSharp.Output.Models
                 conversion,
                 Assign(request.Content, content)
             };
+        }
+
+        private MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, InputParameter inputParameter, Parameter outputParameter)
+        {
+            var value = GetValueForRequestPart(inputParameter, outputParameter);
+            var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, outputParameter.Type, false);
+
+            var propertyName = property.SerializedName ?? property.Name;
+            var writePropertyStatement = new[]
+            {
+                jsonWriter.WritePropertyName(propertyName),
+                JsonSerializationMethodsBuilder.SerializeExpression(jsonWriter, valueSerialization, value)
+            };
+
+            var writeNullStatement = property.IsRequired ? jsonWriter.WriteNull(propertyName) : null;
+            if (outputParameter.Type.IsNullable)
+            {
+                return new IfElseStatement(NotEqual(value, Null), writePropertyStatement, writeNullStatement);
+            }
+
+            return writePropertyStatement;
         }
 
         private static MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)

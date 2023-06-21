@@ -105,7 +105,6 @@ namespace AutoRest.CSharp.Output.Models
         public ClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
         {
             var parameters = new Dictionary<InputParameter, Parameter>();
-            (InputParameter, Parameter)? flatten = null;
             foreach (var inputParameter in sortedParameters)
             {
                 var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
@@ -114,10 +113,6 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     AddCreateMessageParameter(parameter);
                     _protocolParameters.Add(parameter);
-                }
-                else if (inputParameter.Kind == InputOperationParameterKind.Flattened)
-                {
-                    flatten = (inputParameter, parameter);
                 }
 
                 parameters.Add(inputParameter, parameter);
@@ -131,12 +126,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
-            }
-
-            if (flatten is not null)
-            {
-                var (_, outputParameter) = flatten.Value;
-                CreateFlattenedConversions(outputParameter);
             }
 
             return new ClientMethodParameters
@@ -333,27 +322,6 @@ namespace AutoRest.CSharp.Output.Models
             _protocolParameters.Add(protocolMethodParameter);
             _convenienceParameters.AddRange(requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters));
             _arguments[protocolMethodParameter] = requestContent;
-        }
-
-        private void CreateFlattenedConversions(Parameter parameter)
-        {
-            var conversion = new List<MethodBodyStatement>
-            {
-                Var("content", New.Utf8JsonRequestContent(), out var content),
-                content.JsonWriter.WriteStartObject()
-            };
-
-            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
-            {
-                if (inputParameter is { FlattenedBodyProperty: { } property })
-                {
-                    conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, outputParameter));
-                }
-            }
-
-            conversion.Add(content.JsonWriter.WriteEndObject());
-            _conversions[parameter] = conversion;
-            _arguments[parameter] = content;
         }
 
         private Parameter CreateSpreadParameter(InputParameter inputParameter, InputModelProperty property)

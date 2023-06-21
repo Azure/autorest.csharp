@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputClient in _input.Clients)
             {
                 var clientName = GetClientName(inputClient);
-                var clientPrefix = ClientBuilder.GetClientPrefix(inputClient.Name, _defaultName);
+                var clientPrefix = ClientBuilder.GetClientPrefix(clientName, _defaultName);
 
                 foreach (var operation in inputClient.Operations)
                 {
