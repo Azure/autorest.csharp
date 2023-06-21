@@ -294,13 +294,19 @@ namespace ModelShapes
             uri.AppendPath("/op3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new ParametersModel()
-            {
-                Code = code,
-                Status = status
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (code != null)
+            {
+                content.JsonWriter.WritePropertyName("Code"u8);
+                content.JsonWriter.WriteStringValue(code);
+            }
+            if (status != null)
+            {
+                content.JsonWriter.WritePropertyName("Status"u8);
+                content.JsonWriter.WriteStringValue(status);
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }

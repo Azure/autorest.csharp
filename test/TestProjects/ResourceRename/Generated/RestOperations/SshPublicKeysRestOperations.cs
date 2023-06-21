@@ -127,12 +127,14 @@ namespace ResourceRename
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SshPublicKeyInfoData()
-            {
-                Properties = properties
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (properties != null)
+            {
+                content.JsonWriter.WritePropertyName("properties"u8);
+                content.JsonWriter.WriteObjectValue(properties);
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             _userAgent.Apply(message);
             return message;

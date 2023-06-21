@@ -127,12 +127,14 @@ namespace ExactMatchFlattenInheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new CustomModel2Data()
-            {
-                Foo = foo
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (foo != null)
+            {
+                content.JsonWriter.WritePropertyName("foo"u8);
+                content.JsonWriter.WriteStringValue(foo);
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             _userAgent.Apply(message);
             return message;

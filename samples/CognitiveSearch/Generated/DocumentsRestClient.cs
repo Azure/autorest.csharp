@@ -122,15 +122,21 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            foreach (var param in searchOptions.Facets)
+            if (searchOptions?.Facets != null)
             {
-                uri.AppendQuery("facet", param, true);
+                foreach (var param in searchOptions.Facets)
+                {
+                    uri.AppendQuery("facet", param, true);
+                }
             }
             if (searchOptions?.Filter != null)
             {
                 uri.AppendQuery("$filter", searchOptions.Filter, true);
             }
-            uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
+            if (searchOptions?.HighlightFields != null)
+            {
+                uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
+            }
             if (searchOptions?.HighlightPostTag != null)
             {
                 uri.AppendQuery("highlightPostTag", searchOptions.HighlightPostTag, true);
@@ -143,25 +149,37 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
+            if (searchOptions?.OrderBy != null)
+            {
+                uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
+            }
             if (searchOptions?.QueryType != null)
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            foreach (var param0 in searchOptions.ScoringParameters)
+            if (searchOptions?.ScoringParameters != null)
             {
-                uri.AppendQuery("scoringParameter", param0, true);
+                foreach (var param in searchOptions.ScoringParameters)
+                {
+                    uri.AppendQuery("scoringParameter", param, true);
+                }
             }
             if (searchOptions?.ScoringProfile != null)
             {
                 uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
             }
-            uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
+            if (searchOptions?.SearchFields != null)
+            {
+                uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
+            }
             if (searchOptions?.SearchMode != null)
             {
                 uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
             }
-            uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
+            if (searchOptions?.Select != null)
+            {
+                uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
+            }
             if (searchOptions?.Skip != null)
             {
                 uri.AppendQuery("$skip", searchOptions.Skip.Value, true);
@@ -413,9 +431,18 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
-            uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
-            uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
+            if (suggestOptions?.OrderBy != null)
+            {
+                uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
+            }
+            if (suggestOptions?.SearchFields != null)
+            {
+                uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
+            }
+            if (suggestOptions?.Select != null)
+            {
+                uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
+            }
             if (suggestOptions?.Top != null)
             {
                 uri.AppendQuery("$top", suggestOptions.Top.Value, true);
@@ -688,7 +715,10 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
+            if (autocompleteOptions?.SearchFields != null)
+            {
+                uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
+            }
             if (autocompleteOptions?.Top != null)
             {
                 uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);
