@@ -38,15 +38,11 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (!_isAzureSdk)
             {
                 //clean up old sln and csproj files
-                foreach (var file in Directory.GetFiles(Configuration.AbsoluteProjectFolder, "*.csproj"))
+                foreach (var file in Directory.GetFiles(_projectDirectory, "*.csproj", SearchOption.AllDirectories))
                 {
                     File.Delete(file);
                 }
-                foreach (var file in Directory.GetFiles(_projectDirectory, "*.sln"))
-                {
-                    File.Delete(file);
-                }
-                foreach (var file in Directory.GetFiles(_testDirectory, "*.csproj"))
+                foreach (var file in Directory.GetFiles(_projectDirectory, "*.sln", SearchOption.AllDirectories))
                 {
                     File.Delete(file);
                 }
@@ -77,8 +73,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(Path.Combine(_testDirectory, "SessionRecords"));
             }
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCsproj()));
-            //WriteTestBaseClass(autoRest);
-            //WriteTestEnvironment(autoRest);
+            //TODO WriteTestBaseClass(autoRest);
+            //TODO WriteTestEnvironment(autoRest);
         }
 
         private async Task WriteProjectFiles()
