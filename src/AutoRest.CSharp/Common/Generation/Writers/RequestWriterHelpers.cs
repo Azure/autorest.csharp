@@ -385,9 +385,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (delimiter != null)
                     {
                         writer.Append($", {delimiter:L}");
-                        Console.WriteLine($"array query parameter: {queryParameter.Name}, serialization {queryParameter.SerializationFormat}");
                     }
-                    Console.WriteLine($"query parameter: {queryParameter.Name}, serialization {queryParameter.SerializationFormat}");
                     WriteSerializationFormat(writer, queryParameter.SerializationFormat);
                     writer.Line($", {queryParameter.Escape:L});");
                 }
