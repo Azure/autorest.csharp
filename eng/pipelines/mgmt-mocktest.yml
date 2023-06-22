@@ -32,8 +32,8 @@ stages:
       - job: MockTest
         timeoutInMinutes: 240
         pool:
-          name: azsdk-pool-mms-win-2022-general
-          vmImage: windows-2022
+          name: azsdk-pool-mms-ubuntu-2204-general
+          vmImage: ubuntu-22.04
         steps:
           - checkout: self
           - checkout: azure-sdk-tools

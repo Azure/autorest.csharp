@@ -16,8 +16,8 @@ parameters:
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: windows-2022
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
   dependsOn: ${{ parameters.dependsOn }}
   steps:
     - task: NodeTool@0
