@@ -43,6 +43,7 @@ jobs:
         workingDirectory: $(Build.SourcesDirectory)
     - script: |
         npm ci
+        npm ls -a
       displayName: "Install packages"
     - pwsh: .\eng\CodeGenerationCheck.ps1 -Filter "${{ parameters.filter }}"
       displayName: "Check if generated code is up-to-date"
