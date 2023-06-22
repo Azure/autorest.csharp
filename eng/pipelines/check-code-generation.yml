@@ -44,11 +44,9 @@ jobs:
     - script: |
         npm ci
       displayName: "Install packages"
-      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     - script: |
         npm ls -a
       displayName: "List packages"
-      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     - pwsh: .\eng\CodeGenerationCheck.ps1 -Filter "${{ parameters.filter }}"
       displayName: "Check if generated code is up-to-date"
       env:
