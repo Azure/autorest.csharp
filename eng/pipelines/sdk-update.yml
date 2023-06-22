@@ -71,7 +71,7 @@ stages:
               npm run prettier
             displayName: "Emitter format check"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
+          - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber 20230622.10 -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
             name: Package
             displayName: "Pack Artifacts"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
