@@ -42,20 +42,20 @@
         "winston": "^3.8.2"
     },
     "peerDependencies": {
-        "@azure-tools/typespec-autorest": ">=0.30.0 <1.0.0",
-        "@azure-tools/typespec-azure-core": ">=0.30.0 <1.0.0",
-        "@azure-tools/typespec-client-generator-core": ">=0.30.0 <1.0.0",
-        "@typespec/compiler": ">=0.44.0 <1.0.0",
-        "@typespec/http": ">=0.44.0 <1.0.0",
-        "@typespec/openapi": ">=0.44.0 <1.0.0",
-        "@typespec/rest": ">=0.44.0 <1.0.0",
-        "@typespec/versioning": ">=0.44.0 <1.0.0"
+        "@azure-tools/typespec-autorest": ">=0.31.0 <1.0.0",
+        "@azure-tools/typespec-azure-core": ">=0.31.0 <1.0.0",
+        "@azure-tools/typespec-client-generator-core": ">=0.31.0 <1.0.0",
+        "@typespec/compiler": ">=0.45.2 <1.0.0",
+        "@typespec/http": ">=0.45.0 <1.0.0",
+        "@typespec/openapi": ">=0.45.0 <1.0.0",
+        "@typespec/rest": ">=0.45.0 <1.0.0",
+        "@typespec/versioning": ">=0.45.0 <1.0.0"
     },
     "devDependencies": {
         "@azure-tools/typespec-autorest": "0.31.0",
         "@azure-tools/typespec-azure-core": "0.31.0",
         "@azure-tools/typespec-client-generator-core": "0.31.0",
-        "@typespec/compiler": "0.45.0",
+        "@typespec/compiler": "0.45.2",
         "@typespec/http": "0.45.0",
         "@typespec/openapi": "0.45.0",
         "@typespec/rest": "0.45.0",
