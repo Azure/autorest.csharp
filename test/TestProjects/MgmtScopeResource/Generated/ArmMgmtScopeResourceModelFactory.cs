@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
         /// <param name="displayName"> The display name of the policy assignment. </param>
         /// <param name="policyDefinitionId"> The ID of the policy definition or policy set definition being assigned. </param>
         /// <param name="scope"> The scope for the policy assignment. </param>
-        /// <param name="notScopes"> The policy&apos;s excluded scopes. </param>
+        /// <param name="notScopes"> The policy's excluded scopes. </param>
         /// <param name="parameters"> The parameter values for the assigned policy rule. The keys are the parameter names. </param>
         /// <param name="description"> This message will be part of response in case of policy violation. </param>
         /// <param name="metadata"> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </param>
@@ -303,7 +303,7 @@ namespace MgmtScopeResource.Models
         /// <param name="departmentName"> Department name. </param>
         /// <param name="consumedService"> Consumed service name. </param>
         /// <param name="costCenter"> The cost center of this department if it is a department and a costcenter exists. </param>
-        /// <param name="additionalProperties"> Additional details of this usage item. By default this is not populated, unless it&apos;s specified in $expand. </param>
+        /// <param name="additionalProperties"> Additional details of this usage item. By default this is not populated, unless it's specified in $expand. </param>
         /// <param name="publisherName"> The name of publisher. </param>
         /// <param name="planName"> The name of plan. </param>
         /// <param name="isRecurringCharge"> Flag indicating whether this is a recurring charge or not. </param>

@@ -18,6 +18,7 @@ using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
 using YamlDotNet.Core.Tokens;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -628,7 +629,7 @@ namespace AutoRest.CSharp.Generation.Writers
             for (int i = 0; i < parameters.Count; i++)
             {
                 //skip last param if its optional and cancellation token or request context
-                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContent))))
+                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContext))))
                     continue;
 
                 if (allParameters || parameters[i].DefaultValue == null)
@@ -1124,7 +1125,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string FixKeyWords(string serializedName)
         {
-            var result = serializedName.Replace('-', '_');
+            // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
+            // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
+            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
             return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 

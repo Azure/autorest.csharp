@@ -10,7 +10,7 @@ namespace Azure.Analytics.Purview.Account
     [CodeGenClient("AccountsClient")]
     public partial class PurviewAccountsClient { }
 
-    [CodeGenClient("Collections", ParentClient = typeof(PurviewAccountsClient))]
+    [CodeGenClient("CollectionsClient", ParentClient = typeof(PurviewAccountsClient))]
     public partial class PurviewAccountCollections { }
 
     [CodeGenClient("ResourceSetRulesClient", ParentClient = typeof(PurviewAccountsClient))]

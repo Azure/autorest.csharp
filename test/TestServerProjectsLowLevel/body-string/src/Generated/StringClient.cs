@@ -180,7 +180,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get empty string value value &apos;&apos;
+        /// [Protocol Method] Get empty string value value ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -210,7 +210,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get empty string value value &apos;&apos;
+        /// [Protocol Method] Get empty string value value ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -240,7 +240,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set string value empty &apos;&apos;
+        /// [Protocol Method] Set string value empty ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -274,7 +274,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set string value empty &apos;&apos;
+        /// [Protocol Method] Set string value empty ''
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -308,7 +308,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;
+        /// [Protocol Method] Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -338,7 +338,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;
+        /// [Protocol Method] Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -368,7 +368,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;
+        /// [Protocol Method] Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -402,7 +402,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;
+        /// [Protocol Method] Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -436,7 +436,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+        /// [Protocol Method] Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -466,7 +466,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+        /// [Protocol Method] Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -496,7 +496,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+        /// [Protocol Method] Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -530,7 +530,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;
+        /// [Protocol Method] Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// <list type="bullet">
         /// <item>
         /// <description>

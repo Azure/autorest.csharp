@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: WindowsConfiguration.enableAutomaticUpdates
         /// </param>
         /// <param name="timeZone">
-        /// Specifies the time zone of the virtual machine. e.g. &quot;Pacific Standard Time&quot;. &lt;br&gt;&lt;br&gt; Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones).
+        /// Specifies the time zone of the virtual machine. e.g. "Pacific Standard Time". &lt;br&gt;&lt;br&gt; Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones).
         /// Serialized Name: WindowsConfiguration.timeZone
         /// </param>
         /// <param name="additionalUnattendContent">
@@ -68,7 +68,7 @@ namespace MgmtRenameRules.Models
         /// </summary>
         public bool? EnableAutomaticUpdates { get; set; }
         /// <summary>
-        /// Specifies the time zone of the virtual machine. e.g. &quot;Pacific Standard Time&quot;. &lt;br&gt;&lt;br&gt; Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones).
+        /// Specifies the time zone of the virtual machine. e.g. "Pacific Standard Time". &lt;br&gt;&lt;br&gt; Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones).
         /// Serialized Name: WindowsConfiguration.timeZone
         /// </summary>
         public string TimeZone { get; set; }

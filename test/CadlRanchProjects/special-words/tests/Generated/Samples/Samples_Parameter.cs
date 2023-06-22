@@ -35,7 +35,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = client.GetWithIf("<if>", new RequestContext());
+            Response response = client.GetWithIf("<if>");
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +55,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithIfAsync("<if>", new RequestContext());
+            Response response = await client.GetWithIfAsync("<if>");
             Console.WriteLine(response.Status);
         }
 
@@ -75,7 +75,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = client.GetWithFilter("<filter>", new RequestContext());
+            Response response = client.GetWithFilter("<filter>");
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +95,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithFilterAsync("<filter>", new RequestContext());
+            Response response = await client.GetWithFilterAsync("<filter>");
             Console.WriteLine(response.Status);
         }
     }

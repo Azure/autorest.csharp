@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The format of the synonym map. Only the &apos;solr&apos; format is currently supported. </summary>
+    /// <summary> The format of the synonym map. Only the 'solr' format is currently supported. </summary>
     public readonly partial struct SynonymMapFormat : IEquatable<SynonymMapFormat>
     {
         private readonly string _value;

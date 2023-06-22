@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class CorsOptions
     {
         /// <summary> Initializes a new instance of CorsOptions. </summary>
-        /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single &apos;*&apos; to allow all origins (not recommended). </param>
+        /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="allowedOrigins"/> is null. </exception>
         public CorsOptions(IEnumerable<string> allowedOrigins)
         {
@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of CorsOptions. </summary>
-        /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single &apos;*&apos; to allow all origins (not recommended). </param>
+        /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
         /// <param name="maxAgeInSeconds"> The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. </param>
         internal CorsOptions(IList<string> allowedOrigins, long? maxAgeInSeconds)
         {
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
             MaxAgeInSeconds = maxAgeInSeconds;
         }
 
-        /// <summary> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single &apos;*&apos; to allow all origins (not recommended). </summary>
+        /// <summary> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </summary>
         public IList<string> AllowedOrigins { get; }
         /// <summary> The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. </summary>
         public long? MaxAgeInSeconds { get; set; }

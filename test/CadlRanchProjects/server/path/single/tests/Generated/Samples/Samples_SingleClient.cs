@@ -37,7 +37,7 @@ namespace Server.Path.Single.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SingleClient(endpoint);
 
-            Response response = client.MyOp(new RequestContext());
+            Response response = client.MyOp();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace Server.Path.Single.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SingleClient(endpoint);
 
-            Response response = await client.MyOpAsync(new RequestContext());
+            Response response = await client.MyOpAsync();
             Console.WriteLine(response.Status);
         }
     }

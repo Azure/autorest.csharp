@@ -18,7 +18,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <summary> response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </summary>
         public DateTimeOffset? Value => _response.Headers.TryGetValue("value", out DateTimeOffset? value) ? value : null;
     }
 }

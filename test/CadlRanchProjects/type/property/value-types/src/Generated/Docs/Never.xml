@@ -75,7 +75,7 @@ var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var data = new {};
 
-Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -88,7 +88,7 @@ var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
 var data = new {};
 
-Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
