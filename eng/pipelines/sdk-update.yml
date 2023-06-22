@@ -65,8 +65,7 @@ stages:
               displayName: "Publish package-json artifact"
           - script: |
               npm ci
-              npm ls -a
-            displayName: "Install and list packages"
+            displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
               npm ls -a
