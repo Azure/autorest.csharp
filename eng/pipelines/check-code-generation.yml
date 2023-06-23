@@ -44,6 +44,9 @@ jobs:
     - script: |
         npm ci
       displayName: "Install packages"
+    - script: |
+        npm ls -a
+      displayName: "List packages"
     - pwsh: .\eng\CodeGenerationCheck.ps1 -Filter "${{ parameters.filter }}"
       displayName: "Check if generated code is up-to-date"
       env:
