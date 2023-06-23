@@ -11,5 +11,6 @@ steps:
     displayName: 'Use .NET 6.0 SDK'
     retryCountOnTaskFailure: 3
     inputs:
-      performMultiLevelLookup: true
+      packageType: "runtime"
       version: "6.0.x"
+      performMultiLevelLookup: true
