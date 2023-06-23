@@ -43,8 +43,8 @@
 
     <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
-    <Content Include="build/CodeGeneration.targets" PackagePath="build/Microsoft.Azure.AutoRest.CSharp.targets" />
-    <Content Include="build/CodeGeneration.targets" PackagePath="buildMultiTargeting/Microsoft.Azure.AutoRest.CSharp.targets" />
+    <Content Include="build/CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
+    <Content Include="build/CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
   </ItemGroup>
 
   <ItemGroup>
