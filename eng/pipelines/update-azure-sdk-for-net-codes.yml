@@ -31,11 +31,7 @@ jobs:
       - Name: Azure/azure-sdk-for-net
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
       SkipCheckoutNone: true
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core SDK'
-    inputs:
-      useGlobalJson: true
-      performMultiLevelLookup: true
+  - template: /eng/pipelines/templates/steps/install-dotnet.yml
   - task: DownloadPipelineArtifact@2
     displayName: Download job matrix props files
     inputs:

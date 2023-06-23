@@ -38,12 +38,7 @@ stages:
             fetchDepth: 1
           - checkout: azure-sdk-tools
             fetchDepth: 1
-          - task: UseDotNet@2
-            displayName: 'Use .NET Core SDK'
-            retryCountOnTaskFailure: 3
-            inputs:
-              useGlobalJson: true
-              performMultiLevelLookup: true
+          - template: /eng/pipelines/templates/steps/install-dotnet.yml
           - task: NodeTool@0
             displayName: "Install Node 18.x"
             inputs:

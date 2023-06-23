@@ -20,11 +20,7 @@ jobs:
   - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core SDK'
-    inputs:
-      useGlobalJson: true
-      performMultiLevelLookup: true
+  - template: /eng/pipelines/templates/steps/install-dotnet.yml
   - task: Powershell@2
     displayName: Update SDK samples ${{ parameters.filter }}
     inputs:
