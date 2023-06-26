@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (library is DataPlaneOutputLibrary dpl)
             {
-                return methodBuilder.BuildLegacy(dpl.FindHeaderModel(methodBuilder.Operation), dpl.FindLongRunningOperation(methodBuilder.Operation)?.Type, null);
+                return methodBuilder.BuildLegacy(dpl.FindHeaderModel(methodBuilder.Operation)?.Type, dpl.FindLongRunningOperation(methodBuilder.Operation)?.Type, null);
             }
 
             return methodBuilder.BuildLegacy(null, null, null);

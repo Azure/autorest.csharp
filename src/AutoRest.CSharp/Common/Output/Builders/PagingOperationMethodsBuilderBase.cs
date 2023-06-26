@@ -14,8 +14,10 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Response = AutoRest.CSharp.Output.Models.Responses.Response;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -46,9 +48,9 @@ namespace AutoRest.CSharp.Output.Models
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
         }
 
-        public override LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? lroType, CSharpType? resourceDataType)
+        public override LegacyMethods BuildLegacy(CSharpType? headerModelType, CSharpType? lroType, CSharpType? resourceDataType)
         {
-            var legacy = base.BuildLegacy(headerModel, lroType, resourceDataType);
+            var legacy = base.BuildLegacy(headerModelType, lroType, resourceDataType);
 
             if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null })
             {
@@ -63,18 +65,21 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
 
             var nextPageResponses = Operation.LongRunning is null
-                ? RestClientBuilder.BuildResponses(Operation, resourceDataType, _typeFactory, out _)
+                ? RestClientBuilder.BuildResponses(Operation, resourceDataType, _typeFactory)
                 : new[] { new Response(null, new[] { new StatusCodes(200, null) }) };
 
             var createNextPageRequest = BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, legacy.CreateRequest.Signature.Summary, legacy.CreateRequest.Signature.Description);
 
             var methodName = ProtocolMethodName + "NextPage";
             var invokeCreateRequestMethod = InvokeCreateRequestMethod(null, createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
+            var returnType = headerModelType is not null
+                ? ResponseType is not null ? new CSharpType(typeof(ResponseWithHeaders<>), ResponseType, headerModelType) : new CSharpType(typeof(ResponseWithHeaders))
+                : ResponseType is not null ? new CSharpType(typeof(Response<>), ResponseType) : new CSharpType(typeof(Azure.Response));
 
             var restClientNextPageMethods = new[]
             {
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModel?.Type, resourceDataType, true),
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModel?.Type, resourceDataType, false)
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModelType, returnType, true),
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModelType, returnType, false)
             };
 
             return new LegacyMethods

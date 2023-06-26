@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             var methodName = $"Start{ProtocolMethodName}";
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
 
-            var signature = CreateMethodSignature(methodName, ConvenienceAccessibility, ConvenienceMethodParameters, lroType!);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, lroType!);
             var body = new[]
             {
                 new ParameterValidationBlock(ConvenienceMethodParameters, true),

@@ -7,8 +7,10 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -77,7 +79,9 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     yield return operation.LongRunning is { } longRunning
                         ? new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, _typeFactory, parameters)
-                        : new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters);
+                        : operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
+                            ? new HeadAsBooleanOperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters)
+                            : new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters);
                 }
             }
         }

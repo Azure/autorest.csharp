@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var body = CreateLegacyConvenienceMethodBody(async);
 
             return new Method(signature.WithAsync(async), body);

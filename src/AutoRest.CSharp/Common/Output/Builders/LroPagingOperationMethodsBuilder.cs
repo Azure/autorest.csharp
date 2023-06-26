@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models
             var methodName = $"Start{ProtocolMethodName}";
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
 
-            var signature = CreateMethodSignature(methodName, ConvenienceAccessibility, ConvenienceMethodParameters, lroType!);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, lroType!);
             var nextLink = new CodeWriterDeclaration(KnownParameters.NextLink.Name);
             var nextPageDelegate = CreateNextPageMessageMethodName is not null
                 ? new FuncExpression(new[]{null, nextLink}, InvokeCreateRequestMethod(RestClient, CreateNextPageMessageMethodName, CreateNextPageMessageMethodParameters))

@@ -44,31 +44,20 @@ namespace AutoRest.CSharp.Output.Models
                 : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
-        public static Response[] BuildResponses(InputOperation operation, CSharpType? resourceDataType, TypeFactory typeFactory, out CSharpType? responseType)
+        public static Response[] BuildResponses(InputOperation operation, CSharpType? resourceDataType, TypeFactory typeFactory)
         {
             if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
             {
-                responseType = new CSharpType(typeof(bool));
                 return new[]
                 {
-                    new Response(
-                        new ConstantResponseBody(new Constant(true, responseType)),
-                        new[] {new StatusCodes(null, 2)}),
-                    new Response(
-                        new ConstantResponseBody(new Constant(false, responseType)),
-                        new[] {new StatusCodes(null, 4)}),
+                    new Response(new ConstantResponseBody(new Constant(true, typeof(bool))), new[] {new StatusCodes(null, 2)}),
+                    new Response(new ConstantResponseBody(new Constant(false, typeof(bool))), new[] {new StatusCodes(null, 4)}),
                 };
             }
 
             var clientResponse = new List<Response>();
             foreach (var response in operation.Responses.Where(r => !r.IsErrorResponse))
             {
-                var statusCodes = new List<StatusCodes>();
-                foreach (var statusCode in response.StatusCodes)
-                {
-                    statusCodes.Add(new StatusCodes(statusCode, null));
-                }
-
                 ResponseBody? responseBody;
                 var bodyType = response.BodyType;
                 if (operation.LongRunning != null || bodyType == null)
@@ -90,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
                     responseBody = new ObjectResponseBody(responseType1, serialization);
                 }
 
-                clientResponse.Add(new Response(responseBody, statusCodes.ToArray()));
+                clientResponse.Add(new Response(responseBody, response.StatusCodes.Select(statusCode => new StatusCodes(statusCode, null)).ToArray()));
             }
 
             if (resourceDataType is not null && clientResponse.Any())
@@ -113,18 +102,6 @@ namespace AutoRest.CSharp.Output.Models
                     typeGroup.Key,
                     typeGroup.SelectMany(r => r.StatusCodes).Distinct().ToArray()));
             }
-
-            var bodyTypes = clientResponse.Select(r => r.ResponseBody?.Type)
-                .OfType<CSharpType>()
-                .Distinct()
-                .ToArray();
-
-            responseType = bodyTypes.Length switch
-            {
-                0 => null,
-                1 => bodyTypes[0],
-                _ => typeof(object)
-            };
 
             return clientResponse.ToArray();
         }

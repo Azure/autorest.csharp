@@ -13,28 +13,19 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Builders;
 using Azure;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class OperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
-        private readonly bool _headAsBoolean;
-
         public OperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodParameters clientMethodParameters)
             : base(operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, typeFactory), clientMethodParameters)
         {
-            _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean;
         }
 
         private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
         {
-            if (operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean)
-            {
-                return new OperationMethodReturnTypes(typeof(bool), typeof(Response<bool>), typeof(Response<bool>));
-            }
-
             var responseType = GetResponseType(operation, typeFactory);
             var protocol = typeof(Response);
             var convenience = responseType is not null ? new CSharpType(typeof(Response<>), responseType) : protocol;
@@ -45,9 +36,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return WrapInDiagnosticScope(ProtocolMethodName,
                 Declare("message", InvokeCreateRequestMethod(null), out var message),
-                _headAsBoolean
-                    ? Return(PipelineField.ProcessHeadAsBoolMessage(message, ClientDiagnosticsProperty, CreateMessageRequestContext, async))
-                    : Return(PipelineField.ProcessMessage(message, CreateMessageRequestContext, null, async))
+                Return(PipelineField.ProcessMessage(message, CreateMessageRequestContext, null, async))
             );
         }
 
@@ -60,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
             var body = WrapInDiagnosticScopeLegacy(ProtocolMethodName, Return(InvokeProtocolMethod(RestClient, arguments, async)));
 
