@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Xml;
 using System.Xml.Linq;
 using NUnit.Framework;
 
@@ -9,9 +10,21 @@ namespace Azure.Core.Tests
 {
     public class RequestContentHelperTests
     {
+        public static IEnumerable<TestCaseData> GetTimeSpanData()
+        {
+            yield return new TestCaseData(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), XmlConvert.ToTimeSpan("P163DT22H14M12.011S"));
+        }
+
+        public static IEnumerable<TestCaseData> GetDateTimeData()
+        {
+            yield return new TestCaseData(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), DateTimeOffset.Parse("2022-09-26T18:38:00Z"));
+        }
+
         [TestCase(1, 2)]
         [TestCase("a", "b")]
         [TestCase(true, false)]
+        [TestCaseSource("GetTimeSpanData")]
+        [TestCaseSource("GetDateTimeData")]
         public void TestGenericFromEnumerable<T>(T expectedValue1, T expectedValue2)
         {
             var expectedList = new List<T> { expectedValue1, expectedValue2 };
@@ -68,6 +81,8 @@ namespace Azure.Core.Tests
         [TestCase(1, 2)]
         [TestCase("a", "b")]
         [TestCase(true, false)]
+        [TestCaseSource("GetTimeSpanData")]
+        [TestCaseSource("GetDateTimeData")]
         public void TestGenericFromDictionary<T>(T expectedValue1, T expectedValue2)
         {
             var expectedDictionary = new Dictionary<string, T>()
