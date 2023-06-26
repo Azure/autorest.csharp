@@ -86,25 +86,30 @@ namespace AutoRest.CSharp.Generation.Writers
             if (model.Discriminator is { } discriminator && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
             {
                 var discriminatorProperty = discriminator.Property;
-                if (discriminator.Value is null)
+                if (discriminator.Value is Constant discriminatorValue)
                 {
-                    if (model.Declaration.IsAbstract)
-                    {
-                        model = (SerializableObjectType)discriminator.DefaultObjectType;
-                        ctor = model.SerializationConstructor;
-                    }
-                    // it is the base type, it may or may not already have a property initializer for the discriminator property
-                    // if the discriminator is an extensible enum, it already has it. We ensured this in ModelFactoryTypeProvider
-                    // if the discriminator is a fixed enum, it does not have it. We also ensured this in ModelFactoryTypeProvider
-                    if (!initializers.ContainsKey(discriminatorProperty))
-                    {
-                        initializers.Add(discriminatorProperty,
-                            new PropertyInitializer(
-                                discriminatorProperty.Declaration.Name,
-                                discriminatorProperty.Declaration.Type,
-                                discriminatorProperty.IsReadOnly,
-                                $"default"));
-                    }
+                    initializers.Add(discriminatorProperty,
+                        new PropertyInitializer(
+                            discriminatorProperty.Declaration.Name,
+                            discriminatorProperty.Declaration.Type,
+                            discriminatorProperty.IsReadOnly,
+                            GetDiscriminatorValue(discriminatorProperty.Declaration.Type, discriminatorValue)));
+                }
+                else if (model.Declaration.IsAbstract)
+                {
+                model = (SerializableObjectType)discriminator.DefaultObjectType!;
+                    ctor = model.SerializationConstructor;
+                }
+
+            // here we ensure the discriminator property will always have an initializer
+                if (!initializers.ContainsKey(discriminatorProperty))
+                {
+                    initializers.Add(discriminatorProperty,
+                        new PropertyInitializer(
+                            discriminatorProperty.Declaration.Name,
+                            discriminatorProperty.Declaration.Type,
+                            discriminatorProperty.IsReadOnly,
+                            $"default"));
                 }
             }
 
