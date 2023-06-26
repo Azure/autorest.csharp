@@ -12,6 +12,62 @@ namespace Azure.Core.Tests
         [TestCase(1, 2)]
         [TestCase("a", "b")]
         [TestCase(true, false)]
+        public void TestGenericFromEnumerable<T>(T expectedValue1, T expectedValue2)
+        {
+            var expectedList = new List<T> { expectedValue1, expectedValue2 };
+            var content = RequestContentHelper.FromEnumerable<T>(expectedList);
+
+            var stream = new MemoryStream();
+            content.WriteTo(stream, default);
+            stream.Position = 0;
+
+            var document = JsonDocument.Parse(stream);
+            int count = 0;
+            foreach (var property in document.RootElement.EnumerateArray())
+            {
+                if (typeof(T) == typeof(int))
+                {
+                    Assert.AreEqual(expectedList[count++], property.GetInt32());
+                }
+                else if (typeof(T) == typeof(string))
+                {
+                    Assert.AreEqual(expectedList[count++], property.GetString());
+                }
+                else if (typeof(T) == typeof(bool))
+                {
+                    Assert.AreEqual(expectedList[count++], property.GetBoolean());
+                }
+            }
+        }
+
+        [Test]
+        public void TestBinaryDataFromEnumerable()
+        {
+            var expectedList = new List<BinaryData> { new BinaryData(1), new BinaryData("\"hello\""), null };
+            var content = RequestContentHelper.FromEnumerable(expectedList);
+
+            var stream = new MemoryStream();
+            content.WriteTo(stream, default);
+            stream.Position = 0;
+
+            var document = JsonDocument.Parse(stream);
+            int count = 0;
+            foreach (var property in document.RootElement.EnumerateArray())
+            {
+                if (property.ValueKind == JsonValueKind.Null)
+                {
+                    Assert.IsNull(expectedList[count++]);
+                }
+                else
+                {
+                    Assert.AreEqual(expectedList[count++].ToObjectFromJson(), BinaryData.FromString(property.GetRawText()).ToObjectFromJson());
+                }
+            }
+        }
+
+        [TestCase(1, 2)]
+        [TestCase("a", "b")]
+        [TestCase(true, false)]
         public void TestGenericFromDictionary<T>(T expectedValue1, T expectedValue2)
         {
             var expectedDictionary = new Dictionary<string, T>()

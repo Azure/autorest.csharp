@@ -264,15 +264,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     else
                     {
-                        // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
-                        if (TypeFactory.IsList(convenienceParameter.Type) && convenienceParameter.RequestLocation == RequestLocation.Body)
-                        {
-                            parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
-                        }
-                        else
-                        {
-                            parameterList.Add(convenienceParameter);
-                        }
+                        parameterList.Add(convenienceParameter);
                         if (protocolParameter != null)
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
