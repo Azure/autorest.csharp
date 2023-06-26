@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,15 +20,41 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class PagingOperationMethodsBuilder : PagingOperationMethodsBuilderBase
     {
+        private CSharpType PageItemType { get; }
+
         public PagingOperationMethodsBuilder(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientPagingMethodParameters parameters)
             : base(paging, operation, restClient, fields, clientName, typeFactory, GetReturnType(operation, paging, typeFactory), parameters)
         {
+            if (ResponseType is null)
+            {
+                throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
+            }
+
+            PageItemType = GetPageItemType(ResponseType, paging);
         }
 
-        private static ClientMethodReturnTypes GetReturnType(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
+        private static OperationMethodReturnTypes GetReturnType(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
         {
             var responseType = GetResponseType(operation, typeFactory, paging);
-            return new(responseType, typeof(Pageable<BinaryData>), new(typeof(Pageable<>), responseType));
+            var pageItemType = GetPageItemType(responseType, paging);
+            return new(responseType, typeof(Pageable<BinaryData>), new(typeof(Pageable<>), pageItemType));
+        }
+
+        private static CSharpType GetPageItemType(CSharpType responseType, OperationPaging paging)
+        {
+            if (responseType.IsFrameworkType || responseType.Implementation is not SerializableObjectType modelType)
+            {
+                return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
+            }
+
+            var property = modelType.GetPropertyBySerializedName(paging.ItemName ?? "value");
+            var propertyType = property.ValueType.WithNullable(false);
+            if (!TypeFactory.IsList(propertyType))
+            {
+                throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
+            }
+
+            return TypeFactory.GetElementType(property.ValueType);
         }
 
         protected override bool ShouldConvenienceMethodGenerated() => true;
@@ -65,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
             }
 
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, ResponseType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, PageItemType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
                 ? new[]{parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}
@@ -95,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, arguments, out createNextPageRequest);
             }
 
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, ResponseType, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, PageItemType, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
                 ? new[]{parameterValidations, parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}

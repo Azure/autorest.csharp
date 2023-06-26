@@ -11,10 +11,12 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -28,12 +30,12 @@ namespace AutoRest.CSharp.Output.Models
             _longRunning = longRunning;
         }
 
-        private static ClientMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
+        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
         {
             var responseType = GetResponseType(operation, typeFactory);
             var protocol = responseType is not null ? typeof(Operation<BinaryData>) : typeof(Operation);
             var convenience = responseType is not null ? new CSharpType(typeof(Operation<>), responseType) : typeof(Operation);
-            return new ClientMethodReturnTypes(responseType, protocol, convenience);
+            return new OperationMethodReturnTypes(Configuration.AzureArm || Configuration.Generation1ConvenienceClient ? null : responseType, protocol, convenience);
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)

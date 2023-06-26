@@ -22,29 +22,74 @@ namespace AutoRest.CSharp.Output.Models
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
         private static readonly ResponseClassifierType NextPageStatusCodes = new(new[] { new StatusCodes(200, null) }.OrderBy(sc => sc.Code));
+        private readonly TypeFactory _typeFactory;
 
         protected OperationPaging Paging { get; }
-        protected CSharpType ResponseType { get; }
 
         protected string? NextLinkName { get; }
         protected string ItemPropertyName { get; }
         protected string? CreateNextPageMessageMethodName { get; }
         protected IReadOnlyList<Parameter> CreateNextPageMessageMethodParameters { get; }
 
-        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodReturnTypes returnTypes, ClientPagingMethodParameters clientMethodsParameters)
+        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, OperationMethodReturnTypes returnTypes, ClientPagingMethodParameters clientMethodsParameters)
             : base(operation, restClient, fields, clientName, typeFactory, returnTypes, clientMethodsParameters)
         {
+            _typeFactory = typeFactory;
             Paging = paging;
             ItemPropertyName = paging.ItemName ?? "value";
             NextLinkName = paging.NextLinkName;
-
-            ResponseType = GetResponseType(operation, typeFactory, paging);
 
             CreateNextPageMessageMethodName = paging is { NextLinkOperation: { } nextLinkOperation }
                 ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
                 : paging is { NextLinkName: { }} ? $"Create{ProtocolMethodName}NextPageRequest" : null;
 
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
+        }
+
+        public override LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? lroType, CSharpType? resourceDataType)
+        {
+            var legacy = base.BuildLegacy(headerModel, lroType, resourceDataType);
+
+            if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null })
+            {
+                return legacy with { Order = this is LroPagingOperationMethodsBuilder ? 2 : 1 };
+            }
+
+            var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+
+            var nextPageParameters = ConvenienceMethodParameters
+                .Where(p => p.Name != nextPageUrlParameter.Name)
+                .Prepend(nextPageUrlParameter)
+                .ToArray();
+
+            var nextPageResponses = Operation.LongRunning is null
+                ? RestClientBuilder.BuildResponses(Operation, resourceDataType, _typeFactory, out _)
+                : new[] { new Response(null, new[] { new StatusCodes(200, null) }) };
+
+            var createNextPageRequest = BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, legacy.CreateRequest.Signature.Summary, legacy.CreateRequest.Signature.Description);
+
+            var methodName = ProtocolMethodName + "NextPage";
+            var invokeCreateRequestMethod = InvokeCreateRequestMethod(null, createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
+
+            var restClientNextPageMethods = new[]
+            {
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModel?.Type, resourceDataType, true),
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModel?.Type, resourceDataType, false)
+            };
+
+            return new LegacyMethods
+            (
+                legacy.CreateRequest,
+                createNextPageRequest,
+                legacy.RestClientConvenience,
+                restClientNextPageMethods,
+                legacy.Convenience,
+
+                this is LroPagingOperationMethodsBuilder ? 2 : 1,
+                Operation,
+                null,
+                legacy.ResponseType
+            );
         }
 
         protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
@@ -116,20 +161,7 @@ namespace AutoRest.CSharp.Output.Models
                 throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
             }
 
-            var responseType = typeFactory.CreateType(firstResponseBodyType);
-            if (responseType.IsFrameworkType || responseType.Implementation is not SerializableObjectType modelType)
-            {
-                return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
-            }
-
-            var property = modelType.GetPropertyBySerializedName(paging.ItemName ?? "value");
-            var propertyType = property.ValueType.WithNullable(false);
-            if (!TypeFactory.IsList(propertyType))
-            {
-                throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
-            }
-
-            return TypeFactory.GetElementType(property.ValueType);
+            return typeFactory.CreateType(firstResponseBodyType);
         }
     }
 }

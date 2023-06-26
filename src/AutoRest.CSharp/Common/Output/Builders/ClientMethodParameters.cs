@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
-    internal record ClientMethodReturnTypes
+    internal record OperationMethodReturnTypes
     (
         CSharpType? ResponseType,
         CSharpType ProtocolMethodReturnType,

@@ -16,15 +16,12 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class NonPagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        protected NonPagingOperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
+        protected NonPagingOperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, OperationMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
             : base(operation, restClient, fields, clientName, typeFactory, returnTypes, clientMethodParameters)
         {
-            ResponseType = returnTypes.ResponseType;
         }
 
         protected override bool ShouldConvenienceMethodGenerated() => ResponseType is not null || base.ShouldConvenienceMethodGenerated();
-
-        protected CSharpType? ResponseType { get; }
 
         protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
         {
@@ -52,11 +49,6 @@ namespace AutoRest.CSharp.Output.Models
 
         protected static CSharpType? GetResponseType(InputOperation operation, TypeFactory typeFactory)
         {
-            if (operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean)
-            {
-                return null;
-            }
-
             var responseTypes = operation.Responses
                 .Where(r => !r.IsErrorResponse)
                 .Select(r => r.BodyType)

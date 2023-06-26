@@ -22,16 +22,13 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OperationLongRunning _longRunning;
 
         public LroPagingOperationMethodsBuilder(OperationLongRunning longRunning, OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, typeFactory, GetReturnType(operation, paging, typeFactory), parameters)
+            : base(paging, operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, paging, typeFactory), parameters)
         {
             _longRunning = longRunning;
         }
 
-        private static ClientMethodReturnTypes GetReturnType(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
-        {
-            var responseType = GetResponseType(operation, typeFactory, paging);
-            return new(responseType, typeof(Operation<Pageable<BinaryData>>), new(typeof(Operation<>), new CSharpType(typeof(Pageable<>), GetResponseType(operation, typeFactory, paging))));
-        }
+        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
+            => new(null, typeof(Operation<Pageable<BinaryData>>), new(typeof(Operation<>), new CSharpType(typeof(Pageable<>), GetResponseType(operation, typeFactory, paging))));
 
         protected override bool ShouldConvenienceMethodGenerated() => false;
 

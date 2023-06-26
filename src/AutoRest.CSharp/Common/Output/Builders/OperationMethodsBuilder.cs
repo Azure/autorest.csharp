@@ -28,12 +28,17 @@ namespace AutoRest.CSharp.Output.Models
             _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean;
         }
 
-        private static ClientMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
+        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
         {
+            if (operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean)
+            {
+                return new OperationMethodReturnTypes(typeof(bool), typeof(Response<bool>), typeof(Response<bool>));
+            }
+
             var responseType = GetResponseType(operation, typeFactory);
-            var protocol = operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean ? typeof(Response<bool>) : typeof(Response);
+            var protocol = typeof(Response);
             var convenience = responseType is not null ? new CSharpType(typeof(Response<>), responseType) : protocol;
-            return new ClientMethodReturnTypes(responseType, protocol, convenience);
+            return new OperationMethodReturnTypes(responseType, protocol, convenience);
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)

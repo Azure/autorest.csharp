@@ -14,6 +14,13 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class ClientMethodsBuilder
     {
+        private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-client-request-id",
+            "tracestate",
+            "traceparent"
+        };
+
         private readonly IEnumerable<InputOperation> _operations;
         private readonly TypeFactory _typeFactory;
         private readonly bool _legacyParameterSorting;
@@ -33,7 +40,10 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var inputOperation in _operations)
             {
-                var unsortedParameters = inputOperation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)).ToArray();
+                var unsortedParameters = inputOperation.Parameters
+                    .Where(rp => rp.Location != RequestLocation.Header || !IgnoredRequestHeader.Contains(rp.NameInRequest))
+                    .ToArray();
+
                 var sortedParameters = _legacyParameterSorting
                     ? GetLegacySortedParameters(unsortedParameters)
                     : GetSortedParameters(inputOperation, unsortedParameters);
