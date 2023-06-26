@@ -271,7 +271,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method] Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -308,7 +308,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method] Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -345,7 +345,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method] Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -380,7 +380,7 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary>
-        /// [Protocol Method] Triggers a job to export a project&apos;s data.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>

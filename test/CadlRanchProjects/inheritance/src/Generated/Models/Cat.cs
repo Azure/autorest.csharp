@@ -24,7 +24,7 @@ namespace _Type.Model.Inheritance.Models
             Age = age;
         }
 
-        /// <summary> Gets or sets the age. </summary>
-        public int Age { get; set; }
+        /// <summary> Gets the age. </summary>
+        public int Age { get; }
     }
 }

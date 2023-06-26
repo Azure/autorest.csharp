@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        nullableProperty = null;
+                        nullableProperty = new ChangeTrackingList<BinaryData>();
                         continue;
                     }
                     List<BinaryData> array = new List<BinaryData>();

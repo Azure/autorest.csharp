@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machine scale set network profile&apos;s IP configuration. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network
+    /// Describes a virtual machine scale set network profile's IP configuration. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network
     /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateIPConfiguration : SubResource

@@ -41,8 +41,8 @@ namespace subscriptionId_apiVersion
             _pipeline = pipeline;
         }
 
-        /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
-        /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
+        /// <summary> Provides a resouce group with name 'testgroup101' and location 'West US'. </summary>
+        /// <param name="resourceGroupName"> Resource Group name 'testgroup101'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SampleResourceGroup>> GetSampleResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
@@ -59,8 +59,8 @@ namespace subscriptionId_apiVersion
             }
         }
 
-        /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
-        /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
+        /// <summary> Provides a resouce group with name 'testgroup101' and location 'West US'. </summary>
+        /// <param name="resourceGroupName"> Resource Group name 'testgroup101'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SampleResourceGroup> GetSampleResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {

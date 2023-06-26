@@ -9,43 +9,50 @@
    "$id": "2",
    "Name": "DaysOfWeekEnum",
    "Namespace": "Type.Enum.Fixed",
-   "Description": "",
+   "Description": "Days of the week",
    "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
      "Name": "Monday",
-     "Value": "Monday"
+     "Value": "Monday",
+     "Description": "Monday."
     },
     {
      "$id": "4",
      "Name": "Tuesday",
-     "Value": "Tuesday"
+     "Value": "Tuesday",
+     "Description": "Tuesday."
     },
     {
      "$id": "5",
      "Name": "Wednesday",
-     "Value": "Wednesday"
+     "Value": "Wednesday",
+     "Description": "Wednesday."
     },
     {
      "$id": "6",
      "Name": "Thursday",
-     "Value": "Thursday"
+     "Value": "Thursday",
+     "Description": "Thursday."
     },
     {
      "$id": "7",
      "Name": "Friday",
-     "Value": "Friday"
+     "Value": "Friday",
+     "Description": "Friday."
     },
     {
      "$id": "8",
      "Name": "Saturday",
-     "Value": "Saturday"
+     "Value": "Saturday",
+     "Description": "Saturday."
     },
     {
      "$id": "9",
      "Name": "Sunday",
-     "Value": "Sunday"
+     "Value": "Sunday",
+     "Description": "Sunday."
     }
    ],
    "IsExtensible": false,

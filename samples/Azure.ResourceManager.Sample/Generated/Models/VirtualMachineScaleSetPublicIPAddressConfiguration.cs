@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration
+    /// Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
     /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfiguration

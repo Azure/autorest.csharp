@@ -29,7 +29,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -41,7 +42,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -53,7 +55,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -65,7 +68,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -89,14 +93,16 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -113,7 +119,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -129,6 +135,10 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -139,6 +149,8 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -152,14 +164,18 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -176,7 +192,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -185,13 +201,22 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                nonRequiredModelList = new[] {
         new {}
     },
-                optionalNullableStringList = new[] {
+                nonRequiredStringList = new[] {
         "<String>"
     },
-                optionalNullableIntList = new[] {
+                nonRequiredIntList = new[] {
+        1234
+    },
+                nonRequiredNullableModelList = new[] {
+        new {}
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
         1234
     },
             };
@@ -201,6 +226,15 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -216,6 +250,10 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -229,14 +267,16 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -253,7 +293,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -269,6 +309,10 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -279,6 +323,8 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -292,14 +338,18 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -316,7 +366,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -325,13 +375,22 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                nonRequiredModelList = new[] {
         new {}
     },
-                optionalNullableStringList = new[] {
+                nonRequiredStringList = new[] {
         "<String>"
     },
-                optionalNullableIntList = new[] {
+                nonRequiredIntList = new[] {
+        1234
+    },
+                nonRequiredNullableModelList = new[] {
+        new {}
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
         1234
     },
             };
@@ -341,6 +400,15 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
+            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -356,6 +424,10 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
+            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -365,7 +437,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
+            var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[]
             {
     1234
             }, new string[]
@@ -391,12 +463,23 @@ namespace ModelsTypeSpec.Samples
     1234
             })
             {
-                OptionalModelCollection = { },
-                OptionalNullableStringList =
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                NonRequiredModelList = { },
+                NonRequiredStringList =
 {
         "<null>"
     },
-                OptionalNullableIntList =
+                NonRequiredIntList =
+{
+        1234
+    },
+                NonRequiredNullableModelList = { },
+                NonRequiredNullableStringList =
+{
+        "<null>"
+    },
+                NonRequiredNullableIntList =
 {
         1234
     },
@@ -415,14 +498,16 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -439,7 +524,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -476,14 +561,18 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -500,7 +589,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -509,13 +598,22 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                nonRequiredModelList = new[] {
         new {}
     },
-                optionalNullableStringList = new[] {
+                nonRequiredStringList = new[] {
         "<String>"
     },
-                optionalNullableIntList = new[] {
+                nonRequiredIntList = new[] {
+        1234
+    },
+                nonRequiredNullableModelList = new[] {
+        new {}
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
         1234
     },
             };
@@ -546,14 +644,16 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -570,7 +670,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -607,14 +707,18 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new { },
-                requiredIntCollection = new[] {
+                requiredIntList = new[] {
         1234
     },
-                requiredStringCollection = new[] {
+                requiredStringList = new[] {
         "<String>"
     },
-                requiredModelCollection = new[] {
+                requiredModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -631,7 +735,7 @@ namespace ModelsTypeSpec.Samples
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
     },
-                requiredNullableModelCollection = new[] {
+                requiredNullableModelList = new[] {
         new {}
     },
                 requiredNullableStringList = new[] {
@@ -640,13 +744,22 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                nonRequiredModelList = new[] {
         new {}
     },
-                optionalNullableStringList = new[] {
+                nonRequiredStringList = new[] {
         "<String>"
     },
-                optionalNullableIntList = new[] {
+                nonRequiredIntList = new[] {
+        1234
+    },
+                nonRequiredNullableModelList = new[] {
+        new {}
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
         1234
     },
             };
@@ -673,7 +786,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            var input = new InputModel("<requiredString>", 1234, new BaseModel(), new int[]
+            var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[]
             {
     1234
             }, new string[]
@@ -699,12 +812,23 @@ namespace ModelsTypeSpec.Samples
     1234
             })
             {
-                OptionalModelCollection = { },
-                OptionalNullableStringList =
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                NonRequiredModelList = { },
+                NonRequiredStringList =
 {
         "<null>"
     },
-                OptionalNullableIntList =
+                NonRequiredIntList =
+{
+        1234
+    },
+                NonRequiredNullableModelList = { },
+                NonRequiredNullableStringList =
+{
+        "<null>"
+    },
+                NonRequiredNullableIntList =
 {
         1234
     },
@@ -744,7 +868,7 @@ namespace ModelsTypeSpec.Samples
                 optionalIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                optionalModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -826,7 +950,7 @@ namespace ModelsTypeSpec.Samples
                 optionalIntList = new[] {
         1234
     },
-                optionalModelCollection = new[] {
+                optionalModelList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -887,14 +1011,17 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = "1",
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -920,6 +1047,12 @@ namespace ModelsTypeSpec.Samples
                 requiredUnknown = new { },
                 requiredInt8Array = new[] {
         1234
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
     },
             };
 
@@ -941,15 +1074,22 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                nonRequiredString = "<nonRequiredString>",
+                nonRequiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = "1",
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -983,6 +1123,18 @@ namespace ModelsTypeSpec.Samples
     },
                 optionalInt8Array = new[] {
         1234
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
+        1234
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
     },
             };
 
@@ -1004,14 +1156,17 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = "1",
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -1038,6 +1193,12 @@ namespace ModelsTypeSpec.Samples
                 requiredInt8Array = new[] {
         1234
     },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
             };
 
             Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -1058,15 +1219,22 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
+                nonRequiredString = "<nonRequiredString>",
+                nonRequiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = "1",
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -1100,6 +1268,18 @@ namespace ModelsTypeSpec.Samples
     },
                 optionalInt8Array = new[] {
         1234
+    },
+                requiredNullableIntList = new[] {
+        1234
+    },
+                requiredNullableStringList = new[] {
+        "<String>"
+    },
+                nonRequiredNullableIntList = new[] {
+        1234
+    },
+                nonRequiredNullableStringList = new[] {
+        "<String>"
     },
             };
 
@@ -1343,7 +1523,7 @@ namespace ModelsTypeSpec.Samples
 
             var data = new
             {
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -1368,7 +1548,7 @@ namespace ModelsTypeSpec.Samples
 
             var data = new
             {
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -1393,7 +1573,7 @@ namespace ModelsTypeSpec.Samples
 
             var data = new
             {
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},
@@ -1418,7 +1598,7 @@ namespace ModelsTypeSpec.Samples
 
             var data = new
             {
-                requiredCollection = new[] {
+                requiredList = new[] {
         new {
             requiredModelRecord = new {
                 key = new {},

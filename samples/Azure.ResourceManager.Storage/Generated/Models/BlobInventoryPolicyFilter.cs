@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    /// <summary> An object that defines the blob inventory rule filter conditions. For &apos;Blob&apos; definition.objectType all filter properties are applicable, &apos;blobTypes&apos; is required and others are optional. For &apos;Container&apos; definition.objectType only prefixMatch is applicable and is optional. </summary>
+    /// <summary> An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional. </summary>
     public partial class BlobInventoryPolicyFilter
     {
         /// <summary> Initializes a new instance of BlobInventoryPolicyFilter. </summary>

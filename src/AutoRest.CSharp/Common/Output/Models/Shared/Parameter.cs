@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."
-                : BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
+                : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (!type.IsFrameworkType || values == null)
             {
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+                BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
 
             return requestParameter.Schema switch
             {
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
                 return string.IsNullOrEmpty(allowedValues)
                     ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
             }
         }
 

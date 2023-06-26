@@ -99,8 +99,6 @@ namespace AutoRest.CSharp.Output.Builders
             }
         };
 
-        public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
-
         private const string EscapedAmpersand = "&amp;";
         private const string EscapedLessThan = "&lt;";
         private const string EscapedGreaterThan = "&gt;";
@@ -266,7 +264,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 $"The {schema.Name}." :
-                EscapeXmlDescription(schema.Language.Default.Description);
+                EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 
         public static string DisambiguateName(CSharpType type, string name)

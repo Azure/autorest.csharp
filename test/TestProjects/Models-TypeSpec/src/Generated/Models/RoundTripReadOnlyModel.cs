@@ -28,13 +28,13 @@ namespace ModelsTypeSpec.Models
 
             RequiredReadonlyStringList = new ChangeTrackingList<string>();
             RequiredReadonlyIntList = new ChangeTrackingList<int>();
-            RequiredReadOnlyModelCollection = new ChangeTrackingList<CollectionItem>();
+            RequiredReadOnlyModelList = new ChangeTrackingList<CollectionItem>();
             RequiredReadOnlyIntRecord = new ChangeTrackingDictionary<string, int>();
             RequiredStringRecord = new ChangeTrackingDictionary<string, string>();
             RequiredReadOnlyModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
             OptionalReadonlyStringList = new ChangeTrackingList<string>();
             OptionalReadonlyIntList = new ChangeTrackingList<int>();
-            OptionalReadOnlyModelCollection = new ChangeTrackingList<CollectionItem>();
+            OptionalReadOnlyModelList = new ChangeTrackingList<CollectionItem>();
             OptionalReadOnlyIntRecord = optionalReadOnlyIntRecord;
             OptionalReadOnlyStringRecord = optionalReadOnlyStringRecord;
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
@@ -55,19 +55,19 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalReadonlyExtensibleEnum"> Optional readonly extensible enum. </param>
         /// <param name="requiredReadonlyStringList"> Required readonly string collection. </param>
         /// <param name="requiredReadonlyIntList"> Required readonly int collection. </param>
-        /// <param name="requiredReadOnlyModelCollection"> Required model collection. </param>
+        /// <param name="requiredReadOnlyModelList"> Required model collection. </param>
         /// <param name="requiredReadOnlyIntRecord"> Required int record. </param>
         /// <param name="requiredStringRecord"> Required string record. </param>
         /// <param name="requiredReadOnlyModelRecord"> Required model record. </param>
         /// <param name="optionalReadonlyStringList"> Optional readonly string collection. </param>
         /// <param name="optionalReadonlyIntList"> Optional readonly int collection. </param>
-        /// <param name="optionalReadOnlyModelCollection"> Optional model collection. </param>
+        /// <param name="optionalReadOnlyModelList"> Optional model collection. </param>
         /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
         /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
         /// <param name="optionalModelRecord"> Optional model record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
         /// <param name="optionalCollectionWithNullableBooleanElement"> Optional collection of which the element is a nullable boolean. </param>
-        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelCollection, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelCollection, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement)
+        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelList, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelList, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement)
         {
             RequiredReadonlyString = requiredReadonlyString;
             RequiredReadonlyInt = requiredReadonlyInt;
@@ -81,13 +81,13 @@ namespace ModelsTypeSpec.Models
             OptionalReadonlyExtensibleEnum = optionalReadonlyExtensibleEnum;
             RequiredReadonlyStringList = requiredReadonlyStringList;
             RequiredReadonlyIntList = requiredReadonlyIntList;
-            RequiredReadOnlyModelCollection = requiredReadOnlyModelCollection;
+            RequiredReadOnlyModelList = requiredReadOnlyModelList;
             RequiredReadOnlyIntRecord = requiredReadOnlyIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredReadOnlyModelRecord = requiredReadOnlyModelRecord;
             OptionalReadonlyStringList = optionalReadonlyStringList;
             OptionalReadonlyIntList = optionalReadonlyIntList;
-            OptionalReadOnlyModelCollection = optionalReadOnlyModelCollection;
+            OptionalReadOnlyModelList = optionalReadOnlyModelList;
             OptionalReadOnlyIntRecord = optionalReadOnlyIntRecord;
             OptionalReadOnlyStringRecord = optionalReadOnlyStringRecord;
             OptionalModelRecord = optionalModelRecord;
@@ -120,7 +120,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required readonly int collection. </summary>
         public IReadOnlyList<int> RequiredReadonlyIntList { get; }
         /// <summary> Required model collection. </summary>
-        public IReadOnlyList<CollectionItem> RequiredReadOnlyModelCollection { get; }
+        public IReadOnlyList<CollectionItem> RequiredReadOnlyModelList { get; }
         /// <summary> Required int record. </summary>
         public IReadOnlyDictionary<string, int> RequiredReadOnlyIntRecord { get; }
         /// <summary> Required string record. </summary>
@@ -132,7 +132,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional readonly int collection. </summary>
         public IReadOnlyList<int> OptionalReadonlyIntList { get; }
         /// <summary> Optional model collection. </summary>
-        public IReadOnlyList<CollectionItem> OptionalReadOnlyModelCollection { get; }
+        public IReadOnlyList<CollectionItem> OptionalReadOnlyModelList { get; }
         /// <summary> Optional int record. </summary>
         public IReadOnlyDictionary<string, int> OptionalReadOnlyIntRecord { get; }
         /// <summary> Optional string record. </summary>

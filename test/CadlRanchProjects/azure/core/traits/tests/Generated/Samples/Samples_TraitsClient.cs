@@ -78,5 +78,83 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             var result = await client.SmokeTestAsync(1234, "<foo>", null);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction()
+        {
+            var client = new TraitsClient();
+
+            var data = new
+            {
+                userActionValue = "<userActionValue>",
+            };
+
+            Response response = client.RepeatableAction(1234, RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction_AllParameters()
+        {
+            var client = new TraitsClient();
+
+            var data = new
+            {
+                userActionValue = "<userActionValue>",
+            };
+
+            Response response = client.RepeatableAction(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_Async()
+        {
+            var client = new TraitsClient();
+
+            var data = new
+            {
+                userActionValue = "<userActionValue>",
+            };
+
+            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_AllParameters_Async()
+        {
+            var client = new TraitsClient();
+
+            var data = new
+            {
+                userActionValue = "<userActionValue>",
+            };
+
+            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_Convenience_Async()
+        {
+            var client = new TraitsClient();
+
+            var userActionParam = new UserActionParam("<userActionValue>");
+            var result = await client.RepeatableActionAsync(1234, userActionParam, "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+        }
     }
 }

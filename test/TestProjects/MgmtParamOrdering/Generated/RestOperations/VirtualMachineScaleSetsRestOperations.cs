@@ -299,7 +299,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -331,7 +331,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>

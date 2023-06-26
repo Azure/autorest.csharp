@@ -102,7 +102,7 @@ namespace MgmtParamOrdering
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineScaleSetResource>> GetAsync(ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
@@ -135,7 +135,7 @@ namespace MgmtParamOrdering
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetResource> Get(ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {

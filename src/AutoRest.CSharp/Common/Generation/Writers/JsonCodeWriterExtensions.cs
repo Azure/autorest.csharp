@@ -365,7 +365,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
                         using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                         {
-                            writer.Line($"{propertyVariables[property].Declaration} = null;");
+                            // we only assign null when it is not a collection
+                            if (!TypeFactory.IsCollectionType(property.ValueType))
+                            {
+                                writer.Line($"{propertyVariables[property].Declaration} = null;");
+                            }
+                            else if (property.IsRequired)
+                            {
+                                // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
+                                writer.Line($"{propertyVariables[property].Declaration} = new {TypeFactory.GetPropertyImplementationType(property.ValueType)}();");
+                            }
                             writer.Append($"continue;");
                         }
                     }

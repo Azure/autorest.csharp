@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machine scale set network profile&apos;s IP configuration.
+    /// Describes a virtual machine scale set network profile's IP configuration.
     /// Serialized Name: VirtualMachineScaleSetIPConfiguration
     /// </summary>
     public partial class VirtualMachineScaleSetIPConfiguration : SubResource

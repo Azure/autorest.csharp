@@ -38,19 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
-            string? discriminator = inputModel.DiscriminatorPropertyName;
-            if (discriminator is not null)
-            {
-                var originalFieldName = discriminator.ToCleanName();
-                var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
-                var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty, false);
-                fields.Add(field);
-                fieldsToInputs[field] = inputModelProperty;
-                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
-                parametersToFields[parameter.Name] = field;
-                serializationParameters.Add(parameter);
-            }
-
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
 
             foreach (var inputModelProperty in inputModel.Properties)
@@ -82,8 +69,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter);
-                // only required + not readonly + not literal property could get into the public ctor
-                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly && inputModelProperty.Type is not InputLiteralType)
+                // only required + not readonly + not literal property + not discriminator could get into the public ctor
+                if (inputModelProperty.IsRequired &&
+                    !inputModelProperty.IsReadOnly &&
+                    !inputModelProperty.IsDiscriminator &&
+                    inputModelProperty.Type is not InputLiteralType)
                 {
                     publicParameters.Add(parameter);
                 }
@@ -127,23 +117,41 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        private static bool ShouldPropertyOmitSetter(InputModelType inputModel, InputModelProperty property, CSharpType type)
+        {
+            if (property.IsDiscriminator)
+            {
+                // Discriminator properties should be writeable
+                return false;
+            }
+            if (property.Type is InputLiteralType && property.IsRequired)
+            {
+                // we should remove the setter of required constant
+                return true;
+            }
+
+            var propertyShouldOmitSetter = !inputModel.Usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly;
+
+            if (TypeFactory.IsCollectionType(type))
+            {
+                // nullable collection should be settable
+                // one exception is in the property bag, we never let them to be settable.
+                propertyShouldOmitSetter |= !property.Type.IsNullable || inputModel.IsPropertyBag;
+            }
+            else
+            {
+                // In mixed models required properties are not readonly
+                propertyShouldOmitSetter |= property.IsRequired &&
+                                inputModel.Usage.HasFlag(InputModelTypeUsage.Input) &&
+                                !inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+            }
+
+            return propertyShouldOmitSetter;
+        }
+
         private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool optionalViaNullability)
         {
-            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
-                // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
-                inputModelProperty.Type is CodeModelType type && (type.Schema is ArraySchema or DictionarySchema);
-            var propertyIsRequiredInNonRoundTripModel = !inputModel.Usage.HasFlag(InputModelTypeUsage.RoundTrip) && inputModelProperty.IsRequired;
-            var propertyIsOptionalInOutputModel = !inputModel.Usage.HasFlag(InputModelTypeUsage.Input) && !inputModelProperty.IsRequired;
-            var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
-            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
-            var propertyIsNullable = inputModelProperty.Type.IsNullable;
-            var isPropertyBag = inputModel.IsPropertyBag;
-            var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
-                (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
-                (propertyIsLiteralType && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
-                (propertyIsCollection && (!propertyIsNullable || isPropertyBag)) || // a property will not have setter when it is a non-nullable collection, in other words, a collection property only has setter when it is nullable
-                propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
-                propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
+            var propertyShouldOmitSetter = ShouldPropertyOmitSetter(inputModel, inputModelProperty, originalType);
 
             var valueType = originalType;
             if (optionalViaNullability)
@@ -153,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
-            if (propertyIsDiscriminator)
+            if (inputModelProperty.IsDiscriminator)
             {
                 fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
                 setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;

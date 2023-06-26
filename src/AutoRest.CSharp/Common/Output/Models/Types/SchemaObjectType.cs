@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
-        private ObjectTypeProperty? _additionalPropertiesProperty;
+        //private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
         private BuildContext _context;
