@@ -16,6 +16,7 @@
         "azure/client-generator-core/internal",
         "encode/duration",
         "projection/projected-name",
+        "resiliency/srv-driven/old.tsp",
         "server/path/multiple",
         "server/path/single",
         "server/version/path",

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="FromNoneAsync(RequestContext)">
+<example>
+This sample shows how to call FromNoneAsync.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = await client.FromNoneAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FromNone(RequestContext)">
+<example>
+This sample shows how to call FromNone.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = client.FromNone();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FromOneRequiredAsync(string,RequestContext)">
+<example>
+This sample shows how to call FromOneRequiredAsync with required parameters.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = await client.FromOneRequiredAsync("<parameter>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FromOneRequired(string,RequestContext)">
+<example>
+This sample shows how to call FromOneRequired with required parameters.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = client.FromOneRequired("<parameter>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FromOneOptionalAsync(string,RequestContext)">
+<example>
+This sample shows how to call FromOneOptionalAsync.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = await client.FromOneOptionalAsync();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneOptionalAsync with all parameters.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = await client.FromOneOptionalAsync("<parameter>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="FromOneOptional(string,RequestContext)">
+<example>
+This sample shows how to call FromOneOptional.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = client.FromOneOptional();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneOptional with all parameters.
+<code><![CDATA[
+var client = new ResiliencyServiceDrivenClient("<serviceDeploymentVersion>");
+
+Response response = client.FromOneOptional("<parameter>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
