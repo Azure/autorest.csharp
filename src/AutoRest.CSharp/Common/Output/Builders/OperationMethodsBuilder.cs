@@ -19,17 +19,9 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class OperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
-        public OperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, typeFactory), clientMethodParameters)
+        public OperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
+            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodParameters)
         {
-        }
-
-        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
-        {
-            var responseType = GetResponseType(operation, typeFactory);
-            var protocol = typeof(Response);
-            var convenience = responseType is not null ? new CSharpType(typeof(Response<>), responseType) : protocol;
-            return new OperationMethodReturnTypes(responseType, protocol, convenience);
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
@@ -47,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models
                 : CreateConvenienceMethodLogic(async).AsStatement();
         }
 
-        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
+        protected override Method BuildLegacyConvenienceMethod(bool async)
         {
             var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();

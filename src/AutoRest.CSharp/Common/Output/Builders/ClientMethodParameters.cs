@@ -38,11 +38,4 @@ namespace AutoRest.CSharp.Output.Models
         {
         }
     }
-
-    internal record OperationMethodReturnTypes
-    (
-        CSharpType? ResponseType,
-        CSharpType ProtocolMethodReturnType,
-        CSharpType ConvenienceMethodReturnType
-    );
 }

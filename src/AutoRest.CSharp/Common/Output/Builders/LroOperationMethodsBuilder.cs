@@ -11,31 +11,22 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class LroOperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
         private readonly OperationLongRunning _longRunning;
+        private readonly CSharpType? _lroType;
 
-        public LroOperationMethodsBuilder(OperationLongRunning longRunning, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, typeFactory), clientMethodParameters)
+        public LroOperationMethodsBuilder(OperationLongRunning longRunning, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, CSharpType? lroType, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
+            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodParameters)
         {
             _longRunning = longRunning;
-        }
-
-        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, TypeFactory typeFactory)
-        {
-            var responseType = GetResponseType(operation, typeFactory);
-            var protocol = responseType is not null ? typeof(Operation<BinaryData>) : typeof(Operation);
-            var convenience = responseType is not null ? new CSharpType(typeof(Operation<>), responseType) : typeof(Operation);
-            return new OperationMethodReturnTypes(Configuration.AzureArm || Configuration.Generation1ConvenienceClient ? null : responseType, protocol, convenience);
+            _lroType = lroType;
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
@@ -71,18 +62,23 @@ namespace AutoRest.CSharp.Output.Models
                 : CreateConvenienceMethodLogic(methodName, async).AsStatement();
         }
 
-        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
+        protected override Method BuildLegacyConvenienceMethod(bool async)
         {
+            if (_lroType is null)
+            {
+                throw new InvalidOperationException();
+            }
+
             var methodName = $"Start{ProtocolMethodName}";
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
 
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, lroType!);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, _lroType);
             var body = new[]
             {
                 new ParameterValidationBlock(ConvenienceMethodParameters, true),
                 WrapInDiagnosticScopeLegacy(methodName,
                     Var("originalResponse", InvokeProtocolMethod(RestClient, arguments, async), out var response),
-                    Return(New.Instance(lroType!, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response))
+                    Return(New.Instance(_lroType, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response))
                 )
             };
 

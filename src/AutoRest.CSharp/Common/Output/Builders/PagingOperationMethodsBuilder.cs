@@ -8,12 +8,10 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
@@ -22,39 +20,10 @@ namespace AutoRest.CSharp.Output.Models
     {
         private CSharpType PageItemType { get; }
 
-        public PagingOperationMethodsBuilder(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, typeFactory, GetReturnType(operation, paging, typeFactory), parameters)
+        public PagingOperationMethodsBuilder(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters parameters)
+            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, parameters)
         {
-            if (ResponseType is null)
-            {
-                throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
-            }
-
-            PageItemType = GetPageItemType(ResponseType, paging);
-        }
-
-        private static OperationMethodReturnTypes GetReturnType(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
-        {
-            var responseType = GetResponseType(operation, typeFactory, paging);
-            var pageItemType = GetPageItemType(responseType, paging);
-            return new(responseType, typeof(Pageable<BinaryData>), new(typeof(Pageable<>), pageItemType));
-        }
-
-        private static CSharpType GetPageItemType(CSharpType responseType, OperationPaging paging)
-        {
-            if (responseType.IsFrameworkType || responseType.Implementation is not SerializableObjectType modelType)
-            {
-                return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
-            }
-
-            var property = modelType.GetPropertyBySerializedName(paging.ItemName ?? "value");
-            var propertyType = property.ValueType.WithNullable(false);
-            if (!TypeFactory.IsList(propertyType))
-            {
-                throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
-            }
-
-            return TypeFactory.GetElementType(property.ValueType);
+            PageItemType = statusCodeSwitchBuilder.PageItemType ?? throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
         }
 
         protected override bool ShouldConvenienceMethodGenerated() => true;
@@ -99,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models
                 : new[]{parameterConversions, firstPageRequestLine, returnLine};
         }
 
-        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
+        protected override Method BuildLegacyConvenienceMethod(bool async)
         {
             var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var body = CreateLegacyConvenienceMethodBody(async);

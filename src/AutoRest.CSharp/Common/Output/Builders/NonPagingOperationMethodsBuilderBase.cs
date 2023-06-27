@@ -2,22 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Utilities;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class NonPagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        protected NonPagingOperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, OperationMethodReturnTypes returnTypes, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, typeFactory, returnTypes, clientMethodParameters)
+        protected NonPagingOperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
+            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodParameters)
         {
         }
 
@@ -45,23 +41,6 @@ namespace AutoRest.CSharp.Output.Models
                     protocolMethodArguments.Add(protocolParameter);
                 }
             }
-        }
-
-        protected static CSharpType? GetResponseType(InputOperation operation, TypeFactory typeFactory)
-        {
-            var responseTypes = operation.Responses
-                .Where(r => !r.IsErrorResponse)
-                .Select(r => r.BodyType)
-                .WhereNotNull()
-                .Distinct()
-                .ToList();
-
-            return responseTypes.Count switch
-            {
-                0 => null,
-                1 => TypeFactory.GetOutputType(typeFactory.CreateType(responseTypes[0])),
-                _ => typeof(object)
-            };
         }
     }
 }

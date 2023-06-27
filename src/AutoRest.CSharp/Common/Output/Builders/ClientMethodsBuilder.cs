@@ -8,9 +8,12 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using StringExtensions = AutoRest.CSharp.Utilities.StringExtensions;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -25,12 +28,16 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly IEnumerable<InputOperation> _operations;
         private readonly TypeFactory _typeFactory;
+        private readonly DataPlaneOutputLibrary? _dpLibrary;
+        private readonly MgmtOutputLibrary? _mpglibrary;
         private readonly bool _legacyParameterSorting;
         private readonly bool _legacyParameterBuilding;
 
-        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
+        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
         {
             _operations = operations;
+            _dpLibrary = library as DataPlaneOutputLibrary;
+            _mpglibrary = library as MgmtOutputLibrary;
             _typeFactory = typeFactory;
             _legacyParameterSorting = legacyParameterSorting;
             _legacyParameterBuilding = legacyParameterBuilding;
@@ -60,6 +67,10 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var (operation, parameters) in operationParameters)
             {
+                var headerModelType = _dpLibrary?.FindHeaderModel(operation)?.Type;
+                var resourceDataType = FindResourceDataType(operation);
+                var lroType = _dpLibrary?.FindLongRunningOperation(operation)?.Type;
+
                 if (operation.Paging is {} paging)
                 {
                     var createNextPageMessageMethodParameters = paging switch
@@ -69,21 +80,44 @@ namespace AutoRest.CSharp.Output.Models
                         _ => Array.Empty<Parameter>()
                     };
 
+                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, paging, operation.LongRunning is not null, _typeFactory);
                     var pagingParameters = new ClientPagingMethodParameters(parameters, createNextPageMessageMethodParameters);
 
                     yield return operation.LongRunning is { } longRunning
-                        ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters)
-                        : new PagingOperationMethodsBuilder(paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters);
+                        ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, lroType, statusCodeSwitchBuilder, pagingParameters)
+                        : new PagingOperationMethodsBuilder(paging, operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, pagingParameters);
+                }
+                else if (operation.LongRunning is { } longRunning)
+                {
+                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, null, true, _typeFactory);
+                    yield return new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, lroType, statusCodeSwitchBuilder, parameters);
+                }
+                else if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
+                {
+                    yield return new HeadAsBooleanOperationMethodsBuilder(operation, restClientReference, fields, clientName, parameters);
                 }
                 else
                 {
-                    yield return operation.LongRunning is { } longRunning
-                        ? new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, _typeFactory, parameters)
-                        : operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
-                            ? new HeadAsBooleanOperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters)
-                            : new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters);
+                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, null, false, _typeFactory);
+                    yield return new OperationMethodsBuilder(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, parameters);
                 }
             }
+        }
+
+        private CSharpType? FindResourceDataType(InputOperation operation)
+        {
+            if (operation.HttpMethod != RequestMethod.Get)
+            {
+                return null;
+            }
+
+            if (_mpglibrary is null || !_mpglibrary.TryGetResourceData(operation.Path, out var resourceData))
+            {
+                return null;
+            }
+
+            var operationSet = _mpglibrary.GetOperationSet(operation.Path);
+            return operationSet.IsResource() ? resourceData.Type : null;
         }
 
         private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)

@@ -8,23 +8,18 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using Response = AutoRest.CSharp.Output.Models.Responses.Response;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
         private static readonly ResponseClassifierType NextPageStatusCodes = new(new[] { new StatusCodes(200, null) }.OrderBy(sc => sc.Code));
-        private readonly TypeFactory _typeFactory;
 
         protected OperationPaging Paging { get; }
 
@@ -33,10 +28,9 @@ namespace AutoRest.CSharp.Output.Models
         protected string? CreateNextPageMessageMethodName { get; }
         protected IReadOnlyList<Parameter> CreateNextPageMessageMethodParameters { get; }
 
-        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, OperationMethodReturnTypes returnTypes, ClientPagingMethodParameters clientMethodsParameters)
-            : base(operation, restClient, fields, clientName, typeFactory, returnTypes, clientMethodsParameters)
+        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
+            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodsParameters)
         {
-            _typeFactory = typeFactory;
             Paging = paging;
             ItemPropertyName = paging.ItemName ?? "value";
             NextLinkName = paging.NextLinkName;
@@ -48,9 +42,9 @@ namespace AutoRest.CSharp.Output.Models
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
         }
 
-        public override LegacyMethods BuildLegacy(CSharpType? headerModelType, CSharpType? lroType, CSharpType? resourceDataType)
+        public override LegacyMethods BuildLegacy()
         {
-            var legacy = base.BuildLegacy(headerModelType, lroType, resourceDataType);
+            var legacy = base.BuildLegacy();
 
             if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null })
             {
@@ -64,22 +58,15 @@ namespace AutoRest.CSharp.Output.Models
                 .Prepend(nextPageUrlParameter)
                 .ToArray();
 
-            var nextPageResponses = Operation.LongRunning is null
-                ? RestClientBuilder.BuildResponses(Operation, resourceDataType, _typeFactory)
-                : new[] { new Response(null, new[] { new StatusCodes(200, null) }) };
-
             var createNextPageRequest = BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, legacy.CreateRequest.Signature.Summary, legacy.CreateRequest.Signature.Description);
 
             var methodName = ProtocolMethodName + "NextPage";
             var invokeCreateRequestMethod = InvokeCreateRequestMethod(null, createNextPageRequest.Signature.Name, createNextPageRequest.Signature.Parameters);
-            var returnType = headerModelType is not null
-                ? ResponseType is not null ? new CSharpType(typeof(ResponseWithHeaders<>), ResponseType, headerModelType) : new CSharpType(typeof(ResponseWithHeaders))
-                : ResponseType is not null ? new CSharpType(typeof(Response<>), ResponseType) : new CSharpType(typeof(Azure.Response));
 
             var restClientNextPageMethods = new[]
             {
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModelType, returnType, true),
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, nextPageResponses, headerModelType, returnType, false)
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, true),
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, false)
             };
 
             return new LegacyMethods
@@ -156,17 +143,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return conversions;
-        }
-
-        protected static CSharpType GetResponseType(InputOperation operation, TypeFactory typeFactory, OperationPaging paging)
-        {
-            var firstResponseBodyType = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().FirstOrDefault();
-            if (firstResponseBodyType is null)
-            {
-                throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
-            }
-
-            return typeFactory.CreateType(firstResponseBodyType);
         }
     }
 }

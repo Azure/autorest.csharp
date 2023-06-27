@@ -20,15 +20,14 @@ namespace AutoRest.CSharp.Output.Models
     internal class LroPagingOperationMethodsBuilder : PagingOperationMethodsBuilderBase
     {
         private readonly OperationLongRunning _longRunning;
+        private readonly CSharpType? _lroType;
 
-        public LroPagingOperationMethodsBuilder(OperationLongRunning longRunning, OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, TypeFactory typeFactory, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, typeFactory, GetReturnTypes(operation, paging, typeFactory), parameters)
+        public LroPagingOperationMethodsBuilder(OperationLongRunning longRunning, OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, CSharpType? lroType, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters parameters)
+            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, parameters)
         {
             _longRunning = longRunning;
+            _lroType = lroType;
         }
-
-        private static OperationMethodReturnTypes GetReturnTypes(InputOperation operation, OperationPaging paging, TypeFactory typeFactory)
-            => new(null, typeof(Operation<Pageable<BinaryData>>), new(typeof(Operation<>), new CSharpType(typeof(Pageable<>), GetResponseType(operation, typeFactory, paging))));
 
         protected override bool ShouldConvenienceMethodGenerated() => false;
 
@@ -55,12 +54,17 @@ namespace AutoRest.CSharp.Output.Models
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
 
-        protected override Method BuildLegacyConvenienceMethod(CSharpType? lroType, bool async)
+        protected override Method BuildLegacyConvenienceMethod(bool async)
         {
+            if (_lroType is null)
+            {
+                throw new InvalidOperationException();
+            }
+
             var methodName = $"Start{ProtocolMethodName}";
             var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
 
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, lroType!);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, _lroType);
             var nextLink = new CodeWriterDeclaration(KnownParameters.NextLink.Name);
             var nextPageDelegate = CreateNextPageMessageMethodName is not null
                 ? new FuncExpression(new[]{null, nextLink}, InvokeCreateRequestMethod(RestClient, CreateNextPageMessageMethodName, CreateNextPageMessageMethodParameters))
@@ -71,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models
                 new ParameterValidationBlock(ConvenienceMethodParameters, true),
                 WrapInDiagnosticScopeLegacy(methodName,
                     Var("originalResponse", InvokeProtocolMethod(RestClient, arguments, async), out var response),
-                    Return(New.Instance(lroType!, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response, nextPageDelegate))
+                    Return(New.Instance(_lroType, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response, nextPageDelegate))
                 )
             };
 

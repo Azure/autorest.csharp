@@ -114,14 +114,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteDeclaration(line);
                     break;
 
-                case SwitchStatement(var matchExpression, var cases):
+                case SwitchStatement switchStatement:
                     using (writer.AmbientScope())
                     {
                         writer.Append($"switch (");
-                        writer.WriteValueExpression(matchExpression);
+                        writer.WriteValueExpression(switchStatement.MatchExpression);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
-                        foreach (var switchCase in cases)
+                        foreach (var switchCase in switchStatement.Cases)
                         {
                             if (switchCase.Match.Any())
                             {

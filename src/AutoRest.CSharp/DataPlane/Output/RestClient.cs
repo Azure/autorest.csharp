@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "internal";
 
-        public RestClient(ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, TypeFactory typeFactory, OutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public RestClient(ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             _clientName = clientName;
@@ -44,18 +44,8 @@ namespace AutoRest.CSharp.Output.Models
             var restClient = new MemberReference(null, "RestClient");
             Methods = clientMethodsBuilder
                 .Build(restClient, Fields, clientPrefix + GetClientSuffix())
-                .Select(b => BuildMethods(library, b))
+                .Select(b => b.BuildLegacy())
                 .ToList();
-        }
-
-        protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
-        {
-            if (library is DataPlaneOutputLibrary dpl)
-            {
-                return methodBuilder.BuildLegacy(dpl.FindHeaderModel(methodBuilder.Operation)?.Type, dpl.FindLongRunningOperation(methodBuilder.Operation)?.Type, null);
-            }
-
-            return methodBuilder.BuildLegacy(null, null, null);
         }
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)
@@ -68,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models
 
             // Filter protocol method requests for this operationGroup based on the config
             var operations = methods.Select(m => m.Operation).Where(operation => IsProtocolMethodExists(operation, inputClient, library));
-            return new ClientMethodsBuilder(operations, typeFactory, false, false)
+            return new ClientMethodsBuilder(operations, library, typeFactory, false, false)
                 .Build(null, fields, _clientName)
                 .Select(b => b.BuildDpg());
         }
