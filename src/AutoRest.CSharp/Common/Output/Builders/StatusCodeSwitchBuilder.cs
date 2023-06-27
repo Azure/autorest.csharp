@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
 
                 successStatusCodes.AddRange(statusCodes);
-                if (operation.LongRunning != null || bodyType == null)
+                if (bodyType == null)
                 {
                     successResponses.Add((StatusCodes: statusCodes, null, null));
                 }
@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
                 (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), responseType, headerModelType),
                 (not null, null) => new CSharpType(typeof(Response<>), responseType),
                 (null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                _ => new CSharpType(typeof(Azure.Response))
+                _ => new CSharpType(typeof(Response))
             };
         }
 
@@ -282,20 +282,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async, out ValueExpression value)
         {
-            if (type.Equals(typeof(string)))
-            {
-                return new DeclareVariableStatement(null, "value", httpMessage.ExtractResponseContent(), out value);
-            }
-
-            if (type.Equals(typeof(Stream)))
-            {
-                return new[]
-                {
-                    Declare("streamReader", New.StreamReader(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
-                    new DeclareVariableStatement(type, "value", streamReader.ReadToEnd(async), out value)
-                };
-            }
-
             if (serialization is not null)
             {
                 return new[]
@@ -307,6 +293,20 @@ namespace AutoRest.CSharp.Output.Models
                         XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, httpMessage.Response).AsStatement(),
                         _ => throw new NotImplementedException(serialization?.ToString() ?? $"No serialization for type {type}")
                     }
+                };
+            }
+
+            if (type.Equals(typeof(Stream)))
+            {
+                return new DeclareVariableStatement(null, "value", httpMessage.ExtractResponseContent(), out value);
+            }
+
+            if (type.Equals(typeof(string)))
+            {
+                return new[]
+                {
+                    Declare("streamReader", New.StreamReader(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
+                    new DeclareVariableStatement(type, "value", streamReader.ReadToEnd(async), out value)
                 };
             }
 
