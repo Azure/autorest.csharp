@@ -314,7 +314,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -349,7 +349,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -452,7 +452,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -487,7 +487,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>

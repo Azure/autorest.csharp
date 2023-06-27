@@ -17,7 +17,6 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyChooserModelFactory
     {
-
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

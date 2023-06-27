@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Input;
 using Azure;
@@ -27,6 +28,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static readonly string GeneratedFolder = "Generated";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
+
+        private static readonly CSharpSyntaxRewriter SA1505Rewriter = new SA1505Rewriter();
 
         static GeneratedCodeWorkspace()
         {
@@ -129,8 +132,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (syntaxTree != null)
             {
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                var rewriter = new MemberRemoverRewriter(_project, semanticModel, suppressedTypeNames);
-                document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
+                var modelRemoveRewriter = new MemberRemoverRewriter(_project, semanticModel, suppressedTypeNames);
+                document = document.WithSyntaxRoot(SA1505Rewriter.Visit(modelRemoveRewriter.Visit(await syntaxTree.GetRootAsync())));
             }
 
             return document;

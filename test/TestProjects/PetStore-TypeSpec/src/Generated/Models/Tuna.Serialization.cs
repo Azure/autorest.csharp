@@ -45,7 +45,7 @@ namespace PetStore.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Tuna FromResponse(Response response)
+        internal static new Tuna FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeTuna(document.RootElement);
