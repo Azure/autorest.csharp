@@ -1,4 +1,4 @@
-param($BuildNumber, $AutorestVersion, $StagingDirectory)
+param([string]$BuildNumber, $AutorestVersion, $StagingDirectory)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'TypeSpec.Extension' 'Emitter.Csharp')
