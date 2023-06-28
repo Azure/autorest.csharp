@@ -30,7 +30,36 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? $"The {clientPrefix} service client."
                 : BuilderHelpers.EscapeXmlDocDescription(description);
 
-        public static string GetRPName(string namespaceName) => namespaceName.Split('.').Last();
+        private const string AzurePackageNamespacePrefix = "Azure.";
+        private const string AzureMgmtPackageNamespacePrefix = "Azure.ResourceManager.";
+
+        /// <summary>
+        /// Returns a the name of the RP from the namespace by the following rule:
+        /// If the namespace starts with `Azure.ResourceManager` and it is a management plane package, returns every segment concating after the `Azure.ResourceManager` prefix.
+        /// If the namespace starts with `Azure`, returns every segment concating together after the `Azure` prefix
+        /// Returns the namespace as the RP name if nothing matches.
+        /// </summary>
+        /// <param name="namespaceName"></param>
+        /// <returns></returns>
+        public static string GetRPName(string namespaceName)
+        {
+            var segments = namespaceName.Split('.');
+            if (namespaceName.StartsWith(AzurePackageNamespacePrefix))
+            {
+                if (Configuration.AzureArm && Configuration.MgmtConfiguration.IsArmCore)
+                {
+                    return "ResourceManager";
+                }
+
+                if (Configuration.AzureArm && namespaceName.StartsWith(AzureMgmtPackageNamespacePrefix))
+                {
+                    return string.Join("", segments.Skip(2)); // skips "Azure" and "ResourceManager"
+                }
+
+                return string.Join("", segments.Skip(1));
+            }
+            return string.Join("", segments);
+        }
 
         public static string GetClientPrefix(string name, BuildContext context)
             => GetClientPrefix(name, context.DefaultName);
