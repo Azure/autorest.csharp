@@ -178,5 +178,45 @@ namespace Encode.Duration.Samples
             Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Int32SecondsArray()
+        {
+            var client = new DurationClient().GetQueryClient("1.0.0");
+
+            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Int32SecondsArray_AllParameters()
+        {
+            var client = new DurationClient().GetQueryClient("1.0.0");
+
+            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Int32SecondsArray_Async()
+        {
+            var client = new DurationClient().GetQueryClient("1.0.0");
+
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Int32SecondsArray_AllParameters_Async()
+        {
+            var client = new DurationClient().GetQueryClient("1.0.0");
+
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Console.WriteLine(response.Status);
+        }
     }
 }

@@ -331,5 +331,94 @@ namespace Encode.Duration.Samples
             var body = new FloatSecondsDurationProperty(new TimeSpan(1, 2, 3));
             var result = await client.FloatSecondsAsync(body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FloatSecondsArray()
+        {
+            var client = new DurationClient().GetPropertyClient("1.0.0");
+
+            var data = new
+            {
+                value = new[] {
+        new {}
+    },
+            };
+
+            Response response = client.FloatSecondsArray(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FloatSecondsArray_AllParameters()
+        {
+            var client = new DurationClient().GetPropertyClient("1.0.0");
+
+            var data = new
+            {
+                value = new[] {
+        new {}
+    },
+            };
+
+            Response response = client.FloatSecondsArray(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FloatSecondsArray_Async()
+        {
+            var client = new DurationClient().GetPropertyClient("1.0.0");
+
+            var data = new
+            {
+                value = new[] {
+        new {}
+    },
+            };
+
+            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FloatSecondsArray_AllParameters_Async()
+        {
+            var client = new DurationClient().GetPropertyClient("1.0.0");
+
+            var data = new
+            {
+                value = new[] {
+        new {}
+    },
+            };
+
+            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FloatSecondsArray_Convenience_Async()
+        {
+            var client = new DurationClient().GetPropertyClient("1.0.0");
+
+            var body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
+            {
+    new TimeSpan(1, 2, 3)
+            });
+            var result = await client.FloatSecondsArrayAsync(body);
+        }
     }
 }

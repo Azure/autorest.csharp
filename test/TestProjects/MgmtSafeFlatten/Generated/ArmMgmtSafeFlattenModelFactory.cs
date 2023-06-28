@@ -16,7 +16,6 @@ namespace MgmtSafeFlatten.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSafeFlattenModelFactory
     {
-
         /// <summary> Initializes a new instance of TypeOneData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
