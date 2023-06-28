@@ -13,21 +13,6 @@ namespace Azure.Core
 {
     internal static class RequestHeaderExtensions
     {
-        internal static string ConvertToString(object? value, string? format = null)
-            => value switch
-            {
-                null => "null",
-                string s => s,
-                bool b => TypeFormatters.ToString(b),
-                int or float or double or long or decimal => ((IFormattable)value).ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture),
-                byte[] b when format != null => TypeFormatters.ToString(b, format),
-                IEnumerable<string> s => string.Join(",", s),
-                DateTimeOffset dateTime when format != null => TypeFormatters.ToString(dateTime, format),
-                TimeSpan timeSpan when format != null => TypeFormatters.ToString(timeSpan, format),
-                TimeSpan timeSpan => XmlConvert.ToString(timeSpan),
-                Guid guid => guid.ToString(),
-                _ => value.ToString()!
-            };
         public static void Add(this RequestHeaders headers, string name, bool value)
         {
             headers.Add(name, TypeFormatters.ToString(value));
@@ -134,7 +119,7 @@ namespace Azure.Core
 
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter, string format)
         {
-            var stringValues = value.Select(v => ConvertToString(v, format));
+            var stringValues = value.Select(v => TypeFormatters.ConvertToString(v, format));
             headers.Add(name, string.Join(delimiter, stringValues));
         }
     }
