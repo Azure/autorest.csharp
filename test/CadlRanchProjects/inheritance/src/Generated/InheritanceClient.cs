@@ -346,6 +346,94 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetDuplicateAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<Turtle>> GetDuplicateAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDuplicateAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Turtle.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetDuplicate(CancellationToken)']/*" />
+        public virtual Response<Turtle> GetDuplicate(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDuplicate(context);
+            return Response.FromValue(Turtle.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetDuplicateAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetDuplicateAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDuplicateAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetDuplicate");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDuplicateRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetDuplicate(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetDuplicate(RequestContext)']/*" />
+        public virtual Response GetDuplicate(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetDuplicate");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDuplicateRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
@@ -948,6 +1036,20 @@ namespace _Type.Model.Inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDuplicateRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/model/inheritance/duplicate", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

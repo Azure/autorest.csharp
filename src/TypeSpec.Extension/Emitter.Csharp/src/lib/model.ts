@@ -568,7 +568,8 @@ export function getInputType(
                 model,
                 m.properties,
                 properties,
-                baseModel?.DiscriminatorPropertyName
+                model?.DiscriminatorPropertyName ??
+                    baseModel?.DiscriminatorPropertyName
             );
 
             // Temporary part. Derived types may not be referenced directly by any operation
