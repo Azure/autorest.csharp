@@ -48,62 +48,67 @@ namespace AutoRest.CSharp.Output.Models
                 : null;
 
             var successStatusCodes = new List<int>();
-            var successResponses = new List<(IReadOnlyList<int> StatusCodes, CSharpType? Type, ObjectSerialization? Serialization)>();
-            foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
-            {
-                if (isErrorResponse)
-                {
-                    continue;
-                }
-
-                successStatusCodes.AddRange(statusCodes);
-                if (bodyType == null)
-                {
-                    successResponses.Add((StatusCodes: statusCodes, null, null));
-                }
-                else if (bodyMediaType == BodyMediaType.Text)
-                {
-                    successResponses.Add((StatusCodes: statusCodes, typeof(string), null));
-                }
-                else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
-                {
-                    successResponses.Add((StatusCodes: statusCodes, typeof(Stream), null));
-                }
-                else
-                {
-                    var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-                    var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
-                    successResponses.Add((StatusCodes: statusCodes, responseType, serialization));
-                }
-            }
-
-            if (resourceDataType is not null && successResponses.Any())
-            {
-                var responseBodyTypeName = successResponses[0].Type?.Name;
-                if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
-                {
-                    successResponses.Add((new[]{404}, null, null));
-                }
-            }
-
-            _successResponses = successResponses
-                .GroupBy(r => r.Type)
-                .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
-                .ToList();
-
             if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
             {
-                ResponseType = null;
+                successStatusCodes = operation.Responses
+                    .Where(r => !r.IsErrorResponse)
+                    .SelectMany(r => r.StatusCodes)
+                    .ToList();
+
+                _successResponses = new (CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)[]{ (null, null, successStatusCodes.Distinct().ToList()) };
             }
             else
             {
-                ResponseType = _successResponses.Count(r => r.Type is not null) switch
+                var successResponses = new List<(IReadOnlyList<int> StatusCodes, CSharpType? Type, ObjectSerialization? Serialization)>();
+                foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
                 {
-                    0 => null,
-                    1 => _successResponses[0].Type,
-                    _ => typeof(object)
-                };
+                    if (isErrorResponse)
+                    {
+                        continue;
+                    }
+
+                    successStatusCodes.AddRange(statusCodes);
+                    if (bodyType == null)
+                    {
+                        successResponses.Add((StatusCodes: statusCodes, null, null));
+                    }
+                    else if (bodyMediaType == BodyMediaType.Text)
+                    {
+                        successResponses.Add((StatusCodes: statusCodes, typeof(string), null));
+                    }
+                    else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                    {
+                        successResponses.Add((StatusCodes: statusCodes, typeof(Stream), null));
+                    }
+                    else
+                    {
+                        var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
+                        var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
+                        successResponses.Add((StatusCodes: statusCodes, responseType, serialization));
+                    }
+                }
+
+                if (resourceDataType is not null && successResponses.Any())
+                {
+                    var responseBodyTypeName = successResponses[0].Type?.Name;
+                    if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
+                    {
+                        successResponses.Add((new[]{404}, null, null));
+                    }
+                }
+
+                _successResponses = successResponses
+                    .GroupBy(r => r.Type)
+                    .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
+                    .ToList();
             }
+
+            ResponseType = _successResponses.Count(r => r.Type is not null) switch
+            {
+                0 => null,
+                1 => _successResponses.First(r => r.Type is not null).Type,
+                _ => typeof(object)
+            };
 
             ProtocolReturnType = GetProtocolReturnType(ResponseType is not null, isLro, paging is not null);
             RestClientConvenienceReturnType = GetRestClientConvenienceReturnType(ResponseType, headerModelType);
