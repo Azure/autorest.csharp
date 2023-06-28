@@ -67,7 +67,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model)
             => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
 
-        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();
+        public override CSharpType? FindTypeByName(string originalName)
+        {
+            foreach (var model in Models)
+            {
+                if (model.Declaration.Name == originalName)
+                    return model.Type;
+            }
+
+            foreach (var e in Enums)
+            {
+                if (e.Declaration.Name == originalName)
+                    return e.Type;
+            }
+
+            return null;
+        }
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
