@@ -174,8 +174,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
                 .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
 
-            writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
-
             var method = methodBase as MethodSignature;
             if (method != null)
             {
@@ -185,6 +183,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
                     .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
+                // SA1206: 'new' should be after static
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
+
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -193,6 +194,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.AppendRaw("void ");
                 }
+            }
+            else
+            {
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
             }
 
             writer.Append($"{methodBase.Name}");

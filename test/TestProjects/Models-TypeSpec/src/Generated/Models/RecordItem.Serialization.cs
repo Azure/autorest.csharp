@@ -52,7 +52,7 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static RecordItem FromResponse(Response response)
+        internal static new RecordItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRecordItem(document.RootElement);

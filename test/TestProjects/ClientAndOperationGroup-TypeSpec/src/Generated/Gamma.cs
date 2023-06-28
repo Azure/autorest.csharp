@@ -46,7 +46,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -76,7 +76,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -106,7 +106,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -136,7 +136,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
