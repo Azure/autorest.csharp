@@ -1605,7 +1605,7 @@ namespace FirstTestTypeSpec
             request.Uri = uri;
             if (repeatabilityFirstSent != null)
             {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
             }
             request.Headers.Add("Accept", "application/json");
             return message;

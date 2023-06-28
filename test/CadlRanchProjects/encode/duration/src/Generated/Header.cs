@@ -402,7 +402,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/iso8601-array", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.AddDelimited("duration", duration, ",");
+            request.Headers.AddDelimited("duration", duration, ",", "P");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

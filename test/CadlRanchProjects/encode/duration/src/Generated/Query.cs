@@ -432,7 +432,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
             if (input != null && Optional.IsCollectionDefined(input))
             {
-                uri.AppendQueryDelimited("input", input, ",", true);
+                uri.AppendQueryDelimited("input", input, ",", "%s", true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
