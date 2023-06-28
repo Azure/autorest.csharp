@@ -44,6 +44,8 @@ namespace AutoRest.CSharp.Output.Builders
         public static SerializationFormat GetSerializationFormat(InputType type) => type switch
         {
             InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+            InputListType listType => GetSerializationFormat(listType.ElementType),
+            InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
