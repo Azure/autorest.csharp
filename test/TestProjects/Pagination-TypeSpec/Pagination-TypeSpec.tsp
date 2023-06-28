@@ -212,16 +212,84 @@ model TextBlockItem {
   text: string;
 }
 
+enum Interval {
+  @doc("5 seconds, available only if test run duration is less than 10 minutes")
+  PT5S,
+  @doc("10 seconds, available only if test run duration is less than 10 minutes")
+  PT10S,
+  @doc("1 minute") PT1M,
+  @doc("5 minutes, available only if test run duration is greater than 1 minute")
+  PT5M,
+  @doc("1 hour, available only if test run duration is greater than 1 minute")
+  PT1H,
+}
+
+model MetricDimensions {
+  @doc("The interval (i.e. timegrain) of the query.")
+  @query
+  interval?: Interval;
+
+  @doc("Metric name")
+  @query
+  metricName?: string;
+
+  @doc("Metric namespace to query metric definitions for.")
+  @query
+  metricNamespace: string;
+
+  @doc("""
+  The timespan of the query. It is a string with the following format
+  'startDateTime_ISO/endDateTime_ISO'.
+  """)
+  @query
+  timespan?: string;
+};
+
+@resource("values")
+@parentResource(Dimension)
+model DimensionValueList {
+  @key
+  value: string[];
+}
+
+@resource("metric-dimensions")
+@parentResource(TestRuns)
+model Dimension {
+  @key
+  @doc("Dimension name")
+  @path("name")
+  @visibility("query")
+  name: string;
+}
+
+@doc("Load test run model")
+@resource("test-runs")
+model TestRuns {
+  // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
+  @key
+  @path
+  @doc("Unique test run name as identifier")
+  @visibility("read")
+  testRunId: string;
+}
+
 //
 // ** Operations **
 //
 
 @route("/app")
 namespace Pagination {
-
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
   op ListPaginationLedgerEntries is Azure.Core.Foundations.ResourceList<LedgerEntry, ListLedgerEntryInput, PagedLedgerEntries>;
+}
+
+interface AdditionalParameter {  
+  @summary("List the dimension values for the given metric dimension name.")
+  @doc("List the dimension values for the given metric dimension name.")
+  ListMetricDimensionValues is Azure.Core.ResourceList<
+    DimensionValueList, QueryParametersTrait<MetricDimensions>
+  >;
 }
 
 @route("/adp")
