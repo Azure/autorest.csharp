@@ -13,7 +13,6 @@ namespace CustomNamespace
     /// <summary> Client options for SchemaMappingClient. </summary>
     internal partial class MainClientOptions : ClientOptions
     {
-
         internal string Version { get; }
 
         /// <summary> Initializes new instance of MainClientOptions. </summary>

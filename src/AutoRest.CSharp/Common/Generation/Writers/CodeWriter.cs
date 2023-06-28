@@ -580,7 +580,8 @@ namespace AutoRest.CSharp.Generation.Writers
             // Normalize newlines
             builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
 
-            return builder.ToString();
+            // remove any trailing whitespace, for SA1028. can roll back this change after Roslyn fixes https://github.com/dotnet/roslyn/issues/28818
+            return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
         }
 
         internal class CodeWriterScope : IDisposable
