@@ -104,7 +104,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FooResource>> GetAsync(string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
@@ -141,7 +141,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FooResource> Get(string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)

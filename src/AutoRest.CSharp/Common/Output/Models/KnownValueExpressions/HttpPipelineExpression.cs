@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
             return new InvokeInstanceMethodStatement(Untyped, methodName, new ValueExpression[]{message, cancellationToken}, async);
         }
 
-        public ValueExpression ProcessHeadAsBoolMessage(HttpMessageExpression message, ClientDiagnosticsExpression clientDiagnostics, RequestContextExpression? requestContext, bool async)
+        public ValueExpression ProcessHeadAsBoolMessage(HttpMessageExpression message, ValueExpression clientDiagnostics, RequestContextExpression? requestContext, bool async)
         {
             var arguments = new List<ValueExpression>
             {

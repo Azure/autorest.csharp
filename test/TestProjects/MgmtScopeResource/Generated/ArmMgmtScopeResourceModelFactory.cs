@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
         /// <param name="displayName"> The display name of the policy assignment. </param>
         /// <param name="policyDefinitionId"> The ID of the policy definition or policy set definition being assigned. </param>
         /// <param name="scope"> The scope for the policy assignment. </param>
-        /// <param name="notScopes"> The policy&apos;s excluded scopes. </param>
+        /// <param name="notScopes"> The policy's excluded scopes. </param>
         /// <param name="parameters"> The parameter values for the assigned policy rule. The keys are the parameter names. </param>
         /// <param name="description"> This message will be part of response in case of policy violation. </param>
         /// <param name="metadata"> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </param>
@@ -274,6 +274,47 @@ namespace MgmtScopeResource.Models
         public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, string location = null, string resourceType = null)
         {
             return new GuestConfigurationBaseResource(id, name, location, resourceType);
+        }
+
+        /// <summary> Initializes a new instance of Marketplace. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="billingPeriodId"> The id of the billing period resource that the usage belongs to. </param>
+        /// <param name="usageStart"> The start of the date time range covered by the usage detail. </param>
+        /// <param name="usageEnd"> The end of the date time range covered by the usage detail. </param>
+        /// <param name="resourceRate"> The marketplace resource rate. </param>
+        /// <param name="offerName"> The type of offer. </param>
+        /// <param name="resourceGroup"> The name of resource group. </param>
+        /// <param name="additionalInfo"> Additional information. </param>
+        /// <param name="orderNumber"> The order number. </param>
+        /// <param name="instanceName"> The name of the resource instance that the usage is about. </param>
+        /// <param name="instanceId"> The uri of the resource instance that the usage is about. </param>
+        /// <param name="currency"> The ISO currency in which the meter is charged, for example, USD. </param>
+        /// <param name="consumedQuantity"> The quantity of usage. </param>
+        /// <param name="unitOfMeasure"> The unit of measure. </param>
+        /// <param name="pretaxCost"> The amount of cost before tax. </param>
+        /// <param name="isEstimated"> The estimated usage is subject to change. </param>
+        /// <param name="meterId"> The meter id (GUID). </param>
+        /// <param name="subscriptionGuid"> Subscription guid. </param>
+        /// <param name="subscriptionName"> Subscription name. </param>
+        /// <param name="accountName"> Account name. </param>
+        /// <param name="departmentName"> Department name. </param>
+        /// <param name="consumedService"> Consumed service name. </param>
+        /// <param name="costCenter"> The cost center of this department if it is a department and a costcenter exists. </param>
+        /// <param name="additionalProperties"> Additional details of this usage item. By default this is not populated, unless it's specified in $expand. </param>
+        /// <param name="publisherName"> The name of publisher. </param>
+        /// <param name="planName"> The name of plan. </param>
+        /// <param name="isRecurringCharge"> Flag indicating whether this is a recurring charge or not. </param>
+        /// <param name="etag"> The etag for the resource. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <returns> A new <see cref="Models.Marketplace"/> instance for mocking. </returns>
+        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, string etag = null, IReadOnlyDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly CSharpType? _headerModelType;
         private readonly IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? _successResponses;
-        private readonly ClientDiagnosticsExpression? _clientDiagnosticsProperty;
 
         public CSharpType? ResponseType { get; }
         public CSharpType ProtocolReturnType { get; }
@@ -43,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
         public CSharpType ClientConvenienceReturnType { get; }
         public ResponseClassifierType ResponseClassifier { get; }
 
-        public static StatusCodeSwitchBuilder CreateSwitch(InputOperation operation, ClientFields fields, OutputLibrary? library, TypeFactory typeFactory)
+        public static StatusCodeSwitchBuilder CreateSwitch(InputOperation operation, OutputLibrary? library, TypeFactory typeFactory)
         {
             var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
             var isLro = operation.LongRunning is not null;
@@ -117,7 +116,6 @@ namespace AutoRest.CSharp.Output.Models
             return new StatusCodeSwitchBuilder
             (
                 successResponses,
-                GetClientDiagnosticsProperty(fields),
                 headerModelType,
                 commonResponseType,
                 GetProtocolReturnType(commonResponseType is not null, isLro, operation.Paging is not null),
@@ -128,15 +126,12 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch(ClientFields fields)
-            => new(null, GetClientDiagnosticsProperty(fields), null, typeof(bool), typeof(Response<bool>), typeof(Response<bool>), null, typeof(Response<bool>), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
+        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), typeof(Response<bool>), typeof(Response<bool>), null, typeof(Response<bool>), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
 
-        private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses,
-            ClientDiagnosticsExpression? clientDiagnosticsProperty, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
+        private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
         {
             _successResponses = successResponses;
             _headerModelType = headerModelType;
-            _clientDiagnosticsProperty = clientDiagnosticsProperty;
 
             ResponseType = responseType;
             ProtocolReturnType = protocolReturnType;
@@ -146,18 +141,12 @@ namespace AutoRest.CSharp.Output.Models
             ResponseClassifier = responseClassifier;
         }
 
-        private static ClientDiagnosticsExpression? GetClientDiagnosticsProperty(ClientFields fields) {
-            return fields.Contains(fields.ClientDiagnosticsProperty)
-                ? new ClientDiagnosticsExpression(fields.ClientDiagnosticsProperty.Declaration)
-                : null;
-        }
-
         public StatusCodeSwitchBuilder CreateLroPagingNextPageSwitch()
         {
             var successResponses = new (CSharpType?, ObjectSerialization?, IReadOnlyList<int>)[]{(null, null, new[]{200})};
             var responseClassifierType = new ResponseClassifierType(new[] { new StatusCodes(200, null) }.OrderBy(c => c.Code));
 
-            return new StatusCodeSwitchBuilder(successResponses, _clientDiagnosticsProperty, _headerModelType, ResponseType, ProtocolReturnType, RestClientConvenienceReturnType, PageItemType, ClientConvenienceReturnType, responseClassifierType);
+            return new StatusCodeSwitchBuilder(successResponses, _headerModelType, ResponseType, ProtocolReturnType, RestClientConvenienceReturnType, PageItemType, ClientConvenienceReturnType, responseClassifierType);
         }
 
         public MethodBodyStatement Build(HttpMessageExpression httpMessage, bool async)
@@ -168,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     new(new[]{new FormattableStringToExpression($"int s when s >= 200 && s < 300")}, BuildHeadAsBooleanSwitchCaseStatement(httpMessage, True), AddScope: true),
                     new(new[]{new FormattableStringToExpression($"int s when s >= 400 && s < 500")}, BuildHeadAsBooleanSwitchCaseStatement(httpMessage, False), AddScope: true),
-                    BuildDefaultStatusCodeSwitchCase(httpMessage, async)
+                    SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response)))
                 };
             }
 
@@ -179,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models
                     httpMessage.Response.Status,
                     _successResponses
                         .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, async), AddScope: r.Type is not null))
-                        .Append(BuildDefaultStatusCodeSwitchCase(httpMessage, async))
+                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
                         .ToArray()
                 );
             }
@@ -192,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models
                     httpMessage.Response.Status,
                     _successResponses
                         .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: r.Type is not null))
-                        .Append(BuildDefaultStatusCodeSwitchCase(httpMessage, async))
+                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
                         .ToArray()
                 )
             };
@@ -281,15 +270,6 @@ namespace AutoRest.CSharp.Output.Models
                 new DeclareVariableStatement(typeof(bool), "value", valueConstant, out var value),
                 Return(ResponseExpression.FromValue(value, httpMessage.Response))
             };
-        }
-
-        private SwitchCase BuildDefaultStatusCodeSwitchCase(HttpMessageExpression httpMessage, bool async)
-        {
-            var exception = _clientDiagnosticsProperty is not null
-                ? _clientDiagnosticsProperty.CreateRequestFailedException(httpMessage.Response, async)
-                : New.RequestFailedException(httpMessage.Response);
-
-            return SwitchCase.Default(Throw(exception));
         }
 
         private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async)

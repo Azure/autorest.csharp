@@ -37,7 +37,7 @@ namespace object_type
             _pipeline = pipeline;
         }
 
-        /// <summary> Basic get that returns an object. Returns object { &apos;message&apos;: &apos;An object was successfully returned&apos; }. </summary>
+        /// <summary> Basic get that returns an object. Returns object { 'message': 'An object was successfully returned' }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<object>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -54,7 +54,7 @@ namespace object_type
             }
         }
 
-        /// <summary> Basic get that returns an object. Returns object { &apos;message&apos;: &apos;An object was successfully returned&apos; }. </summary>
+        /// <summary> Basic get that returns an object. Returns object { 'message': 'An object was successfully returned' }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<object> Get(CancellationToken cancellationToken = default)
         {
@@ -71,8 +71,8 @@ namespace object_type
             }
         }
 
-        /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
-        /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
+        /// <summary> Basic put that puts an object. Pass in {'foo': 'bar'} to get a 200 and anything else to get an object error. </summary>
+        /// <param name="putObject"> Pass in {'foo': 'bar'} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public virtual async Task<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
@@ -90,8 +90,8 @@ namespace object_type
             }
         }
 
-        /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
-        /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
+        /// <summary> Basic put that puts an object. Pass in {'foo': 'bar'} to get a 200 and anything else to get an object error. </summary>
+        /// <param name="putObject"> Pass in {'foo': 'bar'} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public virtual Response Put(object putObject, CancellationToken cancellationToken = default)

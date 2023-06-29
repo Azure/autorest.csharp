@@ -73,7 +73,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -95,7 +95,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -136,7 +136,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -157,7 +157,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -191,7 +191,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -208,7 +208,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -243,7 +243,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -259,7 +259,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -281,7 +281,7 @@ namespace media_types
             return message;
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<string>> ContentTypeWithEncodingAsync(string input = null, CancellationToken cancellationToken = default)
@@ -298,11 +298,11 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> ContentTypeWithEncoding(string input = null, CancellationToken cancellationToken = default)
@@ -319,7 +319,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -338,7 +338,7 @@ namespace media_types
             return message0;
         }
 
-        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
+        /// <summary> Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -361,11 +361,11 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
-        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
+        /// <summary> Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -388,7 +388,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
@@ -407,7 +407,7 @@ namespace media_types
             return message0;
         }
 
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <summary> Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -430,11 +430,11 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <summary> Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -457,7 +457,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
@@ -476,7 +476,7 @@ namespace media_types
             return message0;
         }
 
-        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <summary> Body that's either text/plain or application/json. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -499,11 +499,11 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
-        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <summary> Body that's either text/plain or application/json. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -526,7 +526,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+                    throw new RequestFailedException(message0.Response);
             }
         }
     }

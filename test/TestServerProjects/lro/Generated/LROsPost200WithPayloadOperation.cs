@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success. </summary>
     public partial class LROsPost200WithPayloadOperation : Operation<Sku>, IOperationSource<Sku>
     {
         private readonly OperationInternal<Sku> _operation;
@@ -29,7 +29,7 @@ namespace lro
         internal LROsPost200WithPayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Sku> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Sku>(clientDiagnostics, nextLinkOperation, response, "LROsPost200WithPayloadOperation");
+            _operation = new OperationInternal<Sku>(nextLinkOperation, clientDiagnostics, response, "LROsPost200WithPayloadOperation");
         }
 
         /// <inheritdoc />

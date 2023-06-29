@@ -17,7 +17,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+    /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }]. </summary>
     public partial class LROsPost202ListOperation : Operation<IReadOnlyList<Product>>, IOperationSource<IReadOnlyList<Product>>
     {
         private readonly OperationInternal<IReadOnlyList<Product>> _operation;
@@ -30,7 +30,7 @@ namespace lro
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<IReadOnlyList<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<IReadOnlyList<Product>>(clientDiagnostics, nextLinkOperation, response, "LROsPost202ListOperation");
+            _operation = new OperationInternal<IReadOnlyList<Product>>(nextLinkOperation, clientDiagnostics, response, "LROsPost202ListOperation");
         }
 
         /// <inheritdoc />

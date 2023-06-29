@@ -19,7 +19,7 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20220404.3
+      ref: refs/tags/azure-sdk-tools_20230428.1
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
@@ -58,9 +58,13 @@ stages:
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
+              npm ls -a
+            displayName: "List packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
               npm run prettier
             displayName: "Emitter format check"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
@@ -95,16 +99,16 @@ stages:
               DOTNET_MULTILEVEL_LOOKUP: 0
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: Npm@1
-            displayName: 'Build CADL csharp emitter'
+            displayName: 'Build TypeSpec csharp emitter'
             inputs:
               command: custom
               customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-            displayName: 'E2E Test for CADL emitter'
+              workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - pwsh: ./eng/ExecuteTypeSpecEmitterUnitTests.ps1
+            displayName: 'E2E Test for TypeSpec emitter'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
-              npm run test --prefix src/CADL.Extension/Emitter.Csharp
+              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
             displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: PublishBuildArtifacts@1
@@ -117,7 +121,7 @@ stages:
                 ./eng/PublishRelease.ps1
                 -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net6.0/
                 -CoverageDirectory ./artifacts/coverage
-                -CadlEmitterDirectory ./src/CADL.Extension/Emitter.Csharp
+                -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
                 -GitHubToken $(azuresdk-github-pat)
                 -NpmToken $(azure-sdk-npm-token)
                 -BuildNumber $(Build.BuildNumber)
@@ -138,7 +142,7 @@ stages:
                 azureSubscription: "Cadl Ranch Storage"
                 scriptType: "bash"
                 scriptLocation: "inlineScript"
-                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
+                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version")
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: check-code-generation.yml
         parameters:
@@ -168,55 +172,24 @@ stages:
         - Release
       variables:
         AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-        CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
+        TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.TypeSpecEmitterVersion']]
       jobs:
         - template: update-generator-versions.yml
           parameters:
             AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
 # update codes
+        - template: generate-sdk-job-matrix-files.yml
+          parameters:
+            Name: Generate_Job_Matrix
+            JobCount: 7
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
-            name: Update_Codes_A_C
-            filter: "a*,b*,c*"
+            Name: Update_Code
+            Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
             AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_D_E
-            filter: "d*,e*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_F_L
-            filter: "f*,g*,h*,i*,j*,k*,l*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_M_O
-            filter: "m*,n*,o*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_P_R
-            filter: "p*,q*,r*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_S_U
-            filter: "s*,t*,u*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_V_Z
-            filter: "v*,w*,x*,y*,z*"
-            AutorestCSharpVersion: $(AutorestCSharpVersion)
-            CadlEmitterVersion: $(CadlEmitterVersion)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+            DependsOn: Generate_Job_Matrix
 # update samples
         - template: update-azure-sdk-for-net-samples.yml
           parameters:
@@ -236,13 +209,7 @@ stages:
             filter: "s*,t*,u*,v*,w*,x*,y*,z*"
         - job: Create_PR
           dependsOn:
-            - Update_Codes_A_C
-            - Update_Codes_D_E
-            - Update_Codes_F_L
-            - Update_Codes_M_O
-            - Update_Codes_P_R
-            - Update_Codes_S_U
-            - Update_Codes_V_Z
+            - Update_Code
             - Update_Samples_A_F
             - Update_Samples_G_L
             - Update_Samples_M_R

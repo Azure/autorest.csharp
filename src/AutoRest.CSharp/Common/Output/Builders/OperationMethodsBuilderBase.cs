@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public InputOperation Operation { get; }
 
-        protected ClientDiagnosticsExpression ClientDiagnosticsProperty { get; }
+        protected ValueExpression ClientDiagnosticsProperty { get; }
         protected HttpPipelineExpression PipelineField { get; }
         protected ValueExpression? RestClient { get; }
 
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
 
             Operation = args.Operation;
-            ClientDiagnosticsProperty = new ClientDiagnosticsExpression(_fields.ClientDiagnosticsProperty.Declaration);
+            ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
             PipelineField = new HttpPipelineExpression(_fields.PipelineField.Declaration);
             RestClient = args.RestClientReference;
 

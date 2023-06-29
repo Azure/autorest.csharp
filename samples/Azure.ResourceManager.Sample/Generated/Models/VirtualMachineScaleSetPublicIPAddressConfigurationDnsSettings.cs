@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Describes a virtual machines scale sets network configuration&apos;s DNS settings.
+    /// Describes a virtual machines scale sets network configuration's DNS settings.
     /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
     /// </summary>
     internal partial class VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings

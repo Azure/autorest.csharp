@@ -28,11 +28,11 @@ namespace MgmtPropertyBag.Models
         public string FooName { get; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The Int32 to use. </summary>
+        /// <summary> The Integer to use. </summary>
         public int? Top { get; set; }
         /// <summary> The String to use. </summary>
         public string Orderby { get; set; }
-        /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
+        /// <summary> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </summary>
         public ETag? IfMatch { get; set; }
         /// <summary> Optional. Number of records to skip. </summary>
         public int? Skip { get; set; }

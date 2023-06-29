@@ -61,7 +61,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -76,7 +76,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -105,7 +105,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -120,7 +120,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -138,7 +138,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <summary> Get '1000000' integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
@@ -149,11 +149,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <summary> Get '1000000' integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
@@ -164,7 +164,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -182,7 +182,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <summary> Get '-1000000' integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
@@ -193,11 +193,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <summary> Get '-1000000' integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
@@ -208,7 +208,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -226,7 +226,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <summary> Get '10000000000' 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
@@ -237,11 +237,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <summary> Get '10000000000' 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetTenBillion(CancellationToken cancellationToken = default)
         {
@@ -252,7 +252,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -270,7 +270,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <summary> Get '-10000000000' 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
@@ -281,11 +281,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <summary> Get '-10000000000' 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
@@ -296,7 +296,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -314,7 +314,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <summary> Get '1.034E+20' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
@@ -325,11 +325,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <summary> Get '1.034E+20' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
@@ -340,7 +340,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -358,7 +358,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <summary> Get '-1.034E-20' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
@@ -369,11 +369,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <summary> Get '-1.034E-20' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
@@ -384,7 +384,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -402,7 +402,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <summary> Get '9999999.999' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
@@ -413,11 +413,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <summary> Get '9999999.999' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
@@ -428,7 +428,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -446,7 +446,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <summary> Get '-9999999.999' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
@@ -457,11 +457,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <summary> Get '-9999999.999' numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
@@ -472,7 +472,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -490,7 +490,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <summary> Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
@@ -501,11 +501,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <summary> Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUnicode(CancellationToken cancellationToken = default)
         {
@@ -516,7 +516,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -534,7 +534,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <summary> Get 'begin!*'();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
@@ -545,11 +545,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <summary> Get 'begin!*'();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
@@ -560,7 +560,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -578,9 +578,9 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <summary> Get 'begin!*'();:@&amp;=+$,end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded. </remarks>
         public async Task<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlNonEncodedRequest();
@@ -590,13 +590,13 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <summary> Get 'begin!*'();:@&amp;=+$,end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded. </remarks>
         public Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlNonEncodedRequest();
@@ -606,7 +606,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -624,7 +624,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;&apos;. </summary>
+        /// <summary> Get ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -635,11 +635,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;&apos;. </summary>
+        /// <summary> Get ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringEmpty(CancellationToken cancellationToken = default)
         {
@@ -650,7 +650,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -686,7 +686,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -708,7 +708,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -726,7 +726,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <summary> Get using uri with 'green color' in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
@@ -738,11 +738,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <summary> Get using uri with 'green color' in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor enumPath, CancellationToken cancellationToken = default)
@@ -754,7 +754,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -784,7 +784,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -800,7 +800,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -818,8 +818,8 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <summary> Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public async Task<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
@@ -836,12 +836,12 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <summary> Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public Response ByteMultiByte(byte[] bytePath, CancellationToken cancellationToken = default)
@@ -858,7 +858,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -876,7 +876,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <summary> Get '' as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -887,11 +887,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <summary> Get '' as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteEmpty(CancellationToken cancellationToken = default)
         {
@@ -902,7 +902,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -938,7 +938,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -960,7 +960,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -978,7 +978,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <summary> Get '2012-01-01' as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
@@ -989,11 +989,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <summary> Get '2012-01-01' as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateValid(CancellationToken cancellationToken = default)
         {
@@ -1004,7 +1004,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1034,7 +1034,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1050,7 +1050,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1068,7 +1068,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <summary> Get '2012-01-01T01:01:01Z' as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1079,11 +1079,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <summary> Get '2012-01-01T01:01:01Z' as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeValid(CancellationToken cancellationToken = default)
         {
@@ -1094,7 +1094,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1124,7 +1124,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1140,7 +1140,7 @@ namespace url
                 case 400:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1158,7 +1158,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <summary> Get 'lorem' encoded value as 'bG9yZW0' (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
@@ -1176,11 +1176,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <summary> Get 'lorem' encoded value as 'bG9yZW0' (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
@@ -1198,7 +1198,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1216,8 +1216,8 @@ namespace url
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <summary> Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         public async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
@@ -1234,12 +1234,12 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <summary> Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         public Response ArrayCsvInPath(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
@@ -1256,7 +1256,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1274,7 +1274,7 @@ namespace url
             return message;
         }
 
-        /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <summary> Get the date 2016-04-13 encoded value as '1460505600' (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
@@ -1286,11 +1286,11 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <summary> Get the date 2016-04-13 encoded value as '1460505600' (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
@@ -1302,7 +1302,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

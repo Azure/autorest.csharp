@@ -71,7 +71,7 @@ namespace body_byte
             }
         }
 
-        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <summary> Get empty byte value ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -88,7 +88,7 @@ namespace body_byte
             }
         }
 
-        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <summary> Get empty byte value ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetEmpty(CancellationToken cancellationToken = default)
         {
@@ -177,7 +177,7 @@ namespace body_byte
             }
         }
 
-        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <summary> Get invalid byte value ':::SWAGGER::::'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
@@ -194,7 +194,7 @@ namespace body_byte
             }
         }
 
-        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <summary> Get invalid byte value ':::SWAGGER::::'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetInvalid(CancellationToken cancellationToken = default)
         {

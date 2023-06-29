@@ -65,8 +65,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var lroType = (_library as DataPlaneOutputLibrary)?.FindLongRunningOperation(operation)?.Type;
                 var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
-                    ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch(fields)
-                    : StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
+                    ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
+                    : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
                 var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder);
 

@@ -3,7 +3,7 @@ param(
     [string]$AutorestCSharpVersion,
 
     [Parameter(Mandatory)]
-    [string]$CadlEmitterVersion,
+    [string]$TypeSpecEmitterVersion,
 
     [Parameter(Mandatory)]
     [string]$SdkRepoRoot,
@@ -14,7 +14,7 @@ $ErrorActionPreference = 'Stop'
 
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 
-Write-Host "Updating Autorest.CSharp($AutorestCSharpVersion) and Cadl Emitter($CadlEmitterVersion) under $SdkRepoRoot"
+Write-Host "Updating Autorest.CSharp($AutorestCSharpVersion) and TypeSpec Emitter($TypeSpecEmitterVersion) under $SdkRepoRoot"
 
 $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
 (Get-Content -Raw $PackagesProps) -replace `
@@ -22,11 +22,11 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
 "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$AutorestCSharpVersion`" PrivateAssets=`"All`" />" | `
     Set-Content $PackagesProps -NoNewline
 
-$CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
-(Get-Content -Raw $CadlEmitterProps) -replace `
+$TypeSpecEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
+(Get-Content -Raw $TypeSpecEmitterProps) -replace `
     '"@azure-tools/typespec-csharp": ".*?"',
-"`"@azure-tools/typespec-csharp`": `"$CadlEmitterVersion`"" | `
-    Set-Content $CadlEmitterProps -NoNewline
+"`"@azure-tools/typespec-csharp`": `"$TypeSpecEmitterVersion`"" | `
+    Set-Content $TypeSpecEmitterProps -NoNewline
 
 if ($UseInternalFeed) {
     $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")

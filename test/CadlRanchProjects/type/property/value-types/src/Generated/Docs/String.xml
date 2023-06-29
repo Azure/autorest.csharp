@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetStringAsync(CancellationToken)">
+<example>
+This sample shows how to call GetStringAsync.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var result = await client.GetStringAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetString(CancellationToken)">
+<example>
+This sample shows how to call GetString.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var result = client.GetString();
+]]></code>
+</example>
+    </member>
+    <member name="GetStringAsync(RequestContext)">
+<example>
+This sample shows how to call GetStringAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+Response response = await client.GetStringAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetString(RequestContext)">
+<example>
+This sample shows how to call GetString with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+Response response = client.GetString(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(StringProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var body = new StringProperty("<property>");
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(StringProperty,CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var body = new StringProperty("<property>");
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetStringClient("1.0.0");
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

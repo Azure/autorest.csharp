@@ -176,7 +176,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -214,7 +214,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -293,7 +293,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
@@ -329,7 +329,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
@@ -574,7 +574,7 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
-            if (countryOrRegions != null)
+            if (countryOrRegions != null && Optional.IsCollectionDefined(countryOrRegions))
             {
                 foreach (var param in countryOrRegions)
                 {
@@ -607,7 +607,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
@@ -642,7 +642,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="orderby"> The String to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>

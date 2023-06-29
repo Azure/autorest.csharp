@@ -285,7 +285,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <summary> Get boolean array value [true, 'boolean', false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -302,7 +302,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <summary> Get boolean array value [true, 'boolean', false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
@@ -425,7 +425,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <summary> Get integer array value [1, 'integer', 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -442,7 +442,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <summary> Get integer array value [1, 'integer', 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
@@ -565,7 +565,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <summary> Get long array value [1, 'integer', 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -582,7 +582,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <summary> Get long array value [1, 'integer', 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
@@ -705,7 +705,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <summary> Get boolean array value [1.0, 'number', 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -722,7 +722,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <summary> Get boolean array value [1.0, 'number', 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
@@ -845,7 +845,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <summary> Get boolean array value [1.0, 'number', 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
@@ -862,7 +862,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <summary> Get boolean array value [1.0, 'number', 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
@@ -879,7 +879,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get string array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
@@ -896,7 +896,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get string array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
@@ -913,7 +913,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -932,7 +932,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -951,7 +951,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get enum array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
@@ -968,7 +968,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get enum array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
@@ -985,7 +985,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1004,7 +1004,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1023,7 +1023,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get enum array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1040,7 +1040,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Get enum array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
@@ -1057,7 +1057,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1076,7 +1076,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <summary> Set array value ['foo1', 'foo2', 'foo3']. </summary>
         /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1095,7 +1095,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <summary> Get string array value ['foo', null, 'foo2']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1112,7 +1112,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <summary> Get string array value ['foo', null, 'foo2']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
@@ -1129,7 +1129,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <summary> Get string array value ['foo', 123, 'foo2']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
@@ -1146,7 +1146,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <summary> Get string array value ['foo', 123, 'foo2']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
@@ -1163,7 +1163,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <summary> Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1180,7 +1180,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <summary> Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
@@ -1197,7 +1197,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <summary> Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1216,7 +1216,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <summary> Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1235,7 +1235,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <summary> Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
@@ -1252,7 +1252,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <summary> Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
@@ -1269,7 +1269,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <summary> Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1286,7 +1286,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <summary> Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
@@ -1303,7 +1303,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <summary> Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1322,7 +1322,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <summary> Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1341,7 +1341,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <summary> Get date array value ['2012-01-01', null, '1776-07-04']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1358,7 +1358,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <summary> Get date array value ['2012-01-01', null, '1776-07-04']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -1375,7 +1375,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <summary> Get date array value ['2011-03-22', 'date']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
@@ -1392,7 +1392,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <summary> Get date array value ['2011-03-22', 'date']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
@@ -1409,7 +1409,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <summary> Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1426,7 +1426,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <summary> Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
@@ -1443,7 +1443,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <summary> Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1462,7 +1462,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <summary> Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1481,7 +1481,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <summary> Get date array value ['2000-12-01t00:00:01z', null]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1498,7 +1498,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <summary> Get date array value ['2000-12-01t00:00:01z', null]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
@@ -1515,7 +1515,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <summary> Get date array value ['2000-12-01t00:00:01z', 'date-time']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
@@ -1532,7 +1532,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <summary> Get date array value ['2000-12-01t00:00:01z', 'date-time']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
@@ -1549,7 +1549,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <summary> Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1566,7 +1566,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <summary> Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
@@ -1583,7 +1583,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <summary> Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1602,7 +1602,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <summary> Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1621,7 +1621,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <summary> Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1638,7 +1638,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <summary> Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
@@ -1655,7 +1655,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <summary> Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1674,7 +1674,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <summary> Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -1799,7 +1799,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <summary> Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
@@ -1816,7 +1816,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <summary> Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
@@ -1901,7 +1901,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -1918,7 +1918,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
@@ -1935,7 +1935,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -1952,7 +1952,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -1969,7 +1969,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
@@ -1986,7 +1986,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
@@ -2003,7 +2003,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2022,7 +2022,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <summary> Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2109,7 +2109,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -2126,7 +2126,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
@@ -2143,7 +2143,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -2160,7 +2160,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -2177,7 +2177,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2194,7 +2194,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
@@ -2211,7 +2211,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2230,7 +2230,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <summary> Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2317,7 +2317,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
@@ -2334,7 +2334,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
@@ -2351,7 +2351,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -2368,7 +2368,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
@@ -2385,7 +2385,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
@@ -2402,7 +2402,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
@@ -2419,7 +2419,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
@@ -2438,7 +2438,7 @@ namespace body_array
             }
         }
 
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>

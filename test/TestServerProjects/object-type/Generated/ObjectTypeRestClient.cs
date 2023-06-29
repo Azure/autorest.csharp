@@ -48,7 +48,7 @@ namespace object_type
             return message;
         }
 
-        /// <summary> Basic get that returns an object. Returns object { &apos;message&apos;: &apos;An object was successfully returned&apos; }. </summary>
+        /// <summary> Basic get that returns an object. Returns object { 'message': 'An object was successfully returned' }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<object>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -64,11 +64,11 @@ namespace object_type
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Basic get that returns an object. Returns object { &apos;message&apos;: &apos;An object was successfully returned&apos; }. </summary>
+        /// <summary> Basic get that returns an object. Returns object { 'message': 'An object was successfully returned' }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get(CancellationToken cancellationToken = default)
         {
@@ -84,7 +84,7 @@ namespace object_type
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -105,8 +105,8 @@ namespace object_type
             return message;
         }
 
-        /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
-        /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
+        /// <summary> Basic put that puts an object. Pass in {'foo': 'bar'} to get a 200 and anything else to get an object error. </summary>
+        /// <param name="putObject"> Pass in {'foo': 'bar'} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public async Task<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
@@ -123,12 +123,12 @@ namespace object_type
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
-        /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
+        /// <summary> Basic put that puts an object. Pass in {'foo': 'bar'} to get a 200 and anything else to get an object error. </summary>
+        /// <param name="putObject"> Pass in {'foo': 'bar'} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public Response Put(object putObject, CancellationToken cancellationToken = default)
@@ -145,7 +145,7 @@ namespace object_type
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

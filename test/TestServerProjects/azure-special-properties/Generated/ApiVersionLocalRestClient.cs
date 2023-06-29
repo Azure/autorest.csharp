@@ -48,7 +48,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -59,11 +59,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMethodLocalValid(CancellationToken cancellationToken = default)
         {
@@ -74,7 +74,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -107,7 +107,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -123,7 +123,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -141,7 +141,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -152,11 +152,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetPathLocalValid(CancellationToken cancellationToken = default)
         {
@@ -167,7 +167,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -185,7 +185,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -196,11 +196,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
+        /// <summary> Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetSwaggerLocalValid(CancellationToken cancellationToken = default)
         {
@@ -211,7 +211,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

@@ -17,10 +17,10 @@
     -->
 
     <!--
-      <typespecAdditionalOptions></typespecAdditionalOptions>
+      <TypespecAdditionalOptions></TypespecAdditionalOptions>
      
       Allows passing additional tsp command line arguments, for example to run special emitter 
-      use the following command line: dotnet msbuild /t:GenerateCode /p:typespecAdditionalOptions="csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
+      use the following command line: dotnet msbuild /t:GenerateCode /p:TypespecAdditionalOptions="csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
     -->
 
     <IncludeAzureCoreSharedCode Condition="'$(IncludeAzureCoreSharedCode)' == ''">true</IncludeAzureCoreSharedCode>
@@ -32,6 +32,9 @@
     <UseDefaultNamespaceAndOutputFolder Condition="'$(UseDefaultNamespaceAndOutputFolder)' == ''">true</UseDefaultNamespaceAndOutputFolder>
     <_AutoRestCommand>node $(AutoRestEntryPoint) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net6.0/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
+    <_SaveInputs Condition="'$(SaveInputs)' == 'true'">-SaveInputs</_SaveInputs>
+    <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
+    <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
   </PropertyGroup>
 
   <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec"/>
@@ -52,8 +55,9 @@
   </Target>
 
   <Target Name="_GenerateCodeForTypeSpec" Condition="'$(_GenerateCode)' == 'true' AND '$(TypeSpecInput)' != ''" >
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(typespecAdditionalOptions)"/>
+    <Error Text="You used skipped sync but didn't have the TempTypeSpecFiles in your project directory.  Please run 'dotnet build /t:GenerateCode /p:SaveInputs=true' without SkipSync first at least once" Condition="'$(SkipSync)' == 'true' AND !Exists('$(MSBuildProjectDirectory)/../TempTypeSpecFiles')" />
+    <Exec Condition="'$(SkipSync)' != 'true'" Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.. $(_SpecRepoRoot)"/>
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(_TypespecAdditionalOptions) $(_SaveInputs)"/>
   </Target>
 
   <Target Name="GenerateTests" Condition="'$(AutoRestTestsInput)' != ''">

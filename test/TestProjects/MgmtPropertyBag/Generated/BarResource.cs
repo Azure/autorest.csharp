@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -100,19 +101,19 @@ namespace MgmtPropertyBag
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="items"> The items to query on the bar resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<BarResource>> GetAsync(string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(string ifMatch = null, string filter = null, int? top = null, int? skip = null, IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Get");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, skip, items, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -137,19 +138,19 @@ namespace MgmtPropertyBag
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="items"> The items to query on the bar resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BarResource> Get(string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(string ifMatch = null, string filter = null, int? top = null, int? skip = null, IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Get");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, skip, items, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -177,8 +178,8 @@ namespace MgmtPropertyBag
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
@@ -218,8 +219,8 @@ namespace MgmtPropertyBag
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)

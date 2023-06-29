@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll_ListRoleAssignmentsForResource()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_ListForResource" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll_ListRoleAssignmentsForResourceGroup()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_ListForResourceGroup" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -97,7 +97,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CreateOrUpdate_CreateRoleAssignment()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Create" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -136,7 +136,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetRoleAssignmentByName()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -168,7 +168,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Exists_GetRoleAssignmentByName()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -196,7 +196,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll_ListRoleAssignmentsForSubscription()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_List" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -230,7 +230,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll_ListRoleAssignmentsForScope()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_ListForScope" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

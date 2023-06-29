@@ -64,7 +64,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -84,7 +84,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -101,7 +101,7 @@ namespace body_byte
             return message;
         }
 
-        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <summary> Get empty byte value ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
@@ -117,11 +117,11 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <summary> Get empty byte value ''. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetEmpty(CancellationToken cancellationToken = default)
         {
@@ -137,7 +137,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -170,7 +170,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -190,7 +190,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -229,7 +229,7 @@ namespace body_byte
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -251,7 +251,7 @@ namespace body_byte
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -268,7 +268,7 @@ namespace body_byte
             return message;
         }
 
-        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <summary> Get invalid byte value ':::SWAGGER::::'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
@@ -284,11 +284,11 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <summary> Get invalid byte value ':::SWAGGER::::'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetInvalid(CancellationToken cancellationToken = default)
         {
@@ -304,7 +304,7 @@ namespace body_byte
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

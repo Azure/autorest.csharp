@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetAllAsync(CancellationToken)">
+<example>
+This sample shows how to call GetAllAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var result = await client.GetAllAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetAll(CancellationToken)">
+<example>
+This sample shows how to call GetAll.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var result = client.GetAll();
+]]></code>
+</example>
+    </member>
+    <member name="GetAllAsync(RequestContext)">
+<example>
+This sample shows how to call GetAllAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+Response response = await client.GetAllAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetAll(RequestContext)">
+<example>
+This sample shows how to call GetAll with required parameters and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+Response response = client.GetAll(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnlyAsync(CancellationToken)">
+<example>
+This sample shows how to call GetRequiredOnlyAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var result = await client.GetRequiredOnlyAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnly(CancellationToken)">
+<example>
+This sample shows how to call GetRequiredOnly.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var result = client.GetRequiredOnly();
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnlyAsync(RequestContext)">
+<example>
+This sample shows how to call GetRequiredOnlyAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+Response response = await client.GetRequiredOnlyAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetRequiredOnly(RequestContext)">
+<example>
+This sample shows how to call GetRequiredOnly with required parameters and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+Response response = client.GetRequiredOnly(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAllAsync(RequiredAndOptionalProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAllAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var body = new RequiredAndOptionalProperty(1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = await client.PutAllAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAll(RequiredAndOptionalProperty,CancellationToken)">
+<example>
+This sample shows how to call PutAll with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var body = new RequiredAndOptionalProperty(1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = client.PutAll(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAllAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAllAsync with required request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    requiredProperty = 1234,
+};
+
+Response response = await client.PutAllAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAllAsync with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    optionalProperty = "<optionalProperty>",
+    requiredProperty = 1234,
+};
+
+Response response = await client.PutAllAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutAll(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAll with required request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    requiredProperty = 1234,
+};
+
+Response response = client.PutAll(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAll with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    optionalProperty = "<optionalProperty>",
+    requiredProperty = 1234,
+};
+
+Response response = client.PutAll(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnlyAsync(RequiredAndOptionalProperty,CancellationToken)">
+<example>
+This sample shows how to call PutRequiredOnlyAsync with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var body = new RequiredAndOptionalProperty(1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = await client.PutRequiredOnlyAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)">
+<example>
+This sample shows how to call PutRequiredOnly with required parameters.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var body = new RequiredAndOptionalProperty(1234)
+{
+    OptionalProperty = "<OptionalProperty>",
+};
+var result = client.PutRequiredOnly(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnlyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRequiredOnlyAsync with required request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    requiredProperty = 1234,
+};
+
+Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRequiredOnlyAsync with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    optionalProperty = "<optionalProperty>",
+    requiredProperty = 1234,
+};
+
+Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutRequiredOnly(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRequiredOnly with required request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    requiredProperty = 1234,
+};
+
+Response response = client.PutRequiredOnly(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRequiredOnly with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+
+var data = new {
+    optionalProperty = "<optionalProperty>",
+    requiredProperty = 1234,
+};
+
+Response response = client.PutRequiredOnly(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

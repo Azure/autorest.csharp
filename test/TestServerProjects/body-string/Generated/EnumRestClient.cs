@@ -49,7 +49,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
@@ -65,11 +65,11 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
@@ -85,7 +85,7 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -106,7 +106,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
@@ -118,11 +118,11 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
@@ -134,7 +134,7 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -151,7 +151,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
@@ -167,11 +167,11 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
@@ -187,7 +187,7 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -208,7 +208,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
@@ -220,11 +220,11 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <summary> Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
@@ -236,7 +236,7 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -253,7 +253,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
+        /// <summary> Get value 'green-color' from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
@@ -269,11 +269,11 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
+        /// <summary> Get value 'green-color' from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
@@ -289,7 +289,7 @@ namespace body_string
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -310,7 +310,7 @@ namespace body_string
             return message;
         }
 
-        /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <summary> Sends value 'green-color' from a constant. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
@@ -328,11 +328,11 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <summary> Sends value 'green-color' from a constant. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
@@ -350,7 +350,7 @@ namespace body_string
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }
