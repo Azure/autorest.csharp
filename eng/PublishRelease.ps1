@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
+param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
 
 $AutorestArtifactDirectory = Resolve-Path $AutorestArtifactDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
