@@ -12,7 +12,7 @@ using Server.Path.Multiple;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="MultipleClient"/> to client builder. </summary>
-    public static partial class MultipleClientBuilderExtensions
+    public static partial class ServerPathMultipleClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="MultipleClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

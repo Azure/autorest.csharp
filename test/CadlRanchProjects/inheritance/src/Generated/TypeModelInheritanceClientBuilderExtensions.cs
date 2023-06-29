@@ -12,7 +12,7 @@ using _Type.Model.Inheritance;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="InheritanceClient"/> to client builder. </summary>
-    public static partial class InheritanceClientBuilderExtensions
+    public static partial class TypeModelInheritanceClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="InheritanceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

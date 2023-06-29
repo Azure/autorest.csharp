@@ -12,7 +12,7 @@ using Azure.Language.Authoring;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="AuthoringClient"/> to client builder. </summary>
-    public static partial class AuthoringClientBuilderExtensions
+    public static partial class LanguageAuthoringClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="AuthoringClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

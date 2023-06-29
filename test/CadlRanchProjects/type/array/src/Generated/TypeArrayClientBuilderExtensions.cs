@@ -12,7 +12,7 @@ using _Type._Array;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ArrayClient"/> to client builder. </summary>
-    public static partial class ArrayClientBuilderExtensions
+    public static partial class TypeArrayClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ArrayClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

@@ -10,7 +10,7 @@ using System;
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class TraitsModelFactory
+    public static partial class SpecsAzureCoreTraitsModelFactory
     {
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="id"> The user's id. </param>

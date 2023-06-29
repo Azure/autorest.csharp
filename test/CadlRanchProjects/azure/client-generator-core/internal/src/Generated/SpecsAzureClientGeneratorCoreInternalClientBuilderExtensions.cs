@@ -12,7 +12,7 @@ using _Specs_.Azure.ClientGenerator.Core.Internal;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="InternalClient"/> to client builder. </summary>
-    public static partial class InternalClientBuilderExtensions
+    public static partial class SpecsAzureClientGeneratorCoreInternalClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="InternalClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

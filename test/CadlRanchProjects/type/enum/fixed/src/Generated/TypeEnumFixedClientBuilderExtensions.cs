@@ -12,7 +12,7 @@ using _Type._Enum.Fixed;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="FixedClient"/> to client builder. </summary>
-    public static partial class FixedClientBuilderExtensions
+    public static partial class TypeEnumFixedClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="FixedClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

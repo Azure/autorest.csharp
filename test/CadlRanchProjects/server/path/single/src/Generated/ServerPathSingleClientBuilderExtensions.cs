@@ -12,7 +12,7 @@ using Server.Path.Single;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="SingleClient"/> to client builder. </summary>
-    public static partial class SingleClientBuilderExtensions
+    public static partial class ServerPathSingleClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="SingleClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

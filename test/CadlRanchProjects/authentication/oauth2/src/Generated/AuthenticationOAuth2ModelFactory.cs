@@ -7,10 +7,10 @@
 
 using System;
 
-namespace Authentication.ApiKey.Models
+namespace Authentication.OAuth2.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ApiKeyModelFactory
+    public static partial class AuthenticationOAuth2ModelFactory
     {
         /// <summary> Initializes a new instance of InvalidAuth. </summary>
         /// <param name="error"></param>

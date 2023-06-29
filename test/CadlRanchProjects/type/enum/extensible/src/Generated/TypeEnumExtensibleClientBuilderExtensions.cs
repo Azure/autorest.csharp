@@ -12,7 +12,7 @@ using _Type._Enum.Extensible;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ExtensibleClient"/> to client builder. </summary>
-    public static partial class ExtensibleClientBuilderExtensions
+    public static partial class TypeEnumExtensibleClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ExtensibleClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

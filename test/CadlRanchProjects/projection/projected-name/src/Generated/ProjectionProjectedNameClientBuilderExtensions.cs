@@ -12,7 +12,7 @@ using Projection.ProjectedName;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ProjectedNameClient"/> to client builder. </summary>
-    public static partial class ProjectedNameClientBuilderExtensions
+    public static partial class ProjectionProjectedNameClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ProjectedNameClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

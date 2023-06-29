@@ -10,7 +10,7 @@ using System;
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class InternalModelFactory
+    public static partial class SpecsAzureClientGeneratorCoreInternalModelFactory
     {
         /// <summary> Initializes a new instance of PublicModel. </summary>
         /// <param name="name"></param>

@@ -12,7 +12,7 @@ using System.Linq;
 namespace _Specs_.Azure.Core.Basic.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class BasicModelFactory
+    public static partial class SpecsAzureCoreBasicModelFactory
     {
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="id"> The user's id. </param>

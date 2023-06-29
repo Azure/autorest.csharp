@@ -12,7 +12,7 @@ using _Specs_.Azure.Core.Traits;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="TraitsClient"/> to client builder. </summary>
-    public static partial class TraitsClientBuilderExtensions
+    public static partial class SpecsAzureCoreTraitsClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="TraitsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

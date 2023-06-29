@@ -12,7 +12,7 @@ using Parameters.Spread;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="SpreadClient"/> to client builder. </summary>
-    public static partial class SpreadClientBuilderExtensions
+    public static partial class ParametersSpreadClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="SpreadClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

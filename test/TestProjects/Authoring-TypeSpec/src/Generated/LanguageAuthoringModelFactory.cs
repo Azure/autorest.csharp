@@ -13,7 +13,7 @@ using Azure;
 namespace Azure.Language.Authoring.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class AuthoringModelFactory
+    public static partial class LanguageAuthoringModelFactory
     {
         /// <summary> Initializes a new instance of DeploymentJob. </summary>
         /// <param name="jobId"> The job ID. </param>

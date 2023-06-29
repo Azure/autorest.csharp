@@ -12,7 +12,7 @@ using Azure.Core.Extensions;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="OAuth2Client"/> to client builder. </summary>
-    public static partial class OAuth2ClientBuilderExtensions
+    public static partial class AuthenticationOAuth2ClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="OAuth2Client"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

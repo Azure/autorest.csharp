@@ -12,7 +12,7 @@ using _Specs_.Azure.Core.Basic;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="BasicClient"/> to client builder. </summary>
-    public static partial class BasicClientBuilderExtensions
+    public static partial class SpecsAzureCoreBasicClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="BasicClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

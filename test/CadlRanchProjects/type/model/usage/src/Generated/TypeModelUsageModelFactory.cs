@@ -10,7 +10,7 @@ using System;
 namespace _Type.Model.Usage.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class UsageModelFactory
+    public static partial class TypeModelUsageModelFactory
     {
         /// <summary> Initializes a new instance of OutputRecord. </summary>
         /// <param name="requiredProp"></param>
