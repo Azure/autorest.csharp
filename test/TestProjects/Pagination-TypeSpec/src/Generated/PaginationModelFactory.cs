@@ -24,14 +24,14 @@ namespace Pagination.Models
             return new LedgerEntry(contents, collectionId, transactionId);
         }
 
-        /// <summary> Initializes a new instance of DimensionValueList. </summary>
+        /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
         /// <param name="value"></param>
-        /// <returns> A new <see cref="Models.DimensionValueList"/> instance for mocking. </returns>
-        public static DimensionValueList DimensionValueList(IEnumerable<string> value = null)
+        /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
+        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
         {
             value ??= new List<string>();
 
-            return new DimensionValueList(value?.ToList());
+            return new DimensionValueListItem(value?.ToList());
         }
 
         /// <summary> Initializes a new instance of TextBlocklist. </summary>

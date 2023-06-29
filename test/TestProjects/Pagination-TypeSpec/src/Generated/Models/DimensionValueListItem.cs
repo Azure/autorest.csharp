@@ -12,22 +12,22 @@ using Azure.Core;
 
 namespace Pagination.Models
 {
-    /// <summary> The DimensionValueList. </summary>
-    public partial class DimensionValueList
+    /// <summary> The DimensionValueListItem. </summary>
+    public partial class DimensionValueListItem
     {
-        /// <summary> Initializes a new instance of DimensionValueList. </summary>
+        /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal DimensionValueList(IEnumerable<string> value)
+        internal DimensionValueListItem(IEnumerable<string> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DimensionValueList. </summary>
+        /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
         /// <param name="value"></param>
-        internal DimensionValueList(IReadOnlyList<string> value)
+        internal DimensionValueListItem(IReadOnlyList<string> value)
         {
             Value = value;
         }

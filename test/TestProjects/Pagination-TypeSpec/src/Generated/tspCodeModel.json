@@ -187,9 +187,9 @@
   },
   {
    "$id": "25",
-   "Name": "CustomPageDimensionValueList",
+   "Name": "CustomPageDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of DimensionValueList items",
+   "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -197,13 +197,13 @@
      "$id": "26",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "The DimensionValueList items on this page",
+     "Description": "The DimensionValueListItem items on this page",
      "Type": {
       "$id": "27",
       "Name": "Array",
       "ElementType": {
        "$id": "28",
-       "Name": "DimensionValueList",
+       "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
@@ -648,7 +648,7 @@
     {
      "$id": "78",
      "Name": "ListMetricDimensionValues",
-     "ResourceName": "DimensionValueList",
+     "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
      "Parameters": [

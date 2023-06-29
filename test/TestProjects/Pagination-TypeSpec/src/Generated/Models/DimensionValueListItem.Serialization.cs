@@ -12,9 +12,9 @@ using Azure.Core;
 
 namespace Pagination.Models
 {
-    public partial class DimensionValueList
+    public partial class DimensionValueListItem
     {
-        internal static DimensionValueList DeserializeDimensionValueList(JsonElement element)
+        internal static DimensionValueListItem DeserializeDimensionValueListItem(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -34,15 +34,15 @@ namespace Pagination.Models
                     continue;
                 }
             }
-            return new DimensionValueList(value);
+            return new DimensionValueListItem(value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DimensionValueList FromResponse(Response response)
+        internal static DimensionValueListItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDimensionValueList(document.RootElement);
+            return DeserializeDimensionValueListItem(document.RootElement);
         }
     }
 }

@@ -247,7 +247,7 @@ model MetricDimensions {
 
 @resource("values")
 @parentResource(Dimension)
-model DimensionValueList {
+model DimensionValueListItem {
   @key
   value: string[];
 }
@@ -288,7 +288,7 @@ interface AdditionalParameter {
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   ListMetricDimensionValues is Azure.Core.ResourceList<
-    DimensionValueList, QueryParametersTrait<MetricDimensions>
+    DimensionValueListItem, QueryParametersTrait<MetricDimensions>
   >;
 }
 

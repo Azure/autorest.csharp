@@ -169,7 +169,7 @@ namespace Pagination
         /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,Interval?,string,string,CancellationToken)']/*" />
-        public virtual AsyncPageable<DimensionValueList> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DimensionValueListItem> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -178,7 +178,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DimensionValueList.DeserializeDimensionValueList, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
         }
 
         /// <summary> List the dimension values for the given metric dimension name. </summary>
@@ -195,7 +195,7 @@ namespace Pagination
         /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,Interval?,string,string,CancellationToken)']/*" />
-        public virtual Pageable<DimensionValueList> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DimensionValueListItem> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -204,7 +204,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DimensionValueList.DeserializeDimensionValueList, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
         }
 
         /// <summary>
