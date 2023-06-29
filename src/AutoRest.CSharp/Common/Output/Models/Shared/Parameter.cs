@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -19,10 +20,15 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
+        public Parameter ToRequired()
+        {
+            return this with { DefaultValue = null };
+        }
+
         public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {
-            // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional
-            var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired ? Validation.None : Validation.AssertNotNull;
+            // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
+            var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.Type.IsNullable ? Validation.None : Validation.AssertNotNull;
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
@@ -78,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."
-                : BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
+                : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (!type.IsFrameworkType || values == null)
             {
@@ -86,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
         }
 
         public static Validation GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -158,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+                BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
 
             return requestParameter.Schema switch
             {
@@ -173,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
                 return string.IsNullOrEmpty(allowedValues)
                     ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
             }
         }
 
@@ -190,12 +196,23 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? ParseConstant(RequestParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.Schema is ConstantSchema constantSchema)
+            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
             {
                 return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
             }
 
             return null;
+        }
+
+        public static readonly IEqualityComparer<Parameter> EqualityComparerByType = new ParameterByTypeEqualityComparer();
+        private class ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y)
+            {
+                return Object.Equals(x?.Type, y?.Type);
+            }
+
+            public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
     }
 

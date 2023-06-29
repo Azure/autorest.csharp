@@ -22,9 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + (string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+            return BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.") + (string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
                 string.Empty :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDescription(ObjectSchema.Language.Default.Description)}");
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}");
         }
 
         private string _clientPrefix;

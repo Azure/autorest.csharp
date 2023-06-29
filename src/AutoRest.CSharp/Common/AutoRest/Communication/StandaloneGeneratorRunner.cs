@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             string? projectPath = null;
             string outputPath;
+            string sampleOutputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
             if (options.Standalone is not null)
             {
@@ -33,45 +34,46 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 projectPath = options.ProjectPath!;
                 outputPath = Path.Combine(projectPath, "Generated");
             }
+            sampleOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated", "Samples");
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
-            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath));
+            LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
-            var cadlInputFile = Path.Combine(outputPath, "cadl.json");
+            var tspInputFile = Path.Combine(outputPath, "tspCodeModel.json");
 
             GeneratedCodeWorkspace workspace;
-            if (File.Exists(cadlInputFile))
+            if (File.Exists(tspInputFile))
             {
-                var json = await File.ReadAllTextAsync(cadlInputFile);
-                var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
+                var json = await File.ReadAllTextAsync(tspInputFile);
+                var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
-                    // TODO - add support for DataFactoryExpression lookup
-                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, outputPath, false);
+                    // TODO - add support for DataFactoryElement lookup
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
             else if (File.Exists(codeModelInputPath))
             {
                 var yaml = await File.ReadAllTextAsync(codeModelInputPath);
-                var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(yaml));
-                workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+                var codeModel = CodeModelSerialization.DeserializeCodeModel(yaml);
+                workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    var codeModel = await codeModelTask;
-                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
                 }
             }
             else
             {
-                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor tspCodeModel.json exist in {outputPath} folder.");
             }
 
             if (options.ClearOutputFolder)
             {
-                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "cadl.json" };
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
+                DeleteDirectory(sampleOutputPath, keepFiles);
             }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
@@ -90,6 +92,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
         private static void DeleteDirectory(string path, string[] keepFiles)
         {
             var directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+            {
+                return;
+            }
             foreach (FileInfo file in directoryInfo.GetFiles())
             {
                 if (keepFiles.Contains(file.Name))
@@ -176,6 +182,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
+                    WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ProtocolMethodList, Configuration.ProtocolMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
@@ -230,7 +237,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return null;
         }
 
-        internal static void LoadConfiguration(string? projectPath, string outputPath, string json)
+        internal static void LoadConfiguration(string? projectPath, string outputPath, string? existingProjectFolder, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -254,8 +261,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
-                root.GetProperty(nameof(Configuration.Namespace)).GetString(),
-                root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
+                root.GetProperty(nameof(Configuration.Namespace)).GetString()!,
+                root.GetProperty(nameof(Configuration.LibraryName)).GetString()!,
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
                 ReadOption(root, Configuration.Options.AzureArm),
@@ -268,13 +275,17 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 ReadOption(root, Configuration.Options.GenerateModelFactory),
+                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
+                ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
+                existingProjectFolder,
                 protocolMethods,
                 suppressAbstractBaseClasses,
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
+                ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
             );

@@ -5,14 +5,15 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class CadlInputModelPropertyConverter : JsonConverter<InputModelProperty>
+    internal sealed class TypeSpecInputModelPropertyConverter : JsonConverter<InputModelProperty>
     {
-        private readonly CadlReferenceHandler _referenceHandler;
+        private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public CadlInputModelPropertyConverter(CadlReferenceHandler referenceHandler)
+        public TypeSpecInputModelPropertyConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.Common.Input
             description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetDefaultValue(propertyType));
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetSerializationFormat(propertyType));
             if (id != null)
             {
                 resolver.AddReference(id, property);
@@ -64,19 +65,23 @@ namespace AutoRest.CSharp.Common.Input
             return property;
         }
 
-        private static InputConstant? GetDefaultValue(InputType propertyType)
+        private static SerializationFormat GetSerializationFormat(InputType propertyType)
         {
-            if (propertyType is not InputLiteralType literalType)
+            InputTypeKind? typeKind = propertyType switch
             {
-                return null;
-            }
+                InputPrimitiveType primitiveType => primitiveType.Kind,
+                _ => null
+            };
 
-            if (literalType.LiteralValueType is InputPrimitiveType { Kind: InputTypeKind.Boolean or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128 or InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.String } primitiveType)
+            if (typeKind is null)
+                return SerializationFormat.Default;
+
+            return typeKind switch
             {
-                return new InputConstant(literalType.Value, primitiveType);
-            }
-
-            throw new Exception($"Unsupported literal value type: {literalType.LiteralValueType}");
+                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
+                _ => SerializationFormat.Default
+            };
         }
     }
 }

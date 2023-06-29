@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 contextualParameterMappings.Remove(result);
             if (result is null && pathParameter.Type.IsEnum)
             {
-                foreach (var keySegment in requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type)))
+                foreach (var keySegment in requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type) && s.IsConstant))
                 {
                     var keyParam = keySegment.Type.Name.ToVariableName();
                     return new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, Literal(keySegment.ConstantValue), Enumerable.Empty<string>());

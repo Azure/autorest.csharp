@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
@@ -45,9 +44,6 @@ namespace AutoRest.CSharp.Common.Input
                 ApiVersions: GetApiVersions(codeModel),
                 Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
-
-        public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
-            => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
             => operationGroups.Select(CreateClient).ToList();
@@ -131,7 +127,7 @@ namespace AutoRest.CSharp.Common.Input
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy is {} groupedBy ? _parametersCache[groupedBy]() : null,
+            GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
             Kind: GetOperationParameterKind(input),
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
@@ -141,7 +137,8 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            FlattenedBodyProperty: input is VirtualParameter { Schema: not ConstantSchema, TargetProperty: {} property } ? CreateProperty(property) : null
+            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
+            SerializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -247,7 +244,7 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
+                DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName);
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
@@ -370,7 +367,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
+            ConstantSchema constantSchema => CreateLiteralType(constantSchema, format, modelsCache),
 
             CredentialSchema => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
@@ -378,21 +375,44 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Uri,
 
-            ChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
-            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
+            ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
             ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
             DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
+            AnySchema when IsDPG => InputIntrinsicType.Unknown,
+            AnyObjectSchema when IsDPG => InputIntrinsicType.Unknown,
+
             _ => new CodeModelType(schema)
         };
 
-        public static InputEnumType CreateEnumType(ChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+        private static InputLiteralType CreateLiteralType(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
+        {
+            var valueType = CreateType(constantSchema.ValueType, format, modelsCache);
+            // normalize the value, because the "value" coming from the code model is always a string
+            var kind = valueType switch
+            {
+                InputPrimitiveType primitiveType => primitiveType.Kind,
+                InputEnumType enumType => enumType.EnumValueType.Kind,
+                _ => throw new InvalidCastException($"Unknown value type {valueType.GetType()} for literal types")
+            };
+            var rawValue = constantSchema.Value.Value;
+            object normalizedValue = kind switch
+            {
+                InputTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
+                InputTypeKind.Int32 => int.Parse(rawValue.ToString()!),
+                InputTypeKind.Int64 => long.Parse(rawValue.ToString()!),
+                InputTypeKind.Float32 => float.Parse(rawValue.ToString()!),
+                InputTypeKind.Float64 => double.Parse(rawValue.ToString()!),
+                _ => rawValue
+            };
 
-        public static InputEnumType CreateEnumType(SealedChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false);
+            return new InputLiteralType("Literal", valueType, normalizedValue);
+        }
 
-        private static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
+        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,

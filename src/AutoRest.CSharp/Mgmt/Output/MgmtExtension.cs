@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var rawType = ResourceTypeSegment.ParseRequestPath(requestPath);
             var segmentsInResourceType = new HashSet<Segment>(resource.ResourceType);
             // compare and find the new segments in rawType
-            return rawType.Where(segment => !segmentsInResourceType.Contains(segment));
+            return rawType.Where(segment => segment.IsConstant && !segmentsInResourceType.Contains(segment));
         }
 
         // This piece of logic is duplicated in MgmtExtensionWriter, to be refactored

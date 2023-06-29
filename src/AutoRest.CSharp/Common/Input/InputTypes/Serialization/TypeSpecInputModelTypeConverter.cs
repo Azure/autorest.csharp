@@ -8,11 +8,11 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class CadlInputModelTypeConverter : JsonConverter<InputModelType>
+    internal sealed class TypeSpecInputModelTypeConverter : JsonConverter<InputModelType>
     {
-        private readonly CadlReferenceHandler _referenceHandler;
+        private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public CadlInputModelTypeConverter(CadlReferenceHandler referenceHandler)
+        public TypeSpecInputModelTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Input
             string? deprecated = null;
             string? description = null;
             string? usageString = null;
-            string? discriminatorPropertyValue = null;
+            string? discriminatorPropertyName = null;
             string? discriminatorValue = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyValue)
+                    || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
                     || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
 
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyValue, baseModel, properties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, resolver);
         }
 
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)

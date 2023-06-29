@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -14,57 +15,54 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
+        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
+        public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
         {
             _existingType = existingType;
-            _propertyMappings = new Dictionary<string, ISymbol>();
+            _propertyMappings = new();
+            _serializationMappings = new(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
-                if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
+                string[]? serializationPath = null;
+                (string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
+                foreach (var attributeData in member.GetAttributes())
                 {
-                    _propertyMappings.Add(schemaMemberName, member);
-                }
-            }
-
-            if (existingType != null)
-            {
-                foreach (var attributeData in existingType.GetAttributes())
-                {
-                    if (SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, modelAttribute))
+                    // handle CodeGenMember attribute
+                    if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
-                        foreach (var namedArgument in attributeData.NamedArguments)
-                        {
-                            switch (namedArgument.Key)
-                            {
-                                case nameof(CodeGenModelAttribute.Usage):
-                                    Usage = ToStringArray(namedArgument.Value.Values);
-                                    break;
-                                case nameof(CodeGenModelAttribute.Formats):
-                                    Formats = ToStringArray(namedArgument.Value.Values);
-                                    break;
-                            }
-                        }
+                        _propertyMappings.Add(schemaMemberName, member);
+                    }
+                    // handle CodeGenMemberSerialization attribute
+                    if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var pathResult))
+                    {
+                        serializationPath = pathResult;
+                    }
+                    // handle CodeGenMemberSerializationHooks attribute
+                    if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var hooks))
+                    {
+                        serializationHooks = hooks;
                     }
                 }
+                if (serializationPath != null || serializationHooks != null)
+                {
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
+                }
             }
-        }
 
-        private string[]? ToStringArray(ImmutableArray<TypedConstant> values)
-        {
-            if (values.IsDefaultOrEmpty)
+            foreach (var attributeData in existingType.GetAttributes())
             {
-                return null;
+                // handle CodeGenModel attribute
+                if (codeGenAttributes.TryGetCodeGenModelAttributeValue(attributeData, out var usage, out var formats))
+                {
+                    Usage = usage;
+                    Formats = formats;
+                }
             }
-
-            return values
-                .Select(v => (string?) v.Value)
-                .OfType<string>()
-                .ToArray();
         }
 
         public SourceMemberMapping? GetForMember(string name)
@@ -80,6 +78,22 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return null;
+        }
+
+        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
+        {
+            if (symbol == null)
+                return null;
+
+            if (_serializationMappings.TryGetValue(symbol, out var serialization))
+                return serialization;
+
+            return null;
+        }
+
+        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
+        {
+            return _serializationMappings.Values;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

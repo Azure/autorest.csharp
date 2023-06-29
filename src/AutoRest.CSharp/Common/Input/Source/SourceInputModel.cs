@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -14,25 +14,22 @@ namespace AutoRest.CSharp.Input.Source
     public class SourceInputModel
     {
         private readonly Compilation _compilation;
-        private readonly INamedTypeSymbol _typeAttribute;
-        private readonly INamedTypeSymbol _modelAttribute;
-        private readonly INamedTypeSymbol _clientAttribute;
-        private readonly INamedTypeSymbol _schemaMemberNameAttribute;
+        private readonly CompilationInput? _existingCompilation;
+        private readonly CodeGenAttributes _codeGenAttributes;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
-        public SourceInputModel(Compilation compilation)
+        public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
         {
             _compilation = compilation;
-            _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
-            _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
-            _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
-            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
+            _existingCompilation = existingCompilation;
+
+            _codeGenAttributes = new CodeGenAttributes(compilation);
 
             IAssemblySymbol assembly = _compilation.Assembly;
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
-                foreach (var type in GetSymbols(module.GlobalNamespace))
+                foreach (var type in SourceInputHelper.GetSymbols(module.GlobalNamespace))
                 {
                     if (type is INamedTypeSymbol namedTypeSymbol && TryGetName(type, out var schemaName))
                     {
@@ -51,9 +48,17 @@ namespace AutoRest.CSharp.Input.Source
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
         }
 
-        public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
+        public ModelTypeMapping? CreateForModel(INamedTypeSymbol? symbol)
         {
-            return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
+            if (symbol == null)
+                return null;
+
+            return new ModelTypeMapping(_codeGenAttributes, symbol);
+        }
+
+        internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
+        {
+            return _existingCompilation?.FindMethod(namespaceName, typeName, methodName, parameters);
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)
@@ -75,7 +80,7 @@ namespace AutoRest.CSharp.Input.Source
                 var attributeType = attribute.AttributeClass;
                 while (attributeType != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(attributeType, _clientAttribute))
+                    if (SymbolEqualityComparer.Default.Equals(attributeType, _codeGenAttributes.CodeGenClientAttribute))
                     {
                         INamedTypeSymbol? parentClientType = null;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
@@ -107,7 +112,7 @@ namespace AutoRest.CSharp.Input.Source
                 var type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(type, _typeAttribute))
+                    if (SymbolEqualityComparer.Default.Equals(type, _codeGenAttributes.CodeGenTypeAttribute))
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {
@@ -121,36 +126,6 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return name != null;
-        }
-
-        internal static bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
-        {
-            name = null;
-
-            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
-
-            if (attribute?.ConstructorArguments.Length > 0)
-            {
-                name = attribute.ConstructorArguments[0].Value as string;
-            }
-
-            return name != null;
-        }
-
-        private IEnumerable<ITypeSymbol> GetSymbols(INamespaceSymbol namespaceSymbol)
-        {
-            foreach (var childNamespaceSymbol in namespaceSymbol.GetNamespaceMembers())
-            {
-                foreach (var symbol in GetSymbols(childNamespaceSymbol))
-                {
-                    yield return symbol;
-                }
-            }
-
-            foreach (INamedTypeSymbol symbol in namespaceSymbol.GetTypeMembers())
-            {
-                yield return symbol;
-            }
         }
     }
 }

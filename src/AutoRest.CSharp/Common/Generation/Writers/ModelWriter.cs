@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
-using Humanizer;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -91,14 +89,38 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)
+        {
+            writer.AppendRawIf("public ", modifiers.HasFlag(FieldModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(FieldModifiers.Internal))
+                .AppendRawIf("protected ", modifiers.HasFlag(FieldModifiers.Protected))
+                .AppendRawIf("private ", modifiers.HasFlag(FieldModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
+                .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly))
+                .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const));
+        }
+
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
-            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-            if (property.DefaultValue != null)
+
+            // write getter
+            writer.AppendRaw("{");
+            if (property.GetterModifiers is { } getterModifiers)
+                WriteFieldModifiers(writer, getterModifiers);
+            writer.AppendRaw("get;");
+            // writer setter
+            if (!property.IsReadOnly)
             {
-                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
+                if (property.SetterModifiers is { } setterModifiers)
+                    WriteFieldModifiers(writer, setterModifiers);
+                writer.AppendRaw("set;");
+            }
+            writer.AppendRaw("}");
+            if (property.InitializationValue != null)
+            {
+                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
             }
 
             writer.Line();
@@ -211,7 +233,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type, property.SerializationFormat);
             if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
             {
                 return $"{property.PropertyDescription}{binaryDataExtraDescription}";
@@ -219,33 +241,53 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
         }
 
-        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
         {
             if (type.IsFrameworkType)
             {
                 if (type.FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("this property");
+                    return ConstructBinaryDataDescription("this property", serializationFormat);
                 }
                 if (TypeFactory.IsList(type) &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the element of this property");
+                    return ConstructBinaryDataDescription("the element of this property", serializationFormat);
                 }
                 if (TypeFactory.IsDictionary(type) &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the value of this property");
+                    return ConstructBinaryDataDescription("the value of this property", serializationFormat);
                 }
             }
             return $"";
         }
 
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
         {
-            return $@"
+            switch (serializationFormat)
+            {
+                case SerializationFormat.Bytes_Base64Url: //intentional fall through
+                case SerializationFormat.Bytes_Base64:
+                    return $@"
+<para>
+To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
+The byte[] will be serialized to a Base64 encoded string.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
+<description>Creates a payload of ""AQID"".</description>
+</item>
+</list>
+</para>";
+
+                default:
+                    return $@"
 <para>
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
@@ -273,6 +315,7 @@ Examples:
 </item>
 </list>
 </para>";
+            }
         }
         private string GetAbstract(ObjectType schema)
         {
@@ -322,23 +365,6 @@ Examples:
                         }
 
                         writer.Line($";");
-                    }
-
-                    //TODO make the proper initializer here instead
-                    if (schema is ModelTypeProvider modelTypeProvider)
-                    {
-                        foreach (var parameter in constructor.Signature.Parameters)
-                        {
-                            if (modelTypeProvider.Fields.TryGetFieldByParameter(parameter, out var field))
-                            {
-                                if (!field.IsField)
-                                    continue;
-                                writer
-                                    .Append($"{field.Name:I} = {parameter.Name:I}")
-                                    .WriteConversion(parameter.Type, field.Type)
-                                    .LineRaw(";");
-                            }
-                        }
                     }
                 }
                 writer.Line();

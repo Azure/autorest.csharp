@@ -770,8 +770,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
+            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"){GetConfigureAwait(async)};");
 
@@ -818,6 +817,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
+            _writer.RemoveTrailingComma();
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :

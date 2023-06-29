@@ -9,11 +9,11 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class CadlInputConstantConverter: JsonConverter<InputConstant>
+    internal class TypeSpecInputConstantConverter: JsonConverter<InputConstant>
     {
-        private readonly CadlReferenceHandler _referenceHandler;
+        private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public CadlInputConstantConverter(CadlReferenceHandler referenceHandler)
+        public TypeSpecInputConstantConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }

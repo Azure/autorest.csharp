@@ -10,7 +10,21 @@ namespace AutoRest.CSharp.Utilities
 {
     internal static class NamedTypeSymbolExtensions
     {
+        private const string GeneratedLibrary = "GeneratedCode";
         private static readonly SymbolDisplayFormat FullyQualifiedNameFormat = new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+
+        // TODO -- to be removed when we refactor the code of sample generator in DPG. This method duplicated the existing method TypeFactory.CreateType
+        public static CSharpType? GetCSharpType(this INamedTypeSymbol symbol, TypeFactory factory)
+        {
+            if (symbol.ContainingAssembly.Name == GeneratedLibrary)
+            {
+                return factory.GetLibraryTypeByName(symbol.Name);
+            }
+            else
+            {
+                return GetCSharpType(symbol);
+            }
+        }
 
         public static CSharpType GetCSharpType(this INamedTypeSymbol symbol)
         {
@@ -30,6 +44,30 @@ namespace AutoRest.CSharp.Utilities
             return symbol.TypeArguments.Length > 0
                 ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
                 : type;
+        }
+
+        public static bool IsSameType(this INamedTypeSymbol symbol, CSharpType type)
+        {
+            if (type.IsValueType && type.IsNullable) // for cases such as `int?`
+            {
+                if (symbol.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T)
+                    return false;
+                return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.GetNonNullable());
+            }
+
+            if (symbol.ContainingNamespace.ToString() != type.Namespace || symbol.Name != type.Name || symbol.TypeArguments.Length != type.Arguments.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < type.Arguments.Length; ++i)
+            {
+                if (!IsSameType((INamedTypeSymbol)symbol.TypeArguments[i], type.Arguments[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

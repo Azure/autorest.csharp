@@ -82,7 +82,6 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
         [typeof(SubscriptionResource)] = RequestPath.Subscription,
         [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
-        [typeof(ArmResource)] = RequestPath.Any
     };
 
     public static RequestPath GetContextualPath(Type armCoreType)

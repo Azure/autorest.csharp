@@ -189,6 +189,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
+                // SA1206: 'new' should be after static
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
+
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -277,7 +280,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return outerScope;
         }
 
-        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
+        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase, FormattableString? summaryText = null)
         {
             if (methodBase.SummaryText is { } summaryText)
             {

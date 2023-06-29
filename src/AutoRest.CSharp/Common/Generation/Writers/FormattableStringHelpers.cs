@@ -85,6 +85,28 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Reference reference, CSharpType toType)
         {
+            if (TypeFactory.IsReadWriteDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+            }
+
+            if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
+            }
+
+            if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                if (enumType.IsExtensible)
+                {
+                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                }
+                else
+                {
+                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                }
+            }
+
             var conversionMethod = GetConversionMethod(reference.Type, toType);
             if (conversionMethod == null)
             {

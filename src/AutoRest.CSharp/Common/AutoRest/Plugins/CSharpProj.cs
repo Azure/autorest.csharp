@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.28.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.32.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.4.0"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.6.0"" />
   </ItemGroup>
 ";
 
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            Configuration.Initialize(autoRest);
+            Configuration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
             var context = new BuildContext(codeModel, null);
             Execute(context.DefaultNamespace, async (filename, text) =>
@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 _coreCsProjContent += @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-alpha.20221121.1"" />
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-beta.2"" />
   </ItemGroup>";
             }
             var isTestProject = Configuration.MgmtTestConfiguration is not null;

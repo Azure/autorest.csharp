@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<InputEnumType, EnumType> AllEnumMap { get; }
 
-        private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
+        private CachedDictionary<RequestPath, HashSet<Operation>> ChildOperations { get; }
 
         private readonly InputNamespace _input;
 
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
-            ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
+            ChildOperations = new CachedDictionary<RequestPath, HashSet<Operation>>(EnsureResourceChildOperations);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
@@ -358,16 +358,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel, GetModelFactoryNamespaceOverride());
 
         private static string GetModelFactoryName()
         {
             var baseName = MgmtContext.Context.DefaultNamespace.Split('.').Last();
             if (Configuration.MgmtConfiguration.IsArmCore)
-                return baseName;
+                return "ResourceManager";
 
             return $"Arm{baseName}";
         }
+
+        private static string? GetModelFactoryNamespaceOverride() => Configuration.MgmtConfiguration.IsArmCore ? "Azure.ResourceManager.Models" : null;
 
         private bool ShouldIncludeModel(TypeProvider model)
         {
@@ -383,15 +385,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionBuilder EnsureExtensionBuilder()
         {
             var extensionOperations = new Dictionary<Type, IEnumerable<Operation>>();
+            // find the extension operations for the armcore types other than ArmResource
             foreach (var (armCoreType, extensionContextualPath) in RequestPath.ExtensionChoices)
             {
-                var shouldGenerateChilden = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
-                var operations = shouldGenerateChilden ? GetChildOperations(extensionContextualPath) : Enumerable.Empty<Operation>();
+                var operations = ShouldGenerateChildrenForType(armCoreType) ? GetChildOperations(extensionContextualPath) : Enumerable.Empty<Operation>();
                 extensionOperations.Add(armCoreType, operations);
             }
 
-            return new MgmtExtensionBuilder(extensionOperations);
+            // find the extension operations for ArmResource
+            var armResourceOperations = new Dictionary<RequestPath, IEnumerable<Operation>>();
+            foreach (var (parentRequestPath, operations) in ChildOperations)
+            {
+                if (parentRequestPath.IsParameterizedScope())
+                {
+                    armResourceOperations.Add(parentRequestPath, operations);
+                }
+            }
+
+            return new MgmtExtensionBuilder(extensionOperations, armResourceOperations);
         }
+
+        private bool ShouldGenerateChildrenForType(Type armCoreType)
+            => !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
         public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
@@ -562,9 +577,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operationSet in operationSets)
                 {
-                    var operations = GetChildOperations(operationSet.RequestPath);
                     // get the corresponding resource data
                     var originalResourcePath = operationSet.GetRequestPath();
+                    var operations = GetChildOperations(originalResourcePath);
                     var resourceData = GetResourceData(originalResourcePath);
                     if (resourceData is EmptyResourceData emptyResourceData)
                         BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, emptyResourceData);
@@ -736,7 +751,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        public IEnumerable<Operation> GetChildOperations(string requestPath)
+        public IEnumerable<Operation> GetChildOperations(RequestPath requestPath)
         {
             if (requestPath == RequestPath.Any)
                 return Enumerable.Empty<Operation>();
@@ -747,9 +762,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return Enumerable.Empty<Operation>();
         }
 
-        private Dictionary<string, HashSet<Operation>> EnsureResourceChildOperations()
+        private Dictionary<RequestPath, HashSet<Operation>> EnsureResourceChildOperations()
         {
-            var childOperations = new Dictionary<string, HashSet<Operation>>();
+            var childOperations = new Dictionary<RequestPath, HashSet<Operation>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
                 if (operationSet.IsResource())

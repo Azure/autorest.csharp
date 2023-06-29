@@ -37,7 +37,10 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 string? description = parameter.Description;
                 if (description == null)
                     description = $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false, parameter.DefaultValue == null ? null : inputParameter.DefaultValue);
+                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false)
+                {
+                    DefaultValue = parameter.DefaultValue == null ? null : inputParameter.DefaultValue
+                };
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -52,11 +55,11 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 Array.Empty<InputModelType>(),
                 null,
-                null,
-                false,
-                true);
-
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
+                null)
+            {
+                IsPropertyBag = true
+            };
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
         }
 
         protected override bool EnsureShouldValidateParameter()

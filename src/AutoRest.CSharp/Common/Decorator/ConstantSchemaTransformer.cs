@@ -5,30 +5,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class ConstantSchemaTransformer
     {
-        public static void TransformToChoice()
+        public static void Transform(CodeModel codeModel)
         {
-            var constantSchemas = new HashSet<ConstantSchema>(MgmtContext.CodeModel.Schemas.Constants);
+            var constantSchemas = new HashSet<ConstantSchema>(codeModel.Schemas.Constants);
             if (!constantSchemas.Any())
                 return;
 
             Dictionary<ConstantSchema, ChoiceSchema> convertedChoiceSchemas = new();
 
-            foreach (var operation in MgmtContext.CodeModel.OperationGroups.SelectMany(og => og.Operations))
+            foreach (var operation in codeModel.OperationGroups.SelectMany(og => og.Operations))
             {
                 // change the schema on operations (only for optional)
                 foreach (var parameter in operation.Parameters)
                 {
-                    if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
+                    if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema || ShouldSkipReplace(constantSchema))
                         continue;
 
                     var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                    parameter.Schema = choiceSchema;
+                    constantSchema.ValueType = choiceSchema;
                     operation.SignatureParameters.Add(parameter);
                 }
 
@@ -36,43 +35,40 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     foreach (var parameter in request.Parameters)
                     {
-                        if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
+                        if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema || ShouldSkipReplace(constantSchema))
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        parameter.Schema = choiceSchema;
+                        constantSchema.ValueType = choiceSchema;
                         request.SignatureParameters.Add(parameter);
                     }
                 }
 
                 // change the schema on models (optional and required)
-                foreach (var obj in MgmtContext.CodeModel.Schemas.Objects)
+                foreach (var obj in codeModel.Schemas.Objects)
                 {
                     foreach (var property in obj.Properties)
                     {
-                        if (property.Schema is not ConstantSchema constantSchema || CheckPropertyExtension(property))
+                        if (property.Schema is not ConstantSchema constantSchema || ShouldSkipReplace(constantSchema) || CheckPropertyExtension(property))
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        if (!property.IsRequired)
-                        {
-                            property.Schema = choiceSchema;
-                        }
-                        else
-                        {
-                            constantSchema.ValueType = choiceSchema;
-                        }
+                        constantSchema.ValueType = choiceSchema;
                     }
                 }
             }
 
             foreach (var choiceSchema in convertedChoiceSchemas.Values)
-                MgmtContext.CodeModel.Schemas.Choices.Add(choiceSchema);
+                codeModel.Schemas.Choices.Add(choiceSchema);
         }
+
+        // we skip this process when the underlying type of the constant is boolean
+        private static bool ShouldSkipReplace(ConstantSchema constantSchema)
+            => constantSchema.ValueType is BooleanSchema;
 
         private static bool CheckPropertyExtension(Property property)
         {
-            if (property.Extensions?.TryGetValue("x-ms-contant", out var value) ?? false)
+            if (property.Extensions?.TryGetValue("x-ms-constant", out var value) ?? false)
             {
                 return "true".Equals(value.ToString());
             }
