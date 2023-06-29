@@ -891,7 +891,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                         property.SerializedName ?? property.Name,
                                         modelType.DiscriminatorValue,
                                         property.IsRequired,
-                                        BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                        BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                     typesToExplore.Enqueue(property.Type);
                                     continue;
@@ -899,15 +899,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     property.SerializedName ?? property.Name,
-                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
+                                    BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(property.Type)),
                                     property.IsRequired,
-                                    BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                    BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                 typesToExplore.Enqueue(property.Type);
                             }
                         }
 
-                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
+                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
                     case InputListType listType:
                         typesToExplore.Enqueue(listType.ElementType);

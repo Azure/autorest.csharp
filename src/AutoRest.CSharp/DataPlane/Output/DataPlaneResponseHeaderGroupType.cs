@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
                     header.Name.ToCleanName(),
                     header.NameInResponse,
                     type,
-                    BuilderHelpers.EscapeXmlDescription(header.Description));
+                    BuilderHelpers.EscapeXmlDocDescription(header.Description));
             }
 
             DefaultName = clientName + operationName + "Headers";

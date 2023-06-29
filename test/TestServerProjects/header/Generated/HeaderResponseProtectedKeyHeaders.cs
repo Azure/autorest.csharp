@@ -17,7 +17,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary> response with header value "Content-Type": "text/html". </summary>
         public string ContentType => _response.Headers.TryGetValue("Content-Type", out string value) ? value : null;
     }
 }

@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
         public IDictionary<string, string> Tags { get; }
         /// <summary> The identity of the resource. </summary>
         public ManagedServiceIdentity Identity { get; set; }
-        /// <summary> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </summary>
+        /// <summary> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </summary>
         public PublicNetworkAccess? PublicNetworkAccess { get; set; }
         /// <summary> SasPolicy assigned to the storage account. </summary>
         public SasPolicy SasPolicy { get; set; }

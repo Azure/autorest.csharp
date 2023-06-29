@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Vaults_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -90,7 +90,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CreateOrUpdate_CreateOrUpdateAVaultWithNetworkAcls()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Vaults_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -145,7 +145,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_RetrieveAVault()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -179,7 +179,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Exists_RetrieveAVault()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -209,7 +209,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll_ListVaultsInTheSpecifiedResourceGroup()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Vaults_ListByResourceGroup" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

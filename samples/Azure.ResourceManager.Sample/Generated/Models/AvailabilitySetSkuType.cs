@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// Specifies the sku of an Availability Set. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
+    /// Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
     /// Serialized Name: AvailabilitySetSkuTypes
     /// </summary>
     internal readonly partial struct AvailabilitySetSkuType : IEquatable<AvailabilitySetSkuType>

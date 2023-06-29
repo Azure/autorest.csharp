@@ -25,7 +25,7 @@ namespace MgmtRenameRules.Models
 
         /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
         /// <param name="status">
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
         /// </param>
         /// <param name="assessmentActivityId">
@@ -69,7 +69,7 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary>
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
         /// </summary>
         public PatchOperationStatus? Status { get; }

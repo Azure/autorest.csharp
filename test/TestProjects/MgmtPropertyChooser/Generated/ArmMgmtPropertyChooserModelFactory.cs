@@ -17,7 +17,6 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyChooserModelFactory
     {
-
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -61,7 +60,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="location"> The location. </param>
         /// <param name="forceUpdateTag"> How the extension handler should be forced to update even if the extension configuration has not changed. </param>
         /// <param name="publisher"> The name of the extension handler publisher. </param>
-        /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
+        /// <param name="typePropertiesType"> Specifies the type of the extension; an example is "CustomScriptExtension". </param>
         /// <param name="typeHandlerVersion"> Specifies the version of the script handler. </param>
         /// <param name="autoUpgradeMinorVersion"> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </param>
         /// <param name="enableAutomaticUpgrade"> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </param>
@@ -94,8 +93,8 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
         /// <param name="testPrincipalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
-        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
-        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </param>
+        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
+        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
         /// <returns> A new <see cref="Models.IdentityWithRenamedProperty"/> instance for mocking. </returns>
         public static IdentityWithRenamedProperty IdentityWithRenamedProperty(string testPrincipalId = null, string tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
         {
@@ -107,8 +106,8 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of IdentityWithDifferentPropertyType. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
-        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
-        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </param>
+        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
+        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
         /// <returns> A new <see cref="Models.IdentityWithDifferentPropertyType"/> instance for mocking. </returns>
         public static IdentityWithDifferentPropertyType IdentityWithDifferentPropertyType(string principalId = null, int? tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
         {

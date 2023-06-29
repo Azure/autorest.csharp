@@ -165,7 +165,7 @@ namespace _Type.Property.Optional.Samples
                 requiredProperty = 1234,
             };
 
-            Response response = client.PutAll(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutAll(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -196,7 +196,7 @@ namespace _Type.Property.Optional.Samples
                 requiredProperty = 1234,
             };
 
-            Response response = await client.PutAllAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAllAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -240,7 +240,7 @@ namespace _Type.Property.Optional.Samples
                 requiredProperty = 1234,
             };
 
-            Response response = client.PutRequiredOnly(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutRequiredOnly(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -271,7 +271,7 @@ namespace _Type.Property.Optional.Samples
                 requiredProperty = 1234,
             };
 
-            Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelTarget
     {
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool isTspInput)
         {
-            var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
+            var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(isTspInput);
 
             foreach (var model in library.AllModels)
             {
@@ -55,8 +55,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             extensionWriter.Write();
             project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
 
+            var modelFactoryProvider = library.ModelFactory;
+            if (modelFactoryProvider != null)
+            {
+                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
+                modelFactoryWriter.Write();
+                project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
+            }
+
             await project.PostProcessAsync(new PostProcessor(
-                modelFactoryFullName: null,
+                modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }
     }

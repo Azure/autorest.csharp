@@ -68,7 +68,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href="https://aka.ms/taner"&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public async Task<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -98,7 +98,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href="https://aka.ms/taner"&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public Response<EntitiesResult> EntitiesRecognitionGeneral(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -154,7 +154,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public async Task<Response<EntityLinkingResult>> EntitiesLinkingAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -184,7 +184,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public Response<EntityLinkingResult> EntitiesLinking(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -240,7 +240,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public async Task<Response<KeyPhraseResult>> KeyPhrasesAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -270,7 +270,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public Response<KeyPhraseResult> KeyPhrases(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -326,7 +326,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public async Task<Response<LanguageResult>> LanguagesAsync(LanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -356,7 +356,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public Response<LanguageResult> Languages(LanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -412,7 +412,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public async Task<Response<SentimentResponse>> SentimentAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -442,7 +442,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
+        /// <remarks> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </remarks>
         public Response<SentimentResponse> Sentiment(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
             if (input == null)

@@ -58,7 +58,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// [Protocol Method] Send a post request with header value "User-Agent": "overwrite"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -67,7 +67,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -92,7 +92,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// [Protocol Method] Send a post request with header value "User-Agent": "overwrite"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -126,7 +126,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// [Protocol Method] Get a response with header value "User-Agent": "overwrite"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -156,7 +156,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;
+        /// [Protocol Method] Get a response with header value "User-Agent": "overwrite"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +186,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// [Protocol Method] Send a post request with header value "Content-Type": "text/html"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -195,7 +195,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -220,7 +220,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// [Protocol Method] Send a post request with header value "Content-Type": "text/html"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -229,7 +229,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -254,7 +254,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// [Protocol Method] Get a response with header value "Content-Type": "text/html"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -284,7 +284,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;
+        /// [Protocol Method] Get a response with header value "Content-Type": "text/html"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -314,7 +314,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -323,7 +323,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -349,7 +349,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -358,7 +358,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -384,7 +384,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 1 or -2
+        /// [Protocol Method] Get a response with header value "value": 1 or -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -393,7 +393,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -418,7 +418,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 1 or -2
+        /// [Protocol Method] Get a response with header value "value": 1 or -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -427,7 +427,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -452,7 +452,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -461,7 +461,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -487,7 +487,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2 
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -496,7 +496,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -522,7 +522,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 105 or -2
+        /// [Protocol Method] Get a response with header value "value": 105 or -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -531,7 +531,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -556,7 +556,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 105 or -2
+        /// [Protocol Method] Get a response with header value "value": 105 or -2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -565,7 +565,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -590,7 +590,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -599,7 +599,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -625,7 +625,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -634,7 +634,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -660,7 +660,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 0.07 or -3.0
+        /// [Protocol Method] Get a response with header value "value": 0.07 or -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -669,7 +669,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -694,7 +694,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 0.07 or -3.0
+        /// [Protocol Method] Get a response with header value "value": 0.07 or -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -703,7 +703,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -728,7 +728,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -737,7 +737,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -763,7 +763,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0
+        /// [Protocol Method] Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -772,7 +772,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -798,7 +798,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 7e120 or -3.0
+        /// [Protocol Method] Get a response with header value "value": 7e120 or -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -807,7 +807,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -832,7 +832,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: 7e120 or -3.0
+        /// [Protocol Method] Get a response with header value "value": 7e120 or -3.0
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -841,7 +841,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -866,7 +866,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false
+        /// [Protocol Method] Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -875,7 +875,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -901,7 +901,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false
+        /// [Protocol Method] Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -910,7 +910,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -936,7 +936,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: true or false
+        /// [Protocol Method] Get a response with header value "value": true or false
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -945,7 +945,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -970,7 +970,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header value &quot;value&quot;: true or false
+        /// [Protocol Method] Get a response with header value "value": true or false
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -979,7 +979,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1004,7 +1004,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1013,8 +1013,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1039,7 +1039,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1048,8 +1048,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1074,7 +1074,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;
+        /// [Protocol Method] Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1083,7 +1083,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1108,7 +1108,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;
+        /// [Protocol Method] Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1117,7 +1117,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1142,7 +1142,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1151,8 +1151,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1177,7 +1177,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1186,8 +1186,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1212,7 +1212,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;
+        /// [Protocol Method] Get a response with header values "2010-01-01" or "0001-01-01"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1221,7 +1221,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1246,7 +1246,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;
+        /// [Protocol Method] Get a response with header values "2010-01-01" or "0001-01-01"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1255,7 +1255,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1280,7 +1280,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1289,8 +1289,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1315,7 +1315,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1324,8 +1324,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1350,7 +1350,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;
+        /// [Protocol Method] Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1359,7 +1359,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1384,7 +1384,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;
+        /// [Protocol Method] Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1393,7 +1393,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1418,7 +1418,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1427,8 +1427,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1453,7 +1453,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1462,8 +1462,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1488,7 +1488,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// [Protocol Method] Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1497,7 +1497,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1522,7 +1522,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;
+        /// [Protocol Method] Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1531,7 +1531,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1556,7 +1556,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1565,8 +1565,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1591,7 +1591,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1600,8 +1600,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1626,7 +1626,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;P123DT22H14M12.011S&quot;
+        /// [Protocol Method] Get a response with header values "P123DT22H14M12.011S"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1635,7 +1635,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1660,7 +1660,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;P123DT22H14M12.011S&quot;
+        /// [Protocol Method] Get a response with header values "P123DT22H14M12.011S"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1669,7 +1669,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1694,7 +1694,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1703,8 +1703,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1730,7 +1730,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1739,8 +1739,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1766,7 +1766,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// [Protocol Method] Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1775,7 +1775,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1800,7 +1800,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;
+        /// [Protocol Method] Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1809,7 +1809,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1834,7 +1834,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1843,8 +1843,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values 'GREY' . Allowed values: "White" | "black" | "GREY". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1869,7 +1869,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null
+        /// [Protocol Method] Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1878,8 +1878,8 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values 'GREY' . Allowed values: "White" | "black" | "GREY". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1904,7 +1904,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;GREY&quot; or null
+        /// [Protocol Method] Get a response with header values "GREY" or null
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1913,7 +1913,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1938,7 +1938,7 @@ namespace header_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a response with header values &quot;GREY&quot; or null
+        /// [Protocol Method] Get a response with header values "GREY" or null
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1947,7 +1947,7 @@ namespace header_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $AutorestArtifactDirectory, $CadlEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
+param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
 
 $AutorestArtifactDirectory = Resolve-Path $AutorestArtifactDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
@@ -30,9 +30,9 @@ finally {
     Pop-Location
 }
 
-$CadlEmitterDirectory = Resolve-Path $CadlEmitterDirectory
+$typespecEmitterDirectory = Resolve-Path $typespecEmitterDirectory
 
-Push-Location $CadlEmitterDirectory
+Push-Location $typespecEmitterDirectory
 try {
     $autorestVersion = $devVersion
     $currentVersion = node -p -e "require('./package.json').version";
@@ -40,17 +40,17 @@ try {
 
     npm install @autorest/csharp@$autorestVersion --save-exact
 
-    Write-Host "Setting Cadl Emitter version to $devVersion"
+    Write-Host "Setting TypeSpec Emitter version to $devVersion"
     npm version --no-git-tag-version $devVersion | Out-Null;
 
-    Write-Host "Packing cadl emitter..."
+    Write-Host "Packing TypeSpec emitter..."
     $file = npm pack -q;
 
     Write-Host "Publishing $file on Npm..."
-    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Join-Path $CadlEmitterDirectory '.npmrc')
+    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Join-Path $typespecEmitterDirectory '.npmrc')
     npm publish $file --access public
     
-    Write-Host "##vso[task.setvariable variable=CadlEmitterVersion;isoutput=true]$devVersion"
+    Write-Host "##vso[task.setvariable variable=TypeSpecEmitterVersion;isoutput=true]$devVersion"
 }
 finally {
     Pop-Location

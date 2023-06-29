@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
         /// <param name="status">
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
         /// </param>
         /// <param name="installationActivityId">
@@ -34,11 +34,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: LastPatchInstallationSummary.maintenanceWindowExceeded
         /// </param>
         /// <param name="rebootStatus">
-        /// The reboot status of the machine after the patch operation. It will be in &quot;NotNeeded&quot; status if reboot is not needed after the patch operation. &quot;Required&quot; will be the status once the patch is applied and machine is required to reboot. &quot;Started&quot; will be the reboot status when the machine has started to reboot. &quot;Failed&quot; will be the status if the machine is failed to reboot. &quot;Completed&quot; will be the status once the machine is rebooted successfully
+        /// The reboot status of the machine after the patch operation. It will be in "NotNeeded" status if reboot is not needed after the patch operation. "Required" will be the status once the patch is applied and machine is required to reboot. "Started" will be the reboot status when the machine has started to reboot. "Failed" will be the status if the machine is failed to reboot. "Completed" will be the status once the machine is rebooted successfully
         /// Serialized Name: LastPatchInstallationSummary.rebootStatus
         /// </param>
         /// <param name="notSelectedPatchCount">
-        /// The number of all available patches but not going to be installed because it didn&apos;t match a classification or inclusion list entry.
+        /// The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry.
         /// Serialized Name: LastPatchInstallationSummary.notSelectedPatchCount
         /// </param>
         /// <param name="excludedPatchCount">
@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary>
-        /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+        /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
         /// </summary>
         public PatchOperationStatus? Status { get; }
@@ -106,12 +106,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public bool? MaintenanceWindowExceeded { get; }
         /// <summary>
-        /// The reboot status of the machine after the patch operation. It will be in &quot;NotNeeded&quot; status if reboot is not needed after the patch operation. &quot;Required&quot; will be the status once the patch is applied and machine is required to reboot. &quot;Started&quot; will be the reboot status when the machine has started to reboot. &quot;Failed&quot; will be the status if the machine is failed to reboot. &quot;Completed&quot; will be the status once the machine is rebooted successfully
+        /// The reboot status of the machine after the patch operation. It will be in "NotNeeded" status if reboot is not needed after the patch operation. "Required" will be the status once the patch is applied and machine is required to reboot. "Started" will be the reboot status when the machine has started to reboot. "Failed" will be the status if the machine is failed to reboot. "Completed" will be the status once the machine is rebooted successfully
         /// Serialized Name: LastPatchInstallationSummary.rebootStatus
         /// </summary>
         public RebootStatus? RebootStatus { get; }
         /// <summary>
-        /// The number of all available patches but not going to be installed because it didn&apos;t match a classification or inclusion list entry.
+        /// The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry.
         /// Serialized Name: LastPatchInstallationSummary.notSelectedPatchCount
         /// </summary>
         public int? NotSelectedPatchCount { get; }

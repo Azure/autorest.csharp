@@ -48,7 +48,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -57,7 +57,7 @@ namespace ServiceVersionOverride
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
+        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -82,7 +82,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -91,7 +91,7 @@ namespace ServiceVersionOverride
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: &quot;2.0&quot;. </param>
+        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

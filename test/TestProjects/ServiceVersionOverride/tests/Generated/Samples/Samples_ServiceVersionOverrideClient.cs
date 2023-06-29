@@ -35,7 +35,7 @@ namespace ServiceVersionOverride.Samples
         {
             var client = new ServiceVersionOverrideClient();
 
-            Response response = client.Operation("<notApiVersionEnum>", new RequestContext());
+            Response response = client.Operation("<notApiVersionEnum>");
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +55,7 @@ namespace ServiceVersionOverride.Samples
         {
             var client = new ServiceVersionOverrideClient();
 
-            Response response = await client.OperationAsync("<notApiVersionEnum>", new RequestContext());
+            Response response = await client.OperationAsync("<notApiVersionEnum>");
             Console.WriteLine(response.Status);
         }
     }

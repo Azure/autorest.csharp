@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         public int? PlatformFaultDomain { get; set; }
         /// <summary>
-        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to &apos;true&apos; when not provided.
+        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
         /// Serialized Name: DedicatedHostUpdate.properties.autoReplaceOnFailure
         /// </summary>
         public bool? AutoReplaceOnFailure { get; set; }

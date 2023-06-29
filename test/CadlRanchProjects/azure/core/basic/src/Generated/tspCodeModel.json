@@ -1,0 +1,1261 @@
+{
+ "$id": "1",
+ "Name": "_Specs_.Azure.Core.Basic",
+ "Description": "Illustrates bodies templated with Azure Core",
+ "ApiVersions": [
+  "2022-12-01-preview"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "User",
+   "Namespace": "_Specs_.Azure.Core.Basic",
+   "Description": "Details about a user.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The user's id.",
+     "Type": {
+      "$id": "4",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The user's name.",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "orders",
+     "SerializedName": "orders",
+     "Description": "The user's order list",
+     "Type": {
+      "$id": "8",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "9",
+       "Name": "UserOrder",
+       "Namespace": "_Specs_.Azure.Core.Basic",
+       "Description": "UserOrder for testing list with expand.",
+       "IsNullable": false,
+       "Usage": "RoundTrip",
+       "Properties": [
+        {
+         "$id": "10",
+         "Name": "id",
+         "SerializedName": "id",
+         "Description": "The user's id.",
+         "Type": {
+          "$id": "11",
+          "Name": "int32",
+          "Kind": "Int32",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": true,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "12",
+         "Name": "userId",
+         "SerializedName": "userId",
+         "Description": "The user's id.",
+         "Type": {
+          "$id": "13",
+          "Name": "int32",
+          "Kind": "Int32",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "14",
+         "Name": "detail",
+         "SerializedName": "detail",
+         "Description": "The user's order detail",
+         "Type": {
+          "$id": "15",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        }
+       ]
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "16",
+     "Name": "etag",
+     "SerializedName": "etag",
+     "Description": "The entity tag for this resource.",
+     "Type": {
+      "$id": "17",
+      "Name": "eTag",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "9"
+  },
+  {
+   "$id": "18",
+   "Name": "CustomPageUser",
+   "Namespace": "Azure.Core.Foundations",
+   "Description": "Paged collection of User items",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "19",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The User items on this page",
+     "Type": {
+      "$id": "20",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "21",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "22",
+      "Name": "ResourceLocation",
+      "Kind": "Uri",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "23",
+   "Name": "PagedUser",
+   "Namespace": "Azure.Core",
+   "Description": "Paged collection of User items",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "24",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The User items on this page",
+     "Type": {
+      "$id": "25",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "26",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "27",
+      "Name": "ResourceLocation",
+      "Kind": "Uri",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "28",
+   "Name": "UserListResults",
+   "Namespace": "_Specs_.Azure.Core.Basic",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "29",
+     "Name": "items",
+     "SerializedName": "items",
+     "Description": "List of items.",
+     "Type": {
+      "$id": "30",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "31",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "Link to fetch more items.",
+     "Type": {
+      "$id": "32",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "33",
+   "Name": "BasicClient",
+   "Description": "Illustrates bodies templated with Azure Core",
+   "Operations": [
+    {
+     "$id": "34",
+     "Name": "createOrUpdate",
+     "ResourceName": "User",
+     "Summary": "Adds a user or updates a user's fields.",
+     "Description": "Creates or updates a User",
+     "Parameters": [
+      {
+       "$id": "35",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "36",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "37",
+        "Type": {
+         "$id": "38",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "39",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$id": "42",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-12-01-preview"
+       }
+      },
+      {
+       "$id": "43",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Description": "The user's id.",
+       "Type": {
+        "$id": "44",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "45",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "This request has a JSON Merge Patch body.",
+       "Type": {
+        "$id": "46",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "47",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "application/merge-patch+json",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "46"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "49",
+       "Name": "resource",
+       "NameInRequest": "resource",
+       "Description": "The resource instance.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "50",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "51",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "52",
+        "Type": {
+         "$ref": "51"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "53",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "54",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users/{id}",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "55",
+     "Name": "createOrReplace",
+     "ResourceName": "User",
+     "Summary": "Adds a user or replaces a user's fields.",
+     "Description": "Creates or replaces a User",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "56",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Description": "The user's id.",
+       "Type": {
+        "$id": "57",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "58",
+       "Name": "resource",
+       "NameInRequest": "resource",
+       "Description": "The resource instance.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "59",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "60",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "61",
+        "Type": {
+         "$ref": "60"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "62",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "63",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "64",
+        "Type": {
+         "$ref": "63"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "65",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "66",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users/{id}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "67",
+     "Name": "get",
+     "ResourceName": "User",
+     "Summary": "Gets a user.",
+     "Description": "Gets a User",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "68",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Description": "The user's id.",
+       "Type": {
+        "$id": "69",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "70",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "71",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "72",
+        "Type": {
+         "$ref": "71"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "73",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users/{id}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "74",
+     "Name": "list",
+     "ResourceName": "User",
+     "Summary": "Lists all users.",
+     "Description": "Lists all Users",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "75",
+       "Name": "top",
+       "NameInRequest": "top",
+       "Description": "The number of result items to return.",
+       "Type": {
+        "$id": "76",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "77",
+       "Name": "skip",
+       "NameInRequest": "skip",
+       "Description": "The number of result items to skip.",
+       "Type": {
+        "$id": "78",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "79",
+       "Name": "maxpagesize",
+       "NameInRequest": "maxpagesize",
+       "Description": "The maximum number of result items per page.",
+       "Type": {
+        "$id": "80",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "81",
+       "Name": "orderby",
+       "NameInRequest": "orderby",
+       "Description": "Expressions that specify the order of returned results.",
+       "Type": {
+        "$id": "82",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "83",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "84",
+       "Name": "filter",
+       "NameInRequest": "filter",
+       "Description": "Filter the result list using the given expression.",
+       "Type": {
+        "$id": "85",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "86",
+       "Name": "select",
+       "NameInRequest": "select",
+       "Description": "Select the specified fields to be included in the response.",
+       "Type": {
+        "$id": "87",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "88",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "89",
+       "Name": "expand",
+       "NameInRequest": "expand",
+       "Description": "Expand the indicated resources into the response.",
+       "Type": {
+        "$id": "90",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "91",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "92",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "93",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "94",
+        "Type": {
+         "$ref": "93"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "95",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "18"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "96",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "97",
+     "Name": "listWithPage",
+     "ResourceName": "Basic",
+     "Description": "List with Azure.Core.Page<>.",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "98",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "99",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "100",
+        "Type": {
+         "$ref": "99"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "101",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "23"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/page",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "102",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "103",
+     "Name": "listWithCustomPageModel",
+     "ResourceName": "Basic",
+     "Description": "List with custom page model.",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "104",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "105",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "106",
+        "Type": {
+         "$ref": "105"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "107",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "28"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/custom-page",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "108",
+      "NextLinkName": "nextLink",
+      "ItemName": "items"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "109",
+     "Name": "delete",
+     "ResourceName": "User",
+     "Summary": "Deletes a user.",
+     "Description": "Deletes a User",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "110",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Description": "The user's id.",
+       "Type": {
+        "$id": "111",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "112",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "113",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "114",
+        "Type": {
+         "$ref": "113"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "115",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "DELETE",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users/{id}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "116",
+     "Name": "export",
+     "ResourceName": "Basic",
+     "Summary": "Exports a user.",
+     "Description": "Exports a User",
+     "Parameters": [
+      {
+       "$ref": "35"
+      },
+      {
+       "$ref": "39"
+      },
+      {
+       "$id": "117",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Description": "The user's id.",
+       "Type": {
+        "$id": "118",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "119",
+       "Name": "format",
+       "NameInRequest": "format",
+       "Description": "The format of the data.",
+       "Type": {
+        "$id": "120",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "121",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "122",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "123",
+        "Type": {
+         "$ref": "122"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "124",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/users/{id}:export",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "125"
+   },
+   "Creatable": true
+  }
+ ]
+}

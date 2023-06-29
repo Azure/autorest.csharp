@@ -46,7 +46,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +76,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
