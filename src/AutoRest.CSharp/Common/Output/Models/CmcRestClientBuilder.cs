@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.IsKeepClientDefaultValue));
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -616,13 +616,13 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
         }
 
-        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null)
+        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null, bool isKeepClientDefaultValue = false)
         {
             var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
             CSharpType type = typeOverride != null
                 ? new CSharpType(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, isNullable);
-            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
+            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory, isKeepClientDefaultValue);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>

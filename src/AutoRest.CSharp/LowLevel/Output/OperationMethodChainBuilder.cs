@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
+        private bool IsKeepClientDefaultValue { get; }
         public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             _namespaceName = namespaceName;
@@ -58,6 +59,7 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts = new List<RequestPartSource>();
 
             Operation = operation;
+            IsKeepClientDefaultValue = operation.IsKeepClientDefaultValue;
             _returnType = BuildReturnTypes();
             BuildParameters();
             _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
@@ -355,7 +357,13 @@ namespace AutoRest.CSharp.Output.Models
                         optionalRequestParameters.Add(operationParameter);
                         break;
                     case { IsRequired: true }:
-                        requiredRequestParameters.Add(operationParameter);
+                        if (Operation.IsKeepClientDefaultValue && operationParameter.DefaultValue != null)
+                        {
+                            optionalRequestParameters.Add(operationParameter);
+                        } else
+                        {
+                            requiredRequestParameters.Add(operationParameter);
+                        }
                         break;
                     default:
                         optionalRequestParameters.Add(operationParameter);
@@ -510,7 +518,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
                 : _typeFactory.CreateType(operationParameter.Type);
 
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
+            return Parameter.FromInputParameter(operationParameter, type, _typeFactory, IsKeepClientDefaultValue);
         }
 
         private void AddReference(string nameInRequest, InputParameter? operationParameter, Parameter parameter, SerializationFormat serializationFormat)

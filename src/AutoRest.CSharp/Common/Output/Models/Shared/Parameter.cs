@@ -33,13 +33,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
-        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool isKeepClientDefaultValue = false)
         {
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
-            bool keepClientDefaultValue = operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
+            bool keepClientDefaultValue = isKeepClientDefaultValue || operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
             var clientDefaultValue = operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)) : (Constant?)null;
 
             var defaultValue = keepClientDefaultValue
@@ -114,14 +114,14 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return ValidationType.None;
         }
 
-        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory, bool isKeepClientDefaultValue = false)
         {
             var name = requestParameter.CSharpName();
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
             var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
-            bool keepClientDefaultValue = isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter);
+            bool keepClientDefaultValue = isKeepClientDefaultValue || isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter);
             var defaultValue = keepClientDefaultValue
                 ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
                 : ParseConstant(requestParameter, typeFactory);
