@@ -12,7 +12,7 @@ using System.Linq;
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class TextAnalyticsModelFactory
+    public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
         /// <summary> Initializes a new instance of EntitiesResult. </summary>
         /// <param name="documents"> Response by document. </param>
