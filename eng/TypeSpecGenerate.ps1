@@ -23,7 +23,7 @@ foreach ($directory in Get-ChildItem $testEmitterPath -Directory)
     {
         Remove-Item $projectPath/Generated -Force -Recurse
     }
-    node node_modules/@typespec/compiler/cmd/tsp.js compile $projectPath/$testName.tsp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$projectPath --option @azure-tools/typespec-csharp.skipSDKGeneration=true --option @azure-tools/typespec-csharp.save-inputs=true
+    node node_modules/@typespec/compiler/entrypoints/cli.js compile $projectPath/$testName.tsp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$projectPath --option @azure-tools/typespec-csharp.skipSDKGeneration=true --option @azure-tools/typespec-csharp.save-inputs=true
     if (!$?) {
         Pop-Location
         throw "Failed to emit typespec model for $testName."
@@ -47,7 +47,7 @@ foreach ($directory in Get-ChildItem $samplePath -Directory)
      {
          Remove-Item $projectPath/Generated -Force -Recurse
      }
-    node node_modules/@typespec/compiler/cmd/tsp.js compile $projectPath/$testName.tsp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$projectPath --option @azure-tools/typespec-csharp.skipSDKGeneration=true --option @azure-tools/typespec-csharp.save-inputs=true
+    node node_modules/@typespec/compiler/entrypoints/cli.js compile $projectPath/$testName.tsp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$projectPath --option @azure-tools/typespec-csharp.skipSDKGeneration=true --option @azure-tools/typespec-csharp.save-inputs=true
     if (!$?) {
         Pop-Location
         throw "Failed to emit typespec model for $testName."
