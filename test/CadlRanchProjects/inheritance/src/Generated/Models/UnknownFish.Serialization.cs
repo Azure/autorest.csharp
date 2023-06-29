@@ -19,22 +19,22 @@ namespace _Type.Model.Inheritance.Models
             {
                 return null;
             }
-            string kind = "Unknown";
             int age = default;
+            string kind = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("age"u8))
                 {
                     age = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UnknownFish(kind, age);
+            return new UnknownFish(age, kind);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

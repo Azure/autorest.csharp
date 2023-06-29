@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of UnknownTurtle. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"></param>
         internal UnknownTurtle(string kind) : base(kind)
         {
         }

@@ -26,11 +26,11 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
+        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="requiredString"> Required string. </param>
-        internal DerivedModelWithDiscriminatorA(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, string requiredString) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase)
+        internal DerivedModelWithDiscriminatorA(string optionalPropertyOnBase, int requiredPropertyOnBase, string discriminatorProperty, string requiredString) : base(optionalPropertyOnBase, requiredPropertyOnBase, discriminatorProperty)
         {
             RequiredString = requiredString;
         }

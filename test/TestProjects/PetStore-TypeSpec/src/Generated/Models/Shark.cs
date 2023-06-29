@@ -26,10 +26,10 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="bite"> The bite of the shark. </param>
-        internal Shark(string kind, int size, string bite) : base(kind, size)
+        internal Shark(int size, string kind, string bite) : base(size, kind)
         {
             Bite = bite;
         }

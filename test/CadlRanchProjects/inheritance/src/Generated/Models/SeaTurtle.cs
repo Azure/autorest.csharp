@@ -19,7 +19,7 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of SeaTurtle. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"></param>
         /// <param name="swimmingSpeed"></param>
         internal SeaTurtle(string kind, int swimmingSpeed) : base(kind)
         {

@@ -22,17 +22,17 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
-        internal Fish(string kind, int size)
+        /// <param name="kind"> Discriminator. </param>
+        internal Fish(int size, string kind)
         {
-            Kind = kind;
             Size = size;
+            Kind = kind;
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
         /// <summary> The size of the fish. </summary>
         public int Size { get; }
+        /// <summary> Discriminator. </summary>
+        internal string Kind { get; set; }
     }
 }

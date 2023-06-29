@@ -17,10 +17,10 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of UnknownBaseModelWithDiscriminator. </summary>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        internal UnknownBaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase)
+        /// <param name="discriminatorProperty"> Discriminator. </param>
+        internal UnknownBaseModelWithDiscriminator(string optionalPropertyOnBase, int requiredPropertyOnBase, string discriminatorProperty) : base(optionalPropertyOnBase, requiredPropertyOnBase, discriminatorProperty)
         {
         }
     }

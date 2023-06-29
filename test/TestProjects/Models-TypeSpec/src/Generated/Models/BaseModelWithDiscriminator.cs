@@ -22,21 +22,21 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        internal BaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase)
+        /// <param name="discriminatorProperty"> Discriminator. </param>
+        internal BaseModelWithDiscriminator(string optionalPropertyOnBase, int requiredPropertyOnBase, string discriminatorProperty)
         {
-            DiscriminatorProperty = discriminatorProperty;
             OptionalPropertyOnBase = optionalPropertyOnBase;
             RequiredPropertyOnBase = requiredPropertyOnBase;
+            DiscriminatorProperty = discriminatorProperty;
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string DiscriminatorProperty { get; set; }
         /// <summary> Optional property on base. </summary>
         public string OptionalPropertyOnBase { get; set; }
         /// <summary> Required property on base. </summary>
         public int RequiredPropertyOnBase { get; set; }
+        /// <summary> Discriminator. </summary>
+        internal string DiscriminatorProperty { get; set; }
     }
 }

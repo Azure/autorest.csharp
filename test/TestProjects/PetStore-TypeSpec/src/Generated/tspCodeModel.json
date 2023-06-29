@@ -49,8 +49,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "8",
@@ -64,8 +63,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "10",
@@ -79,8 +77,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -95,6 +92,20 @@
    "Properties": [
     {
      "$id": "13",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "The size of the fish",
+     "Type": {
+      "$id": "14",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "15",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
@@ -102,27 +113,12 @@
      "IsReadOnly": false,
      "IsNullable": false,
      "Type": {
-      "$id": "14",
+      "$id": "16",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
-    },
-    {
-     "$id": "15",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "The size of the fish",
-     "Type": {
-      "$id": "16",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
     }
    ]
   },
@@ -150,8 +146,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -179,8 +174,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   }

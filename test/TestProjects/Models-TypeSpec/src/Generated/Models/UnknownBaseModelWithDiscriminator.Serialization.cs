@@ -19,16 +19,11 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            string discriminatorProperty = "Unknown";
             Optional<string> optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
+            string discriminatorProperty = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("discriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("optionalPropertyOnBase"u8))
                 {
                     optionalPropertyOnBase = property.Value.GetString();
@@ -39,8 +34,13 @@ namespace ModelsTypeSpec.Models
                     requiredPropertyOnBase = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("discriminatorProperty"u8))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase);
+            return new UnknownBaseModelWithDiscriminator(optionalPropertyOnBase.Value, requiredPropertyOnBase, discriminatorProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

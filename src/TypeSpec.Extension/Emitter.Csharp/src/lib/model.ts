@@ -530,23 +530,6 @@ export function getInputType(
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
-            if (discriminator) {
-                const discriminatorProperty = {
-                    Name: discriminator.propertyName,
-                    SerializedName: discriminator.propertyName,
-                    Description: "Discriminator",
-                    IsRequired: true,
-                    IsReadOnly: false,
-                    IsNullable: false,
-                    Type: {
-                        Name: "string",
-                        Kind: InputTypeKind.String,
-                        IsNullable: false
-                    } as InputPrimitiveType,
-                    IsDiscriminator: true
-                } as InputModelProperty;
-                properties.push(discriminatorProperty);
-            }
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
@@ -564,13 +547,7 @@ export function getInputType(
             models.set(name, model);
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(
-                model,
-                m.properties,
-                properties,
-                model?.DiscriminatorPropertyName ??
-                    baseModel?.DiscriminatorPropertyName
-            );
+            addModelProperties(model, m.properties, properties);
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
@@ -610,12 +587,12 @@ export function getInputType(
     function addModelProperties(
         model: InputModelType,
         inputProperties: Map<string, ModelProperty>,
-        outputProperties: InputModelProperty[],
-        discriminatorPropertyName?: string
+        outputProperties: InputModelProperty[]
     ): void {
+        let discriminatorPropertyDefined = false;
         inputProperties.forEach((value: ModelProperty, key: string) => {
             if (
-                value.name !== discriminatorPropertyName &&
+                value.name !== model.BaseModel?.DiscriminatorPropertyName &&
                 isSchemaProperty(context, value)
             ) {
                 const vis = getVisibility(program, value);
@@ -649,12 +626,34 @@ export function getInputType(
                     Description: getDoc(program, value) ?? "",
                     Type: inputType,
                     IsRequired: !value.optional,
-                    IsReadOnly: isReadOnly,
-                    IsDiscriminator: false
+                    IsReadOnly: isReadOnly
                 } as InputModelProperty;
+
+                if (name === model.DiscriminatorPropertyName) {
+                    inputProp.IsDiscriminator = true;
+                    discriminatorPropertyDefined = true;
+                }
                 outputProperties.push(inputProp);
             }
         });
+
+        if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            const discriminatorProperty = {
+                Name: model.DiscriminatorPropertyName,
+                SerializedName: model.DiscriminatorPropertyName,
+                Description: "Discriminator",
+                IsRequired: true,
+                IsReadOnly: false,
+                IsNullable: false,
+                Type: {
+                    Name: "string",
+                    Kind: InputTypeKind.String,
+                    IsNullable: false
+                } as InputPrimitiveType,
+                IsDiscriminator: true
+            } as InputModelProperty;
+            outputProperties.push(discriminatorProperty);
+        }
     }
     function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {

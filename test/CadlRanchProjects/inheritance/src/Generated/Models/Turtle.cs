@@ -20,13 +20,13 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Turtle. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"></param>
         internal Turtle(string kind)
         {
             Kind = kind;
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
     }
 }

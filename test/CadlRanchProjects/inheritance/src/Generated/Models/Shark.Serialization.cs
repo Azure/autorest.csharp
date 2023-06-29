@@ -16,10 +16,10 @@ namespace _Type.Model.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
             writer.WriteEndObject();
         }
 
@@ -29,22 +29,22 @@ namespace _Type.Model.Inheritance.Models
             {
                 return null;
             }
-            string kind = default;
             int age = default;
+            string kind = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("age"u8))
                 {
                     age = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Shark(kind, age);
+            return new Shark(age, kind);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

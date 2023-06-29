@@ -17,9 +17,9 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of UnknownFish. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="age"></param>
-        internal UnknownFish(string kind, int age) : base(kind, age)
+        /// <param name="kind"> Discriminator. </param>
+        internal UnknownFish(int age, string kind) : base(age, kind)
         {
         }
     }

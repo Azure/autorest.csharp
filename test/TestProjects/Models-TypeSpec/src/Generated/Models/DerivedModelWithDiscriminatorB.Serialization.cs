@@ -18,8 +18,6 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("discriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
             if (Optional.IsDefined(OptionalPropertyOnBase))
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
@@ -27,6 +25,8 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }
 
@@ -37,19 +37,14 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             int requiredInt = default;
-            string discriminatorProperty = default;
             Optional<string> optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
+            string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("discriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("optionalPropertyOnBase"u8))
@@ -62,8 +57,13 @@ namespace ModelsTypeSpec.Models
                     requiredPropertyOnBase = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("discriminatorProperty"u8))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, requiredInt);
+            return new DerivedModelWithDiscriminatorB(optionalPropertyOnBase.Value, requiredPropertyOnBase, discriminatorProperty, requiredInt);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

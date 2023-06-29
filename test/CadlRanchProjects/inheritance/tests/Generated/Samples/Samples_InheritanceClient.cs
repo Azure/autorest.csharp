@@ -323,8 +323,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -336,8 +336,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -349,8 +349,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -362,8 +362,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -383,8 +383,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = client.PutModel(RequestContent.Create(data));
@@ -399,8 +399,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = client.PutModel(RequestContent.Create(data));
@@ -415,8 +415,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = await client.PutModelAsync(RequestContent.Create(data));
@@ -431,8 +431,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = await client.PutModelAsync(RequestContent.Create(data));
@@ -458,8 +458,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetRecursiveModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -471,8 +471,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetRecursiveModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -484,8 +484,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -497,8 +497,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -518,8 +518,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = client.PutRecursiveModel(RequestContent.Create(data));
@@ -534,8 +534,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = client.PutRecursiveModel(RequestContent.Create(data));
@@ -550,8 +550,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
@@ -566,8 +566,8 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
                 age = 1234,
+                kind = "",
             };
 
             Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
@@ -593,8 +593,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -606,8 +606,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -619,8 +619,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -632,8 +632,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -654,8 +654,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -667,8 +667,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -680,8 +680,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -693,8 +693,8 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
