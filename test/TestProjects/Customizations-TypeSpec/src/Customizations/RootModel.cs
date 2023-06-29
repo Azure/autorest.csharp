@@ -6,7 +6,7 @@ namespace CustomizationsInCadl.Models
     public partial class RootModel
     {
         internal ModelToMakeInternal PropertyModelToMakeInternal { get; set; }
-        
+
         /// <summary> Enum type property to move to customization code. </summary>
         public NormalEnum? PropertyToMoveToCustomization { get; set; }
     }
