@@ -19,22 +19,22 @@ namespace PetStore.Models
             {
                 return null;
             }
-            int size = default;
             string kind = "Unknown";
+            int size = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("size"u8))
-                {
-                    size = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("size"u8))
+                {
+                    size = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new UnknownFish(size, kind);
+            return new UnknownFish(kind, size);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

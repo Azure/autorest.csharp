@@ -17,9 +17,9 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of UnknownFish. </summary>
-        /// <param name="size"> The size of the fish. </param>
         /// <param name="kind"> Discriminator. </param>
-        internal UnknownFish(int size, string kind) : base(size, kind)
+        /// <param name="size"> The size of the fish. </param>
+        internal UnknownFish(string kind, int size) : base(kind, size)
         {
         }
     }

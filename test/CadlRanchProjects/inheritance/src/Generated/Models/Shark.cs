@@ -18,9 +18,9 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="age"></param>
         /// <param name="kind"> Discriminator. </param>
-        internal Shark(int age, string kind) : base(age, kind)
+        /// <param name="age"></param>
+        internal Shark(string kind, int age) : base(kind, age)
         {
         }
     }

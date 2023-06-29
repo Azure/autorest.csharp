@@ -22,17 +22,17 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>
-        /// <param name="age"></param>
         /// <param name="kind"> Discriminator. </param>
-        internal Fish(int age, string kind)
+        /// <param name="age"></param>
+        internal Fish(string kind, int age)
         {
-            Age = age;
             Kind = kind;
+            Age = age;
         }
 
-        /// <summary> Gets or sets the age. </summary>
-        public int Age { get; set; }
         /// <summary> Discriminator. </summary>
         internal string Kind { get; set; }
+        /// <summary> Gets or sets the age. </summary>
+        public int Age { get; set; }
     }
 }

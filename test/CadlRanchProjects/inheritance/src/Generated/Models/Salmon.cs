@@ -23,12 +23,12 @@ namespace _Type.Model.Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>
-        /// <param name="age"></param>
         /// <param name="kind"> Discriminator. </param>
+        /// <param name="age"></param>
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        internal Salmon(int age, string kind, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base(age, kind)
+        internal Salmon(string kind, int age, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base(kind, age)
         {
             Friends = friends;
             Hate = hate;

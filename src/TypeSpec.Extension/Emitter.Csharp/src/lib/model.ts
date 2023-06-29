@@ -652,7 +652,8 @@ export function getInputType(
                 } as InputPrimitiveType,
                 IsDiscriminator: true
             } as InputModelProperty;
-            outputProperties.push(discriminatorProperty);
+            // put default discriminator property as the first property to keep previous behavior
+            outputProperties.unshift(discriminatorProperty);
         }
     }
     function getInputModelBaseType(m?: Model): InputModelType | undefined {

@@ -474,11 +474,27 @@
       "Properties": [
        {
         "$id": "62",
+        "Name": "discriminatorProperty",
+        "SerializedName": "discriminatorProperty",
+        "Description": "Discriminator",
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsNullable": false,
+        "Type": {
+         "$id": "63",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsDiscriminator": true
+       },
+       {
+        "$id": "64",
         "Name": "optionalPropertyOnBase",
         "SerializedName": "optionalPropertyOnBase",
         "Description": "Optional property on base",
         "Type": {
-         "$id": "63",
+         "$id": "65",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -487,34 +503,18 @@
         "IsReadOnly": false
        },
        {
-        "$id": "64",
+        "$id": "66",
         "Name": "requiredPropertyOnBase",
         "SerializedName": "requiredPropertyOnBase",
         "Description": "Required property on base",
         "Type": {
-         "$id": "65",
+         "$id": "67",
          "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
         "IsRequired": true,
         "IsReadOnly": false
-       },
-       {
-        "$id": "66",
-        "Name": "discriminatorProperty",
-        "SerializedName": "discriminatorProperty",
-        "Description": "Discriminator",
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "IsNullable": false,
-        "Type": {
-         "$id": "67",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsDiscriminator": true
        }
       ]
      },

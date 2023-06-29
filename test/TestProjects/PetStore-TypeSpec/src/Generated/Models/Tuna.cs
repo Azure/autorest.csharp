@@ -20,10 +20,10 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of Tuna. </summary>
-        /// <param name="size"> The size of the fish. </param>
         /// <param name="kind"> Discriminator. </param>
+        /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
-        internal Tuna(int size, string kind, int fat) : base(size, kind)
+        internal Tuna(string kind, int size, int fat) : base(kind, size)
         {
             Fat = fat;
         }

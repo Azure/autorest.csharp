@@ -150,20 +150,6 @@
    "Properties": [
     {
      "$id": "18",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
-      "$id": "19",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "20",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
@@ -171,12 +157,26 @@
      "IsReadOnly": false,
      "IsNullable": false,
      "Type": {
-      "$id": "21",
+      "$id": "19",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
+    },
+    {
+     "$id": "20",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
     }
    ]
   },

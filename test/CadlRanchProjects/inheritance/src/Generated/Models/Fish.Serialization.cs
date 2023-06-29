@@ -16,10 +16,10 @@ namespace _Type.Model.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 

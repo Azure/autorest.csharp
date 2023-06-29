@@ -43,10 +43,10 @@ namespace _Type.Model.Inheritance.Models
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);
             }
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
@@ -59,8 +59,8 @@ namespace _Type.Model.Inheritance.Models
             Optional<IList<Fish>> friends = default;
             Optional<IDictionary<string, Fish>> hate = default;
             Optional<Fish> partner = default;
-            int age = default;
             string kind = default;
+            int age = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friends"u8))
@@ -100,18 +100,18 @@ namespace _Type.Model.Inheritance.Models
                     partner = DeserializeFish(property.Value);
                     continue;
                 }
-                if (property.NameEquals("age"u8))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("age"u8))
+                {
+                    age = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new Salmon(age, kind, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
