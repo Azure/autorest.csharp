@@ -36,7 +36,6 @@ namespace AutoRest.CSharp.Common.Input
             InputType? parameterType = null;
             string? location = null;
             InputConstant? defaultValue = null;
-            VirtualParameter? virtualParameter = null;
             InputParameter? groupBy = null;
             string? kind = null;
             bool isRequired = false;
@@ -57,7 +56,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputParameter.Type), options, ref parameterType)
                     || reader.TryReadString(nameof(InputParameter.Location), ref location)
                     || reader.TryReadWithConverter(nameof(InputParameter.DefaultValue), options, ref defaultValue)
-                    || reader.TryReadWithConverter(nameof(InputParameter.VirtualParameter), options, ref virtualParameter)
                     || reader.TryReadWithConverter(nameof(InputParameter.GroupedBy), options, ref groupBy)
                     || reader.TryReadString(nameof(InputParameter.Kind), ref kind)
                     || reader.TryReadBoolean(nameof(InputParameter.IsRequired), ref isRequired)
@@ -96,11 +94,11 @@ namespace AutoRest.CSharp.Common.Input
                 Name: name,
                 NameInRequest: nameInRequest,
                 Description: description,
-                Type: parameterType,
+                Type: FixInputParameterType(parameterType, requestLocation),
                 Location: requestLocation,
                 DefaultValue: defaultValue,
-                VirtualParameter: virtualParameter,
                 GroupedBy: groupBy,
+                FlattenedBodyProperty: null,
                 Kind: parameterKind,
                 IsRequired: isRequired,
                 IsApiVersion: isApiVersion,
@@ -110,8 +108,7 @@ namespace AutoRest.CSharp.Common.Input
                 SkipUrlEncoding: skipUrlEncoding,
                 Explode: explode,
                 ArraySerializationDelimiter: arraySerializationDelimiter,
-                HeaderCollectionPrefix: headerCollectionPrefix,
-                SerializationFormat: GetSerializationFormat(parameterType, requestLocation));
+                HeaderCollectionPrefix: headerCollectionPrefix);
 
             if (id != null)
             {
@@ -121,22 +118,22 @@ namespace AutoRest.CSharp.Common.Input
             return parameter;
         }
 
-        private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
+        private static InputType FixInputParameterType(InputType parameterType, RequestLocation requestLocation)
         {
             if (parameterType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
             {
                 if (requestLocation == RequestLocation.Header)
                 {
-                    return SerializationFormat.DateTime_RFC7231;
+                    return InputPrimitiveType.DateTimeRFC7231;
                 }
 
                 if (requestLocation == RequestLocation.Body)
                 {
-                    return SerializationFormat.DateTime_RFC3339;
+                    return InputPrimitiveType.DateTimeRFC3339;
                 }
             }
 
-            return SerializationBuilder.GetSerializationFormat(parameterType);
+            return parameterType;
         }
     }
 }

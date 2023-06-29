@@ -93,8 +93,8 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts = clientMethodParameters.RequestParts;
             ArgumentsMap = clientMethodParameters.Arguments;
             ConversionsMap = clientMethodParameters.Conversions;
-            _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(Operation.Summary) : null;
-            _description = BuilderHelpers.EscapeXmlDescription(Operation.Description);
+            _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null;
+            _description = BuilderHelpers.EscapeXmlDocDescription(Operation.Description);
             _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility) | MethodSignatureModifiers.Virtual;
         }
@@ -608,7 +608,9 @@ namespace AutoRest.CSharp.Output.Models
                 return inner;
             }
 
-            return new IfElseStatement(NotEqual(value, Null), inner, null);
+            return type.IsCollectionType()
+                ? new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), inner, null)
+                : new IfElseStatement(NotEqual(value, Null), inner, null);
         }
 
         protected virtual bool ShouldConvenienceMethodGenerated()

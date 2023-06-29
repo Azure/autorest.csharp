@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             }
 
             DefaultName = clientPrefix + operation.Name.ToCleanName() + "Operation";
-            Description = BuilderHelpers.EscapeXmlDescription(operation.Description);
+            Description = BuilderHelpers.EscapeXmlDocDescription(operation.Description);
             DefaultAccessibility = accessibility;
         }
 

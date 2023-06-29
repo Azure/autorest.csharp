@@ -43,18 +43,27 @@ namespace AutoRest.CSharp.Output.Builders
         }
 
         public static SerializationFormat GetSerializationFormat(InputType type)
-            => type is not InputPrimitiveType primitiveType ? SerializationFormat.Default : primitiveType.Kind switch
+            => type switch
             {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                InputTypeKind.Date => SerializationFormat.Date_ISO8601,
-                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
-                InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
-                InputTypeKind.Time => SerializationFormat.Time_ISO8601,
+                InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+                InputPrimitiveType primitiveType => primitiveType.Kind switch
+                {
+                    InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+                    InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
+                    InputTypeKind.Date => SerializationFormat.Date_ISO8601,
+                    InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
+                    InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
+                    InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                    InputTypeKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
+                    InputTypeKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
+                    InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
+                    InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
+                    InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
+                    InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
+                    InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
+                    InputTypeKind.Time => SerializationFormat.Time_ISO8601,
+                    _ => SerializationFormat.Default
+                },
                 _ => SerializationFormat.Default
             };
 

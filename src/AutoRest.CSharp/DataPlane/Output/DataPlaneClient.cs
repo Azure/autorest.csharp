@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models
         public DataPlaneClient(InputClient inputClient, RestClient restClient, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = ClientBuilder.GetClientPrefix(inputClient.Name, defaultName) + ClientBuilder.GetClientSuffix();
-            Description = BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, defaultName)));
+            Description = BuilderHelpers.EscapeXmlDocDescription(ClientBuilder.CreateDescription(inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, defaultName)));
             RestClient = restClient;
         }
 

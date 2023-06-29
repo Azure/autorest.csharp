@@ -813,7 +813,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Append($"), ");
                 }
 
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.MethodName)}(");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.Create{operation.MethodName}Request(");
                 WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }

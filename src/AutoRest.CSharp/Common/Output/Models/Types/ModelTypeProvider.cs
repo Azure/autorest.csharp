@@ -21,9 +21,6 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using static Azure.Core.HttpHeader;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -61,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
-            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
+            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
         }
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
@@ -232,7 +229,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
                 parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(_inputModel.IsDefaultDiscriminator ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
+                fullParameterList.AddRange(_inputModel.IsUnknownDiscriminatorModel ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
             }
             fullParameterList.AddRange(parameters.Select(creator));
         }
@@ -242,7 +239,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var arguments = new List<ValueExpression>();
             foreach (var parameter in parametersToPassToBase)
             {
-                if (Discriminator?.SerializedName == parameter.Name && Discriminator?.Value is {} value && !_inputModel.IsDefaultDiscriminator)
+                if (Discriminator?.SerializedName == parameter.Name && Discriminator?.Value is {} value && !_inputModel.IsUnknownDiscriminatorModel)
                 {
                     arguments.Add(new FormattableStringToExpression(value.GetConstantFormattable()));
                 }
@@ -347,7 +344,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
+                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

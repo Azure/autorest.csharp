@@ -13,8 +13,8 @@ internal record InputParameter(
     InputType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
-    VirtualParameter? VirtualParameter,
     InputParameter? GroupedBy,
+    InputModelProperty? FlattenedBodyProperty,
     InputOperationParameterKind Kind,
     bool IsRequired,
     bool IsApiVersion,
@@ -24,8 +24,7 @@ internal record InputParameter(
     bool SkipUrlEncoding,
     bool Explode,
     string? ArraySerializationDelimiter,
-    string? HeaderCollectionPrefix,
-    SerializationFormat SerializationFormat)
+    string? HeaderCollectionPrefix)
 {
     public InputParameter() : this(
         Name: string.Empty,
@@ -34,7 +33,7 @@ internal record InputParameter(
         Type: new InputPrimitiveType(InputTypeKind.Object),
         Location: RequestLocation.None,
         DefaultValue: null,
-        VirtualParameter: null,
+        FlattenedBodyProperty: null,
         GroupedBy: null,
         Kind: InputOperationParameterKind.Method,
         IsRequired: false,
@@ -45,7 +44,6 @@ internal record InputParameter(
         SkipUrlEncoding: false,
         Explode: false,
         ArraySerializationDelimiter: null,
-        HeaderCollectionPrefix: null,
-        SerializationFormat: SerializationFormat.Default)
+        HeaderCollectionPrefix: null)
     { }
 }

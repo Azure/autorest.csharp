@@ -8,16 +8,12 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ModelWriter
     {
-        internal delegate void MethodBodyImplementation(CodeWriter codeWriter, ObjectType objectType);
-
         public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
@@ -102,7 +98,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
-            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            writer.WriteXmlDocumentationSummary(property.PropertyDescription);
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
 
             // write getter
@@ -128,7 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            writer.WriteXmlDocumentationSummary(property.PropertyDescription);
             using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {
                 // write getter
@@ -231,92 +227,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Line($".{property.ChildPropertyName};");
         }
 
-        private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
-        {
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type, property.SerializationFormat);
-            if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
-            {
-                return $"{property.PropertyDescription}{binaryDataExtraDescription}";
-            }
-            return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
-        }
-
-        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (type.FrameworkType == typeof(BinaryData))
-                {
-                    return ConstructBinaryDataDescription("this property", serializationFormat);
-                }
-                if (TypeFactory.IsList(type) &&
-                    type.Arguments[0].IsFrameworkType &&
-                    type.Arguments[0].FrameworkType == typeof(BinaryData))
-                {
-                    return ConstructBinaryDataDescription("the element of this property", serializationFormat);
-                }
-                if (TypeFactory.IsDictionary(type) &&
-                    type.Arguments[1].IsFrameworkType &&
-                    type.Arguments[1].FrameworkType == typeof(BinaryData))
-                {
-                    return ConstructBinaryDataDescription("the value of this property", serializationFormat);
-                }
-            }
-            return $"";
-        }
-
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
-        {
-            switch (serializationFormat)
-            {
-                case SerializationFormat.Bytes_Base64Url: //intentional fall through
-                case SerializationFormat.Bytes_Base64:
-                    return $@"
-<para>
-To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
-The byte[] will be serialized to a Base64 encoded string.
-</para>
-<para>
-Examples:
-<list type=""bullet"">
-<item>
-<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
-<description>Creates a payload of ""AQID"".</description>
-</item>
-</list>
-</para>";
-
-                default:
-                    return $@"
-<para>
-To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
-</para>
-<para>
-To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
-</para>
-<para>
-Examples:
-<list type=""bullet"">
-<item>
-<term>BinaryData.FromObjectAsJson(""foo"")</term>
-<description>Creates a payload of ""foo"".</description>
-</item>
-<item>
-<term>BinaryData.FromString(""\""foo\"""")</term>
-<description>Creates a payload of ""foo"".</description>
-</item>
-<item>
-<term>BinaryData.FromObjectAsJson(new {{ key = ""value"" }})</term>
-<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
-</item>
-<item>
-<term>BinaryData.FromString(""{{\""key\"": \""value\""}}"")</term>
-<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
-</item>
-</list>
-</para>";
-            }
-        }
         private string GetAbstract(ObjectType schema)
         {
             // Limit this change to management plane to avoid data plane affected

@@ -45,6 +45,9 @@ namespace AutoRest.CSharp.Common.Input
                 Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
+        public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
+            => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
+
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
             => operationGroups.Select(CreateClient).ToList();
 
@@ -127,7 +130,7 @@ namespace AutoRest.CSharp.Common.Input
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
+            GroupedBy: input.GroupedBy is {} groupedBy ? _parametersCache[groupedBy]() : null,
             Kind: GetOperationParameterKind(input),
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
@@ -137,8 +140,7 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
-            SerializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
+            FlattenedBodyProperty: input is VirtualParameter { Schema: not ConstantSchema, TargetProperty: {} property } ? CreateProperty(property) : null
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -412,7 +414,11 @@ namespace AutoRest.CSharp.Common.Input
             return new InputLiteralType("Literal", valueType, normalizedValue);
         }
 
-        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
+        public static InputEnumType CreateEnumType(ChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+
+        public static InputEnumType CreateEnumType(SealedChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false);
+
+        private static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,

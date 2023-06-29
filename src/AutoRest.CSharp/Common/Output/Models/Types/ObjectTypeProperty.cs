@@ -9,6 +9,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
 
@@ -16,18 +17,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType, SerializationFormat serializationFormat)
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
                   schemaProperty: null,
                   isRequired: field.IsRequired,
-                  valueType: field.ValueType,
+                  valueType: null,
                   inputModelProperty: inputModelProperty,
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: serializationFormat,
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.DefaultValue;
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -52,7 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
-            SerializationFormat = serializationFormat;
             SerializationMapping = serializationMapping;
         }
 
@@ -71,8 +70,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
-
-        public SerializationFormat SerializationFormat { get; }
 
         public FormattableString? InitializationValue { get; }
 
@@ -137,8 +134,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
-        private string? _propertyDescription;
-        public string PropertyDescription => _propertyDescription ??= Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
+        private FormattableString? _propertyDescription;
+        public FormattableString PropertyDescription => _propertyDescription ??= CreatePropertyDescription();
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
@@ -192,6 +189,94 @@ namespace AutoRest.CSharp.Output.Models.Types
             return extraDescription;
         }
 
+        private FormattableString CreatePropertyDescription()
+        {
+            var propertyDescription = Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type);
+            if (!string.IsNullOrWhiteSpace(propertyDescription))
+            {
+                return $"{propertyDescription}{binaryDataExtraDescription}";
+            }
+
+            return $"{CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly)}{binaryDataExtraDescription}";
+        }
+
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        {
+            if (!type.IsFrameworkType || InputModelProperty is null)
+            {
+                return $"";
+            }
+
+            var serializationFormat = SerializationBuilder.GetSerializationFormat(InputModelProperty.Type);
+            if (type.FrameworkType == typeof(BinaryData))
+            {
+                return ConstructBinaryDataDescription("this property", serializationFormat);
+            }
+            if (TypeFactory.IsList(type) && type.Arguments[0].IsFrameworkType && type.Arguments[0].FrameworkType == typeof(BinaryData))
+            {
+                return ConstructBinaryDataDescription("the element of this property", serializationFormat);
+            }
+            if (TypeFactory.IsDictionary(type) && type.Arguments[1].IsFrameworkType && type.Arguments[1].FrameworkType == typeof(BinaryData))
+            {
+                return ConstructBinaryDataDescription("the value of this property", serializationFormat);
+            }
+            return $"";
+        }
+
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
+        {
+            switch (serializationFormat)
+            {
+                case SerializationFormat.Bytes_Base64Url: //intentional fall through
+                case SerializationFormat.Bytes_Base64:
+                    return $@"
+<para>
+To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
+The byte[] will be serialized to a Base64 encoded string.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
+<description>Creates a payload of ""AQID"".</description>
+</item>
+</list>
+</para>";
+
+                default:
+                    return $@"
+<para>
+To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
+</para>
+<para>
+To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromObjectAsJson(""foo"")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromString(""\""foo\"""")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromObjectAsJson(new {{ key = ""value"" }})</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+<item>
+<term>BinaryData.FromString(""{{\""key\"": \""value\""}}"")</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+</list>
+</para>";
+            }
+        }
+
         private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
         {
             string updatedDescription = string.Empty;
@@ -206,8 +291,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else if (TypeFactory.IsDictionary(valueType))
                 {
-                    var objectTypes = valueType.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is ObjectType);
-                    if (objectTypes.Count() > 0)
+                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType });
+                    if (objectTypes.Any())
                     {
                         var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
                         updatedDescription = string.Join("", subDescription);

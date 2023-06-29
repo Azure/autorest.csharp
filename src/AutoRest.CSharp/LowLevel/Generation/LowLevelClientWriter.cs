@@ -55,16 +55,25 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in _client.ClientMethods)
                     {
-                        foreach (var method in clientMethod.Convenience)
+                        if (clientMethod.Convenience.Any())
                         {
-                            WriteConvenienceMethodDocumentation(_writer, method.Signature);
-                            _writer.WriteMethod(method);
-                        }
+                            WriteConvenienceMethodDocumentation(_writer, (MethodSignature)clientMethod.Convenience[0].Signature);
+                            _writer.WriteMethod(clientMethod.Convenience[0]);
+                            WriteConvenienceMethodDocumentation(_writer, (MethodSignature)clientMethod.Convenience[1].Signature);
+                            _writer.WriteMethod(clientMethod.Convenience[1]);
 
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, true);
-                        _writer.WriteMethod(clientMethod.Protocol[0]);
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, false);
-                        _writer.WriteMethod(clientMethod.Protocol[1]);
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, (MethodSignature)clientMethod.Convenience[0].Signature, true);
+                            _writer.WriteMethod(clientMethod.Protocol[0]);
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, (MethodSignature)clientMethod.Convenience[1].Signature, false);
+                            _writer.WriteMethod(clientMethod.Protocol[1]);
+                        }
+                        else
+                        {
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, null, true);
+                            _writer.WriteMethod(clientMethod.Protocol[0]);
+                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, null, false);
+                            _writer.WriteMethod(clientMethod.Protocol[1]);
+                        }
                     }
 
                     WriteSubClientFactoryMethod();
@@ -314,16 +323,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature methodSignature, bool async)
+        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature protocolMethod, MethodSignature? convenienceMethod, bool async)
         {
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(_writer, methodSignature, clientMethod, hasResponseRemarks);
-            var docRef = GetMethodSignatureString(methodSignature);
+            WriteMethodDocumentation(_writer, protocolMethod, convenienceMethod, clientMethod, hasResponseRemarks);
+            var docRef = GetMethodSignatureString(protocolMethod);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, methodSignature, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, protocolMethod, async));
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, protocolMethod, remarks, hasRequestRemarks, hasResponseRemarks);
             }
         }
 
@@ -339,7 +348,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature methodSignature)
         {
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
+            WriteMethodDocumentation(writer, methodSignature, null, clientMethod, hasResponseRemarks);
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
         }
 
@@ -367,27 +376,45 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool hasResponseRemarks)
+        private static FormattableString BuildProtocolMethodSummary(MethodSignature protocolMethod, MethodSignature? convenienceMethod)
         {
-            codeWriter.WriteMethodDocumentation(methodSignature);
+            var builder = new StringBuilder();
+            builder.AppendLine($"[Protocol Method] {protocolMethod.SummaryText}");
+            builder.AppendLine($"<list type=\"bullet\">");
+            builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+
+            if (convenienceMethod != null)
+            {
+                var convenienceDocRef = GetMethodSignatureString(convenienceMethod);
+                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+            }
+
+            builder.AppendLine($"</list>");
+            return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
+        }
+
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature protocolMethod, MethodSignature? convenienceMethod, LowLevelClientMethod clientMethod, bool hasResponseRemarks)
+        {
+            codeWriter.WriteXmlDocumentationSummary(BuildProtocolMethodSummary(protocolMethod, convenienceMethod));
+            codeWriter.WriteMethodDocumentationSignature(protocolMethod);
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
-            if (methodSignature.ReturnType == null)
+            if (protocolMethod.ReturnType == null)
             {
                 return;
             }
 
-            if (!methodSignature.ReturnType.IsFrameworkType)
+            if (!protocolMethod.ReturnType.IsFrameworkType)
             {
-                throw new InvalidOperationException($"Xml documentation generation is supported only for protocol methods. {methodSignature.ReturnType} can't be a return type of a protocol method.");
+                throw new InvalidOperationException($"Xml documentation generation is supported only for protocol methods. {protocolMethod.ReturnType} can't be a return type of a protocol method.");
             }
 
-            var returnType = methodSignature.ReturnType;
+            var returnType = protocolMethod.ReturnType;
 
             FormattableString text;
             if (clientMethod is { Operation.Paging: not null, Operation.LongRunning: not null })
             {
-                CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
+                CSharpType pageableType = protocolMethod.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
                 text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
             else if (clientMethod.Operation.Paging is not null)
@@ -412,7 +439,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                throw new InvalidOperationException($"Xml documentation generation for return type {methodSignature.ReturnType} is not supported!");
+                throw new InvalidOperationException($"Xml documentation generation for return type {protocolMethod.ReturnType} is not supported!");
             }
 
             codeWriter.WriteXmlDocumentationReturns(text);
@@ -631,7 +658,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                         property.SerializedName ?? property.Name,
                                         modelType.DiscriminatorValue,
                                         property.IsRequired,
-                                        BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                        BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                     typesToExplore.Enqueue(property.Type);
                                     continue;
@@ -639,15 +666,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     property.SerializedName ?? property.Name,
-                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
+                                    BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(property.Type)),
                                     property.IsRequired,
-                                    BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                    BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                 typesToExplore.Enqueue(property.Type);
                             }
                         }
 
-                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
+                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
                     case InputListType listType:
                         typesToExplore.Enqueue(listType.ElementType);

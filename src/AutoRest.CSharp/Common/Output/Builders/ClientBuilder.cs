@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static string CreateDescription(string description, string clientPrefix)
             => string.IsNullOrWhiteSpace(description)
                 ? $"The {clientPrefix} service client."
-                : BuilderHelpers.EscapeXmlDescription(description);
+                : BuilderHelpers.EscapeXmlDocDescription(description);
 
         public static string GetClientPrefix(string? name, string namespaceName)
         {

@@ -504,9 +504,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
     },
-    "Pagination-TypeSpec": {
+    "Pagination-Typespec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-TypeSpec\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Typespec\\src\\Generated"
     },
     "PaginationParams-LowLevel": {
       "commandName": "Project",
