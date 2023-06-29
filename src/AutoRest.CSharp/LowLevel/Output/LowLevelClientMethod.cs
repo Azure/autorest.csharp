@@ -9,7 +9,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(IReadOnlyList<Method> Convenience, IReadOnlyList<Method> Protocol, IReadOnlyList<Method> CreateRequest, ResponseClassifierType ResponseClassifier, string? ExternalDocsUrl, InputType? RequestBodyType, InputType? ResponseBodyType, bool IsPaging, bool IsLongRunning, string PagingItemName);
+    internal record LowLevelClientMethod(IReadOnlyList<Method> CreateRequest, IReadOnlyList<Method> Protocol, IReadOnlyList<Method> Convenience, ResponseClassifierType ResponseClassifier, int Order, InputOperation Operation, string? ExternalDocsUrl, InputType? RequestBodyType, InputType? ResponseBodyType);
 
     internal record LegacyMethods
     (
@@ -21,7 +21,6 @@ namespace AutoRest.CSharp.Output.Models
 
         int Order,
         InputOperation Operation,
-        LowLevelClientMethod? ProtocolMethod,
         CSharpType? ResponseType
     );
 }

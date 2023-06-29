@@ -64,20 +64,24 @@ namespace AutoRest.CSharp.Output.Models
         protected IReadOnlyDictionary<Parameter, MethodBodyStatement> ConversionsMap { get; }
         protected RequestContextExpression? CreateMessageRequestContext { get; }
 
-        protected OperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
+        protected OperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
         {
-            Operation = operation;
-            ClientDiagnosticsProperty = new ClientDiagnosticsExpression(fields.ClientDiagnosticsProperty.Declaration);
-            PipelineField = new HttpPipelineExpression(fields.PipelineField.Declaration);
-            RestClient = restClient;
+            _fields = args.Fields;
+            _clientName = args.ClientName;
+            _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
 
-            ProtocolMethodName = operation.Name.ToCleanName();
+            Operation = args.Operation;
+            ClientDiagnosticsProperty = new ClientDiagnosticsExpression(_fields.ClientDiagnosticsProperty.Declaration);
+            PipelineField = new HttpPipelineExpression(_fields.PipelineField.Declaration);
+            RestClient = args.RestClientReference;
+
+            ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";
 
-            ResponseType = statusCodeSwitchBuilder.ResponseType;
-            ProtocolMethodReturnType = statusCodeSwitchBuilder.ProtocolReturnType;
-            RestConvenienceMethodReturnType = statusCodeSwitchBuilder.RestClientConvenienceReturnType;
-            ConvenienceMethodReturnType = statusCodeSwitchBuilder.ClientConvenienceReturnType;
+            ResponseType = _statusCodeSwitchBuilder.ResponseType;
+            ProtocolMethodReturnType = _statusCodeSwitchBuilder.ProtocolReturnType;
+            RestConvenienceMethodReturnType = _statusCodeSwitchBuilder.RestClientConvenienceReturnType;
+            ConvenienceMethodReturnType = _statusCodeSwitchBuilder.ClientConvenienceReturnType;
 
             CreateMessageMethodParameters = clientMethodParameters.CreateMessage;
             ProtocolMethodParameters = clientMethodParameters.Protocol;
@@ -86,16 +90,13 @@ namespace AutoRest.CSharp.Output.Models
                     ? new RequestContextExpression(KnownParameters.RequestContext)
                     : null;
 
-            _fields = fields;
-            _clientName = clientName;
-            _statusCodeSwitchBuilder = statusCodeSwitchBuilder;
             _requestParts = clientMethodParameters.RequestParts;
             ArgumentsMap = clientMethodParameters.Arguments;
             ConversionsMap = clientMethodParameters.Conversions;
-            _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
-            _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
-            _protocolAccessibility = operation.GenerateProtocolMethod ? GetAccessibility(operation.Accessibility) : MethodSignatureModifiers.Internal;
-            ConvenienceModifiers = GetAccessibility(operation.Accessibility) | MethodSignatureModifiers.Virtual;
+            _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(Operation.Summary) : null;
+            _description = BuilderHelpers.EscapeXmlDescription(Operation.Description);
+            _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
+            ConvenienceModifiers = GetAccessibility(Operation.Accessibility) | MethodSignatureModifiers.Virtual;
         }
 
         public LowLevelClientMethod BuildDpg()
@@ -115,11 +116,11 @@ namespace AutoRest.CSharp.Output.Models
                 convenienceMethods = new[]{ BuildConvenienceMethod(convenienceMethodName, true), BuildConvenienceMethod(convenienceMethodName, false) };
             }
 
+            var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            var isPaging = Operation.Paging is not null;
-            var isLongRunning = Operation.LongRunning is not null;
-            return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, responseClassifier, Operation.ExternalDocsUrl, requestBodyType, responseBodyType, isPaging, isLongRunning, Operation.Paging?.ItemName ?? "value");
+
+            return new LowLevelClientMethod(createRequestMethods, protocolMethods, convenienceMethods, responseClassifier, order, Operation, Operation.ExternalDocsUrl, requestBodyType, responseBodyType);
         }
 
         public virtual LegacyMethods BuildLegacy()
@@ -148,7 +149,6 @@ namespace AutoRest.CSharp.Output.Models
 
                 this is LroOperationMethodsBuilder ? 2 : 0,
                 Operation,
-                null,
                 ResponseType
             );
         }

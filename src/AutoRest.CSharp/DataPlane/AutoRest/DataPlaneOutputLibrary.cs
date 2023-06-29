@@ -229,7 +229,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var restClientParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline }.Union(clientParameters).ToList();
                 var clientName = GetClientName(inputClient);
                 var clientMethodsBuilder = new ClientMethodsBuilder(inputClient.Operations, this, _typeFactory, true, true);
-                restClients.Add(inputClient, new RestClient(clientMethodsBuilder, clientParameters, restClientParameters, clientName, _defaultNamespace, _sourceInputModel));
+                var protocolMethodBuilder = ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods)
+                    ? new ClientMethodsBuilder(inputClient.Operations.Where(o => protocolMethods.Any(m => m.Equals(o.Name, StringComparison.OrdinalIgnoreCase))).ToList(), null, _typeFactory, false, false)
+                    : null;
+
+                restClients.Add(inputClient, new RestClient(clientMethodsBuilder, protocolMethodBuilder, clientParameters, restClientParameters, clientName, _defaultNamespace, _sourceInputModel));
             }
 
             return restClients;

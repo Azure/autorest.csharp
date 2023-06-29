@@ -8,8 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
@@ -66,6 +64,11 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var (operation, parameters) in operationParameters)
             {
                 var lroType = (_library as DataPlaneOutputLibrary)?.FindLongRunningOperation(operation)?.Type;
+                var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
+                    ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch(fields)
+                    : StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
+
+                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder);
 
                 if (operation.Paging is {} paging)
                 {
@@ -76,26 +79,23 @@ namespace AutoRest.CSharp.Output.Models
                         _ => Array.Empty<Parameter>()
                     };
 
-                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
                     var pagingParameters = new ClientPagingMethodParameters(parameters, createNextPageMessageMethodParameters);
 
                     yield return operation.LongRunning is { } longRunning
-                        ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, lroType, statusCodeSwitchBuilder, pagingParameters)
-                        : new PagingOperationMethodsBuilder(paging, operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, pagingParameters);
+                        ? new LroPagingOperationMethodsBuilder(args, paging, pagingParameters, longRunning, lroType)
+                        : new PagingOperationMethodsBuilder(args, paging, pagingParameters);
                 }
                 else if (operation.LongRunning is { } longRunning)
                 {
-                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
-                    yield return new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, lroType, statusCodeSwitchBuilder, parameters);
+                    yield return new LroOperationMethodsBuilder(args, parameters, longRunning, lroType);
                 }
                 else if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
                 {
-                    yield return new HeadAsBooleanOperationMethodsBuilder(operation, restClientReference, fields, clientName, parameters);
+                    yield return new HeadAsBooleanOperationMethodsBuilder(args, parameters);
                 }
                 else
                 {
-                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
-                    yield return new OperationMethodsBuilder(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, parameters);
+                    yield return new OperationMethodsBuilder(args, parameters);
                 }
             }
         }

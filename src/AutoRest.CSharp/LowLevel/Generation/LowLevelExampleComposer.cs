@@ -188,9 +188,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine();
             }
 
-            if (clientMethod.IsLongRunning)
+            if (clientMethod.Operation.LongRunning is not null)
             {
-                if (clientMethod.IsPaging)
+                if (clientMethod.Operation.Paging is not null)
                 {
                     ComposeHandleLongRunningPageableResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     ComposeHandleLongRunningResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
             }
-            else if (clientMethod.IsPaging)
+            else if (clientMethod.Operation.Paging is not null)
             {
                 ComposeHandlePageableResponseCode(clientMethod, signature, async, allParameters, builder);
             }
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine();
             using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(responseModel, clientMethod, allParameters, builder);
             }
         }
 
@@ -311,12 +311,13 @@ namespace AutoRest.CSharp.Generation.Writers
              */
             using (Scope($"{(async ? "await " : "")}foreach (var data in client.{signature.Name}({MockParameterValues(signature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(modelType, clientMethod, allParameters, builder);
             }
         }
 
-        private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
+        private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, LowLevelClientMethod method, bool allProperties, StringBuilder builder)
         {
+            var pagingItemName = method.Operation.Paging?.ItemName ?? "value";
             foreach (var property in responseModelType.Properties)
             {
                 if (property.SerializedName == pagingItemName && property.Type is InputListType listType)

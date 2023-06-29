@@ -44,7 +44,7 @@ namespace ProtocolMethodsInRestClient
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/template/resources", false);
-            if (grouped?.First != null)
+            if (grouped.First != null)
             {
                 uri.AppendQuery("first", grouped.First, true);
             }

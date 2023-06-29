@@ -20,10 +20,10 @@ namespace AutoRest.CSharp.Output.Models
     {
         private CSharpType PageItemType { get; }
 
-        public PagingOperationMethodsBuilder(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, statusCodeSwitchBuilder, parameters)
+        public PagingOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationPaging paging, ClientPagingMethodParameters parameters)
+            : base(args, paging, args.StatusCodeSwitchBuilder, parameters)
         {
-            PageItemType = statusCodeSwitchBuilder.PageItemType ?? throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
+            PageItemType = args.StatusCodeSwitchBuilder.PageItemType ?? throw new InvalidOperationException($"Method {args.Operation.Name} is pageable and has to have a return value");
         }
 
         protected override bool ShouldConvenienceMethodGenerated() => true;

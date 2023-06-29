@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -22,13 +23,14 @@ namespace AutoRest.CSharp.Output.Models
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public IReadOnlyList<LegacyMethods> Methods { get; }
+        public IReadOnlyList<LowLevelClientMethod>? ProtocolMethods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "internal";
 
-        public RestClient(ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public RestClient(ClientMethodsBuilder clientMethodsBuilder, ClientMethodsBuilder? protocolMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             _clientName = clientName;
@@ -46,25 +48,11 @@ namespace AutoRest.CSharp.Output.Models
                 .Build(restClient, Fields, clientPrefix + GetClientSuffix())
                 .Select(b => b.BuildLegacy())
                 .ToList();
+
+            ProtocolMethods = protocolMethodsBuilder?
+                .Build(Snippets.Null, Fields, clientPrefix + GetClientSuffix())
+                .Select(b => b.BuildDpg())
+                .ToList();
         }
-
-        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)
-        {
-            // At least one protocol method is found in the config for this operationGroup
-            if (!inputClient.Operations.Any(operation => IsProtocolMethodExists(operation, inputClient, library)))
-            {
-                return Enumerable.Empty<LowLevelClientMethod>();
-            }
-
-            // Filter protocol method requests for this operationGroup based on the config
-            var operations = methods.Select(m => m.Operation).Where(operation => IsProtocolMethodExists(operation, inputClient, library));
-            return new ClientMethodsBuilder(operations, library, typeFactory, false, false)
-                .Build(null, fields, _clientName)
-                .Select(b => b.BuildDpg());
-        }
-
-        private static bool IsProtocolMethodExists(InputOperation operation, InputClient inputClient, OutputLibrary library)
-            => library is DataPlaneOutputLibrary dpl && dpl.ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods) &&
-               protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }

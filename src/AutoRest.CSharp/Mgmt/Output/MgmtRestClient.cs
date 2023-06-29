@@ -9,8 +9,6 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -22,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Key { get; }
 
         public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations, string clientName, MgmtOutputLibrary library)
-            : base(new ClientMethodsBuilder(inputClient.Operations, library, library.TypeFactory, false, true), clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
+            : base(new ClientMethodsBuilder(inputClient.Operations, library, library.TypeFactory, false, true), null, clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
         {
             Key = inputClient.Key;
             _operations = operations;

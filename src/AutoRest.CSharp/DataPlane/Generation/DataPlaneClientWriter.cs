@@ -39,9 +39,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
-
-        private const string EndpointVariable = "endpoint";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
 
@@ -196,67 +193,6 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.WriteMethodDeclaration(method.Signature))
             {
                 writer.WriteMethodBodyStatement(method.Body!);
-            }
-            writer.Line();
-        }
-
-        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
-        {
-            RestClientMethod originalMethod = lroMethod.StartMethod;
-            CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
-            var parameters = originalMethod.Parameters;
-
-            writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");
-
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{originalMethod.DescriptionText}");
-
-            string asyncText = async ? "async " : string.Empty;
-            writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-
-                using (writer.WriteDiagnosticScope(lroMethod.Diagnostics, ClientDiagnosticsField))
-                {
-                    string awaitText = async ? "await" : string.Empty;
-                    string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
-                    writer.Append($"var originalResponse = {awaitText} RestClient.{CreateMethodName(originalMethod.Name, async)}(");
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-
-                    writer.Line($"cancellationToken){configureText};");
-
-                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField.GetReferenceFormattable()}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(originalMethod.Name)}(");
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Append($").Request, originalResponse");
-
-                    var nextPageMethod = lroMethod.Operation.NextPageMethodName;
-                    if (nextPageMethod != null)
-                    {
-                        writer.Append($", (_, nextLink) => RestClient.{nextPageMethod}(nextLink, {parameters.GetIdentifiersFormattable()})");
-                    }
-
-                    writer.Line($");");
-                }
-
             }
             writer.Line();
         }

@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OperationLongRunning _longRunning;
         private readonly CSharpType? _lroType;
 
-        public LroOperationMethodsBuilder(OperationLongRunning longRunning, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, CSharpType? lroType, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodParameters)
+        public LroOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters, OperationLongRunning longRunning, CSharpType? lroType)
+            : base(args, clientMethodParameters)
         {
             _longRunning = longRunning;
             _lroType = lroType;

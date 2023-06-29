@@ -2,19 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class HeadAsBooleanOperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
-        public HeadAsBooleanOperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch(fields), clientMethodParameters)
+        public HeadAsBooleanOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
+            : base(args, clientMethodParameters)
         {
 
         }

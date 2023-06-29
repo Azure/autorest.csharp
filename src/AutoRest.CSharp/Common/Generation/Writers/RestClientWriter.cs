@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Utilities;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.WriteMethod(method);
                         }
 
-                        if (legacyMethod.ProtocolMethod is {} protocolMethod)
+                        if (restClient.ProtocolMethods?.FirstOrDefault(m => m.Operation == legacyMethod.Operation) is {} protocolMethod)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.ResponseClassifier);

@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Output.Models
         protected string? CreateNextPageMessageMethodName { get; }
         protected IReadOnlyList<Parameter> CreateNextPageMessageMethodParameters { get; }
 
-        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, StatusCodeSwitchBuilder nextPageStatusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
-            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodsParameters)
+        protected PagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, OperationPaging paging, StatusCodeSwitchBuilder nextPageStatusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
+            : base(args, clientMethodsParameters)
         {
             _nextPageStatusCodeSwitchBuilder = nextPageStatusCodeSwitchBuilder;
             Paging = paging;
@@ -48,7 +48,10 @@ namespace AutoRest.CSharp.Output.Models
 
             if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null })
             {
-                return legacy with { Order = this is LroPagingOperationMethodsBuilder ? 2 : 1 };
+                return legacy with
+                {
+                    Order = this is LroPagingOperationMethodsBuilder ? 2 : 1
+                };
             }
 
             var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
@@ -69,19 +72,12 @@ namespace AutoRest.CSharp.Output.Models
                 BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, false)
             };
 
-            return new LegacyMethods
-            (
-                legacy.CreateRequest,
-                createNextPageRequest,
-                legacy.RestClientConvenience,
-                restClientNextPageMethods,
-                legacy.Convenience,
-
-                this is LroPagingOperationMethodsBuilder ? 2 : 1,
-                Operation,
-                null,
-                legacy.ResponseType
-            );
+            return legacy with
+            {
+                CreateNextPageRequest = createNextPageRequest,
+                RestClientNextPageConvenience = restClientNextPageMethods,
+                Order = this is LroPagingOperationMethodsBuilder ? 2 : 1
+            };
         }
 
         protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)

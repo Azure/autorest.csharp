@@ -12,8 +12,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class NonPagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        protected NonPagingOperationMethodsBuilderBase(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodParameters)
+        protected NonPagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
+            : base(args, clientMethodParameters)
         {
         }
 
