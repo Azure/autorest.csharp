@@ -409,7 +409,7 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -453,7 +453,7 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
