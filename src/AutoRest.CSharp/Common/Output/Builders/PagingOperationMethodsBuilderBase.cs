@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -19,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        private static readonly ResponseClassifierType NextPageStatusCodes = new(new[] { new StatusCodes(200, null) }.OrderBy(sc => sc.Code));
+        private readonly StatusCodeSwitchBuilder _nextPageStatusCodeSwitchBuilder;
 
         protected OperationPaging Paging { get; }
 
@@ -28,9 +27,10 @@ namespace AutoRest.CSharp.Output.Models
         protected string? CreateNextPageMessageMethodName { get; }
         protected IReadOnlyList<Parameter> CreateNextPageMessageMethodParameters { get; }
 
-        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
+        protected PagingOperationMethodsBuilderBase(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, StatusCodeSwitchBuilder nextPageStatusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
             : base(operation, restClient, fields, clientName, statusCodeSwitchBuilder, clientMethodsParameters)
         {
+            _nextPageStatusCodeSwitchBuilder = nextPageStatusCodeSwitchBuilder;
             Paging = paging;
             ItemPropertyName = paging.ItemName ?? "value";
             NextLinkName = paging.NextLinkName;
@@ -65,8 +65,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var restClientNextPageMethods = new[]
             {
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, true),
-                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, false)
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, true),
+                BuildRestClientConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, false)
             };
 
             return new LegacyMethods
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody()
         {
-            yield return CreateHttpMessage(NextPageStatusCodes, RequestMethod.Get, out var message, out var request, out var uriBuilder);
+            yield return CreateHttpMessage(_nextPageStatusCodeSwitchBuilder.ResponseClassifier, RequestMethod.Get, out var message, out var request, out var uriBuilder);
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false);
             yield return Assign(request.Uri, uriBuilder);

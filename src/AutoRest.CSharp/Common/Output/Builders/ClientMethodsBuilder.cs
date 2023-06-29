@@ -28,16 +28,14 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly IEnumerable<InputOperation> _operations;
         private readonly TypeFactory _typeFactory;
-        private readonly DataPlaneOutputLibrary? _dpLibrary;
-        private readonly MgmtOutputLibrary? _mpglibrary;
+        private readonly OutputLibrary? _library;
         private readonly bool _legacyParameterSorting;
         private readonly bool _legacyParameterBuilding;
 
         public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
         {
             _operations = operations;
-            _dpLibrary = library as DataPlaneOutputLibrary;
-            _mpglibrary = library as MgmtOutputLibrary;
+            _library = library;
             _typeFactory = typeFactory;
             _legacyParameterSorting = legacyParameterSorting;
             _legacyParameterBuilding = legacyParameterBuilding;
@@ -67,9 +65,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var (operation, parameters) in operationParameters)
             {
-                var headerModelType = _dpLibrary?.FindHeaderModel(operation)?.Type;
-                var resourceDataType = FindResourceDataType(operation);
-                var lroType = _dpLibrary?.FindLongRunningOperation(operation)?.Type;
+                var lroType = (_library as DataPlaneOutputLibrary)?.FindLongRunningOperation(operation)?.Type;
 
                 if (operation.Paging is {} paging)
                 {
@@ -80,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
                         _ => Array.Empty<Parameter>()
                     };
 
-                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, paging, operation.LongRunning is not null, _typeFactory);
+                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
                     var pagingParameters = new ClientPagingMethodParameters(parameters, createNextPageMessageMethodParameters);
 
                     yield return operation.LongRunning is { } longRunning
@@ -89,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 else if (operation.LongRunning is { } longRunning)
                 {
-                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, null, true, _typeFactory);
+                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
                     yield return new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, lroType, statusCodeSwitchBuilder, parameters);
                 }
                 else if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
@@ -98,26 +94,10 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 else
                 {
-                    var statusCodeSwitchBuilder = new StatusCodeSwitchBuilder(operation, fields, resourceDataType, headerModelType, null, false, _typeFactory);
+                    var statusCodeSwitchBuilder = StatusCodeSwitchBuilder.CreateSwitch(operation, fields, _library, _typeFactory);
                     yield return new OperationMethodsBuilder(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, parameters);
                 }
             }
-        }
-
-        private CSharpType? FindResourceDataType(InputOperation operation)
-        {
-            if (operation.HttpMethod != RequestMethod.Get)
-            {
-                return null;
-            }
-
-            if (_mpglibrary is null || !_mpglibrary.TryGetResourceData(operation.Path, out var resourceData))
-            {
-                return null;
-            }
-
-            var operationSet = _mpglibrary.GetOperationSet(operation.Path);
-            return operationSet.IsResource() ? resourceData.Type : null;
         }
 
         private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)

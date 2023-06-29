@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly CSharpType? _lroType;
 
         public LroPagingOperationMethodsBuilder(OperationLongRunning longRunning, OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, CSharpType? lroType, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, parameters)
+            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, statusCodeSwitchBuilder.CreateLroPagingNextPageSwitch(), parameters)
         {
             _longRunning = longRunning;
             _lroType = lroType;

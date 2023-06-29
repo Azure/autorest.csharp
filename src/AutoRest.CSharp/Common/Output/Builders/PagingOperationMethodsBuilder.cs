@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models
         private CSharpType PageItemType { get; }
 
         public PagingOperationMethodsBuilder(OperationPaging paging, InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, StatusCodeSwitchBuilder statusCodeSwitchBuilder, ClientPagingMethodParameters parameters)
-            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, parameters)
+            : base(paging, operation, restClient, fields, clientName, statusCodeSwitchBuilder, statusCodeSwitchBuilder, parameters)
         {
             PageItemType = statusCodeSwitchBuilder.PageItemType ?? throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
         }

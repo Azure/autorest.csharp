@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class HeadAsBooleanOperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
         public HeadAsBooleanOperationMethodsBuilder(InputOperation operation, ValueExpression? restClient, ClientFields fields, string clientName, ClientMethodParameters clientMethodParameters)
-            : base(operation, restClient, fields, clientName, new StatusCodeSwitchBuilder(fields), clientMethodParameters)
+            : base(operation, restClient, fields, clientName, StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch(fields), clientMethodParameters)
         {
 
         }

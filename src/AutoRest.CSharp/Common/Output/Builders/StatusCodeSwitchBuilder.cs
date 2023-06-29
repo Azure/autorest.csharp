@@ -15,10 +15,13 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -40,14 +43,13 @@ namespace AutoRest.CSharp.Output.Models
         public CSharpType ClientConvenienceReturnType { get; }
         public ResponseClassifierType ResponseClassifier { get; }
 
-        public StatusCodeSwitchBuilder(InputOperation operation, ClientFields fields, CSharpType? resourceDataType, CSharpType? headerModelType, OperationPaging? paging, bool isLro, TypeFactory typeFactory)
+        public static StatusCodeSwitchBuilder CreateSwitch(InputOperation operation, ClientFields fields, OutputLibrary? library, TypeFactory typeFactory)
         {
-            _headerModelType = headerModelType;
-            _clientDiagnosticsProperty = fields.Contains(fields.ClientDiagnosticsProperty)
-                ? new ClientDiagnosticsExpression(fields.ClientDiagnosticsProperty.Declaration)
-                : null;
-
+            var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
+            var isLro = operation.LongRunning is not null;
             var successStatusCodes = new List<int>();
+            List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)> successResponses;
+
             if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
             {
                 successStatusCodes = operation.Responses
@@ -55,11 +57,11 @@ namespace AutoRest.CSharp.Output.Models
                     .SelectMany(r => r.StatusCodes)
                     .ToList();
 
-                _successResponses = new (CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)[]{ (null, null, successStatusCodes.Distinct().ToList()) };
+                successResponses = new(){ (null, null, successStatusCodes.Distinct().ToList()) };
             }
             else
             {
-                var successResponses = new List<(IReadOnlyList<int> StatusCodes, CSharpType? Type, ObjectSerialization? Serialization)>();
+                successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
                 foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
                 {
                     if (isErrorResponse)
@@ -70,67 +72,92 @@ namespace AutoRest.CSharp.Output.Models
                     successStatusCodes.AddRange(statusCodes);
                     if (bodyType == null)
                     {
-                        successResponses.Add((StatusCodes: statusCodes, null, null));
+                        successResponses.Add((null, null, statusCodes));
                     }
                     else if (bodyMediaType == BodyMediaType.Text)
                     {
-                        successResponses.Add((StatusCodes: statusCodes, typeof(string), null));
+                        successResponses.Add((typeof(string), null, statusCodes));
                     }
                     else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
                     {
-                        successResponses.Add((StatusCodes: statusCodes, typeof(Stream), null));
+                        successResponses.Add((typeof(Stream), null, statusCodes));
                     }
                     else
                     {
                         var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
                         var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
-                        successResponses.Add((StatusCodes: statusCodes, responseType, serialization));
+                        successResponses.Add((responseType, serialization, statusCodes));
                     }
                 }
 
-                if (resourceDataType is not null && successResponses.Any())
+                if (FindResourceDataType(operation, library) is {} resourceDataType && successResponses.Any())
                 {
                     var responseBodyTypeName = successResponses[0].Type?.Name;
                     if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
                     {
-                        successResponses.Add((new[]{404}, null, null));
+                        successResponses.Add((null, null, new[]{404}));
                     }
                 }
 
-                _successResponses = successResponses
+                successResponses = successResponses
                     .GroupBy(r => r.Type)
                     .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
                     .ToList();
             }
 
-            ResponseType = _successResponses.Count(r => r.Type is not null) switch
+            var commonResponseType = successResponses.Count(r => r.Type is not null) switch
             {
                 0 => null,
-                1 => _successResponses.First(r => r.Type is not null).Type,
+                1 => successResponses.First(r => r.Type is not null).Type,
                 _ => typeof(object)
             };
 
-            ProtocolReturnType = GetProtocolReturnType(ResponseType is not null, isLro, paging is not null);
-            RestClientConvenienceReturnType = GetRestClientConvenienceReturnType(ResponseType, headerModelType);
-            PageItemType = GetPageItemType(ResponseType, paging, operation);
-            ClientConvenienceReturnType = GetClientConvenienceReturnType(ResponseType, PageItemType, isLro);
-            ResponseClassifier = new ResponseClassifierType(successStatusCodes.Distinct().Select(c => new StatusCodes(c, null)).OrderBy(c => c.Code));
+            var pageItemType = GetPageItemType(commonResponseType, operation);
+
+            return new StatusCodeSwitchBuilder
+            (
+                successResponses,
+                GetClientDiagnosticsProperty(fields),
+                headerModelType,
+                commonResponseType,
+                GetProtocolReturnType(commonResponseType is not null, isLro, operation.Paging is not null),
+                GetRestClientConvenienceReturnType(commonResponseType, headerModelType),
+                pageItemType,
+                GetClientConvenienceReturnType(commonResponseType, pageItemType, isLro),
+                new ResponseClassifierType(successStatusCodes.Distinct().Select(c => new StatusCodes(c, null)).OrderBy(c => c.Code))
+            );
         }
 
-        public StatusCodeSwitchBuilder(ClientFields fields)
-        {
-            _successResponses = null;
+        public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch(ClientFields fields)
+            => new(null, GetClientDiagnosticsProperty(fields), null, typeof(bool), typeof(Response<bool>), typeof(Response<bool>), null, typeof(Response<bool>), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));
 
-            _clientDiagnosticsProperty = fields.Contains(fields.ClientDiagnosticsProperty)
+        private StatusCodeSwitchBuilder(IReadOnlyList<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>? successResponses,
+            ClientDiagnosticsExpression? clientDiagnosticsProperty, CSharpType? headerModelType, CSharpType? responseType, CSharpType protocolReturnType, CSharpType restClientConvenienceReturnType, CSharpType? pageItemType, CSharpType clientConvenienceReturnType, ResponseClassifierType responseClassifier)
+        {
+            _successResponses = successResponses;
+            _headerModelType = headerModelType;
+            _clientDiagnosticsProperty = clientDiagnosticsProperty;
+
+            ResponseType = responseType;
+            ProtocolReturnType = protocolReturnType;
+            RestClientConvenienceReturnType = restClientConvenienceReturnType;
+            PageItemType = pageItemType;
+            ClientConvenienceReturnType = clientConvenienceReturnType;
+            ResponseClassifier = responseClassifier;
+        }
+
+        private static ClientDiagnosticsExpression? GetClientDiagnosticsProperty(ClientFields fields) {
+            return fields.Contains(fields.ClientDiagnosticsProperty)
                 ? new ClientDiagnosticsExpression(fields.ClientDiagnosticsProperty.Declaration)
                 : null;
+        }
 
-            ResponseType = typeof(bool);
-            ProtocolReturnType = typeof(Response<bool>);
-            RestClientConvenienceReturnType = typeof(Response<bool>);
-            ClientConvenienceReturnType = typeof(Response<bool>);
+        public StatusCodeSwitchBuilder CreateLroPagingNextPageSwitch()
+        {
+            var successResponses = new (CSharpType?, ObjectSerialization?, IReadOnlyList<int>)[]{(null, null, new[]{200})};
+            var responseClassifierType = new ResponseClassifierType(new[] { new StatusCodes(200, null) }.OrderBy(c => c.Code));
 
-            ResponseClassifier = new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code));
+            return new StatusCodeSwitchBuilder(successResponses, _clientDiagnosticsProperty, _headerModelType, ResponseType, ProtocolReturnType, RestClientConvenienceReturnType, PageItemType, ClientConvenienceReturnType, responseClassifierType);
         }
 
         public MethodBodyStatement Build(HttpMessageExpression httpMessage, bool async)
@@ -171,7 +198,23 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private CSharpType GetProtocolReturnType(bool hasResponseType, bool isLro, bool isPageable)
+        private static CSharpType? FindResourceDataType(InputOperation operation, OutputLibrary? library)
+        {
+            if (operation.HttpMethod != RequestMethod.Get)
+            {
+                return null;
+            }
+
+            if (library is not MgmtOutputLibrary mpgLibrary || !mpgLibrary.TryGetResourceData(operation.Path, out var resourceData))
+            {
+                return null;
+            }
+
+            var operationSet = mpgLibrary.GetOperationSet(operation.Path);
+            return operationSet.IsResource() ? resourceData.Type : null;
+        }
+
+        private static CSharpType GetProtocolReturnType(bool hasResponseType, bool isLro, bool isPageable)
         {
             return (isLro, isPageable) switch
             {
@@ -182,9 +225,9 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private static CSharpType? GetPageItemType(CSharpType? responseType, OperationPaging? paging, InputOperation operation)
+        private static CSharpType? GetPageItemType(CSharpType? responseType, InputOperation operation)
         {
-            if (paging is null)
+            if (operation.Paging is not {} paging || operation.LongRunning is not null)
             {
                 return null;
             }
@@ -220,7 +263,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private CSharpType GetClientConvenienceReturnType(CSharpType? responseType, CSharpType? pageItemType, bool isLro)
+        private static CSharpType GetClientConvenienceReturnType(CSharpType? responseType, CSharpType? pageItemType, bool isLro)
         {
             return (isLro, pageItemType) switch
             {

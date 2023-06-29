@@ -128,8 +128,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var restClientMethods = new[]
             {
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), true),
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), false)
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), _statusCodeSwitchBuilder, true),
+                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), _statusCodeSwitchBuilder, false)
             };
 
             var convenienceMethods = Configuration.PublicClients && !Configuration.AzureArm ? new[]
@@ -641,15 +641,15 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        protected Method BuildRestClientConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, bool async)
+        protected Method BuildRestClientConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var signature = CreateMethodSignature(methodName, MethodSignatureModifiers.Public, parameters, _statusCodeSwitchBuilder.RestClientConvenienceReturnType);
+            var signature = CreateMethodSignature(methodName, MethodSignatureModifiers.Public, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),
                 UsingVar("message", invokeCreateRequestMethod, out var message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
-                _statusCodeSwitchBuilder.Build(message, async)
+                statusCodeSwitchBuilder.Build(message, async)
             };
 
             return new Method(signature.WithAsync(async), body);
