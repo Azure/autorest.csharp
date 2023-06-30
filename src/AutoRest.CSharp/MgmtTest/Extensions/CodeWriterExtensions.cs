@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Xml;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -151,8 +152,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"new {type}(");
             foreach (var parameter in publicCtor.GetParameters())
             {
-                // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
-                var value = exampleValue.Properties[parameter.Name!];
+                ExampleValue value;
+                if (exampleValue.Properties.ContainsKey(parameter.Name!))
+                    // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
+                    value = exampleValue.Properties[parameter.Name!];
+                else
+                {
+                    // if we can't find it directly, try to figure out the serailizedName form propertyMetadataDict
+                    string? serializedName = propertyMetadataDict.FirstOrDefault(p => string.Equals(p.Key, parameter.Name!, StringComparison.OrdinalIgnoreCase)).Value?.SerializedName;
+                    if (string.IsNullOrEmpty(serializedName) || !exampleValue.Properties.ContainsKey(serializedName))
+                        throw new InvalidOperationException($"Unabled to find example value for ctor parameter, type={type.FullName}, param={parameter.Name ?? "<null>"}");
+                    value = exampleValue.Properties[serializedName];
+                }
                 writer.AppendExampleValue(value, parameter.ParameterType);
                 writer.AppendRaw(",");
             }
