@@ -42,6 +42,8 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(NoModelAsStringNoRequiredTwoValueDefaultOpEnum?), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]
@@ -115,6 +117,8 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueDefaultOpEnum), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]
@@ -270,6 +274,8 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultOpEnum), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]
@@ -314,6 +320,8 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultOpEnum), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]

@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaultValueString}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             if (!type.IsFrameworkType || values == null)
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var requestLocation = GetRequestLocation(requestParameter);
 
             var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
-            bool keepClientDefaultValue = shouldKeepClientDefaultValue || isApiVersionParameter(requestParameter) || isContentTypeParameter(requestParameter) || isEndpointParameter(requestParameter);
+            bool keepClientDefaultValue = shouldKeepClientDefaultValue || IsApiVersionParameter(requestParameter) || IsContentTypeParameter(requestParameter) || IsEndpointParameter(requestParameter);
             var defaultValue = keepClientDefaultValue
                 ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
                 : ParseConstant(requestParameter, typeFactory);
@@ -155,11 +155,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
-            static bool isApiVersionParameter(RequestParameter requestParameter)
+            static bool IsApiVersionParameter(RequestParameter requestParameter)
                 => requestParameter.Origin == "modelerfour:synthesized/api-version";
-            static bool isEndpointParameter(RequestParameter requestParameter)
+            static bool IsEndpointParameter(RequestParameter requestParameter)
                 => requestParameter.Origin == "modelerfour:synthesized/host";
-            static bool isContentTypeParameter(RequestParameter requestParameter)
+            static bool IsContentTypeParameter(RequestParameter requestParameter)
                 => requestParameter.Origin == "modelerfour:synthesized/content-type";
         }
 
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default is {defaultValueString}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             return requestParameter.Schema switch
