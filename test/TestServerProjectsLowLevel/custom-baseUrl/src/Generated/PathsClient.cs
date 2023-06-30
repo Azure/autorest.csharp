@@ -34,7 +34,7 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default is "host". </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default value is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>
         public PathsClient(string host, AzureKeyCredential credential) : this(host, credential, new PathsClientOptions())
@@ -42,7 +42,7 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default is "host". </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default value is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>

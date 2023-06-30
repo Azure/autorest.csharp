@@ -28,7 +28,7 @@ namespace MultipleInputFiles
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
-        /// <param name="source"> source - server parameter. The default is "value1". </param>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         public MultipleInputFilesClient(Source source, AzureKeyCredential credential, MultipleInputFilesClientOptions options = null)
@@ -45,7 +45,7 @@ namespace MultipleInputFiles
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
-        /// <param name="source"> source - server parameter. The default is "value1". </param>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         public MultipleInputFilesClient(Source source, TokenCredential credential, MultipleInputFilesClientOptions options = null)
@@ -65,7 +65,7 @@ namespace MultipleInputFiles
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="source"> source - server parameter. The default is "value1". </param>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source source)
         {

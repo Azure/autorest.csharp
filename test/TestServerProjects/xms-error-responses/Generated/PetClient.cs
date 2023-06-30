@@ -111,7 +111,7 @@ namespace xms_error_responses
         }
 
         /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'. </summary>
-        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. The default is "value1". </param>
+        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. The default value is "value1". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> HasModelsParamAsync(string models = null, CancellationToken cancellationToken = default)
         {
@@ -129,7 +129,7 @@ namespace xms_error_responses
         }
 
         /// <summary> Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'. </summary>
-        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. The default is "value1". </param>
+        /// <param name="models"> Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call. The default value is "value1". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response HasModelsParam(string models = null, CancellationToken cancellationToken = default)
         {

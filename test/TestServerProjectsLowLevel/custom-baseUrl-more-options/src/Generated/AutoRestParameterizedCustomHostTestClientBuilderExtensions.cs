@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PathsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default value is "host". </param>
         /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         public static IAzureClientBuilder<PathsClient, PathsClientOptions> AddPathsClient<TBuilder>(this TBuilder builder, string dnsSuffix, string subscriptionId, AzureKeyCredential credential)

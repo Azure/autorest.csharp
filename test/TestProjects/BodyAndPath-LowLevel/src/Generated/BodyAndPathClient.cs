@@ -420,7 +420,7 @@ namespace BodyAndPath_LowLevel
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
-        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default is "value". </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default value is "value". </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
@@ -464,7 +464,7 @@ namespace BodyAndPath_LowLevel
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
-        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default is "value". </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default value is "value". </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>

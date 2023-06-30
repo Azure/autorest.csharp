@@ -30,7 +30,7 @@ namespace PublicClientCtor
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="param1"> Tesing Param1. The default is "value1". </param>
+        /// <param name="param1"> Tesing Param1. The default value is "value1". </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>

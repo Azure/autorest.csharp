@@ -68,9 +68,9 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="skip"> Query parameter skip. The default is 12. </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="status"> Query parameter status. The default is "start". </param>
+        /// <param name="status"> Query parameter status. The default value is "start". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -102,9 +102,9 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="skip"> Query parameter skip. The default is 12. </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="status"> Query parameter status. The default is "start". </param>
+        /// <param name="status"> Query parameter status. The default value is "start". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -388,7 +388,7 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. The default is "start". </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -425,7 +425,7 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. The default is "start". </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -462,8 +462,8 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. The default is "start". </param>
-        /// <param name="skip"> Query parameter skip. The default is 12. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -499,8 +499,8 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. The default is "start". </param>
-        /// <param name="skip"> Query parameter skip. The default is 12. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -535,10 +535,10 @@ namespace Parameters_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> Query parameter Id. The default is 123. </param>
+        /// <param name="id"> Query parameter Id. The default value is 123. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="max"> Query parameter max. The default is 50. </param>
+        /// <param name="max"> Query parameter max. The default value is 50. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -575,10 +575,10 @@ namespace Parameters_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> Query parameter Id. The default is 123. </param>
+        /// <param name="id"> Query parameter Id. The default value is 123. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="max"> Query parameter max. The default is 50. </param>
+        /// <param name="max"> Query parameter max. The default value is 50. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

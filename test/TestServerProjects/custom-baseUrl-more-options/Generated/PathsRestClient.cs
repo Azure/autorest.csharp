@@ -26,7 +26,7 @@ namespace custom_baseUrl_more_options
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default is "host". </param>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default value is "host". </param>
         /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="dnsSuffix"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>

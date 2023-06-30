@@ -150,7 +150,7 @@ namespace MgmtParamOrdering
         /// <summary> Update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. The default is "test". </param>
+        /// <param name="availabilitySetName"> The name of the availability set. The default value is "test". </param>
         /// <param name="patch"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="patch"/> is null. </exception>
@@ -181,7 +181,7 @@ namespace MgmtParamOrdering
         /// <summary> Update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. The default is "test". </param>
+        /// <param name="availabilitySetName"> The name of the availability set. The default value is "test". </param>
         /// <param name="patch"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="patch"/> is null. </exception>
