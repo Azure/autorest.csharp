@@ -55,6 +55,7 @@ export async function typeSpecCompile(
     using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
     
+    ${needAzureCore && needNamespaces ? '@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)' : ""}
     ${needNamespaces ? namespace : ""}
     ${content}
     `
