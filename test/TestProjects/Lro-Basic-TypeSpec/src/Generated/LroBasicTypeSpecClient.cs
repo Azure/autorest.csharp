@@ -57,31 +57,31 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary> The most basic operation. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,Project,CancellationToken)']/*" />
-        public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
+        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProjectAsync(Project,CancellationToken)']/*" />
+        public virtual async Task<Response> CreateProjectAsync(Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return await CreateProjectAsync(waitUntil, resource.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await CreateProjectAsync(resource.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> The most basic operation. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,Project,CancellationToken)']/*" />
-        public virtual Operation CreateProject(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
+        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProject(Project,CancellationToken)']/*" />
+        public virtual Response CreateProject(Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return CreateProject(waitUntil, resource.ToRequestContent(), context);
+            Response response = CreateProject(resource.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary>
@@ -94,19 +94,18 @@ namespace LroBasicTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateProjectAsync(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateProjectAsync(Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProjectAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> CreateProjectAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -115,7 +114,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateCreateProjectRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -134,19 +133,18 @@ namespace LroBasicTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateProject(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateProject(Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation CreateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/LroBasicTypeSpecClient.xml" path="doc/members/member[@name='CreateProject(RequestContent,RequestContext)']/*" />
+        public virtual Response CreateProject(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -155,7 +153,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateCreateProjectRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateProject", OperationFinalStateVia.Location, context, waitUntil);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -234,7 +232,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -277,7 +275,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -347,7 +345,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateCreateThingRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing", OperationFinalStateVia.OriginalUri, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -387,7 +385,7 @@ namespace LroBasicTypeSpec
             try
             {
                 using HttpMessage message = CreateCreateThingRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing", OperationFinalStateVia.OriginalUri, context, waitUntil);
             }
             catch (Exception e)
             {

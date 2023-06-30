@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Azure.Core;
 using NUnit.Framework;
 using _Type._Array;
+using _Type._Array.Models;
 
 namespace CadlRanchProjects.Tests
 {
@@ -27,7 +27,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_Int32Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetInt32ValueClient().PutAsync(RequestContent.Create(new[] { 1, 2 }));
+            var response = await new ArrayClient(host, null).GetInt32ValueClient().PutAsync(new List<int> { 1, 2});
             Assert.AreEqual(204, response.Status);
         });
 
@@ -42,7 +42,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_Int64Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetInt64ValueClient().PutAsync(RequestContent.Create(new[] { 9007199254740991, -9007199254740991 }));
+            var response = await new ArrayClient(host, null).GetInt64ValueClient().PutAsync(new List<long> { 9007199254740991, -9007199254740991 });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -57,7 +57,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_BooleanValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetBooleanValueClient().PutAsync(RequestContent.Create(new[] { true, false }));
+            var response = await new ArrayClient(host, null).GetBooleanValueClient().PutAsync(new List<bool> { true, false });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -72,7 +72,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_StringValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetStringValueClient().PutAsync(RequestContent.Create(new[] { "hello", "" }));
+            var response = await new ArrayClient(host, null).GetStringValueClient().PutAsync(new List<string> { "hello", "" });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -86,7 +86,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_Float32Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(RequestContent.Create(new[] { 42.42f }));
+            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 42.42f });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -100,7 +100,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_DatetimeValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetDatetimeValueClient().PutAsync(RequestContent.Create(new[] { DateTimeOffset.Parse("2022-08-26T18:38:00Z") }));
+            var response = await new ArrayClient(host, null).GetDatetimeValueClient().PutAsync(new List<DateTimeOffset> { DateTimeOffset.Parse("2022-08-26T18:38:00Z") });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -114,7 +114,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_DurationValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetDurationValueClient().PutAsync(RequestContent.Create(new[] { XmlConvert.ToString(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")) }));
+            var response = await new ArrayClient(host, null).GetDurationValueClient().PutAsync(new List<TimeSpan> { XmlConvert.ToTimeSpan("P123DT22H14M12.011S")});
             Assert.AreEqual(204, response.Status);
         });
 
@@ -130,7 +130,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_UnknownValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetUnknownValueClient().PutAsync(RequestContent.Create(new List<object>() { 1, "hello", null }));
+            var response = await new ArrayClient(host, null).GetUnknownValueClient().PutAsync(new List<BinaryData> { new BinaryData(1), new BinaryData("\"hello\""), null });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -145,15 +145,24 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_ModelValue_put() => Test(async (host) =>
         {
-            var value1 = new
-            {
-                property = "hello"
-            };
-            var value2 = new
-            {
-                property = "world"
-            };
-            var response = await new ArrayClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new[] { value1, value2 }));
+            var response = await new ArrayClient(host, null).GetModelValueClient().PutAsync(new List<InnerModel> { new InnerModel("hello"), new InnerModel("world") });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Array_NullableFloatValue_get() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
+            var result = response.Value.ToList();
+            Assert.AreEqual(1.2f, result[0]);
+            Assert.AreEqual(null, result[1]);
+            Assert.AreEqual(3.0f, result[2]);
+        });
+
+        [Test]
+        public Task Type_Array_NullableFloatValue_put() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableFloatValueClient().PutAsync(new List<float?> { 1.2f, null, 3.0f });
             Assert.AreEqual(204, response.Status);
         });
     }
