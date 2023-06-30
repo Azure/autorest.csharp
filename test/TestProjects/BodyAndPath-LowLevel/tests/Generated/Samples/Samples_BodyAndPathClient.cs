@@ -288,7 +288,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+            Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -304,7 +304,7 @@ namespace BodyAndPath_LowLevel.Samples
                 invalid_int_name = 1234,
             };
 
-            Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value");
+            Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
             Console.WriteLine(response.Status);
         }
 
@@ -317,7 +317,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -333,7 +333,7 @@ namespace BodyAndPath_LowLevel.Samples
                 invalid_int_name = 1234,
             };
 
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value");
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
             Console.WriteLine(response.Status);
         }
     }
