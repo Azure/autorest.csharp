@@ -47,24 +47,30 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(object,CancellationToken)">
+    <member name="PutAsync(IEnumerable{DateTimeOffset},CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new object();
+var body = new DateTimeOffset[] 
+{
+    DateTimeOffset.UtcNow
+};
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
-    <member name="Put(object,CancellationToken)">
+    <member name="Put(IEnumerable{DateTimeOffset},CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new object();
+var body = new DateTimeOffset[] 
+{
+    DateTimeOffset.UtcNow
+};
 var result = client.Put(body);
 ]]></code>
 </example>
