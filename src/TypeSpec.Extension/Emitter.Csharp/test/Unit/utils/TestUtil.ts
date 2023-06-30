@@ -36,6 +36,7 @@ export async function typeSpecCompile(
     needAzureCore: boolean = false
 ) {
     const namespace = `
+    @useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
     @service({
       title: "Azure Csharp emitter Testing",
       version: "2023-01-01-preview",
@@ -55,7 +56,6 @@ export async function typeSpecCompile(
     using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
     
-    ${needAzureCore && needNamespaces ? '@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)' : ""}
     ${needNamespaces ? namespace : ""}
     ${content}
     `
