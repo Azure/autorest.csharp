@@ -128,6 +128,79 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetMetricDimensionValues()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            foreach (var item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "<interval>", "<metricName>", "<timespan>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("value")[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMetricDimensionValues_AllParameters()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            foreach (var item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "<interval>", "<metricName>", "<timespan>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("value")[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMetricDimensionValues_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "<interval>", "<metricName>", "<timespan>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("value")[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMetricDimensionValues_AllParameters_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "<interval>", "<metricName>", "<timespan>", new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("value")[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMetricDimensionValues_Convenience_Async()
+        {
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PaginationClient(endpoint, credential);
+
+            await foreach (var item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, "<metricName>", "<timespan>"))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetLedgerEntries()
         {
             var credential = new DefaultAzureCredential();

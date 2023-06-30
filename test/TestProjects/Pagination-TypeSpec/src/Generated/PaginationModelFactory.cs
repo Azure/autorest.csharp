@@ -24,6 +24,16 @@ namespace Pagination.Models
             return new LedgerEntry(contents, collectionId, transactionId);
         }
 
+        /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
+        /// <param name="value"></param>
+        /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
+        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
+        {
+            value ??= new List<string>();
+
+            return new DimensionValueListItem(value?.ToList());
+        }
+
         /// <summary> Initializes a new instance of TextBlocklist. </summary>
         /// <param name="blocklistName"> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </param>
         /// <param name="description"> Text blocklist description. </param>
