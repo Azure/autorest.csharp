@@ -12,7 +12,7 @@ using System.Linq;
 namespace _Type.Property.Nullable.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class NullableModelFactory
+    public static partial class TypePropertyNullableModelFactory
     {
         /// <summary> Initializes a new instance of StringProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>

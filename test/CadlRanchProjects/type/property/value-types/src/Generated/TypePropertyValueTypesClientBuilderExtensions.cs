@@ -12,7 +12,7 @@ using _Type.Property.ValueTypes;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ValueTypesClient"/> to client builder. </summary>
-    public static partial class ValueTypesClientBuilderExtensions
+    public static partial class TypePropertyValueTypesClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ValueTypesClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

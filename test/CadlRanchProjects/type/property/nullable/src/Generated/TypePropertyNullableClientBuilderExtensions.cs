@@ -12,7 +12,7 @@ using _Type.Property.Nullable;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="NullableClient"/> to client builder. </summary>
-    public static partial class NullableClientBuilderExtensions
+    public static partial class TypePropertyNullableClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="NullableClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

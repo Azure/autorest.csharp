@@ -12,7 +12,7 @@ using _Type.Property.Optional;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="OptionalClient"/> to client builder. </summary>
-    public static partial class OptionalClientBuilderExtensions
+    public static partial class TypePropertyOptionalClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="OptionalClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

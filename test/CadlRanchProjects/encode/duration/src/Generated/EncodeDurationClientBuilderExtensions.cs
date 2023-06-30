@@ -12,7 +12,7 @@ using Encode.Duration;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="DurationClient"/> to client builder. </summary>
-    public static partial class DurationClientBuilderExtensions
+    public static partial class EncodeDurationClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="DurationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
