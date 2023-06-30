@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
@@ -43,7 +43,10 @@ import {
     isInputLiteralType,
     isInputUnionType
 } from "../type/inputType.js";
-import { OperationFinalStateVia } from "../type/operationFinalStateVia.js";
+import {
+    OperationFinalStateVia,
+    convertLroFinalStateVia
+} from "../type/operationFinalStateVia.js";
 import { OperationLongRunning } from "../type/operationLongRunning.js";
 import { OperationPaging } from "../type/operationPaging.js";
 import { OperationResponse } from "../type/operationResponse.js";
@@ -376,54 +379,29 @@ export function loadOperation(
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(context, op.operation)) return undefined;
-
-        const finalResponse = loadLongRunningFinalResponse(
-            context,
-            op,
-            resourceOperation
-        );
-        if (finalResponse === undefined) return undefined;
+        const metadata = getLroMetadata(program, op.operation);
+        if (metadata === undefined) {
+            return undefined;
+        }
 
         return {
-            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
-            FinalResponse: finalResponse
+            FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
+            FinalResponse: {
+                // in swagger, we allow delete to return some meaningful body content
+                // for now, let assume we don't allow return type
+                StatusCodes: op.verb === "delete" ? [204] : [200],
+                BodyType:
+                    op.verb === "delete"
+                        ? undefined
+                        : getInputType(
+                              context,
+                              getFormattedType(program, metadata.logicalResult),
+                              models,
+                              enums
+                          ),
+                BodyMediaType: BodyMediaType.Json
+            } as OperationResponse
         } as OperationLongRunning;
-    }
-
-    function loadLongRunningFinalResponse(
-        context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
-    ): OperationResponse | undefined {
-        let finalResponse: any | undefined;
-        for (const response of op.responses) {
-            if (response.statusCode === "200") {
-                finalResponse = response;
-                break;
-            }
-            if (response.statusCode === "204") {
-                finalResponse = response;
-            }
-        }
-
-        if (finalResponse !== undefined) {
-            return loadOperationResponse(
-                context,
-                finalResponse,
-                resourceOperation
-            );
-        }
-
-        return loadOperationResponse(
-            context,
-            op.responses[0],
-            resourceOperation
-        );
-    }
-
-    function isLongRunningOperation(context: SdkContext, op: Operation) {
-        return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 

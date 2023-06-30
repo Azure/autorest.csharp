@@ -22,132 +22,6 @@ namespace Azure.Language.Authoring.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdate()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                projectKind = "CustomSingleLabelClassification",
-                storageInputContainerName = "<storageInputContainerName>",
-                language = "<language>",
-            };
-
-            Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdate_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                projectKind = "CustomSingleLabelClassification",
-                storageInputContainerName = "<storageInputContainerName>",
-                settings = new
-                {
-                    key = "<String>",
-                },
-                multilingual = true,
-                description = "<description>",
-                language = "<language>",
-            };
-
-            Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                projectKind = "CustomSingleLabelClassification",
-                storageInputContainerName = "<storageInputContainerName>",
-                language = "<language>",
-            };
-
-            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                projectKind = "CustomSingleLabelClassification",
-                storageInputContainerName = "<storageInputContainerName>",
-                settings = new
-                {
-                    key = "<String>",
-                },
-                multilingual = true,
-                description = "<description>",
-                language = "<language>",
-            };
-
-            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetProject()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -234,244 +108,6 @@ namespace Azure.Language.Authoring.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Delete("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Delete("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.DeleteAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.DeleteAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Export()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Export("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Export("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Importx()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Importx("<projectName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Importx_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.Importx("<projectName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Importx_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.ImportxAsync("<projectName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Importx_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.ImportxAsync("<projectName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Train()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                modelLabel = "<modelLabel>",
-            };
-
-            Response response = client.Train("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Train_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                modelLabel = "<modelLabel>",
-            };
-
-            Response response = client.Train("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Train_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                modelLabel = "<modelLabel>",
-            };
-
-            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Train_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                modelLabel = "<modelLabel>",
-            };
-
-            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetDeployment()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -520,186 +156,6 @@ namespace Azure.Language.Authoring.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_DeployProject()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new { };
-
-            Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_DeployProject_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new { };
-
-            Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeployProject_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new { };
-
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeployProject_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new { };
-
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteDeployment()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteDeployment_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteDeployment_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteDeployment_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_SwapDeployments()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                firstDeploymentName = "<firstDeploymentName>",
-                secondDeploymentName = "<secondDeploymentName>",
-            };
-
-            Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_SwapDeployments_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                firstDeploymentName = "<firstDeploymentName>",
-                secondDeploymentName = "<secondDeploymentName>",
-            };
-
-            Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_SwapDeployments_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                firstDeploymentName = "<firstDeploymentName>",
-                secondDeploymentName = "<secondDeploymentName>",
-            };
-
-            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_SwapDeployments_AllParameters_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new AuthoringClient(endpoint);
-
-            var data = new
-            {
-                firstDeploymentName = "<firstDeploymentName>",
-                secondDeploymentName = "<secondDeploymentName>",
-            };
-
-            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1170,6 +626,596 @@ namespace Azure.Language.Authoring.Samples
                 Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
                 Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
             }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrUpdate()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                projectKind = "CustomSingleLabelClassification",
+                storageInputContainerName = "<storageInputContainerName>",
+                language = "<language>",
+            };
+
+            var operation = client.CreateOrUpdate(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrUpdate_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                projectKind = "CustomSingleLabelClassification",
+                storageInputContainerName = "<storageInputContainerName>",
+                settings = new
+                {
+                    key = "<String>",
+                },
+                multilingual = true,
+                description = "<description>",
+                language = "<language>",
+            };
+
+            var operation = client.CreateOrUpdate(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("multilingual").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrUpdate_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                projectKind = "CustomSingleLabelClassification",
+                storageInputContainerName = "<storageInputContainerName>",
+                language = "<language>",
+            };
+
+            var operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrUpdate_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                projectKind = "CustomSingleLabelClassification",
+                storageInputContainerName = "<storageInputContainerName>",
+                settings = new
+                {
+                    key = "<String>",
+                },
+                multilingual = true,
+                description = "<description>",
+                language = "<language>",
+            };
+
+            var operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("multilingual").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Delete(WaitUntil.Completed, "<projectName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Delete(WaitUntil.Completed, "<projectName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Delete_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Delete_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Export()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Export_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Importx()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Importx(WaitUntil.Completed, "<projectName>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Importx_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.Importx(WaitUntil.Completed, "<projectName>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Importx_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Importx_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Train()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                modelLabel = "<modelLabel>",
+            };
+
+            var operation = client.Train(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Train_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                modelLabel = "<modelLabel>",
+            };
+
+            var operation = client.Train(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Train_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                modelLabel = "<modelLabel>",
+            };
+
+            var operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Train_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                modelLabel = "<modelLabel>",
+            };
+
+            var operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeployProject()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new { };
+
+            var operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeployProject_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new { };
+
+            var operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DeployProject_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new { };
+
+            var operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DeployProject_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new { };
+
+            var operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteDeployment()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteDeployment_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DeleteDeployment_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DeleteDeployment_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
+
+            Console.WriteLine(operation.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SwapDeployments()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                firstDeploymentName = "<firstDeploymentName>",
+                secondDeploymentName = "<secondDeploymentName>",
+            };
+
+            var operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            Console.WriteLine(responseData.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SwapDeployments_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                firstDeploymentName = "<firstDeploymentName>",
+                secondDeploymentName = "<secondDeploymentName>",
+            };
+
+            var operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            Console.WriteLine(responseData.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SwapDeployments_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                firstDeploymentName = "<firstDeploymentName>",
+                secondDeploymentName = "<secondDeploymentName>",
+            };
+
+            var operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            Console.WriteLine(responseData.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SwapDeployments_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new AuthoringClient(endpoint);
+
+            var data = new
+            {
+                firstDeploymentName = "<firstDeploymentName>",
+                secondDeploymentName = "<secondDeploymentName>",
+            };
+
+            var operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+            BinaryData responseData = operation.Value;
+            Console.WriteLine(responseData.ToString());
         }
     }
 }
