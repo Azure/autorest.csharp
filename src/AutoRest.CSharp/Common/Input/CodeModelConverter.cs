@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Common.Input
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false)
             {
-                IsKeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
+                KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
             };
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Input
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.
         public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
 
-        public bool IsKeepClientDefaultValue => Configuration.MethodsToKeepClientDefaultValue.Contains(OperationId);
+        public bool KeepClientDefaultValue => Configuration.MethodsToKeepClientDefaultValue.Contains(OperationId);
         public OperationFinalStateVia LongRunningFinalStateVia
         {
             get

@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Output.Models
                         optionalRequestParameters.Add(operationParameter);
                         break;
                     case { IsRequired: true }:
-                        if (Operation.IsKeepClientDefaultValue && operationParameter.DefaultValue != null)
+                        if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
                         {
                             optionalRequestParameters.Add(operationParameter);
                         } else
@@ -516,7 +516,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
                 : _typeFactory.CreateType(operationParameter.Type);
 
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory, Operation.IsKeepClientDefaultValue);
+            return Parameter.FromInputParameter(operationParameter, type, _typeFactory, Operation.KeepClientDefaultValue);
         }
 
         private void AddReference(string nameInRequest, InputParameter? operationParameter, Parameter parameter, SerializationFormat serializationFormat)

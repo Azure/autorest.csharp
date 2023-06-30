@@ -149,7 +149,6 @@ namespace AutoRest.CSharp.Input
             _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
-
         }
 
         private static string? DownloadLatestContract(string projectFolder)

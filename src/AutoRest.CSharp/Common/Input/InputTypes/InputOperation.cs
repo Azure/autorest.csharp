@@ -68,5 +68,5 @@ internal record InputOperation(
         }
     }
 
-    public bool IsKeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
 }
