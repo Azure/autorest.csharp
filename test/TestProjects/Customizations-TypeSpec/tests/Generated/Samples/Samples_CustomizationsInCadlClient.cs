@@ -90,6 +90,7 @@ namespace CustomizationsInCadl.Samples
                 {
                     requiredInt = 1234,
                 },
+                propertyToMoveToCustomization = "a",
             };
 
             Response response = client.RoundTrip(RequestContent.Create(data));
@@ -115,6 +116,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
         [Test]
@@ -187,6 +189,7 @@ namespace CustomizationsInCadl.Samples
                 {
                     requiredInt = 1234,
                 },
+                propertyToMoveToCustomization = "a",
             };
 
             Response response = await client.RoundTripAsync(RequestContent.Create(data));
@@ -212,6 +215,7 @@ namespace CustomizationsInCadl.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
         [Test]
@@ -254,6 +258,7 @@ namespace CustomizationsInCadl.Samples
                     AdditionalSerializableProperty = 1234,
                     AdditionalNullableSerializableProperty = 1234,
                 },
+                PropertyToMoveToCustomization = NormalEnum.A,
             };
             var result = await client.RoundTripAsync(input);
         }
