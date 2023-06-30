@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateProjectAsync(WaitUntil,Project,CancellationToken)">
+    <member name="CreateProjectAsync(Project,CancellationToken)">
 <example>
 This sample shows how to call CreateProjectAsync with required parameters.
 <code><![CDATA[
@@ -13,11 +13,11 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+var result = await client.CreateProjectAsync(resource);
 ]]></code>
 </example>
     </member>
-    <member name="CreateProject(WaitUntil,Project,CancellationToken)">
+    <member name="CreateProject(Project,CancellationToken)">
 <example>
 This sample shows how to call CreateProject with required parameters.
 <code><![CDATA[
@@ -29,24 +29,23 @@ var resource = new Project()
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = client.CreateProject(WaitUntil.Completed, resource);
+var result = client.CreateProject(resource);
 ]]></code>
 </example>
     </member>
-    <member name="CreateProjectAsync(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProjectAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call CreateProjectAsync with required parameters.
+This sample shows how to call CreateProjectAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+Response response = await client.CreateProjectAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call CreateProjectAsync with all parameters and request content.
+This sample shows how to call CreateProjectAsync with all request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
@@ -56,26 +55,24 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+Response response = await client.CreateProjectAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProject(RequestContent,RequestContext)">
 <example>
-This sample shows how to call CreateProject with required parameters.
+This sample shows how to call CreateProject.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+Response response = client.CreateProject(RequestContent.Create(data));
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call CreateProject with all parameters and request content.
+This sample shows how to call CreateProject with all request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
@@ -85,9 +82,8 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+Response response = client.CreateProject(RequestContent.Create(data));
+Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>

@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
-            var body = new object();
+            var body = new BinaryData[]
+            {
+    BinaryData.FromString("<your binary data content>")
+            };
             var result = await client.PutAsync(body);
         }
     }
