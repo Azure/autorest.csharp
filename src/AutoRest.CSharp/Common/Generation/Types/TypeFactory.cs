@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
-            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is { } type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),

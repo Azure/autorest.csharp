@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <returns></returns>
         public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, Parameter parameter)
         {
-            return writer.WriteXmlDocumentationParameter(parameter.Name, parameter.FormattableDescription);
+            return writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description is {} description ? $"{description}" : (FormattableString?)null);
         }
 
         public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, FormattableString? description)

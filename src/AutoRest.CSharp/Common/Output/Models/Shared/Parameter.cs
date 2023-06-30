@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
-        public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
@@ -83,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? $"The {operationParameter.Type.Name} to use."
+                ? $"The {type.Name} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (!type.IsFrameworkType || values == null)
@@ -108,111 +107,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             return Validation.None;
-        }
-
-        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
-        {
-            var name = requestParameter.CSharpName();
-            var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
-            var requestLocation = GetRequestLocation(requestParameter);
-
-            var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
-            var initializer = (FormattableString?)null;
-
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
-            {
-                initializer = type.GetParameterInitializer(defaultValue.Value);
-                type = type.WithNullable(true);
-                defaultValue = Constant.Default(type);
-            }
-
-            if (!requestParameter.IsRequired && defaultValue == null)
-            {
-                defaultValue = Constant.Default(type);
-            }
-
-            var validation = requestParameter.IsRequired && initializer == null
-                ? GetValidation(type, requestLocation, skipUrlEncoding)
-                : Validation.None;
-
-            var inputType = TypeFactory.GetInputType(type);
-            return new Parameter(
-                name,
-                CreateDescription(requestParameter, type),
-                inputType,
-                defaultValue,
-                validation,
-                initializer,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: skipUrlEncoding,
-                RequestLocation: requestLocation);
-        }
-
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
-            => requestParameter.In switch
-            {
-                HttpParameterIn.Uri => RequestLocation.Uri,
-                HttpParameterIn.Path => RequestLocation.Path,
-                HttpParameterIn.Query => RequestLocation.Query,
-                HttpParameterIn.Header => RequestLocation.Header,
-                HttpParameterIn.Body => RequestLocation.Body,
-                _ => RequestLocation.None
-            };
-
-        private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
-        {
-            var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
-
-            return requestParameter.Schema switch
-            {
-                ChoiceSchema choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Choices),
-                SealedChoiceSchema sealedChoiceSchema when type.IsFrameworkType => AddAllowedValues(description, sealedChoiceSchema.Choices),
-                _ => description
-            };
-
-            static string AddAllowedValues(string description, ICollection<ChoiceValue> choices)
-            {
-                var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
-
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
-            }
-        }
-
-        private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
-        {
-            if (parameter.ClientDefaultValue != null)
-            {
-                CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);
-                return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
-            }
-
-            return null;
-        }
-
-        private static Constant? ParseConstant(RequestParameter parameter, TypeFactory typeFactory)
-        {
-            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
-            {
-                return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
-            }
-
-            return null;
-        }
-
-        public static readonly IEqualityComparer<Parameter> EqualityComparerByType = new ParameterByTypeEqualityComparer();
-        private class ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
-        {
-            public bool Equals(Parameter? x, Parameter? y)
-            {
-                return Object.Equals(x?.Type, y?.Type);
-            }
-
-            public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
     }
 

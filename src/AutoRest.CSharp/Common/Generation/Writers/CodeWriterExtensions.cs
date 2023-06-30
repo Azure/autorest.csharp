@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentationSignature(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationParameters(methodBase.Modifiers.HasFlag(Public) && methodBase is not OperatorSignature ? methodBase.Parameters : methodBase.Parameters.Where(p => p.FormattableDescription is not null));
+            writer.WriteXmlDocumentationParameters(methodBase.Modifiers.HasFlag(Public) && methodBase is not OperatorSignature ? methodBase.Parameters : methodBase.Parameters.Where(p => p.Description is not null));
 
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
             writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
@@ -27,19 +28,21 @@ namespace AutoRest.CSharp.Output.Models
         private readonly IEnumerable<InputOperation> _operations;
         private readonly TypeFactory _typeFactory;
         private readonly OutputLibrary? _library;
+        private readonly SourceInputModel? _sourceInputModel;
         private readonly bool _legacyParameterSorting;
         private readonly bool _legacyParameterBuilding;
 
-        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
+        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, SourceInputModel? sourceInputModel, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
         {
             _operations = operations;
             _library = library;
+            _sourceInputModel = sourceInputModel;
             _typeFactory = typeFactory;
             _legacyParameterSorting = legacyParameterSorting;
             _legacyParameterBuilding = legacyParameterBuilding;
         }
 
-        public IEnumerable<OperationMethodsBuilderBase> Build(ValueExpression? restClientReference, ClientFields fields, string clientName)
+        public IEnumerable<OperationMethodsBuilderBase> Build(ValueExpression? restClientReference, ClientFields fields, string clientName, string clientNamespace)
         {
             var operationParameters = new Dictionary<InputOperation, ClientMethodParameters>();
 
@@ -68,7 +71,9 @@ namespace AutoRest.CSharp.Output.Models
                     ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                     : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
-                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder);
+                var existingProtocolMethod = _sourceInputModel?.FindMethod(clientNamespace, clientName, operation.CleanName, parameters.Protocol.Select(p => p.Type));
+                var protocolMethodHasOptionalParameters = existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
+                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, protocolMethodHasOptionalParameters);
 
                 if (operation.Paging is {} paging)
                 {

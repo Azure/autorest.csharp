@@ -8,6 +8,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTime_RFC1123 => "R",
+            SerializationFormat.DateTime_RFC7231 => "O",
             SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",

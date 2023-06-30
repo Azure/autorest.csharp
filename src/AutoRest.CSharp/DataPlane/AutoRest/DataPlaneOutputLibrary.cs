@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
+            ConstantSchemaTransformer.Transform(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _schemaUsageProvider);
 
             _defaultName = _input.Name;
@@ -228,9 +229,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var restClientParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline }.Union(clientParameters).ToList();
                 var clientName = GetClientName(inputClient);
-                var clientMethodsBuilder = new ClientMethodsBuilder(inputClient.Operations, this, _typeFactory, true, true);
+                var clientMethodsBuilder = new ClientMethodsBuilder(inputClient.Operations, this, null, _typeFactory, true, true);
                 var protocolMethodBuilder = ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods)
-                    ? new ClientMethodsBuilder(inputClient.Operations.Where(o => protocolMethods.Any(m => m.Equals(o.Name, StringComparison.OrdinalIgnoreCase))).ToList(), null, _typeFactory, false, false)
+                    ? new ClientMethodsBuilder(inputClient.Operations.Where(o => protocolMethods.Any(m => m.Equals(o.Name, StringComparison.OrdinalIgnoreCase))).ToList(), null, null, _typeFactory, false, false)
                     : null;
 
                 restClients.Add(inputClient, new RestClient(clientMethodsBuilder, protocolMethodBuilder, clientParameters, restClientParameters, clientName, _defaultNamespace, _sourceInputModel));

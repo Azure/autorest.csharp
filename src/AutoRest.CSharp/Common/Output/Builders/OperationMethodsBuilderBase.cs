@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string? _description;
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
+        private readonly bool _existingProtocolMethodHasOptionalParameters;
 
         public InputOperation Operation { get; }
 
@@ -69,6 +70,7 @@ namespace AutoRest.CSharp.Output.Models
             _fields = args.Fields;
             _clientName = args.ClientName;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
+            _existingProtocolMethodHasOptionalParameters = args.ExistingProtocolMethodHasOptionalParameters;
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
@@ -104,17 +106,31 @@ namespace AutoRest.CSharp.Output.Models
             var responseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
             var createRequestMethods = BuildCreateRequestMethods(responseClassifier).ToArray();
 
-            var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
+            var convenienceMethodName = ProtocolMethodName;
+            var protocolMethodParameters = ProtocolMethodParameters;
             var convenienceMethods = Array.Empty<Method>();
+
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
             {
-                var needNameChange = ProtocolMethodParameters.Where(p => !p.IsOptionalInSignature).SequenceEqual(ConvenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
-                var convenienceMethodName = needNameChange
-                    ? ProtocolMethodName.IsLastWordSingular() ? $"{ProtocolMethodName}Value" : $"{ProtocolMethodName.LastWordToSingular()}Values"
-                    : ProtocolMethodName;
+                var hasAmbiguityBetweenProtocolAndConvenience = ProtocolMethodParameters.Where(p => !p.IsOptionalInSignature).SequenceEqual(ConvenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
+                if (hasAmbiguityBetweenProtocolAndConvenience)
+                {
+                    if (!_existingProtocolMethodHasOptionalParameters && Configuration.UseOverloadsBetweenProtocolAndConvenience)
+                    {
+                        protocolMethodParameters = ConvenienceMethodParameters.SkipLast(1).Append(KnownParameters.RequestContextRequired).ToList();
+                    }
+                    else
+                    {
+                        convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
+                            ? $"{ProtocolMethodName}Value"
+                            : $"{ProtocolMethodName.LastWordToSingular()}Values";
+                    }
+                }
 
                 convenienceMethods = new[]{ BuildConvenienceMethod(convenienceMethodName, true), BuildConvenienceMethod(convenienceMethodName, false) };
             }
+
+            var protocolMethods = new[]{ BuildProtocolMethod(protocolMethodParameters, true), BuildProtocolMethod(protocolMethodParameters, false) };
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
@@ -621,9 +637,9 @@ namespace AutoRest.CSharp.Output.Models
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(bool async)
+        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, ProtocolMethodParameters, ProtocolMethodReturnType);
+            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),

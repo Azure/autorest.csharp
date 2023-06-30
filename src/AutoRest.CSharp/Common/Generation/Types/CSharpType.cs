@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
@@ -143,6 +144,56 @@ namespace AutoRest.CSharp.Generation.Types
         public override string ToString()
         {
             return new CodeWriter().Append($"{this}").ToString(false);
+        }
+
+        public bool TryGetCSharpFriendlyName([MaybeNullWhen(false)] out string name)
+        {
+            name = _type switch
+            {
+                null => null,
+                var t when t.IsGenericParameter => t.Name,
+                var t when t == typeof(bool) => "bool",
+                var t when t == typeof(byte) => "byte",
+                var t when t == typeof(sbyte) => "sbyte",
+                var t when t == typeof(short) => "short",
+                var t when t == typeof(ushort) => "ushort",
+                var t when t == typeof(int) => "int",
+                var t when t == typeof(uint) => "uint",
+                var t when t == typeof(long) => "long",
+                var t when t == typeof(ulong) => "ulong",
+                var t when t == typeof(char) => "char",
+                var t when t == typeof(double) => "double",
+                var t when t == typeof(float) => "float",
+                var t when t == typeof(object) => "object",
+                var t when t == typeof(decimal) => "decimal",
+                var t when t == typeof(string) => "string",
+                _ => null
+            };
+
+            return name != null;
+        }
+
+        public string ToStringForDocs()
+        {
+            var sb = new StringBuilder(TryGetCSharpFriendlyName(out var keywordName) ? keywordName : Name);
+            if (IsNullable && IsValueType)
+            {
+                sb.Append("?");
+            }
+
+            if (Arguments.Any())
+            {
+                sb.Append("{");
+                foreach (var argument in Arguments)
+                {
+                    sb.Append(argument.ToStringForDocs()).Append(",");
+                }
+
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("}");
+            }
+
+            return sb.ToString();
         }
 
         internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)

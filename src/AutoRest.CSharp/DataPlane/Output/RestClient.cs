@@ -45,12 +45,12 @@ namespace AutoRest.CSharp.Output.Models
 
             var restClient = new MemberReference(null, "RestClient");
             Methods = clientMethodsBuilder
-                .Build(restClient, Fields, clientPrefix + GetClientSuffix())
+                .Build(restClient, Fields, clientPrefix + GetClientSuffix(), Declaration.Namespace)
                 .Select(b => b.BuildLegacy())
                 .ToList();
 
             ProtocolMethods = protocolMethodsBuilder?
-                .Build(Snippets.Null, Fields, clientPrefix + GetClientSuffix())
+                .Build(Snippets.Null, Fields, clientPrefix + GetClientSuffix(), Declaration.Namespace)
                 .Select(b => b.BuildDpg())
                 .ToList();
         }

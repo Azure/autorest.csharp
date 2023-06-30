@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var methods = new ClientMethodsBuilder(operations, null, typeFactory, false, false).Build(null, Fields, Declaration.Name).Select(b => b.BuildDpg()).ToList();
+            var methods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory, false, false).Build(null, Fields, Declaration.Name, Declaration.Namespace).Select(b => b.BuildDpg()).ToList();
 
             // Temporary sorting to minimize amount of changes in generated code.
             ClientMethods = methods

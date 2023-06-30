@@ -6,5 +6,5 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record OperationMethodsBuilderBaseArgs(InputOperation Operation, ValueExpression? RestClientReference, ClientFields Fields, string ClientName, StatusCodeSwitchBuilder StatusCodeSwitchBuilder);
+    internal record OperationMethodsBuilderBaseArgs(InputOperation Operation, ValueExpression? RestClientReference, ClientFields Fields, string ClientName, StatusCodeSwitchBuilder StatusCodeSwitchBuilder, bool ExistingProtocolMethodHasOptionalParameters);
 }

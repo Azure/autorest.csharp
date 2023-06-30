@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
-            { Schema: ConstantSchema } => InputOperationParameterKind.Constant,
+            { Schema: ConstantSchema, IsRequired: true } => InputOperationParameterKind.Constant,
 
             // Grouped and flattened parameters shouldn't be added to methods
             { IsFlattened: true } => InputOperationParameterKind.Flattened,
@@ -318,11 +318,17 @@ namespace AutoRest.CSharp.Common.Input
             {
                 return Array.Empty<OperationResponseHeader>();
             }
-            return headers.Select(header => CreateResponseHeader(header)).ToList();
+            return headers.Select(CreateResponseHeader).ToList();
         }
 
-        public InputType CreateType(RequestParameter requestParameter)
-            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
+        private InputType CreateType(RequestParameter requestParameter)
+        {
+            var sc = requestParameter is { Schema: ConstantSchema constantSchema }
+                ? constantSchema.ValueType
+                : requestParameter.Schema;
+
+            return CreateType(sc, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
+        }
 
         private static InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
             => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
@@ -455,7 +461,7 @@ namespace AutoRest.CSharp.Common.Input
                 return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 
-            if (parameter.Schema is ConstantSchema constantSchema)
+            if (parameter is { Schema: ConstantSchema constantSchema, IsRequired: true })
             {
                 return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
             }

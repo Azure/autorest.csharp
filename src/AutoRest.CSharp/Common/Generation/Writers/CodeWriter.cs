@@ -319,12 +319,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration = false)
         {
-            string? mappedName = type.IsFrameworkType
-                ? GetTypeNameMapping(type.FrameworkType)
-                : isDeclaration ? type.Implementation.Declaration.Name : null;
-            if (mappedName != null)
+            if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
-                AppendRaw(mappedName);
+                AppendRaw(keywordName);
+            }
+            else if (isDeclaration)
+            {
+                AppendRaw(type.Implementation.Declaration.Name);
             }
             else
             {
@@ -353,28 +354,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw("?");
             }
         }
-
-        internal static string? GetTypeNameMapping(Type? type) => type switch
-        {
-            null => null,
-            var t when t.IsGenericParameter => t.Name,
-            var t when t == typeof(bool) => "bool",
-            var t when t == typeof(byte) => "byte",
-            var t when t == typeof(sbyte) => "sbyte",
-            var t when t == typeof(short) => "short",
-            var t when t == typeof(ushort) => "ushort",
-            var t when t == typeof(int) => "int",
-            var t when t == typeof(uint) => "uint",
-            var t when t == typeof(long) => "long",
-            var t when t == typeof(ulong) => "ulong",
-            var t when t == typeof(char) => "char",
-            var t when t == typeof(double) => "double",
-            var t when t == typeof(float) => "float",
-            var t when t == typeof(object) => "object",
-            var t when t == typeof(decimal) => "decimal",
-            var t when t == typeof(string) => "string",
-            _ => null
-        };
 
         public CodeWriter Literal(object? o)
         {

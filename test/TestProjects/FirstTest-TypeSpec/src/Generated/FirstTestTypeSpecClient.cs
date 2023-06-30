@@ -91,7 +91,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -102,7 +102,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -127,7 +127,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -163,7 +163,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -534,7 +534,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
+        /// <param name="repeatabilityFirstSent"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -565,7 +565,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
+        /// <param name="repeatabilityFirstSent"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

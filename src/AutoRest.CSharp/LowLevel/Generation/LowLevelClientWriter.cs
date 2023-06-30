@@ -57,9 +57,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (clientMethod.Convenience.Any())
                         {
-                            WriteConvenienceMethodDocumentation(_writer, (MethodSignature)clientMethod.Convenience[0].Signature);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(_writer, (MethodSignature)clientMethod.Convenience[0].Signature);
                             _writer.WriteMethod(clientMethod.Convenience[0]);
-                            WriteConvenienceMethodDocumentation(_writer, (MethodSignature)clientMethod.Convenience[1].Signature);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(_writer, (MethodSignature)clientMethod.Convenience[1].Signature);
                             _writer.WriteMethod(clientMethod.Convenience[1]);
 
                             WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, (MethodSignature)clientMethod.Convenience[0].Signature, true);
@@ -323,6 +323,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(CodeWriter writer, MethodSignature convenienceMethod)
+        {
+            writer.WriteMethodDocumentation(convenienceMethod);
+            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
+            var docRef = GetMethodSignatureString(convenienceMethod);
+            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
+        }
+
         private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature protocolMethod, MethodSignature? convenienceMethod, bool async)
         {
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
@@ -337,13 +345,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
-        {
-            var builder = new StringBuilder(signature.Name);
-            builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.Name)));
-            builder.Append(")");
-            return builder.ToString();
-        }
+            => $"{signature.Name}({string.Join(",", signature.Parameters.Select(p => p.Type.ToStringForDocs()))})";
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature methodSignature)
         {
@@ -430,7 +432,7 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
             {
                 text = hasResponseRemarks
-                    ? $"The response returned from the service. Details of the response body schema are in the Remarks section below."
+                    ? $"The response returned from the service."
                     : (FormattableString)$"The response returned from the service.";
             }
             else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
