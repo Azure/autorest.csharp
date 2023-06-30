@@ -46,7 +46,7 @@
         "lodash.isequal": "^4.5.0",
         "mocha": "~9.2.0",
         "rimraf": "~3.0.2",
-        "typescript": "~4.9.4"
+        "typescript": "~5.1.5"
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",

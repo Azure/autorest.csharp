@@ -76,7 +76,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +180,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,7 +219,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

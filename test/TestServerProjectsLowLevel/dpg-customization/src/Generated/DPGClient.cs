@@ -126,7 +126,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. 
+        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -162,7 +162,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. 
+        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
         /// <list type="bullet">
         /// <item>
         /// <description>
