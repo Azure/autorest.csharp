@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CreateOrReplaceAsync(WaitUntil,string,User,CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplaceAsync with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var resource = new User("<role>");
+var operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", resource);
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplace(WaitUntil,string,User,CancellationToken)">
+<example>
+This sample shows how to call CreateOrReplace with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var resource = new User("<role>");
+var operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", resource);
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplaceAsync(WaitUntil,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrReplaceAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var client = new StandardClient();
+
+var data = new {
+    role = "<role>",
+};
+
+var operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", RequestContent.Create(data));
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("role").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="CreateOrReplace(WaitUntil,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateOrReplace with required parameters and request content and parse the result.
+<code><![CDATA[
+var client = new StandardClient();
+
+var data = new {
+    role = "<role>",
+};
+
+var operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", RequestContent.Create(data));
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("role").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="DeleteAsync(WaitUntil,string,RequestContext)">
+<example>
+This sample shows how to call DeleteAsync with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = await client.DeleteAsync(WaitUntil.Completed, "<name>");
+
+Console.WriteLine(operation.GetRawResponse().Status);
+]]></code>
+</example>
+    </member>
+    <member name="Delete(WaitUntil,string,RequestContext)">
+<example>
+This sample shows how to call Delete with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = client.Delete(WaitUntil.Completed, "<name>");
+
+Console.WriteLine(operation.GetRawResponse().Status);
+]]></code>
+</example>
+    </member>
+    <member name="ExportAsync(WaitUntil,string,string,CancellationToken)">
+<example>
+This sample shows how to call ExportAsync with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>");
+]]></code>
+</example>
+    </member>
+    <member name="Export(WaitUntil,string,string,CancellationToken)">
+<example>
+This sample shows how to call Export with required parameters.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = client.Export(WaitUntil.Completed, "<name>", "<format>");
+]]></code>
+</example>
+    </member>
+    <member name="ExportAsync(WaitUntil,string,string,RequestContext)">
+<example>
+This sample shows how to call ExportAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("resourceUri").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Export(WaitUntil,string,string,RequestContext)">
+<example>
+This sample shows how to call Export with required parameters and parse the result.
+<code><![CDATA[
+var client = new StandardClient();
+
+var operation = client.Export(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("resourceUri").ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

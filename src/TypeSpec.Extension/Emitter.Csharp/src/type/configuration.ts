@@ -14,4 +14,5 @@ export interface Configuration {
     "model-namespace"?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
+    "methods-to-keep-client-default-value"?: string[];
 }
