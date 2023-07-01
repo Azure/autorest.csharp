@@ -3,7 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
-{
-    public InputConstant? DefaultValue { get; init; }
-}
+internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, InputConstant? ConstantValue, bool IsRequired, bool IsReadOnly, bool IsDiscriminator);

@@ -90,6 +90,11 @@ namespace AutoRest.CSharp.Common.Input
             }
             Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out var parameterKind);
 
+            if (parameterType is InputLiteralType literalType)
+            {
+                parameterType = literalType.LiteralValueType;
+            }
+
             var parameter = new InputParameter(
                 Name: name,
                 NameInRequest: nameInRequest,

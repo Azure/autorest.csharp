@@ -62,7 +62,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
-            IsNumericValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long)) || ValueType.Equals(typeof(float));
+            IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+            IsFloatValueType = ValueType.Equals(typeof(float));
+            IsNumericValueType = IsIntValueType || IsFloatValueType;
 
             if (IsExtensible)
             {
@@ -72,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                SerializationMethod = IsStringValueType ? CreateSerializationMethod(this) : null;
+                SerializationMethod = IsStringValueType || IsFloatValueType ? CreateSerializationMethod(this) : null;
                 DeserializationMethod = CreateDeserializationMethod(this);
                 EqualsMethod = null;
             }
@@ -80,6 +82,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
+        public bool IsIntValueType { get; }
+        public bool IsFloatValueType { get; }
         public bool IsStringValueType { get; }
         public bool IsNumericValueType { get; }
         public Method? EqualsMethod { get; }

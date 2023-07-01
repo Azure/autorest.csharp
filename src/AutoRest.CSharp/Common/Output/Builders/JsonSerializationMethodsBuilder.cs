@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value);
 
-                case EnumType { IsNumericValueType: true, IsExtensible: false } enumType:
+                case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
 
                 case EnumType { IsNumericValueType: true } enumType:
@@ -424,7 +424,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
             => propertySerializations
                 .Where(p => !p.ShouldSkipDeserialization)
-                .Select(p => new IfElseStatement(jsonProperty.NameEquals(p.SerializedName), DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull).AsStatement(), null))
+                .Select(p => new IfStatement(jsonProperty.NameEquals(p.SerializedName))
+                {
+                    DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull).AsStatement()
+                })
                 .ToArray();
 
         private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
@@ -515,7 +518,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     if (!jsonProperty.IsRequired)
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
+                        {
                             type = new CSharpType(type.Arguments[0].FrameworkType);
+                        }
                         type = new CSharpType(typeof(Optional<>), type);
                     }
 

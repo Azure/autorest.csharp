@@ -21,10 +21,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtensible:
+                case EnumType { IsExtensible: true } e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtensible:
+                case EnumType { IsExtensible: false } e:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -293,13 +293,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"{enumType.Description}");
                 AddClassAttributes(writer, enumType);
                 writer.Append($"{enumType.Declaration.Accessibility} enum {enumType.Declaration.Name}")
-                    .AppendIf($" : {enumType.ValueType}", enumType.IsNumericValueType && !enumType.ValueType.Equals(typeof(int)));
+                    .AppendIf($" : {enumType.ValueType}", enumType.IsIntValueType && !enumType.ValueType.Equals(typeof(int)));
                 using (writer.Scope())
                 {
                     foreach (EnumTypeValue value in enumType.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{value.Description}");
-                        if (enumType.IsNumericValueType)
+                        if (enumType.IsIntValueType)
                         {
                             writer.Line($"{value.Declaration.Name} = {value.Value.Value:L},");
                         }

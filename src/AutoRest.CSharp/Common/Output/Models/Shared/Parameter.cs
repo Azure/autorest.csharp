@@ -108,6 +108,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             return Validation.None;
         }
+
+        public static readonly IEqualityComparer<Parameter> EqualityComparerByType = new ParameterByTypeEqualityComparer();
+        private class ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y) => Equals(x?.Type, y?.Type);
+            public int GetHashCode(Parameter obj) => obj.Type.GetHashCode();
+        }
     }
 
     internal record Validation(ValidationType Type, object? Data)

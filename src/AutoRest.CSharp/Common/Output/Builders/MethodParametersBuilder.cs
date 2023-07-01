@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var property in model.Properties)
                 {
-                    if (property is { IsReadOnly: true, IsDiscriminator: false, Type: not InputLiteralType })
+                    if (property is { IsReadOnly: true, IsDiscriminator: false, ConstantValue: null })
                     {
                         continue;
                     }
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateSpreadParameter(InputParameter inputParameter, InputModelProperty property)
         {
             var parameterType = TypeFactory.GetInputType(_typeFactory.CreateType(property.Type));
-            Parameter.CreateDefaultValue(ref parameterType, _typeFactory, property.DefaultValue, false, property.IsRequired, out var defaultValue, out var initializer);
+            Parameter.CreateDefaultValue(ref parameterType, _typeFactory, property.ConstantValue, false, property.IsRequired, out var defaultValue, out var initializer);
             var validation = property.IsRequired && initializer == null
                 ? Parameter.GetValidation(parameterType, inputParameter.Location, false)
                 : Validation.None;

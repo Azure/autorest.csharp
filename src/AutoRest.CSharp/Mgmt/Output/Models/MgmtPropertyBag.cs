@@ -37,10 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 string? description = parameter.Description;
                 if (description == null)
                     description = $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false)
-                {
-                    DefaultValue = parameter.DefaultValue == null ? null : inputParameter.DefaultValue
-                };
+                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";

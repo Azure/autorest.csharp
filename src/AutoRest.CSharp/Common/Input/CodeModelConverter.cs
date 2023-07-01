@@ -260,6 +260,7 @@ namespace AutoRest.CSharp.Common.Input
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
             Type: CreateType(property.Schema, _modelsCache, property.IsNullable),
+            ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, _modelsCache) : null,
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false
@@ -375,7 +376,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
-            ConstantSchema constantSchema => CreateLiteralType(constantSchema, format, modelsCache),
+            ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache).Type,
 
             CredentialSchema => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
@@ -396,7 +397,7 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema)
         };
 
-        private static InputLiteralType CreateLiteralType(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
+        private static InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
         {
             var valueType = CreateType(constantSchema.ValueType, format, modelsCache);
             // normalize the value, because the "value" coming from the code model is always a string
@@ -417,7 +418,7 @@ namespace AutoRest.CSharp.Common.Input
                 _ => rawValue
             };
 
-            return new InputLiteralType("Literal", valueType, normalizedValue);
+            return new InputConstant(normalizedValue, valueType);
         }
 
         public static InputEnumType CreateEnumType(ChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
