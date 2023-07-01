@@ -323,14 +323,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(CodeWriter writer, MethodSignature convenienceMethod)
-        {
-            writer.WriteMethodDocumentation(convenienceMethod);
-            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
-            var docRef = GetMethodSignatureString(convenienceMethod);
-            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-        }
-
         private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature protocolMethod, MethodSignature? convenienceMethod, bool async)
         {
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
@@ -342,6 +334,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, protocolMethod, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, protocolMethod, remarks, hasRequestRemarks, hasResponseRemarks);
             }
+        }
+
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(CodeWriter writer, MethodSignature convenienceMethod)
+        {
+            writer.WriteMethodDocumentation(convenienceMethod);
+            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
+            var docRef = GetMethodSignatureString(convenienceMethod);
+            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
@@ -530,11 +530,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return false;
             }
         }
+
         private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
         {
-            if (schemas.Count <= 0)
+            if (clientMethod.Operation.ExternalDocsUrl == null)
             {
-                writeXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
                 return;
             }
 

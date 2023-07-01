@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
+                  serializationFormat: SerializationBuilder.GetSerializationFormat(inputModelProperty.Type),
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.DefaultValue;
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -52,8 +53,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
+            SerializationFormat = serializationFormat;
             SerializationMapping = serializationMapping;
         }
+
+        public SerializationFormat SerializationFormat { get; }
 
         public ObjectTypeProperty MarkFlatten()
         {
@@ -192,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private FormattableString CreatePropertyDescription()
         {
             var propertyDescription = Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type);
+            var binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type);
             if (!string.IsNullOrWhiteSpace(propertyDescription))
             {
                 return $"{propertyDescription}{binaryDataExtraDescription}";
@@ -203,30 +207,29 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
         {
-            if (!type.IsFrameworkType || InputModelProperty is null)
+            if (!type.IsFrameworkType)
             {
                 return $"";
             }
 
-            var serializationFormat = SerializationBuilder.GetSerializationFormat(InputModelProperty.Type);
-            if (type.FrameworkType == typeof(BinaryData))
+            if (type.Equals(typeof(BinaryData)))
             {
-                return ConstructBinaryDataDescription("this property", serializationFormat);
+                return ConstructBinaryDataDescription("this property");
             }
             if (TypeFactory.IsList(type) && type.Arguments[0].IsFrameworkType && type.Arguments[0].FrameworkType == typeof(BinaryData))
             {
-                return ConstructBinaryDataDescription("the element of this property", serializationFormat);
+                return ConstructBinaryDataDescription("the element of this property");
             }
             if (TypeFactory.IsDictionary(type) && type.Arguments[1].IsFrameworkType && type.Arguments[1].FrameworkType == typeof(BinaryData))
             {
-                return ConstructBinaryDataDescription("the value of this property", serializationFormat);
+                return ConstructBinaryDataDescription("the value of this property");
             }
             return $"";
         }
 
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
         {
-            switch (serializationFormat)
+            switch (SerializationFormat)
             {
                 case SerializationFormat.Bytes_Base64Url: //intentional fall through
                 case SerializationFormat.Bytes_Base64:
