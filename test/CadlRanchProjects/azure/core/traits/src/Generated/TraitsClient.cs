@@ -313,6 +313,7 @@ namespace _Specs_.Azure.Core.Traits
             uri.AppendPath(":repeatableAction", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (repeatabilityRequestId != null)
             {
                 request.Headers.Add("Repeatability-Request-ID", repeatabilityRequestId);
@@ -321,7 +322,6 @@ namespace _Specs_.Azure.Core.Traits
             {
                 request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
             }
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

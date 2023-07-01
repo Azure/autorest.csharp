@@ -161,7 +161,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)">
+    <member name="UpdateAsync(string,string,string,string,RequestContent,string,RequestContext)">
 <example>
 This sample shows how to call UpdateAsync with required parameters.
 <code><![CDATA[
@@ -170,7 +170,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = new {};
 
-Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UpdateAsync with all parameters and request content.
@@ -182,12 +182,12 @@ var data = new {
     invalid_int_name = 1234,
 };
 
-Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value");
+Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Update(string,string,string,RequestContent,string,string,RequestContext)">
+    <member name="Update(string,string,string,string,RequestContent,string,RequestContext)">
 <example>
 This sample shows how to call Update with required parameters.
 <code><![CDATA[
@@ -196,7 +196,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = new {};
 
-Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Update with all parameters and request content.
@@ -208,7 +208,7 @@ var data = new {
     invalid_int_name = 1234,
 };
 
-Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value");
+Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

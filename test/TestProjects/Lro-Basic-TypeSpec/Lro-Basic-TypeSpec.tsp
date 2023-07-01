@@ -43,6 +43,8 @@ model Thing {
 interface Authoring {
   createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
 
+  // know issue: https://github.com/Azure/typespec-azure/issues/3109
+  // this definition is broken
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;

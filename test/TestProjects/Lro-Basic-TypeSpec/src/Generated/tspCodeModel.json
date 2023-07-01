@@ -253,37 +253,11 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "LongRunning": {
-      "$id": "30",
-      "FinalStateVia": 1,
-      "FinalResponse": {
-       "$id": "31",
-       "StatusCodes": [
-        202
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "32",
-         "Name": "Location",
-         "NameInResponse": "location",
-         "Description": "",
-         "Type": {
-          "$id": "33",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false
-      }
-     },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "30",
      "Name": "updateProject",
      "ResourceName": "Project",
      "Description": "The most basic operation.",
@@ -295,11 +269,11 @@
        "$ref": "16"
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "36",
+        "$id": "32",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -315,7 +289,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "37",
+       "$id": "33",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -333,11 +307,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "38",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "39",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -352,19 +326,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "36",
         "Type": {
-         "$ref": "39"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "38",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -379,9 +353,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "39",
         "Type": {
-         "$ref": "42"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -389,7 +363,7 @@
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -399,12 +373,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "45",
+         "$id": "41",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "46",
+          "$id": "42",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -414,7 +388,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "47",
+       "$id": "43",
        "StatusCodes": [
         201
        ],
@@ -424,12 +398,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "48",
+         "$id": "44",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "49",
+          "$id": "45",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -448,39 +422,24 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "50",
-      "FinalStateVia": 1,
+      "$id": "46",
+      "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "51",
+       "$id": "47",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "52",
-         "Name": "Operation-Location",
-         "NameInResponse": "operationLocation",
-         "Description": "The location for monitoring the operation state.",
-         "Type": {
-          "$id": "53",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false
+       "BodyMediaType": "Json"
       }
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "48",
      "Name": "createThing",
      "ResourceName": "Authoring",
      "Description": "Long running RPC operation template",
@@ -492,7 +451,7 @@
        "$ref": "16"
       },
       {
-       "$id": "55",
+       "$id": "49",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
@@ -509,11 +468,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "56",
+       "$id": "50",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "57",
+        "$id": "51",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -528,19 +487,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "52",
         "Type": {
-         "$ref": "57"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "59",
+       "$id": "53",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "54",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -555,9 +514,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "55",
         "Type": {
-         "$ref": "60"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
@@ -565,7 +524,7 @@
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "56",
        "StatusCodes": [
         202
        ],
@@ -575,12 +534,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "63",
+         "$id": "57",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "64",
+          "$id": "58",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -599,32 +558,17 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "65",
-      "FinalStateVia": 1,
+      "$id": "59",
+      "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "66",
+       "$id": "60",
        "StatusCodes": [
-        202
+        200
        ],
        "BodyType": {
         "$ref": "9"
        },
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "67",
-         "Name": "Operation-Location",
-         "NameInResponse": "operationLocation",
-         "Description": "The location for monitoring the operation state.",
-         "Type": {
-          "$id": "68",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false
+       "BodyMediaType": "Json"
       }
      },
      "GenerateProtocolMethod": true,
@@ -632,7 +576,7 @@
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "61"
    },
    "Creatable": true
   }
