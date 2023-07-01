@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 AppendRaw(keywordName);
             }
-            else if (isDeclaration)
+            else if (isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
             }
