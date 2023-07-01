@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility => "public";
 
+        private readonly TypeFactory _typeFactory;
         private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
@@ -55,6 +57,7 @@ namespace AutoRest.CSharp.Output.Models
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
+            _typeFactory = typeFactory;
 
             ClientOptions = clientOptions;
 
@@ -220,5 +223,130 @@ namespace AutoRest.CSharp.Output.Models
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
+
+        internal MethodSignatureBase? GetEffectiveCtor()
+        {
+            //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
+            //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
+
+            List<ConstructorSignature> candidates = new(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
+
+            if (ExistingType is null)
+            {
+                return candidates.MinBy(c => c.Parameters.Count);
+            }
+
+            //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+            //remove suppressed ctors from the candidates
+            foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+            {
+                if (attribute.ConstructorArguments.Length != 2)
+                    continue;
+                var classTarget = attribute.ConstructorArguments[0].Value;
+                if (classTarget is null || !classTarget.Equals(DefaultName))
+                    continue;
+
+                candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()));
+            }
+
+            // add custom ctors into the candidates
+            foreach (var existingCtor in ExistingType.Constructors)
+            {
+                var parameters = existingCtor.Parameters;
+                var modifiers = GetModifiers(existingCtor);
+                bool isPublic = modifiers.HasFlag(Public);
+                //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
+                if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
+                {
+                    if (!isPublic)
+                        candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray()));
+                    continue;
+                }
+                var ctor = new ConstructorSignature(
+                    DefaultName,
+                    GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
+                    null,
+                    modifiers,
+                    parameters.Select(p => new Parameter(p.Name, p.GetDocumentationCommentXml(), ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!, null, Validation.None, null)).ToArray(),
+                    null);
+                candidates.Add(ctor);
+            }
+
+            return candidates.MinBy(c => c.Parameters.Count);
+        }
+
+        private string? GetSummaryPortion(string? xmlComment)
+        {
+            if (xmlComment is null)
+                return null;
+
+            ReadOnlySpan<char> span = xmlComment.AsSpan();
+            int start = span.IndexOf("<summary>");
+            if (start == -1)
+                return null;
+            start += 9;
+            int end = span.IndexOf("</summary>");
+            if (end == -1)
+                return null;
+            return span.Slice(start, end - start).Trim().ToString();
+        }
+
+        private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, INamedTypeSymbol[] suppressionParameters)
+        {
+            if (methodParameters.Count != suppressionParameters.Length)
+                return false;
+
+            for (int i = 0; i < methodParameters.Count; i++)
+            {
+                if (!suppressionParameters[i].IsSameType(methodParameters[i].Type))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private MethodSignatureModifiers GetModifiers(IMethodSymbol existingCtor)
+        {
+            MethodSignatureModifiers result = GetAccessModifier(existingCtor.DeclaredAccessibility);
+            if (existingCtor.IsStatic)
+            {
+                result |= Static;
+            }
+            if (existingCtor.IsVirtual)
+            {
+                result |= Virtual;
+            }
+            return result;
+        }
+
+        private static MethodSignatureModifiers GetAccessModifier(Accessibility declaredAccessibility) => declaredAccessibility switch
+        {
+            Accessibility.Public => Public,
+            Accessibility.Protected => Protected,
+            Accessibility.Internal => Internal,
+            _ => Private
+        };
+
+        internal bool IsMethodSuppressed(MethodSignature signature)
+        {
+            if (ExistingType is null)
+                return false;
+
+            //[CodeGenSuppress("GetTests", typeof(string), typeof(string), typeof(DateTimeOffset?), typeof(DateTimeOffset?), typeof(int?), typeof(RequestContext))]
+            //remove suppressed ctors from the candidates
+            foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+            {
+                if (attribute.ConstructorArguments.Length != 2)
+                    continue;
+                var methodTarget = attribute.ConstructorArguments[0].Value;
+                if (methodTarget is null || !methodTarget.Equals(signature.Name))
+                    continue;
+
+                if (IsParamMatch(signature.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

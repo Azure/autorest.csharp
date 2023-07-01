@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelExampleComposer
     {
+        private readonly LowLevelClient _client;
         private static readonly CSharpType UriType = new CSharpType(typeof(Uri));
         private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
         private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
@@ -28,12 +29,29 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public LowLevelExampleComposer(LowLevelClient client)
         {
+            _client = client;
             ClientTypeName = client.Type.Name;
             ClientInvocationChain = GetClientInvocationChain(client);
         }
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, MethodSignature signature, bool async)
         {
+            //skip non public protocol methods
+            if ((signature.Modifiers & MethodSignatureModifiers.Public) == 0)
+                return $"";
+
+            //skip obsolete protocol methods
+            if (signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
+                return $"";
+
+            //skip suppressed protocol methods
+            if (_client.IsMethodSuppressed(signature))
+                return $"";
+
+            //skip if there are no valid ctors
+            if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
+                return $"";
+
             var requestBodyType = clientMethod.RequestBodyType;
             var builder = new StringBuilder();
 
