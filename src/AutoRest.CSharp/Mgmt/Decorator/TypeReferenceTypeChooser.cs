@@ -42,6 +42,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             foreach (System.Type replacementType in TypeReferenceTypes)
             {
+                // DataFactory reference types should only be used to replace generated types in a DataFactory namespace.
+                if (replacementType.Assembly.GetName().Name == "Azure.Core.Expressions.DataFactory" &&
+                    !typeToReplace.Type.Namespace.Contains("DataFactory"))
+                {
+                    continue;
+                }
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
                     var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
