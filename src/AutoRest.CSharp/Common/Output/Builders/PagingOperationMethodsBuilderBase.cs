@@ -35,9 +35,12 @@ namespace AutoRest.CSharp.Output.Models
             ItemPropertyName = paging.ItemName ?? "value";
             NextLinkName = paging.NextLinkName;
 
-            CreateNextPageMessageMethodName = paging is { NextLinkOperation: { } nextLinkOperation }
-                ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
-                : paging is { NextLinkName: { }} ? $"Create{ProtocolMethodName}NextPageRequest" : null;
+            CreateNextPageMessageMethodName = paging switch {
+                { SelfNextLink: true } => $"Create{Operation.CleanName}Request",
+                { NextLinkOperation: { } nextLinkOperation } => $"Create{nextLinkOperation.CleanName}Request",
+                { NextLinkName: { }} => $"Create{ProtocolMethodName}NextPageRequest",
+                _ => null
+            };
 
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
         }
@@ -46,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var legacy = base.BuildLegacy();
 
-            if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null })
+            if (CreateNextPageMessageMethodName is null || Paging is not { NextLinkOperation: null, SelfNextLink: false })
             {
                 return legacy with
                 {
@@ -84,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var createRequestMethod = BuildCreateRequestMethod(responseClassifierType);
             yield return createRequestMethod;
-            if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
+            if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null, SelfNextLink: false })
             {
                 yield return BuildCreateNextPageRequestMethod(CreateNextPageMessageMethodName, createRequestMethod.Signature.Summary, createRequestMethod.Signature.Description);
             }

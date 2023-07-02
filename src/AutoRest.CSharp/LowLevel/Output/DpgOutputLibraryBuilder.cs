@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<InputClient> UpdateOperations()
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
-            // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
+            // this map of old/new InputOperation is to correctly resolve references between operations
             var operationsMap = new Dictionary<InputOperation, Func<InputOperation>>();
             foreach (var client in _rootNamespace.Clients)
             {
@@ -158,19 +158,7 @@ namespace AutoRest.CSharp.Output.Models
                     operationsMap.CreateAndCacheResult(operation, () => UpdateOperation(operation, clientName, operationsMap));
                 }
             }
-
-            var clients = new List<InputClient>();
-            foreach (var client in _rootNamespace.Clients)
-            {
-                var operations = new List<InputOperation>();
-                foreach (var operation in client.Operations)
-                {
-                    operations.Add(operationsMap[operation]());
-                }
-                clients.Add(client with { Operations = operations });
-            }
-
-            return clients;
+            return _rootNamespace.Clients.Select(client => client with { Operations = client.Operations.Select(operation => operationsMap[operation]()).ToList() }).ToList();
         }
 
         private static InputOperation UpdateOperation(in InputOperation operation, string clientName, IDictionary<InputOperation, Func<InputOperation>> operationsMap)

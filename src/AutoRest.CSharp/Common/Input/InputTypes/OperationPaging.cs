@@ -5,7 +5,7 @@ using System;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationPaging(string? NextLinkName, string? ItemName, InputOperation? NextLinkOperation)
+internal record OperationPaging(string? NextLinkName, string? ItemName, InputOperation? NextLinkOperation, bool SelfNextLink)
 {
-    public OperationPaging() : this(null, null, null) { }
+    public OperationPaging() : this(null, null, null, false) { }
 }

@@ -182,10 +182,10 @@ namespace AutoRest.CSharp.Common.Input
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
             if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, nextLinkOperationRef());
+                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null);
+            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)

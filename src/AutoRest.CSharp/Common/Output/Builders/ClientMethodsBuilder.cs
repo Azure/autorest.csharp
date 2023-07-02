@@ -79,6 +79,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     var createNextPageMessageMethodParameters = paging switch
                     {
+                        { SelfNextLink: true } => parameters.CreateMessage,
                         { NextLinkOperation: {} nextLinkOperation } => operationParameters[nextLinkOperation].CreateMessage,
                         { NextLinkName: {}} => parameters.CreateMessage.Prepend(KnownParameters.NextLink).ToArray(),
                         _ => Array.Empty<Parameter>()
