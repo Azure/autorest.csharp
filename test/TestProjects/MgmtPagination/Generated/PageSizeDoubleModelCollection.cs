@@ -66,7 +66,7 @@ namespace MgmtPagination
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="data"> The PageSizeDoubleModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -106,7 +106,7 @@ namespace MgmtPagination
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="data"> The PageSizeDoubleModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -145,7 +145,7 @@ namespace MgmtPagination
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -181,7 +181,7 @@ namespace MgmtPagination
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -262,7 +262,7 @@ namespace MgmtPagination
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -297,7 +297,7 @@ namespace MgmtPagination
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>

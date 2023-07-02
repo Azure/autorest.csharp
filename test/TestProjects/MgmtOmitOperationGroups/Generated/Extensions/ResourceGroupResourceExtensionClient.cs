@@ -102,7 +102,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model5SName"> The String to use. </param>
+        /// <param name="model5SName"> The string to use. </param>
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
@@ -133,7 +133,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model5SName"> The String to use. </param>
+        /// <param name="model5SName"> The string to use. </param>
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
@@ -164,7 +164,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model5SName"> The String to use. </param>
+        /// <param name="model5SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
@@ -194,7 +194,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model5SName"> The String to use. </param>
+        /// <param name="model5SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
