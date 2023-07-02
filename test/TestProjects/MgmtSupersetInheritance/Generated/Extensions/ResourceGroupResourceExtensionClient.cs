@@ -87,7 +87,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel2SName"> The String to use. </param>
+        /// <param name="supersetModel2SName"> The string to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
@@ -118,7 +118,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel2SName"> The String to use. </param>
+        /// <param name="supersetModel2SName"> The string to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel2SName"> The String to use. </param>
+        /// <param name="supersetModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
@@ -179,7 +179,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel2SName"> The String to use. </param>
+        /// <param name="supersetModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel2> GetSupersetModel2(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
@@ -209,7 +209,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="supersetModel3SName"> The string to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
@@ -240,7 +240,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="supersetModel3SName"> The string to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
@@ -271,7 +271,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="supersetModel3SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
@@ -301,7 +301,7 @@ namespace MgmtSupersetInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="supersetModel3SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel3> GetSupersetModel3(string supersetModel3SName, CancellationToken cancellationToken = default)
         {

@@ -62,7 +62,7 @@ namespace FlattenedParameters
             return message;
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -77,7 +77,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -119,7 +119,7 @@ namespace FlattenedParameters
             return message;
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -134,7 +134,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -176,8 +176,8 @@ namespace FlattenedParameters
             return message;
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationNotRequiredAsync(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -192,8 +192,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response OperationNotRequired(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -232,8 +232,8 @@ namespace FlattenedParameters
             return message;
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
@@ -254,8 +254,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)

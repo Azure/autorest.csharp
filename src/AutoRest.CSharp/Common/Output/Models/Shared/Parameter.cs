@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? $"The {type.Name} to use."
+                ? $"The {type.ToStringForDocs()} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (!type.IsFrameworkType || values == null)
