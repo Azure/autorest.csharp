@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static bool IsEqual(Type sourceType, MgmtObjectType targetType)
         {
             var sourceTypeProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-            var targetTypeProperties = targetType.MyProperties.ToList();
+            var targetTypeProperties = targetType.MyProperties.Where(p => p.Declaration.Accessibility == "public").ToList();
 
             return IsEqual(sourceType, targetType, sourceTypeProperties, targetTypeProperties, new Dictionary<Type, CSharpType> { { sourceType, targetType.Type } });
         }
