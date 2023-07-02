@@ -19,12 +19,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
 
-        public MethodSignature WithAsync(bool isAsync)
-            => isAsync && !Modifiers.HasFlag(Async)
-                ? MakeAsync()
-                : Modifiers.HasFlag(Async)
-                    ? MakeSync()
-                    : this;
+        public MethodSignature WithAsync(bool isAsync) => isAsync ? MakeAsync() : MakeSync();
 
         private MethodSignature MakeAsync()
         {
@@ -67,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodSignature MakeSync()
         {
-            if (!Modifiers.HasFlag(Async) || ReturnType != null && TypeFactory.IsPageable(ReturnType))
+            if (!Modifiers.HasFlag(Async) && (ReturnType == null || !TypeFactory.IsAsyncPageable(ReturnType)))
             {
                 return this;
             }

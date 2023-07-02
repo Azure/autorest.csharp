@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             if (signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                                 !signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
                                 (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
-                                _client.IsMethodSuppressed(signature))
+                                !_client.IsMethodSuppressed(signature))
                             {
 
                                 if (ShouldGenerateShortVersion(method))
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             var convenience = method.Convenience[0];
                             if (convenience.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                                 (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
-                                _client.IsMethodSuppressed(convenience.Signature))
+                                !_client.IsMethodSuppressed(convenience.Signature))
                             {
                                 WriteConvenienceTestCompilation(method, (MethodSignature)convenience.Signature, true, false);
                             }
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var builder = new StringBuilder();
             _exampleComposer.ComposeConvenienceMethodExample(clientMethod, signature, isAsync, false, builder);
-            var testMethodName = signature.Name;
+            var testMethodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
                 testMethodName += "_AllParameters";
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var builder = new StringBuilder();
             _exampleComposer.ComposeProtocolCodeSnippet(method, signature, isAsync, useAllParameters, builder);
-            var methodName = signature.Name;
+            var methodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
                 methodName += "_AllParameters";
