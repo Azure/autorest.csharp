@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Common.Input
                 RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(operation),
+                Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false);
 
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Common.Input
             );
         }
 
-        private OperationPaging? CreateOperationPaging(Operation operation)
+        private OperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -180,12 +180,12 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
-            if (nextLinkServiceRequest == null || !_operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
+            if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
+                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, nextLinkOperationRef());
             }
 
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
+            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null);
         }
 
         private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)

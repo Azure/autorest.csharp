@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -148,35 +149,50 @@ namespace AutoRest.CSharp.Output.Models
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
             // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
-            var operationsMap = new Dictionary<InputOperation, InputOperation>();
+            var operationsMap = new Dictionary<InputOperation, Func<InputOperation>>();
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
+                foreach (var operation in client.Operations)
+                {
+                    operationsMap.CreateAndCacheResult(operation, () => UpdateOperation(operation, clientName, operationsMap));
+                }
             }
+
+            var clients = new List<InputClient>();
+            foreach (var client in _rootNamespace.Clients)
+            {
+                var operations = new List<InputOperation>();
+                foreach (var operation in client.Operations)
+                {
+                    operations.Add(operationsMap[operation]());
+                }
+                clients.Add(client with { Operations = operations });
+            }
+
+            return clients;
         }
 
-        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
+        private static InputOperation UpdateOperation(in InputOperation operation, string clientName, IDictionary<InputOperation, Func<InputOperation>> operationsMap)
         {
-            InputOperation updatedOperation;
-            if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
+            if (operation.Paging is not {} paging || Configuration.DisablePaginationTopRenaming || operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
-                updatedOperation = operation with
-                {
-                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
-                    Parameters = UpdateOperationParameters(operation.Parameters),
-                    // to update the lazy initialization of `Paging.NextLinkOperation`
-                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
-                };
+                return operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
             }
-            else
+
+            var nextLinkOperation = paging.NextLinkOperation;
+            var updatedOperation = operation with
             {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
+                Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
+                Parameters = UpdateOperationParameters(operation.Parameters),
+            };
+
+            if (nextLinkOperation is null)
+            {
+                return updatedOperation;
             }
-            operationsMap.Add(operation, updatedOperation);
 
-            return updatedOperation;
-
+            return updatedOperation with { Paging = paging with { NextLinkOperation = operationsMap[nextLinkOperation]() }};
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)

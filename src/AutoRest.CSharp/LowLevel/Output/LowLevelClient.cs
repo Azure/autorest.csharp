@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
             _ => Private
         };
 
-        internal bool IsMethodSuppressed(MethodSignature signature)
+        internal bool IsMethodSuppressed(MethodSignatureBase signature)
         {
             if (ExistingType is null)
                 return false;

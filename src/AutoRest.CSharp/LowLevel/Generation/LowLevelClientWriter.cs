@@ -331,7 +331,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, protocolMethod, async));
+                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.ComposeProtocol(clientMethod, protocolMethod, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, protocolMethod, remarks, hasRequestRemarks, hasResponseRemarks);
             }
         }
