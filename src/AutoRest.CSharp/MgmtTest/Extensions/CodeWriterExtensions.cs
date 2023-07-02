@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 Dictionary<string, string> DFE_FACTORY_METHOD_MAPPING = new Dictionary<string, string>()
                 {
                     ["Expression"] = "FromExpression",
-                    ["SecureString"] = "FromMaskedString",
+                    ["SecureString"] = "FromSecretString",
                     ["AzureKeyVaultSecretReference"] = "FromKeyVaultSecretReference"
                 };
 
