@@ -66,7 +66,7 @@ namespace MgmtSingletonResource
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="data"> The SingletonResource to use. </param>
+        /// <param name="data"> The SingletonResourceData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -97,7 +97,7 @@ namespace MgmtSingletonResource
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="data"> The SingletonResource to use. </param>
+        /// <param name="data"> The SingletonResourceData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
