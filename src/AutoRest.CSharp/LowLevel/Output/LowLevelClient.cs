@@ -390,6 +390,7 @@ namespace AutoRest.CSharp.Output.Models
 
         internal bool HasMatchingCustomMethod(LowLevelClientMethod method)
         {
+            // TODO -- we should get this kind of information from the ModelTypeMapping class
             if (ExistingType is not null)
             {
                 // add custom ctors into the candidates

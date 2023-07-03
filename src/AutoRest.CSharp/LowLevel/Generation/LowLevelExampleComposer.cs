@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
 using YamlDotNet.Core.Tokens;
 using AutoRest.CSharp.Utilities;
+using System.IO;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -300,6 +301,32 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.Append("]]></code>");
         }
 
+        internal void ComposeCodeSnippet(CodeWriter codeWriter, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
+        {
+            ComposeGetClientCodes(codeWriter);
+
+            if (clientMethod.RequestBodyType is { } requestBodyType)
+            {
+                ComposeRequestContent(codeWriter, useAllParameters, requestBodyType);
+            }
+
+            switch (clientMethod.LongRunning, clientMethod.PagingInfo)
+            {
+                case (not null, not null):
+                    ComposeHandleLongRunningPageableResponseCode(codeWriter, clientMethod, methodName, isAsync, useAllParameters);
+                    break;
+                case (not null, null):
+                    ComposeHandleLongRunningResponseCode(codeWriter, clientMethod, methodName, isAsync, useAllParameters);
+                    break;
+                case (null, not null):
+                    ComposeHandlePageableResponseCode(codeWriter, clientMethod, methodName, isAsync, useAllParameters);
+                    break;
+                case (null, null):
+                    ComposeHandleNormalResponseCode(codeWriter, clientMethod, methodName, isAsync, useAllParameters);
+                    break;
+            }
+        }
+
         internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             ComposeGetClientCodes(builder);
@@ -331,6 +358,45 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeHandleLongRunningPageableResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
+        {
+            if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
+                return;
+
+            /* CODE PATTEN
+             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
+             *
+             * await foreach (var item in operation.Value)
+             * {
+             *     Console.WriteLine(item.ToString());
+             * or
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
+             *     ...
+             * }
+             */
+            var returnType = clientMethod.ProtocolMethodSignature.ReturnType!;
+            writer.Append($"{returnType} operation = ")
+                .AppendRawIf("await ", isAsync)
+                .Append($"client.{methodName}(");
+
+            foreach (var parameter in MockParameterValues2(clientMethod.ProtocolMethodSignature.Parameters, MockParameterValue2, useAllParameters))
+            {
+                writer.Append(parameter).AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            writer.LineRaw(");");
+
+            var itemType = returnType.Arguments.Single();
+            writer.Line();
+            writer.AppendRawIf("await ", isAsync)
+                .Append($"foreach ({itemType} item in operation.Value)");
+            using (writer.Scope())
+            {
+                ComposeParsingPageableResponseCodes(writer, responseModel, clientMethod.PagingInfo!.ItemName, useAllParameters);
+            }
+        }
+
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
@@ -355,6 +421,42 @@ namespace AutoRest.CSharp.Generation.Writers
             using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
+            }
+        }
+
+        private void ComposeHandleLongRunningResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
+        {
+            /* GENERATED CODE PATTERN
+             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
+             *
+             * Console.WriteLine(operation.GetRawResponse().Status);
+             * or
+             * BinaryData responseData = operation.Value;
+             * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             * Console.WriteLine(result[.GetProperty(...)...].ToString());
+             * ...
+             */
+            writer.Append($"{clientMethod.ProtocolMethodSignature.ReturnType} operation = ")
+                .AppendRawIf("await ", isAsync)
+                .Line($"client.{methodName}(");
+
+            foreach (var parameter in MockParameterValues2(clientMethod.ProtocolMethodSignature.Parameters, MockParameterValue2, useAllParameters))
+            {
+                writer.Append(parameter).AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            writer.LineRaw(");");
+
+            writer.Line();
+
+            if (clientMethod.ResponseBodyType == null)
+            {
+                ConsoleWriteLine(writer, $"operation.GetRawResponse().Status");
+            }
+            else
+            {
+                writer.Line($"{typeof(BinaryData)} responseData = operation.Value;");
+                ComposeParsingLongRunningResponseCodes(writer, useAllParameters, clientMethod.ResponseBodyType);
             }
         }
 
@@ -392,6 +494,34 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
         }
 
+        private void ComposeParsingLongRunningResponseCodes(CodeWriter writer, bool useAllProperties, InputType inputType)
+        {
+            if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            {
+                using (writer.Scope($"using({typeof(Stream)} outFileStream = {typeof(File)}.{nameof(File.OpenWrite)}({"<filePath>":L}))"))
+                {
+                    writer.Line($"responseData.ToStream().CopyTo(outFileStream);");
+                }
+                return;
+            }
+
+            var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
+            ComposeResponseParsingCode(useAllProperties, inputType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { $"result" }), new HashSet<InputType>());
+
+            if (!apiInvocationChainList.Any())
+            {
+                ConsoleWriteLine(writer, $"responseData.ToString()");
+            }
+            else
+            {
+                writer.Line($"{typeof(JsonElement)} result = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(responseData.ToStream()).RootElement;");
+                foreach (var apiInvocationChain in apiInvocationChainList)
+                {
+                    ConsoleWriteLine(writer, $"{apiInvocationChain.ToArray().Join(".")}.ToString()");
+                }
+            }
+        }
+
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
             if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
@@ -417,6 +547,38 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
                 }
+            }
+        }
+
+        private void ComposeHandlePageableResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
+        {
+            if (clientMethod.ResponseBodyType is not InputModelType modelType)
+                return;
+
+            var itemType = clientMethod.ProtocolMethodSignature.ReturnType!.Arguments.Single();
+            /* GENERATED CODE PATTERN
+             * await foreach (var item in client.{methodName}(...))
+             * {
+             *     Console.WriteLine(item.ToString());
+             * or
+             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
+             *     ...
+             * }
+             */
+            writer.AppendRawIf("await ", isAsync)
+                .Append($"foreach ({itemType} item in client.{methodName}(");
+
+            foreach (var parameter in MockParameterValues2(clientMethod.ProtocolMethodSignature.Parameters, MockParameterValue2, useAllParameters))
+            {
+                writer.Append(parameter).AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            writer.AppendRaw("))");
+
+            using (writer.Scope())
+            {
+                ComposeParsingPageableResponseCodes(writer, modelType, clientMethod.PagingInfo!.ItemName, useAllParameters);
             }
         }
 
@@ -451,6 +613,18 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeParsingPageableResponseCodes(CodeWriter writer, InputModelType responseModelType, string pagingItemName, bool useAllProperties)
+        {
+            foreach (var property in responseModelType.Properties)
+            {
+                if (property.SerializedName == pagingItemName && property.Type is InputListType listType)
+                {
+                    var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
+                    ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { $"result" }), new HashSet<InputType> { responseModelType });
+                }
+            }
+        }
+
         private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
         {
             foreach (var property in responseModelType.Properties)
@@ -481,6 +655,37 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeHandleNormalResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
+        {
+            CSharpType responseType = typeof(Response);
+            var responseVar = new CodeWriterDeclaration("response");
+            FormattableString responseExpression = $"{responseVar}";
+            if (clientMethod.RequestMethod.Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
+            {
+                responseType = typeof(Response<bool>);
+                responseExpression = $"{responseVar}.GetRawResponse()";
+            }
+            writer.Append($"{responseType} {responseVar:D} = ")
+                .AppendRawIf("await ", isAsync)
+                .Append($"client.{methodName}(");
+
+            foreach (var parameter in MockParameterValues2(clientMethod.ProtocolMethodSignature.Parameters, MockParameterValue2, useAllParameters))
+            {
+                writer.Append(parameter).AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            writer.LineRaw(");");
+
+            if (clientMethod.ResponseBodyType != null)
+            {
+                ComposeParsingNormalResponseCodes(writer, useAllParameters, clientMethod.ResponseBodyType, responseExpression);
+            }
+            else
+            {
+                ConsoleWriteLine(writer, $"{responseExpression}.Status");
+            }
+        }
+
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             var resposneType = "Response";
@@ -506,6 +711,39 @@ namespace AutoRest.CSharp.Generation.Writers
             // TODO -- need refactor to use CodeWriter and then reduce with Roslyn maybe?
             var methodSignature = convenienceMethod.Signature;
             builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
+        }
+
+        private void ComposeParsingNormalResponseCodes(CodeWriter writer, bool useAllProperties, InputType responseBodyType, FormattableString responseExpression)
+        {
+            if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            {
+                using (writer.Scope($"if ({responseExpression}.ContentStream != null)"))
+                {
+                    using (writer.Scope($"using({typeof(Stream)} outFileStream = {typeof(File)}.{nameof(File.OpenWrite)}({"<filePath>":L})"))
+                    {
+                        writer.Line($"{responseExpression}.ContentStream.CopyTo(outFileStream);");
+                    }
+                }
+                return;
+            }
+
+            var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
+            ComposeResponseParsingCode(useAllProperties, responseBodyType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { $"result" }), new HashSet<InputType>());
+
+            writer.Line();
+
+            if (!apiInvocationChainList.Any())
+            {
+                ConsoleWriteLine(writer, $"response.ToString()");
+            }
+            else
+            {
+                writer.Line($"{typeof(JsonElement)} result = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.ContentStream).RootElement;");
+                foreach (var apiInvocationChain in apiInvocationChainList)
+                {
+                    ConsoleWriteLine(writer, $"{apiInvocationChain.ToList().Join(".")}.ToString()");
+                }
+            }
         }
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)
@@ -541,6 +779,35 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void ComposeResponseParsingCode(bool useAllProperties, InputType type, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        {
+            switch (type)
+            {
+                case InputListType listType:
+                    if (visitedTypes.Contains(listType.ElementType))
+                        return;
+                    // {parentOp}[0]
+                    var parentOp = currentApiInvocationChain.Pop();
+                    currentApiInvocationChain.Push($"{parentOp}[0]");
+                    ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    return;
+                case InputDictionaryType dictionaryType:
+                    if (visitedTypes.Contains(dictionaryType.ValueType))
+                        return;
+                    // .GetProrperty("<test>")
+                    currentApiInvocationChain.Push($"GetProperty({"<test>":L})");
+                    ComposeResponseParsingCode(useAllProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    currentApiInvocationChain.Pop();
+                    return;
+                case InputModelType modelType:
+                    ComposeResponseParsingCodeForModel(useAllProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    return;
+            }
+
+            // primitive types, return
+            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+        }
+
         private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
         {
             switch (type)
@@ -566,7 +833,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     currentApiInvocationChain.Pop();
                     return;
                 case InputModelType modelType:
-                    ComposeResponseParsingCode(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    ComposeResponseParsingCodeForModel(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     return;
             }
 
@@ -574,7 +841,40 @@ namespace AutoRest.CSharp.Generation.Writers
             AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
         }
 
-        private void ComposeResponseParsingCode(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        private void ComposeResponseParsingCodeForModel(bool useAllProperties, InputModelType model, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        {
+            foreach (var modelOrBase in model.GetSelfAndBaseModels())
+            {
+                if (!modelOrBase.Properties.Any())
+                    continue;
+
+                var propertiesToExplore = useAllProperties ?
+                    modelOrBase.Properties :
+                    modelOrBase.Properties.Where(p => p.IsRequired);
+
+                if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
+                {
+                    // return the object
+                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+                    return;
+                }
+
+                foreach (var property in propertiesToExplore)
+                {
+                    if (!visitedTypes.Contains(property.Type))
+                    {
+                        // .GetProperty("{propertyName}")
+                        visitedTypes.Add(property.Type);
+                        currentApiInvocationChain.Push($"GetProperty({property.SerializedName:L})");
+                        ComposeResponseParsingCode(useAllProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                        currentApiInvocationChain.Pop();
+                        visitedTypes.Remove(property.Type);
+                    }
+                }
+            }
+        }
+
+        private void ComposeResponseParsingCodeForModel(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
         {
             foreach (var modelOrBase in model.GetSelfAndBaseModels())
             {
@@ -611,11 +911,35 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void AddApiInvocationChainResult(List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain)
+        {
+            var finalChain = currentApiInvocationChain.ToList();
+            finalChain.Reverse();
+            apiInvocationChainList.Add(finalChain);
+        }
+
         private void AddApiInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain)
         {
             var finalChain = currentApiInvocationChain.ToList();
             finalChain.Reverse();
             apiInvocationChainList.Add(finalChain);
+        }
+
+        private IEnumerable<FormattableString> MockParameterValues2(IReadOnlyList<Parameter> parameters, Func<Parameter, FormattableString> parameterSelector, bool useAllParameters)
+        {
+            if (parameters.Count == 0)
+                yield break;
+
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                var parameter = parameters[i];
+                // skip last parameter if it is optional and it is CancellationToken or RequestContext
+                if (i == parameters.Count - 1 && parameter.IsOptionalInSignature && (parameter.Type.Equals(typeof(CancellationToken)) || parameter.Type.Equals(typeof(RequestContext))))
+                    continue;
+
+                if (useAllParameters || parameter.DefaultValue == null)
+                    yield return parameterSelector(parameter);
+            }
         }
 
         private string MockParameterValues(IReadOnlyList<Parameter> parameters, Func<Parameter, string> parameterSelector, bool allParameters)
@@ -650,6 +974,34 @@ namespace AutoRest.CSharp.Generation.Writers
             return MockParameterValue(parameter);
         }
 
+        private FormattableString MockParameterValue2(Parameter parameter)
+        {
+            if (parameter.RequestLocation == RequestLocation.Body)
+            {
+                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}(data)";
+            }
+
+            if (parameter.DefaultValue is { } defaultValue)
+            {
+                if (defaultValue.IsNewInstanceSentinel && defaultValue.Type.IsValueType)
+                {
+                    return $"default";
+                }
+
+                if (defaultValue.Value is not null)
+                {
+                    if (defaultValue.Type.EqualsIgnoreNullable(typeof(string)))
+                    {
+                        return $"\"{defaultValue.Value}\"";
+                    }
+                    var value = JsonSerializer.Serialize(defaultValue.Value);
+                    return $"{value}";
+                }
+            }
+
+            return MockParameterValueByType(parameter.Name, parameter.Type);
+        }
+
         private string MockParameterValue(Parameter parameter)
         {
             if (parameter.RequestLocation == RequestLocation.Body)
@@ -675,6 +1027,121 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
             return MockParameterTypeValue(parameter.Name, parameter.Type);
+        }
+
+        private FormattableString MockParameterValueByType(string parameterName, CSharpType parameterType)
+        {
+            if (parameterType.IsFrameworkType)
+            {
+                var type = parameterType.FrameworkType;
+
+                // Refer to TypeFactory.cs as how number type is created
+                if (type == typeof(long) || type == typeof(int))
+                {
+                    return $"1234";
+                }
+
+                if (type == typeof(float))
+                {
+                    return $"3.14f";
+                }
+
+                if (type == typeof(decimal) || type == typeof(double))
+                {
+                    return $"3.14";
+                }
+
+                if (type == typeof(string))
+                {
+                    return $"\"<{parameterName}>\"";
+                }
+
+                if (type == typeof(bool))
+                {
+                    return $"true";
+                }
+
+                if (type == typeof(DateTimeOffset))
+                {
+                    return $"{typeof(DateTimeOffset)}.{nameof(DateTimeOffset.UtcNow)}";
+                }
+
+                if (type == typeof(DateTime))
+                {
+                    return $"{typeof(DateTime)}.{nameof(DateTime.UtcNow)}";
+                }
+
+                if (type == typeof(TimeSpan))
+                {
+                    return $"new {typeof(TimeSpan)}(1, 2, 3)";
+                }
+
+                if (type == typeof(MatchConditions))
+                {
+                    return $"new {typeof(MatchConditions)} {{ {nameof(MatchConditions.IfMatch)} = new {typeof(ETag)}({"<YOUR_ETAG>":L}) }}";
+                }
+
+                if (type == typeof(Guid))
+                {
+                    return $"{typeof(Guid)}.{nameof(Guid.NewGuid)}()";
+                }
+
+                if (type == typeof(Uri))
+                {
+                    return $"new {typeof(Uri)}({"http://localhost:3000":L})";
+                }
+
+                if (type == typeof(WaitUntil))
+                {
+                    // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
+                    return $"{nameof(WaitUntil)}.{nameof(WaitUntil.Completed)}";
+                }
+
+                if (type.IsEnum)
+                {
+                    return $"{type.Name}.{Enum.GetNames(type)[0]}";
+                }
+
+                if (type == typeof(ContentType))
+                {
+                    return $"{nameof(ContentType)}.{nameof(ContentType.ApplicationOctetStream)}"; // stick to octect-stream?
+                }
+
+                if (type == typeof(IEnumerable<>))
+                {
+                    var elementType = parameterType.Arguments.Single();
+                    return $"new {elementType}[]{{{MockParameterValueByType(parameterName, elementType)}}}";
+                }
+
+                if (type == typeof(IDictionary<,>))
+                {
+                    var valueType = parameterType.Arguments[1];
+                    var dictionaryType = TypeFactory.GetImplementationType(parameterType);
+                    return $"new {dictionaryType}{{ \"<test>\" = {MockParameterValueByType(parameterName, valueType)} }}";
+                }
+
+                if (type == typeof(BinaryData))
+                {
+                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromString)}({"<your binary data content>":L})";
+                }
+
+                if (type == typeof(RequestContext))
+                {
+                    return $"new {typeof(RequestContext)}()";
+                }
+
+                if (type == typeof(JsonElement))
+                {
+                    return $"new {typeof(JsonElement)}()";
+                }
+
+                if (type == typeof(object))
+                {
+                    return $"new {typeof(object)}()";
+                }
+            }
+
+            return $"null"; // some unknown found
         }
 
         private string MockParameterTypeValue(string parameterName, CSharpType parameterType)
@@ -791,6 +1258,15 @@ namespace AutoRest.CSharp.Generation.Writers
             return "null"; // some unknown found
         }
 
+        private void ComposeRequestContent(CodeWriter writer, bool useAllParameters, InputType requestBodyType)
+        {
+            writer.Append($"var data = ");
+            ComposeRequestContent(writer, useAllParameters, requestBodyType, null, new HashSet<InputModelType>());
+            writer.LineRaw(";");
+
+            writer.Line();
+        }
+
         private void ComposeRequestContent(bool composeAll, InputType requestBodyType, StringBuilder builder)
         {
             // var data = {value_expression};
@@ -806,6 +1282,40 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.Append(ComposeCSharpType(composeAll, bodyParameter.Type, null, 0, true, new HashSet<ObjectType>()));
             builder.AppendLine(";");
         }
+
+        private CodeWriter ComposeRequestContent(CodeWriter writer, bool useAllProperties, InputType inputType, string? propertyDescription, HashSet<InputModelType> visitedModels) => inputType switch
+        {
+            InputListType listType => ComposeArrayRequestContent(writer, useAllProperties, listType.ElementType, visitedModels),
+            InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(writer, useAllProperties, dictionaryType.ValueType, visitedModels),
+            InputEnumType enumType => writer.Literal(enumType.AllowedValues.First().Value),
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
+            {
+                InputTypeKind.Stream => writer.Append($"{typeof(File)}.{nameof(File.OpenRead)}({"<filePath>":L})"),
+                InputTypeKind.Boolean => writer.Literal(true),
+                InputTypeKind.Date => writer.Literal("2022-05-10"),
+                InputTypeKind.DateTime => writer.Literal("2022-05-10T14:57:31.2311892-04:00"),
+                InputTypeKind.DateTimeISO8601 => writer.Literal("2022-05-10T18:57:31.2311892Z"),
+                InputTypeKind.DateTimeRFC1123 => writer.Literal("Tue, 10 May 2022 18:57:31 GMT"),
+                InputTypeKind.DateTimeRFC3339 => writer.Literal("2022-05-10T18:57:31.2311892Z"),
+                InputTypeKind.DateTimeRFC7231 => writer.Literal("Tue, 10 May 2022 18:57:31 GMT"),
+                InputTypeKind.DateTimeUnix => writer.Literal("1652209051"),
+                InputTypeKind.Float32 => writer.Literal(123.45f),
+                InputTypeKind.Float64 => writer.Literal(123.45d),
+                InputTypeKind.Float128 => writer.Literal(123.45m),
+                InputTypeKind.Guid => writer.Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
+                InputTypeKind.Int32 => writer.Literal(1234),
+                InputTypeKind.Int64 => writer.Literal(1234L),
+                InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? writer.Literal("<String>") : writer.Literal($"<{propertyDescription}>"),
+                InputTypeKind.DurationISO8601 => writer.Literal("PT1H23M45S"),
+                InputTypeKind.DurationConstant => writer.Literal("01:23:45"),
+                InputTypeKind.Time => writer.Literal("01:23:45"),
+                InputTypeKind.Uri => writer.Literal("http://localhost:3000"),
+                _ => writer.AppendRaw("new {}"),
+            },
+            InputLiteralType literalType => writer.Literal(literalType.Value),
+            InputModelType modelType => ComposeModelRequestContent(writer, useAllProperties, modelType, visitedModels),
+            _ => writer.AppendRaw("new {}"),
+        };
 
         private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
         {
@@ -868,6 +1378,26 @@ namespace AutoRest.CSharp.Generation.Writers
             _ => "null",
         };
 
+        private CodeWriter ComposeArrayRequestContent(CodeWriter writer, bool useAllProperties, InputType elementType, HashSet<InputModelType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new[] {
+             *     {element_expression}
+             * }
+             * or
+             * new[] {}
+             */
+
+            writer.Append($"new[] ");
+            using (writer.Scope($"", newLine: false))
+            {
+                ComposeRequestContent(writer, useAllProperties, elementType, null, visitedModels);
+                writer.Line();
+            }
+
+            return writer;
+        }
+
         private string ComposeArrayRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
         {
             /* GENERATED CODE PATTERN
@@ -927,6 +1457,23 @@ namespace AutoRest.CSharp.Generation.Writers
             return builder.ToString();
         }
 
+        private CodeWriter ComposeDictionaryRequestContent(CodeWriter writer, bool useAllProperties, InputType elementType, HashSet<InputModelType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new {
+             *     key = {value_expression},
+             * }
+             * or
+             * new {}
+             */
+            using (writer.Scope($"new ", newLine: false))
+            {
+                writer.Append($"key = ");
+                ComposeRequestContent(writer, useAllProperties, elementType, null, visitedModels);
+            }
+            return writer;
+        }
+
         private string ComposeDictionaryRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
         {
             /* GENERATED CODE PATTERN
@@ -973,6 +1520,66 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.Append(' ', indent + 4).AppendLine($"[{keyExpr}] = {valueExpr},");
             }
             return builder.ToString();
+        }
+
+        private CodeWriter ComposeModelRequestContent(CodeWriter writer, bool useAllProperties, InputModelType model, HashSet<InputModelType> visitedModels)
+        {
+            visitedModels.Add(model);
+
+            /* GENERATED CODE PATTERN
+                     * new {
+                     *     prop1 = {value_expression},
+                     *     prop2 = {value_expression},
+                     *     ...
+                     * }
+                     * or
+                     * new {}
+                     */
+            var properties = new List<InputModelProperty>();
+            // We must also include any properties introduced by our parent chain.
+            // Try to get the concrete child type for polymorphism
+            var concreteModel = GetConcreteChildModel(model);
+            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
+            {
+                if (useAllProperties)
+                {
+                    properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
+                }
+                else
+                {
+                    properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
+                }
+            }
+
+            if (!properties.Any())
+            {
+                return writer.Append($"new {{}}");
+            }
+
+            // remove references to my stack
+            _ = properties.RemoveAll(p =>
+                visitedModels.Contains(p.Type) ||
+                (p.Type is InputListType listType && visitedModels.Contains(listType.ElementType)) ||
+                (p.Type is InputDictionaryType dictionaryType && visitedModels.Contains(dictionaryType.ValueType)));
+
+            using (writer.Scope($"new ", newLine: false))
+            {
+                foreach (var property in properties)
+                {
+                    writer.Append($"{FixKeyWords(property.SerializedName)} = ");
+                    if (property.IsDiscriminator)
+                    {
+                        writer.Literal(concreteModel.DiscriminatorValue ?? "");
+                    }
+                    else
+                    {
+                        ComposeRequestContent(writer, useAllProperties, property.Type, property.SerializedName, visitedModels);
+                    }
+                    writer.AppendRaw(",");
+                }
+            }
+
+            return writer;
         }
 
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
@@ -1032,7 +1639,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (propertyValueExpr != "")
                 {
                     var propertyExprBuilder = new StringBuilder();
-                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
+                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName)} = {propertyValueExpr},");
                     propertyExpressions.Add(propertyExprBuilder.ToString());
                 }
             }
@@ -1131,6 +1738,37 @@ namespace AutoRest.CSharp.Generation.Writers
             return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 
+        private void ComposeGetClientCodes(CodeWriter writer)
+        {
+            var clientConstructor = ClientInvocationChain[0];
+            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
+            {
+                writer.Line($"{typeof(AzureKeyCredential)} credential = new {typeof(AzureKeyCredential)}({"<key>":L});");
+            }
+            else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
+            {
+                // we cannot use typeof(DefaultAzureCredential) here because autorest.csharp does not use `Azure.Identity` as a dependency
+                writer.UseNamespace("Azure.Identity");
+                writer.Line($"{typeof(TokenCredential)} credential = new DefaultAzureCredential();");
+            }
+
+            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
+            {
+                writer.Line($"{typeof(Uri)} endpoint = new {typeof(Uri)}(\"<{GetEndpoint()}>\");");
+            }
+
+            writer.Append($"{_client.Type} client = new {ClientInvocationChain[0].Name}({MockClientConstructorParameterValues(ClientInvocationChain[0].Parameters)})");
+
+            for (int i = 1; i < ClientInvocationChain.Count; i++)
+            {
+                var factoryMethod = ClientInvocationChain[i];
+                writer.Append($".{factoryMethod.Name}({MockParameterValues(factoryMethod.Parameters, MockParameterValue, true)})");
+            }
+            writer.LineRaw(";");
+
+            writer.Line();
+        }
+
         private void ComposeGetClientCodes(StringBuilder builder)
         {
             var clientConstructor = ClientInvocationChain[0];
@@ -1222,6 +1860,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return "https://my-service.azure.com";
         }
 
+        // TODO -- the model.DerivedModels is not properly contains the derived models now.
         private static InputModelType GetConcreteChildModel(InputModelType model)
             => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
 
@@ -1266,6 +1905,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     Builder.AppendLine();
                 }
             }
+        }
+
+        private static void ConsoleWriteLine(CodeWriter writer, FormattableString content)
+        {
+            writer.Line($"{typeof(Console)}.{nameof(Console.WriteLine)}({content});");
         }
     }
 }

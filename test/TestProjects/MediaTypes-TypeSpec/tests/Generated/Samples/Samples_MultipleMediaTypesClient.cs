@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using MultipleMediaTypes;
 using MultipleMediaTypes.Models;
 using NUnit.Framework;
 
@@ -24,8 +25,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneBinaryBodyTwoContentTypes()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new { };
 
@@ -37,8 +38,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneBinaryBodyTwoContentTypes_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new { };
 
@@ -50,8 +51,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneBinaryBodyTwoContentTypes_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new { };
 
@@ -63,8 +64,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneBinaryBodyTwoContentTypes_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new { };
 
@@ -87,8 +88,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneStringBodyThreeContentTypes()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = "<String>";
 
@@ -100,8 +101,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneStringBodyThreeContentTypes_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = "<String>";
 
@@ -113,8 +114,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneStringBodyThreeContentTypes_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = "<String>";
 
@@ -126,8 +127,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneStringBodyThreeContentTypes_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = "<String>";
 
@@ -150,8 +151,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneModelBodyOneContentType()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new
             {
@@ -166,8 +167,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OneModelBodyOneContentType_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new
             {
@@ -182,8 +183,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneModelBodyOneContentType_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new
             {
@@ -198,8 +199,8 @@ namespace MultipleMediaTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OneModelBodyOneContentType_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new MultipleMediaTypesClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             var data = new
             {

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApiVersionInCadl;
 using ApiVersionInCadl.Models;
 using Azure;
 using Azure.Core;
@@ -24,9 +25,9 @@ namespace ApiVersionInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBatchDetectionResult()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInCadlClient(endpoint, credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ApiVersionInCadlClient client = new ApiVersionInCadlClient(endpoint, credential);
 
             Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
@@ -38,9 +39,9 @@ namespace ApiVersionInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBatchDetectionResult_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInCadlClient(endpoint, credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ApiVersionInCadlClient client = new ApiVersionInCadlClient(endpoint, credential);
 
             Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
 
@@ -52,9 +53,9 @@ namespace ApiVersionInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBatchDetectionResult_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInCadlClient(endpoint, credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ApiVersionInCadlClient client = new ApiVersionInCadlClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 
@@ -66,9 +67,9 @@ namespace ApiVersionInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBatchDetectionResult_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInCadlClient(endpoint, credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ApiVersionInCadlClient client = new ApiVersionInCadlClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
 

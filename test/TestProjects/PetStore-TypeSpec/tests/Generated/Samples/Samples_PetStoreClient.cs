@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using PetStore;
 using PetStore.Models;
 
 namespace PetStore.Samples
@@ -24,8 +25,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
@@ -35,8 +36,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
@@ -46,8 +47,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
@@ -57,8 +58,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
@@ -68,8 +69,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Read()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Read(1234, new RequestContext());
 
@@ -82,8 +83,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Read_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Read(1234, new RequestContext());
 
@@ -97,8 +98,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Read_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.ReadAsync(1234, new RequestContext());
 
@@ -111,8 +112,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Read_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.ReadAsync(1234, new RequestContext());
 
@@ -136,8 +137,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Create()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             var data = new
             {
@@ -156,8 +157,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Create_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             var data = new
             {
@@ -178,8 +179,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Create_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             var data = new
             {
@@ -198,8 +199,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Create_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             var data = new
             {
@@ -234,8 +235,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPetByKind()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetPetByKind("<kind>");
 
@@ -248,8 +249,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPetByKind_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetPetByKind("<kind>");
 
@@ -263,8 +264,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPetByKind_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetPetByKindAsync("<kind>");
 
@@ -277,8 +278,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPetByKind_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetPetByKindAsync("<kind>");
 
@@ -302,8 +303,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFirstPet()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetFirstPet(1234, new RequestContext());
 
@@ -316,8 +317,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFirstPet_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetFirstPet(1234, new RequestContext());
 
@@ -331,8 +332,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFirstPet_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetFirstPetAsync(1234, new RequestContext());
 
@@ -345,8 +346,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFirstPet_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetFirstPetAsync(1234, new RequestContext());
 
@@ -370,8 +371,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFish()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetFish("<kind>", new RequestContext());
 
@@ -384,8 +385,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFish_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.GetFish("<kind>", new RequestContext());
 
@@ -398,8 +399,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFish_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetFishAsync("<kind>", new RequestContext());
 
@@ -412,8 +413,8 @@ namespace PetStore.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFish_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PetStoreClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.GetFishAsync("<kind>", new RequestContext());
 

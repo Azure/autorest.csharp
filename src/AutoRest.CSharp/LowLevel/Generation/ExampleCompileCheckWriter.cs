@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 {
     internal class ExampleCompileCheckWriter
     {
-        private MethodSignature ExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
+        private MethodSignature GetExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
             $"Example_{name}",
             null,
             null,
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 testMethodName += "_Async";
             }
-            using (_writer.WriteMethodDeclaration(ExampleMethodSignature(testMethodName, isAsync)))
+            using (_writer.WriteMethodDeclaration(GetExampleMethodSignature(testMethodName, isAsync)))
             {
                 _writer.AppendRaw(builder.ToString());
             }
@@ -144,9 +144,6 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
         {
-            StringBuilder builder = new StringBuilder();
-            var asyncKeyword = isAsync ? "Async" : "";
-            _exampleComposer.ComposeCodeSnippet(method, $"{method.RequestMethod.Name}{asyncKeyword}", isAsync, useAllParameters, builder);
             var methodName = method.RequestMethod.Name;
             if (useAllParameters)
             {
@@ -156,12 +153,14 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 methodName += "_Async";
             }
-            using (_writer.WriteMethodDeclaration(ExampleMethodSignature(methodName, isAsync)))
+            using (_writer.WriteMethodDeclaration(GetExampleMethodSignature(methodName, isAsync)))
             {
-                _writer.AppendRaw(builder.ToString());
+                _exampleComposer.ComposeCodeSnippet(_writer, method, GetMethodName(method.RequestMethod.Name, isAsync), isAsync, useAllParameters);
             }
             _writer.Line();
         }
+
+        private string GetMethodName(string methodName, bool isAsync) => isAsync ? $"{methodName}Async" : methodName;
 
         public override string ToString()
         {

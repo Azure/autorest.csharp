@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using ModelsTypeSpec;
 using ModelsTypeSpec.Models;
 using NUnit.Framework;
 
@@ -24,8 +25,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetOutputDiscriminatorModel()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
@@ -37,8 +38,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetOutputDiscriminatorModel_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
@@ -50,8 +51,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetOutputDiscriminatorModel_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
@@ -63,8 +64,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetOutputDiscriminatorModel_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
@@ -86,37 +87,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTrip()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -141,37 +151,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTrip_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -201,37 +220,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTrip_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -256,37 +284,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTrip_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -345,37 +382,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTripPrimitive()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
@@ -397,37 +443,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTripPrimitive_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
@@ -449,37 +504,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTripPrimitive_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
@@ -501,37 +565,46 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTripPrimitive_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
                 requiredModel = new { },
-                requiredIntCollection = new[] {
-        1234
-    },
-                requiredStringCollection = new[] {
-        "<String>"
-    },
-                requiredModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredIntCollection = new[]
+            {
+1234
+},
+                requiredStringCollection = new[]
+            {
+"<String>"
+},
+                requiredModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
-                requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
-    },
-                requiredCollectionWithNullableBooleanElement = new[] {
-        true
-    },
+                requiredCollectionWithNullableFloatElement = new[]
+            {
+123.45F
+},
+                requiredCollectionWithNullableBooleanElement = new[]
+            {
+true
+},
             };
 
             Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
@@ -582,8 +655,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTripOptional()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -597,27 +670,34 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToRoundTripOptional_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 optionalString = "<optionalString>",
                 optionalInt = 1234,
-                optionalStringList = new[] {
-        "<String>"
-    },
-                optionalIntList = new[] {
-        1234
-    },
-                optionalModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
-                optionalModel = new { },
+                optionalStringList = new[]
+            {
+"<String>"
+},
+                optionalIntList = new[]
+            {
+1234
+},
+                optionalModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
+                optionalModel = new
+                {
+                },
                 optionalModelWithPropertiesOnBase = new
                 {
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
@@ -626,21 +706,24 @@ namespace ModelsTypeSpec.Samples
                 optionalExtensibleEnum = "1",
                 optionalIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 optionalStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 optionalModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 optionalPlainDate = "2022-05-10",
                 optionalPlainTime = "01:23:45",
-                optionalCollectionWithNullableIntElement = new[] {
-        1234
-    },
+                optionalCollectionWithNullableIntElement = new[]
+            {
+1234
+},
             };
 
             Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
@@ -664,8 +747,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTripOptional_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new { };
 
@@ -679,27 +762,34 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToRoundTripOptional_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
                 optionalString = "<optionalString>",
                 optionalInt = 1234,
-                optionalStringList = new[] {
-        "<String>"
-    },
-                optionalIntList = new[] {
-        1234
-    },
-                optionalModelCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
-                optionalModel = new { },
+                optionalStringList = new[]
+            {
+"<String>"
+},
+                optionalIntList = new[]
+            {
+1234
+},
+                optionalModelCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
+                optionalModel = new
+                {
+                },
                 optionalModelWithPropertiesOnBase = new
                 {
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
@@ -708,21 +798,24 @@ namespace ModelsTypeSpec.Samples
                 optionalExtensibleEnum = "1",
                 optionalIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 optionalStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 optionalModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 optionalPlainDate = "2022-05-10",
                 optionalPlainTime = "01:23:45",
-                optionalCollectionWithNullableIntElement = new[] {
-        1234
-    },
+                optionalCollectionWithNullableIntElement = new[]
+            {
+1234
+},
             };
 
             Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
@@ -746,8 +839,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripToOutput()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -755,39 +848,46 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    discriminatorProperty = null,
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 requiredStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 requiredBytes = new { },
-                requiredUint8Array = new[] {
-        1234
-    },
+                requiredUint8Array = new[]
+            {
+1234
+},
                 requiredUnknown = new { },
-                requiredInt8Array = new[] {
-        1234
-    },
+                requiredInt8Array = new[]
+            {
+1234
+},
             };
 
             Response response = client.RoundTripToOutput(RequestContent.Create(data));
@@ -801,8 +901,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripToOutput_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -810,48 +910,57 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    discriminatorProperty = null,
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 requiredStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 requiredBytes = new { },
                 optionalBytes = new { },
-                requiredUint8Array = new[] {
-        1234
-    },
-                optionalUint8Array = new[] {
-        1234
-    },
+                requiredUint8Array = new[]
+            {
+1234
+},
+                optionalUint8Array = new[]
+            {
+1234
+},
                 requiredUnknown = new { },
                 optionalUnknown = new { },
-                requiredInt8Array = new[] {
-        1234
-    },
-                optionalInt8Array = new[] {
-        1234
-    },
+                requiredInt8Array = new[]
+            {
+1234
+},
+                optionalInt8Array = new[]
+            {
+1234
+},
             };
 
             Response response = client.RoundTripToOutput(RequestContent.Create(data));
@@ -865,8 +974,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripToOutput_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -874,39 +983,46 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    discriminatorProperty = null,
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 requiredStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 requiredBytes = new { },
-                requiredUint8Array = new[] {
-        1234
-    },
+                requiredUint8Array = new[]
+            {
+1234
+},
                 requiredUnknown = new { },
-                requiredInt8Array = new[] {
-        1234
-    },
+                requiredInt8Array = new[]
+            {
+1234
+},
             };
 
             Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -920,8 +1036,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripToOutput_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -929,48 +1045,57 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    discriminatorProperty = null,
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 requiredIntRecord = new
                 {
-                    key = 1234,
+                    key = 1234
                 },
                 requiredStringRecord = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
                 requiredModelRecord = new
                 {
-                    key = new { },
+                    key = new
+                    {
+                    }
                 },
                 requiredBytes = new { },
                 optionalBytes = new { },
-                requiredUint8Array = new[] {
-        1234
-    },
-                optionalUint8Array = new[] {
-        1234
-    },
+                requiredUint8Array = new[]
+            {
+1234
+},
+                optionalUint8Array = new[]
+            {
+1234
+},
                 requiredUnknown = new { },
                 optionalUnknown = new { },
-                requiredInt8Array = new[] {
-        1234
-    },
-                optionalInt8Array = new[] {
-        1234
-    },
+                requiredInt8Array = new[]
+            {
+1234
+},
+                optionalInt8Array = new[]
+            {
+1234
+},
             };
 
             Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -984,8 +1109,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputRecursive()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1000,8 +1125,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputRecursive_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1016,8 +1141,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputRecursive_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1032,8 +1157,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputRecursive_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1059,8 +1184,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripRecursive()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1077,8 +1202,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripRecursive_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1096,8 +1221,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripRecursive_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1114,8 +1239,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripRecursive_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
@@ -1144,8 +1269,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SelfReference()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(new RequestContext());
 
@@ -1157,8 +1282,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SelfReference_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(new RequestContext());
 
@@ -1171,8 +1296,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SelfReference_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(new RequestContext());
 
@@ -1184,8 +1309,8 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SelfReference_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(new RequestContext());
 
@@ -1208,18 +1333,21 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripToOutputWithNoUseBase()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 baseModelProp = "<baseModelProp>",
             };
 
@@ -1233,18 +1361,21 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripToOutputWithNoUseBase_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 baseModelProp = "<baseModelProp>",
             };
 
@@ -1258,18 +1389,21 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripToOutputWithNoUseBase_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 baseModelProp = "<baseModelProp>",
             };
 
@@ -1283,18 +1417,21 @@ namespace ModelsTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTripToOutputWithNoUseBase_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             var data = new
             {
-                requiredCollection = new[] {
-        new {
-            requiredModelRecord = new {
-                key = new {},
-            },
-        }
-    },
+                requiredCollection = new[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+}},}
+},
                 baseModelProp = "<baseModelProp>",
             };
 

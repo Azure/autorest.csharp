@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Inheritance;
 using _Type.Model.Inheritance.Models;
 
 namespace _Type.Model.Inheritance.Samples
@@ -24,7 +25,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PostValid()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -41,7 +42,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PostValid_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -58,7 +59,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostValid_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -75,7 +76,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostValid_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -102,7 +103,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetValid(new RequestContext());
 
@@ -116,7 +117,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetValid(new RequestContext());
 
@@ -130,7 +131,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetValidAsync(new RequestContext());
 
@@ -144,7 +145,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetValidAsync(new RequestContext());
 
@@ -167,7 +168,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -188,7 +189,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -209,7 +210,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -230,7 +231,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -261,7 +262,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetModel(new RequestContext());
 
@@ -274,7 +275,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetModel(new RequestContext());
 
@@ -287,7 +288,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetModelAsync(new RequestContext());
 
@@ -300,7 +301,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetModelAsync(new RequestContext());
 
@@ -322,7 +323,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutModel()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -338,7 +339,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutModel_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -354,7 +355,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutModel_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -370,7 +371,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutModel_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -396,7 +397,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModel()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetRecursiveModel(new RequestContext());
 
@@ -409,7 +410,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModel_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetRecursiveModel(new RequestContext());
 
@@ -422,7 +423,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModel_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
@@ -435,7 +436,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModel_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
@@ -457,7 +458,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutRecursiveModel()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -473,7 +474,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutRecursiveModel_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -489,7 +490,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRecursiveModel_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -505,7 +506,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRecursiveModel_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             var data = new
             {
@@ -531,7 +532,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMissingDiscriminator()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
@@ -544,7 +545,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMissingDiscriminator_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
@@ -557,7 +558,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMissingDiscriminator_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
@@ -570,7 +571,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMissingDiscriminator_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
@@ -592,7 +593,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWrongDiscriminator()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
@@ -605,7 +606,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWrongDiscriminator_AllParameters()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
@@ -618,7 +619,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWrongDiscriminator_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
@@ -631,7 +632,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWrongDiscriminator_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 

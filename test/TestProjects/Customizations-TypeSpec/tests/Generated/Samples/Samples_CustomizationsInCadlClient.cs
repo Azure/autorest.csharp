@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using CustomizationsInCadl;
 using CustomizationsInCadl.Models;
 using NUnit.Framework;
 
@@ -24,7 +25,7 @@ namespace CustomizationsInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTrip()
         {
-            var client = new CustomizationsInCadlClient();
+            CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
             var data = new { };
 
@@ -38,7 +39,7 @@ namespace CustomizationsInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTrip_AllParameters()
         {
-            var client = new CustomizationsInCadlClient();
+            CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
             var data = new
             {
@@ -60,28 +61,32 @@ namespace CustomizationsInCadl.Samples
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
                     propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
+                    propertyToMakeInt = 123.45F,
                     propertyToMakeDuration = "<propertyToMakeDuration>",
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new[] {
-            "<String>"
-        },
+                    badListName = new[]
+            {
+"<String>"
+},
                     badDictionaryName = new
                     {
-                        key = "<String>",
+                        key = "<String>"
                     },
-                    badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-                    badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+                    badListOfListName = new[]
+            {
+new[]
+{
+"<String>"
+}
+},
+                    badListOfDictionaryName = new[]
+            {
+new
+{
+key = "<String>"}
+},
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -123,7 +128,7 @@ namespace CustomizationsInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTrip_Async()
         {
-            var client = new CustomizationsInCadlClient();
+            CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
             var data = new { };
 
@@ -137,7 +142,7 @@ namespace CustomizationsInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTrip_AllParameters_Async()
         {
-            var client = new CustomizationsInCadlClient();
+            CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
             var data = new
             {
@@ -159,28 +164,32 @@ namespace CustomizationsInCadl.Samples
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
                     propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
+                    propertyToMakeInt = 123.45F,
                     propertyToMakeDuration = "<propertyToMakeDuration>",
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new[] {
-            "<String>"
-        },
+                    badListName = new[]
+            {
+"<String>"
+},
                     badDictionaryName = new
                     {
-                        key = "<String>",
+                        key = "<String>"
                     },
-                    badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-                    badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+                    badListOfListName = new[]
+            {
+new[]
+{
+"<String>"
+}
+},
+                    badListOfDictionaryName = new[]
+            {
+new
+{
+key = "<String>"}
+},
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",

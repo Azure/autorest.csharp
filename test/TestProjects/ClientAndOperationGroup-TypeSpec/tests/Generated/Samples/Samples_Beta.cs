@@ -11,6 +11,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.ClientAndOperationGroupService;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -23,8 +24,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Two()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = client.Two();
 
@@ -36,8 +37,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Two_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = client.Two();
 
@@ -49,8 +50,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Two_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync();
 
@@ -62,8 +63,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Two_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync();
 
@@ -75,8 +76,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Three()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = client.Three();
 
@@ -88,8 +89,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Three_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = client.Three();
 
@@ -101,8 +102,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Three_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync();
 
@@ -114,8 +115,8 @@ namespace Azure.ClientAndOperationGroupService.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Three_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync();
 

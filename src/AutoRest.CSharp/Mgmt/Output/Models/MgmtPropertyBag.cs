@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 string? description = parameter.Description;
                 if (description == null)
                     description = $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false)
+                var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null, false, false)
                 {
                     DefaultValue = GetDefaultValue(parameter)
                 };
