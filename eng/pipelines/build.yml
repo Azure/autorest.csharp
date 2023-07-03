@@ -19,15 +19,16 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20220404.3
+      ref: refs/tags/azure-sdk-tools_20230428.1
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
+      ref: main
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230112.1
+      ref: refs/tags/azure-sdk-build-tools_20230307.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -35,11 +36,13 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          name: azsdk-pool-mms-win-2019-general
-          vmImage: MMS2019
+          name: azsdk-pool-mms-win-2022-general
+          vmImage: windows-2022
         steps:
           - checkout: self
+            fetchDepth: 1
           - checkout: azure-sdk-tools
+            fetchDepth: 1
           - task: UseDotNet@2
             displayName: 'Use .NET Core SDK'
             retryCountOnTaskFailure: 3
@@ -47,14 +50,21 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 16.x"
+            displayName: "Install Node 18.x"
             inputs:
-              # https://github.com/nodejs/node/issues/40468
-              versionSpec: '16.6.2'
+              versionSpec: '18.x'
           - script: |
               npm ci
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm ls -a
+            displayName: "List packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run prettier
+            displayName: "Emitter format check"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
@@ -63,8 +73,8 @@ stages:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
-          - pwsh: ./eng/CodeChecks.ps1
-            displayName: "Check if code is up-to-date"
+          - pwsh: ./eng/SharedCodeCheck.ps1
+            displayName: "Check if shared source code is up-to-date"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: Npm@1
             displayName: 'Build CADL Ranch Mock Api project'
@@ -89,13 +99,17 @@ stages:
               DOTNET_MULTILEVEL_LOOKUP: 0
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: Npm@1
-            displayName: 'Build CADL csharp emitter'
+            displayName: 'Build TypeSpec csharp emitter'
             inputs:
               command: custom
               customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-            displayName: 'Unit Test for CADL emitter'
+              workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - pwsh: ./eng/ExecuteTypeSpecEmitterUnitTests.ps1
+            displayName: 'E2E Test for TypeSpec emitter'
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
+            displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: PublishBuildArtifacts@1
             condition: succeededOrFailed()
@@ -105,9 +119,9 @@ stages:
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: >
                 ./eng/PublishRelease.ps1
-                -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/netcoreapp3.1/
+                -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net6.0/
                 -CoverageDirectory ./artifacts/coverage
-                -CadlEmitterDirectory ./src/CADL.Extension/Emitter.Csharp
+                -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
                 -GitHubToken $(azuresdk-github-pat)
                 -NpmToken $(azure-sdk-npm-token)
                 -BuildNumber $(Build.BuildNumber)
@@ -120,30 +134,31 @@ stages:
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
             artifact: CoverageReport
-          - task: AzureCLI@2
-            displayName: 'Upload to Cadl Ranch Coverage Report'
-            condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
-            inputs:
-              azureSubscription: "Azure SDK Playground"
-              scriptType: "bash"
-              scriptLocation: "inlineScript"
-              inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - template: smoke-test.yml
+          - ${{if eq(variables['System.TeamProject'], 'internal')}}:
+            - task: AzureCLI@2
+              displayName: 'Upload to Cadl Ranch Coverage Report'
+              condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+              inputs:
+                azureSubscription: "Cadl Ranch Storage"
+                scriptType: "bash"
+                scriptLocation: "inlineScript"
+                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version")
+                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_A_C
+          name: Check_Code_Generation_A_C
           filter: "^[a-b]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_C_I
+          name: Check_Code_Generation_C_I
           filter: "^[c-i]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_J_R
+          name: Check_Code_Generation_J_R
           filter: "^[j-r]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_S_Z
+          name: Check_Code_Generation_S_Z
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
@@ -155,35 +170,64 @@ stages:
       dependsOn:
         - Build_and_Test
         - Release
+      variables:
+        AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+        TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.TypeSpecEmitterVersion']]
       jobs:
-        - job: Update
-          timeoutInMinutes: 120
-          pool:
-            vmImage: ubuntu-20.04
-          variables:
-            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
+        - template: update-generator-versions.yml
+          parameters:
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+# update codes
+        - template: generate-sdk-job-matrix-files.yml
+          parameters:
+            Name: Generate_Job_Matrix
+            JobCount: 7
+        - template: update-azure-sdk-for-net-codes.yml
+          parameters:
+            Name: Update_Code
+            Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+            DependsOn: Generate_Job_Matrix
+# update samples
+        - template: update-azure-sdk-for-net-samples.yml
+          parameters:
+            name: Update_Samples_A_F
+            filter: "a*,b*,c*,d*,e*,f*"
+        - template: update-azure-sdk-for-net-samples.yml
+          parameters:
+            name: Update_Samples_G_L
+            filter: "g*,h*,i*,j*,k*,l*"
+        - template: update-azure-sdk-for-net-samples.yml
+          parameters:
+            name: Update_Samples_M_R
+            filter: "m*,n*,o*,p*,q*,r*"
+        - template: update-azure-sdk-for-net-samples.yml
+          parameters:
+            name: Update_Samples_S_Z
+            filter: "s*,t*,u*,v*,w*,x*,y*,z*"
+        - job: Create_PR
+          dependsOn:
+            - Update_Code
+            - Update_Samples_A_F
+            - Update_Samples_G_L
+            - Update_Samples_M_R
+            - Update_Samples_S_Z
           steps:
             - checkout: self
-            - checkout: azure-sdk-for-net
             - checkout: azure-sdk-tools
-            - task: UseDotNet@2
-              displayName: 'Use .NET Core SDK'
+            - task: PowerShell@2
+              displayName: Create pull request
               inputs:
-                useGlobalJson: true
-                performMultiLevelLookup: true
-            - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -AutorestCSharpVersion $(AutorestCSharpVersion) -CadlEmitterVersion $(CadlEmitterVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-              failOnStderr: false
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update generator version in Azure SDK repo'
-            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
-              parameters:
-                BaseBranchName: main
-                RepoName: azure-sdk-for-net
-                PRBranchName: auto-update-autorest
-                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRTitle:  Update AutoRest C# version
-                PushArgs: -f
-                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+                pwsh: true
+                filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+                arguments: >
+                  -RepoOwner "Azure"
+                  -RepoName "azure-sdk-for-net"
+                  -BaseBranch "main"
+                  -PROwner "azure-sdk"
+                  -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
+                  -AuthToken "$(azuresdk-github-pat)"
+                  -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                  -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"

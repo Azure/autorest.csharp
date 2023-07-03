@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public string ClientShortName { get; }
         protected override string DefaultName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
+        public string Description => ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, _context));
         public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_inputClient);
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();
 
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
                     continue;
                 }
 
-                var name = operation.Name.ToCleanName();
+                var name = operation.CleanName;
                 RestClientMethod startMethod = RestClient.GetOperationMethod(operation);
 
                 yield return new LongRunningOperationMethod(

@@ -17,12 +17,12 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field1))
             {
-                writer.WritePropertyName("field1");
+                writer.WritePropertyName("field1"u8);
                 writer.WriteNumberValue(Field1.Value);
             }
             if (Optional.IsDefined(Field2))
             {
-                writer.WritePropertyName("field2");
+                writer.WritePropertyName("field2"u8);
                 writer.WriteNumberValue(Field2.Value);
             }
             writer.WriteEndObject();
@@ -30,25 +30,27 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<long> field1 = default;
             Optional<long> field2 = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field1"))
+                if (property.NameEquals("field1"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     field1 = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("field2"))
+                if (property.NameEquals("field2"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     field2 = property.Value.GetInt64();

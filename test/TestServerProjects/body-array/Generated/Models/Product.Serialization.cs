@@ -17,12 +17,12 @@ namespace body_array.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Integer))
             {
-                writer.WritePropertyName("integer");
+                writer.WritePropertyName("integer"u8);
                 writer.WriteNumberValue(Integer.Value);
             }
             if (Optional.IsDefined(String))
             {
-                writer.WritePropertyName("string");
+                writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
             }
             writer.WriteEndObject();
@@ -30,21 +30,24 @@ namespace body_array.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> integer = default;
             Optional<string> @string = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("integer"))
+                if (property.NameEquals("integer"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     integer = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("string"))
+                if (property.NameEquals("string"u8))
                 {
                     @string = property.Value.GetString();
                     continue;

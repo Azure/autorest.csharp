@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
 
         public static TextSplitMode ToTextSplitMode(this string value)
         {
-            if (string.Equals(value, "pages", StringComparison.InvariantCultureIgnoreCase)) return TextSplitMode.Pages;
-            if (string.Equals(value, "sentences", StringComparison.InvariantCultureIgnoreCase)) return TextSplitMode.Sentences;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "pages")) return TextSplitMode.Pages;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "sentences")) return TextSplitMode.Sentences;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextSplitMode value.");
         }
     }

@@ -2,10 +2,10 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $autoRestBinary = "npx --no-install autorest"
 $AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp')
 
-function Invoke($command)
+function Invoke($command, $executePath=$repoRoot)
 {
     Write-Host "> $command"
-    pushd $repoRoot
+    Push-Location $executePath
     if ($IsLinux -or $IsMacOs)
     {
         sh -c "$command 2>&1"
@@ -14,7 +14,7 @@ function Invoke($command)
     {
         cmd /c "$command 2>&1"
     }
-    popd
+    Pop-Location
     
     if($LastExitCode -ne 0)
     {
@@ -24,7 +24,12 @@ function Invoke($command)
 
 function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
-    $outputPath = Join-Path $baseOutput "Generated"
+    $outputPath = $baseOutput
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = Join-Path $outputPath "src"
+    }
+
+    $outputPath = Join-Path $outputPath "Generated"
     if ($projectName -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
@@ -42,7 +47,11 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     }
 
     Invoke $command
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
 function AutoRest-Reset()
@@ -50,7 +59,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
+function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -60,6 +69,10 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = $baseOutput
 
+    if(Test-Path "$outputPath/*.sln") {
+        $outputPath = "$outputPath/src"
+    }
+
     if ($fast)
     {
         $outputPath = Join-Path $baseOutput "Generated"
@@ -68,22 +81,16 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
     }
     else
     {
-        #clean up
-        if (Test-Path $outputPath/Generated/*) 
-        {
-            Remove-Item $outputPath/Generated/* -Recurse
-        }
-        
-        # emit cadl json
+        # emit typespec json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
-        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/AutoRest.CSharp.dll"
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
-            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.emitter-output-dir=$outputPath --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
-            Invoke $emitCommand    
+            $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
+            $emitCommand = "npx tsp compile $typespecFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            Invoke $emitCommand $outputPath
         }
         Finally 
         {
@@ -91,13 +98,17 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         }        
     }
 
-    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+    $buildDir = $baseOutput
+    if($buildDir.EndsWith("src")) {
+        $buildDir = $buildDir -replace ".{4}$"
+    }
+    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
 }
 
-function Invoke-CadlSetup()
+function Invoke-TypeSpecSetup()
 {
     # build emitter
-    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
+    $emitterPath = Join-Path $PSScriptRoot ".." "src" "TypeSpec.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
 
@@ -133,5 +144,5 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
-Export-ModuleMember -Function "Invoke-Cadl"
-Export-ModuleMember -Function "Invoke-CadlSetup"
+Export-ModuleMember -Function "Invoke-TypeSpec"
+Export-ModuleMember -Function "Invoke-TypeSpecSetup"

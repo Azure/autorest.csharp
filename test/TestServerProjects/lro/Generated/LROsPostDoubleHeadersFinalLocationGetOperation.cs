@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object. </summary>
     public partial class LROsPostDoubleHeadersFinalLocationGetOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly OperationInternal<Product> _operation;
@@ -29,7 +29,7 @@ namespace lro
         internal LROsPostDoubleHeadersFinalLocationGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPostDoubleHeadersFinalLocationGetOperation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LROsPostDoubleHeadersFinalLocationGetOperation");
         }
 
         /// <inheritdoc />

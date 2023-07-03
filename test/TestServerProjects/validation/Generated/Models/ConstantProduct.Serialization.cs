@@ -15,27 +15,31 @@ namespace validation.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("constProperty");
-            writer.WriteStringValue(ConstProperty);
-            writer.WritePropertyName("constProperty2");
-            writer.WriteStringValue(ConstProperty2);
+            writer.WritePropertyName("constProperty"u8);
+            writer.WriteStringValue(ConstProperty.ToString());
+            writer.WritePropertyName("constProperty2"u8);
+            writer.WriteStringValue(ConstProperty2.ToString());
             writer.WriteEndObject();
         }
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
-            string constProperty = default;
-            string constProperty2 = default;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            ConstantProductConstProperty constProperty = default;
+            ConstantProductConstProperty2 constProperty2 = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("constProperty"))
+                if (property.NameEquals("constProperty"u8))
                 {
-                    constProperty = property.Value.GetString();
+                    constProperty = new ConstantProductConstProperty(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("constProperty2"))
+                if (property.NameEquals("constProperty2"u8))
                 {
-                    constProperty2 = property.Value.GetString();
+                    constProperty2 = new ConstantProductConstProperty2(property.Value.GetString());
                     continue;
                 }
             }

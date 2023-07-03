@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             if (Carrier is not Resource resource)
                 return null;
-            var parents = resource.Parent();
+            var parents = resource.GetParents();
             // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
             // Only when this resource is a "scope resource", we could have multiple parents
             // We could use the value of the scope variable, get the resource type from it to know which resource we should use as a parent here
@@ -58,8 +59,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return language.SerializedName ?? language.Name;
         }
 
-        private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
-        public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
+        private MappingObject? _parameterValueMapping;
+        public MappingObject ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping().Item1;
+
+        private MappingObject? _propertyBagParamValueMapping;
+        public MappingObject PropertyBagParamValueMapping => _propertyBagParamValueMapping ??= EnsureParameterValueMapping().Item2;
 
         private IEnumerable<Parameter> GetAllPossibleParameters()
         {
@@ -67,14 +71,23 @@ namespace AutoRest.CSharp.MgmtTest.Models
             var methodParameters = Operation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
                 Operation.MethodParameters.Skip(1) : Operation.MethodParameters;
 
+            // remove the property bag parameter and add the parameter in the property bag
+            if (Operation.IsPropertyBagOperation)
+            {
+                methodParameters = methodParameters.Where(p => !p.IsPropertyBag).Concat(Operation.PropertyBagUnderlyingParameters);
+            }
+
             return Carrier.ExtraConstructorParameters.Concat(methodParameters);
         }
 
-        private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
+        private Tuple<MappingObject, MappingObject> EnsureParameterValueMapping()
         {
-            var result = new Dictionary<string, ExampleParameterValue>();
+            var result = new MappingObject();
+            var propertyBagMapping = new MappingObject();
+            var parameters = GetAllPossibleParameters();
+            var propertyBagParamNames = Operation.PropertyBagUnderlyingParameters.Select(p => p.Name).ToList();
             // get the "serialized name" of the parameters based on the raw request path
-            foreach (var parameter in GetAllPossibleParameters())
+            foreach (var parameter in parameters)
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
@@ -94,14 +107,21 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 }
                 else
                 {
-                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
+                    {
+                        propertyBagMapping.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    }
+                    else
+                    {
+                        result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    }
                 }
             }
 
-            return result;
+            return Tuple.Create(result, propertyBagMapping);
         }
 
-        private static bool ProcessKnownParameters(Dictionary<string, ExampleParameterValue> result, Parameter parameter)
+        private static bool ProcessKnownParameters(MappingObject result, Parameter parameter)
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {

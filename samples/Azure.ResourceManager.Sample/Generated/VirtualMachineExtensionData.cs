@@ -13,7 +13,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineExtension data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineExtension data model.
+    /// Describes a Virtual Machine Extension.
+    /// Serialized Name: VirtualMachineExtension
+    /// </summary>
     public partial class VirtualMachineExtensionData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
@@ -38,7 +42,7 @@ namespace Azure.ResourceManager.Sample
         /// Serialized Name: VirtualMachineExtension.properties.publisher
         /// </param>
         /// <param name="extensionType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtension.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -94,7 +98,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         public string Publisher { get; set; }
         /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtension.properties.type
         /// </summary>
         public string ExtensionType { get; set; }

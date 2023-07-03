@@ -1,0 +1,24 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtReferenceTypes",
+  "LibraryName": "ReferenceTypes",
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "KeepOrphanedModels": [
+    "ResourceNon"
+  ],
+  "RenameMapping": {
+    "PrivateLinkResource": "PrivateLinkResourceData",
+    "PrivateEndpointConnection": "PrivateEndpointConnectionData",
+    "PrivateEndpointConnectionListResult": "PrivateEndpointConnectionList",
+    "PrivateLinkResourceListResult": "PrivateLinkResourceList",
+    "CheckNameAvailabilityRequest.type": "ResourceType"
+  },
+  "ArmCore": true
+}

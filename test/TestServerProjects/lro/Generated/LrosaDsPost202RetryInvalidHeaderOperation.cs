@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers. </summary>
     public partial class LrosaDsPost202RetryInvalidHeaderOperation : Operation
     {
         private readonly OperationInternal _operation;
@@ -27,7 +27,7 @@ namespace lro
         internal LrosaDsPost202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LrosaDsPost202RetryInvalidHeaderOperation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LrosaDsPost202RetryInvalidHeaderOperation");
         }
 
         /// <inheritdoc />

@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace lro
 {
-    /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+    /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers. </summary>
     public partial class LrosaDsDelete202RetryInvalidHeaderOperation : Operation
     {
         private readonly OperationInternal _operation;
@@ -27,7 +27,7 @@ namespace lro
         internal LrosaDsDelete202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LrosaDsDelete202RetryInvalidHeaderOperation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LrosaDsDelete202RetryInvalidHeaderOperation");
         }
 
         /// <inheritdoc />

@@ -208,8 +208,7 @@ public override string ToString() => _value;
 namespace Cadl.TestServer.EnumPropertiesBasic
 {
 /// <summary> Represents the days of the week using a standard, non-string enum. </summary>
-public enum DayOfTheWeek
-{
+public enum DayOfTheWeek{
 /// <summary> Monday. </summary>
 Monday,
 /// <summary> Tuesday. </summary>
@@ -253,13 +252,13 @@ _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, 
 
 public static DayOfTheWeek ToDayOfTheWeek(this string value)
 {
-if (string.Equals(value, ""Monday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Monday;
-if (string.Equals(value, ""Tuesday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Tuesday;
-if (string.Equals(value, ""Wednesday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Wednesday;
-if (string.Equals(value, ""Thursday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Thursday;
-if (string.Equals(value, ""Friday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Friday;
-if (string.Equals(value, ""Saturday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Saturday;
-if (string.Equals(value, ""Sunday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Sunday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Monday"")) return DayOfTheWeek.Monday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Tuesday"")) return DayOfTheWeek.Tuesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Wednesday"")) return DayOfTheWeek.Wednesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Thursday"")) return DayOfTheWeek.Thursday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Friday"")) return DayOfTheWeek.Friday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Saturday"")) return DayOfTheWeek.Saturday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Sunday"")) return DayOfTheWeek.Sunday;
 throw new global::System.ArgumentOutOfRangeException(nameof(value), value, ""Unknown DayOfTheWeek value."");
 }
 }

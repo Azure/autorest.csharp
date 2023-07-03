@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetModelAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+Response response = await client.GetModelAsync("<mode>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetModel(string,RequestContext)">
+<example>
+This sample shows how to call GetModel with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+Response response = client.GetModel("<mode>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostModelAsync(string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+var data = new {
+    hello = "<hello>",
+};
+
+Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostModel(string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostModel with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+var data = new {
+    hello = "<hello>",
+};
+
+Response response = client.PostModel("<mode>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetPagesAsync(string,RequestContext)">
+<example>
+This sample shows how to call GetPagesAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+await foreach (var item in client.GetPagesAsync("<mode>"))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("received").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetPages(string,RequestContext)">
+<example>
+This sample shows how to call GetPages with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+foreach (var item in client.GetPages("<mode>"))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("received").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="LroAsync(WaitUntil,string,RequestContext)">
+<example>
+This sample shows how to call LroAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Lro(WaitUntil,string,RequestContext)">
+<example>
+This sample shows how to call Lro with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new DPGClient(credential);
+
+var operation = client.Lro(WaitUntil.Completed, "<mode>");
+
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("received").ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

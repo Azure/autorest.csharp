@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Extreme))
             {
-                writer.WritePropertyName("extreme");
+                writer.WritePropertyName("extreme"u8);
                 writer.WriteObjectValue(Extreme);
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtMockAndSample.Models
 
         internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SuperDeepSinglePropertyModel> extreme = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("extreme"))
+                if (property.NameEquals("extreme"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     extreme = SuperDeepSinglePropertyModel.DeserializeSuperDeepSinglePropertyModel(property.Value);

@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -51,6 +52,38 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 writer.Append($"{parameter.Name}: ");
 
             return writer.AppendExampleParameterValue(exampleParameterValue);
+        }
+
+        public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
+        {
+            writer.Append($"new {parameter.Type}(");
+            var mgmtObject = parameter.Type.Implementation as ModelTypeProvider;
+            var requiredProperties = mgmtObject!.Properties.Where(p => p.IsRequired);
+            var nonRequiredProperties = mgmtObject!.Properties.Where(p => !p.IsRequired);
+            foreach (var property in requiredProperties)
+            {
+                var parameterName = property.Declaration.Name.ToVariableName();
+                if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
+                {
+                    writer.Append($"{parameterName}: ");
+                    writer.AppendExampleParameterValue(value);
+                    writer.Append($", ");
+                }
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($"){{ ");
+            foreach (var property in nonRequiredProperties)
+            {
+                var parameterName = property.Declaration.Name.ToVariableName();
+                if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
+                {
+                    writer.Append($"{property.Declaration.Name} = ");
+                    writer.AppendExampleParameterValue(value);
+                    writer.Append($", ");
+                }
+            }
+            writer.RemoveTrailingComma();
+            return writer.Append($"}}");
         }
 
         public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue)

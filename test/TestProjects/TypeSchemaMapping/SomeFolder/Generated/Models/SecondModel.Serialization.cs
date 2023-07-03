@@ -19,12 +19,12 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(IntProperty))
             {
-                writer.WritePropertyName("StringProperty");
+                writer.WritePropertyName("StringProperty"u8);
                 writer.WriteNumberValue(IntProperty);
             }
             if (Optional.IsCollectionDefined(DictionaryProperty))
             {
-                writer.WritePropertyName("DictionaryProperty");
+                writer.WritePropertyName("DictionaryProperty"u8);
                 writer.WriteStartObject();
                 foreach (var item in DictionaryProperty)
                 {
@@ -35,7 +35,7 @@ namespace TypeSchemaMapping.Models
             }
             if (Optional.IsDefined(DaysOfWeek))
             {
-                writer.WritePropertyName("DaysOfWeek");
+                writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
@@ -43,26 +43,28 @@ namespace TypeSchemaMapping.Models
 
         internal static SecondModel DeserializeSecondModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> stringProperty = default;
             Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("StringProperty"))
+                if (property.NameEquals("StringProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     stringProperty = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("DictionaryProperty"))
+                if (property.NameEquals("DictionaryProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -73,11 +75,10 @@ namespace TypeSchemaMapping.Models
                     dictionaryProperty = dictionary;
                     continue;
                 }
-                if (property.NameEquals("DaysOfWeek"))
+                if (property.NameEquals("DaysOfWeek"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());

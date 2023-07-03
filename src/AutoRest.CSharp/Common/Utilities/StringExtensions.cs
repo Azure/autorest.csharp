@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.Utilities
         public static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
             var words = single.SplitByCamelCase();
-            var lastWord = words.LastOrDefault();
+            var lastWord = words.Last();
             var lastWordPlural = lastWord.ToPlural(inputIsKnownToBeSingular);
             if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
             {
@@ -348,7 +348,7 @@ namespace AutoRest.CSharp.Utilities
         public static string LastWordToSingular(this string plural, bool inputIsKnownToBePlural = true)
         {
             var words = plural.SplitByCamelCase();
-            var lastWord = words.LastOrDefault();
+            var lastWord = words.Last();
             var lastWordSingular = lastWord.ToSingular(inputIsKnownToBePlural);
             if (inputIsKnownToBePlural || lastWord != lastWordSingular)
             {

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierExpressionValues(RequestPath resourcePath)
         {
             var scopePath = resourcePath.GetScopePath();
-            if (scopePath.IsParameterizedScope())
+            if (scopePath.IsRawParameterizedScope())
             {
                 var trimmedPath = resourcePath.TrimScope();
                 return ComposeResourceIdentifierForScopePath(scopePath, trimmedPath);

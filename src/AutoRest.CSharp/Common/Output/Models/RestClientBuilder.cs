@@ -81,9 +81,9 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.CleanName,
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 parameters,
@@ -113,9 +113,9 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.CleanName,
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 methodParameters,
@@ -315,7 +315,8 @@ namespace AutoRest.CSharp.Output.Models
                         var serialization = SerializationBuilder.Build(
                             bodyMediaType,
                             bodyRequestParameter.Type,
-                            bodyParameterValue.Type);
+                            bodyParameterValue.Type,
+                            null);
 
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
@@ -351,7 +352,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
@@ -387,7 +388,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType);
+            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);
         }

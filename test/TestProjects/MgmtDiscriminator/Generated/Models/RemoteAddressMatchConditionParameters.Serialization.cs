@@ -16,18 +16,18 @@ namespace MgmtDiscriminator.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("typeName");
+            writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            writer.WritePropertyName("operator");
+            writer.WritePropertyName("operator"u8);
             writer.WriteStringValue(Operator.ToString());
             if (Optional.IsDefined(NegateCondition))
             {
-                writer.WritePropertyName("negateCondition");
+                writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
             }
             if (Optional.IsCollectionDefined(MatchValues))
             {
-                writer.WritePropertyName("matchValues");
+                writer.WritePropertyName("matchValues"u8);
                 writer.WriteStartArray();
                 foreach (var item in MatchValues)
                 {
@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
             }
             if (Optional.IsCollectionDefined(Transforms))
             {
-                writer.WritePropertyName("transforms");
+                writer.WritePropertyName("transforms"u8);
                 writer.WriteStartArray();
                 foreach (var item in Transforms)
                 {
@@ -50,6 +50,10 @@ namespace MgmtDiscriminator.Models
 
         internal static RemoteAddressMatchConditionParameters DeserializeRemoteAddressMatchConditionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RemoteAddressMatchConditionParametersTypeName typeName = default;
             RemoteAddressOperator @operator = default;
             Optional<bool> negateCondition = default;
@@ -57,31 +61,29 @@ namespace MgmtDiscriminator.Models
             Optional<IList<Transform>> transforms = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("typeName"))
+                if (property.NameEquals("typeName"u8))
                 {
                     typeName = new RemoteAddressMatchConditionParametersTypeName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("operator"))
+                if (property.NameEquals("operator"u8))
                 {
                     @operator = new RemoteAddressOperator(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("negateCondition"))
+                if (property.NameEquals("negateCondition"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     negateCondition = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("matchValues"))
+                if (property.NameEquals("matchValues"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -92,11 +94,10 @@ namespace MgmtDiscriminator.Models
                     matchValues = array;
                     continue;
                 }
-                if (property.NameEquals("transforms"))
+                if (property.NameEquals("transforms"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Transform> array = new List<Transform>();

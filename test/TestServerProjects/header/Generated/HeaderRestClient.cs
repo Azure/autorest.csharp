@@ -49,8 +49,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <summary> Send a post request with header value "User-Agent": "overwrite". </summary>
+        /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         public async Task<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
@@ -67,12 +67,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <summary> Send a post request with header value "User-Agent": "overwrite". </summary>
+        /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         public Response ParamExistingKey(string userAgent, CancellationToken cancellationToken = default)
@@ -89,7 +89,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -106,7 +106,7 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary> Get a response with header value "User-Agent": "overwrite". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<HeaderResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
@@ -118,11 +118,11 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <summary> Get a response with header value "User-Agent": "overwrite". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HeaderResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
         {
@@ -134,7 +134,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -151,8 +151,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <summary> Send a post request with header value "Content-Type": "text/html". </summary>
+        /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         public async Task<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
@@ -169,12 +169,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <summary> Send a post request with header value "Content-Type": "text/html". </summary>
+        /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         public Response ParamProtectedKey(string contentType, CancellationToken cancellationToken = default)
@@ -191,7 +191,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -208,7 +208,7 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary> Get a response with header value "Content-Type": "text/html". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<HeaderResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
@@ -220,11 +220,11 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <summary> Get a response with header value "Content-Type": "text/html". </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HeaderResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
         {
@@ -236,7 +236,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -255,8 +255,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -274,12 +274,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -297,7 +297,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -315,8 +315,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 1 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseIntegerHeaders>> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
@@ -334,12 +334,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 1 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseIntegerHeaders> ResponseInteger(string scenario, CancellationToken cancellationToken = default)
@@ -357,7 +357,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -376,8 +376,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -395,12 +395,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -418,7 +418,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -436,8 +436,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 105 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseLongHeaders>> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
@@ -455,12 +455,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 105 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseLongHeaders> ResponseLong(string scenario, CancellationToken cancellationToken = default)
@@ -478,7 +478,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -497,8 +497,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -516,12 +516,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -539,7 +539,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -557,8 +557,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 0.07 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseFloatHeaders>> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
@@ -576,12 +576,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 0.07 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseFloatHeaders> ResponseFloat(string scenario, CancellationToken cancellationToken = default)
@@ -599,7 +599,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -618,8 +618,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -637,12 +637,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -660,7 +660,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -678,8 +678,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 7e120 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseDoubleHeaders>> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
@@ -697,12 +697,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <summary> Get a response with header value "value": 7e120 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseDoubleHeaders> ResponseDouble(string scenario, CancellationToken cancellationToken = default)
@@ -720,7 +720,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -739,8 +739,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -758,12 +758,12 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
@@ -781,7 +781,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -799,8 +799,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <summary> Get a response with header value "value": true or false. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseBoolHeaders>> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
@@ -818,12 +818,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <summary> Get a response with header value "value": true or false. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseBoolHeaders> ResponseBool(string scenario, CancellationToken cancellationToken = default)
@@ -841,7 +841,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -863,9 +863,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamStringAsync(string scenario, string value = null, CancellationToken cancellationToken = default)
@@ -882,13 +882,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamString(string scenario, string value = null, CancellationToken cancellationToken = default)
@@ -905,7 +905,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -923,8 +923,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <summary> Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseStringHeaders>> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
@@ -942,12 +942,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <summary> Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseStringHeaders> ResponseString(string scenario, CancellationToken cancellationToken = default)
@@ -965,7 +965,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -984,9 +984,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -1003,13 +1003,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamDate(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -1026,7 +1026,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1044,8 +1044,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "2010-01-01" or "0001-01-01". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseDateHeaders>> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
@@ -1063,12 +1063,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "2010-01-01" or "0001-01-01". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseDateHeaders> ResponseDate(string scenario, CancellationToken cancellationToken = default)
@@ -1086,7 +1086,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1105,9 +1105,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -1124,13 +1124,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamDatetime(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -1147,7 +1147,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1165,8 +1165,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseDatetimeHeaders>> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
@@ -1184,12 +1184,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseDatetimeHeaders> ResponseDatetime(string scenario, CancellationToken cancellationToken = default)
@@ -1207,7 +1207,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1229,9 +1229,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
@@ -1248,13 +1248,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
+        /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
@@ -1271,7 +1271,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1289,8 +1289,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
@@ -1308,12 +1308,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <summary> Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123(string scenario, CancellationToken cancellationToken = default)
@@ -1331,7 +1331,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1350,9 +1350,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
@@ -1369,13 +1369,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamDuration(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
@@ -1392,7 +1392,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1410,8 +1410,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <summary> Get a response with header values "P123DT22H14M12.011S". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseDurationHeaders>> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
@@ -1429,12 +1429,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <summary> Get a response with header values "P123DT22H14M12.011S". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseDurationHeaders> ResponseDuration(string scenario, CancellationToken cancellationToken = default)
@@ -1452,7 +1452,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1471,9 +1471,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         public async Task<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
@@ -1494,13 +1494,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
+        /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         public Response ParamByte(string scenario, byte[] value, CancellationToken cancellationToken = default)
@@ -1521,7 +1521,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1539,8 +1539,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <summary> Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseByteHeaders>> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
@@ -1558,12 +1558,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <summary> Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseByteHeaders> ResponseByte(string scenario, CancellationToken cancellationToken = default)
@@ -1581,7 +1581,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1603,9 +1603,9 @@ namespace header
             return message;
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values 'GREY'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
@@ -1622,13 +1622,13 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <summary> Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
+        /// <param name="value"> Send a post request with header values 'GREY'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
@@ -1645,7 +1645,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1663,8 +1663,8 @@ namespace header
             return message;
         }
 
-        /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <summary> Get a response with header values "GREY" or null. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderResponseEnumHeaders>> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
@@ -1682,12 +1682,12 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <summary> Get a response with header values "GREY" or null. </summary>
+        /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public ResponseWithHeaders<HeaderResponseEnumHeaders> ResponseEnum(string scenario, CancellationToken cancellationToken = default)
@@ -1705,7 +1705,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1733,7 +1733,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -1748,7 +1748,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

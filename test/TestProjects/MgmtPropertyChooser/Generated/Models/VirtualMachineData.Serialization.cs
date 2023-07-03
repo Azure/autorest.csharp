@@ -21,43 +21,43 @@ namespace MgmtPropertyChooser
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
             {
-                writer.WritePropertyName("plan");
+                writer.WritePropertyName("plan"u8);
                 JsonSerializer.Serialize(writer, Plan);
             }
             if (Optional.IsDefined(Identity))
             {
-                writer.WritePropertyName("identity");
+                writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
-                writer.WritePropertyName("identityWithRenamedProperty");
+                writer.WritePropertyName("identityWithRenamedProperty"u8);
                 writer.WriteObjectValue(IdentityWithRenamedProperty);
             }
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
-                writer.WritePropertyName("identityWithDifferentPropertyType");
+                writer.WritePropertyName("identityWithDifferentPropertyType"u8);
                 writer.WriteObjectValue(IdentityWithDifferentPropertyType);
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
-                writer.WritePropertyName("identityWithNoUserIdentity");
+                writer.WritePropertyName("identityWithNoUserIdentity"u8);
                 JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
-                writer.WritePropertyName("identityWithNoSystemIdentity");
+                writer.WritePropertyName("identityWithNoSystemIdentity"u8);
                 writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
             if (Optional.IsDefined(IdentityV3))
             {
-                writer.WritePropertyName("identityV3");
+                writer.WritePropertyName("identityV3"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, IdentityV3, serializeOptions);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
-                writer.WritePropertyName("zones");
+                writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
                 foreach (var item in Zones)
                 {
@@ -67,17 +67,17 @@ namespace MgmtPropertyChooser
             }
             if (Optional.IsDefined(FakeSubResource))
             {
-                writer.WritePropertyName("fakeSubResource");
+                writer.WritePropertyName("fakeSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeSubResource);
             }
             if (Optional.IsDefined(FakeWritableSubResource))
             {
-                writer.WritePropertyName("fakeWritableSubResource");
+                writer.WritePropertyName("fakeWritableSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeWritableSubResource);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -86,18 +86,18 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("location");
+            writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(LicenseType))
             {
-                writer.WritePropertyName("licenseType");
+                writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
             if (Optional.IsDefined(ExtensionsTimeBudget))
             {
-                writer.WritePropertyName("extensionsTimeBudget");
+                writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
             }
             writer.WriteEndObject();
@@ -106,6 +106,10 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ArmPlan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ManagedServiceIdentity> identity = default;
@@ -130,21 +134,19 @@ namespace MgmtPropertyChooser
             Optional<string> extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("plan"))
+                if (property.NameEquals("plan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     plan = JsonSerializer.Deserialize<ArmPlan>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("resources"))
+                if (property.NameEquals("resources"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VirtualMachineExtension> array = new List<VirtualMachineExtension>();
@@ -155,72 +157,65 @@ namespace MgmtPropertyChooser
                     resources = array;
                     continue;
                 }
-                if (property.NameEquals("identity"))
+                if (property.NameEquals("identity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("identityWithRenamedProperty"))
+                if (property.NameEquals("identityWithRenamedProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identityWithRenamedProperty = IdentityWithRenamedProperty.DeserializeIdentityWithRenamedProperty(property.Value);
                     continue;
                 }
-                if (property.NameEquals("identityWithDifferentPropertyType"))
+                if (property.NameEquals("identityWithDifferentPropertyType"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value);
                     continue;
                 }
-                if (property.NameEquals("identityWithNoUserIdentity"))
+                if (property.NameEquals("identityWithNoUserIdentity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identityWithNoUserIdentity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("identityWithNoSystemIdentity"))
+                if (property.NameEquals("identityWithNoSystemIdentity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value);
                     continue;
                 }
-                if (property.NameEquals("identityV3"))
+                if (property.NameEquals("identityV3"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                     identityV3 = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
                     continue;
                 }
-                if (property.NameEquals("zones"))
+                if (property.NameEquals("zones"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -231,11 +226,10 @@ namespace MgmtPropertyChooser
                     zones = array;
                     continue;
                 }
-                if (property.NameEquals("fakeResources"))
+                if (property.NameEquals("fakeResources"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<MgmtPropertyChooserResourceData> array = new List<MgmtPropertyChooserResourceData>();
@@ -246,31 +240,28 @@ namespace MgmtPropertyChooser
                     fakeResources = array;
                     continue;
                 }
-                if (property.NameEquals("fakeSubResource"))
+                if (property.NameEquals("fakeSubResource"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     fakeSubResource = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("fakeWritableSubResource"))
+                if (property.NameEquals("fakeWritableSubResource"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     fakeWritableSubResource = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -281,37 +272,36 @@ namespace MgmtPropertyChooser
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -320,22 +310,22 @@ namespace MgmtPropertyChooser
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("licenseType"))
+                        if (property0.NameEquals("licenseType"u8))
                         {
                             licenseType = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("vmId"))
+                        if (property0.NameEquals("vmId"u8))
                         {
                             vmId = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("extensionsTimeBudget"))
+                        if (property0.NameEquals("extensionsTimeBudget"u8))
                         {
                             extensionsTimeBudget = property0.Value.GetString();
                             continue;

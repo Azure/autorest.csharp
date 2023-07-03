@@ -16,9 +16,9 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("fields");
+            writer.WritePropertyName("fields"u8);
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
             {
-                writer.WritePropertyName("scoringProfiles");
+                writer.WritePropertyName("scoringProfiles"u8);
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
@@ -37,17 +37,17 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsDefined(DefaultScoringProfile))
             {
-                writer.WritePropertyName("defaultScoringProfile");
+                writer.WritePropertyName("defaultScoringProfile"u8);
                 writer.WriteStringValue(DefaultScoringProfile);
             }
             if (Optional.IsDefined(CorsOptions))
             {
-                writer.WritePropertyName("corsOptions");
+                writer.WritePropertyName("corsOptions"u8);
                 writer.WriteObjectValue(CorsOptions);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
-                writer.WritePropertyName("suggesters");
+                writer.WritePropertyName("suggesters"u8);
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsCollectionDefined(Analyzers))
             {
-                writer.WritePropertyName("analyzers");
+                writer.WritePropertyName("analyzers"u8);
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsCollectionDefined(Tokenizers))
             {
-                writer.WritePropertyName("tokenizers");
+                writer.WritePropertyName("tokenizers"u8);
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsCollectionDefined(TokenFilters))
             {
-                writer.WritePropertyName("tokenFilters");
+                writer.WritePropertyName("tokenFilters"u8);
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsCollectionDefined(CharFilters))
             {
-                writer.WritePropertyName("charFilters");
+                writer.WritePropertyName("charFilters"u8);
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
@@ -97,17 +97,17 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsDefined(EncryptionKey))
             {
-                writer.WritePropertyName("encryptionKey");
+                writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
             if (Optional.IsDefined(Similarity))
             {
-                writer.WritePropertyName("similarity");
+                writer.WritePropertyName("similarity"u8);
                 writer.WriteObjectValue(Similarity);
             }
             if (Optional.IsDefined(ETag))
             {
-                writer.WritePropertyName("@odata.etag");
+                writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
             writer.WriteEndObject();
@@ -115,6 +115,10 @@ namespace CognitiveSearch.Models
 
         internal static Index DeserializeIndex(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             IList<Field> fields = default;
             Optional<IList<ScoringProfile>> scoringProfiles = default;
@@ -130,12 +134,12 @@ namespace CognitiveSearch.Models
             Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("fields"))
+                if (property.NameEquals("fields"u8))
                 {
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -145,11 +149,10 @@ namespace CognitiveSearch.Models
                     fields = array;
                     continue;
                 }
-                if (property.NameEquals("scoringProfiles"))
+                if (property.NameEquals("scoringProfiles"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ScoringProfile> array = new List<ScoringProfile>();
@@ -160,26 +163,24 @@ namespace CognitiveSearch.Models
                     scoringProfiles = array;
                     continue;
                 }
-                if (property.NameEquals("defaultScoringProfile"))
+                if (property.NameEquals("defaultScoringProfile"u8))
                 {
                     defaultScoringProfile = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("corsOptions"))
+                if (property.NameEquals("corsOptions"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
                     continue;
                 }
-                if (property.NameEquals("suggesters"))
+                if (property.NameEquals("suggesters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Suggester> array = new List<Suggester>();
@@ -190,11 +191,10 @@ namespace CognitiveSearch.Models
                     suggesters = array;
                     continue;
                 }
-                if (property.NameEquals("analyzers"))
+                if (property.NameEquals("analyzers"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Analyzer> array = new List<Analyzer>();
@@ -205,11 +205,10 @@ namespace CognitiveSearch.Models
                     analyzers = array;
                     continue;
                 }
-                if (property.NameEquals("tokenizers"))
+                if (property.NameEquals("tokenizers"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Tokenizer> array = new List<Tokenizer>();
@@ -220,11 +219,10 @@ namespace CognitiveSearch.Models
                     tokenizers = array;
                     continue;
                 }
-                if (property.NameEquals("tokenFilters"))
+                if (property.NameEquals("tokenFilters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<TokenFilter> array = new List<TokenFilter>();
@@ -235,11 +233,10 @@ namespace CognitiveSearch.Models
                     tokenFilters = array;
                     continue;
                 }
-                if (property.NameEquals("charFilters"))
+                if (property.NameEquals("charFilters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CharFilter> array = new List<CharFilter>();
@@ -250,27 +247,25 @@ namespace CognitiveSearch.Models
                     charFilters = array;
                     continue;
                 }
-                if (property.NameEquals("encryptionKey"))
+                if (property.NameEquals("encryptionKey"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
-                if (property.NameEquals("similarity"))
+                if (property.NameEquals("similarity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     similarity = Similarity.DeserializeSimilarity(property.Value);
                     continue;
                 }
-                if (property.NameEquals("@odata.etag"))
+                if (property.NameEquals("@odata.etag"u8))
                 {
                     odataEtag = property.Value.GetString();
                     continue;

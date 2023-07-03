@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema && property.IsRequired)
                 {
                     // Turn constants into initializers
                     initializationValue = constantSchema.Value.Value != null ?
@@ -423,6 +423,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
             SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
+            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
+
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
             var propertyType = GetDefaultPropertyType(property);
@@ -459,6 +461,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||
                               property.IsReadOnly;
 
+
             if (isCollection)
             {
                 isReadOnly |= !property.IsNullable;
@@ -471,6 +474,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                               !_usage.HasFlag(SchemaTypeUsage.Output);
             }
 
+            // we should remove the setter of required constant
+            if (property.Schema is ConstantSchema && property.IsRequired)
+            {
+                isReadOnly = true;
+            }
+
             if (property.IsDiscriminator == true)
             {
                 // Discriminator properties should be writeable
@@ -479,11 +488,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var objectTypeProperty = new ObjectTypeProperty(
                 memberDeclaration,
-                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDocDescription(property.Language.Default.Description),
                 isReadOnly,
                 property,
                 valueType,
-                optionalViaNullability);
+                optionalViaNullability,
+                serializationMapping);
             return objectTypeProperty;
         }
 

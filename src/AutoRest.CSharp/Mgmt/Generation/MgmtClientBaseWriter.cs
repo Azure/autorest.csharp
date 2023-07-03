@@ -150,23 +150,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    if (This is MgmtExtensionClient)
-                        return;
-
-                    foreach (var param in This.ExtraConstructorParameters)
+                    if (!This.IsInitializedByProperties)
                     {
-                        _writer.Line($"_{param.Name} = {param.Name};");
-                    }
+                        foreach (var param in This.ExtraConstructorParameters)
+                        {
+                            _writer.Line($"_{param.Name} = {param.Name};");
+                        }
 
-                    foreach (var set in This.UniqueSets)
-                    {
-                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        foreach (var set in This.UniqueSets)
+                        {
+                            WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        }
+                        if (This.CanValidateResourceType)
+                            WriteDebugValidate();
                     }
-                    if (This.CanValidateResourceType)
-                        WriteDebugValidate();
                 }
             }
             _writer.Line();
+        }
+
+        private string GetEnumerableArgValue()
+        {
+            string value = string.Empty;
+            if (This is ResourceCollection collection)
+            {
+                if (collection.GetAllOperation?.IsPropertyBagOperation == true)
+                {
+                    value = "options: null";
+                }
+            }
+            return value;
         }
 
         private void WriteIEnumerable(CSharpType type)
@@ -174,15 +187,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetEnumerator()");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
             _writer.Line();
             _writer.Line($"{typeof(IEnumerator)} {typeof(IEnumerable)}.GetEnumerator()");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
         }
 
@@ -191,9 +205,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({(argValue == string.Empty ? string.Empty : argValue + ", ")}{KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
@@ -214,14 +229,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceTypeExpression)}", DiagnosticsProperty);
             var diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
-            string apiVersionText = string.Empty;
+            FormattableString? apiVersionExpression = null;
             if (resourceTypeExpression is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
                 _writer.Line($"TryGetApiVersion({resourceTypeExpression}, out string {apiVersionVariable});");
-                apiVersionText = $", {apiVersionVariable}";
+                apiVersionExpression = $"{apiVersionVariable}";
             }
-            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
+            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionExpression)};");
         }
 
         protected FormattableString? ConstructResourceTypeExpression(Resource? resource)
@@ -244,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteResourceCollectionGetMethod(resource);
 
-                    if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    if (This.HasChildResourceGetMethods)
                     {
                         WriteChildResourceGetMethod(resource.ResourceCollection, true);
                         WriteChildResourceGetMethod(resource.ResourceCollection, false);
@@ -298,7 +313,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
-                Attributes = new[]{new CSharpAttribute(typeof(ForwardsClientCallsAttribute))}
+                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
             };
 
             _writer.Line();
@@ -327,11 +342,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
         }
 
-        protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
+        protected virtual void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
         {
             // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
             // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"Id")});");
         }
 
         protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;
@@ -406,12 +422,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
-        protected string GetRestConstructorString(MgmtRestClient restClient, string apiVersionVariable)
+        protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
         {
-            string subIdVariable = ", Id.SubscriptionId";
-            if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
-                subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
+            var paramList = new List<FormattableString>()
+            {
+                $"{PipelineProperty}",
+                $"{DiagnosticsProperty}.ApplicationId"
+            };
+
+            if (restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
+            {
+                paramList.Add($"Id.SubscriptionId");
+            }
+            paramList.Add($"{EndpointProperty}");
+            if (apiVersionExpression != null)
+            {
+                paramList.Add(apiVersionExpression);
+            }
+            return $"new {restClient.Type}({paramList.Join(", ")})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
@@ -490,9 +518,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected Dictionary<string, WriteMethodDelegate> _customMethods = new Dictionary<string, WriteMethodDelegate>();
         private WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
         {
-            if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
-                throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
-
             if (!_customMethods.TryGetValue($"Write{clientOperation.Name}Body", out var function))
             {
                 function = GetMethodDelegate(clientOperation.IsLongRunningOperation, clientOperation.IsPagingOperation);
@@ -507,8 +532,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 (true, false) => WriteLROMethodBody,
                 (false, true) => WritePagingMethodBody,
                 (false, false) => WriteNormalMethodBody,
-                _ => throw new InvalidOperationException("Unknown method combination"),
+                (true, true) => WritePagingLROMethodBody,
             };
+
+        private void WritePagingLROMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        {
+            throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+        }
 
         protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
@@ -553,7 +583,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
@@ -728,8 +758,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -775,8 +804,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+
+                if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
+                {
+                    _writer.AppendRaw("skipApiVersionOverride: true,");
+                }
+
+                if (Configuration.MgmtConfiguration.OperationsToLroApiVersionOverride.TryGetValue(operation.OperationId, out var apiVersionOverrideValue))
+                {
+                    _writer.Append($"apiVersionOverrideValue: {apiVersionOverrideValue:L}");
+                }
             }
+            _writer.RemoveTrailingComma();
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :
@@ -813,13 +853,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            args.Add($"{parameter.Parameter.Name}");
+                            if (parameter.Parameter.IsPropertyBag)
+                                args.Add($"{parameter.ValueExpression}");
+                            else
+                                args.Add($"{parameter.Parameter.Name}");
                         }
                     }
                     else
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             args.Add($"null");
+                        else if (parameter.Parameter.IsPropertyBag)
+                            args.Add($"{parameter.ValueExpression}");
                         else
                             args.Add($"{parameter.Parameter.Name}");
                     }

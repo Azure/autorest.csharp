@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Samples
@@ -22,7 +23,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetTenantActivityLogs_GetTenantActivityLogsWithoutFilterOrSelect()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "TenantActivityLogs_List" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -48,7 +49,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CalculateTemplateHashDeployment_CalculateTemplateHash()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "Deployments_CalculateTemplateHash" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

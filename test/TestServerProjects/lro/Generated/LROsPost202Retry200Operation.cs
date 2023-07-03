@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success. </summary>
     public partial class LROsPost202Retry200Operation : Operation
     {
         private readonly OperationInternal _operation;
@@ -27,7 +27,7 @@ namespace lro
         internal LROsPost202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LROsPost202Retry200Operation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LROsPost202Retry200Operation");
         }
 
         /// <inheritdoc />

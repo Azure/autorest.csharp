@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 ResourceCollection => throw new InvalidOperationException($"ResourceCollection is not supported here"),
                 Resource parentResource => WriteGetFromResource(parentResource, example, client),
-                MgmtExtensions parentExtension => WriteGetExtension(parentExtension, example, client),
+                MgmtExtension parentExtension => WriteGetExtension(parentExtension, example, client),
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
@@ -137,27 +137,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return resourceVar;
         }
 
-        protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
+        protected CodeWriterDeclaration WriteGetExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
         {
             _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, example, client),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException("The method that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException($"The method `{example.OperationId}` that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
 
-        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtensions parentExtension, OperationExample example, FormattableString client)
+        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtension parentExtension, OperationExample example, FormattableString client)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 
-        private CodeWriterDeclaration WriteGetOtherExtension(MgmtExtensions parentExtension, OperationExample example, FormattableString client)
+        private CodeWriterDeclaration WriteGetOtherExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
             WriteCreateResourceIdentifier(example, idVar, parentExtension.ContextualPath, parentExtension.ArmCoreType);
 
             _writer.Line($"{parentExtension.ArmCoreType} {resourceVar:D} = {client}.Get{parentExtension.ArmCoreType.Name}({idVar});");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 

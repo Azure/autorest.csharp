@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
         };
 
         public DataPlaneResponseHeaderGroupType(InputClient inputClient, InputOperation operation, OperationResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
-            :this(httpResponseHeaders, context, operation.Name.ToCleanName(), context.Library.FindRestClient(inputClient).ClientPrefix)
+            :this(httpResponseHeaders, context, operation.CleanName, context.Library.FindRestClient(inputClient).ClientPrefix)
         {
         }
 
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
                     header.Name.ToCleanName(),
                     header.NameInResponse,
                     type,
-                    BuilderHelpers.EscapeXmlDescription(header.Description));
+                    BuilderHelpers.EscapeXmlDocDescription(header.Description));
             }
 
             DefaultName = clientName + operationName + "Headers";

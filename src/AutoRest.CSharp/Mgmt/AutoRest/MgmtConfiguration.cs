@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Input
 {
@@ -95,7 +97,8 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
             IReadOnlyList<string> generateArmResourceExtensions,
-            IReadOnlyList<string> preventWrappingReturnType,
+            IReadOnlyList<string> parameterizedScopes,
+            IReadOnlyList<string> operationsToSkipLroApiVersionOverride,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -106,6 +109,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? overrideOperationName = default,
             JsonElement? operationPositions = default,
             JsonElement? renameRules = default,
+            JsonElement? renamePropertyBag = default,
             JsonElement? formatByNameRules = default,
             JsonElement? renameMapping = default,
             JsonElement? parameterRenameMapping = default,
@@ -117,7 +121,9 @@ namespace AutoRest.CSharp.Input
             JsonElement? singletonRequiresKeyword = default,
             JsonElement? operationIdMappings = default,
             JsonElement? updateRequiredCopy = default,
-            JsonElement? patchInitializerCustomization = default)
+            JsonElement? patchInitializerCustomization = default,
+            JsonElement? partialResources = default,
+            JsonElement? operationsToLroApiVersionOverride = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -127,10 +133,12 @@ namespace AutoRest.CSharp.Input
             RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
             OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
             RawRenameRules = DeserializeDictionary<string, string>(renameRules);
+            RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
             FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
             RenameMapping = DeserializeDictionary<string, string>(renameMapping);
             ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
+            PartialResources = DeserializeDictionary<string, string>(partialResources);
             try
             {
                 OperationPositions = DeserializeDictionary<string, string[]>(operationPositions);
@@ -162,11 +170,8 @@ namespace AutoRest.CSharp.Input
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
-            if (preventWrappingReturnType.Any())
-            {
-                Console.Error.WriteLine($"WARNING: The configuration 'prevent-wrapping-return-type' is a workaround and will be removed in the future.");
-            }
-            PreventWrappingReturnType = preventWrappingReturnType;
+            RawParameterizedScopes = parameterizedScopes;
+            OperationsToSkipLroApiVersionOverride = operationsToSkipLroApiVersionOverride;
             IsArmCore = Configuration.DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = Configuration.DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = Configuration.DeserializeBoolean(resourceModelRequiresName, true);
@@ -174,6 +179,7 @@ namespace AutoRest.CSharp.Input
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
             UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
             PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
+            OperationsToLroApiVersionOverride = DeserializeDictionary<string, string>(operationsToLroApiVersionOverride);
         }
 
         private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
@@ -198,6 +204,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
+        public IReadOnlyDictionary<string, string> RenamePropertyBag { get; }
         private IReadOnlyDictionary<string, string> RawRenameRules { get; }
         private IReadOnlyDictionary<string, RenameRuleTarget>? _renameRules;
         public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
@@ -208,6 +215,11 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
+        public IReadOnlyDictionary<string, string> PartialResources { get; }
+        public IReadOnlyList<string> RawParameterizedScopes { get; }
+        private ImmutableHashSet<RequestPath>? _parameterizedScopes;
+        internal ImmutableHashSet<RequestPath> ParameterizedScopes
+            => _parameterizedScopes ??= RawParameterizedScopes.Select(scope => RequestPath.FromString(scope)).ToImmutableHashSet();
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
@@ -217,13 +229,14 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralEnums { get; }
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
+        public IReadOnlyList<string> OperationsToSkipLroApiVersionOverride { get; }
+        public IReadOnlyDictionary<string, string> OperationsToLroApiVersionOverride { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
-        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
-        public IReadOnlyList<string> PreventWrappingReturnType { get; }
 
         public bool IsArmCore { get; }
 
@@ -241,7 +254,8 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                preventWrappingReturnType: autoRest.GetValue<string[]?>("prevent-wrapping-return-type").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                operationsToSkipLroApiVersionOverride: autoRest.GetValue<string[]?>("operations-to-skip-lro-api-version-override").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -252,6 +266,7 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
                 renameRules: autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
+                renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
                 renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
                 parameterRenameMapping: autoRest.GetValue<JsonElement?>("parameter-rename-mapping").GetAwaiter().GetResult(),
@@ -263,7 +278,9 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
                 updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
-                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult());
+                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
+                partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult(),
+                operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -277,7 +294,6 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
             WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
-            WriteNonEmptySettings(writer, nameof(PreventWrappingReturnType), PreventWrappingReturnType);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -287,11 +303,13 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
+            WriteNonEmptySettings(writer, nameof(RenamePropertyBag), RenamePropertyBag);
             WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
             WriteNonEmptySettings(writer, nameof(ParameterRenameMapping), ParameterRenameMapping);
             WriteNonEmptySettings(writer, nameof(IrregularPluralWords), IrregularPluralWords);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
+            WriteNonEmptySettings(writer, nameof(PartialResources), PartialResources);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
@@ -305,6 +323,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
             WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
             WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
+            WriteNonEmptySettings(writer, nameof(OperationsToLroApiVersionOverride), OperationsToLroApiVersionOverride);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -319,7 +338,6 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffixElement);
             root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefixElement);
             root.TryGetProperty(nameof(GenerateArmResourceExtensions), out var generateArmResourceExtensionsElement);
-            root.TryGetProperty(nameof(PreventWrappingReturnType), out var preventWrappingReturnTypeElement);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -328,6 +346,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
+            root.TryGetProperty(nameof(RenamePropertyBag), out var renamePropertyBag);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
             root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
             root.TryGetProperty(nameof(ParameterRenameMapping), out var parameterRenameMapping);
@@ -335,6 +354,9 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
+            root.TryGetProperty(nameof(PartialResources), out var virtualResources);
+            root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
+            root.TryGetProperty(nameof(OperationsToSkipLroApiVersionOverride), out var operationsToSkipLroApiVersionOverrideElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = Configuration.DeserializeArray(requestPathIsNonResourceElement);
@@ -347,7 +369,8 @@ namespace AutoRest.CSharp.Input
             var noResourceSuffix = Configuration.DeserializeArray(noResourceSuffixElement);
             var prependRPPrefix = Configuration.DeserializeArray(prependRPPrefixElement);
             var generateArmResourceExtensions = Configuration.DeserializeArray(generateArmResourceExtensionsElement);
-            var preventWrappingReturnType = Configuration.DeserializeArray(preventWrappingReturnTypeElement);
+            var parameterizedScopes = Configuration.DeserializeArray(parameterizedScopesElement);
+            var operationsToSkipLroApiVersionOverride = Configuration.DeserializeArray(operationsToSkipLroApiVersionOverrideElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -357,6 +380,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
             root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
             root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
+            root.TryGetProperty(nameof(OperationsToLroApiVersionOverride), out var operationsToLroApiVersionOverride);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupToOmit,
@@ -370,7 +394,8 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: noResourceSuffix,
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
-                preventWrappingReturnType: preventWrappingReturnType,
+                parameterizedScopes: parameterizedScopes,
+                operationsToSkipLroApiVersionOverride: operationsToSkipLroApiVersionOverride,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
@@ -381,6 +406,7 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
                 renameRules: renameRules,
+                renamePropertyBag: renamePropertyBag,
                 formatByNameRules: formatByNameRules,
                 renameMapping: renameMapping,
                 parameterRenameMapping: parameterRenameMapping,
@@ -392,7 +418,9 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 operationIdMappings: operationIdMappings,
                 updateRequiredCopy: updateRequiredCopy,
-                patchInitializerCustomization: patchInitializerCustomization);
+                patchInitializerCustomization: patchInitializerCustomization,
+                partialResources: virtualResources,
+                operationsToLroApiVersionOverride: operationsToLroApiVersionOverride);
         }
 
         private static void WriteNonEmptySettings(

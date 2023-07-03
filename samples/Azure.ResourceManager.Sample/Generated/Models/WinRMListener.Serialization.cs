@@ -18,12 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Protocol))
             {
-                writer.WritePropertyName("protocol");
+                writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
             if (Optional.IsDefined(CertificateUri))
             {
-                writer.WritePropertyName("certificateUrl");
+                writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
             writer.WriteEndObject();
@@ -31,25 +31,27 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static WinRMListener DeserializeWinRMListener(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ProtocolType> protocol = default;
             Optional<Uri> certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("protocol"))
+                if (property.NameEquals("protocol"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     protocol = property.Value.GetString().ToProtocolType();
                     continue;
                 }
-                if (property.NameEquals("certificateUrl"))
+                if (property.NameEquals("certificateUrl"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        certificateUrl = null;
                         continue;
                     }
                     certificateUrl = new Uri(property.Value.GetString());

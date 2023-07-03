@@ -78,7 +78,7 @@ namespace MgmtScopeResource.Models
         /// </summary>
         public BinaryData Outputs { get; }
         /// <summary>
-        /// Deployment parameters. 
+        /// Deployment parameters.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

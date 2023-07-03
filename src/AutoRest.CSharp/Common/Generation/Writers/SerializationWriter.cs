@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
@@ -29,7 +30,10 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case SerializableObjectType objectSchema:
-                    WriteObjectSerialization(writer, objectSchema);
+                    if (objectSchema.IncludeSerializer || objectSchema.IncludeDeserializer)
+                    {
+                        WriteObjectSerialization(writer, objectSchema);
+                    }
                     break;
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
@@ -171,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
                 }
 
-                var objectType = (ObjectType) serialization.Type.Implementation;
+                var objectType = (ObjectType)serialization.Type.Implementation;
                 writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
             }
             writer.Line();
@@ -181,6 +185,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
             {
+                if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
+                {
+                    using (writer.Scope($"if (element.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
+                    {
+                        writer.Line($"return null;");
+                    }
+                }
+
                 var discriminator = serialization.Discriminator;
 
                 if (discriminator is not null && discriminator.HasDescendants)
@@ -237,31 +249,31 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Line($"return Deserialize{objectType.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
         }
 
-        public static void WriteEnumSerialization(CodeWriter writer, EnumType schema)
+        public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
         {
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                string declaredTypeName = schema.Declaration.Name;
+                string declaredTypeName = enumType.Declaration.Name;
 
-                var isString = schema.ValueType.FrameworkType == typeof(string);
+                var isString = enumType.ValueType.FrameworkType == typeof(string);
 
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    if (!schema.IsIntValueType)
+                    if (!enumType.IsIntValueType)
                     {
-                        WriteEnumSerializationMethod(writer, schema, declaredTypeName);
+                        WriteEnumSerializationMethod(writer, enumType, declaredTypeName);
                     }
 
-                    WriteEnumDeserializationMethod(writer, schema, declaredTypeName, isString);
+                    WriteEnumDeserializationMethod(writer, enumType, declaredTypeName, isString);
                 }
             }
         }
 
-        private static void WriteEnumSerializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName)
+        private static void WriteEnumSerializationMethod(CodeWriter writer, EnumType enumType, string declaredTypeName)
         {
-            using (writer.Scope($"public static {schema.ValueType} ToSerial{schema.ValueType.Name.FirstCharToUpperCase()}(this {declaredTypeName} value) => value switch", end: "};"))
+            using (writer.Scope($"public static {enumType.ValueType} {enumType.SerializationMethodName}(this {declaredTypeName} value) => value switch", end: "};"))
             {
-                foreach (EnumTypeValue value in schema.Values)
+                foreach (EnumTypeValue value in enumType.Values)
                 {
                     writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
                 }
@@ -279,9 +291,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
-                        writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                        writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
-                        writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
+                        if (value.Value.Value is string strValue && strValue.All(char.IsAscii))
+                        {
+                            writer.Append($"if ({typeof(StringComparer)}.{nameof(StringComparer.OrdinalIgnoreCase)}.{nameof(StringComparer.Equals)}(value, {strValue:L}))");
+                        }
+                        else
+                        {
+                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
+                            writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase))");
+                        }
+                        writer.Line($" return {declaredTypeName}.{value.Declaration.Name};");
                     }
                 }
                 else// int, and float

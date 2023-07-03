@@ -18,7 +18,7 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Array))
             {
-                writer.WritePropertyName("array");
+                writer.WritePropertyName("array"u8);
                 writer.WriteStartArray();
                 foreach (var item in Array)
                 {
@@ -31,14 +31,17 @@ namespace body_complex.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> array = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("array"))
+                if (property.NameEquals("array"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array0 = new List<string>();

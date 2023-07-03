@@ -14,10 +14,14 @@ namespace MgmtScopeResource.Models
     {
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             WorkspaceInfo workspace = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("workspace"))
+                if (property.NameEquals("workspace"u8))
                 {
                     workspace = WorkspaceInfo.DeserializeWorkspaceInfo(property.Value);
                     continue;

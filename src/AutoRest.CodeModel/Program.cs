@@ -4,8 +4,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration.CSharp;
 
@@ -16,12 +17,11 @@ namespace AutoRest.CodeModel
         private const string Path = "AutoRest.CSharp/Common/Input/Generated";
         private static readonly string Namespace = "AutoRest.CSharp.Input";
 
-        private static void Main()
+        private static async Task Main()
         {
-            using var webClient = new WebClient();
-            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/codemodel/.resources/all-in-one/json/code-model.json", "code-model.json");
-
-            var schemaJson = File.ReadAllText("code-model.json")
+            using var webClient = new HttpClient();
+            var schemaJson = await webClient.GetStringAsync(@"https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/codemodel/.resources/all-in-one/json/code-model.json");
+            schemaJson = schemaJson
                 // Makes Choices only have string values
                 .Replace("          \"type\": [\n            \"string\",\n            \"number\",\n            \"boolean\"\n          ]\n", $"          \"type\": \"string\"\n");
 

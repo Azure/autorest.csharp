@@ -47,15 +47,19 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
                 InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
                 InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeRFC1123 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC3339 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC7231 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeUnix => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DurationISO8601 => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationSeconds => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationSecondsFloat => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.DurationConstant => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
                 InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
@@ -64,6 +68,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
                 InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
                 InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
                 InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
@@ -73,6 +78,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -82,17 +88,17 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
-            ConstantSchema constantSchema => ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema _ when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
-                typeof(DataFactoryExpression<>),
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+                typeof(DataFactoryElement<>),
                 isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-definition"]))),
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
@@ -270,16 +276,16 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.IPAddress => typeof(IPAddress),
             XMsFormat.ContentType => typeof(ContentType),
             XMsFormat.RequestMethod => typeof(RequestMethod),
-            XMsFormat.DataFactoryExpressionOfString => typeof(DataFactoryExpression<string>),
-            XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
-            XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
-            XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
-            XMsFormat.DataFactoryExpressionOfDateTime => typeof(DataFactoryExpression<DateTimeOffset>),
-            XMsFormat.DataFactoryExpressionOfDuration => typeof(DataFactoryExpression<TimeSpan>),
-            XMsFormat.DataFactoryExpressionOfUri => typeof(DataFactoryExpression<Uri>),
-            XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),
-            XMsFormat.DataFactoryExpressionOfListOfString => typeof(DataFactoryExpression<IList<string>>),
-            XMsFormat.DataFactoryExpressionOfKeyValuePairs => typeof(DataFactoryExpression<IDictionary<string, string>>),
+            XMsFormat.DataFactoryElementOfString => typeof(DataFactoryElement<string>),
+            XMsFormat.DataFactoryElementOfInt => typeof(DataFactoryElement<int>),
+            XMsFormat.DataFactoryElementOfDouble => typeof(DataFactoryElement<double>),
+            XMsFormat.DataFactoryElementOfBool => typeof(DataFactoryElement<bool>),
+            XMsFormat.DataFactoryElementOfDateTime => typeof(DataFactoryElement<DateTimeOffset>),
+            XMsFormat.DataFactoryElementOfDuration => typeof(DataFactoryElement<TimeSpan>),
+            XMsFormat.DataFactoryElementOfUri => typeof(DataFactoryElement<Uri>),
+            XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<BinaryData>),
+            XMsFormat.DataFactoryElementOfListOfString => typeof(DataFactoryElement<IList<string>>),
+            XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
             _ => null
         };
 
@@ -353,6 +359,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
             => TryCreateType(symbol, NoTypeValidator, out type);
+
+        public CSharpType? GetLibraryTypeByName(string name) => _library.FindTypeByName(name);
 
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {

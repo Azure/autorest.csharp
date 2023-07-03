@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Very))
             {
-                writer.WritePropertyName("very");
+                writer.WritePropertyName("very"u8);
                 writer.WriteObjectValue(Very);
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtMockAndSample.Models
 
         internal static VeryDeepSinglePropertyModel DeserializeVeryDeepSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DeepSinglePropertyModel> very = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("very"))
+                if (property.NameEquals("very"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     very = DeepSinglePropertyModel.DeserializeDeepSinglePropertyModel(property.Value);

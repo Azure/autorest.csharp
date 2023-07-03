@@ -62,16 +62,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 
-        public static bool TryCast<T>(this CSharpType type, [MaybeNullWhen(false)] out T provider) where T : TypeProvider
-        {
-            provider = null;
-            if (type.IsFrameworkType)
-                return false;
-
-            provider = type.Implementation as T;
-            return provider != null;
-        }
-
         public static bool TryCastResource(this CSharpType type, [MaybeNullWhen(false)] out Resource resource)
             => type.TryCast<Resource>(out resource);
 

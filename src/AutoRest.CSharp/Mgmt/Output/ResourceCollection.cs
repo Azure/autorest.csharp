@@ -33,7 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
+            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -213,8 +214,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parents = Resource.Parent();
-            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parents = Resource.GetParents();
+            var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
@@ -268,6 +269,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 yield return new FieldDeclaration(FieldModifiers, reference.Type, GetFieldName(reference).ToString());
             }
         }
+
+        public override MethodSignature CreateResourceIdentifierMethodSignature => throw new InvalidOperationException("Resource collections will never have CreateResourceIdentifier method");
 
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
         public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();

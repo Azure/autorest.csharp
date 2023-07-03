@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+    /// <summary> Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code. </summary>
     public partial class LrosaDsPutNonRetry201Creating400Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly OperationInternal<Product> _operation;
@@ -29,7 +29,7 @@ namespace lro
         internal LrosaDsPutNonRetry201Creating400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LrosaDsPutNonRetry201Creating400Operation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LrosaDsPutNonRetry201Creating400Operation");
         }
 
         /// <inheritdoc />

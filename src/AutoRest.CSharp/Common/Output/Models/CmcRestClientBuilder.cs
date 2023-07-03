@@ -100,8 +100,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CSharpName(),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDocDescription(operation.Language.Default.Summary ?? string.Empty),
+                BuilderHelpers.EscapeXmlDocDescription(operation.Language.Default.Description),
                 responseType,
                 request,
                 methodParameters,
@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models
                     Deprecated: operation.Deprecated?.Reason,
                     Description: operation.Language.Default.Description,
                     Accessibility: operation.Accessibility,
-                    Parameters: new List<InputParameter>(),
+                    Parameters: CreateInputParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
                     Responses: new List<OperationResponse>(),
                     HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
                     RequestBodyMediaType: BodyMediaType.None,
@@ -142,9 +142,64 @@ namespace AutoRest.CSharp.Output.Models
                     BufferResponse: operation.Extensions?.BufferResponse ?? true,
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
-                    false);
+                    GenerateProtocolMethod: true,
+                    GenerateConvenienceMethod: false);
             }
             return new InputOperation();
+        }
+
+        private static IReadOnlyList<InputParameter> CreateInputParameters(IEnumerable<RequestParameter> requestParameters)
+        {
+            var parameters = new List<InputParameter>();
+            foreach (var requestParameter in requestParameters)
+            {
+                parameters.Add(CreateInputParameter(requestParameter));
+            }
+            return parameters;
+        }
+
+        private static InputParameter CreateInputParameter(RequestParameter requestParameter)
+        {
+            return new(
+                    Name: requestParameter.Language.Default.Name,
+                    NameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
+                    Description: requestParameter.Language.Default.Description,
+                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
+                    Location: CodeModelConverter.GetRequestLocation(requestParameter),
+                    DefaultValue: GetDefaultValue(requestParameter),
+                    IsRequired: requestParameter.IsRequired,
+                    GroupedBy: requestParameter.GroupedBy != null ? CreateInputParameter(requestParameter.GroupedBy) : null,
+                    Kind: CodeModelConverter.GetOperationParameterKind(requestParameter),
+                    IsApiVersion: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                    IsResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
+                    IsContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
+                    IsEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
+                    ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
+                    Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
+                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                    HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
+                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema));
+        }
+
+        private static InputConstant? GetDefaultValue(RequestParameter parameter)
+        {
+            if (parameter.ClientDefaultValue != null)
+            {
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+            }
+
+            if (parameter.Schema is ConstantSchema constantSchema)
+            {
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CodeModelConverter.CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, null) with { IsNullable = constantSchema.Value.Value == null});
+            }
+
+            if (!parameter.IsRequired)
+            {
+                return new InputConstant(Value: null, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+            }
+
+            return null;
         }
 
         private OperationPaging? CreateOperationPaging(Operation operation)
@@ -164,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -390,7 +445,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
             }
 
-            if (requestParameter.Schema is ConstantSchema constant)
+            if (requestParameter.Schema is ConstantSchema constant && requestParameter.IsRequired)
             {
                 return ParseConstant(constant);
             }
@@ -405,7 +460,6 @@ namespace AutoRest.CSharp.Output.Models
             var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
 
             return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
-
         }
 
         private static SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
@@ -543,7 +597,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
-            => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
+            => requestParameter.Implementation == ImplementationLocation.Method &&
+                (requestParameter.Schema is not ConstantSchema || !requestParameter.IsRequired) && // we should put the parameter in signature when it is not Constant or "it is Constant, but it is optional"
+                !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
 
         public static bool IsEndpointParameter(RequestParameter requestParameter)
             => requestParameter.Origin == "modelerfour:synthesized/host";
@@ -560,13 +616,13 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
         }
 
-        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null)
+        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null, bool keepClientDefaultValue = false)
         {
             var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
             CSharpType type = typeOverride != null
                 ? new CSharpType(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, isNullable);
-            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
+            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory, keepClientDefaultValue);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>

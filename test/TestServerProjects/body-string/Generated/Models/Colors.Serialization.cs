@@ -21,9 +21,9 @@ namespace body_string.Models
 
         public static Colors ToColors(this string value)
         {
-            if (string.Equals(value, "red color", StringComparison.InvariantCultureIgnoreCase)) return Colors.RedColor;
-            if (string.Equals(value, "green-color", StringComparison.InvariantCultureIgnoreCase)) return Colors.GreenColor;
-            if (string.Equals(value, "blue_color", StringComparison.InvariantCultureIgnoreCase)) return Colors.BlueColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "red color")) return Colors.RedColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "green-color")) return Colors.GreenColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "blue_color")) return Colors.BlueColor;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Colors value.");
         }
     }

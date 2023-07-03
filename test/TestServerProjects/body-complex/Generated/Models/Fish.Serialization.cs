@@ -15,18 +15,18 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("fishtype");
+            writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
             if (Optional.IsDefined(Species))
             {
-                writer.WritePropertyName("species");
+                writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
-            writer.WritePropertyName("length");
+            writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
             if (Optional.IsCollectionDefined(Siblings))
             {
-                writer.WritePropertyName("siblings");
+                writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
@@ -39,6 +39,10 @@ namespace body_complex.Models
 
         internal static Fish DeserializeFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

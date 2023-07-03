@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
         /// <summary> Initializes a new instance of EntitiesResult. </summary>
@@ -165,7 +165,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="matches"> List of instances this entity appears in the text. </param>
         /// <param name="language"> Language used in the data source. </param>
         /// <param name="id"> Unique identifier of the recognized entity from the data source. </param>
-        /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
+        /// <param name="url"> URL for the entity's page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
         /// <returns> A new <see cref="Models.LinkedEntity"/> instance for mocking. </returns>
         public static LinkedEntity LinkedEntity(string name = null, IEnumerable<Match> matches = null, string language = null, string id = null, string url = null, string dataSource = null)

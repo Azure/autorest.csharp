@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
-using Humanizer;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -28,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteObjectSchema(writer, objectSchema);
                     break;
                 case EnumType e when e.IsExtensible:
-                    WriteExtendableEnum(writer, e);
+                    WriteExtensibleEnum(writer, e);
                     break;
                 case EnumType e when !e.IsExtensible:
                     WriteEnum(writer, e);
@@ -91,52 +89,77 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)
+        {
+            writer.AppendRawIf("public ", modifiers.HasFlag(FieldModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(FieldModifiers.Internal))
+                .AppendRawIf("protected ", modifiers.HasFlag(FieldModifiers.Protected))
+                .AppendRawIf("private ", modifiers.HasFlag(FieldModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
+                .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly))
+                .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const));
+        }
+
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-            if (property is FlattenedObjectTypeProperty flattenedProperty)
+            writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
+
+            // write getter
+            writer.AppendRaw("{");
+            if (property.GetterModifiers is { } getterModifiers)
+                WriteFieldModifiers(writer, getterModifiers);
+            writer.AppendRaw("get;");
+            // writer setter
+            if (!property.IsReadOnly)
             {
-                WriteFlattenedProperty(writer, flattenedProperty);
+                if (property.SetterModifiers is { } setterModifiers)
+                    WriteFieldModifiers(writer, setterModifiers);
+                writer.AppendRaw("set;");
             }
-            else
+            writer.AppendRaw("}");
+            if (property.InitializationValue != null)
             {
-                WriteNormalProperty(writer, property);
+                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
             }
 
             writer.Line();
         }
 
-        private static void WriteFlattenedProperty(CodeWriter writer, FlattenedObjectTypeProperty flattenedProperty)
+        private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            using (writer.Scope($"{flattenedProperty.Declaration.Accessibility} {flattenedProperty.Declaration.Type} {flattenedProperty.Declaration.Name:D}"))
+            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {
                 // write getter
-                switch (flattenedProperty.IncludeGetterNullCheck)
+                switch (property.IncludeGetterNullCheck)
                 {
                     case true:
-                        WriteGetWithNullCheck(writer, flattenedProperty);
+                        WriteGetWithNullCheck(writer, property);
                         break;
                     case false:
-                        WriteGetWithDefault(writer, flattenedProperty);
+                        WriteGetWithDefault(writer, property);
                         break;
                     default:
-                        WriteGetWithEscape(writer, flattenedProperty);
+                        WriteGetWithEscape(writer, property);
                         break;
                 }
 
                 // only write the setter when it is not readonly
-                if (!flattenedProperty.IsReadOnly)
+                if (!property.IsReadOnly)
                 {
-                    if (flattenedProperty.IncludeSetterNullCheck)
+                    if (property.IncludeSetterNullCheck)
                     {
-                        WriteSetWithNullCheck(writer, flattenedProperty);
+                        WriteSetWithNullCheck(writer, property);
                     }
                     else
                     {
-                        WriteSetWithSingleParamCtor(writer, flattenedProperty);
+                        WriteSetWithSingleParamCtor(writer, property);
                     }
                 }
             }
+
+            writer.Line();
         }
 
         private static void WriteSetWithNullCheck(CodeWriter writer, FlattenedObjectTypeProperty property)
@@ -208,15 +231,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Line($".{property.ChildPropertyName};");
         }
 
-        private static void WriteNormalProperty(CodeWriter writer, ObjectTypeProperty property)
-        {
-            writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
-            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-        }
-
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type, property.SerializationFormat);
             if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
             {
                 return $"{property.PropertyDescription}{binaryDataExtraDescription}";
@@ -224,33 +241,53 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
         }
 
-        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
         {
             if (type.IsFrameworkType)
             {
                 if (type.FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("this property");
+                    return ConstructBinaryDataDescription("this property", serializationFormat);
                 }
                 if (TypeFactory.IsList(type) &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the element of this property");
+                    return ConstructBinaryDataDescription("the element of this property", serializationFormat);
                 }
                 if (TypeFactory.IsDictionary(type) &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
                 {
-                    return ConstructBinaryDataDescription("the value of this property");
+                    return ConstructBinaryDataDescription("the value of this property", serializationFormat);
                 }
             }
             return $"";
         }
 
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat)
         {
-            return $@"
+            switch (serializationFormat)
+            {
+                case SerializationFormat.Bytes_Base64Url: //intentional fall through
+                case SerializationFormat.Bytes_Base64:
+                    return $@"
+<para>
+To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
+The byte[] will be serialized to a Base64 encoded string.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
+<description>Creates a payload of ""AQID"".</description>
+</item>
+</list>
+</para>";
+
+                default:
+                    return $@"
 <para>
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
@@ -278,6 +315,7 @@ Examples:
 </item>
 </list>
 </para>";
+            }
         }
         private string GetAbstract(ObjectType schema)
         {
@@ -305,7 +343,7 @@ Examples:
         {
         }
 
-        public void WriteConstructor(CodeWriter writer, ObjectType schema)
+        private void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {
@@ -328,46 +366,31 @@ Examples:
 
                         writer.Line($";");
                     }
-
-                    //TODO make the proper initializer here instead
-                    if (schema is ModelTypeProvider modelTypeProvider)
-                    {
-                        foreach (var parameter in constructor.Signature.Parameters)
-                        {
-                            if (modelTypeProvider.Fields.TryGetFieldByParameter(parameter, out var field))
-                            {
-                                if (!field.IsField)
-                                    continue;
-                                writer
-                                    .Append($"{field.Name:I} = {parameter.Name:I}")
-                                    .WriteConversion(parameter.Type, field.Type)
-                                    .LineRaw(";");
-                            }
-                        }
-                    }
                 }
                 writer.Line();
             }
         }
 
-        public void WriteEnum(CodeWriter writer, EnumType schema)
+        public void WriteEnum(CodeWriter writer, EnumType enumType)
         {
-            if (schema.Declaration.IsUserDefined)
+            if (enumType.Declaration.IsUserDefined)
             {
                 return;
             }
 
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
-                AddClassAttributes(writer, schema);
+                writer.WriteXmlDocumentationSummary($"{enumType.Description}");
+                AddClassAttributes(writer, enumType);
 
-                using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}{(schema.IsLongValueType ? " : long" : "")}"))
+                writer.Append($"{enumType.Declaration.Accessibility} enum {enumType.Declaration.Name}")
+                    .AppendIf($" : {enumType.ValueType}", enumType.IsIntValueType && !enumType.ValueType.Equals(typeof(int)));
+                using (writer.Scope())
                 {
-                    foreach (EnumTypeValue value in schema.Values)
+                    foreach (EnumTypeValue value in enumType.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{value.Description}");
-                        if (schema.IsIntValueType)
+                        if (enumType.IsIntValueType)
                         {
                             writer.Line($"{value.Declaration.Name} = {value.Value.Value:L},");
                         }
@@ -381,7 +404,7 @@ Examples:
             }
         }
 
-        public void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
+        public void WriteExtensibleEnum(CodeWriter writer, EnumType enumType)
         {
             var cs = enumType.Type;
             string name = enumType.Declaration.Name;
@@ -428,6 +451,14 @@ Examples:
                         writer.WriteXmlDocumentationSummary($"{choice.Description}");
                         var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
+                    }
+
+                    // write ToSerial method, only write when the underlying type is not a string
+                    if (!enumType.IsStringValueType)
+                    {
+                        writer.Line();
+                        writer.Line($"internal {enumType.ValueType} {enumType.SerializationMethodName}() => _value;");
+                        writer.Line();
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");

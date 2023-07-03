@@ -12,7 +12,10 @@ using MgmtResourceName.Models;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing the ProviderOperation data model. </summary>
+    /// <summary>
+    /// A class representing the ProviderOperation data model.
+    /// Provider Operations metadata
+    /// </summary>
     public partial class ProviderOperationData : ResourceData
     {
         /// <summary> Initializes a new instance of ProviderOperationData. </summary>

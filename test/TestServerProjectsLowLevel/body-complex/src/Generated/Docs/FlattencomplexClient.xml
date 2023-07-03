@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetValidAsync(RequestContext)">
+<example>
+This sample shows how to call GetValidAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new FlattencomplexClient(credential);
+
+Response response = await client.GetValidAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetValid(RequestContext)">
+<example>
+This sample shows how to call GetValid and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new FlattencomplexClient(credential);
+
+Response response = client.GetValid();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
