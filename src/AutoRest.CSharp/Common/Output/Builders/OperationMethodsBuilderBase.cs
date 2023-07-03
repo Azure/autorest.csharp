@@ -117,7 +117,10 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (!_existingProtocolMethodHasOptionalParameters && Configuration.UseOverloadsBetweenProtocolAndConvenience)
                     {
-                        protocolMethodParameters = ConvenienceMethodParameters.SkipLast(1).Append(KnownParameters.RequestContextRequired).ToList();
+                        protocolMethodParameters = protocolMethodParameters
+                            .SkipLast(1)
+                            .Select(p => p with {DefaultValue = null})
+                            .Append(KnownParameters.RequestContextRequired).ToList();
                     }
                     else
                     {

@@ -263,9 +263,10 @@ namespace AutoRest.CSharp.Output.Models
                 else
                 {
                     var argumentConversion = CreateConversion(convenienceMethodParameter, protocolMethodParameter);
-                    if (_operation.Paging is not null)
+                    // in paging methods, every request parameter is used twice, so even conversions that can be inlined must be cached
+                    // Exception from this rule is extensible enum ToString call (it returns underlying value and doesn't allocate any additional memory)
+                    if (_operation.Paging is not null && convenienceMethodParameter.Type is not { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true, SerializationMethod: null } })
                     {
-                        // in paging methods, every request parameter is used twice, so even conversions that can be inlined must be cached
                         _conversions[protocolMethodParameter] = new DeclareVariableStatement(protocolMethodParameter.Type, protocolMethodParameter.Name, argumentConversion, out var argument);
                         _arguments[protocolMethodParameter] = argument;
                     }
