@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-            var responseBodyType = GetReturnedResponseInputType();
+            var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
@@ -166,7 +166,16 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            CSharpType? responseType = GetReturnedResponseCSharpType();
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
+            CSharpType? responseType = null;
+            if (operationBodyTypes.Length != 0)
+            {
+                var firstBodyType = operationBodyTypes[0];
+                if (firstBodyType != null)
+                {
+                    responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
+                }
+            };
 
             if (Operation.Paging != null)
             {
@@ -222,32 +231,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
-        }
-
-        private CSharpType? GetReturnedResponseCSharpType()
-        {
-            var inputType = GetReturnedResponseInputType();
-            if (inputType != null)
-            {
-                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
-            }
-            return null;
-        }
-
-        private InputType? GetReturnedResponseInputType()
-        {
-            if (Operation.LongRunning != null)
-            {
-                return Operation.LongRunning.FinalResponse.BodyType;
-            }
-
-            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct();
-            if (operationBodyTypes.Any())
-            {
-                return operationBodyTypes.First();
-            }
-
-            return null;
         }
 
         private ConvenienceMethod BuildConvenienceMethod(bool shouldRequestContextOptional)
