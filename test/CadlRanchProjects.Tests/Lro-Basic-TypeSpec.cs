@@ -16,7 +16,6 @@ namespace CadlRanchProjects.Tests
     /// </summary>
     public class LroBasicTypeSpecTests : CadlRanchMockApiTestBase
     {
-        /* https://github.com/Azure/typespec-azure/issues/3109
         [Test]
         public Task LroBasic_CreateProject() => Test(async (host) =>
         {
@@ -38,7 +37,6 @@ namespace CadlRanchProjects.Tests
             Assert.IsTrue(operation.HasCompleted);
             Assert.AreEqual((int)HttpStatusCode.OK, operation.GetRawResponse().Status);
         });
-        */
 
         [Test]
         public Task LroBasic_UpdateProject() => Test(async (host) =>
