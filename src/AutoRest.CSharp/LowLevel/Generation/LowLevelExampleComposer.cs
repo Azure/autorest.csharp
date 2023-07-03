@@ -4,22 +4,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using Azure;
-using Azure.Core;
-using AutoRest.CSharp.Generation.Types;
+using System.Threading;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Input;
+using Azure;
+using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp;
-using System.Threading;
-using YamlDotNet.Core.Tokens;
-using AutoRest.CSharp.Utilities;
-using System.IO;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -140,17 +138,17 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
             => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
 
-        private void ComposeExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
+        private void ComposeExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool isAsync, StringBuilder builder)
         {
             var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.ProtocolMethodSignature.Parameters);
             builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, false, builder);
+            WriteTestMethodName(clientMethod.ProtocolMethodSignature.Name, false, isAsync, false, builder);
         }
 
-        private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
+        private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool isAsync, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, true, builder);
+            WriteTestMethodName(clientMethod.ProtocolMethodSignature.Name, true, isAsync, false, builder);
         }
 
         private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, bool shouldWrap, StringBuilder builder)
@@ -221,10 +219,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {methodName} with {(useAllParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
+            WriteTestMethodName(clientMethod.ProtocolMethodSignature.Name, useAllParameters, isAsync, false, builder);
         }
 
         private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
@@ -243,10 +241,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return "request content";
         }
 
-        private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters, StringBuilder builder)
         {
             builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            WriteTestMethodName(clientMethod.ProtocolMethodSignature.Name, useAllParameters, isAsync, false, builder);
         }
 
         private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
@@ -1910,6 +1908,31 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void ConsoleWriteLine(CodeWriter writer, FormattableString content)
         {
             writer.Line($"{typeof(Console)}.{nameof(Console.WriteLine)}({content});");
+        }
+
+        private void WriteTestMethodName(string methodName, bool useAllParameters, bool isAsync, bool isConvenienceMethod, StringBuilder builder)
+        {
+            builder.Append("<code>");
+            builder.Append(GetTestMethodName(methodName, useAllParameters, isAsync, isConvenienceMethod));
+            builder.Append("</code>");
+        }
+
+        internal string GetTestMethodName(string methodName, bool useAllParameters, bool isAsync, bool isConvenienceMethod)
+        {
+            var builder = new StringBuilder("Example_").Append(methodName);
+            if (useAllParameters)
+            {
+                builder.Append("_AllParameters");
+            }
+            if (isConvenienceMethod)
+            {
+                builder.Append("_Convenience");
+            }
+            if (isAsync)
+            {
+                builder.Append("_Async");
+            }
+            return builder.ToString();
         }
     }
 }

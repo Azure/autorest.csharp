@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
     internal class ExampleCompileCheckWriter
     {
         private MethodSignature GetExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
-            $"Example_{name}",
+            name,
             null,
             null,
             isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
@@ -93,16 +93,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             StringBuilder builder = new StringBuilder();
             var asyncKeyword = isAsync ? "Async" : "";
             _exampleComposer.ComposeConvenienceMethodExample(method, isAsync, false, $"{methodName}{asyncKeyword}", builder);
-            var testMethodName = methodName;
-            if (useAllParameters)
-            {
-                testMethodName += "_AllParameters";
-            }
-            testMethodName += "_Convenience";
-            if (isAsync)
-            {
-                testMethodName += "_Async";
-            }
+            var testMethodName = _exampleComposer.GetTestMethodName(methodName, useAllParameters, isAsync, true);
             using (_writer.WriteMethodDeclaration(GetExampleMethodSignature(testMethodName, isAsync)))
             {
                 _writer.AppendRaw(builder.ToString());
@@ -144,16 +135,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
         {
-            var methodName = method.RequestMethod.Name;
-            if (useAllParameters)
-            {
-                methodName += "_AllParameters";
-            }
-            if (isAsync)
-            {
-                methodName += "_Async";
-            }
-            using (_writer.WriteMethodDeclaration(GetExampleMethodSignature(methodName, isAsync)))
+            var testMethodName = _exampleComposer.GetTestMethodName(method.RequestMethod.Name, useAllParameters, isAsync, false);
+            using (_writer.WriteMethodDeclaration(GetExampleMethodSignature(testMethodName, isAsync)))
             {
                 _exampleComposer.ComposeCodeSnippet(_writer, method, GetMethodName(method.RequestMethod.Name, isAsync), isAsync, useAllParameters);
             }

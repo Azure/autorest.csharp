@@ -54,12 +54,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static Task<Project>? _cachedProject;
 
         private Project _project;
-        private Dictionary<string, string> _docFiles { get; init; }
+        private Dictionary<string, XmlDocument> _xmlDocFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
-            _docFiles = new Dictionary<string, string>();
+            _xmlDocFiles = new();
         }
 
         /// <summary>
@@ -86,10 +86,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// Add generated doc file.
         /// </summary>
         /// <param name="name">Name of the doc file, including the relative path to the "Generated" folder.</param>
-        /// <param name="text">Content of the doc file.</param>
-        public void AddGeneratedDocFile(string name, string text)
+        /// <param name="xmlDocument">The xml Document.</param>
+        public void AddGeneratedDocFile(string name, XmlDocument xmlDocument)
         {
-            _docFiles.Add(name, text);
+            _xmlDocFiles.Add(name, xmlDocument);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -110,6 +110,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
             }
 
+            var generatedDocs = new Dictionary<string, SyntaxTree>();
+
             foreach (var task in documents)
             {
                 var processed = await task;
@@ -118,11 +120,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
+                generatedDocs.Add(processed.Name, text);
             }
 
-            foreach (var doc in _docFiles)
+            foreach (var doc in _xmlDocFiles)
             {
-                yield return (doc.Key, doc.Value);
+                var xmlDocument = doc.Value.XmlDocDocument;
+                var testDocument = generatedDocs[doc.Value.TestFileName];
+                var content = await XmlFormatter.FormatAsync(xmlDocument, testDocument);
+                yield return (doc.Key, content);
             }
         }
 
