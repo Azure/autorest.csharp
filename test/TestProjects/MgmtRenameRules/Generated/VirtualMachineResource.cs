@@ -550,7 +550,7 @@ namespace MgmtRenameRules
         }
 
         /// <summary>
-        /// The operation to reapply a virtual machine&apos;s state.
+        /// The operation to reapply a virtual machine's state.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -584,7 +584,7 @@ namespace MgmtRenameRules
         }
 
         /// <summary>
-        /// The operation to reapply a virtual machine&apos;s state.
+        /// The operation to reapply a virtual machine's state.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -892,7 +892,7 @@ namespace MgmtRenameRules
         }
 
         /// <summary>
-        /// The operation to retrieve SAS URIs for a virtual machine&apos;s boot diagnostic logs.
+        /// The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -923,7 +923,7 @@ namespace MgmtRenameRules
         }
 
         /// <summary>
-        /// The operation to retrieve SAS URIs for a virtual machine&apos;s boot diagnostic logs.
+        /// The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

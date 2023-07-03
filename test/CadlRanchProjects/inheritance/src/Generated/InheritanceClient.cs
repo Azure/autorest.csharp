@@ -76,7 +76,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -172,7 +172,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +207,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -268,7 +268,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,7 +307,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -364,7 +364,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -399,7 +399,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -460,7 +460,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -499,7 +499,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -556,7 +556,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -591,7 +591,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -652,7 +652,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -691,7 +691,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -748,7 +748,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -783,7 +783,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -836,7 +836,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -871,7 +871,7 @@ namespace _Type.Model.Inheritance
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

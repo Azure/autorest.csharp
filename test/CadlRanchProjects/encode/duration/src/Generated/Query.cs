@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -46,7 +47,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +78,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -108,7 +109,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -139,7 +140,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -170,7 +171,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -201,7 +202,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -232,7 +233,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -263,7 +264,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -284,6 +285,74 @@ namespace Encode.Duration
             try
             {
                 using HttpMessage message = CreateFloatSecondsRequest(input, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The Array to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual async Task<Response> Int32SecondsArrayAsync(IEnumerable<TimeSpan> input, RequestContext context = null)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32SecondsArrayRequest(input, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="input"> The Array to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArray(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual Response Int32SecondsArray(IEnumerable<TimeSpan> input, RequestContext context = null)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32SecondsArrayRequest(input, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -347,6 +416,24 @@ namespace Encode.Duration
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/float-seconds", false);
             uri.AppendQuery("input", input, "s\\.fff", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateInt32SecondsArrayRequest(IEnumerable<TimeSpan> input, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
+            if (input != null && Optional.IsCollectionDefined(input))
+            {
+                uri.AppendQueryDelimited("input", input, ",", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

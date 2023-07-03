@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var description = string.IsNullOrWhiteSpace(value.Description)
                 ? value.GetValueString()
                 : value.Description;
-            return BuilderHelpers.EscapeXmlDescription(description);
+            return BuilderHelpers.EscapeXmlDocDescription(description);
         }
 
         public static string GetAccessibility(Schema schema, BuildContext context)

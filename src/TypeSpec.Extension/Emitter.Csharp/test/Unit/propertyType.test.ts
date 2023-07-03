@@ -91,8 +91,11 @@ describe("Test GetInputType for enum", () => {
         @doc("fixed string enum")
         @fixed
         enum SimpleEnum {
+            @doc("Enum value one")
             One: "1",
+            @doc("Enum value two")
             Two: "2",
+            @doc("Enum value four")
             Four: "4"
         }
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
@@ -115,9 +118,21 @@ describe("Test GetInputType for enum", () => {
                     Description: "fixed string enum",
                     EnumValueType: "String",
                     AllowedValues: [
-                        { Name: "One", Value: "1", Description: undefined },
-                        { Name: "Two", Value: "2", Description: undefined },
-                        { Name: "Four", Value: "4", Description: undefined }
+                        {
+                            Name: "One",
+                            Value: "1",
+                            Description: "Enum value one"
+                        },
+                        {
+                            Name: "Two",
+                            Value: "2",
+                            Description: "Enum value two"
+                        },
+                        {
+                            Name: "Four",
+                            Value: "4",
+                            Description: "Enum value four"
+                        }
                     ],
                     IsExtensible: false,
                     IsNullable: false,
@@ -139,8 +154,11 @@ describe("Test GetInputType for enum", () => {
       @doc("Fixed int enum")
       @fixed
       enum FixedIntEnum {
+          @doc("Enum value one")
           One: 1,
+          @doc("Enum value two")
           Two: 2,
+          @doc("Enum value four")
           Four: 4
       }
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
@@ -163,9 +181,21 @@ describe("Test GetInputType for enum", () => {
                     Description: "Fixed int enum",
                     EnumValueType: "Float32",
                     AllowedValues: [
-                        { Name: "One", Value: 1, Description: undefined },
-                        { Name: "Two", Value: 2, Description: undefined },
-                        { Name: "Four", Value: 4, Description: undefined }
+                        {
+                            Name: "One",
+                            Value: 1,
+                            Description: "Enum value one"
+                        },
+                        {
+                            Name: "Two",
+                            Value: 2,
+                            Description: "Enum value two"
+                        },
+                        {
+                            Name: "Four",
+                            Value: 4,
+                            Description: "Enum value four"
+                        }
                     ],
                     IsExtensible: false,
                     IsNullable: false,

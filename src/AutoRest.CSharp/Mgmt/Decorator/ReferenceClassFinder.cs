@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 
@@ -147,8 +148,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// All external types, right now they are all defined in <c>ResourceManager</c>
+        /// All external types, right now they are all defined in Azure.Core, Azure.Core.Expressions.DataFactory, and Azure.ResourceManager.
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src
+        ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src
+        ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core.Expressions.DataFactory/src
         /// </summary>
         internal static IList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
         internal static IList<Type> GetReferenceClassCollection() => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
@@ -167,6 +170,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 types.AddRange(assembly.GetTypes());
 
             assembly = Assembly.GetAssembly(typeof(Operation));
+            if (assembly != null)
+                types.AddRange(assembly.GetTypes());
+
+            assembly = Assembly.GetAssembly(typeof(DataFactoryElement<>));
             if (assembly != null)
                 types.AddRange(assembly.GetTypes());
 

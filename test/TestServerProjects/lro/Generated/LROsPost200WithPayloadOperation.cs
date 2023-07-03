@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
+    /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success. </summary>
     public partial class LROsPost200WithPayloadOperation : Operation<Sku>, IOperationSource<Sku>
     {
         private readonly OperationInternal<Sku> _operation;

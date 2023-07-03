@@ -1117,7 +1117,7 @@ namespace Azure.ResourceManager.Sample
             return message;
         }
 
-        /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
+        /// <summary> The operation to reapply a virtual machine's state. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -1142,7 +1142,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
+        /// <summary> The operation to reapply a virtual machine's state. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -1481,7 +1481,7 @@ namespace Azure.ResourceManager.Sample
             return message;
         }
 
-        /// <summary> The operation to retrieve SAS URIs for a virtual machine&apos;s boot diagnostic logs. </summary>
+        /// <summary> The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -1511,7 +1511,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to retrieve SAS URIs for a virtual machine&apos;s boot diagnostic logs. </summary>
+        /// <summary> The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>

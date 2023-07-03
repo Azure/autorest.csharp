@@ -58,7 +58,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default 'value' node.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,7 +79,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default 'value' node.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -182,7 +182,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +203,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -272,7 +272,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -281,7 +281,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -294,7 +294,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -303,7 +303,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -316,7 +316,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -325,7 +325,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -338,7 +338,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -347,7 +347,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -708,7 +708,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -736,7 +736,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -764,7 +764,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -792,7 +792,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -820,7 +820,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -850,7 +850,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -880,7 +880,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -910,7 +910,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -940,7 +940,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -961,7 +961,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1112,6 +1112,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1124,7 +1125,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1183,6 +1183,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1195,7 +1196,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1209,6 +1209,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(offset, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1221,7 +1222,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1329,6 +1329,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1341,7 +1342,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1440,6 +1440,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1452,7 +1453,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1478,6 +1478,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1490,7 +1491,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1503,6 +1503,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1515,7 +1516,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1606,6 +1606,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1618,7 +1619,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

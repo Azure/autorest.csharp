@@ -155,6 +155,140 @@ namespace Pagination
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
         }
 
+        /// <summary> List the dimension values for the given metric dimension name. </summary>
+        /// <param name="testRunId"> Unique test run name as identifier. </param>
+        /// <param name="name"> Dimension name. </param>
+        /// <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
+        /// <param name="interval"> The interval (i.e. timegrain) of the query. </param>
+        /// <param name="metricName"> Metric name. </param>
+        /// <param name="timespan">
+        /// The timespan of the query. It is a string with the following format
+        /// 'startDateTime_ISO/endDateTime_ISO'.
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,Interval?,string,string,CancellationToken)']/*" />
+        public virtual AsyncPageable<DimensionValueListItem> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+        }
+
+        /// <summary> List the dimension values for the given metric dimension name. </summary>
+        /// <param name="testRunId"> Unique test run name as identifier. </param>
+        /// <param name="name"> Dimension name. </param>
+        /// <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
+        /// <param name="interval"> The interval (i.e. timegrain) of the query. </param>
+        /// <param name="metricName"> Metric name. </param>
+        /// <param name="timespan">
+        /// The timespan of the query. It is a string with the following format
+        /// 'startDateTime_ISO/endDateTime_ISO'.
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,Interval?,string,string,CancellationToken)']/*" />
+        public virtual Pageable<DimensionValueListItem> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] List the dimension values for the given metric dimension name.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMetricDimensionValuesAsync(string,string,string,Interval?,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="testRunId"> Unique test run name as identifier. </param>
+        /// <param name="name"> Dimension name. </param>
+        /// <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
+        /// <param name="interval"> The interval (i.e. timegrain) of the query. Allowed values: "PT5S" | "PT10S" | "PT1M" | "PT5M" | "PT1H". </param>
+        /// <param name="metricName"> Metric name. </param>
+        /// <param name="timespan">
+        /// The timespan of the query. It is a string with the following format
+        /// 'startDateTime_ISO/endDateTime_ISO'.
+        /// </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,string,string,string,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval, metricName, timespan, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval, metricName, timespan, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] List the dimension values for the given metric dimension name.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetMetricDimensionValues(string,string,string,Interval?,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="testRunId"> Unique test run name as identifier. </param>
+        /// <param name="name"> Dimension name. </param>
+        /// <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
+        /// <param name="interval"> The interval (i.e. timegrain) of the query. Allowed values: "PT5S" | "PT10S" | "PT1M" | "PT5M" | "PT1H". </param>
+        /// <param name="metricName"> Metric name. </param>
+        /// <param name="timespan">
+        /// The timespan of the query. It is a string with the following format
+        /// 'startDateTime_ISO/endDateTime_ISO'.
+        /// </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,string,string,string,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval, metricName, timespan, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval, metricName, timespan, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetMetricDimensionValues", "value", "nextLink", context);
+        }
+
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(CancellationToken)']/*" />
@@ -429,6 +563,37 @@ namespace Pagination
             return message;
         }
 
+        internal HttpMessage CreateGetMetricDimensionValuesRequest(string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/app/test-runs/", false);
+            uri.AppendPath(testRunId, true);
+            uri.AppendPath("/metric-dimensions/", false);
+            uri.AppendPath(name, true);
+            uri.AppendPath("/values", false);
+            uri.AppendQuery("metricNamespace", metricNamespace, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (interval != null)
+            {
+                uri.AppendQuery("interval", interval, true);
+            }
+            if (metricName != null)
+            {
+                uri.AppendQuery("metricName", metricName, true);
+            }
+            if (timespan != null)
+            {
+                uri.AppendQuery("timespan", timespan, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
         internal HttpMessage CreateGetLedgerEntriesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -486,6 +651,19 @@ namespace Pagination
         }
 
         internal HttpMessage CreateGetPaginationLedgerEntriesNextPageRequest(string nextLink, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetMetricDimensionValuesNextPageRequest(string nextLink, string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

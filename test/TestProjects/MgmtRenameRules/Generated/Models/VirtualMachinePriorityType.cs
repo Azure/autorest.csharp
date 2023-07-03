@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtRenameRules.Models
 {
     /// <summary>
-    /// Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; &apos;Low&apos; enum will be deprecated in the future, please use &apos;Spot&apos; as the enum to deploy Azure Spot VM/VMSS.
+    /// Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
     /// Serialized Name: VirtualMachinePriorityTypes
     /// </summary>
     public readonly partial struct VirtualMachinePriorityType : IEquatable<VirtualMachinePriorityType>

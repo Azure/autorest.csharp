@@ -28,13 +28,13 @@ namespace custom_baseUrl_more_options
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
-        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value 'host'. The default value is "host". </param>
+        /// <param name="subscriptionId"> The subscription id with value 'test12'. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="dnsSuffix"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
+        internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string dnsSuffix, string subscriptionId)
         {
-            RestClient = new PathsRestClient(clientDiagnostics, pipeline, subscriptionId, dnsSuffix);
+            RestClient = new PathsRestClient(clientDiagnostics, pipeline, dnsSuffix, subscriptionId);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -42,8 +42,8 @@ namespace custom_baseUrl_more_options
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
-        /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
-        /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
+        /// <param name="keyName"> The key name with value 'key1'. </param>
+        /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
@@ -63,8 +63,8 @@ namespace custom_baseUrl_more_options
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
-        /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
-        /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
+        /// <param name="keyName"> The key name with value 'key1'. </param>
+        /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {

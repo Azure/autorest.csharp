@@ -239,7 +239,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -278,7 +278,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -337,7 +337,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -351,7 +351,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
+        /// <param name="kind"> The PetKind to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -377,7 +377,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -391,7 +391,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
+        /// <param name="kind"> The PetKind to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -437,7 +437,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -473,7 +473,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -529,7 +529,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -565,7 +565,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

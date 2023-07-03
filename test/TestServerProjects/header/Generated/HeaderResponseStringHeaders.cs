@@ -17,7 +17,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
+        /// <summary> response with header values "The quick brown fox jumps over the lazy dog" or null or "". </summary>
         public string Value => _response.Headers.TryGetValue("value", out string value) ? value : null;
     }
 }
