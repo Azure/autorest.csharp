@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
 
-            var body = new object();
+            var body = new float?[]
+            {
+    3.14f
+            };
             var result = await client.PutAsync(body);
         }
     }

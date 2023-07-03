@@ -29,9 +29,8 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Response response = client.CreateProject(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,9 +46,8 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Response response = client.CreateProject(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -61,9 +59,8 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Response response = await client.CreateProjectAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,9 +76,8 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Response response = await client.CreateProjectAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -96,7 +92,7 @@ namespace LroBasicTypeSpec.Samples
                 Description = "<Description>",
                 Name = "<Name>",
             };
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+            var result = await client.CreateProjectAsync(resource);
         }
 
         [Test]

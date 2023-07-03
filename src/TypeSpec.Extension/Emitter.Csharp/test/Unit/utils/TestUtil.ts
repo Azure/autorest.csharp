@@ -36,6 +36,7 @@ export async function typeSpecCompile(
     needAzureCore: boolean = false
 ) {
     const namespace = `
+    @useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
     @service({
       title: "Azure Csharp emitter Testing",
       version: "2023-01-01-preview",

@@ -61,6 +61,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
                 shouldTreatBase64AsBinaryData: true,
+                methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null);
         }
