@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (clientMethod.Operation.LongRunning is not null)
             {
-                if (clientMethod.Operation.Paging is { NextLinkOperation: { } })
+                if (clientMethod.Operation.Paging is not null)
                 {
                     ComposeProtocolHandleLongRunningPageableResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
