@@ -823,13 +823,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
 
-            if (provider == null)
-            {
-                // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
-                provider = _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
-            }
+            // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
+            provider ??= _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
 
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
         }
 

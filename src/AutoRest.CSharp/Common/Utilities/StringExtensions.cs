@@ -55,9 +55,6 @@ namespace AutoRest.CSharp.Utilities
                 var c = name[i];
                 if (IsWordSeparator(c))
                 {
-                    // keep following _ if there are multiple _ in a row, so that we can have a way to customize name with _
-                    if (name[i] == '_' && i > 0 && name[i - 1] == '_')
-                        nameBuilder.Append(c);
                     upperCase = true;
                     continue;
                 }

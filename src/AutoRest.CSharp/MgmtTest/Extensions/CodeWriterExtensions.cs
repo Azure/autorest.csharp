@@ -5,14 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Transactions;
 using System.Xml;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -185,18 +183,16 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"new {type}(");
             foreach (var parameter in publicCtor.GetParameters())
             {
-                ExampleValue value;
-                if (exampleValue.Properties.ContainsKey(parameter.Name!))
-                    // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
-                    value = exampleValue.Properties[parameter.Name!];
-                else
+                ExampleValue? value;
+                // Try to figure out the serailizedName from propertyMetadataDict first
+                if ((!propertyMetadataDict.TryGetValue(parameter.Name!.ToCleanName(), out ReferenceClassFinder.PropertyMetadata? pm) ||
+                     !exampleValue.Properties.TryGetValue(pm.SerializedName, out value)) &&
+                // try to use the parameter name directly if no match found in searilizedName
+                     !exampleValue.Properties.TryGetValue(parameter.Name!, out value))
                 {
-                    // if we can't find it directly, try to figure out the serailizedName form propertyMetadataDict
-                    string? serializedName = propertyMetadataDict.FirstOrDefault(p => string.Equals(p.Key, parameter.Name!, StringComparison.OrdinalIgnoreCase)).Value?.SerializedName;
-                    if (string.IsNullOrEmpty(serializedName) || !exampleValue.Properties.ContainsKey(serializedName))
-                        throw new InvalidOperationException($"Unabled to find example value for ctor parameter, type={type.FullName}, param={parameter.Name ?? "<null>"}");
-                    value = exampleValue.Properties[serializedName];
+                    throw new InvalidOperationException($"Unabled to find example value for ctor parameter, type={type.FullName}, param={parameter.Name ?? "<null>"}");
                 }
+
                 writer.AppendExampleValue(value, parameter.ParameterType);
                 writer.AppendRaw(",");
             }
