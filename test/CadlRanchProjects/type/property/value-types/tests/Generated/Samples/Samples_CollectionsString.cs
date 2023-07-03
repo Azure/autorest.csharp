@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollectionsString()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             Response response = client.GetCollectionsString(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollectionsString_AllParameters()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             Response response = client.GetCollectionsString(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollectionsString_Async()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             Response response = await client.GetCollectionsStringAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollectionsString_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             Response response = await client.GetCollectionsStringAsync(new RequestContext());
 
@@ -81,13 +82,14 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        "<String>"
-    },
+                property = new[]
+            {
+"<String>"
+},
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -98,13 +100,14 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        "<String>"
-    },
+                property = new[]
+            {
+"<String>"
+},
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,13 +118,14 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        "<String>"
-    },
+                property = new[]
+            {
+"<String>"
+},
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -132,13 +136,14 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+            CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        "<String>"
-    },
+                property = new[]
+            {
+"<String>"
+},
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

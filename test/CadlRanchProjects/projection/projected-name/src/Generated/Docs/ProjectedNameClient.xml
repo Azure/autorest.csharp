@@ -2,48 +2,44 @@
 <doc>
   <members>
     <member name="OperationAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = await client.OperationAsync();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Operation.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = client.Operation();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ParameterAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call ParameterAsync with required parameters.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = await client.ParameterAsync("<defaultName>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Parameter(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Parameter with required parameters.
 <code><![CDATA[
-var client = new ProjectedNameClient();
+ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = client.Parameter("<defaultName>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

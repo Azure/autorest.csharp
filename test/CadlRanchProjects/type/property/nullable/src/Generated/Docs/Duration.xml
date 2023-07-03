@@ -2,164 +2,156 @@
 <doc>
   <members>
     <member name="GetNonNullAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
 var client = new NullableClient().GetDurationClient("1.0.0");
 
 var result = await client.GetNonNullAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNonNull(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNonNull.
 <code><![CDATA[
 var client = new NullableClient().GetDurationClient("1.0.0");
 
 var result = client.GetNonNull();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNonNullAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNonNullAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
 Response response = await client.GetNonNullAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 Console.WriteLine(result.GetProperty("nullableProperty").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNonNull(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNonNull with required parameters and parse the result.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
 Response response = client.GetNonNull(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 Console.WriteLine(result.GetProperty("nullableProperty").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNullAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNullAsync.
 <code><![CDATA[
 var client = new NullableClient().GetDurationClient("1.0.0");
 
 var result = await client.GetNullAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNull(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNull.
 <code><![CDATA[
 var client = new NullableClient().GetDurationClient("1.0.0");
 
 var result = client.GetNull();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNullAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNullAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
 Response response = await client.GetNullAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 Console.WriteLine(result.GetProperty("nullableProperty").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNull with required parameters and parse the result.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
 Response response = client.GetNull(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 Console.WriteLine(result.GetProperty("nullableProperty").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchNonNullAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchNonNullAsync with required request content.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
-var data = new {
+var data = new
+{
     requiredProperty = "<requiredProperty>",
     nullableProperty = "PT1H23M45S",
 };
 
 Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchNonNull(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchNonNull with required request content.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
-var data = new {
+var data = new
+{
     requiredProperty = "<requiredProperty>",
     nullableProperty = "PT1H23M45S",
 };
 
 Response response = client.PatchNonNull(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchNullAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchNullAsync with required request content.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
-var data = new {
+var data = new
+{
     requiredProperty = "<requiredProperty>",
     nullableProperty = "PT1H23M45S",
 };
 
 Response response = await client.PatchNullAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchNull(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchNull with required request content.
 <code><![CDATA[
-var client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient("1.0.0");
 
-var data = new {
+var data = new
+{
     requiredProperty = "<requiredProperty>",
     nullableProperty = "PT1H23M45S",
 };
 
 Response response = client.PatchNull(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

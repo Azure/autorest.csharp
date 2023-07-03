@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optional;
 using _Type.Property.Optional.Models;
 
 namespace _Type.Property.Optional.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetAll(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetAll(new RequestContext());
 
@@ -49,7 +50,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetAllAsync(new RequestContext());
 
@@ -61,7 +62,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetAllAsync(new RequestContext());
 
@@ -83,7 +84,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRequiredOnly()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetRequiredOnly(new RequestContext());
 
@@ -95,7 +96,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRequiredOnly_AllParameters()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetRequiredOnly(new RequestContext());
 
@@ -108,7 +109,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRequiredOnly_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetRequiredOnlyAsync(new RequestContext());
 
@@ -120,7 +121,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRequiredOnly_AllParameters_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetRequiredOnlyAsync(new RequestContext());
 
@@ -142,7 +143,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -157,7 +158,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -173,7 +174,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -188,7 +189,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -217,7 +218,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutRequiredOnly()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -232,7 +233,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutRequiredOnly_AllParameters()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -248,7 +249,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRequiredOnly_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {
@@ -263,7 +264,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRequiredOnly_AllParameters_Async()
         {
-            var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
+            RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             var data = new
             {

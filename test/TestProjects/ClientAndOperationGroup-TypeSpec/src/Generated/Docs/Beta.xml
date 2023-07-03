@@ -2,60 +2,56 @@
 <doc>
   <members>
     <member name="TwoAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call TwoAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
 Response response = await client.TwoAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Two(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Two and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
 Response response = client.Two();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ThreeAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ThreeAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
 Response response = await client.ThreeAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Three(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Three and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
 Response response = client.Three();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Encode.Duration;
 using Encode.Duration.Models;
 using NUnit.Framework;
 
@@ -24,7 +25,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -41,7 +42,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -58,7 +59,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -75,7 +76,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -102,7 +103,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -119,7 +120,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_AllParameters()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -136,7 +137,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -153,7 +154,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_AllParameters_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -180,7 +181,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -197,7 +198,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_AllParameters()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -214,7 +215,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -231,7 +232,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_AllParameters_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -258,7 +259,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -275,7 +276,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_AllParameters()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -292,7 +293,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -309,7 +310,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_AllParameters_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
@@ -336,13 +337,14 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
-                value = new[] {
-        new {}
-    },
+                value = new[]
+            {
+new {}
+},
             };
 
             Response response = client.FloatSecondsArray(RequestContent.Create(data));
@@ -355,13 +357,14 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray_AllParameters()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
-                value = new[] {
-        new {}
-    },
+                value = new[]
+            {
+new {}
+},
             };
 
             Response response = client.FloatSecondsArray(RequestContent.Create(data));
@@ -374,13 +377,14 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
-                value = new[] {
-        new {}
-    },
+                value = new[]
+            {
+new {}
+},
             };
 
             Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
@@ -393,13 +397,14 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_AllParameters_Async()
         {
-            var client = new DurationClient().GetPropertyClient("1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             var data = new
             {
-                value = new[] {
-        new {}
-    },
+                value = new[]
+            {
+new {}
+},
             };
 
             Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));

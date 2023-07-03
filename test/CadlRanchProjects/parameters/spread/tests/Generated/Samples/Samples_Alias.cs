@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters.Spread;
 using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
@@ -24,7 +25,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -39,7 +40,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -54,7 +55,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -69,7 +70,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -93,7 +94,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -108,7 +109,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -123,7 +124,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -138,7 +139,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -162,7 +163,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -182,7 +183,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -202,7 +203,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {
@@ -222,7 +223,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient("1.0.0");
 
             var data = new
             {

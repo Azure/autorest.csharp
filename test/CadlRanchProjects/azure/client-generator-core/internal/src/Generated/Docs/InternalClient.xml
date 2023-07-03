@@ -2,58 +2,50 @@
 <doc>
   <members>
     <member name="PublicOnlyAsync(string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PublicOnlyAsync with required parameters.
 <code><![CDATA[
 var client = new InternalClient();
 
 var result = await client.PublicOnlyAsync("<name>");
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PublicOnly(string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PublicOnly with required parameters.
 <code><![CDATA[
 var client = new InternalClient();
 
 var result = client.PublicOnly("<name>");
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PublicOnlyAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PublicOnlyAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
 Response response = await client.PublicOnlyAsync("<name>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PublicOnly(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PublicOnly with required parameters and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
 Response response = client.PublicOnly("<name>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="InternalOnlyAsync(string,CancellationToken)">
-    </member>
-    <member name="InternalOnly(string,CancellationToken)">
-    </member>
-    <member name="InternalOnlyAsync(string,RequestContext)">
-    </member>
-    <member name="InternalOnly(string,RequestContext)">
-    </member>
+    <member name="InternalOnlyAsync(string,CancellationToken)"></member>
+    <member name="InternalOnly(string,CancellationToken)"></member>
+    <member name="InternalOnlyAsync(string,RequestContext)"></member>
+    <member name="InternalOnly(string,RequestContext)"></member>
   </members>
 </doc>

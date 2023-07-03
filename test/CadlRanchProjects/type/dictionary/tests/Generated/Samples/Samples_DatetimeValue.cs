@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Dictionary;
 using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
@@ -24,7 +25,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             Response response = client.GetDatetimeValue(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_AllParameters()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             Response response = client.GetDatetimeValue(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_Async()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(new RequestContext());
 
@@ -81,11 +82,11 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -96,11 +97,11 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -111,11 +112,11 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00"
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -126,11 +127,11 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00"
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

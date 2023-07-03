@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = client.GetNonNull(new RequestContext());
 
@@ -37,7 +38,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = client.GetNonNull(new RequestContext());
 
@@ -50,7 +51,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(new RequestContext());
 
@@ -63,7 +64,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(new RequestContext());
 
@@ -85,7 +86,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = client.GetNull(new RequestContext());
 
@@ -98,7 +99,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = client.GetNull(new RequestContext());
 
@@ -111,7 +112,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = await client.GetNullAsync(new RequestContext());
 
@@ -124,7 +125,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             Response response = await client.GetNullAsync(new RequestContext());
 
@@ -146,7 +147,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -162,7 +163,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull_AllParameters()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -178,7 +179,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -194,7 +195,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -210,7 +211,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -226,7 +227,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull_AllParameters()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -242,7 +243,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {
@@ -258,7 +259,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetBytesClient("1.0.0");
+            Bytes client = new NullableClient().GetBytesClient("1.0.0");
 
             var data = new
             {

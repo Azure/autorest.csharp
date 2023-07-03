@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.ClientGenerator.Core.Internal;
 using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
@@ -24,7 +25,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
             Response response = client.Public("<name>", new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public_AllParameters()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
             Response response = client.Public("<name>", new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Async()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Async()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", new RequestContext());
 

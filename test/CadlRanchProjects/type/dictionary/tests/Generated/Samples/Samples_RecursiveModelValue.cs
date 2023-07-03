@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Dictionary;
 using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
@@ -24,7 +25,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModelValue()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = client.GetRecursiveModelValue(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModelValue_AllParameters()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = client.GetRecursiveModelValue(new RequestContext());
 
@@ -49,7 +50,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModelValue_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
 
@@ -61,7 +62,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModelValue_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
 
@@ -83,14 +84,14 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             var data = new
             {
                 key = new
                 {
                     property = "<property>",
-                },
+                }
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -101,14 +102,14 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             var data = new
             {
                 key = new
                 {
                     property = "<property>",
-                },
+                }
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -119,14 +120,14 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             var data = new
             {
                 key = new
                 {
                     property = "<property>",
-                },
+                }
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -137,14 +138,14 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             var data = new
             {
                 key = new
                 {
                     property = "<property>",
-                },
+                }
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

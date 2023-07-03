@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Enum.Fixed;
 using _Type._Enum.Fixed.Models;
 
 namespace _Type._Enum.Fixed.Samples
@@ -24,7 +25,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetKnownValue()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             Response response = client.GetKnownValue(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetKnownValue_AllParameters()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             Response response = client.GetKnownValue(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetKnownValue_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             Response response = await client.GetKnownValueAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetKnownValue_AllParameters_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             Response response = await client.GetKnownValueAsync(new RequestContext());
 
@@ -81,7 +82,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutKnownValue()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -93,7 +94,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutKnownValue_AllParameters()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -105,7 +106,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutKnownValue_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -117,7 +118,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutKnownValue_AllParameters_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -139,7 +140,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutUnknownValue()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -151,7 +152,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutUnknownValue_AllParameters()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -163,7 +164,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutUnknownValue_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 
@@ -175,7 +176,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutUnknownValue_AllParameters_Async()
         {
-            var client = new FixedClient();
+            FixedClient client = new FixedClient();
 
             var data = "Monday";
 

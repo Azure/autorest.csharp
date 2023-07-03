@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Array;
 using _Type._Array.Models;
 
 namespace _Type._Array.Samples
@@ -24,7 +25,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
             Response response = client.GetStringValue(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue_AllParameters()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
             Response response = client.GetStringValue(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
             Response response = await client.GetStringValueAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_AllParameters_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
             Response response = await client.GetStringValueAsync(new RequestContext());
 
@@ -81,10 +82,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var data = new[] {
-    "<String>"
+            var data = new[]
+            {
+"<String>"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -95,10 +97,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var data = new[] {
-    "<String>"
+            var data = new[]
+            {
+"<String>"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -109,10 +112,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var data = new[] {
-    "<String>"
+            var data = new[]
+            {
+"<String>"
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -123,10 +127,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var data = new[] {
-    "<String>"
+            var data = new[]
+            {
+"<String>"
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

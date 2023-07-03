@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             Response response = client.GetString(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString_AllParameters()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             Response response = client.GetString(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_Async()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             Response response = await client.GetStringAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             Response response = await client.GetStringAsync(new RequestContext());
 
@@ -81,7 +82,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             var data = new
             {
@@ -96,7 +97,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             var data = new
             {
@@ -111,7 +112,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             var data = new
             {
@@ -126,7 +127,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetStringClient("1.0.0");
+            String client = new ValueTypesClient().GetStringClient("1.0.0");
 
             var data = new
             {

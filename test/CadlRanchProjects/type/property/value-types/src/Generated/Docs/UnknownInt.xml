@@ -2,102 +2,96 @@
 <doc>
   <members>
     <member name="GetUnknownIntAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetUnknownIntAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var result = await client.GetUnknownIntAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownInt(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetUnknownInt.
 <code><![CDATA[
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var result = client.GetUnknownInt();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownIntAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownIntAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = await client.GetUnknownIntAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownInt(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownInt with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = client.GetUnknownInt(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(UnknownIntProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var body = new UnknownIntProperty(BinaryData.FromString("<your binary data content>"));
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(UnknownIntProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var body = new UnknownIntProperty(BinaryData.FromString("<your binary data content>"));
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-var data = new {
-    property = new {},
+var data = new
+{
+    property = new { },
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-var data = new {
-    property = new {},
+var data = new
+{
+    property = new { },
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

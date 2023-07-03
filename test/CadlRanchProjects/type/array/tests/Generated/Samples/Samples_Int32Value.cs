@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Array;
 using _Type._Array.Models;
 
 namespace _Type._Array.Samples
@@ -24,7 +25,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
             Response response = client.GetInt32Value(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
             Response response = client.GetInt32Value(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
             Response response = await client.GetInt32ValueAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
             Response response = await client.GetInt32ValueAsync(new RequestContext());
 
@@ -81,10 +82,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-            var data = new[] {
-    1234
+            var data = new[]
+            {
+1234
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -95,10 +97,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-            var data = new[] {
-    1234
+            var data = new[]
+            {
+1234
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -109,10 +112,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-            var data = new[] {
-    1234
+            var data = new[]
+            {
+1234
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -123,10 +127,11 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-            var data = new[] {
-    1234
+            var data = new[]
+            {
+1234
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

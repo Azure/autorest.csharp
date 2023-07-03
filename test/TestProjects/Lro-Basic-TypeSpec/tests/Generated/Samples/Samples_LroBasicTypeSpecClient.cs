@@ -30,7 +30,8 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+            Operation operation = client.CreateProject(
+            WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -48,7 +49,8 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+            Operation operation = client.CreateProject(
+            WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -62,7 +64,8 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+            Operation operation = await client.CreateProjectAsync(
+            WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -80,7 +83,8 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+            Operation operation = await client.CreateProjectAsync(
+            WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }

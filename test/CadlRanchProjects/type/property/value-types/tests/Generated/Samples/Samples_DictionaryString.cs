@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDictionaryString()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = client.GetDictionaryString(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDictionaryString_AllParameters()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = client.GetDictionaryString(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDictionaryString_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = await client.GetDictionaryStringAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDictionaryString_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = await client.GetDictionaryStringAsync(new RequestContext());
 
@@ -81,13 +82,13 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             var data = new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
             };
 
@@ -99,13 +100,13 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             var data = new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
             };
 
@@ -117,13 +118,13 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             var data = new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
             };
 
@@ -135,13 +136,13 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             var data = new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<String>"
                 },
             };
 

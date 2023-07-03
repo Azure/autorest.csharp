@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFloat()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             Response response = client.GetFloat(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFloat_AllParameters()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             Response response = client.GetFloat(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFloat_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             Response response = await client.GetFloatAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFloat_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             Response response = await client.GetFloatAsync(new RequestContext());
 
@@ -81,11 +82,11 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             var data = new
             {
-                property = 123.45f,
+                property = 123.45F,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -96,11 +97,11 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             var data = new
             {
-                property = 123.45f,
+                property = 123.45F,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -111,11 +112,11 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             var data = new
             {
-                property = 123.45f,
+                property = 123.45F,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -126,11 +127,11 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             var data = new
             {
-                property = 123.45f,
+                property = 123.45F,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optional;
 using _Type.Property.Optional.Models;
 
 namespace _Type.Property.Optional.Samples
@@ -24,7 +25,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetAll(new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetAll(new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetAllAsync(new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetAllAsync(new RequestContext());
 
@@ -81,7 +82,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetDefault(new RequestContext());
 
@@ -93,7 +94,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetDefault(new RequestContext());
 
@@ -105,7 +106,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetDefaultAsync(new RequestContext());
 
@@ -117,7 +118,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetDefaultAsync(new RequestContext());
 
@@ -138,7 +139,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new { };
 
@@ -150,13 +151,14 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        new {}
-    },
+                property = new[]
+            {
+new {}
+},
             };
 
             Response response = client.PutAll(RequestContent.Create(data));
@@ -167,7 +169,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new { };
 
@@ -179,13 +181,14 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        new {}
-    },
+                property = new[]
+            {
+new {}
+},
             };
 
             Response response = await client.PutAllAsync(RequestContent.Create(data));
@@ -212,7 +215,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new { };
 
@@ -224,13 +227,14 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        new {}
-    },
+                property = new[]
+            {
+new {}
+},
             };
 
             Response response = client.PutDefault(RequestContent.Create(data));
@@ -241,7 +245,7 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new { };
 
@@ -253,13 +257,14 @@ namespace _Type.Property.Optional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Async()
         {
-            var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
+            CollectionsByte client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
             var data = new
             {
-                property = new[] {
-        new {}
-    },
+                property = new[]
+            {
+new {}
+},
             };
 
             Response response = await client.PutDefaultAsync(RequestContent.Create(data));

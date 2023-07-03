@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters.CollectionFormat;
 
 namespace Parameters.CollectionFormat.Samples
 {
@@ -23,7 +24,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Csv()
         {
-            var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
             Console.WriteLine(response.Status);
@@ -33,7 +34,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Csv_AllParameters()
         {
-            var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
             Console.WriteLine(response.Status);
@@ -43,7 +44,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Csv_Async()
         {
-            var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
             Console.WriteLine(response.Status);
@@ -53,7 +54,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Csv_AllParameters_Async()
         {
-            var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
             Console.WriteLine(response.Status);

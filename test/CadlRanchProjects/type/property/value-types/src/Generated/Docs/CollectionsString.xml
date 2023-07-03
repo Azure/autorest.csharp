@@ -2,53 +2,49 @@
 <doc>
   <members>
     <member name="GetCollectionsStringAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsStringAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
 var result = await client.GetCollectionsStringAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetCollectionsString(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsString.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
 var result = client.GetCollectionsString();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetCollectionsStringAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsStringAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
 Response response = await client.GetCollectionsStringAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetCollectionsString(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetCollectionsString with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
 Response response = client.GetCollectionsString(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(CollectionsStringProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
@@ -58,11 +54,10 @@ var body = new CollectionsStringProperty(new string[]
     "<null>"
 });
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(CollectionsStringProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
@@ -72,42 +67,43 @@ var body = new CollectionsStringProperty(new string[]
     "<null>"
 });
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-var data = new {
-    property = new[] {
-        "<String>"
-    },
+var data = new
+{
+    property = new[]
+{
+"<String>"
+},
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-var data = new {
-    property = new[] {
-        "<String>"
-    },
+var data = new
+{
+    property = new[]
+{
+"<String>"
+},
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

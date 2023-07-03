@@ -2,53 +2,49 @@
 <doc>
   <members>
     <member name="GetStringValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetStringValueAsync.
 <code><![CDATA[
 var client = new ArrayClient().GetStringValueClient("1.0.0");
 
 var result = await client.GetStringValueAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetStringValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetStringValue.
 <code><![CDATA[
 var client = new ArrayClient().GetStringValueClient("1.0.0");
 
 var result = client.GetStringValue();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetStringValueAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetStringValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
 Response response = await client.GetStringValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetStringValue(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetStringValue with required parameters and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
 Response response = client.GetStringValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(IEnumerable{string},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetStringValueClient("1.0.0");
@@ -58,11 +54,10 @@ var body = new string[]
     "<null>"
 };
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(IEnumerable{string},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetStringValueClient("1.0.0");
@@ -72,38 +67,37 @@ var body = new string[]
     "<null>"
 };
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-var data = new[] {
-    "<String>"
+var data = new[]
+{
+"<String>"
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
 
-var data = new[] {
-    "<String>"
+var data = new[]
+{
+"<String>"
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

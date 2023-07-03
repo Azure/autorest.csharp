@@ -848,7 +848,7 @@ key = new
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = null,
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -910,7 +910,7 @@ key = new
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = null,
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -983,7 +983,7 @@ key = new
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = null,
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1045,7 +1045,7 @@ key = new
                 requiredInt = 1234,
                 requiredModel = new
                 {
-                    discriminatorProperty = null,
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },

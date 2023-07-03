@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Usage;
 using _Type.Model.Usage.Models;
 
 namespace _Type.Model.Usage.Samples
@@ -24,7 +25,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Input()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -39,7 +40,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Input_AllParameters()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -54,7 +55,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Input_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -69,7 +70,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Input_AllParameters_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -94,7 +95,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Output()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             Response response = client.Output(new RequestContext());
 
@@ -106,7 +107,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Output_AllParameters()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             Response response = client.Output(new RequestContext());
 
@@ -118,7 +119,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Output_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             Response response = await client.OutputAsync(new RequestContext());
 
@@ -130,7 +131,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Output_AllParameters_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             Response response = await client.OutputAsync(new RequestContext());
 
@@ -151,7 +152,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputAndOutput()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -168,7 +169,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputAndOutput_AllParameters()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -185,7 +186,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputAndOutput_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {
@@ -202,7 +203,7 @@ namespace _Type.Model.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputAndOutput_AllParameters_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
             var data = new
             {

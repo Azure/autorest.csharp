@@ -2,102 +2,96 @@
 <doc>
   <members>
     <member name="GetIntAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetIntAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
 var result = await client.GetIntAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetInt(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetInt.
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
 var result = client.GetInt();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetIntAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetIntAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient("1.0.0");
 
 Response response = await client.GetIntAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetInt(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetInt with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient("1.0.0");
 
 Response response = client.GetInt(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(IntProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
 var body = new IntProperty(1234);
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(IntProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
 var body = new IntProperty(1234);
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient("1.0.0");
 
-var data = new {
+var data = new
+{
     property = 1234,
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient("1.0.0");
 
-var data = new {
+var data = new
+{
     property = 1234,
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

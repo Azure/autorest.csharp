@@ -2,7 +2,7 @@
 <doc>
   <members>
     <member name="RoundTripAsync(RootModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call RoundTripAsync with required parameters.
 <code><![CDATA[
 var client = new CustomizationsInCadlClient();
@@ -44,11 +44,10 @@ var input = new RootModel()
     PropertyToMoveToCustomization = NormalEnum.A,
 };
 var result = await client.RoundTripAsync(input);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="RoundTrip(RootModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call RoundTrip with required parameters.
 <code><![CDATA[
 var client = new CustomizationsInCadlClient();
@@ -90,16 +89,15 @@ var input = new RootModel()
     PropertyToMoveToCustomization = NormalEnum.A,
 };
 var result = client.RoundTrip(input);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="RoundTripAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call RoundTripAsync and parse the result.
 <code><![CDATA[
-var client = new CustomizationsInCadlClient();
+CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
-var data = new {};
+var data = new { };
 
 Response response = await client.RoundTripAsync(RequestContent.Create(data));
 
@@ -108,49 +106,60 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTripAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new CustomizationsInCadlClient();
+CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
-var data = new {
-    propertyModelToMakeInternal = new {
+var data = new
+{
+    propertyModelToMakeInternal = new
+    {
         requiredInt = 1234,
     },
-    propertyModelToRename = new {
+    propertyModelToRename = new
+    {
         requiredInt = 1234,
         optionalInt = 1234,
     },
-    propertyModelToChangeNamespace = new {
+    propertyModelToChangeNamespace = new
+    {
         requiredInt = 1234,
     },
-    propertyModelWithCustomizedProperties = new {
+    propertyModelWithCustomizedProperties = new
+    {
         propertyToMakeInternal = 1234,
         propertyToRename = 1234,
         propertyToMakeFloat = 1234,
-        propertyToMakeInt = 123.45f,
+        propertyToMakeInt = 123.45F,
         propertyToMakeDuration = "<propertyToMakeDuration>",
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new[] {
-            "<String>"
+        badListName = new[]
+{
+"<String>"
+},
+        badDictionaryName = new
+        {
+            key = "<String>"
         },
-        badDictionaryName = new {
-            key = "<String>",
-        },
-        badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-        badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+        badListOfListName = new[]
+{
+new[]
+{
+"<String>"
+}
+},
+        badListOfDictionaryName = new[]
+{
+new
+{
+ng>"}
+},
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",
     propertyEnumToBeMadeExtensible = "1",
-    propertyModelToAddAdditionalSerializableProperty = new {
+    propertyModelToAddAdditionalSerializableProperty = new
+    {
         requiredInt = 1234,
     },
     propertyToMoveToCustomization = "a",
@@ -180,16 +189,15 @@ Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString()
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="RoundTrip(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call RoundTrip and parse the result.
 <code><![CDATA[
-var client = new CustomizationsInCadlClient();
+CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
-var data = new {};
+var data = new { };
 
 Response response = client.RoundTrip(RequestContent.Create(data));
 
@@ -198,49 +206,60 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTrip with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new CustomizationsInCadlClient();
+CustomizationsInCadlClient client = new CustomizationsInCadlClient();
 
-var data = new {
-    propertyModelToMakeInternal = new {
+var data = new
+{
+    propertyModelToMakeInternal = new
+    {
         requiredInt = 1234,
     },
-    propertyModelToRename = new {
+    propertyModelToRename = new
+    {
         requiredInt = 1234,
         optionalInt = 1234,
     },
-    propertyModelToChangeNamespace = new {
+    propertyModelToChangeNamespace = new
+    {
         requiredInt = 1234,
     },
-    propertyModelWithCustomizedProperties = new {
+    propertyModelWithCustomizedProperties = new
+    {
         propertyToMakeInternal = 1234,
         propertyToRename = 1234,
         propertyToMakeFloat = 1234,
-        propertyToMakeInt = 123.45f,
+        propertyToMakeInt = 123.45F,
         propertyToMakeDuration = "<propertyToMakeDuration>",
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new[] {
-            "<String>"
+        badListName = new[]
+{
+"<String>"
+},
+        badDictionaryName = new
+        {
+            key = "<String>"
         },
-        badDictionaryName = new {
-            key = "<String>",
-        },
-        badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-        badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+        badListOfListName = new[]
+{
+new[]
+{
+"<String>"
+}
+},
+        badListOfDictionaryName = new[]
+{
+new
+{
+ng>"}
+},
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",
     propertyEnumToBeMadeExtensible = "1",
-    propertyModelToAddAdditionalSerializableProperty = new {
+    propertyModelToAddAdditionalSerializableProperty = new
+    {
         requiredInt = 1234,
     },
     propertyToMoveToCustomization = "a",
@@ -270,8 +289,7 @@ Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString()
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

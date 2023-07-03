@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Projection.ProjectedName;
 using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples
@@ -24,7 +25,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Json()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -39,7 +40,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Json_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -54,7 +55,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Json_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -69,7 +70,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Json_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -94,7 +95,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Client()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -109,7 +110,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Client_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -124,7 +125,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Client_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -139,7 +140,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Client_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -164,7 +165,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Language()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -179,7 +180,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Language_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -194,7 +195,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Language_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -209,7 +210,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Language_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -234,7 +235,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JsonAndClient()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -249,7 +250,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JsonAndClient_AllParameters()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -264,7 +265,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JsonAndClient_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {
@@ -279,7 +280,7 @@ namespace Projection.ProjectedName.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JsonAndClient_AllParameters_Async()
         {
-            var client = new ProjectedNameClient().GetPropertyClient();
+            Property client = new ProjectedNameClient().GetPropertyClient();
 
             var data = new
             {

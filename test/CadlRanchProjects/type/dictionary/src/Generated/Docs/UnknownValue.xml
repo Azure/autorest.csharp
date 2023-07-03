@@ -2,53 +2,49 @@
 <doc>
   <members>
     <member name="GetUnknownValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
 var result = await client.GetUnknownValueAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValue.
 <code><![CDATA[
 var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
 var result = client.GetUnknownValue();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValueAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
 Response response = await client.GetUnknownValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
 Response response = client.GetUnknownValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
@@ -58,11 +54,10 @@ var body = new Dictionary<string, BinaryData>
     ["key"] = BinaryData.FromString("<your binary data content>"),
 };
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
@@ -72,38 +67,37 @@ var body = new Dictionary<string, BinaryData>
     ["key"] = BinaryData.FromString("<your binary data content>"),
 };
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
-var data = new {
-    key = new {},
+var data = new
+{
+    key = new { }
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
-var data = new {
-    key = new {},
+var data = new
+{
+    key = new { }
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

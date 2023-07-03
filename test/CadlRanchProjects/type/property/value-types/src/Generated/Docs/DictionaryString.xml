@@ -2,53 +2,49 @@
 <doc>
   <members>
     <member name="GetDictionaryStringAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDictionaryStringAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 var result = await client.GetDictionaryStringAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDictionaryString(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDictionaryString.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 var result = client.GetDictionaryString();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDictionaryStringAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDictionaryStringAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 Response response = await client.GetDictionaryStringAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDictionaryString(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDictionaryString with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
 Response response = client.GetDictionaryString(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(DictionaryStringProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
@@ -58,11 +54,10 @@ var body = new DictionaryStringProperty(new Dictionary<string, string>
     ["key"] = "<null>",
 });
 var result = await client.PutAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(DictionaryStringProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
@@ -72,42 +67,43 @@ var body = new DictionaryStringProperty(new Dictionary<string, string>
     ["key"] = "<null>",
 });
 var result = client.Put(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
-var data = new {
-    property = new {
-        key = "<String>",
+var data = new
+{
+    property = new
+    {
+        key = "<String>"
     },
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
-var data = new {
-    property = new {
-        key = "<String>",
+var data = new
+{
+    property = new
+    {
+        key = "<String>"
     },
 };
 
 Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

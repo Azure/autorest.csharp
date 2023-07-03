@@ -2,60 +2,56 @@
 <doc>
   <members>
     <member name="ZeroAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ZeroAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
 
 Response response = await client.ZeroAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Zero(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Zero and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
 
 Response response = client.Zero();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="OneAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call OneAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
 
 Response response = await client.OneAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="One(RequestContext)">
-<example>
+      <example>
 This sample shows how to call One and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
 
 Response response = client.One();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

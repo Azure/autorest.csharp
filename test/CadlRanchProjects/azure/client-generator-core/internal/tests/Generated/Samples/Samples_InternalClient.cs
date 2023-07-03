@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.ClientGenerator.Core.Internal;
 using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
@@ -24,7 +25,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicOnly()
         {
-            var client = new InternalClient();
+            InternalClient client = new InternalClient();
 
             Response response = client.PublicOnly("<name>", new RequestContext());
 
@@ -36,7 +37,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicOnly_AllParameters()
         {
-            var client = new InternalClient();
+            InternalClient client = new InternalClient();
 
             Response response = client.PublicOnly("<name>", new RequestContext());
 
@@ -48,7 +49,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicOnly_Async()
         {
-            var client = new InternalClient();
+            InternalClient client = new InternalClient();
 
             Response response = await client.PublicOnlyAsync("<name>", new RequestContext());
 
@@ -60,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicOnly_AllParameters_Async()
         {
-            var client = new InternalClient();
+            InternalClient client = new InternalClient();
 
             Response response = await client.PublicOnlyAsync("<name>", new RequestContext());
 
