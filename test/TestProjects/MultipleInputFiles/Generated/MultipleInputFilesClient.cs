@@ -28,16 +28,15 @@ namespace MultipleInputFiles
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(Source source, AzureKeyCredential credential, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            source ??= new Source("value1");
 
             options ??= new MultipleInputFilesClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -46,16 +45,15 @@ namespace MultipleInputFiles
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(TokenCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(Source source, TokenCredential credential, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            source ??= new Source("value1");
 
             options ??= new MultipleInputFilesClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -67,9 +65,9 @@ namespace MultipleInputFiles
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="source"> source - server parameter. </param>
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = null)
+        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source source)
         {
             RestClient = new MultipleInputFilesRestClient(clientDiagnostics, pipeline, source);
             _clientDiagnostics = clientDiagnostics;
