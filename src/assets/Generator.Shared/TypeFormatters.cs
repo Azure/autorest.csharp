@@ -28,6 +28,7 @@ namespace Azure.Core
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
             "O" => value.ToUniversalTime().ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
             "o" => value.ToUniversalTime().ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
+            "R" => value.ToString("r", CultureInfo.InvariantCulture),
             _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 

@@ -101,7 +101,7 @@ namespace _Type._Array.Samples
     "2022-05-10T14:57:31.2311892-04:00"
 };
 
-            Response response = client.Put(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +129,7 @@ namespace _Type._Array.Samples
     "2022-05-10T14:57:31.2311892-04:00"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-            var body = new object();
+            var body = new DateTimeOffset[]
+            {
+    DateTimeOffset.UtcNow
+            };
             var result = await client.PutAsync(body);
         }
     }

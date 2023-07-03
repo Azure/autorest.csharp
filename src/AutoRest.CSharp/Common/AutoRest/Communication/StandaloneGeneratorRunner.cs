@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             string? projectPath = null;
             string outputPath;
+            string sampleOutputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
             if (options.Standalone is not null)
             {
@@ -33,22 +34,23 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 projectPath = options.ProjectPath!;
                 outputPath = Path.Combine(projectPath, "Generated");
             }
+            sampleOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated", "Samples");
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
-            var cadlInputFile = Path.Combine(outputPath, "cadl.json");
+            var tspInputFile = Path.Combine(outputPath, "tspCodeModel.json");
 
             GeneratedCodeWorkspace workspace;
-            if (File.Exists(cadlInputFile))
+            if (File.Exists(tspInputFile))
             {
-                var json = await File.ReadAllTextAsync(cadlInputFile);
-                var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
+                var json = await File.ReadAllTextAsync(tspInputFile);
+                var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
-                    // TODO - add support for DataFactoryExpression lookup
+                    // TODO - add support for DataFactoryElement lookup
                     new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
@@ -64,13 +66,14 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor tspCodeModel.json exist in {outputPath} folder.");
             }
 
             if (options.ClearOutputFolder)
             {
-                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "cadl.json" };
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
+                DeleteDirectory(sampleOutputPath, keepFiles);
             }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
@@ -89,6 +92,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
         private static void DeleteDirectory(string path, string[] keepFiles)
         {
             var directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+            {
+                return;
+            }
             foreach (FileInfo file in directoryInfo.GetFiles())
             {
                 if (keepFiles.Contains(file.Name))
@@ -250,6 +257,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
             root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
+            root.TryGetProperty(nameof(Configuration.Options.MethodsToKeepClientDefaultValue), out var methodsToKeepClientDefaultValueElement);
+            var methodsToKeepClientDefaultValue = Configuration.DeserializeArray(methodsToKeepClientDefaultValueElement);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
@@ -279,6 +288,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
                 ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
+                methodsToKeepClientDefaultValue,
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
             );

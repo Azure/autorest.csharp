@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +77,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

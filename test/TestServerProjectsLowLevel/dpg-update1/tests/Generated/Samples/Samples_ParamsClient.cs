@@ -205,7 +205,7 @@ namespace dpg_update1_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = client.PostParameters(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.PostParameters(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -241,7 +241,7 @@ namespace dpg_update1_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -265,7 +265,7 @@ namespace dpg_update1_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = client.DeleteParameters(new RequestContext());
+            Response response = client.DeleteParameters();
             Console.WriteLine(response.Status);
         }
 
@@ -287,7 +287,7 @@ namespace dpg_update1_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.DeleteParametersAsync(new RequestContext());
+            Response response = await client.DeleteParametersAsync();
             Console.WriteLine(response.Status);
         }
 

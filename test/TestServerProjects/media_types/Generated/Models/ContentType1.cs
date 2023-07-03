@@ -10,9 +10,9 @@ namespace media_types.Models
     /// <summary> Content type for upload. </summary>
     public enum ContentType1
     {
-        /// <summary> Content Type &apos;application/json&apos;. </summary>
+        /// <summary> Content Type 'application/json'. </summary>
         ApplicationJson,
-        /// <summary> Content Type &apos;application/octet-stream&apos;. </summary>
+        /// <summary> Content Type 'application/octet-stream'. </summary>
         ApplicationOctetStream
     }
 }

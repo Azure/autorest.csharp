@@ -51,7 +51,7 @@ namespace AnomalyDetector.Models
                     continue;
                 }
             }
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo);
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

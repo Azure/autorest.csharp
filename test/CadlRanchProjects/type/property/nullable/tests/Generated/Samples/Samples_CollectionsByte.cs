@@ -174,7 +174,7 @@ namespace _Type.Property.Nullable.Samples
     },
             };
 
-            Response response = client.PatchNonNull(RequestContent.Create(data), new RequestContext());
+            Response response = client.PatchNonNull(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -210,7 +210,7 @@ namespace _Type.Property.Nullable.Samples
     },
             };
 
-            Response response = await client.PatchNonNullAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -246,7 +246,7 @@ namespace _Type.Property.Nullable.Samples
     },
             };
 
-            Response response = client.PatchNull(RequestContent.Create(data), new RequestContext());
+            Response response = client.PatchNull(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -282,7 +282,7 @@ namespace _Type.Property.Nullable.Samples
     },
             };
 
-            Response response = await client.PatchNullAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PatchNullAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

@@ -527,7 +527,7 @@ schemas: !Schemas
           serializedName: DfeListOfT
           extensions:
             x-ms-format: dfe-list-generic
-            x-ms-format-element-definition: SeparateClass
+            x-ms-format-element-type: SeparateClass
           language: !Languages 
             default:
               name: dfeListOfT

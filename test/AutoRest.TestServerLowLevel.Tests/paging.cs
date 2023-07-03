@@ -29,7 +29,7 @@ namespace AutoRest.TestServer.Tests
             var host = endpoint.ToString().Replace("http://", String.Empty);
             var linkPart = "/paging/customurl/partialnextlink/page/";
 
-            var pageableAsync = new CustomPagingClient(Key, host, null).GetPagesPartialUrlAsync(string.Empty, new());
+            var pageableAsync = new CustomPagingClient(host, Key, null).GetPagesPartialUrlAsync(string.Empty, new());
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new CustomPagingClient(Key, host, null).GetPagesPartialUrl(string.Empty, new());
+            var pageable = new CustomPagingClient(host, Key, null).GetPagesPartialUrl(string.Empty, new());
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests
             var host = endpoint.ToString().Replace("http://", String.Empty);
             var linkPart = "partialnextlinkop/page/";
 
-            var pageableAsync = new CustomPagingClient(Key, host, null).GetPagesPartialUrlOperationAsync(accountName, new());
+            var pageableAsync = new CustomPagingClient(host, Key, null).GetPagesPartialUrlOperationAsync(accountName, new());
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
@@ -90,7 +90,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new CustomPagingClient(Key, host, null).GetPagesPartialUrlOperation(accountName, new());
+            var pageable = new CustomPagingClient(host, Key, null).GetPagesPartialUrlOperation(accountName, new());
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);

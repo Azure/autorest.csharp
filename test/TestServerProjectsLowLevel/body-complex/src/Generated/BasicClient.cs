@@ -60,7 +60,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// [Protocol Method] Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// [Protocol Method] Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -120,7 +120,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// [Protocol Method] Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -154,7 +154,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// [Protocol Method] Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -368,7 +368,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get a basic complex type while the server doesn't provide a response payload
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -398,7 +398,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// [Protocol Method] Get a basic complex type while the server doesn't provide a response payload
         /// <list type="bullet">
         /// <item>
         /// <description>

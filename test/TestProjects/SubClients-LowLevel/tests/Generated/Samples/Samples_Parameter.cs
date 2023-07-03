@@ -39,7 +39,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = client.GetSubParameter("<subParameter>", new RequestContext());
+            Response response = client.GetSubParameter("<subParameter>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
+            Response response = await client.GetSubParameterAsync("<subParameter>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

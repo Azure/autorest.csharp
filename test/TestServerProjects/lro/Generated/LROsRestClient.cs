@@ -320,7 +320,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<LROsPost202ListHeaders>> Post202ListAsync(CancellationToken cancellationToken = default)
         {
@@ -337,7 +337,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LROsPost202ListHeaders> Post202List(CancellationToken cancellationToken = default)
         {
@@ -426,7 +426,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> Put202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
@@ -442,7 +442,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put202Retry200(Product product = null, CancellationToken cancellationToken = default)
@@ -1767,7 +1767,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> Post200WithPayloadAsync(CancellationToken cancellationToken = default)
         {
@@ -1783,7 +1783,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post200WithPayload(CancellationToken cancellationToken = default)
         {
@@ -1819,7 +1819,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<LROsPost202Retry200Headers>> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
@@ -1836,7 +1836,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LROsPost202Retry200Headers> Post202Retry200(Product product = null, CancellationToken cancellationToken = default)
@@ -1873,7 +1873,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<LROsPost202NoRetry204Headers>> Post202NoRetry204Async(Product product = null, CancellationToken cancellationToken = default)
@@ -1890,7 +1890,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LROsPost202NoRetry204Headers> Post202NoRetry204(Product product = null, CancellationToken cancellationToken = default)
@@ -1920,7 +1920,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostDoubleHeadersFinalLocationGetAsync(CancellationToken cancellationToken = default)
         {
@@ -1935,7 +1935,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostDoubleHeadersFinalLocationGet(CancellationToken cancellationToken = default)
         {
@@ -1963,7 +1963,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostDoubleHeadersFinalAzureHeaderGetAsync(CancellationToken cancellationToken = default)
         {
@@ -1978,7 +1978,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostDoubleHeadersFinalAzureHeaderGet(CancellationToken cancellationToken = default)
         {
@@ -2006,7 +2006,7 @@ namespace lro
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(CancellationToken cancellationToken = default)
         {
@@ -2021,7 +2021,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostDoubleHeadersFinalAzureHeaderGetDefault(CancellationToken cancellationToken = default)
         {

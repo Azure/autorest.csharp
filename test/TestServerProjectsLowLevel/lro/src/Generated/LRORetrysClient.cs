@@ -372,7 +372,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -404,7 +404,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>

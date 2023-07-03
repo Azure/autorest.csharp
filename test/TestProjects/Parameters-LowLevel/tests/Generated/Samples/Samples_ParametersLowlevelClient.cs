@@ -211,7 +211,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.NoRequestBodyNoResponseBody(new RequestContext());
+            Response response = client.NoRequestBodyNoResponseBody();
             Console.WriteLine(response.Status);
         }
 
@@ -233,7 +233,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.NoRequestBodyNoResponseBodyAsync(new RequestContext());
+            Response response = await client.NoRequestBodyNoResponseBodyAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -296,7 +296,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParameters(1234, 1234);
+            Response response = client.OptionalPathParameters(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -307,7 +307,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParameters(1234, 1234, "start", new RequestContext());
+            Response response = client.OptionalPathParameters(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -318,7 +318,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersAsync(1234, 1234);
+            Response response = await client.OptionalPathParametersAsync(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -329,7 +329,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersAsync(1234, 1234, "start", new RequestContext());
+            Response response = await client.OptionalPathParametersAsync(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -340,7 +340,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParametersWithMixedSequence(1234);
+            Response response = client.OptionalPathParametersWithMixedSequence(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -351,7 +351,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", 12, new RequestContext());
+            Response response = client.OptionalPathParametersWithMixedSequence(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -362,7 +362,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234);
+            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -373,7 +373,7 @@ namespace Parameters_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12, new RequestContext());
+            Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "<name>", 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -386,7 +386,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data), 1234, 1234, 1234, new RequestContext());
+            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -403,7 +403,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data), 1234, 1234, 1234, new RequestContext());
+            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -416,7 +416,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 1234, 1234, 1234, new RequestContext());
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -433,7 +433,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 1234, 1234, 1234, new RequestContext());
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

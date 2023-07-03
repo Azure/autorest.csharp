@@ -28,7 +28,8 @@ namespace SpecialWords.Samples
 
             Response response = client.GetModel();
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -37,9 +38,10 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            Response response = client.GetModel(new RequestContext());
+            Response response = client.GetModel();
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -50,7 +52,8 @@ namespace SpecialWords.Samples
 
             Response response = await client.GetModelAsync();
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -59,9 +62,10 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            Response response = await client.GetModelAsync(new RequestContext());
+            Response response = await client.GetModelAsync();
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -79,7 +83,10 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new { };
+            var data = new
+            {
+                modelkind = "",
+            };
 
             Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -91,9 +98,12 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new { };
+            var data = new
+            {
+                modelkind = "",
+            };
 
-            Response response = client.Put(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +113,10 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new { };
+            var data = new
+            {
+                modelkind = "",
+            };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -115,9 +128,12 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new { };
+            var data = new
+            {
+                modelkind = "",
+            };
 
-            Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

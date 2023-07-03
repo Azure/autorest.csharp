@@ -17,7 +17,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
+        /// <summary> response with header value "value": 7e120 or -3.0. </summary>
         public double? Value => _response.Headers.TryGetValue("value", out double? value) ? value : null;
     }
 }

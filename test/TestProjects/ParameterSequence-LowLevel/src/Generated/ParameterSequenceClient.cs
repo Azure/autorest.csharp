@@ -220,11 +220,11 @@ namespace ParameterSequence_LowLevel
             uri.AppendPath(itemName, true);
             uri.AppendQuery("origin", origin, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (version != null)
             {
                 request.Headers.Add("version", version);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -239,11 +239,11 @@ namespace ParameterSequence_LowLevel
             uri.AppendPath(itemName, true);
             uri.AppendQuery("origin", origin, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (version != null)
             {
                 request.Headers.Add("version", version);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

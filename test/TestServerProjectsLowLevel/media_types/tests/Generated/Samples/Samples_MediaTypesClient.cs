@@ -43,7 +43,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -73,7 +73,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -101,7 +101,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -127,7 +127,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
         }
 
@@ -155,7 +155,7 @@ namespace media_types_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.ContentTypeWithEncoding(RequestContent.Create(data), new RequestContext());
+            Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -185,7 +185,7 @@ namespace media_types_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -215,7 +215,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -245,7 +245,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -275,7 +275,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -305,7 +305,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -335,7 +335,7 @@ namespace media_types_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -365,7 +365,7 @@ namespace media_types_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+            Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

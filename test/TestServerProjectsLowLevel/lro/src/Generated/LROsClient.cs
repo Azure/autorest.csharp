@@ -378,7 +378,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }].
+        /// [Protocol Method] Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -409,7 +409,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }].
+        /// [Protocol Method] Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -504,7 +504,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState
+        /// [Protocol Method] Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -536,7 +536,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState
+        /// [Protocol Method] Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2208,7 +2208,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2239,7 +2239,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2270,7 +2270,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2302,7 +2302,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2334,7 +2334,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2366,7 +2366,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2398,7 +2398,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2429,7 +2429,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2460,7 +2460,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2491,7 +2491,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2522,7 +2522,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2553,7 +2553,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
+        /// [Protocol Method] Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -16,7 +16,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExactMatchFlattenInheritanceModelFactory
     {
-
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

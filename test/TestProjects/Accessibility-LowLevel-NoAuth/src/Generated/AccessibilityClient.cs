@@ -46,7 +46,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +77,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -108,7 +108,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -139,7 +139,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

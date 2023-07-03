@@ -40,7 +40,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PolymorphicrecursiveClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -72,7 +72,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PolymorphicrecursiveClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -116,7 +116,7 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45f,
             };
 
-            Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutValid(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45f,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

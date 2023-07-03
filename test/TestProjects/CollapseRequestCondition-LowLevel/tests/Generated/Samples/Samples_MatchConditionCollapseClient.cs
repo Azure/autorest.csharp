@@ -37,7 +37,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -133,7 +133,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = client.CollapseGet(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = client.CollapseGet(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -155,7 +155,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
     }

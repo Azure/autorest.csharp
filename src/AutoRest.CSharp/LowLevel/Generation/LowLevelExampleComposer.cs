@@ -17,6 +17,8 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
+using YamlDotNet.Core.Tokens;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -627,7 +629,7 @@ namespace AutoRest.CSharp.Generation.Writers
             for (int i = 0; i < parameters.Count; i++)
             {
                 //skip last param if its optional and cancellation token or request context
-                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContent))))
+                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContext))))
                     continue;
 
                 if (allParameters || parameters[i].DefaultValue == null)
@@ -818,6 +820,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
                 InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
                 InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
+                InputTypeKind.DateTimeRFC3339 => "\"2022-05-10T18:57:31.2311892Z\"",
+                InputTypeKind.DateTimeRFC7231 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
                 InputTypeKind.DateTimeUnix => "\"1652209051\"",
                 InputTypeKind.Float32 => "123.45f",
                 InputTypeKind.Float64 => "123.45d",
@@ -832,15 +836,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.Uri => "\"http://localhost:3000\"",
                 _ => "new {}"
             },
-            InputLiteralType literalType when literalType.LiteralValueType is InputPrimitiveType literalPrimitiveType => literalPrimitiveType.Kind switch
+            InputLiteralType literalType => ComposeRequestContentForLiteral(literalType),
+            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
+            _ => "new {}"
+        };
+
+        private static string ComposeRequestContentForLiteral(InputLiteralType literalType)
+        {
+            var kind = literalType.LiteralValueType switch
+            {
+                InputPrimitiveType primivateType => primivateType.Kind,
+                InputEnumType enumType => enumType.EnumValueType.Kind,
+                _ => throw new InvalidOperationException($"Unsupported type for literal {literalType}")
+            };
+            return kind switch
             {
                 InputTypeKind.String => $"\"{literalType.Value}\"",
                 InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
                 _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
-            },
-            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
-            _ => "new {}"
-        };
+            };
+        }
 
         private string ComposeCSharpType(bool allProperties, CSharpType type, string? propertyDescription, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
         {
@@ -1110,7 +1125,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string FixKeyWords(string serializedName)
         {
-            var result = serializedName.Replace('-', '_');
+            // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
+            // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
+            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
             return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
         }
 

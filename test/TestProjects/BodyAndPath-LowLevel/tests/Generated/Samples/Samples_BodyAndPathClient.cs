@@ -41,7 +41,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.Create("<itemName>", RequestContent.Create(data), new RequestContext());
+            Response response = client.Create("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -67,7 +67,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -93,7 +93,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[] { "<excluded>" }, new RequestContext());
+            Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[] { "<excluded>" });
             Console.WriteLine(response.Status);
         }
 
@@ -119,7 +119,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[] { "<excluded>" }, new RequestContext());
+            Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[] { "<excluded>" });
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +145,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data), new RequestContext());
+            Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -171,7 +171,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -195,7 +195,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths(new RequestContext());
+            Response response = client.GetBodyAndPaths();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -221,7 +221,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync(new RequestContext());
+            Response response = await client.GetBodyAndPathsAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -247,7 +247,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetItems(new RequestContext());
+            Response response = client.GetItems();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -273,7 +273,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetItemsAsync(new RequestContext());
+            Response response = await client.GetItemsAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -288,7 +288,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+            Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -304,7 +304,7 @@ namespace BodyAndPath_LowLevel.Samples
                 invalid_int_name = 1234,
             };
 
-            Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
+            Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
             Console.WriteLine(response.Status);
         }
 
@@ -317,7 +317,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -333,7 +333,7 @@ namespace BodyAndPath_LowLevel.Samples
                 invalid_int_name = 1234,
             };
 
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", "value", new RequestContext());
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
             Console.WriteLine(response.Status);
         }
     }

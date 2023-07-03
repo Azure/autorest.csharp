@@ -111,12 +111,12 @@ namespace _Type.Model.Inheritance.Models
                     continue;
                 }
             }
-            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner);
+            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Salmon FromResponse(Response response)
+        internal static new Salmon FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeSalmon(document.RootElement);

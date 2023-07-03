@@ -184,7 +184,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required integer. Please put a valid int-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The IntWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerPropertyAsync(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -202,7 +202,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required integer. Please put a valid int-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The IntWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerProperty(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -220,7 +220,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a valid int-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The IntOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -238,7 +238,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a valid int-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The IntOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerProperty(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -256,7 +256,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required integer. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
@@ -274,7 +274,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required integer. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerHeader(int headerParameter, CancellationToken cancellationToken = default)
@@ -292,7 +292,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
@@ -310,7 +310,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerHeader(int? headerParameter = null, CancellationToken cancellationToken = default)
@@ -400,7 +400,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required string. Please put a valid string-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The StringWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredStringPropertyAsync(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -418,7 +418,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required string. Please put a valid string-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The StringWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredStringProperty(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -436,7 +436,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a valid string-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The StringOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -454,7 +454,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a valid string-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The StringOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalStringProperty(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -472,7 +472,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required string. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default)
@@ -490,7 +490,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required string. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredStringHeader(string headerParameter, CancellationToken cancellationToken = default)
@@ -508,7 +508,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional string. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional string. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalStringHeaderAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
@@ -526,7 +526,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional string. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional string. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalStringHeader(string bodyParameter = null, CancellationToken cancellationToken = default)
@@ -616,7 +616,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ClassWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredClassPropertyAsync(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -634,7 +634,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ClassWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredClassProperty(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -652,7 +652,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional complex object. Please put a valid class-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The ClassOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -670,7 +670,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional complex object. Please put a valid class-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The ClassOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalClassProperty(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -760,7 +760,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required array. Please put a valid array-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -778,7 +778,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required array. Please put a valid array-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredArrayProperty(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
@@ -796,7 +796,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional array. Please put a valid array-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional array. Please put a valid array-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The ArrayOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -814,7 +814,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional array. Please put a valid array-wrapper with &apos;value&apos; = null. </summary>
+        /// <summary> Test explicitly optional array. Please put a valid array-wrapper with 'value' = null. </summary>
         /// <param name="bodyParameter"> The ArrayOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalArrayProperty(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
@@ -832,7 +832,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required array. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredArrayHeaderAsync(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
@@ -850,7 +850,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly required array. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
+        /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredArrayHeader(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
@@ -868,7 +868,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="headerParameter"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
@@ -886,7 +886,7 @@ namespace required_optional
             }
         }
 
-        /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
+        /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
         /// <param name="headerParameter"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalArrayHeader(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)

@@ -37,7 +37,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Head300(new RequestContext());
+            Response response = client.Head300();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Head300Async(new RequestContext());
+            Response response = await client.Head300Async();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get300(new RequestContext());
+            Response response = client.Get300();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get300Async(new RequestContext());
+            Response response = await client.Get300Async();
             Console.WriteLine(response.Status);
         }
 
@@ -125,7 +125,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Head301(new RequestContext());
+            Response response = client.Head301();
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +147,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Head301Async(new RequestContext());
+            Response response = await client.Head301Async();
             Console.WriteLine(response.Status);
         }
 
@@ -169,7 +169,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get301(new RequestContext());
+            Response response = client.Get301();
             Console.WriteLine(response.Status);
         }
 
@@ -191,7 +191,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get301Async(new RequestContext());
+            Response response = await client.Get301Async();
             Console.WriteLine(response.Status);
         }
 
@@ -217,7 +217,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put301(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put301(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -243,7 +243,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put301Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put301Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -265,7 +265,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Head302(new RequestContext());
+            Response response = client.Head302();
             Console.WriteLine(response.Status);
         }
 
@@ -287,7 +287,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Head302Async(new RequestContext());
+            Response response = await client.Head302Async();
             Console.WriteLine(response.Status);
         }
 
@@ -309,7 +309,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get302(new RequestContext());
+            Response response = client.Get302();
             Console.WriteLine(response.Status);
         }
 
@@ -331,7 +331,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get302Async(new RequestContext());
+            Response response = await client.Get302Async();
             Console.WriteLine(response.Status);
         }
 
@@ -357,7 +357,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch302(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch302(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -383,7 +383,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch302Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch302Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -409,7 +409,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post303(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post303(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -435,7 +435,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post303Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post303Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -457,7 +457,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Head307(new RequestContext());
+            Response response = client.Head307();
             Console.WriteLine(response.Status);
         }
 
@@ -479,7 +479,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Head307Async(new RequestContext());
+            Response response = await client.Head307Async();
             Console.WriteLine(response.Status);
         }
 
@@ -501,7 +501,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get307(new RequestContext());
+            Response response = client.Get307();
             Console.WriteLine(response.Status);
         }
 
@@ -523,7 +523,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get307Async(new RequestContext());
+            Response response = await client.Get307Async();
             Console.WriteLine(response.Status);
         }
 
@@ -545,7 +545,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Options307(new RequestContext());
+            Response response = client.Options307();
             Console.WriteLine(response.Status);
         }
 
@@ -567,7 +567,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Options307Async(new RequestContext());
+            Response response = await client.Options307Async();
             Console.WriteLine(response.Status);
         }
 
@@ -593,7 +593,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -619,7 +619,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -645,7 +645,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -671,7 +671,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -697,7 +697,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -723,7 +723,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -749,7 +749,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Delete307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Delete307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -775,7 +775,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Delete307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

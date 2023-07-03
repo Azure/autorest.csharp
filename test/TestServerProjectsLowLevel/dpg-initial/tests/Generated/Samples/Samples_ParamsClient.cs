@@ -205,7 +205,7 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = client.PostParameters(RequestContent.Create(data), new RequestContext());
+            Response response = client.PostParameters(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -241,7 +241,7 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = await client.PostParametersAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PostParametersAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
