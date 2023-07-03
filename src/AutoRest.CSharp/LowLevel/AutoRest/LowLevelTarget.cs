@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
@@ -74,11 +72,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new PostProcessor(
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
-        }
-
-        private class XmlStringWriter : StringWriter
-        {
-            public override Encoding Encoding => Encoding.UTF8;
         }
     }
 }
