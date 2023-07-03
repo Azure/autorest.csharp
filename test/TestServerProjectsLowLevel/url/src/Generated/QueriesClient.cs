@@ -2524,7 +2524,7 @@ namespace url_LowLevel
             uri.AppendPath("/queries/byte/multibyte", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2555,7 +2555,7 @@ namespace url_LowLevel
             uri.AppendPath("/queries/byte/null", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

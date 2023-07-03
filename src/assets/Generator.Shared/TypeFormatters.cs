@@ -38,6 +38,13 @@ namespace Azure.Core
             _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
+        public static string ToString(BinaryData value, string format) => format switch
+        {
+            "U" => ToBase64UrlString(value.ToArray()),
+            "D" => Convert.ToBase64String(value.ToArray()),
+            _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
+        };
+
         public static string ToString(byte[] value, string format) => format switch
         {
             "U" => ToBase64UrlString(value),

@@ -1992,7 +1992,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/multibyte/", false);
-            uri.AppendPath(bytePath.ToArray(), "D", true);
+            uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2020,7 +2020,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/null/", false);
-            uri.AppendPath(bytePath.ToArray(), "D", true);
+            uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2090,7 +2090,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/bG9yZW0/", false);
-            uri.AppendPath(base64UrlPath.ToArray(), "U", true);
+            uri.AppendPath(base64UrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

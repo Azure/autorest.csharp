@@ -21,6 +21,7 @@ namespace Azure.Core
                 bool b => TypeFormatters.ToString(b),
                 int or float or double or long or decimal => ((IFormattable)value).ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture),
                 byte[] b when format != null => TypeFormatters.ToString(b, format),
+                BinaryData bd when format != null => TypeFormatters.ToString(bd, format),
                 IEnumerable<string> s => string.Join(",", s),
                 DateTimeOffset dateTime when format != null => TypeFormatters.ToString(dateTime, format),
                 TimeSpan timeSpan when format != null => TypeFormatters.ToString(timeSpan, format),
@@ -50,6 +51,11 @@ namespace Azure.Core
         }
 
         public static void AppendPath(this RequestUriBuilder builder, byte[] value, string format, bool escape = true)
+        {
+            builder.AppendPath(ConvertToString(value, format), escape);
+        }
+
+        public static void AppendPath(this RequestUriBuilder builder, BinaryData value, string format, bool escape = true)
         {
             builder.AppendPath(ConvertToString(value, format), escape);
         }
@@ -125,6 +131,11 @@ namespace Azure.Core
         }
 
         public static void AppendQuery(this RequestUriBuilder builder, string name, byte[] value, string format, bool escape = true)
+        {
+            builder.AppendQuery(name, ConvertToString(value, format), escape);
+        }
+
+        public static void AppendQuery(this RequestUriBuilder builder, string name, BinaryData value, string format, bool escape = true)
         {
             builder.AppendQuery(name, ConvertToString(value, format), escape);
         }
