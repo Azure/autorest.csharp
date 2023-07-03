@@ -68,7 +68,7 @@ namespace ParameterSequence_LowLevel
         /// </list>
         /// </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="origin"> The String to use. </param>
+        /// <param name="origin"> The string to use. </param>
         /// <param name="version"> version of the item. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="origin"/> is null. </exception>
@@ -106,7 +106,7 @@ namespace ParameterSequence_LowLevel
         /// </list>
         /// </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="origin"> The String to use. </param>
+        /// <param name="origin"> The string to use. </param>
         /// <param name="version"> version of the item. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="origin"/> is null. </exception>
@@ -144,7 +144,7 @@ namespace ParameterSequence_LowLevel
         /// </list>
         /// </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="origin"> The String to use. </param>
+        /// <param name="origin"> The string to use. </param>
         /// <param name="version"> version of the item. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="origin"/> is null. </exception>
@@ -182,7 +182,7 @@ namespace ParameterSequence_LowLevel
         /// </list>
         /// </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="origin"> The String to use. </param>
+        /// <param name="origin"> The string to use. </param>
         /// <param name="version"> version of the item. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="origin"/> is null. </exception>

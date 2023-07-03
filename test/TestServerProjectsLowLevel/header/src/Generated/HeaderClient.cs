@@ -2390,7 +2390,7 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value.ToArray(), "D");
+            request.Headers.Add("value", value, "D");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
