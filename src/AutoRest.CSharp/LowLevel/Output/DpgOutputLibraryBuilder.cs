@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
@@ -50,11 +51,13 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
+            var mockExampleValues = ExampleMockValueBuilder.Build(_rootNamespace);
+
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, mockExampleValues, _sourceInputModel);
 
             if (isTspInput)
             {
@@ -62,6 +65,7 @@ namespace AutoRest.CSharp.Output.Models
                 CreateModels(models, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
+
 
             return library;
         }
