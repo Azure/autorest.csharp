@@ -8,7 +8,7 @@ This sample shows how to call GetNullAsync with required parameters and parse th
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetNullAsync();
+Response response = await client.GetNullAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -22,7 +22,7 @@ This sample shows how to call GetNull with required parameters and parse the res
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetNull();
+Response response = client.GetNull(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -38,7 +38,7 @@ var client = new StringClient(credential);
 
 var data = "<String>";
 
-Response response = await client.PutNullAsync(RequestContent.Create(data));
+Response response = await client.PutNullAsync(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -52,7 +52,7 @@ var client = new StringClient(credential);
 
 var data = "<String>";
 
-Response response = client.PutNull(RequestContent.Create(data));
+Response response = client.PutNull(RequestContent.Create(data), new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call GetEmptyAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetEmptyAsync();
+Response response = await client.GetEmptyAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -78,7 +78,7 @@ This sample shows how to call GetEmpty with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetEmpty();
+Response response = client.GetEmpty(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -120,7 +120,7 @@ This sample shows how to call GetMbcsAsync with required parameters and parse th
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetMbcsAsync();
+Response response = await client.GetMbcsAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -134,7 +134,7 @@ This sample shows how to call GetMbcs with required parameters and parse the res
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetMbcs();
+Response response = client.GetMbcs(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -176,7 +176,7 @@ This sample shows how to call GetWhitespaceAsync with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetWhitespaceAsync();
+Response response = await client.GetWhitespaceAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -190,7 +190,7 @@ This sample shows how to call GetWhitespace with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetWhitespace();
+Response response = client.GetWhitespace(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -232,7 +232,7 @@ This sample shows how to call GetNotProvidedAsync with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetNotProvidedAsync();
+Response response = await client.GetNotProvidedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -246,7 +246,7 @@ This sample shows how to call GetNotProvided with required parameters and parse 
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetNotProvided();
+Response response = client.GetNotProvided(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -260,7 +260,7 @@ This sample shows how to call GetBase64EncodedAsync with required parameters and
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetBase64EncodedAsync();
+Response response = await client.GetBase64EncodedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -274,7 +274,7 @@ This sample shows how to call GetBase64Encoded with required parameters and pars
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetBase64Encoded();
+Response response = client.GetBase64Encoded(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -288,7 +288,7 @@ This sample shows how to call GetBase64UrlEncodedAsync with required parameters 
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetBase64UrlEncodedAsync();
+Response response = await client.GetBase64UrlEncodedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -302,7 +302,7 @@ This sample shows how to call GetBase64UrlEncoded with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetBase64UrlEncoded();
+Response response = client.GetBase64UrlEncoded(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -344,7 +344,7 @@ This sample shows how to call GetNullBase64UrlEncodedAsync with required paramet
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetNullBase64UrlEncodedAsync();
+Response response = await client.GetNullBase64UrlEncodedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -358,7 +358,7 @@ This sample shows how to call GetNullBase64UrlEncoded with required parameters a
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = client.GetNullBase64UrlEncoded();
+Response response = client.GetNullBase64UrlEncoded(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

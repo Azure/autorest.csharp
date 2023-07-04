@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetValidAsync();
+Response response = await client.GetValidAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
@@ -22,7 +22,7 @@ This sample shows how to call GetValid with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetValid();
+Response response = client.GetValid(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
@@ -92,7 +92,7 @@ This sample shows how to call GetEmptyAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetEmptyAsync();
+Response response = await client.GetEmptyAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
@@ -106,7 +106,7 @@ This sample shows how to call GetEmpty with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetEmpty();
+Response response = client.GetEmpty(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
@@ -176,7 +176,7 @@ This sample shows how to call GetNotProvidedAsync with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = await client.GetNotProvidedAsync();
+Response response = await client.GetNotProvidedAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
@@ -190,7 +190,7 @@ This sample shows how to call GetNotProvided with required parameters and parse 
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
-Response response = client.GetNotProvided();
+Response response = client.GetNotProvided(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());

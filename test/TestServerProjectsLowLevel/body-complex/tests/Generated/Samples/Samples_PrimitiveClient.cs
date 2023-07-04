@@ -39,7 +39,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetInt();
+            Response response = client.GetInt(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -66,7 +66,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetIntAsync();
+            Response response = await client.GetIntAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetLong();
+            Response response = client.GetLong(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -180,7 +180,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetLongAsync();
+            Response response = await client.GetLongAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -267,7 +267,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetFloat();
+            Response response = client.GetFloat(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -294,7 +294,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetFloatAsync();
+            Response response = await client.GetFloatAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -381,7 +381,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetDouble();
+            Response response = client.GetDouble(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -408,7 +408,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDoubleAsync();
+            Response response = await client.GetDoubleAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -495,7 +495,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetBool();
+            Response response = client.GetBool(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -522,7 +522,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetBoolAsync();
+            Response response = await client.GetBoolAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -609,7 +609,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetString();
+            Response response = client.GetString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -637,7 +637,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetStringAsync();
+            Response response = await client.GetStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -727,7 +727,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetDate();
+            Response response = client.GetDate(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -754,7 +754,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateAsync();
+            Response response = await client.GetDateAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -841,7 +841,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetDateTime();
+            Response response = client.GetDateTime(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -868,7 +868,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeAsync();
+            Response response = await client.GetDateTimeAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -955,7 +955,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetDateTimeRfc1123();
+            Response response = client.GetDateTimeRfc1123(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -982,7 +982,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeRfc1123Async();
+            Response response = await client.GetDateTimeRfc1123Async(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1069,7 +1069,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetDuration();
+            Response response = client.GetDuration(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1095,7 +1095,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDurationAsync();
+            Response response = await client.GetDurationAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1179,7 +1179,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = client.GetByte();
+            Response response = client.GetByte(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1205,7 +1205,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetByteAsync();
+            Response response = await client.GetByteAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());

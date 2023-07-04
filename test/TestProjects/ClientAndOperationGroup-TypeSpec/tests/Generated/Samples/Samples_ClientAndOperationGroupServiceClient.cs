@@ -39,7 +39,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-            Response response = client.Zero();
+            Response response = client.Zero(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-            Response response = await client.ZeroAsync();
+            Response response = await client.ZeroAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -91,7 +91,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-            Response response = client.One();
+            Response response = client.One(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +117,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-            Response response = await client.OneAsync();
+            Response response = await client.OneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

@@ -51,7 +51,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post505Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post505Async with required parameters and request content.
+This sample shows how to call Post505Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
@@ -65,7 +65,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post505(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post505 with required parameters and request content.
+This sample shows how to call Post505 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
@@ -79,7 +79,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete505Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete505Async with required parameters and request content.
+This sample shows how to call Delete505Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);
@@ -93,7 +93,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete505(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete505 with required parameters and request content.
+This sample shows how to call Delete505 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpServerFailureClient(credential);

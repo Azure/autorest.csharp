@@ -252,7 +252,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -283,7 +283,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put400(RequestContent,RequestContext)']/*" />
-        public virtual Response Put400(RequestContent content, RequestContext context)
+        public virtual Response Put400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -314,7 +314,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -345,7 +345,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch400(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch400(RequestContent content, RequestContext context)
+        public virtual Response Patch400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -407,7 +407,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post400(RequestContent,RequestContext)']/*" />
-        public virtual Response Post400(RequestContent content, RequestContext context)
+        public virtual Response Post400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -438,7 +438,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -469,7 +469,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete400(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete400(RequestContent content, RequestContext context)
+        public virtual Response Delete400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -740,7 +740,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -771,7 +771,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put404(RequestContent,RequestContext)']/*" />
-        public virtual Response Put404(RequestContent content, RequestContext context)
+        public virtual Response Put404(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -802,7 +802,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -833,7 +833,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch405(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch405(RequestContent content, RequestContext context)
+        public virtual Response Patch405(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -864,7 +864,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -895,7 +895,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post406(RequestContent,RequestContext)']/*" />
-        public virtual Response Post406(RequestContent content, RequestContext context)
+        public virtual Response Post406(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -926,7 +926,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -957,7 +957,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete407(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete407(RequestContent content, RequestContext context)
+        public virtual Response Delete407(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -988,7 +988,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -1019,7 +1019,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put409(RequestContent,RequestContext)']/*" />
-        public virtual Response Put409(RequestContent content, RequestContext context)
+        public virtual Response Put409(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -1290,7 +1290,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -1321,7 +1321,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Put413(RequestContent,RequestContext)']/*" />
-        public virtual Response Put413(RequestContent content, RequestContext context)
+        public virtual Response Put413(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -1352,7 +1352,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -1383,7 +1383,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Patch414(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch414(RequestContent content, RequestContext context)
+        public virtual Response Patch414(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -1414,7 +1414,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -1445,7 +1445,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Post415(RequestContent,RequestContext)']/*" />
-        public virtual Response Post415(RequestContent content, RequestContext context)
+        public virtual Response Post415(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -1536,7 +1536,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
@@ -1567,7 +1567,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpClientFailureClient.xml" path="doc/members/member[@name='Delete417(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete417(RequestContent content, RequestContext context)
+        public virtual Response Delete417(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();

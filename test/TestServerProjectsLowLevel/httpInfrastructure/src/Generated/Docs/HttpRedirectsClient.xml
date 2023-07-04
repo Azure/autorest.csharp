@@ -99,7 +99,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put301Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put301Async with required parameters and request content.
+This sample shows how to call Put301Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -113,7 +113,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put301(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put301 with required parameters and request content.
+This sample shows how to call Put301 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -175,7 +175,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch302Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch302Async with required parameters and request content.
+This sample shows how to call Patch302Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch302(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch302 with required parameters and request content.
+This sample shows how to call Patch302 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -203,7 +203,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post303Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post303Async with required parameters and request content.
+This sample shows how to call Post303Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -217,7 +217,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post303(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post303 with required parameters and request content.
+This sample shows how to call Post303 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -303,7 +303,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put307Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put307Async with required parameters and request content.
+This sample shows how to call Put307Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -317,7 +317,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put307(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put307 with required parameters and request content.
+This sample shows how to call Put307 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -331,7 +331,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch307Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch307Async with required parameters and request content.
+This sample shows how to call Patch307Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -345,7 +345,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch307(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch307 with required parameters and request content.
+This sample shows how to call Patch307 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -359,7 +359,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post307Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post307Async with required parameters and request content.
+This sample shows how to call Post307Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -373,7 +373,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post307(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post307 with required parameters and request content.
+This sample shows how to call Post307 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -387,7 +387,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete307Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete307Async with required parameters and request content.
+This sample shows how to call Delete307Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
@@ -401,7 +401,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete307(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete307 with required parameters and request content.
+This sample shows how to call Delete307 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);

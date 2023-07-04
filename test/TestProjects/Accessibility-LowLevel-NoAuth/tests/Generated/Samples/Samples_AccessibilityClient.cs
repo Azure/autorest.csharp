@@ -39,7 +39,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = client.Operation(RequestContent.Create(data));
+            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -63,7 +63,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data));
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

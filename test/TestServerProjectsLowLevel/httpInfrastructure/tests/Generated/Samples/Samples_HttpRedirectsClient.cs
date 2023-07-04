@@ -204,7 +204,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put301(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put301(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -230,7 +230,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put301Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put301Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -344,7 +344,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch302(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch302(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -370,7 +370,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch302Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch302Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -396,7 +396,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post303(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post303(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -422,7 +422,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post303Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post303Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -580,7 +580,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -606,7 +606,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -632,7 +632,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -658,7 +658,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -684,7 +684,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -710,7 +710,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -736,7 +736,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Delete307(RequestContent.Create(data), new RequestContext());
+            Response response = client.Delete307(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -762,7 +762,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete307Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Delete307Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

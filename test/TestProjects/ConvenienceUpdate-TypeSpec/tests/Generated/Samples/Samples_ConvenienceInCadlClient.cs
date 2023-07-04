@@ -221,7 +221,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.NoConvenienceRequiredBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.NoConvenienceRequiredBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -251,7 +251,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.NoConvenienceRequiredBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.NoConvenienceRequiredBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

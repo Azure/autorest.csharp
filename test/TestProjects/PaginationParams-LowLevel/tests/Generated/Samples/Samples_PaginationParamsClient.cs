@@ -40,7 +40,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
+            foreach (var item in client.GetPaginationParams(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -70,7 +70,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
+            await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -100,7 +100,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234))
+            foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -130,7 +130,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
+            await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -160,7 +160,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get3s(1234, 1234, 1234))
+            foreach (var item in client.Get3s(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -190,7 +190,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
+            await foreach (var item in client.Get3sAsync(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -220,7 +220,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get4s(1234, 1234, 3.14f))
+            foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -250,7 +250,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))
+            await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());

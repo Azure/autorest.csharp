@@ -8,7 +8,7 @@ This sample shows how to call ZeroAsync with required parameters and parse the r
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-Response response = await client.ZeroAsync();
+Response response = await client.ZeroAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -22,7 +22,7 @@ This sample shows how to call Zero with required parameters and parse the result
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-Response response = client.Zero();
+Response response = client.Zero(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -36,7 +36,7 @@ This sample shows how to call OneAsync with required parameters and parse the re
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-Response response = await client.OneAsync();
+Response response = await client.OneAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -50,7 +50,7 @@ This sample shows how to call One with required parameters and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint);
 
-Response response = client.One();
+Response response = client.One(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

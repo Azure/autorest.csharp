@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put500Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put500Async with required parameters and request content.
+This sample shows how to call Put500Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put500(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put500 with required parameters and request content.
+This sample shows how to call Put500 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -55,7 +55,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch500Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch500Async with required parameters and request content.
+This sample shows how to call Patch500Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch500(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch500 with required parameters and request content.
+This sample shows how to call Patch500 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -112,7 +112,7 @@ This sample shows how to call Options502Async with required parameters and parse
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Options502Async();
+Response response = await client.Options502Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -126,7 +126,7 @@ This sample shows how to call Options502 with required parameters and parse the 
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = client.Options502();
+Response response = client.Options502(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -135,7 +135,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Post503Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post503Async with required parameters and request content.
+This sample shows how to call Post503Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -149,7 +149,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post503(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post503 with required parameters and request content.
+This sample shows how to call Post503 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -163,7 +163,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete503Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete503Async with required parameters and request content.
+This sample shows how to call Delete503Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -177,7 +177,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete503(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete503 with required parameters and request content.
+This sample shows how to call Delete503 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -191,7 +191,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put504Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put504Async with required parameters and request content.
+This sample shows how to call Put504Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -205,7 +205,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put504(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put504 with required parameters and request content.
+This sample shows how to call Put504 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -219,7 +219,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch504Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch504Async with required parameters and request content.
+This sample shows how to call Patch504Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -233,7 +233,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch504(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch504 with required parameters and request content.
+This sample shows how to call Patch504 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);

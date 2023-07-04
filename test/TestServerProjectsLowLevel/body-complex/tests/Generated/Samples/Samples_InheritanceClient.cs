@@ -39,7 +39,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = client.GetValid();
+            Response response = client.GetValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());
@@ -71,7 +71,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = await client.GetValidAsync();
+            Response response = await client.GetValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());

@@ -39,7 +39,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            Response response = client.GetParameters();
+            Response response = client.GetParameters(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            Response response = await client.GetParametersAsync();
+            Response response = await client.GetParametersAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -92,7 +92,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            foreach (var item in client.GetGroups())
+            foreach (var item in client.GetGroups(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -120,7 +120,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            await foreach (var item in client.GetGroupsAsync())
+            await foreach (var item in client.GetGroupsAsync(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -148,7 +148,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            foreach (var item in client.GetAllItems())
+            foreach (var item in client.GetAllItems(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -176,7 +176,7 @@ namespace ResourceClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ResourceServiceClient(credential);
 
-            await foreach (var item in client.GetAllItemsAsync())
+            await foreach (var item in client.GetAllItemsAsync(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());

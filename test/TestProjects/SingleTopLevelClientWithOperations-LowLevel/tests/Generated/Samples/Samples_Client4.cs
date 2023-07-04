@@ -39,7 +39,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
 
-            Response response = client.Patch("<filter>");
+            Response response = client.Patch("<filter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
 
-            Response response = await client.PatchAsync("<filter>");
+            Response response = await client.PatchAsync("<filter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

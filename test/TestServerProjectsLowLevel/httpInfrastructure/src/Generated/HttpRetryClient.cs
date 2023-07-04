@@ -132,7 +132,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -163,7 +163,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put500(RequestContent,RequestContext)']/*" />
-        public virtual Response Put500(RequestContent content, RequestContext context)
+        public virtual Response Put500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -194,7 +194,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -225,7 +225,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch500(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch500(RequestContent content, RequestContext context)
+        public virtual Response Patch500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -407,7 +407,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Post503(RequestContent,RequestContext)']/*" />
-        public virtual Response Post503(RequestContent content, RequestContext context)
+        public virtual Response Post503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -438,7 +438,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -469,7 +469,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Delete503(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete503(RequestContent content, RequestContext context)
+        public virtual Response Delete503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -500,7 +500,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -531,7 +531,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Put504(RequestContent,RequestContext)']/*" />
-        public virtual Response Put504(RequestContent content, RequestContext context)
+        public virtual Response Put504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -562,7 +562,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
@@ -593,7 +593,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Patch504(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch504(RequestContent content, RequestContext context)
+        public virtual Response Patch504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();

@@ -32,7 +32,7 @@ This sample shows how to call Get200Async with required parameters and parse the
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Get200Async();
+Response response = await client.Get200Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -46,7 +46,7 @@ This sample shows how to call Get200 with required parameters and parse the resu
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Get200();
+Response response = client.Get200(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -60,7 +60,7 @@ This sample shows how to call Options200Async with required parameters and parse
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Options200Async();
+Response response = await client.Options200Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -74,7 +74,7 @@ This sample shows how to call Options200 with required parameters and parse the 
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Options200();
+Response response = client.Options200(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -83,7 +83,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Put200Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put200Async with required parameters and request content.
+This sample shows how to call Put200Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -97,7 +97,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put200(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put200 with required parameters and request content.
+This sample shows how to call Put200 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -111,7 +111,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch200Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch200Async with required parameters and request content.
+This sample shows how to call Patch200Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -125,7 +125,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch200(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch200 with required parameters and request content.
+This sample shows how to call Patch200 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -139,7 +139,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post200Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post200Async with required parameters and request content.
+This sample shows how to call Post200Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -153,7 +153,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post200(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post200 with required parameters and request content.
+This sample shows how to call Post200 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -167,7 +167,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete200Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete200Async with required parameters and request content.
+This sample shows how to call Delete200Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -181,7 +181,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete200(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete200 with required parameters and request content.
+This sample shows how to call Delete200 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -195,7 +195,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put201Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put201Async with required parameters and request content.
+This sample shows how to call Put201Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -209,7 +209,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put201(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put201 with required parameters and request content.
+This sample shows how to call Put201 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -223,7 +223,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post201Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post201Async with required parameters and request content.
+This sample shows how to call Post201Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -237,7 +237,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post201(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post201 with required parameters and request content.
+This sample shows how to call Post201 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -251,7 +251,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put202Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put202Async with required parameters and request content.
+This sample shows how to call Put202Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -265,7 +265,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put202(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put202 with required parameters and request content.
+This sample shows how to call Put202 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -279,7 +279,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch202Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch202Async with required parameters and request content.
+This sample shows how to call Patch202Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -293,7 +293,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch202(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch202 with required parameters and request content.
+This sample shows how to call Patch202 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -307,7 +307,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post202Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post202Async with required parameters and request content.
+This sample shows how to call Post202Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -321,7 +321,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post202(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post202 with required parameters and request content.
+This sample shows how to call Post202 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -335,7 +335,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete202Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete202Async with required parameters and request content.
+This sample shows how to call Delete202Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -349,7 +349,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete202(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete202 with required parameters and request content.
+This sample shows how to call Delete202 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -387,7 +387,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put204Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put204Async with required parameters and request content.
+This sample shows how to call Put204Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -401,7 +401,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put204(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Put204 with required parameters and request content.
+This sample shows how to call Put204 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -415,7 +415,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch204Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch204Async with required parameters and request content.
+This sample shows how to call Patch204Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -429,7 +429,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Patch204(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Patch204 with required parameters and request content.
+This sample shows how to call Patch204 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -443,7 +443,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post204Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post204Async with required parameters and request content.
+This sample shows how to call Post204Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -457,7 +457,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Post204(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Post204 with required parameters and request content.
+This sample shows how to call Post204 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -471,7 +471,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete204Async(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete204Async with required parameters and request content.
+This sample shows how to call Delete204Async with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -485,7 +485,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Delete204(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Delete204 with required parameters and request content.
+This sample shows how to call Delete204 with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);

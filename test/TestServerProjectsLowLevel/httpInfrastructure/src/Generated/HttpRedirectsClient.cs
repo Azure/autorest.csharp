@@ -312,7 +312,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
@@ -343,7 +343,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put301(RequestContent,RequestContext)']/*" />
-        public virtual Response Put301(RequestContent content, RequestContext context)
+        public virtual Response Put301(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
@@ -494,7 +494,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
@@ -525,7 +525,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch302(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch302(RequestContent content, RequestContext context)
+        public virtual Response Patch302(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
@@ -556,7 +556,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
@@ -587,7 +587,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post303(RequestContent,RequestContext)']/*" />
-        public virtual Response Post303(RequestContent content, RequestContext context)
+        public virtual Response Post303(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
@@ -798,7 +798,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
@@ -829,7 +829,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Put307(RequestContent,RequestContext)']/*" />
-        public virtual Response Put307(RequestContent content, RequestContext context)
+        public virtual Response Put307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
@@ -860,7 +860,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
@@ -891,7 +891,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Patch307(RequestContent,RequestContext)']/*" />
-        public virtual Response Patch307(RequestContent content, RequestContext context)
+        public virtual Response Patch307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
@@ -922,7 +922,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
@@ -953,7 +953,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Post307(RequestContent,RequestContext)']/*" />
-        public virtual Response Post307(RequestContent content, RequestContext context)
+        public virtual Response Post307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
@@ -984,7 +984,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context)
+        public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
@@ -1015,7 +1015,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRedirectsClient.xml" path="doc/members/member[@name='Delete307(RequestContent,RequestContext)']/*" />
-        public virtual Response Delete307(RequestContent content, RequestContext context)
+        public virtual Response Delete307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
