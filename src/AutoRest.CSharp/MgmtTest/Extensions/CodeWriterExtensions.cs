@@ -183,16 +183,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"new {type}(");
             foreach (var parameter in publicCtor.GetParameters())
             {
-                ExampleValue? value;
-                // Try to figure out the serailizedName from propertyMetadataDict first
-                if ((!propertyMetadataDict.TryGetValue(parameter.Name!.ToCleanName(), out ReferenceClassFinder.PropertyMetadata? pm) ||
-                     !exampleValue.Properties.TryGetValue(pm.SerializedName, out value)) &&
-                // try to use the parameter name directly if no match found in searilizedName
-                     !exampleValue.Properties.TryGetValue(parameter.Name!, out value))
-                {
-                    throw new InvalidOperationException($"Unabled to find example value for ctor parameter, type={type.FullName}, param={parameter.Name ?? "<null>"}");
-                }
-
+                // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
+                var value = exampleValue.Properties[parameter.Name!];
                 writer.AppendExampleValue(value, parameter.ParameterType);
                 writer.AppendRaw(",");
             }
