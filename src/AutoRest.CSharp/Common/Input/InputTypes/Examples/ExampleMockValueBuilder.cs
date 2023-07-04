@@ -8,9 +8,9 @@ namespace AutoRest.CSharp.Common.Input.Examples
 {
     internal class ExampleMockValueBuilder
     {
-        public static IEnumerable<InputClientExample> Build(InputNamespace inputNamespace)
+        public static IEnumerable<InputClientExample> Build(IEnumerable<InputClient> inputClients)
         {
-            foreach (var client in inputNamespace.Clients)
+            foreach (var client in inputClients)
             {
                 // construct the mock example value for a client
                 var exampleOperations = new List<InputOperationExample>();

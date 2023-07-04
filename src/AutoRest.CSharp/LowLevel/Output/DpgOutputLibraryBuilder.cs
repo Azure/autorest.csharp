@@ -51,20 +51,20 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
-            var mockExampleValues = ExampleMockValueBuilder.Build(_rootNamespace);
+            var inputClientExamples = ExampleMockValueBuilder.Build(inputClients);
 
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, mockExampleValues, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
             if (isTspInput)
             {
                 CreateEnums(enums, library.TypeFactory);
                 CreateModels(models, library.TypeFactory);
             }
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, inputClientExamples);
 
 
             return library;
@@ -361,9 +361,10 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, IEnumerable<InputClientExample> inputClientExamples)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+            var operationExamples = inputClientExamples.SelectMany(e => e.Operations).ToDictionary(e => e.Operation, e => e);
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, operationExamples);
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -373,7 +374,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, IReadOnlyDictionary<InputOperation, InputOperationExample> operationExamples)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -392,6 +393,7 @@ namespace AutoRest.CSharp.Output.Models
                     clientInfo.Requests,
                     clientInfo.ClientParameters,
                     _rootNamespace.Auth,
+                    operationExamples,
                     _sourceInputModel,
                     clientOptions,
                     typeFactory)
@@ -399,7 +401,7 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, operationExamples));
 
                 yield return client;
             }
