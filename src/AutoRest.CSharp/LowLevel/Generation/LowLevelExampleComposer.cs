@@ -254,13 +254,6 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeCodeSnippet(convenienceMethod, methodName, async, allParameters, shouldWrap, builder);
         }
 
-        private void ComposeWrappedCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            builder.AppendLine("<code><![CDATA[");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
-            builder.Append("]]></code>");
-        }
-
         private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
         {
             if (shouldWrap)
@@ -325,37 +318,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            ComposeGetClientCodes(builder);
-            builder.AppendLine();
-            if (clientMethod.RequestBodyType != null)
-            {
-                ComposeRequestContent(allParameters, clientMethod.RequestBodyType, builder);
-                builder.AppendLine();
-            }
-
-            if (clientMethod.LongRunning != null)
-            {
-                if (clientMethod.PagingInfo != null && clientMethod.PagingInfo?.NextPageMethod != null)
-                {
-                    ComposeHandleLongRunningPageableResponseCode(clientMethod, methodName, async, allParameters, builder);
-                }
-                else
-                {
-                    ComposeHandleLongRunningResponseCode(clientMethod, methodName, async, allParameters, builder);
-                }
-            }
-            else if (clientMethod.PagingInfo != null)
-            {
-                ComposeHandlePageableResponseCode(clientMethod, methodName, async, allParameters, builder);
-            }
-            else
-            {
-                ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
-            }
-        }
-
         private void ComposeHandleLongRunningPageableResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
         {
             if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
@@ -395,33 +357,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
-            {
-                return;
-            }
-
-            /* CODE PATTEN
-             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
-             *
-             * await foreach (var item in operation.Value)
-             * {
-             *     Console.WriteLine(item.ToString());
-             * or
-             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
-             *     ...
-             * }
-             */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            builder.AppendLine();
-            using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
-            {
-                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
-            }
-        }
-
         private void ComposeHandleLongRunningResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
         {
             /* GENERATED CODE PATTERN
@@ -455,32 +390,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"{typeof(BinaryData)} responseData = operation.Value;");
                 ComposeParsingLongRunningResponseCodes(writer, useAllParameters, clientMethod.ResponseBodyType);
-            }
-        }
-
-        private void ComposeHandleLongRunningResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            /* GENERATED CODE PATTERN
-             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
-             *
-             * Console.WriteLine(operation.GetRawResponse().Status);
-             * or
-             * BinaryData responseData = operation.Value;
-             * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-             * Console.WriteLine(result[.GetProperty(...)...].ToString());
-             * ...
-             */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            builder.AppendLine();
-
-            if (clientMethod.ResponseBodyType == null)
-            {
-                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status);");
-            }
-            else
-            {
-                builder.AppendLine($"BinaryData responseData = operation.Value;");
-                ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
         }
 
@@ -520,34 +429,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
-        {
-            if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
-            {
-                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 0, builder, true))
-                {
-                    builder.AppendLine("    responseData.ToStream().CopyTo(outFileStream);");
-                }
-                return;
-            }
-
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, inputType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
-
-            if (apiInvocationChainList.Count == 0)
-            {
-                builder.AppendLine($"Console.WriteLine(responseData.ToString());");
-            }
-            else
-            {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;");
-                foreach (var apiInvocationChain in apiInvocationChainList)
-                {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                }
-            }
-        }
-
         private void ComposeHandlePageableResponseCode(CodeWriter writer, LowLevelClientMethod clientMethod, string methodName, bool isAsync, bool useAllParameters)
         {
             if (clientMethod.ResponseBodyType is not InputModelType modelType)
@@ -580,29 +461,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeHandlePageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            if (clientMethod.ResponseBodyType is not InputModelType modelType)
-            {
-                return;
-            }
-
-            /* GENERATED CODE PATTERN
-             * await foreach (var item in client.{methodName}(...))
-             * {
-             *     Console.WriteLine(item.ToString());
-             * or
-             *     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
-             *     ...
-             * }
-             */
-            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
-            {
-                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
-            }
-        }
-
         private void ComposeHandlePageableResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             var methodSignature = convenienceMethod.Signature;
@@ -619,36 +477,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
                     ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { $"result" }), new HashSet<InputType> { responseModelType });
-                }
-            }
-        }
-
-        private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
-        {
-            foreach (var property in responseModelType.Properties)
-            {
-                if (property.SerializedName == pagingItemName && property.Type is InputListType listType)
-                {
-                    var apiInvocationChainList = new List<IReadOnlyList<string>>();
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType> { responseModelType });
-                    var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
-
-                    if (apiInvocationChainList.Count == 0)
-                    {
-                        builder.Append(' ', 4);
-                        builder.AppendLine($"Console.WriteLine(item.ToString());");
-                    }
-                    else
-                    {
-                        builder.Append(' ', 4);
-                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;");
-                        foreach (var apiInvocationChain in apiInvocationChainList)
-                        {
-                            builder.Append(' ', 4);
-                            builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                        }
-                    }
-                    break;
                 }
             }
         }
@@ -681,26 +509,6 @@ namespace AutoRest.CSharp.Generation.Writers
             else
             {
                 ConsoleWriteLine(writer, $"{responseExpression}.Status");
-            }
-        }
-
-        private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            var resposneType = "Response";
-            var responseVar = "response";
-            if (clientMethod.RequestMethod.Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
-            {
-                resposneType = "Response<bool>";
-                responseVar = "response.GetRawResponse()";
-            }
-            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            if (clientMethod.ResponseBodyType != null)
-            {
-                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, responseVar, builder);
-            }
-            else
-            {
-                builder.AppendLine($"Console.WriteLine({responseVar}.Status);");
             }
         }
 
@@ -744,39 +552,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)
-        {
-            if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
-            {
-                using (Scope($"if ({responseVar}.ContentStream != null)", 0, builder, true))
-                {
-                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 4, builder, true))
-                    {
-                        builder.AppendLine($"        {responseVar}.ContentStream.CopyTo(outFileStream);");
-                    }
-                }
-                return;
-            }
-
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseBodyType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
-
-            builder.AppendLine();
-
-            if (apiInvocationChainList.Count == 0)
-            {
-                builder.AppendLine($"Console.WriteLine(response.ToString());");
-            }
-            else
-            {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
-                foreach (var apiInvocationChain in apiInvocationChainList)
-                {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                }
-            }
-        }
-
         private void ComposeResponseParsingCode(bool useAllProperties, InputType type, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
         {
             switch (type)
@@ -799,39 +574,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     return;
                 case InputModelType modelType:
                     ComposeResponseParsingCodeForModel(useAllProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-            }
-
-            // primitive types, return
-            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-        }
-
-        private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
-                    {
-                        return;
-                    }
-                    // {parentOp}[0]
-                    var parentOp = currentApiInvocationChain.Pop();
-                    currentApiInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                    {
-                        return;
-                    }
-                    // .GetProperty("<test>")
-                    currentApiInvocationChain.Push("GetProperty(\"<test>\")");
-                    ComposeResponseParsingCode(allProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    currentApiInvocationChain.Pop();
-                    return;
-                case InputModelType modelType:
-                    ComposeResponseParsingCodeForModel(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     return;
             }
 
@@ -872,51 +614,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeResponseParsingCodeForModel(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels())
-            {
-                if (!modelOrBase.Properties.Any())
-                {
-                    continue;
-                }
-
-                var propertiesToExplore = modelOrBase.Properties;
-                if (!allProperties)
-                {
-                    propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
-                }
-
-                if (propertiesToExplore.Count == 0) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-                    return;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    if (!visitedTypes.Contains(property.Type))
-                    {
-                        // .GetProperty("{property_name}")
-                        visitedTypes.Add(property.Type);
-                        currentApiInvocationChain.Push($"GetProperty(\"{property.SerializedName}\")");
-                        ComposeResponseParsingCode(allProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                        currentApiInvocationChain.Pop();
-                        visitedTypes.Remove(property.Type);
-                    }
-                }
-            }
-        }
-
         private void AddApiInvocationChainResult(List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain)
-        {
-            var finalChain = currentApiInvocationChain.ToList();
-            finalChain.Reverse();
-            apiInvocationChainList.Add(finalChain);
-        }
-
-        private void AddApiInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain)
         {
             var finalChain = currentApiInvocationChain.ToList();
             finalChain.Reverse();
@@ -997,7 +695,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            return MockParameterValueByType(parameter.Name, parameter.Type);
+            return MockFrameworkTypeParameterValue(parameter.Name, parameter.Type);
         }
 
         private string MockParameterValue(Parameter parameter)
@@ -1027,7 +725,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return MockParameterTypeValue(parameter.Name, parameter.Type);
         }
 
-        private FormattableString MockParameterValueByType(string parameterName, CSharpType parameterType)
+        private FormattableString MockFrameworkTypeParameterValue(string parameterName, CSharpType parameterType)
         {
             if (parameterType.IsFrameworkType)
             {
@@ -1108,14 +806,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(IEnumerable<>))
                 {
                     var elementType = parameterType.Arguments.Single();
-                    return $"new {elementType}[]{{{MockParameterValueByType(parameterName, elementType)}}}";
+                    return $"new {elementType}[]{{{MockFrameworkTypeParameterValue(parameterName, elementType)}}}";
                 }
 
                 if (type == typeof(IDictionary<,>))
                 {
                     var valueType = parameterType.Arguments[1];
                     var dictionaryType = TypeFactory.GetImplementationType(parameterType);
-                    return $"new {dictionaryType}{{ \"<test>\" = {MockParameterValueByType(parameterName, valueType)} }}";
+                    return $"new {dictionaryType}{{ \"<test>\" = {MockFrameworkTypeParameterValue(parameterName, valueType)} }}";
                 }
 
                 if (type == typeof(BinaryData))
@@ -1265,14 +963,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void ComposeRequestContent(bool composeAll, InputType requestBodyType, StringBuilder builder)
-        {
-            // var data = {value_expression};
-            builder.Append("var data = ");
-            builder.Append(ComposeRequestContent(composeAll, requestBodyType, null, 0, new HashSet<InputModelType>()));
-            builder.AppendLine(";");
-        }
-
         private void ComposeBodyParameter(bool composeAll, Parameter bodyParameter, StringBuilder builder)
         {
             // var <parameterName> = {value_expression};
@@ -1315,56 +1005,6 @@ namespace AutoRest.CSharp.Generation.Writers
             _ => writer.AppendRaw("new {}"),
         };
 
-        private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
-        {
-            InputListType listType => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
-            InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(allProperties, dictionaryType.ValueType, indent, visitedModels),
-            InputEnumType enumType => $"\"{enumType.AllowedValues.First().Value}\"",
-            InputPrimitiveType primitiveType => primitiveType.Kind switch
-            {
-                InputTypeKind.Stream => "File.OpenRead(\"<filePath>\")",
-                InputTypeKind.Boolean => "true",
-                InputTypeKind.Date => "\"2022-05-10\"",
-                InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
-                InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeRFC3339 => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC7231 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeUnix => "\"1652209051\"",
-                InputTypeKind.Float32 => "123.45f",
-                InputTypeKind.Float64 => "123.45d",
-                InputTypeKind.Float128 => "123.45m",
-                InputTypeKind.Guid => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
-                InputTypeKind.Int32 => "1234",
-                InputTypeKind.Int64 => "1234L",
-                InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601 => "\"PT1H23M45S\"",
-                InputTypeKind.DurationConstant => "\"01:23:45\"",
-                InputTypeKind.Time => "\"01:23:45\"",
-                InputTypeKind.Uri => "\"http://localhost:3000\"",
-                _ => "new {}"
-            },
-            InputLiteralType literalType => ComposeRequestContentForLiteral(literalType),
-            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
-            _ => "new {}"
-        };
-
-        private static string ComposeRequestContentForLiteral(InputLiteralType literalType)
-        {
-            var kind = literalType.LiteralValueType switch
-            {
-                InputPrimitiveType primivateType => primivateType.Kind,
-                InputEnumType enumType => enumType.EnumValueType.Kind,
-                _ => throw new InvalidOperationException($"Unsupported type for literal {literalType}")
-            };
-            return kind switch
-            {
-                InputTypeKind.String => $"\"{literalType.Value}\"",
-                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
-                _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
-            };
-        }
-
         private string ComposeCSharpType(bool allProperties, CSharpType type, string? propertyDescription, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
         {
             _ when TypeFactory.IsIEnumerableOfT(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), indent, includeCollectionInitialization, visitedModels), // IEnumerable<T> is guaranteed to have one and only one generic parameter
@@ -1394,30 +1034,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return writer;
-        }
-
-        private string ComposeArrayRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
-        {
-            /* GENERATED CODE PATTERN
-             * new[] {
-             *     {element_expression}
-             * }
-             * or
-             * new[] {}
-             */
-
-            var elementExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (elementExpr == string.Empty)
-            {
-                return "new[] {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new[] ", indent, builder))
-            {
-                builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
-            }
-            return builder.ToString();
         }
 
         private string ComposeArrayCSharpType(bool allProperties, CSharpType elementType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
@@ -1470,29 +1086,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 ComposeRequestContent(writer, useAllProperties, elementType, null, visitedModels);
             }
             return writer;
-        }
-
-        private string ComposeDictionaryRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
-        {
-            /* GENERATED CODE PATTERN
-             * new {
-             *     key = {value_expression},
-             * }
-             * or
-             * new {}
-             */
-            var valueExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (valueExpr == string.Empty)
-            {
-                return "new {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new ", indent, builder))
-            {
-                builder.Append(' ', indent + 4).AppendLine($"key = {valueExpr},");
-            }
-            return builder.ToString();
         }
 
         private string ComposeDictionaryCSharpType(bool allProperties, CSharpType keyType, CSharpType valueType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
@@ -1578,84 +1171,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return writer;
-        }
-
-        private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
-        {
-            visitedModels.Add(model);
-
-            /* GENERATED CODE PATTERN
-                     * new {
-                     *     prop1 = {value_expression},
-                     *     prop2 = {value_expression},
-                     *     ...
-                     * }
-                     * or
-                     * new {}
-                     */
-            var properties = new List<InputModelProperty>();
-            // We must also include any properties introduced by our parent chain.
-            // Try to get the concrete child type for polymorphism
-            var concreteModel = GetConcreteChildModel(model);
-            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
-            {
-                if (allProperties)
-                {
-                    properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
-                }
-                else
-                {
-                    properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
-                }
-            }
-
-            if (!properties.Any())
-            {
-                return "new {}";
-            }
-
-            //remove references to my stack
-            _ = properties.RemoveAll(p =>
-                visitedModels.Contains(p.Type) ||
-                (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
-                (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
-
-            var propertyExpressions = new List<string>();
-            foreach (var property in properties)
-            {
-                string propertyValueExpr;
-                if (property.IsDiscriminator)
-                {
-                    propertyValueExpr = property.Type is InputPrimitiveType { Kind: InputTypeKind.Boolean } or InputPrimitiveType { IsNumber: true } ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
-                }
-                else
-                {
-                    propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
-
-                }
-
-                if (propertyValueExpr != "")
-                {
-                    var propertyExprBuilder = new StringBuilder();
-                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName)} = {propertyValueExpr},");
-                    propertyExpressions.Add(propertyExprBuilder.ToString());
-                }
-            }
-
-            if (propertyExpressions.Count == 0)
-            {
-                return "new {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new ", indent, builder))
-            {
-                foreach (var expr in propertyExpressions)
-                {
-                    builder.AppendLine(expr);
-                }
-            }
-            return builder.ToString();
         }
 
         private string ComposeObjectType(bool allProperties, ObjectType model, int indent, HashSet<ObjectType> visitedModels)
