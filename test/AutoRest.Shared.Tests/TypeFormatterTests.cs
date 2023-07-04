@@ -33,7 +33,7 @@ namespace Azure.Core.Tests
             new object[] { "c", new TimeSpan(1, 2, 59, 59, 500), "1.02:59:59.5000000" }
         };
 
-        public static object[] TimeSpanWithoutFormateCases =
+        public static object[] TimeSpanWithoutFormatCases =
         {
             new object[] { null, new TimeSpan(1, 2, 59, 59), "P1DT2H59M59S" },
         };
@@ -123,7 +123,7 @@ namespace Azure.Core.Tests
         [TestCase("U", new byte[] { 4, 5, 6 }, "BAUG")]
         [TestCase(null, new string[] { "a", "b" }, "a,b")]
         [TestCaseSource(nameof(DateTimeOffsetCases))]
-        [TestCaseSource(nameof(TimeSpanWithoutFormateCases))]
+        [TestCaseSource(nameof(TimeSpanWithoutFormatCases))]
         [TestCaseSource(nameof(TimeSpanCases))]
         [TestCaseSource(nameof(GuidCases))]
         public void ValidateConvertToString(string? format, object? value, string expected)
