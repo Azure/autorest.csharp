@@ -242,7 +242,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
 
             method = typeof(MixApiVersionClient).GetMethod("Read");
-            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, method.GetParameters().Last().IsOptional);
         }
     }
 }

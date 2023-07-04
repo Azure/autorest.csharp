@@ -19,9 +19,9 @@ namespace AutoRest.TestServer.Tests
                 new TypeAsserts.Parameter[] {
                     new("id", typeof(int)),
                     new("skip", typeof(int)),
-                    new("top", typeof(int?), null),
-                    new("status", typeof(string), null),
-                    new("context", typeof(RequestContext), null)
+                    new("top", typeof(int?)),
+                    new("status", typeof(string)),
+                    new("context", typeof(RequestContext))
                 });
         }
 
