@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 
@@ -137,5 +138,21 @@ namespace Azure.Core
             "P" => XmlConvert.ToTimeSpan(value),
             _ => TimeSpan.ParseExact(value, format, CultureInfo.InvariantCulture)
         };
+
+        public static string ConvertToString(object? value, string? format = null)
+            => value switch
+            {
+                null => "null",
+                string s => s,
+                bool b => ToString(b),
+                int or float or double or long or decimal => ((IFormattable)value).ToString(DefaultNumberFormat, CultureInfo.InvariantCulture),
+                byte[] b when format != null => ToString(b, format),
+                IEnumerable<string> s => string.Join(",", s),
+                DateTimeOffset dateTime when format != null => ToString(dateTime, format),
+                TimeSpan timeSpan when format != null => ToString(timeSpan, format),
+                TimeSpan timeSpan => XmlConvert.ToString(timeSpan),
+                Guid guid => guid.ToString(),
+                _ => value.ToString()!
+            };
     }
 }

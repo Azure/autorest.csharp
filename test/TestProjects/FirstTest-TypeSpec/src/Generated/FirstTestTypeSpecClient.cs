@@ -1606,7 +1606,7 @@ namespace FirstTestTypeSpec
             request.Headers.Add("Accept", "application/json");
             if (repeatabilityFirstSent != null)
             {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
             }
             return message;
         }
