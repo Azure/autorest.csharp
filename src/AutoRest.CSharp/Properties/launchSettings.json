@@ -616,13 +616,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\src\\Generated"
     },
-    "typespec-azure/core/lro/standard": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\standard\\src\\Generated"
-    },
     "typespec-azure/core/traits": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated"
+    },
+    "typespec-encode/datetime": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\datetime\\src\\Generated"
     },
     "typespec-encode/duration": {
       "commandName": "Project",

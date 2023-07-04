@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net7.0;net6.0;net461</TargetFrameworks>
   </PropertyGroup>
@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\AzureLroStandard.csproj" />
+    <ProjectReference Include="..\src\DateTime.csproj" />
   </ItemGroup>
 </Project>

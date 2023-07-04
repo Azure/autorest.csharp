@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="DefaultAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call DefaultAsync with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = await client.DefaultAsync(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Default(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call Default with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = client.Default(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Rfc3339Async(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call Rfc3339Async with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Rfc3339(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call Rfc3339 with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = client.Rfc3339(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Rfc7231Async(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call Rfc7231Async with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Rfc7231(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call Rfc7231 with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = client.Rfc7231(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimestampAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call UnixTimestampAsync with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimestamp(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call UnixTimestamp with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = client.UnixTimestamp(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimestampArrayAsync(IEnumerable{DateTimeOffset},RequestContext)">
+<example>
+This sample shows how to call UnixTimestampArrayAsync with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]{DateTimeOffset.UtcNow});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UnixTimestampArray(IEnumerable{DateTimeOffset},RequestContext)">
+<example>
+This sample shows how to call UnixTimestampArray with required parameters.
+<code><![CDATA[
+var client = new DatetimeClient().GetHeaderClient("1.0.0");
+
+Response response = client.UnixTimestampArray(new DateTimeOffset[]{DateTimeOffset.UtcNow});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -5,52 +5,47 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Standard.Models
+namespace Encode.Datetime.Models
 {
-    public partial class User : IUtf8JsonSerializable
+    public partial class DefaultDatetimeProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("role"u8);
-            writer.WriteStringValue(Role);
+            writer.WritePropertyName("value"u8);
+            writer.WriteStringValue(Value, "O");
             writer.WriteEndObject();
         }
 
-        internal static User DeserializeUser(JsonElement element)
+        internal static DefaultDatetimeProperty DeserializeDefaultDatetimeProperty(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            string name = default;
-            string role = default;
+            DateTimeOffset value = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
+                if (property.NameEquals("value"u8))
                 {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("role"u8))
-                {
-                    role = property.Value.GetString();
+                    value = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }
-            return new User(name, role);
+            return new DefaultDatetimeProperty(value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static User FromResponse(Response response)
+        internal static DefaultDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUser(document.RootElement);
+            return DeserializeDefaultDatetimeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
