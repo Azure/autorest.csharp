@@ -40,26 +40,29 @@ namespace FirstTestTypeSpec
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
+        public FirstTestTypeSpecClient(Uri endpoint, string clientRequestId, AzureKeyCredential credential) : this(endpoint, clientRequestId, credential, new FirstTestTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
+        public FirstTestTypeSpecClient(Uri endpoint, string clientRequestId, TokenCredential credential) : this(endpoint, clientRequestId, credential, new FirstTestTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential, FirstTestTypeSpecClientOptions options)
+        public FirstTestTypeSpecClient(Uri endpoint, string clientRequestId, AzureKeyCredential credential, FirstTestTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
@@ -67,17 +70,18 @@ namespace FirstTestTypeSpec
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { AzureClientRequestIdPolicy.Shared }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential, FirstTestTypeSpecClientOptions options)
+        public FirstTestTypeSpecClient(Uri endpoint, string clientRequestId, TokenCredential credential, FirstTestTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
@@ -85,7 +89,7 @@ namespace FirstTestTypeSpec
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { AzureClientRequestIdPolicy.Shared }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
@@ -687,6 +691,116 @@ namespace FirstTestTypeSpec
             try
             {
                 using HttpMessage message = CreateStringFormatRequest(subscriptionId, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> paramete has string format. </summary>
+        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
+        public virtual async Task<Response> IgnoreHeadersAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await IgnoreHeadersAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> paramete has string format. </summary>
+        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)']/*" />
+        public virtual Response IgnoreHeaders(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = IgnoreHeaders(subscriptionId, body.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] paramete has string format.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeadersAsync(Guid,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> IgnoreHeadersAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.IgnoreHeaders");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIgnoreHeadersRequest(subscriptionId, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] paramete has string format.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeaders(Guid,RequestContent,RequestContext)']/*" />
+        public virtual Response IgnoreHeaders(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.IgnoreHeaders");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIgnoreHeadersRequest(subscriptionId, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1619,6 +1733,23 @@ namespace FirstTestTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateIgnoreHeadersRequest(Guid subscriptionId, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/ignoreHeaders/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

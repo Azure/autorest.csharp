@@ -569,6 +569,64 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)">
+<example>
+This sample shows how to call IgnoreHeadersAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
+var result = await client.IgnoreHeadersAsync(Guid.NewGuid(), body);
+]]></code>
+</example>
+    </member>
+    <member name="IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)">
+<example>
+This sample shows how to call IgnoreHeaders with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
+var result = client.IgnoreHeaders(Guid.NewGuid(), body);
+]]></code>
+</example>
+    </member>
+    <member name="IgnoreHeadersAsync(Guid,RequestContent,RequestContext)">
+<example>
+This sample shows how to call IgnoreHeadersAsync with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = new {
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+};
+
+Response response = await client.IgnoreHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="IgnoreHeaders(Guid,RequestContent,RequestContext)">
+<example>
+This sample shows how to call IgnoreHeaders with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = new {
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+};
+
+Response response = client.IgnoreHeaders(Guid.NewGuid(), RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.

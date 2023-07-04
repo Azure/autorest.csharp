@@ -18,20 +18,22 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="FirstTestTypeSpecClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions> AddFirstTestTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions> AddFirstTestTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint, string clientRequestId, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions>((options) => new FirstTestTypeSpecClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions>((options) => new FirstTestTypeSpecClient(endpoint, clientRequestId, credential, options));
         }
 
         /// <summary> Registers a <see cref="FirstTestTypeSpecClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions> AddFirstTestTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        /// <param name="clientRequestId"> The request id. </param>
+        public static IAzureClientBuilder<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions> AddFirstTestTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint, string clientRequestId)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions>((options, cred) => new FirstTestTypeSpecClient(endpoint, cred, options));
+            return builder.RegisterClientFactory<FirstTestTypeSpecClient, FirstTestTypeSpecClientOptions>((options, cred) => new FirstTestTypeSpecClient(endpoint, clientRequestId, cred, options));
         }
 
         /// <summary> Registers a <see cref="FirstTestTypeSpecClient"/> instance. </summary>

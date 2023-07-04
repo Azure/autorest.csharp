@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter KeyAuth = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, ValidationType.None, null);
         public static readonly Parameter TokenAuth = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
         public static readonly Parameter Endpoint = new("endpoint", "Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri);
+        public static readonly Parameter ClientRequestId = new("clientRequestId", "The request id.", new CSharpType(typeof(string)), null, ValidationType.None, null);
 
         public static readonly Parameter PageSizeHint = new("pageSizeHint", "The number of items per <see cref=\"Page{T}\"/> that should be requested (from service operations that support it). It's not guaranteed that the value will be respected.", new CSharpType(typeof(int), true), null, ValidationType.None, null);
         public static readonly Parameter NextLink = new("nextLink", "Continuation token", typeof(string), null, ValidationType.None, null);

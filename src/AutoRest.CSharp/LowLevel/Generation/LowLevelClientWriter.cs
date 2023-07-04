@@ -231,6 +231,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
+                var clientRequestIdParameter = signature.Parameters.FirstOrDefault(p => p.Name == "clientRequestId");
+                if (clientRequestIdParameter != null)
+                {
+                    perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{AzureClientRequestIdPolicy.Shared}}";
+                }
+
                 _writer.Line($"{_client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
 
                 foreach (var parameter in _client.Parameters)
