@@ -264,15 +264,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     else
                     {
-                        // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
-                        if (TypeFactory.IsList(convenienceParameter.Type) && convenienceParameter.RequestLocation == RequestLocation.Body)
-                        {
-                            parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
-                        }
-                        else
-                        {
-                            parameterList.Add(convenienceParameter);
-                        }
+                        parameterList.Add(convenienceParameter);
                         if (protocolParameter != null)
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
@@ -348,14 +340,20 @@ namespace AutoRest.CSharp.Output.Models
                             : requestConditionSerializationFormat;
 
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
+                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
-                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                    case { IsApiVersion: true, DefaultValue: not null }:
+                        optionalRequestParameters.Add(operationParameter);
                         break;
-                    case { IsRequired: true, DefaultValue: null }:
-                        requiredRequestParameters.Add(operationParameter);
+                    case { IsRequired: true }:
+                        if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
+                        {
+                            optionalRequestParameters.Add(operationParameter);
+                        } else
+                        {
+                            requiredRequestParameters.Add(operationParameter);
+                        }
                         break;
                     default:
                         optionalRequestParameters.Add(operationParameter);
@@ -510,7 +508,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
                 : _typeFactory.CreateType(operationParameter.Type);
 
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
+            return Parameter.FromInputParameter(operationParameter, type, _typeFactory, Operation.KeepClientDefaultValue);
         }
 
         private void AddReference(string nameInRequest, InputParameter? operationParameter, Parameter parameter, SerializationFormat serializationFormat)
