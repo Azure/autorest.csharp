@@ -103,8 +103,10 @@ namespace AutoRest.CSharp.Common.Input
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
-                GenerateConvenienceMethod: false);
-
+                GenerateConvenienceMethod: false)
+            {
+                KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
+            };
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
         }
