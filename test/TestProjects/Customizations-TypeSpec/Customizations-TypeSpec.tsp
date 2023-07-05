@@ -106,6 +106,13 @@ enum EnumToBeMadeExtensible {
     ExThree: "3"
 }
 
+@doc("A normal enum")
+enum NormalEnum
+{
+    A: "a",
+    B: "b"
+}
+
 @doc("Root RoundTrip model to reference all other types to ensure generation")
 model RootModel {  
   @doc("ModelToMakeInternal")
@@ -131,6 +138,9 @@ model RootModel {
 
   @doc("ModelToAddAdditionalSerializableProperty")
   propertyModelToAddAdditionalSerializableProperty?: ModelToAddAdditionalSerializableProperty;
+
+  @doc("Enum type property to move to customization code")
+  propertyToMoveToCustomization?: NormalEnum;
 }
 
 @route("/inputToRoundTrip")

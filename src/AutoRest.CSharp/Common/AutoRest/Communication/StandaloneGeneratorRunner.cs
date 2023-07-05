@@ -258,6 +258,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
             root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
+            root.TryGetProperty(nameof(Configuration.Options.MethodsToKeepClientDefaultValue), out var methodsToKeepClientDefaultValueElement);
+            var methodsToKeepClientDefaultValue = Configuration.DeserializeArray(methodsToKeepClientDefaultValueElement);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
@@ -286,6 +288,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
                 ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
+                methodsToKeepClientDefaultValue,
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
             );

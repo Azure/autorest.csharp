@@ -46,14 +46,14 @@
         "lodash.isequal": "^4.5.0",
         "mocha": "~9.2.0",
         "rimraf": "~3.0.2",
-        "typescript": "~4.9.4"
+        "typescript": "~5.1.5"
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",
         "@azure-tools/typespec-autorest": "0.31.0",
         "@azure-tools/typespec-azure-core": "0.31.0",
         "@azure-tools/typespec-client-generator-core": "0.31.0",
-        "@typespec/compiler": "0.45.0",
+        "@typespec/compiler": "0.45.2",
         "@typespec/eslint-config-typespec": "0.7.0",
         "@typespec/eslint-plugin": "0.45.0",
         "@typespec/http": "0.45.0",
@@ -62,7 +62,7 @@
         "@typespec/versioning": "0.45.0",
         "fs-extra": "^10.1.0",
         "js-yaml": "^4.1.0",
-        "json-serialize-refs": "^0.1.0-0",
+        "json-serialize-refs": "0.1.0-0",
         "winston": "^3.8.2"
     }
 }

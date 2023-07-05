@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var body = new object();
+            var body = new string[]
+            {
+    "<null>"
+            };
             var result = await client.PutAsync(body);
         }
     }

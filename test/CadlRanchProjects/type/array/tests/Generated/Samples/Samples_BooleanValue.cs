@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            var body = new object();
+            var body = new bool[]
+            {
+    true
+            };
             var result = await client.PutAsync(body);
         }
     }

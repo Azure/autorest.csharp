@@ -41,6 +41,7 @@ var input = new RootModel()
         AdditionalSerializableProperty = 1234,
         AdditionalNullableSerializableProperty = 1234,
     },
+    PropertyToMoveToCustomization = NormalEnum.A,
 };
 var result = await client.RoundTripAsync(input);
 ]]></code>
@@ -86,6 +87,7 @@ var input = new RootModel()
         AdditionalSerializableProperty = 1234,
         AdditionalNullableSerializableProperty = 1234,
     },
+    PropertyToMoveToCustomization = NormalEnum.A,
 };
 var result = client.RoundTrip(input);
 ]]></code>
@@ -151,6 +153,7 @@ var data = new {
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
     },
+    propertyToMoveToCustomization = "a",
 };
 
 Response response = await client.RoundTripAsync(RequestContent.Create(data));
@@ -176,6 +179,7 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 ]]></code>
 </example>
     </member>
@@ -239,6 +243,7 @@ var data = new {
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
     },
+    propertyToMoveToCustomization = "a",
 };
 
 Response response = client.RoundTrip(RequestContent.Create(data));
@@ -264,6 +269,7 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 ]]></code>
 </example>
     </member>

@@ -3,4 +3,5 @@
 
 export interface InputApiKeyAuth {
     Name: string;
+    Prefix?: string;
 }

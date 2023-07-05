@@ -143,7 +143,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                                   ].indexOf(item) < 0
                           )
                       )
-                    : undefined
+                    : undefined,
+                "methods-to-keep-client-default-value":
+                    options["methods-to-keep-client-default-value"]
             } as Configuration;
 
             await program.host.writeFile(

@@ -409,7 +409,7 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -420,29 +420,29 @@ namespace BodyAndPath_LowLevel
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default value is "value". </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
-        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item1"/>, <paramref name="item4"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,string,RequestContent,string,RequestContext)']/*" />
+        public virtual async Task<Response> UpdateAsync(string item3, string item2, string item1, string item4, RequestContent content, string item5 = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
+            Argument.AssertNotNull(item1, nameof(item1));
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item1, item4, content, item5, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -453,7 +453,7 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -464,29 +464,29 @@ namespace BodyAndPath_LowLevel
         /// </summary>
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. The default value is "value". </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
-        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, <paramref name="content"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item1"/>, <paramref name="item4"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,RequestContent,string,string,RequestContext)']/*" />
-        public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,string,RequestContent,string,RequestContext)']/*" />
+        public virtual Response Update(string item3, string item2, string item1, string item4, RequestContent content, string item5 = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
+            Argument.AssertNotNull(item1, nameof(item1));
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item1, item4, content, item5, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -576,7 +576,7 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateUpdateRequest(string item3, string item2, string item4, RequestContent content, string item5, string item1, RequestContext context)
+        internal HttpMessage CreateUpdateRequest(string item3, string item2, string item1, string item4, RequestContent content, string item5, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -588,12 +588,12 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath("/item4/", false);
             uri.AppendPath(item2, true);
             uri.AppendPath("/item1", false);
+            uri.AppendQuery("item1", item1, true);
             uri.AppendQuery("item4", item4, true);
             if (item5 != null)
             {
                 uri.AppendQuery("item5", item5, true);
             }
-            uri.AppendQuery("item1", item1, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
