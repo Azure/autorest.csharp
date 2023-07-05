@@ -96,5 +96,12 @@ namespace CadlRanchProjects.Tests
             //Assert.IsNotInstanceOf<Shark>(response.Value);
             Assert.AreEqual(1, response.Value.Age);
         });
+
+
+        [Test]
+        public void DuplicatedDiscriminatorDeclaration()
+        {
+            Assert.AreEqual(typeof(Turtle), typeof(SeaTurtle).BaseType);
+        }
     }
 }

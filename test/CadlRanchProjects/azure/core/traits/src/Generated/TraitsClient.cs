@@ -320,7 +320,7 @@ namespace _Specs_.Azure.Core.Traits
             }
             if (repeatabilityFirstSent != null)
             {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
