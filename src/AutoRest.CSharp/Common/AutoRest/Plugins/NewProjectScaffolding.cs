@@ -63,7 +63,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private async Task WriteServiceDirectoryFiles()
         {
             //TODO handle existing ci where multiple projects are in the same service directory
-            await File.WriteAllBytesAsync(Path.Combine(_serviceDirectory, "ci.yml"), Encoding.ASCII.GetBytes(GetCiYml()));
+            string ciYmlFile = Path.Combine(_serviceDirectory, "ci.yml");
+            if (!File.Exists(ciYmlFile))
+                await File.WriteAllBytesAsync(ciYmlFile, Encoding.ASCII.GetBytes(GetCiYml()));
         }
 
         private async Task WriteTestFiles()
