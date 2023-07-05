@@ -8,5 +8,5 @@ using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal record InputClientExample(InputClient Client, IReadOnlyList<InputOperationExample> Operations);
+    internal record InputClientExample(InputClient Client, IReadOnlyList<InputOperationExample> Operations, IReadOnlyList<InputParameterExample> Parameters);
 }

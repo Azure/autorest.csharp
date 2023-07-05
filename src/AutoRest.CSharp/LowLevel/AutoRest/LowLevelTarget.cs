@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
 
-                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
+                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client, library.GetSamples(client));
                 exampleCompileCheckWriter.Write();
                 var exampleCheckerFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
                 project.AddGeneratedFile(exampleCheckerFilename, exampleCompileCheckWriter.ToString());

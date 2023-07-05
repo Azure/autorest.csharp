@@ -20,7 +20,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     exampleOperations.Add(exampleOperation);
                 }
 
-                yield return new InputClientExample(client, exampleOperations);
+                var exampleClientParameters = new List<InputParameterExample>();
+                foreach (var clientParameter in client.Parameters)
+                {
+                    // client parameters should always be primitive types, therefore it does not really need a dictionary for visited models
+                    var parameterExample = BuildExampleParameter(clientParameter, new Dictionary<InputType, InputExampleValue>());
+                    exampleClientParameters.Add(parameterExample);
+                }
+
+                yield return new InputClientExample(client, exampleOperations, exampleClientParameters);
             }
         }
 
@@ -44,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             // if the parameter is constant, we just put the constant into the example value instead of mocking a new one
             if (parameter.Kind == InputOperationParameterKind.Constant)
             {
-                var value = InputExampleValue.FromRawValue(parameter.Type, parameter.DefaultValue!.Value!);
+                var value = InputExampleValue.FromRawValue(parameter.Type, parameter.DefaultValue!.Value);
                 return new(parameter, value);
             }
 
@@ -52,6 +60,12 @@ namespace AutoRest.CSharp.Common.Input.Examples
             if (parameter.IsEndpoint)
             {
                 var value = InputExampleValue.FromRawValue(parameter.Type, GetEndpoint());
+                return new(parameter, value);
+            }
+
+            if (parameter.DefaultValue != null)
+            {
+                var value = InputExampleValue.FromRawValue(parameter.Type, parameter.DefaultValue.Value);
                 return new(parameter, value);
             }
 
@@ -145,7 +159,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private static string GetEndpoint()
         {
-            return "https://my-service.azure.com";
+            return "<https://my-service.azure.com>";
         }
     }
 }

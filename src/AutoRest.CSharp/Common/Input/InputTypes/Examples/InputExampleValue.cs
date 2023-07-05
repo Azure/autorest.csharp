@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
     {
         public static InputExampleValue Null(InputType type) => new(type, null, null, null);
 
-        public static InputExampleValue FromRawValue(InputType type, object rawValue) => new(type, rawValue, null, null);
+        public static InputExampleValue FromRawValue(InputType type, object? rawValue) => new(type, rawValue, null, null);
 
         public static InputExampleValue FromList(InputType type, IReadOnlyList<InputExampleValue> values) => new(type, null, values, null);
 

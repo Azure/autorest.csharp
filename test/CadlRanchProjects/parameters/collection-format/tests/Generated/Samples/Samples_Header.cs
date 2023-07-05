@@ -5,14 +5,8 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using Parameters.CollectionFormat;
 
@@ -22,42 +16,26 @@ namespace Parameters.CollectionFormat.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv()
-        {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
-
-            Response response = client.Csv(new string[] { "<colors>" });
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Csv_AllParameters()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new string[] { "<colors>" });
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_Async()
-        {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
-
-            Response response = await client.CsvAsync(new string[] { "<colors>" });
-            Console.WriteLine(response.Status);
+            Response response = client.Csv(new string[]
+            {
+"<colors>"
+            });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Csv_AllParameters_Async()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new string[] { "<colors>" });
-            Console.WriteLine(response.Status);
+            Response response = await client.CsvAsync(new string[]
+            {
+"<colors>"
+            });
         }
     }
 }

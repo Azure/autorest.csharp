@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, IReadOnlyDictionary<InputOperation, InputOperationExample> operationExamples, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -67,18 +67,7 @@ namespace AutoRest.CSharp.Output.Models
             _operations = operations;
             _sourceInputModel = sourceInputModel;
 
-            _operationExamples = operationExamples;
-
             SubClients = Array.Empty<LowLevelClient>();
-        }
-
-        private readonly IReadOnlyDictionary<InputOperation, InputOperationExample> _operationExamples;
-
-        // TODO -- maybe move this method into a type provider of samples?
-        public InputOperationExample? GetOperationExample(LowLevelClientMethod method)
-        {
-            // TODO
-            return null;
         }
 
         private IReadOnlyList<Parameter>? _parameters;

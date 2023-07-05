@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Samples.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, IEnumerable<InputClientExample> inputClientExamples, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
@@ -38,9 +39,40 @@ namespace AutoRest.CSharp.Output.Models.Types
             _enums = enums;
             _models = models;
             _isTspInput = isTspInput;
-             _sourceInputModel = sourceInputModel;
+            _sourceInputModel = sourceInputModel;
             RestClients = restClients;
             ClientOptions = clientOptions;
+
+            _inputClientExamples = inputClientExamples;
+            _inputClientParameterExamples = inputClientExamples.SelectMany(c => c.Parameters);
+            _inputOperationExamples = inputClientExamples.SelectMany(c => c.Operations)
+                .ToDictionary(e => e.Operation, e => e);
+        }
+
+        private readonly IEnumerable<InputClientExample> _inputClientExamples;
+        private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
+        private readonly IReadOnlyDictionary<InputOperation, InputOperationExample> _inputOperationExamples;
+
+        private readonly Dictionary<LowLevelClientMethod, DpgOperationSample> _inputOperationSampleCache = new();
+        public IEnumerable<DpgOperationSample> GetSamples(LowLevelClient client)
+        {
+            foreach (var method in client.ClientMethods)
+            {
+                if (_inputOperationSampleCache.TryGetValue(method, out var sample))
+                {
+                    // return the sample if we get it in the cache
+                    yield return sample;
+                }
+                else
+                {
+                    // build the sample and add it into the cache then return it
+                    // TODO -- should we return nothing if inputOperation is not in the dictionary?
+                    var inputOperation = method.RequestMethod.Operation;
+                    sample = new DpgOperationSample(client, method, _inputClientParameterExamples, _inputOperationExamples[inputOperation]);
+                    _inputOperationSampleCache.Add(method, sample);
+                    yield return sample;
+                }
+            }
         }
 
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;

@@ -2,23 +2,29 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.LowLevel.Generation.Extensions;
+using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Samples.Models;
+using Azure;
+using Azure.Core;
 using NUnit.Framework;
 
 namespace AutoRest.CSharp.LowLevel.Generation
 {
     internal class ExampleCompileCheckWriter
     {
+        private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
+        private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
+
         private MethodSignature GetExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
             name,
             null,
@@ -32,31 +38,48 @@ namespace AutoRest.CSharp.LowLevel.Generation
         private LowLevelClient _client;
         private CodeWriter _writer;
         private LowLevelExampleComposer _exampleComposer;
+        private readonly IEnumerable<DpgOperationSample> _operationSamples;
 
-        public ExampleCompileCheckWriter(LowLevelClient client)
+        public ExampleCompileCheckWriter(LowLevelClient client, IEnumerable<DpgOperationSample> operationSamples)
         {
             _client = client;
             _writer = new CodeWriter();
             _exampleComposer = new LowLevelExampleComposer(_client);
+            _operationSamples = operationSamples;
         }
 
         public void Write()
         {
-            //TODO: Once the code snippet composer uses CodeWriter these won't be needed
-            _writer.UseNamespace("Azure");
-            _writer.UseNamespace("Azure.Core");
-            _writer.UseNamespace("Azure.Identity");
-            _writer.UseNamespace("System");
-            _writer.UseNamespace("System.Collections.Generic");
-            _writer.UseNamespace("System.IO");
-            _writer.UseNamespace("System.Text.Json");
-            if (Configuration.ModelNamespace && _client.HasConvenienceMethods)
-                _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
+            ////TODO: Once the code snippet composer uses CodeWriter these won't be needed
+            //_writer.UseNamespace("Azure");
+            //_writer.UseNamespace("Azure.Core");
+            //_writer.UseNamespace("Azure.Identity");
+            //_writer.UseNamespace("System");
+            //_writer.UseNamespace("System.Collections.Generic");
+            //_writer.UseNamespace("System.IO");
+            //_writer.UseNamespace("System.Text.Json");
+            //if (Configuration.ModelNamespace && _client.HasConvenienceMethods)
+            //    _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
                 {
+                    foreach (var sample in _operationSamples)
+                    {
+                        var method = sample.Method;
+                        if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                            !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
+                            !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
+                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
+                        {
+                            bool writeShortVersion = ShouldGenerateShortVersion(method);
+
+                            WriteTestMethod(sample, writeShortVersion, false);
+                            WriteTestMethod(sample, writeShortVersion, true);
+                        }
+                    }
+#if false
                     foreach (var method in _client.ClientMethods)
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
@@ -74,18 +97,195 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             if (writeShortVersion)
                                 WriteTestCompilation(method, true, false);
                             WriteTestCompilation(method, true, true);
-
                         }
 
-                        if (method.ConvenienceMethod is not null &&
-                            !method.ConvenienceMethod.IsDeprecatedForExamples() &&
-                            method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
-                            !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
-                            WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
+                        //if (method.ConvenienceMethod is not null &&
+                        //    !method.ConvenienceMethod.IsDeprecatedForExamples() &&
+                        //    method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                        //    (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
+                        //    !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
+                        //    WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
+#endif
                 }
             }
+        }
+
+        // TODO -- maybe change this DpgOperationSample to DpgProtocolMethodSample
+        private void WriteTestMethod(DpgOperationSample sample, bool useAllParameters, bool isAsync)
+        {
+            using (_writer.WriteMethodDeclaration(sample.GetExampleMethodSignature(true, isAsync)))
+            {
+                var clientVar = WriteGetClient(sample);
+
+                var response = WriteSampleOperation(sample, sample.Method.ProtocolMethodSignature.WithAsync(isAsync), clientVar, useAllParameters, isAsync);
+            }
+
+            _writer.Line();
+        }
+
+        private CodeWriterDeclaration WriteGetClient(DpgOperationSample sample)
+        {
+            var clientConstructor = sample.ClientInvocationChain.First();
+            // handle authentication related parameters
+            var parameterDeclarations = new Dictionary<Parameter, CodeWriterDeclaration>();
+            foreach (var parameter in clientConstructor.Parameters)
+            {
+                var declaration = new CodeWriterDeclaration(parameter.Name);
+                if (parameter.Type.EqualsIgnoreNullable(KeyAuthType))
+                {
+                    _writer.Line($"{typeof(AzureKeyCredential)} {declaration:D} = new {typeof(AzureKeyCredential)}({"<key>":L});");
+                    parameterDeclarations.Add(parameter, declaration);
+                }
+                else if (parameter.Type.EqualsIgnoreNullable(TokenAuthType))
+                {
+                    // we cannot use typeof(DefaultAzureCredential) here because autorest.csharp does not use `Azure.Identity` as a dependency
+                    _writer.UseNamespace("Azure.Identity");
+                    _writer.Line($"{typeof(TokenCredential)} {declaration:D} = new DefaultAzureCredential();");
+                    parameterDeclarations.Add(parameter, declaration);
+                }
+                else if (parameter.Name == KnownParameters.Endpoint.Name && parameter.Type.EqualsIgnoreNullable(KnownParameters.Endpoint.Type))
+                {
+                    // randomly find an endpoint in the list as its value
+                    var exampleValue = sample.GetEndpointValue();
+                    _writer.Append($"{parameter.Type} {declaration:D} = ")
+                        .AppendExampleParameterValue(parameter, new(parameter, exampleValue))
+                        .LineRaw(";");
+                    parameterDeclarations.Add(parameter, declaration);
+                }
+            }
+
+            var clientVar = new CodeWriterDeclaration("client");
+            _writer.Append($"{sample.Client.Type} {clientVar:D} = ");
+            foreach (var method in sample.ClientInvocationChain)
+            {
+                // write the method invocation
+                if (method is ConstructorSignature ctor)
+                    _writer.Append($"new {clientConstructor.Name}(");
+                else
+                    _writer.Append($"{method.Name}(");
+
+                // write the parameters
+                foreach (var parameter in method.Parameters)
+                {
+                    // if it is handled above
+                    if (parameterDeclarations.TryGetValue(parameter, out var declaration))
+                    {
+                        _writer.Append($"{declaration:I},");
+                    }
+                    else if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
+                    {
+                        _writer.AppendExampleParameterValue(parameter, exampleValue)
+                            .AppendRaw(",");
+                    }
+                    else
+                    {
+                        _writer.Append($"default,");
+                    }
+                }
+                _writer.RemoveTrailingComma();
+                _writer.AppendRaw(").");
+            }
+            _writer.RemoveTrailingCharacter();
+            _writer.LineRaw(";");
+
+            _writer.Line();
+
+            return clientVar;
+        }
+
+        private CodeWriterDeclaration? WriteSampleOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync) => (sample.Method.LongRunning, sample.Method.PagingInfo) switch
+        {
+            (not null, not null) => WriteSampleLongRunningPageableOperation(sample, methodSignature, clientVar, useAllParameters, isAsync),
+            (not null, null) => WriteSampleLongRunningOperation(sample, methodSignature, clientVar, useAllParameters, isAsync),
+            (null, not null) => WriteSamplePageableOperation(sample, methodSignature, clientVar, useAllParameters, isAsync),
+            (null, null) => WriteSampleNormalOperation(sample, methodSignature, clientVar, useAllParameters, isAsync),
+        };
+
+        private CodeWriterDeclaration? WriteSampleLongRunningPageableOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        {
+            //var returnType = methodSignature.ReturnType!; // a return type of a client method is never null (at least the client method will return `Response`)
+            //var operation = new CodeWriterDeclaration("operation");
+            //_writer.Append($"{returnType} {operation} = ")
+            //    .AppendRawIf("await ", isAsync)
+            //    .Append($"{clientVar}.{methodSignature.Name}(");
+
+            //// write parameters
+
+            //_writer.LineRaw(");");
+
+            return null;
+        }
+
+        private CodeWriterDeclaration? WriteSampleLongRunningOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        {
+            return null;
+        }
+
+        private CodeWriterDeclaration? WriteSamplePageableOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        {
+            return null;
+        }
+
+        private CodeWriterDeclaration? WriteSampleNormalOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        {
+            var parameters = WriteOperationInvocationParameters(sample, methodSignature);
+
+            var returnType = GetReturnType(methodSignature);
+            var response = new CodeWriterDeclaration("response");
+
+            _writer.Append($"{returnType} {response:D} = ");
+            WriteOperationInvocation(clientVar, parameters, sample, methodSignature, isAsync, false);
+            _writer.LineRaw(";");
+            return response;
+        }
+
+        private Dictionary<string, CodeWriterDeclaration> WriteOperationInvocationParameters(DpgOperationSample sample, MethodSignature methodSignature)
+        {
+            var result = new Dictionary<string, CodeWriterDeclaration>();
+            foreach (var parameter in methodSignature.Parameters)
+            {
+                // some parameters are always inline
+                if (sample.IsInlineParameter(parameter))
+                    continue;
+
+                if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                {
+                    var declaration = new CodeWriterDeclaration(parameter.Name);
+                    _writer.Append($"{parameter.Type} {declaration:D} = ")
+                        .AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    result.Add(parameter.Name, declaration);
+                }
+            }
+
+            return result;
+        }
+
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterDeclaration> parameters, DpgOperationSample sample, MethodSignature methodSignature, bool isAsync, bool isPageable)
+        {
+            var methodName = methodSignature.Name;
+            _writer.AppendRawIf("await ", isAsync && !isPageable) // pageable operations do not need the await keyword
+                .Append($"{instanceVar}.{methodName}(");
+            // write parameters
+            foreach (var parameter in methodSignature.Parameters)
+            {
+                if (sample.IsInlineParameter(parameter))
+                {
+                    if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
+                    {
+                        _writer.AppendExampleParameterValue(parameter, exampleValue).AppendRaw(",");
+                    }
+                    continue;
+                }
+                if (parameters.TryGetValue(parameter.Name, out var declaration))
+                {
+                    _writer.AppendIf($"{parameter.Name}: ", parameter.DefaultValue != null)
+                        .Append($"{declaration:I}")
+                        .AppendRaw(",");
+                }
+            }
+            _writer.RemoveTrailingComma();
+            _writer.AppendRaw(")");
         }
 
         private void WriteConvenienceTestCompilation(ConvenienceMethod method, string methodName, bool isAsync, bool useAllParameters)
@@ -144,6 +344,18 @@ namespace AutoRest.CSharp.LowLevel.Generation
         }
 
         private string GetMethodName(string methodName, bool isAsync) => isAsync ? $"{methodName}Async" : methodName;
+
+        private static CSharpType GetReturnType(MethodSignature methodSignature)
+        {
+            // the return type of a client operation is never null
+            var returnType = methodSignature.ReturnType!;
+            if (returnType is { IsFrameworkType: true } frameworkType && frameworkType.FrameworkType.Equals(typeof(Task<>)))
+            {
+                return frameworkType.Arguments.Single();
+            }
+
+            return returnType;
+        }
 
         public override string ToString()
         {
