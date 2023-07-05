@@ -22,7 +22,7 @@ namespace Encode.Duration.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteNumberValue(Convert.ToInt32(item.ToString("%s")));
+                writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.fff")));
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -42,7 +42,7 @@ namespace Encode.Duration.Models
                     List<TimeSpan> array = new List<TimeSpan>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TimeSpan.FromSeconds(item.GetInt32()));
+                        array.Add(TimeSpan.FromSeconds(item.GetDouble()));
                     }
                     value = array;
                     continue;

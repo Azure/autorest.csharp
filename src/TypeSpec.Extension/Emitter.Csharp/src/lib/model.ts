@@ -183,7 +183,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                 case "ISO8601":
                     return InputTypeKind.DurationISO8601;
                 case "seconds":
-                    if (encode.type?.name === "float") {
+                    if (encode.type?.name === "float" || encode.type?.name === "float32") {
                         return InputTypeKind.DurationSecondsFloat;
                     } else {
                         return InputTypeKind.DurationSeconds;

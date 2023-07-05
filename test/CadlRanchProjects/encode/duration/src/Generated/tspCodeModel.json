@@ -121,7 +121,7 @@
       "ElementType": {
        "$id": "17",
        "Name": "Float32Duration",
-       "Kind": "DurationSeconds",
+       "Kind": "DurationSecondsFloat",
        "IsNullable": false
       },
       "IsNullable": false
