@@ -222,7 +222,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
                         if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name})}}";
+                            string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
