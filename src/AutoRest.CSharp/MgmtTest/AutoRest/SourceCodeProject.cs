@@ -46,6 +46,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             var genFolders = di.EnumerateDirectories(GeneratedCodeWorkspace.GeneratedFolder, SearchOption.AllDirectories).ToList();
 
             sourceCodeProject = GeneratedCodeWorkspace.AddDirectory(sourceCodeProject, sourceCodePath,
+                // Skip adding the generated sdk code to the project
                 skipPredicate: sourceFile => genFolders.Exists(f => sourceFile.StartsWith(f.FullName)));
 
             foreach (var sharedSourceFolder in sharedSourceFolders)
