@@ -606,7 +606,7 @@
     },
     "typespec-authentication/http/custom": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\http\\custom\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\http\\custom\\src\\Generated -n"
     },
     "typespec-authentication/oauth2": {
       "commandName": "Project",
@@ -630,7 +630,7 @@
     },
     "typespec-encode/datetime": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\datetime\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\datetime\\src\\Generated -n"
     },
     "typespec-encode/duration": {
       "commandName": "Project",
