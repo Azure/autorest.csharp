@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Custom.csproj" />
+    <ProjectReference Include="..\src\AuthenticationHttpCustom.csproj" />
   </ItemGroup>
 </Project>

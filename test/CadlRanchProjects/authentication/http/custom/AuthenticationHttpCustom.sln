@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Custom", "src\Custom.csproj", "{EF98FAE9-578D-4E0D-A11A-5FBB215EB50F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Custom", "src\AuthenticationHttpCustom.csproj", "{EF98FAE9-578D-4E0D-A11A-5FBB215EB50F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Custom.Tests", "tests\Custom.Tests.csproj", "{BC589A3B-0DFC-4379-93FD-E1675974D43B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Custom.Tests", "tests\AuthenticationHttpCustom.Tests.csproj", "{BC589A3B-0DFC-4379-93FD-E1675974D43B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
