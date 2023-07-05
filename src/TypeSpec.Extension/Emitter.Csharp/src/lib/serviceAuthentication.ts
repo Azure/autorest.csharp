@@ -37,7 +37,7 @@ export function processServiceAuthentication(
                         schemeOrApiKeyPrefix === "bearer"
                     ) {
                         logger.warn(
-                            `{scheme.scheme} auth method is currently not supported.`
+                            `{schemeOrApiKeyPrefix} auth method is currently not supported.`
                         );
                     } else {
                         auth.ApiKey = {
