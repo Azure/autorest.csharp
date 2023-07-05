@@ -488,7 +488,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
-            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
+            AddReference(name, inputParameter, protocolMethodParameter, inputParameter.SerializationFormat);
             if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;

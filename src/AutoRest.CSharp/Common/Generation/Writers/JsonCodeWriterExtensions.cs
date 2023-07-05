@@ -719,6 +719,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                if (format == SerializationFormat.DateTime_Unix)
+                {
+                    return $"{typeof(DateTimeOffset)}.FromUnixTimeSeconds({element}.GetInt64())";
+                }
+            }
+
             if (IsCustomJsonConverterAdded(frameworkType))
             {
                 return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{serializationType}>({element}.GetRawText())";

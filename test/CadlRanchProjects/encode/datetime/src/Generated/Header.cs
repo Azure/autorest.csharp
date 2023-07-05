@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Encode.Duration
+namespace Encode.Datetime
 {
     // Data plane generated sub-client.
     /// <summary> The Header sub-client. </summary>
@@ -47,7 +47,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -56,18 +56,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="value"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='DefaultAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> DefaultAsync(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='DefaultAsync(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> DefaultAsync(DateTimeOffset value, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDefaultRequest(duration, context);
+                using HttpMessage message = CreateDefaultRequest(value, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -87,18 +87,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="value"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Default(TimeSpan,RequestContext)']/*" />
-        public virtual Response Default(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Default(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response Default(DateTimeOffset value, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDefaultRequest(duration, context);
+                using HttpMessage message = CreateDefaultRequest(value, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,18 +118,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="value"> The DateTimeRFC3339 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601Async(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> Iso8601Async(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Rfc3339Async(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> Rfc3339Async(DateTimeOffset value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601");
+            using var scope = ClientDiagnostics.CreateScope("Header.Rfc3339");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601Request(duration, context);
+                using HttpMessage message = CreateRfc3339Request(value, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,18 +149,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="value"> The DateTimeRFC3339 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601(TimeSpan,RequestContext)']/*" />
-        public virtual Response Iso8601(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Rfc3339(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response Rfc3339(DateTimeOffset value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601");
+            using var scope = ClientDiagnostics.CreateScope("Header.Rfc3339");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601Request(duration, context);
+                using HttpMessage message = CreateRfc3339Request(value, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -171,7 +171,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,21 +180,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The Array to use. </param>
+        /// <param name="value"> The DateTimeRFC7231 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601ArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
-        public virtual async Task<Response> Iso8601ArrayAsync(IEnumerable<TimeSpan> duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Rfc7231Async(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> Rfc7231Async(DateTimeOffset value, RequestContext context = null)
         {
-            Argument.AssertNotNull(duration, nameof(duration));
-
-            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
+            using var scope = ClientDiagnostics.CreateScope("Header.Rfc7231");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601ArrayRequest(duration, context);
+                using HttpMessage message = CreateRfc7231Request(value, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -205,7 +202,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -214,21 +211,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The Array to use. </param>
+        /// <param name="value"> The DateTimeRFC7231 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601Array(IEnumerable{TimeSpan},RequestContext)']/*" />
-        public virtual Response Iso8601Array(IEnumerable<TimeSpan> duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Rfc7231(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response Rfc7231(DateTimeOffset value, RequestContext context = null)
         {
-            Argument.AssertNotNull(duration, nameof(duration));
-
-            using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
+            using var scope = ClientDiagnostics.CreateScope("Header.Rfc7231");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIso8601ArrayRequest(duration, context);
+                using HttpMessage message = CreateRfc7231Request(value, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -239,7 +233,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -248,18 +242,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSeconds to use. </param>
+        /// <param name="value"> The DateTimeUnix to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32SecondsAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> Int32SecondsAsync(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestampAsync(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> UnixTimestampAsync(DateTimeOffset value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.Int32Seconds");
+            using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestamp");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsRequest(duration, context);
+                using HttpMessage message = CreateUnixTimestampRequest(value, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -270,7 +264,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -279,18 +273,18 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSeconds to use. </param>
+        /// <param name="value"> The DateTimeUnix to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32Seconds(TimeSpan,RequestContext)']/*" />
-        public virtual Response Int32Seconds(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestamp(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response UnixTimestamp(DateTimeOffset value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.Int32Seconds");
+            using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestamp");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInt32SecondsRequest(duration, context);
+                using HttpMessage message = CreateUnixTimestampRequest(value, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -301,7 +295,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -310,18 +304,21 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSecondsFloat to use. </param>
+        /// <param name="value"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatSecondsAsync(TimeSpan,RequestContext)']/*" />
-        public virtual async Task<Response> FloatSecondsAsync(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(IEnumerable{DateTimeOffset},RequestContext)']/*" />
+        public virtual async Task<Response> UnixTimestampArrayAsync(IEnumerable<DateTimeOffset> value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.FloatSeconds");
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestampArray");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatSecondsRequest(duration, context);
+                using HttpMessage message = CreateUnixTimestampArrayRequest(value, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -332,7 +329,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] 
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -341,18 +338,21 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSecondsFloat to use. </param>
+        /// <param name="value"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatSeconds(TimeSpan,RequestContext)']/*" />
-        public virtual Response FloatSeconds(TimeSpan duration, RequestContext context = null)
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestampArray(IEnumerable{DateTimeOffset},RequestContext)']/*" />
+        public virtual Response UnixTimestampArray(IEnumerable<DateTimeOffset> value, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Header.FloatSeconds");
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestampArray");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatSecondsRequest(duration, context);
+                using HttpMessage message = CreateUnixTimestampArrayRequest(value, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -362,77 +362,77 @@ namespace Encode.Duration
             }
         }
 
-        internal HttpMessage CreateDefaultRequest(TimeSpan duration, RequestContext context)
+        internal HttpMessage CreateDefaultRequest(DateTimeOffset value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/header/default", false);
+            uri.AppendPath("/encode/datetime/header/default", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "P");
+            request.Headers.Add("value", value, "R");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateIso8601Request(TimeSpan duration, RequestContext context)
+        internal HttpMessage CreateRfc3339Request(DateTimeOffset value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/header/iso8601", false);
+            uri.AppendPath("/encode/datetime/header/rfc3339", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "P");
+            request.Headers.Add("value", value, "O");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateIso8601ArrayRequest(IEnumerable<TimeSpan> duration, RequestContext context)
+        internal HttpMessage CreateRfc7231Request(DateTimeOffset value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/header/iso8601-array", false);
+            uri.AppendPath("/encode/datetime/header/rfc7231", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.AddDelimited("duration", duration, ",", "P");
+            request.Headers.Add("value", value, "R");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInt32SecondsRequest(TimeSpan duration, RequestContext context)
+        internal HttpMessage CreateUnixTimestampRequest(DateTimeOffset value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/header/int32-seconds", false);
+            uri.AppendPath("/encode/datetime/header/unix-timestamp", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "%s");
+            request.Headers.Add("value", value, "U");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateFloatSecondsRequest(TimeSpan duration, RequestContext context)
+        internal HttpMessage CreateUnixTimestampArrayRequest(IEnumerable<DateTimeOffset> value, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/encode/duration/header/float-seconds", false);
+            uri.AppendPath("/encode/datetime/header/unix-timestamp-array", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "s\\.fff");
+            request.Headers.AddDelimited("value", value, ",", "U");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
