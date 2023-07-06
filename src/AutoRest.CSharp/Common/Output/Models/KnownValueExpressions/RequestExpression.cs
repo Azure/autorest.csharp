@@ -9,9 +9,9 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record RequestExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Request), Untyped)
     {
-        public RequestContentExpression Content => new(new MemberReference(Untyped, nameof(Request.Content)));
-        public RequestHeadersExpression Headers => new(new MemberReference(Untyped, nameof(Request.Headers)));
-        public ValueExpression Method => new MemberReference(Untyped, nameof(Request.Method));
-        public RawRequestUriBuilderExpression Uri => new(new MemberReference(Untyped, nameof(Request.Uri)));
+        public RequestContentExpression Content => new(new MemberExpression(Untyped, nameof(Request.Content)));
+        public RequestHeadersExpression Headers => new(new MemberExpression(Untyped, nameof(Request.Headers)));
+        public ValueExpression Method => new MemberExpression(Untyped, nameof(Request.Method));
+        public RawRequestUriBuilderExpression Uri => new(new MemberExpression(Untyped, nameof(Request.Uri)));
     }
 }

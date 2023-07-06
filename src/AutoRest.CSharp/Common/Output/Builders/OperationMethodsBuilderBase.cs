@@ -135,9 +135,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-            var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
 
-            return new LowLevelClientMethod(createRequestMethods, protocolMethods, convenienceMethods, responseClassifier, order, Operation, Operation.ExternalDocsUrl, requestBodyType, responseBodyType);
+            return new LowLevelClientMethod(createRequestMethods, protocolMethods, convenienceMethods, responseClassifier, order, Operation, requestBodyType, ResponseType, _statusCodeSwitchBuilder.PageItemType);
         }
 
         public virtual LegacyMethods BuildLegacy()
@@ -212,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
                 statements.Add(Assign(message.BufferResponse, False));
             }
 
-            statements.Add(Assign(request.Method, new MemberReference(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
+            statements.Add(Assign(request.Method, new MemberExpression(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
             statements.Add(Var("uri", New.RawRequestUriBuilder(), out uriBuilder));
 
             return statements;
@@ -579,7 +578,7 @@ namespace AutoRest.CSharp.Output.Models
                     var groupParameter = CreateMessageMethodParameters.Single(p => p.Name == groupedByParameterName);
                     var property = ((SchemaObjectType)groupParameter.Type.Implementation).GetPropertyForGroupedParameter(inputParameter.Name);
 
-                    return new MemberReference(NullConditional(groupParameter), property.Declaration.Name);
+                    return new MemberExpression(NullConditional(groupParameter), property.Declaration.Name);
 
                 default:
                     return outputParameter;

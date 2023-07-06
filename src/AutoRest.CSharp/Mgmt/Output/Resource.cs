@@ -473,7 +473,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return new MemberReference(resourceDataParameter, "Id");
+                return new MemberExpression(resourceDataParameter, "Id");
             }
         }
 

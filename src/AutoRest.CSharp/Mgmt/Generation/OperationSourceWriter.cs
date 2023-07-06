@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 yield return new DeclareVariableStatement(null, "data", deserializeExpression, out var dataVariable);
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
-                    yield return Assign(new MemberReference(dataVariable, "Id"), new MemberReference(_opSource.ArmClientField, "Id"));
+                    yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));
                 }
                 yield return Return(New.Instance(_opSource.Resource.Type, _opSource.ArmClientField, dataVariable));
             }

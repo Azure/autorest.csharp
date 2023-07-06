@@ -8,13 +8,19 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Models.Statements
 {
-    internal record ForeachStatement(CodeWriterDeclaration Item, ValueExpression Enumerable) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
+    internal record ForeachStatement(CodeWriterDeclaration Item, ValueExpression Enumerable, bool IsAsync = false) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
     {
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
         public ForeachStatement(string itemName, ValueExpression enumerable, out ValueExpression item)
             : this(new CodeWriterDeclaration(itemName), enumerable)
+        {
+            item = Item;
+        }
+
+        public ForeachStatement(string itemName, ValueExpression enumerable, bool isAsync, out ValueExpression item)
+            : this(new CodeWriterDeclaration(itemName), enumerable, isAsync)
         {
             item = Item;
         }

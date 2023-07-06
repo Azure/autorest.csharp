@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ResourceTypeExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ResourceType), Untyped)
     {
-        public StringExpression Namespace => new(new MemberReference(Untyped, nameof(ResourceType.Namespace)));
+        public StringExpression Namespace => new(new MemberExpression(Untyped, nameof(ResourceType.Namespace)));
 
         public StringExpression GetLastType() => new(new InvokeInstanceMethodExpression(Untyped, nameof(ResourceType.GetLastType)));
     }

@@ -9,8 +9,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record XElementExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XElement), Untyped)
     {
-        public XNameExpression Name => new(new MemberReference(Untyped, nameof(XElement.Name)));
-        public StringExpression Value => new(new MemberReference(Untyped, nameof(XElement.Value)));
+        public XNameExpression Name => new(new MemberExpression(Untyped, nameof(XElement.Name)));
+        public StringExpression Value => new(new MemberExpression(Untyped, nameof(XElement.Value)));
 
         public ValueExpression GetBytesFromBase64Value(string? format)
             => InvokeStaticMethodExpression.Extension(typeof(XElementExtensions), nameof(XElementExtensions.GetBytesFromBase64Value), Untyped, Snippets.Literal(format));

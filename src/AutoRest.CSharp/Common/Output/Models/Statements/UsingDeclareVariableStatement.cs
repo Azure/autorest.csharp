@@ -7,5 +7,12 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Models.Statements
 {
-    internal record UsingDeclareVariableStatement(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : DeclarationStatement;
+    internal record UsingDeclareVariableStatement(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : DeclarationStatement
+    {
+        public UsingDeclareVariableStatement(CSharpType? type, string name, ValueExpression value, out ValueExpression variable)
+            : this(type, new CodeWriterDeclaration(name), value)
+        {
+            variable = Name;
+        }
+    }
 }

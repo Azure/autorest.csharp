@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -25,8 +26,17 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(RequestContextExpression value, out RequestContextExpression variable)
             => Var(typeof(RequestContext), KnownParameters.RequestContext.Name, value, d => new RequestContextExpression(d), out variable);
 
+        public static DeclarationStatement Declare(string name, BinaryDataExpression value, out BinaryDataExpression variable)
+            => Var(typeof(HttpMessage), name, value, d => new BinaryDataExpression(d), out variable);
+
         public static DeclarationStatement Declare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingVar(typeof(HttpMessage), name, value, d => new HttpMessageExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
+            => Var(typeof(JsonElement), name, value, d => new JsonElementExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, ResponseExpression value, out ResponseExpression variable)
+            => Var(typeof(Response), name, value, d => new ResponseExpression(d), out variable);
 
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Var(typeof(StreamReader), name, value, d => new StreamReaderExpression(d), out variable);
@@ -52,6 +62,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, MultipartFormDataContentExpression value, out MultipartFormDataContentExpression variable)
             => Var(null, name, value, d => new MultipartFormDataContentExpression(d), out variable);
 
+        public static DeclarationStatement Var(string name, OperationExpression value, out OperationExpression variable)
+            => Var(null, name, value, d => new OperationExpression(d), out variable);
+
         public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
             => Var(null, name, value, d => new RawRequestUriBuilderExpression(d), out variable);
 
@@ -73,6 +86,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
             => Var(null, name, value, d => new XmlWriterContentExpression(d), out variable);
 
+        public static DeclarationStatement Var(string name, ValueExpression value, out ValueExpression variable)
+            => new DeclareVariableStatement(null, name, value, out variable);
 
         private static DeclarationStatement UsingVar<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
         {

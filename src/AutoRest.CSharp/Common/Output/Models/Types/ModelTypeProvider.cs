@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     result.Add(new JsonPropertySerialization(
                         declaredName.ToVariableName(),
-                        new MemberReference(null, declaredName),
+                        new MemberExpression(null, declaredName),
                         serializedName,
                         property.Declaration.Type,
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,

@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: MethodSignatureModifiers.Public,
                 Parameters: new[] { IsAsyncParameter },
-                Initializer: new ConstructorInitializer(true, new ValueExpression[]{ IsAsyncParameter, new MemberReference(typeof(RecordedTestMode), nameof(RecordedTestMode.Record))}));
+                Initializer: new ConstructorInitializer(true, new ValueExpression[]{ IsAsyncParameter, new MemberExpression(typeof(RecordedTestMode), nameof(RecordedTestMode.Record))}));
         }
     }
 }

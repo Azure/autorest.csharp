@@ -8,6 +8,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record XNameExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XName), Untyped)
     {
-        public StringExpression LocalName => new(new MemberReference(Untyped, nameof(XName.LocalName)));
+        public StringExpression LocalName => new(new MemberExpression(Untyped, nameof(XName.LocalName)));
     }
 }

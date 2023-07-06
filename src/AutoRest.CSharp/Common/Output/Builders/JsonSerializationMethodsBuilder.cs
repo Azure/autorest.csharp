@@ -177,8 +177,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
-                        var declareSerializeOptions = DeclareJsonSerializerOptions(out var serializeOptions);
-                        return new[]{declareSerializeOptions, InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value, serializeOptions)};
+                        return new[]
+                        {
+                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
+                            InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value, serializeOptions)
+                        };
                     }
 
                     return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
@@ -258,7 +261,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(Uri))
             {
-                return utf8JsonWriter.WriteStringValue(new MemberReference(value, nameof(Uri.AbsoluteUri)));
+                return utf8JsonWriter.WriteStringValue(new MemberExpression(value, nameof(Uri.AbsoluteUri)));
             }
 
             if (valueType == typeof(BinaryData))
@@ -593,7 +596,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
-                    var declareSerializeOptions = DeclareJsonSerializerOptions(out var serializeOptions);
+                    var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format, serializeOptions);
                     return declareSerializeOptions;
 
@@ -717,7 +720,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (targetType.IsNullable)
             {
-                return new MemberReference(variable.Declaration, "Value");
+                return new MemberExpression(variable.Declaration, "Value");
             }
 
             return variable.Declaration;
@@ -807,12 +810,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement InvokeJsonSerializerSerializeMethod(ValueExpression writer, ValueExpression value, ValueExpression options)
             => new InvokeStaticMethodStatement(typeof(JsonSerializer), nameof(JsonSerializer.Serialize), new[]{writer, value, options});
-
-        private static DeclareVariableStatement DeclareJsonSerializerOptions(out CodeWriterDeclaration serializeOptions)
-        {
-            serializeOptions = new CodeWriterDeclaration("serializeOptions");
-            return new DeclareVariableStatement(null, serializeOptions, New.JsonSerializerOptions());
-        }
 
         private static bool IsCustomJsonConverterAdded(Type type)
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));

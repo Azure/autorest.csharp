@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record JsonDocumentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(JsonDocument), Untyped)
     {
-        public JsonElementExpression RootElement => new(new MemberReference(Untyped, nameof(JsonDocument.RootElement)));
+        public JsonElementExpression RootElement => new(new MemberExpression(Untyped, nameof(JsonDocument.RootElement)));
 
         public static JsonDocumentExpression Parse(ValueExpression json)
             => new(new InvokeStaticMethodExpression(typeof(JsonDocument), nameof(JsonDocument.Parse), new[]{json}));

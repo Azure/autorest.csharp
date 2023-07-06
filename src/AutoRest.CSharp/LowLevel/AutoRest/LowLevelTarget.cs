@@ -37,12 +37,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var xmlDocWriter = new XmlDocWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
+                var exampleComposer = new LowLevelExampleComposer(client, library.TypeFactory);
+                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client, exampleComposer);
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
 
-                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
+                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client, exampleComposer);
                 exampleCompileCheckWriter.Write();
                 project.AddGeneratedFile($"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs", exampleCompileCheckWriter.ToString());
             }

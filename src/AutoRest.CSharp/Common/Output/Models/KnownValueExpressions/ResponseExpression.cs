@@ -10,9 +10,9 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Response), Untyped)
     {
-        public ValueExpression Status => new MemberReference(Untyped, nameof(Response.Status));
-        public BinaryDataExpression Content => new(new MemberReference(Untyped, nameof(Response.Content)));
-        public StringExpression ContentStream => new(new MemberReference(Untyped, nameof(Response.ContentStream)));
+        public ValueExpression Status => new MemberExpression(Untyped, nameof(Response.Status));
+        public BinaryDataExpression Content => new(new MemberExpression(Untyped, nameof(Response.Content)));
+        public StringExpression ContentStream => new(new MemberExpression(Untyped, nameof(Response.ContentStream)));
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));

@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
         public string PropertyName { get; }
 
         protected XmlPropertySerialization(string serializedName, ObjectTypeProperty property)
-            : base(property.Declaration.Name.ToVariableName(), new MemberReference(null, property.Declaration.Name), serializedName, property.Declaration.Type, property.ValueType, property.SchemaProperty?.Required ?? false, property.SchemaProperty?.ReadOnly ?? false)
+            : base(property.Declaration.Name.ToVariableName(), new MemberExpression(null, property.Declaration.Name), serializedName, property.Declaration.Type, property.ValueType, property.SchemaProperty?.Required ?? false, property.SchemaProperty?.ReadOnly ?? false)
         {
             PropertyName = property.Declaration.Name;
         }

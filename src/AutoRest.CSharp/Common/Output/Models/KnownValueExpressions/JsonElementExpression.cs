@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public EnumerableExpression EnumerateArray() => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateArray)));
         public EnumerableExpression EnumerateObject() => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateObject)));
+        public JsonElementExpression this[int index] =>new(new IndexerExpression(Untyped, Int(index)));
+        public JsonElementExpression GetProperty(string propertyName) => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.GetProperty), Literal(propertyName)));
 
         public ValueExpression CallClone() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.Clone));
         public ValueExpression GetBoolean() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.GetBoolean));
@@ -34,10 +36,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ValueExpression GetTimeSpan(string? format) => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetTimeSpan), Untyped, Literal(format));
 
         public BoolExpression ValueKindEqualsNull()
-            => new(new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));
+            => new(new BinaryOperatorExpression("==", new MemberExpression(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));
 
         public BoolExpression ValueKindEqualsString()
-            => new(new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String)));
+            => new(new BinaryOperatorExpression("==", new MemberExpression(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String)));
 
         public MethodBodyStatement WriteTo(ValueExpression writer) => new InvokeInstanceMethodStatement(Untyped, nameof(JsonElement.WriteTo), new[]{writer}, false);
 

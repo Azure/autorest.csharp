@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class CodeWriter
     {
+        private readonly bool _appendTypeNameOnly;
         private const int DefaultLength = 1024;
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
@@ -27,8 +28,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private char[] _builder;
         private int _length;
 
-        public CodeWriter()
+        public CodeWriter(bool appendTypeNameOnly = false)
         {
+            _appendTypeNameOnly = appendTypeNameOnly;
             _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
 
             _scopes = new Stack<CodeWriterScope>();
@@ -326,6 +328,10 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
+            }
+            else if (_appendTypeNameOnly)
+            {
+                AppendRaw(type.Name);
             }
             else
             {

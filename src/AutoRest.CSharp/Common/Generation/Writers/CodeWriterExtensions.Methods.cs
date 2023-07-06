@@ -101,8 +101,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ForeachStatement foreachStatement:
                     using (writer.AmbientScope())
                     {
+                        writer.AppendRawIf("await ", foreachStatement.IsAsync);
                         writer.Append($"foreach(var {foreachStatement.Item:D} in ");
-                        writer.WriteValueExpression(foreachStatement.Enumerable);
+                        writer.WriteValueExpression(foreachStatement.Enumerable switch
+                        {
+                            InvokeInstanceMethodExpression invokeInstance => invokeInstance with {CallAsAsync = false},
+                            InvokeStaticMethodExpression invokeStatic => invokeStatic with {CallAsAsync = false},
+                            _ => foreachStatement.Enumerable
+                        });
+                        //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
                         WriteMethodBodyStatement(writer, foreachStatement.Body.AsStatement());
@@ -170,6 +177,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(expression);
                     }
                     writer.LineRaw(";");
+                    break;
+
+                case EmptyLineStatement:
+                    writer.Line();
                     break;
 
                 case MethodBodyStatements(var statements):
@@ -242,13 +253,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.AppendRaw(" }");
                     break;
-                case MemberReference(var inner, var memberName):
+                case MemberExpression(var inner, var memberName):
                     if (inner is not null)
                     {
                         writer.WriteValueExpression(inner);
                         writer.AppendRaw(".");
                     }
                     writer.AppendRaw(memberName);
+                    break;
+                case IndexerExpression(var inner, var indexer):
+                    if (inner is not null)
+                    {
+                        writer.WriteValueExpression(inner);
+                    }
+                    writer.AppendRaw("[");
+                    writer.WriteValueExpression(indexer);
+                    writer.AppendRaw("]");
                     break;
                 case InvokeStaticMethodExpression { CallAsExtension: true } methodCall:
                     writer.AppendRawIf("await ", methodCall.CallAsAsync);
@@ -350,16 +370,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     break;
 
-                case NewInstanceExpression(var type, var arguments, var properties):
-                    writer.Append($"new {type}");
-                    if (arguments.Count > 0 || properties is not { Count: > 0 })
+                case ObjectInitializerExpression(var properties, var isInline):
+                    if (properties is not { Count: > 0 })
                     {
-                        WriteArguments(writer, arguments);
+                        writer.AppendRaw("{}");
+                        break;
                     }
 
-                    if (properties is { Count: > 0 })
+                    if (isInline)
                     {
-                        writer.AppendRaw(" { ");
+                        writer.AppendRaw("{");
                         foreach (var (name, value) in properties)
                         {
                             writer.Append($"{name} = ");
@@ -368,10 +388,84 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
 
                         writer.RemoveTrailingComma();
-                        writer.AppendRaw(" }");
+                        writer.AppendRaw("}");
+                    }
+                    else
+                    {
+                        writer.Line();
+                        writer.LineRaw("{");
+                        foreach (var (name, value) in properties)
+                        {
+                            writer.Append($"{name} = ");
+                            writer.WriteValueExpression(value);
+                            writer.LineRaw(",");
+                        }
+                        // Commented to minimize changes in generated code
+                        //writer.RemoveTrailingComma();
+                        //writer.Line();
+                        writer.AppendRaw("}");
+                    }
+                    break;
+
+                case NewInstanceExpression(var type, var arguments, var properties):
+                    writer.Append($"new {type}");
+                    if (arguments.Count > 0 || properties is not { Properties.Count: > 0 })
+                    {
+                        WriteArguments(writer, arguments);
+                    }
+
+                    if (properties is { Properties.Count: > 0 })
+                    {
+                        writer.WriteValueExpression(properties);
+                    }
+                    break;
+
+                case NewDictionaryExpression(var type, var values):
+                    writer.Append($"new {type}");
+                    if (values is not { Count: > 0 })
+                    {
+                        writer.AppendRaw("()");
+                    }
+                    else
+                    {
+                        writer.LineRaw("{");
+                        foreach (var (key, value) in values)
+                        {
+                            writer.AppendRaw("[");
+                            writer.WriteValueExpression(key);
+                            writer.AppendRaw("] = ");
+                            writer.WriteValueExpression(value);
+                            writer.LineRaw(",");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.Line();
+                        writer.AppendRaw("}");
                     }
 
                     break;
+
+                case NewArrayExpression(var type, var items):
+                    if (items is not { Count: > 0 })
+                    {
+                        writer.Append($"Array.Empty<{type}>()");
+                    }
+                    else
+                    {
+                        writer.Line($"new {type}[]{{");
+                        foreach (var item in items)
+                        {
+                            writer.WriteValueExpression(item);
+                            writer.LineRaw(",");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.Line();
+                        writer.AppendRaw("}");
+                    }
+
+                    break;
+
                 case NullConditionalExpression nullConditional:
                     writer.WriteValueExpression(nullConditional.Inner);
                     writer.AppendRaw("?");

@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
-            : base(string.Empty, new MemberReference(null, serializedName), serializedName, typeof(object), null, false, false)
+            : base(string.Empty, new MemberExpression(null, serializedName), serializedName, typeof(object), null, false, false)
         {
             PropertySerializations = propertySerializations;
         }

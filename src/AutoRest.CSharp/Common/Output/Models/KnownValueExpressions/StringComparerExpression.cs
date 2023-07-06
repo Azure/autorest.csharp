@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public BoolExpression Equals(StringExpression left, StringExpression right) => new(new InvokeInstanceMethodExpression(Untyped, nameof(StringComparer.Equals), left, right));
 
-        public static StringComparerExpression Ordinal => new(new MemberReference(new TypeReference(typeof(StringComparer)), nameof(StringComparer.Ordinal)));
-        public static StringComparerExpression OrdinalIgnoreCase => new(new MemberReference(new TypeReference(typeof(StringComparer)), nameof(StringComparer.OrdinalIgnoreCase)));
+        public static StringComparerExpression Ordinal => new(new MemberExpression(new TypeReference(typeof(StringComparer)), nameof(StringComparer.Ordinal)));
+        public static StringComparerExpression OrdinalIgnoreCase => new(new MemberExpression(new TypeReference(typeof(StringComparer)), nameof(StringComparer.OrdinalIgnoreCase)));
     }
 }

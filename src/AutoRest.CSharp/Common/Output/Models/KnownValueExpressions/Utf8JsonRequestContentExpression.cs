@@ -8,6 +8,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record Utf8JsonRequestContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Utf8JsonRequestContent), Untyped)
     {
-        public Utf8JsonWriterExpression JsonWriter { get; } = new(new MemberReference(Untyped, nameof(Utf8JsonRequestContent.JsonWriter)));
+        public Utf8JsonWriterExpression JsonWriter { get; } = new(new MemberExpression(Untyped, nameof(Utf8JsonRequestContent.JsonWriter)));
     }
 }

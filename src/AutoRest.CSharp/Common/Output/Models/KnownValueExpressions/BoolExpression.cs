@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
     internal sealed record KeyValuePairExpression(ValueExpression Untyped) : TypedValueExpression(typeof(KeyValuePair<,>), Untyped)
     {
-        public ValueExpression Key => new MemberReference(Untyped, nameof(KeyValuePair<string, string>.Key));
-        public ValueExpression Value => new MemberReference(Untyped, nameof(KeyValuePair<string, string>.Value));
+        public ValueExpression Key => new MemberExpression(Untyped, nameof(KeyValuePair<string, string>.Key));
+        public ValueExpression Value => new MemberExpression(Untyped, nameof(KeyValuePair<string, string>.Value));
     }
 }

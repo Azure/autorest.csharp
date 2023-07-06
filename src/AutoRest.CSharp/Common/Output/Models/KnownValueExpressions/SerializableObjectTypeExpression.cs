@@ -10,10 +10,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record SerializableObjectTypeExpression(SerializableObjectType ObjectType, ValueExpression Untyped) : TypedValueExpression(ObjectType.Type, Untyped)
     {
-        public static MemberReference FromResponseDelegate(SerializableObjectType serializableObjectType)
+        public static MemberExpression FromResponseDelegate(SerializableObjectType serializableObjectType)
             => new(new TypeReference(serializableObjectType.Type), "FromResponse");
 
-        public static MemberReference DeserializeDelegate(SerializableObjectType serializableObjectType)
+        public static MemberExpression DeserializeDelegate(SerializableObjectType serializableObjectType)
             => new(new TypeReference(serializableObjectType.Type), $"Deserialize{serializableObjectType.Declaration.Name}");
 
         public static SerializableObjectTypeExpression FromResponse(SerializableObjectType serializableObjectType, ResponseExpression response)

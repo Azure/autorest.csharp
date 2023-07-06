@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ArmResourceExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ArmResource), Untyped)
     {
-        public ResourceIdentifierExpression Id { get; } = new(new MemberReference(Untyped, nameof(ArmResource.Id)));
-        public ResourceIdentifierExpression Name { get; } = new(new MemberReference(Untyped, "Name"));
+        public ResourceIdentifierExpression Id { get; } = new(new MemberExpression(Untyped, nameof(ArmResource.Id)));
+        public ResourceIdentifierExpression Name { get; } = new(new MemberExpression(Untyped, "Name"));
     }
 }

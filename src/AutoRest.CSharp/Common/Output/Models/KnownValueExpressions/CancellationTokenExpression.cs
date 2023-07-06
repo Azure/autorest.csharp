@@ -11,6 +11,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     internal sealed record CancellationTokenExpression(ValueExpression Untyped) : TypedValueExpression(typeof(CancellationToken), Untyped)
     {
         public static CancellationTokenExpression KnownParameter { get; } = new(KnownParameters.CancellationTokenParameter);
-        public ValueExpression CanBeCanceled { get; } = new MemberReference(Untyped, nameof(CancellationToken.CanBeCanceled));
+        public ValueExpression CanBeCanceled { get; } = new MemberExpression(Untyped, nameof(CancellationToken.CanBeCanceled));
     }
 }

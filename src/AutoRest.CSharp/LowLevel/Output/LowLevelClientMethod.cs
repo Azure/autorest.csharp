@@ -9,7 +9,19 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(IReadOnlyList<Method> CreateRequest, IReadOnlyList<Method> Protocol, IReadOnlyList<Method> Convenience, ResponseClassifierType ResponseClassifier, int Order, InputOperation Operation, string? ExternalDocsUrl, InputType? RequestBodyType, InputType? ResponseBodyType);
+    internal record LowLevelClientMethod
+    (
+        IReadOnlyList<Method> CreateRequest,
+        IReadOnlyList<Method> Protocol,
+        IReadOnlyList<Method> Convenience,
+        ResponseClassifierType ResponseClassifier,
+
+        int Order,
+        InputOperation Operation,
+        InputType? RequestBodyType,
+        CSharpType? ResponseType,
+        CSharpType? PageItemType
+    );
 
     internal record LegacyMethods
     (

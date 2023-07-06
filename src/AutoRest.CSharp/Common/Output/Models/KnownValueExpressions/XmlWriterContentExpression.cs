@@ -8,6 +8,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record XmlWriterContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XmlWriterContent), Untyped)
     {
-        public XmlWriterExpression XmlWriter { get; }  = new(new MemberReference(Untyped, nameof(XmlWriterContent.XmlWriter)));
+        public XmlWriterExpression XmlWriter { get; }  = new(new MemberExpression(Untyped, nameof(XmlWriterContent.XmlWriter)));
     }
 }

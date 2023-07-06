@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record StringExpression(ValueExpression Untyped) : TypedValueExpression(typeof(string), Untyped)
     {
-        public ValueExpression Length => new MemberReference(Untyped, nameof(string.Length));
+        public ValueExpression Length => new MemberExpression(Untyped, nameof(string.Length));
 
         public static BoolExpression Equals(StringExpression left, StringExpression right, StringComparison comparisonType)
             => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Equals), new[]{ left, right, FrameworkEnumValue(comparisonType) }));

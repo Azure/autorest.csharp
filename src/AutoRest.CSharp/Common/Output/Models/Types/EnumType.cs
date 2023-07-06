@@ -117,8 +117,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var otherParameter = new Parameter("other", null, enumType.Type, null, Validation.None, null);
             var signature = new MethodSignature(nameof(Equals), null, null, Public, typeof(bool), null, new[]{otherParameter});
 
-            var value = new MemberReference(null, "_value");
-            var otherValue = new MemberReference(otherParameter, "_value");
+            var value = new MemberExpression(null, "_value");
+            var otherValue = new MemberExpression(otherParameter, "_value");
             var bodyExpression = enumType.IsStringValueType
                 ? StringExpression.Equals(new StringExpression(value), new StringExpression(otherValue), StringComparison.InvariantCultureIgnoreCase)
                 : new(new InvokeStaticMethodExpression(enumType.ValueType, nameof(object.Equals), new[]{ value, otherValue }));
@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static Method CreateExtensibleSerializationMethod(EnumType enumType)
         {
             var signature = new MethodSignature(GetSerializationMethodName(enumType), null, null, Internal, enumType.ValueType, null, Array.Empty<Parameter>());
-            return new Method(signature, new MemberReference(null, "_value"));
+            return new Method(signature, new MemberExpression(null, "_value"));
         }
 
         private static Method CreateSerializationMethod(EnumType enumType)

@@ -269,7 +269,7 @@ namespace AutoRest.CSharp.Output.Builders
 
                 yield return new JsonPropertySerialization(
                     parameter.Name,
-                    new MemberReference(null, objectProperty.Declaration.Name),
+                    new MemberExpression(null, objectProperty.Declaration.Name),
                     property.SerializedName,
                     objectProperty.Declaration.Type,
                     objectProperty.ValueType,

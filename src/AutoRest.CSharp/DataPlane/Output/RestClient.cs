@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             Fields = ClientFields.CreateForRestClient(restClientParameters);
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
-            var restClient = new MemberReference(null, "RestClient");
+            var restClient = new MemberExpression(null, "RestClient");
             Methods = clientMethodsBuilder
                 .Build(restClient, Fields, clientPrefix + GetClientSuffix(), Declaration.Namespace)
                 .Select(b => b.BuildLegacy())

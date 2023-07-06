@@ -18,6 +18,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Microsoft.CodeAnalysis;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -227,6 +228,9 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
 
         internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
+
+        internal static bool IsOperation(CSharpType type)
+            => type.IsFrameworkType && (type.FrameworkType == typeof(Operation) || type.FrameworkType == typeof(Operation<>));
 
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 

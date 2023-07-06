@@ -3,9 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Models;
@@ -34,11 +31,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
         private readonly CodeWriter _writer;
         private readonly LowLevelExampleComposer _exampleComposer;
 
-        public ExampleCompileCheckWriter(LowLevelClient client)
+        public ExampleCompileCheckWriter(LowLevelClient client, LowLevelExampleComposer exampleComposer)
         {
             _client = client;
             _writer = new CodeWriter();
-            _exampleComposer = new LowLevelExampleComposer(_client);
+            _exampleComposer = exampleComposer;
         }
 
         public void Write()
@@ -92,7 +89,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                                 (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
                                 !_client.IsMethodSuppressed(convenience.Signature))
                             {
-                                WriteConvenienceTestCompilation(method, (MethodSignature)convenience.Signature, true, false);
+                                WriteConvenienceTestCompilation((MethodSignature)convenience.Signature, true, false);
                             }
                         }
                     }
@@ -100,10 +97,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
         }
 
-        private void WriteConvenienceTestCompilation(LowLevelClientMethod clientMethod, MethodSignature signature, bool isAsync, bool useAllParameters)
+        private void WriteConvenienceTestCompilation(MethodSignature signature, bool isAsync, bool useAllParameters)
         {
-            var builder = new StringBuilder();
-            _exampleComposer.ComposeConvenienceMethodExample(clientMethod, signature, isAsync, false, builder);
+            var methodBody = _exampleComposer.ComposeConvenienceMethodExample(signature, isAsync);
             var testMethodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
@@ -116,7 +112,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
             using (_writer.WriteMethodDeclaration(ExampleMethodSignature(testMethodName, isAsync)))
             {
-                _writer.AppendRaw(builder.ToString());
+                _writer.WriteMethodBodyStatement(methodBody);
             }
             _writer.Line();
 
@@ -150,8 +146,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private void WriteProtocolTestCompilation(LowLevelClientMethod method, MethodSignature signature, bool isAsync, bool useAllParameters)
         {
-            var builder = new StringBuilder();
-            _exampleComposer.ComposeProtocolCodeSnippet(method, signature, isAsync, useAllParameters, builder);
+            var methodBody =_exampleComposer.ComposeProtocolCodeSnippet(method, signature, useAllParameters, isAsync).AsStatement();
             var methodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
@@ -163,7 +158,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
             using (_writer.WriteMethodDeclaration(ExampleMethodSignature(methodName, isAsync)))
             {
-                _writer.AppendRaw(builder.ToString());
+                _writer.WriteMethodBodyStatement(methodBody);
             }
             _writer.Line();
         }
