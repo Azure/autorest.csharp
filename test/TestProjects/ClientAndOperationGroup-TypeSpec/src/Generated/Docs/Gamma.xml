@@ -6,7 +6,7 @@
 This sample shows how to call FourAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
 Response response = await client.FourAsync();
 
@@ -20,7 +20,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call Four and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
 Response response = client.Four();
 
@@ -34,7 +34,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call FiveAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
 Response response = await client.FiveAsync();
 
@@ -48,7 +48,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call Five and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
 Response response = client.Five();
 

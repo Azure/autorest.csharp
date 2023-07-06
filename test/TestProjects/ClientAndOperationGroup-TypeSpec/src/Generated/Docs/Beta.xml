@@ -6,7 +6,7 @@
 This sample shows how to call TwoAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.TwoAsync();
 
@@ -20,7 +20,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call Two and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Two();
 
@@ -34,7 +34,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ThreeAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.ThreeAsync();
 
@@ -48,7 +48,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call Three and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Three();
 

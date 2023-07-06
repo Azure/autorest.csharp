@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Azure.RenameGetList;
+using RenameGetList;
 
 namespace Microsoft.Extensions.Azure
 {

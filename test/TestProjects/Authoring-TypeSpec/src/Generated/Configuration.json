@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Azure.Language.Authoring",
-  "LibraryName": "Azure.Language.Authoring",
+  "Namespace": "AuthoringTypeSpec",
+  "LibraryName": "AuthoringTypeSpec",
   "SharedSourceFolders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"

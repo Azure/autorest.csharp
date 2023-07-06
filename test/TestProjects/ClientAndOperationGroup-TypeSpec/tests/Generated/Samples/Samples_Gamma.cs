@@ -15,7 +15,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace Azure.ClientAndOperationGroupService.Samples
+namespace ClientAndOperationGroup.Samples
 {
     internal class Samples_Gamma
     {
@@ -24,7 +24,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Four()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Four();
 
@@ -37,7 +37,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Four_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Four();
 
@@ -50,7 +50,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Four_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync();
 
@@ -63,7 +63,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Four_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync();
 
@@ -76,7 +76,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Five()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Five();
 
@@ -89,7 +89,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Five_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Five();
 
@@ -102,7 +102,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Five_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync();
 
@@ -115,7 +115,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Five_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync();
 
