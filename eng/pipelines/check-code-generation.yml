@@ -13,6 +13,9 @@ parameters:
     type: object
     default: []
 
+variables:
+  NugetSecurityAnalysisWarningLevel: 'none'
+
 jobs:
 - job: ${{ parameters.name }}
   pool:
