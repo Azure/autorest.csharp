@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using Azure.Core;
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 if (options.IsNewProject)
                 {
                     // TODO - add support for DataFactoryElement lookup
-                    new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
+                    await new NewProjectScaffolding().Execute();
                 }
             }
             else if (File.Exists(codeModelInputPath))

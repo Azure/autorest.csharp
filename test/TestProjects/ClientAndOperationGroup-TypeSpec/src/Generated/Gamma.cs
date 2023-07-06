@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.ClientAndOperationGroupService
+namespace ClientAndOperationGroup
 {
     // Data plane generated sub-client.
     /// <summary> The Gamma sub-client. </summary>

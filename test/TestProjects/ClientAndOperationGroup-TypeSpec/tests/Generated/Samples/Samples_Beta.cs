@@ -15,7 +15,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace Azure.ClientAndOperationGroupService.Samples
+namespace ClientAndOperationGroup.Samples
 {
     internal class Samples_Beta
     {
@@ -24,7 +24,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Two()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Two(new RequestContext());
 
@@ -37,7 +37,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Two_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Two(new RequestContext());
 
@@ -50,7 +50,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Two_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(new RequestContext());
 
@@ -63,7 +63,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Two_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(new RequestContext());
 
@@ -76,7 +76,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Three()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Three(new RequestContext());
 
@@ -89,7 +89,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public void Example_Three_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Three(new RequestContext());
 
@@ -102,7 +102,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Three_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(new RequestContext());
 
@@ -115,7 +115,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
         public async Task Example_Three_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(new RequestContext());
 
