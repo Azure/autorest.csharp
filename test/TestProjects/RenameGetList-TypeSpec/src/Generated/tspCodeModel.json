@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Azure.RenameGetList",
+ "Name": "RenameGetList",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -40,7 +40,7 @@
   {
    "$id": "6",
    "Name": "Project",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -56,8 +56,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "9",
@@ -68,8 +67,7 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "10",
@@ -83,8 +81,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "12",
@@ -109,8 +106,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "16",
@@ -124,8 +120,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "18",
@@ -139,8 +134,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "20",
@@ -154,8 +148,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "22",
@@ -169,8 +162,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "24",
@@ -184,8 +176,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "26",
@@ -199,8 +190,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "28",
@@ -214,8 +204,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -241,8 +230,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "33",
@@ -256,15 +244,14 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "35",
    "Name": "Deployment",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -280,8 +267,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -307,8 +293,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "41",
@@ -322,8 +307,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   }

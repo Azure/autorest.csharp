@@ -5,8 +5,13 @@
       <example>
 This sample shows how to call TwoAsync and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
+>>>>>>> origin/feature/v3
 
 Response response = await client.TwoAsync();
 
@@ -18,8 +23,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Two and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
+>>>>>>> origin/feature/v3
 
 Response response = client.Two();
 
@@ -31,8 +41,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call ThreeAsync and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
+>>>>>>> origin/feature/v3
 
 Response response = await client.ThreeAsync();
 
@@ -44,8 +59,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Three and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
+>>>>>>> origin/feature/v3
 
 Response response = client.Three();
 

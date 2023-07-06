@@ -25,7 +25,7 @@ const pullingSuccessResponse = {
   status: "Succeeded"
 }
 
-Scenarios.LroBasic_CreateProject = passOnSuccess([
+Scenarios.LroBasicTypeSpec_CreateProject = passOnSuccess([
   mockapi.post("/projects", (req) => {
     req.expect.bodyEquals(projectCreationRequest);
     return {
@@ -42,7 +42,7 @@ Scenarios.LroBasic_CreateProject = passOnSuccess([
   })
 ]);
 
-Scenarios.LroBasic_UpdateProject = passOnSuccess([
+Scenarios.LroBasicTypeSpec_UpdateProject = passOnSuccess([
   mockapi.put("/projects/123", (req) => {
     req.expect.bodyEquals(projectUpdateRequest);
     return {

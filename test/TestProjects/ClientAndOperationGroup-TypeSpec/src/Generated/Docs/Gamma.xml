@@ -5,8 +5,13 @@
       <example>
 This sample shows how to call FourAsync and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
+>>>>>>> origin/feature/v3
 
 Response response = await client.FourAsync();
 
@@ -18,8 +23,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Four and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
+>>>>>>> origin/feature/v3
 
 Response response = client.Four();
 
@@ -31,8 +41,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call FiveAsync and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
+>>>>>>> origin/feature/v3
 
 Response response = await client.FiveAsync();
 
@@ -44,8 +59,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Five and parse the result.
 <code><![CDATA[
+<<<<<<< HEAD
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
+=======
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
+>>>>>>> origin/feature/v3
 
 Response response = client.Five();
 

@@ -163,6 +163,52 @@ Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="GetDuplicateAsync(CancellationToken)">
+<example>
+This sample shows how to call GetDuplicateAsync.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = await client.GetDuplicateAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetDuplicate(CancellationToken)">
+<example>
+This sample shows how to call GetDuplicate.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = client.GetDuplicate();
+]]></code>
+</example>
+    </member>
+    <member name="GetDuplicateAsync(RequestContext)">
+<example>
+This sample shows how to call GetDuplicateAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetDuplicateAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetDuplicate(RequestContext)">
+<example>
+This sample shows how to call GetDuplicate with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetDuplicate(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
     <member name="GetModelAsync(CancellationToken)">
       <example>
 This sample shows how to call GetModelAsync.

@@ -185,6 +185,19 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return true;
             }
 
+            // handle credentials
+            if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
+            {
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"new {typeof(AzureKeyCredential)}({"<key>":L})"));
+                return true;
+            }
+
+            if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
+            {
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"new DefaultAzureCredential()"));
+                return true;
+            }
+
             return false;
         }
 
@@ -202,8 +215,15 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsInlineParameter(Parameter parameter)
         {
+            // TODO -- maybe we should store it here?
             // temporarily only RequestContent is not inline parameter
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
+                return false;
+
+            if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
+                return false;
+
+            if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
                 return false;
 
             return true;

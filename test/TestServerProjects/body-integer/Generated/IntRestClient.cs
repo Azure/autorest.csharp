@@ -588,7 +588,7 @@ namespace body_integer
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -608,7 +608,7 @@ namespace body_integer
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -690,7 +690,7 @@ namespace body_integer
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -710,7 +710,7 @@ namespace body_integer
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -749,7 +749,7 @@ namespace body_integer
                         }
                         else
                         {
-                            value = document.RootElement.GetDateTimeOffset("U");
+                            value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -776,7 +776,7 @@ namespace body_integer
                         }
                         else
                         {
-                            value = document.RootElement.GetDateTimeOffset("U");
+                            value = DateTimeOffset.FromUnixTimeSeconds(document.RootElement.GetInt64());
                         }
                         return Response.FromValue(value, message.Response);
                     }

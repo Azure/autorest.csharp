@@ -27,7 +27,7 @@ using Azure.ClientGenerator.Core;
 )
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
-namespace Azure.Language.Authoring;
+namespace AuthoringTypeSpec;
 
 // Common Parameters
 

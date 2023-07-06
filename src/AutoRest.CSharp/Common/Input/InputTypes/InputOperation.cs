@@ -54,19 +54,19 @@ internal record InputOperation(
         GenerateConvenienceMethod: false)
     { }
 
-    private string? _cleanName;
-    public string CleanName
-    {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
+    //private string? _cleanName;
+    public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    //{
+    //    get
+    //    {
+    //        if (_cleanName == null)
+    //        {
+    //            _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    //        }
 
-            return _cleanName;
-        }
-    }
+    //        return _cleanName;
+    //    }
+    //}
 
     public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
 }

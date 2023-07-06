@@ -16,7 +16,7 @@ using Azure.Identity;
 using Azure.RenameGetList;
 using NUnit.Framework;
 
-namespace Azure.RenameGetList.Samples
+namespace RenameGetList.Samples
 {
     public class Samples_RenameGetListClient
     {

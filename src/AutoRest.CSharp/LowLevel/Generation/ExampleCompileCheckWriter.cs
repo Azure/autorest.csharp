@@ -271,13 +271,14 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 if (sample.IsInlineParameter(parameter))
                 {
+                    // this is inline parameter, we just append its value here
                     if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
                     {
                         _writer.AppendExampleParameterValue(parameter, exampleValue).AppendRaw(",");
                     }
                     continue;
                 }
-                if (parameters.TryGetValue(parameter.Name, out var declaration))
+                else if (parameters.TryGetValue(parameter.Name, out var declaration))
                 {
                     _writer.AppendIf($"{parameter.Name}: ", parameter.DefaultValue != null)
                         .Append($"{declaration:I}")
