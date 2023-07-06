@@ -8,7 +8,7 @@
 
   <!-- Reference the Client Library -->
   <ItemGroup>
-    <ProjectReference Include="..\src\Spread.csproj" />
+    <ProjectReference Include="..\src\SpreadTypeSpec.csproj" />
   </ItemGroup>
   
   <ItemGroup>

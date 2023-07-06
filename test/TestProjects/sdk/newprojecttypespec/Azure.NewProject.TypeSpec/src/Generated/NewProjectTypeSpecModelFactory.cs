@@ -12,7 +12,7 @@ using System.Linq;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class AzureNewProjectTypeSpecModelFactory
+    public static partial class NewProjectTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>

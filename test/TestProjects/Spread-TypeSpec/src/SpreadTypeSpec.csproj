@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the Spread client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation Spread for Azure Data Plane</AssemblyTitle>
+    <Description>This is the SpreadTypeSpec client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation SpreadTypeSpec for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>Spread</PackageTags>
+    <PackageTags>SpreadTypeSpec</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
