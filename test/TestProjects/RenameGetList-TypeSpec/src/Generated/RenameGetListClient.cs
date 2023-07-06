@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.RenameGetList
+namespace RenameGetList
 {
     // Data plane generated client.
     /// <summary> The RenameGetList service client. </summary>

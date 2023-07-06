@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Azure.RenameGetList",
+ "Name": "RenameGetList",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -40,7 +40,7 @@
   {
    "$id": "6",
    "Name": "Project",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -251,7 +251,7 @@
   {
    "$id": "35",
    "Name": "Deployment",
-   "Namespace": "Azure.RenameGetList",
+   "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
