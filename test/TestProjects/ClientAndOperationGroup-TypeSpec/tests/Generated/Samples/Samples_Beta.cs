@@ -6,14 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.ClientAndOperationGroupService;
-using Azure.Core;
-using Azure.Identity;
+using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
@@ -22,53 +18,12 @@ namespace ClientAndOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
-
-            Response response = client.Two();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Two_AllParameters()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
+            Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Two();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_Async()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
-
-            Response response = await client.TwoAsync();
+            Response response = client.Two(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -78,33 +33,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Two_AllParameters_Async()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
+            Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.TwoAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Three()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
-
-            Response response = client.Three();
+            Response response = await client.TwoAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -114,33 +46,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Three_AllParameters()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
+            Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Three();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Three_Async()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
-
-            Response response = await client.ThreeAsync();
+            Response response = client.Three(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -150,15 +59,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Three_AllParameters_Async()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Beta client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
->>>>>>> origin/feature/v3
+            Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.ThreeAsync();
+            Response response = await client.ThreeAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

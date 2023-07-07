@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
-using Azure.RenameGetList;
 using NUnit.Framework;
+using RenameGetList;
 
 namespace RenameGetList.Samples
 {
@@ -22,60 +18,20 @@ namespace RenameGetList.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetProject()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            Response response = client.GetProject("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            Response response = client.GetProject("<projectName>");
+            Response response = client.GetProject("<projectName>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
             Console.WriteLine(result.GetProperty("projectKind").ToString());
             Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("multilingual").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetProject_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            Response response = await client.GetProjectAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
             Console.WriteLine(result.GetProperty("language").ToString());
             Console.WriteLine(result.GetProperty("createdDateTime").ToString());
             Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
@@ -90,13 +46,13 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>");
+            Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
             Console.WriteLine(result.GetProperty("projectKind").ToString());
             Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("multilingual").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("language").ToString());
@@ -108,38 +64,12 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDeployment()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            Response response = client.GetDeployment("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetDeployment_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            Response response = client.GetDeployment("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDeployment_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = client.GetDeployment("<projectName>", "<deploymentName>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -152,22 +82,10 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetProjects()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            foreach (BinaryData item in client.GetProjects())
-            {
-            }
         }
 
         [Test]
@@ -177,20 +95,20 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            foreach (BinaryData item in client.GetProjects())
+            foreach (BinaryData item in client.GetProjects(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetProjects_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            await foreach (BinaryData item in client.GetProjectsAsync())
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -201,20 +119,20 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            await foreach (BinaryData item in client.GetProjectsAsync())
+            await foreach (BinaryData item in client.GetProjectsAsync(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDeployments()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            foreach (BinaryData item in client.GetDeployments("<projectName>"))
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -225,20 +143,10 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            foreach (BinaryData item in client.GetDeployments("<projectName>"))
+            foreach (BinaryData item in client.GetDeployments("<projectName>", new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDeployments_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenameGetListClient client = new RenameGetListClient(endpoint);
-
-            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -249,8 +157,10 @@ namespace RenameGetList.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
 
-            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
+            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>", new RequestContext()))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

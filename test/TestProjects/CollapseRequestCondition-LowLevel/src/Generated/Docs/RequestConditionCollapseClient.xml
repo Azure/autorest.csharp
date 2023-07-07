@@ -10,17 +10,7 @@ var client = new RequestConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.CollapsePutAsync(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call CollapsePutAsync with all parameters and request content.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new RequestConditionCollapseClient(credential);
-
-var data = "<String>";
-
-Response response = await client.CollapsePutAsync(RequestContent.Create(data), null);
+Response response = await client.CollapsePutAsync(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -34,17 +24,7 @@ var client = new RequestConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = client.CollapsePut(RequestContent.Create(data));
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call CollapsePut with all parameters and request content.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new RequestConditionCollapseClient(credential);
-
-var data = "<String>";
-
-Response response = client.CollapsePut(RequestContent.Create(data), null);
+Response response = client.CollapsePut(RequestContent.Create(data), null, new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

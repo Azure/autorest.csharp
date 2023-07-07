@@ -6,14 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.ClientAndOperationGroupService;
-using Azure.Core;
-using Azure.Identity;
+using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
@@ -22,53 +18,12 @@ namespace ClientAndOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Zero()
-        {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
-
-            Response response = client.Zero();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Zero_AllParameters()
         {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.Zero();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Zero_Async()
-        {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
-
-            Response response = await client.ZeroAsync();
+            Response response = client.Zero(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -78,33 +33,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Zero_AllParameters_Async()
         {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.ZeroAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_One()
-        {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
-
-            Response response = client.One();
+            Response response = await client.ZeroAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -114,33 +46,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_One_AllParameters()
         {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.One();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_Async()
-        {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
-
-            Response response = await client.OneAsync();
+            Response response = client.One(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -150,15 +59,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_One_AllParameters_Async()
         {
-<<<<<<< HEAD:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupServiceClient.cs
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientAndOperationGroupServiceClient client = new ClientAndOperationGroupServiceClient(endpoint);
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
->>>>>>> origin/feature/v3:test/TestProjects/ClientAndOperationGroup-TypeSpec/tests/Generated/Samples/Samples_ClientAndOperationGroupClient.cs
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.OneAsync();
+            Response response = await client.OneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

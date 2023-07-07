@@ -6,14 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.ClientAndOperationGroupService;
-using Azure.Core;
-using Azure.Identity;
+using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
@@ -22,53 +18,12 @@ namespace ClientAndOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Four()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
-
-            Response response = client.Four();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Four_AllParameters()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
+            Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = client.Four();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Four_Async()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
-
-            Response response = await client.FourAsync();
+            Response response = client.Four(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -78,33 +33,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Four_AllParameters_Async()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
+            Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FourAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Five()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
-
-            Response response = client.Five();
+            Response response = await client.FourAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -114,33 +46,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Five_AllParameters()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
+            Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = client.Five();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Five_Async()
-        {
-<<<<<<< HEAD
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
-
-            Response response = await client.FiveAsync();
+            Response response = client.Five(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -150,15 +59,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Five_AllParameters_Async()
         {
-<<<<<<< HEAD
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Gamma client = new ClientAndOperationGroupServiceClient(endpoint).GetGammaClient();
-=======
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
->>>>>>> origin/feature/v3
+            Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FiveAsync();
+            Response response = await client.FiveAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

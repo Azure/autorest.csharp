@@ -302,7 +302,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
@@ -332,7 +332,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
-        public virtual Response GetBodyAndPaths(RequestContext context = null)
+        public virtual Response GetBodyAndPaths(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
@@ -362,7 +362,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetItemsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
@@ -392,7 +392,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
-        public virtual Response GetItems(RequestContext context = null)
+        public virtual Response GetItems(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();

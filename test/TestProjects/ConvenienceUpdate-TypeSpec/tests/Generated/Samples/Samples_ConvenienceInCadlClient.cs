@@ -150,6 +150,174 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenience()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            Response response = client.NoConvenience(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenience_AllParameters()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            Response response = client.NoConvenience(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenience_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            Response response = await client.NoConvenienceAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenience_AllParameters_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            Response response = await client.NoConvenienceAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenienceRequiredBody()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = client.NoConvenienceRequiredBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenienceRequiredBody_AllParameters()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = client.NoConvenienceRequiredBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenienceRequiredBody_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = await client.NoConvenienceRequiredBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenienceRequiredBody_AllParameters_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = await client.NoConvenienceRequiredBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenienceOptionalBody()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_NoConvenienceOptionalBody_AllParameters()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenienceOptionalBody_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoConvenienceOptionalBody_AllParameters_Async()
+        {
+            var client = new ConvenienceInCadlClient();
+
+            var data = new
+            {
+                id = "<id>",
+            };
+
+            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Protocol()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();

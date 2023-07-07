@@ -26,7 +26,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = client.GetSubParameter("<subParameter>");
+            Response response = client.GetSubParameter("<subParameter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -39,7 +39,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = client.GetSubParameter("<subParameter>");
+            Response response = client.GetSubParameter("<subParameter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -52,7 +52,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = await client.GetSubParameterAsync("<subParameter>");
+            Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-            Response response = await client.GetSubParameterAsync("<subParameter>");
+            Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
