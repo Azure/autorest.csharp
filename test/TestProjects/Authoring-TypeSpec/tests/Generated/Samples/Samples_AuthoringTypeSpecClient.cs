@@ -196,9 +196,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
-            {
-            });
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
             Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
         }
 
@@ -209,9 +207,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
-            {
-            });
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
         }
 
@@ -311,6 +307,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            foreach (BinaryData item in client.GetProjects())
+            {
+            }
         }
 
         [Test]
@@ -319,6 +319,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetProjectsAsync())
+            {
+            }
         }
 
         [Test]
@@ -327,6 +331,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            foreach (BinaryData item in client.GetDeployments("<projectName>"))
+            {
+            }
         }
 
         [Test]
@@ -335,6 +343,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
+            {
+            }
         }
 
         [Test]
@@ -343,6 +355,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            foreach (BinaryData item in client.GetSupportedLanguages(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
         }
 
         [Test]
@@ -351,6 +367,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
         }
 
         [Test]
@@ -359,6 +379,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            foreach (BinaryData item in client.GetTrainingConfigVersions(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
         }
 
         [Test]
@@ -367,6 +391,10 @@ namespace AuthoringTypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
         }
     }
 }

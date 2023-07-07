@@ -34,63 +34,35 @@ var operation = client.CreateProject(WaitUntil.Completed, resource);
     <member name="CreateProjectAsync(WaitUntil,RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateProjectAsync with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
-
-var data = new { };
-
-Operation operation = await client.CreateProjectAsync(
-WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
-]]></code>
+<code>Example_CreateProject_Async</code>
 This sample shows how to call CreateProjectAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    description = "<description>",
-    name = "<name>",
-};
-
-Operation operation = await client.CreateProjectAsync(
-WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+    ["description"] = "<description>",
+    ["name"] = "<name>",
+});
+Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
 ]]></code></example>
     </member>
     <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateProject with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
-
-var data = new { };
-
-Operation operation = client.CreateProject(
-WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
-]]></code>
+<code>Example_CreateProject</code>
 This sample shows how to call CreateProject with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    description = "<description>",
-    name = "<name>",
-};
-
-Operation operation = client.CreateProject(
-WaitUntil.Completed, RequestContent.Create(data));
-
-Console.WriteLine(operation.GetRawResponse().Status);
+    ["description"] = "<description>",
+    ["name"] = "<name>",
+});
+Operation operation = client.CreateProject(WaitUntil.Completed, content);
 ]]></code></example>
     </member>
     <member name="UpdateProjectAsync(WaitUntil,string,Project,CancellationToken)">
@@ -126,75 +98,35 @@ var operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
     <member name="UpdateProjectAsync(WaitUntil,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
-
-var data = new { };
-
-Operation<BinaryData> operation = await client.UpdateProjectAsync(
-WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
+<code>Example_UpdateProject_Async</code>
 This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    description = "<description>",
-    name = "<name>",
-};
-
-Operation<BinaryData> operation = await client.UpdateProjectAsync(
-WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
+    ["description"] = "<description>",
+    ["name"] = "<name>",
+});
+Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
 ]]></code></example>
     </member>
     <member name="UpdateProject(WaitUntil,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call UpdateProject with required parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
-
-var data = new { };
-
-Operation<BinaryData> operation = client.UpdateProject(
-WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
+<code>Example_UpdateProject</code>
 This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    description = "<description>",
-    name = "<name>",
-};
-
-Operation<BinaryData> operation = client.UpdateProject(
-WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
+    ["description"] = "<description>",
+    ["name"] = "<name>",
+});
+Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
 ]]></code></example>
     </member>
     <member name="CreateThingAsync(WaitUntil,Thing,CancellationToken)">
@@ -226,17 +158,11 @@ This sample shows how to call CreateThingAsync with required parameters and requ
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Operation<BinaryData> operation = await client.CreateThingAsync(
-WaitUntil.Completed, RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+    ["name"] = "<name>",
+});
+Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
 ]]></code></example>
     </member>
     <member name="CreateThing(WaitUntil,RequestContent,RequestContext)">
@@ -246,17 +172,11 @@ This sample shows how to call CreateThing with required parameters and request c
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Operation<BinaryData> operation = client.CreateThing(
-WaitUntil.Completed, RequestContent.Create(data));
-
-BinaryData responseData = operation.Value;
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+    ["name"] = "<name>",
+});
+Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
 ]]></code></example>
     </member>
   </members>

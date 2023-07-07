@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -155,26 +156,57 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private CodeWriterDeclaration? WriteSampleLongRunningPageableOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
         {
-            //var returnType = methodSignature.ReturnType!; // a return type of a client method is never null (at least the client method will return `Response`)
-            //var operation = new CodeWriterDeclaration("operation");
-            //_writer.Append($"{returnType} {operation} = ")
-            //    .AppendRawIf("await ", isAsync)
-            //    .Append($"{clientVar}.{methodSignature.Name}(");
+            // write the lro invocation
+            var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, useAllParameters, isAsync);
 
-            //// write parameters
-
-            //_writer.LineRaw(");");
+            // write the paging invocation
+            // TODO -- this might be incorrect, to be verified
+            var itemType = GetItemType(methodSignature.ReturnType);
+            var item = new CodeWriterDeclaration("item");
+            _writer.AppendRawIf("await ", isAsync)
+                .Append($"foreach ({itemType} {item:D} in {operation}.Value)");
+            using (_writer.Scope())
+            {
+                // TODO -- handle response
+            }
 
             return null;
         }
 
         private CodeWriterDeclaration? WriteSampleLongRunningOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
         {
-            return null;
+            var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
+
+            var returnType = GetReturnType(methodSignature.ReturnType);
+            var operation = new CodeWriterDeclaration("operation");
+
+            _writer.Append($"{returnType} {operation:D} = ")
+                .AppendRawIf("await ", isAsync)
+                .Append($"{clientVar}.");
+            WriteOperationInvocation(parameters, sample, methodSignature);
+            _writer.LineRaw(";");
+
+            // TODO -- handle response
+
+            return operation;
         }
 
         private CodeWriterDeclaration? WriteSamplePageableOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
         {
+            var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
+
+            var itemType = GetItemType(methodSignature.ReturnType);
+            var item = new CodeWriterDeclaration("item");
+            _writer.AppendRawIf("await ", isAsync)
+                .Append($"foreach ({itemType} {item:D} in {clientVar}.");
+            WriteOperationInvocation(parameters, sample, methodSignature);
+            _writer.LineRaw(")");
+
+            using (_writer.Scope())
+            {
+                // TODO -- handle response
+            }
+
             return null;
         }
 
@@ -182,7 +214,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
-            var returnType = GetReturnType(methodSignature);
+            var returnType = GetReturnType(methodSignature.ReturnType);
             var response = new CodeWriterDeclaration("response");
 
             _writer.Append($"{returnType} {response:D} = ")
@@ -190,6 +222,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 .Append($"{clientVar}.");
             WriteOperationInvocation(parameters, sample, methodSignature);
             _writer.LineRaw(";");
+
+            // TODO -- handle response
+
             return response;
         }
 
@@ -298,16 +333,37 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private string GetMethodName(string methodName, bool isAsync) => isAsync ? $"{methodName}Async" : methodName;
 
-        private static CSharpType GetReturnType(MethodSignature methodSignature)
+        private static CSharpType GetReturnType(CSharpType? returnType)
         {
-            // the return type of a client operation is never null
-            var returnType = methodSignature.ReturnType!;
-            if (returnType is { IsFrameworkType: true } frameworkType && frameworkType.FrameworkType.Equals(typeof(Task<>)))
+            if (returnType == null)
+                throw new InvalidOperationException("The return type of a client operation should never be null");
+
+            if (returnType.IsFrameworkType && returnType.FrameworkType.Equals(typeof(Task<>)))
             {
-                return frameworkType.Arguments.Single();
+                return returnType.Arguments.Single();
             }
 
             return returnType;
+        }
+
+        private static CSharpType GetOperationValueType(CSharpType? returnType)
+        {
+            if (returnType == null)
+                throw new InvalidOperationException("The return type of a client operation should never be null");
+
+            Debug.Assert(TypeFactory.IsOperationOfT(returnType));
+
+            return returnType.Arguments.Single();
+        }
+
+        private static CSharpType GetItemType(CSharpType? returnType)
+        {
+            if (returnType == null)
+                throw new InvalidOperationException("The return type of a client operation should never be null");
+
+            Debug.Assert(TypeFactory.IsPageable(returnType) || TypeFactory.IsAsyncPageable(returnType));
+
+            return returnType.Arguments.Single();
         }
 
         public override string ToString()

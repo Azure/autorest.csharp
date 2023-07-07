@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             {
                 writer.LineRaw("null");
             }
-            else
+            else if (exampleValue.Properties.Any())
             {
                 using (writer.Scope($"new {typeof(Dictionary<string, object>)}()", newLine: false))
                 {
@@ -171,15 +171,17 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                     }
                 }
             }
+            else
+            {
+                writer.Append($"new {typeof(Dictionary<string, object>)}()");
+            }
 
             return writer;
         }
 
         private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
         {
-            // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
-            // https://github.com/Azure/autorest.csharp/issues/2377
-            string str => writer.AppendStringValue(type, str, inputType), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
+            string str => writer.AppendStringValue(type, str, inputType),
             int or float or double or decimal or bool => writer.Literal(rawValue),
             null => writer.AppendRaw("null"),
             _ => writer.AppendRaw(rawValue.ToString()!)
