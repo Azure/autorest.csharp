@@ -7,8 +7,4 @@ using AutoRest.CSharp.Generation.Types;
 namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 {
     internal record NewInstanceExpression(CSharpType Type, IReadOnlyList<ValueExpression> Arguments, ObjectInitializerExpression? Properties = null) : ValueExpression;
-    internal record NewArrayExpression(CSharpType? Type, IReadOnlyList<ValueExpression>? Items = null, bool IsInline = false) : ValueExpression;
-    internal record NewDictionaryExpression(CSharpType Type, IReadOnlyList<(ValueExpression Key, ValueExpression Value)>? Values = null) : ValueExpression;
-
-    internal record ObjectInitializerExpression(IReadOnlyDictionary<string, ValueExpression>? Properties = null, bool IsInline = true) : ValueExpression;
 }

@@ -863,7 +863,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
             {
-                statements.Add(Var("credential", new FormattableStringToExpression($"new DefaultAzureCredential()"), out credential));
+                statements.Add(Var("credential", new FormattableStringToExpression($"new Azure.Identity.DefaultAzureCredential()"), out credential));
             }
 
             ValueExpression? endpoint = null;
