@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -31,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, IEnumerable<InputClientExample> inputClientExamples, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, IEnumerable<InputClient> inputClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
@@ -43,15 +45,31 @@ namespace AutoRest.CSharp.Output.Models.Types
             RestClients = restClients;
             ClientOptions = clientOptions;
 
-            _inputClientExamples = inputClientExamples;
-            _inputClientParameterExamples = inputClientExamples.SelectMany(c => c.Parameters);
-            _inputOperationExamples = inputClientExamples.SelectMany(c => c.Operations)
-                .ToDictionary(e => e.Operation, e => e);
+            _inputClients = inputClients;
         }
 
-        private readonly IEnumerable<InputClientExample> _inputClientExamples;
-        private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
-        private readonly IReadOnlyDictionary<InputOperation, InputOperationExample> _inputOperationExamples;
+        private readonly IEnumerable<InputClient> _inputClients;
+
+        private IEnumerable<InputClientExample>? _inputClientExamples;
+        private IEnumerable<InputClientExample> InputClientExamples => _inputClientExamples ??= ExampleMockValueBuilder.Build(_inputClients);
+
+        private IEnumerable<InputParameterExample>? _inputClientParameterExamples;
+        private IEnumerable<InputParameterExample> InputClientParameterExamples => _inputClientParameterExamples ??= InputClientExamples.SelectMany(c => c.Parameters);
+
+        private IReadOnlyDictionary<string, InputOperationExample>? _inputOperationExamples;
+        private IReadOnlyDictionary<string, InputOperationExample> InputOperationExamples => _inputOperationExamples ??= InputClientExamples.SelectMany(c => c.Operations).ToDictionary(e => GetInputOperationKey(e.Operation), e => e);
+
+        private static string GetInputOperationKey(InputOperation inputOperation)
+        {
+            var builder = new StringBuilder(inputOperation.CleanName);
+            builder.Append("(");
+            foreach (var parameter in inputOperation.Parameters)
+            {
+                builder.Append(parameter);
+            }
+            builder.Append(")");
+            return builder.ToString();
+        }
 
         private readonly Dictionary<LowLevelClientMethod, DpgOperationSample> _inputOperationSampleCache = new();
         public IEnumerable<DpgOperationSample> GetSamples(LowLevelClient client)
@@ -68,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // build the sample and add it into the cache then return it
                     // TODO -- should we return nothing if inputOperation is not in the dictionary?
                     var inputOperation = method.RequestMethod.Operation;
-                    sample = new DpgOperationSample(client, method, _inputClientParameterExamples, _inputOperationExamples[inputOperation]);
+                    sample = new DpgOperationSample(client, method, InputClientParameterExamples, InputOperationExamples[GetInputOperationKey(inputOperation)]);
                     _inputOperationSampleCache.Add(method, sample);
                     yield return sample;
                 }

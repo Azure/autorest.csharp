@@ -51,13 +51,11 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
-            var inputClientExamples = ExampleMockValueBuilder.Build(inputClients);
-
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, inputClientExamples, clientOptions, isTspInput, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, inputClients, clientOptions, isTspInput, _sourceInputModel);
 
             if (isTspInput)
             {
@@ -65,7 +63,6 @@ namespace AutoRest.CSharp.Output.Models
                 CreateModels(models, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
-
 
             return library;
         }
@@ -166,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 updatedOperation = operation with
                 {
-                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
+                    Name = UpdateOperationName(operation.CleanName, operation.ResourceName ?? clientName),
                     Parameters = UpdateOperationParameters(operation.Parameters),
                     // to update the lazy initialization of `Paging.NextLinkOperation`
                     Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
@@ -174,7 +171,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
+                updatedOperation = operation with { Name = UpdateOperationName(operation.CleanName, operation.ResourceName ?? clientName) };
             }
             operationsMap.Add(operation, updatedOperation);
 
@@ -182,8 +179,8 @@ namespace AutoRest.CSharp.Output.Models
 
         }
 
-        private static string UpdateOperationName(InputOperation operation, string clientName)
-            => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
+        private static string UpdateOperationName(string operationName, string clientName)
+            => operationName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
         private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {
