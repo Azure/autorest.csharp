@@ -73,6 +73,10 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public ResponseClassifierType ResponseClassifierType { get; }
 
-        public PropertyBag? PropertyBag { get;  }
+        public PropertyBag? PropertyBag { get; }
+
+        public bool ShouldEnableRedirect => Responses.Any(r => r.StatusCodes.Any(r => IsRedirectResponseCode(r.Code)));
+
+        private bool IsRedirectResponseCode(int? code) => code >= 300 && code < 400;
     }
 }
