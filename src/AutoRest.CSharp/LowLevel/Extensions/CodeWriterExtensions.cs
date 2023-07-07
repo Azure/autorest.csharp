@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type, exampleValue, includeCollectionInitialization);
+                return writer.AppendListValue(type.Arguments.Single(), exampleValue, includeCollectionInitialization);
 
             if (TypeFactory.IsDictionary(type))
                 return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
@@ -82,12 +82,10 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 .AppendRaw(")");
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType elementType, InputExampleValue exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var elements = exampleValue.Elements ?? Enumerable.Empty<InputExampleValue>();
-            // since this is a list, we take the first generic argument (and it should always has this first argument)
-            var elementType = type.Arguments.First();
             var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
@@ -95,7 +93,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
                     writer.AppendExampleValue(itemValue, elementType);
-                    if (type.IsFrameworkType)
+                    if (elementType.IsFrameworkType)
                         writer.AppendRaw(",");
                     else
                         writer.LineRaw(",");
@@ -106,18 +104,16 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType dictionaryType, InputExampleValue exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var keyValues = exampleValue.Properties ?? new Dictionary<string, InputExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
-            var keyType = type.Arguments[0];
+            var keyType = dictionaryType.Arguments[0];
             // the second as the value type
-            var valueType = type.Arguments[1];
-            // the type of dictionary in our generated SDK is usually an interface `IDictionary<>` or `IReadOnlyDictionary<>`, here we just use `Dictionary` as its proper initialization
-            var concreteDictType = new CSharpType(typeof(Dictionary<,>), type.Arguments);
-            var initialization = includeInitialization ? (FormattableString)$"new {concreteDictType}()" : (FormattableString)$"";
+            var valueType = dictionaryType.Arguments[1];
+            var initialization = includeInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(dictionaryType)}()" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
                 foreach ((var key, var value) in keyValues)
@@ -389,6 +385,10 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return writer.Append($"new {enumType.Type}(")
                 .AppendRawValue(value, underlyingType)
                 .AppendRaw(")");
+        }
+        public static void ConsoleWriteLine(this CodeWriter writer, FormattableString content)
+        {
+            writer.Line($"{typeof(Console)}.{nameof(Console.WriteLine)}({content});");
         }
     }
 }
